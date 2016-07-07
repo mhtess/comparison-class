@@ -1,30 +1,77 @@
-// categories/classes
-// predicates/features
-// terms/kinds
+// set up the ontological tree with basic ontologies
+var ontologies = [ 
+	{
+		category: "ALL THINGS", 
+		parent: null, 
+		children: ["THINGS WITH SPATIAL LOCATION", "ABSTRACT OBJECTS"] 
+	},
+	{ 
+		category: "THINGS WITH SPATIAL LOCATION", 
+		parent: "ALL THINGS",
+		children: ["PHYSICAL OBJECTS", "EVENTS"]
+	},
+	{
+		category: "ABSTRACT OBJECTS",
+		parent: "ALL THINGS",
+		children: []
+	},
+	{ 
+		category: "PHYSICAL OBJECTS", 
+		parent: "THINGS WITH SPATIAL LOCATION",
+		children: ["SOLID OBJECTS", "AGGREGATES"] 
+	}, 
+	{ 
+		category: "EVENTS", 
+		parent: "THINGS WITH SPATIAL LOCATION",
+		children: []
+	},
+	{ 
+		category: "SOLID OBJECTS", 
+		parent: "PHYSICAL OBJECTS",
+		children: ["LIVING THINGS", "FUNCTIONAL ARTIFACTS"] 
+	},
+	{ 
+		category: "AGGREGATES", 
+		parent: "PHYSICAL OBJECTS",
+		children: [] 
+	}, 
+	{ 
+		category: "LIVING THINGS", 
+		parent: "SOLID OBJECTS",
+		children: ["ANIMALS", "PLANTS"] 
+	}, 
+	{ 
+		category: "FUNCTIONAL ARTIFACTS", 
+		parent: "SOLID OBJECTS",
+		children: [] 
+	}, 
+	{ 
+		category: "ANIMALS", 
+		parent: "LIVING THINGS",
+		children: [] 
+	}, 
+	{ 
+		category: "PLANTS", 
+		parent: "LIVING THINGS",
+		children: [] 
+	},
+]
 
-var makeRoot = { 
-	category: "all things", 
-	parent: null
-	leaves: [] 
+var makeNode = function(args) {
+	// creates and pushes a node to the tree
+	var node = {
+		category: args[0],
+		parent: args[1],
+		children: args[2]
+	}
+	ontologies.push(node)
+
+	// update the parent node
+	_.where(ontologies, {category: args[1]})[0].children.push(args[0])
+
+	return ontologies
 }
 
-// supports only one parent for no
-var makeNode = function(cat, par) {
-	var temp = { category: cat, parent: par, branches: [] }
-	return temp
-}
-
-
-var makeTree = function() {
-	var tree = []
-	var categories = [ 
-		"events", 
-		"physical objects", 
-		"living things"
-	]
-	tree.push(base)	
-	return tree
-}
-
-makeTree()
+var t = makeNode(["humans", "ANIMALS", []])
+t
 
