@@ -1,0 +1,30 @@
+// categories/classes
+// predicates/features
+// terms/kinds
+
+var makeRoot = { 
+	category: "all things", 
+	parent: null
+	leaves: [] 
+}
+
+// supports only one parent for no
+var makeNode = function(cat, par) {
+	var temp = { category: cat, parent: par, branches: [] }
+	return temp
+}
+
+
+var makeTree = function() {
+	var tree = []
+	var categories = [ 
+		"events", 
+		"physical objects", 
+		"living things"
+	]
+	tree.push(base)	
+	return tree
+}
+
+makeTree()
+
