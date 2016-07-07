@@ -1,0 +1,29 @@
+var bins = _.range(-2, 12, 0.5);
+
+var discreteGaussian = function(params) {
+  var mu = params.mu
+  var sigma = params.sigma
+  var discreteProbs = map(function(b){return Math.exp(Gaussian({mu:mu, sigma:sigma}).score(b))}, bins)
+  return Infer(
+    {method:"enumerate"}, 
+    function(){ categorical({ps: discreteProbs, vs: bins}) }
+  )
+} 
+
+// specify height priors for different kinds
+var heightPriors = {
+  dog: discreteGaussian({mu: 1,sigma: 1}),
+  human: discreteGaussian({mu: 4, sigma: 1}),
+  giraffe: discreteGaussian({mu: 7, sigma: 1})
+}
+
+// change this to a general "getPrior" function (takes in a class as argument)
+var animalPrior = Infer( {method:"enumerate"},
+  function(){
+    var whichKind = categorical({vs: ["dog", "human", "giraffe"], ps: [1,1,1]})
+    return sample(heightPriors[whichKind])
+  }
+)
+
+animalPrior
+// viz.auto(animalPrior)
