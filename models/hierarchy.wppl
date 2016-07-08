@@ -72,6 +72,27 @@ var makeNode = function(args) {
 	return ontologies
 }
 
-var t = makeNode(["humans", "ANIMALS", []])
-t
 
+makeNode(["humans", "ANIMALS", []])
+makeNode(["birds", "EVENTS", []])
+makeNode(["phones", "FUNCTIONAL ARTIFACTS", []])
+
+// set up the priors
+var bins = _.range(-2, 12, 0.5)
+
+var discreteGaussian = function(args) {
+	var mu = args.mu
+	var sigma = args.sigma
+	var discreteProbs = map(function(b) {
+		return Math.exp(Gaussian({mu: mu, sigma: sigma}).score(b))
+	}, bins)
+	return Infer({method: 'enumerate'}, function() {
+		categorical({ps: discreteProbs, vs: bins})
+	})
+}
+
+var featurePrior = {
+	humans: discreteGaussian({mu: 1, sigma: 1}),
+	birds: discreteGaussian({mu: 4, sigma: 1}),
+	phones: discreteGaussian({mu: 7, sigma: 1})
+}
