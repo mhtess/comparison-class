@@ -76,6 +76,7 @@ var makeNode = function(args) {
 makeNode(["humans", "ANIMALS", []])
 makeNode(["parties", "EVENTS", []])
 makeNode(["phones", "FUNCTIONAL ARTIFACTS", []])
+makeNode(["iphone", "phones", []])
 
 // set up the priors
 var bins = _.range(-2, 12, 0.5)
@@ -91,10 +92,11 @@ var discreteGaussian = function(args) {
 	})
 }
 
-var featurePrior = {
+var featurePriors = {
 	humans: discreteGaussian({mu: 1, sigma: 1}),
-	birds: discreteGaussian({mu: 4, sigma: 1}),
-	phones: discreteGaussian({mu: 7, sigma: 1})
+	parties: discreteGaussian({mu: 4, sigma: 1}),
+	phones: discreteGaussian({mu: 7, sigma: 1}),
+	iphone: discreteGaussian({mu: 2, sigma: 1})
 }
 
 var kinds = []
@@ -104,22 +106,30 @@ var isLower = function(char) {
 	return char === char.toLowerCase() ? 0 : 1
 }
 
-// traverses through the ontological tree and finds all of the kinds
+// recursively traverses through the tree, finding and storing the kinds
 var findKinds = function(cat) {
+	// if there is no category, then return
+	if (_.isEmpty(cat)) { return } 
+
+	// if there is a category and it happens to be a kind, then save it
 	if (sum(map(isLower, cat)) === 0) { kinds.push(cat) } 
 	var targetCat = _.where(ontologies, {category: cat})[0]
-	if (targetCat.children[0] !== undefined) {
-		findKinds(targetCat.children[0])
-	}
-	//findKinds(_.where(ontologies, {category: cat})[0].children[0])
+
+	// if this node has no children, then return
+	if (_.isEmpty(targetCat.children)) { return }
+	
+	// applies recursion to every child of the current category
+	map(findKinds, targetCat.children)
+
 	return kinds
 }
 
-
-// change this to a general "getPrior" function (takes in a class as argument)
+// samples from and returns a mixture of the priors of the relevant kinds
 var getPrior = function(cat) {
-	// recursively traverse through the tree, finding and storing the kinds and their priors
-	// then, mix all of the gathered priors and return
+	Infer({method: 'enumerate'}, function() {
+		var whichKind = categorical({vs: findKinds(cat), ps: [1, 1, 1]})
+		return sample(featurePriors[whichKind])
+	})
 }
 
-findKinds("ALL THINGS")
+getPrior("SOLID OBJECTS")
