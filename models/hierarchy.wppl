@@ -72,9 +72,9 @@ var makeNode = function(args) {
 	return ontologies
 }
 
-
+// creates nodes of kinds
 makeNode(["humans", "ANIMALS", []])
-makeNode(["birds", "EVENTS", []])
+makeNode(["parties", "EVENTS", []])
 makeNode(["phones", "FUNCTIONAL ARTIFACTS", []])
 
 // set up the priors
@@ -96,3 +96,30 @@ var featurePrior = {
 	birds: discreteGaussian({mu: 4, sigma: 1}),
 	phones: discreteGaussian({mu: 7, sigma: 1})
 }
+
+var kinds = []
+
+// returns 0 if a character is lowercase, 1 otherwise
+var isLower = function(char) {
+	return char === char.toLowerCase() ? 0 : 1
+}
+
+// traverses through the ontological tree and finds all of the kinds
+var findKinds = function(cat) {
+	if (sum(map(isLower, cat)) === 0) { kinds.push(cat) } 
+	var targetCat = _.where(ontologies, {category: cat})[0]
+	if (targetCat.children[0] !== undefined) {
+		findKinds(targetCat.children[0])
+	}
+	//findKinds(_.where(ontologies, {category: cat})[0].children[0])
+	return kinds
+}
+
+
+// change this to a general "getPrior" function (takes in a class as argument)
+var getPrior = function(cat) {
+	// recursively traverse through the tree, finding and storing the kinds and their priors
+	// then, mix all of the gathered priors and return
+}
+
+findKinds("ALL THINGS")
