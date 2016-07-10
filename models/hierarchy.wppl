@@ -57,6 +57,8 @@ var ontologies = [
 	},
 ]
 
+// pre-condition: a category/kind, its parent in the tree, and an empty array for future children
+// post-condition: a new node in the tree with the provided arguments and updated parent node
 var makeNode = function(args) {
 	// creates and pushes a node to the tree
 	var node = {
@@ -72,18 +74,21 @@ var makeNode = function(args) {
 	return ontologies
 }
 
-// creates nodes of kinds
+// creates nodes of categories/kinds; can possibly instantiate priors/prior weights here
 makeNode(["humans", "ANIMALS", []])
 makeNode(["parties", "EVENTS", []])
 makeNode(["phones", "FUNCTIONAL ARTIFACTS", []])
-makeNode(["iphone", "phones", []])
+makeNode(["rocks", "SOLID OBJECTS", []])
+makeNode(["dogs", "ANIMALS", []])
 
-// set up the priors
+// bins for discretizing distributions
 var bins = _.range(-2, 12, 0.5)
 
+// pre-condition: the mean and variance of the desired Gaussian distribution
+// post-condition: returns a discrete version of a Gaussian distribution
 var discreteGaussian = function(args) {
-	var mu = args.mu
-	var sigma = args.sigma
+	var mu = args[0]
+	var sigma = args[1]
 	var discreteProbs = map(function(b) {
 		return Math.exp(Gaussian({mu: mu, sigma: sigma}).score(b))
 	}, bins)
@@ -92,44 +97,84 @@ var discreteGaussian = function(args) {
 	})
 }
 
+// stores the prior distributions of various kinds over features
 var featurePriors = {
-	humans: discreteGaussian({mu: 1, sigma: 1}),
-	parties: discreteGaussian({mu: 4, sigma: 1}),
-	phones: discreteGaussian({mu: 7, sigma: 1}),
-	iphone: discreteGaussian({mu: 2, sigma: 1})
+	height: {
+		humans: discreteGaussian(1, 1),
+		parties: discreteGaussian(4, 1),
+		phones: discreteGaussian(7, 1),
+		rocks: discreteGaussian(10, 1),
+		dogs: discreteGaussian(3, 1)
+	}
 }
 
+// set up an array to store the kinds in the tree
 var kinds = []
+var prior = []
 
-// returns 0 if a character is lowercase, 1 otherwise
+// pre-condition: a character
+// post-condition: returns 0 if the character is lowercase, 1 otherwise
 var isLower = function(char) {
 	return char === char.toLowerCase() ? 0 : 1
 }
 
 // recursively traverses through the tree, finding and storing the kinds
-var findKinds = function(cat) {
-	// if there is no category, then return
-	if (_.isEmpty(cat)) { return } 
+// pre-condition: a node (category or kind) and feature
+// post-condition: the mixed prior distribution of the node over a feature
+var getPrior = function(node, feat) {
+	// if there is no node, then return
+	if (_.isEmpty(node)) { return } 
 
-	// if there is a category and it happens to be a kind, then save it
-	if (sum(map(isLower, cat)) === 0) { kinds.push(cat) } 
-	var targetCat = _.where(ontologies, {category: cat})[0]
+	// variable for storing the object of the current node
+	var currentNode = _.where(ontologies, {category: cat})[0]
 
-	// if this node has no children, then return
-	if (_.isEmpty(targetCat.children)) { return }
+	// applies recursion to every child of the current node
+	map(getPrior, currentNode.children)
 	
-	// applies recursion to every child of the current category
-	map(findKinds, targetCat.children)
+	// if a node does not have children...
+	if (!_.isEmpty(currentNode.children)) {
+		// ...and if it is a kind, push the kind onto the kinds array
+		if (sum(map(isLower, node)) === 0) { 
+			kinds.push(node)
+			return
+		} 
 
-	return kinds
+		// ...and if it is a category, it does not have any priors either so return
+		return
+	}
+
+	// else, the node has children and we can mix the priors up to this node
+	if (kinds.length !== 0) {
+		prior.push(mixPriors(node, feat, kinds))
+
+		// pop off the kinds that were just mixed
+		repeat(kinds.length, function() {
+			return kinds.pop()
+		})
+
+		return
+	}
+
+	return
 }
 
-// samples from and returns a mixture of the priors of the relevant kinds
-var getPrior = function(cat) {
-	Infer({method: 'enumerate'}, function() {
-		var whichKind = categorical({vs: findKinds(cat), ps: [1, 1, 1]})
-		return sample(featurePriors[whichKind])
+// pre-condition: an array of kinds
+// post-condition: determines the weights on the prior distributions of the kinds before mixing
+var priorWeights = function(kin) {
+	return repeat(kin.length, function() {
+		return 1
 	})
 }
 
-getPrior("SOLID OBJECTS")
+// pre-condition:
+// post-condition: 
+var mixPriors = function(cat, feat, kin) {
+	return Infer({method: 'enumerate'}, function() {
+		var whichKind = categorical({vs: kinds, ps: priorWeights(kinds)})
+		return sample(featurePriors.feat[whichKind]) // height object is temporary
+	})
+}
+
+getPrior("ANIMALS", "height")
+//getPrior("SOLID OBJECTS", k)
+prior
