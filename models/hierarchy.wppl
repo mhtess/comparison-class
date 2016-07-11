@@ -175,7 +175,7 @@ var mixPriors = function(filteredPrior) {
 	var p = _.pluck(filteredPrior, "node")
 	return Infer({method: "enumerate"}, function() {
 		var whichPrior = categorical({vs: p, ps: priorWeights(p)})
-		return sample(_.where(priors, {node: whichPrior})[0].prior) // height object is temporary
+		return sample(_.where(priors, {node: whichPrior})[0].prior)
 	})
 }
 
