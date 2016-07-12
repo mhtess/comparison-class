@@ -101,7 +101,7 @@ var discreteGaussian = function(args) {
 var featurePriors = {
 	height: {
 		humans: discreteGaussian({mu: 1, sigma: 1}),
-		parties: discreteGaussian({mu: 10, sigma: 1}),
+		parties: discreteGaussian({mu: 9, sigma: 1}),
 		phones: discreteGaussian({mu: 3, sigma: 1}),
 		roses: discreteGaussian({mu: 5, sigma: 1}),
 		dogs: discreteGaussian({mu: 7, sigma: 1})
@@ -110,6 +110,9 @@ var featurePriors = {
 
 // sets up the feature of interest
 var feature = "height"
+
+// variable to turn on/off hierarchical mixing
+var hierarchical = 0
 
 // set up an array to store the kinds and their priors
 var priors = []
@@ -137,27 +140,34 @@ var getPrior = function(node) {
 	if (_.isEmpty(currentNode.children)) {
 		// ...and if it is a kind, push the kind onto the priors array
 		if (sum(map(isLower, node)) === 0) { 
-			return priors.push({node: node, prior: featurePriors[feature][node]})
+			priors.push({node: node, prior: featurePriors[feature][node]})
+			return
 		} 
 
 		// ...and if it is a category, it does not have any priors either so return
 		return
 	}
 
-	// else, the node has children and we can mix the priors up to this node
-	var prior = {node: node, prior: mixPriors(filter(function(p) {
-		return _.contains(currentNode.children, p.node)
-	}, priors))}
+	// if hierarchical mixing is on...
+	if (hierarchical) {
+		// else, the node has children and we can mix the priors up to this node
+		var filteredPriors = {node: node, prior: mixPriors(filter(function(p) {
+			return _.contains(currentNode.children, p.node)
+		}, priors))}
 
-	// pop off the priors of the kinds that were just mixed
-	repeat(currentNode.children.length, function() {
-		return priors.pop()
-	})
+		// pop off the priors of the kinds that were just mixed
+		repeat(currentNode.children.length, function() {
+			return priors.pop()
+		})
 
-	// finally, push the mixed prior to the priors array
-	priors.push(prior)
+		// finally, push the mixed prior to the priors array
+		priors.push(filteredPriors)
+		return
 
-	return
+	// else, mix at the end
+	} else {
+		return
+	}
 }
 
 // pre-condition: an array of kinds
@@ -179,7 +189,21 @@ var mixPriors = function(filteredPrior) {
 	})
 }
 
-getPrior("ALL THINGS")
+// similar pre- and post-conditions as the getPrior function. Grants a different output depending on what
+// the variable "hierarchical" was set to
+var run = function(node) {
+	// if hierarchical === 1, mix in a hierarchical manner
+	if (hierarchical) {
+		getPrior(node)
 
-// priors is normally an array of objects: {node: ..., prior: ...}
-priors[0].prior
+		// priors is normally an array of objects: {node: ..., prior: ...}
+		return priors[0].prior 
+
+	// else, mix all of the kinds equally
+	} else {
+		getPrior(node)
+		return mixPriors(priors)
+	}
+}
+
+run("ALL THINGS")
