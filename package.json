@@ -1,0 +1,13 @@
+{
+  "name": "comparison-class",
+  "version": "0.0.1",
+  "description": "WebPPL library for retrieving priors from an ontological tree",  
+  "webppl": {
+    "wppl": ["lib/hierarchy.wppl"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhtess/comparison-class.git"
+  },
+  "homepage": "https://github.com/mhtess/comparison-class"
+}
