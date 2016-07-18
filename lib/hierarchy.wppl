@@ -1,4 +1,4 @@
-var classPrior = function(node, feat) {
+var findPrior = function(node, feat, hier) {
 	// set up the ontological tree with basic ontologies
 	var ontologies = [ 
 		{
@@ -112,8 +112,11 @@ var classPrior = function(node, feat) {
 	// sets up the feature of interest
 	var feature = feat
 
-	// variable to turn on/off hierarchical mixing
-	var hierarchical = 0
+	// variable to change the functionality
+	// 0: turn off hierarchical mixing
+	// 1: turn on hierarchical mixing
+	// 2: gather an array of all of the nodes in the tree
+	var hierarchical = hier
 
 	// set up an array to store the kinds and their priors
 	var priors = []
@@ -150,7 +153,7 @@ var classPrior = function(node, feat) {
 		}
 
 		// if hierarchical mixing is on...
-		if (hierarchical) {
+		if (hierarchical === 1) {
 			// else, the node has children and we can mix the priors up to this node
 			var filteredPriors = {node: node, prior: mixPriors(filter(function(p) {
 				return _.contains(currentNode.children, p.node)
@@ -194,14 +197,18 @@ var classPrior = function(node, feat) {
 	// the variable "hierarchical" was set to
 	var run = function(node) {
 		// if hierarchical === 1, mix in a hierarchical manner
-		if (hierarchical) {
+		if (hierarchical === 1) {
 			getPrior(node)
 
 			// priors is normally an array of objects: {node: ..., prior: ...}
 			return priors[0].prior 
 
+		// if hierarchical === 2, return all of the nodes
+		} else if (hierarchical === 2) {
+			return ontologies
+		
 		// else, mix all of the kinds equally
-		} else {
+		} else {		
 			getPrior(node)
 			return mixPriors(priors)
 		}
