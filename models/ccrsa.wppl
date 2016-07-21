@@ -42,6 +42,7 @@ var meaning = function(utterance, state, threshold) {
   }
 }
 
+// literal listener model
 var listener0 = cache(function(utterance, threshold, prior) {
   return Infer({method: "enumerate"}, function() {
     var state = sample(prior)
@@ -51,6 +52,7 @@ var listener0 = cache(function(utterance, threshold, prior) {
   })
 })
 
+// informative speaker model
 var speaker1 = cache(function(state, threshold, prior) {
   return Infer({method: "enumerate"}, function() {
     var utterance = utterancePrior()
@@ -60,6 +62,7 @@ var speaker1 = cache(function(state, threshold, prior) {
   })
 })
 
+// pragmatic listener model
 var listener1 = function(utterance, prior) {
   return Infer({method: "enumerate"}, function() {
     var state = sample(prior)
@@ -70,10 +73,12 @@ var listener1 = function(utterance, prior) {
   })
 }
 
+// finds the prior of humans over height
 var isTallERP = findPrior("humans", "height")
 
 isTallERP
 
+// updates the listener's prior belief of what tall is given an utterance
 var isTallPosterior = listener1("is tall", isTallERP)
 
 isTallPosterior
