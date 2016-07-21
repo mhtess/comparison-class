@@ -112,15 +112,14 @@ function make_slides(f) {
 
 /// init ///
 function init() {
-  exp.trials = [];
+  exp.trials = 3;
   exp.catch_trials = [];
-  
   
   var sentences = Object.keys(examples);
   var contexts = examples;
 
   // samples from sentences (without replacement) 
-  exp.sentence = sampleSentence(sentences, 3);
+  exp.sentence = sampleSentence(sentences, exp.trials);
 
   // uses the results stored in exp.sentence to randomly sample one context phrase from contexts
   exp.context = sampleContext(exp.sentence, contexts);
@@ -128,15 +127,16 @@ function init() {
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,
-      screenH: screen.height,
-      screenUH: exp.height,
-      screenW: screen.width,
-      screenUW: exp.width
+      screenH : screen.height,
+      screenUH : exp.height,
+      screenW : screen.width,
+      screenUW : exp.width
   };
+  
   //blocks of the experiment:
-  //exp.structure=["i0", "instructions", "trial", "one_slider", "multi_slider", "vertical_sliders", 'subj_info', 'thanks'];
   exp.structure = ["i0", "instructions", "trial1", "trial2", "trial3", "subj_info", "thanks"];
   exp.data_trials = [];
+
   //make corresponding slides:
   exp.slides = make_slides(exp);
 
