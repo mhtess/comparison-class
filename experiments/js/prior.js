@@ -22,7 +22,7 @@ function make_slides(f) {
       $(".display_sentence").html(exp.context[0] + " " + exp.sentence[0]);
     },
     button : function() {
-      response = $("#text_response").val();
+      response = $("#text_response1").val();
       if (response.length == 0) {
         $(".err").show();
       } else {
@@ -42,7 +42,7 @@ function make_slides(f) {
       $(".display_sentence").html(exp.context[1] + " " + exp.sentence[1]);
     },
     button : function() {
-      response = $("#text_response").val();
+      response = $("#text_response2").val();
       if (response.length == 0) {
         $(".err").show();
       } else {
@@ -62,7 +62,7 @@ function make_slides(f) {
       $(".display_sentence").html(exp.context[2] + " " + exp.sentence[2]);
     },
     button : function() {
-      response = $("#text_response").val();
+      response = $("#text_response3").val();
       if (response.length == 0) {
         $(".err").show();
       } else {
