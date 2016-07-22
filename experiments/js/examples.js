@@ -28,18 +28,28 @@ var examples = {
 		"John bought a cruise ticket.",
 		"John bought a movie ticket.",
 		"John bought a plane ticket.",
-		"John got pulled over."
-	],
+		"John got pulled over." // technically not proper English usage
+	], 
 	"Beth is heavy." : [
+		"Beth is a cow.",
 		"Beth is a person.",
-		"Beth is a cow."
+		"Beth boxes at the welterweight level."
 	],
-	"Susan is light." : [
-		"Susan is a 4-year-old.",
-		"Susan is a dancer."
+	"The stars are light." : [
+		"John is watching his favorite TV show.", 
+		"John is an looking through a telescope."
 	],
 	"Switzerland is far away." : [ 
 		"John lives in Germany.",
 		"John lives in the Caribbean."
+	],
+	"The date is nearby." : [
+		"John is waiting for Bailey's date to arrive.",
+		"John has a dental appointment soon."
+	],
+	// below here the sentences use repeated adjectives
+	"The crane is tall." : [
+		"Beth is at a construction site.",
+		"Beth is a veterinarian."
 	]
 };
