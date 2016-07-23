@@ -22,7 +22,7 @@ var examples = {
 	"The necklace is expensive." : [
 		"John is at the jewelry store.",
 		"John is buying a diamond necklace.",
-		"John is buying his high-school prom date a necklace."
+		"John saved up money from his part-time job to buy his prom date a necklace."
 	],
 	"The ticket was cheap." : [
 		"John bought a cruise ticket.",
