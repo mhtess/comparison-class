@@ -27,7 +27,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : "trial1",
+          "trial_type" : exp.context[0] + " " + exp.sentence[0],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -47,7 +47,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : "trial2",
+          "trial_type" : exp.context[1] + " " + exp.sentence[1],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -67,7 +67,47 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : "trial3",
+          "trial_type" : exp.context[2] + " " + exp.sentence[2],
+          "response" : response
+        });
+        exp.go(); //make sure this is at the *end*, after you log your data
+      }
+    },
+  });
+
+  slides.trial4 = slide({
+    name : "trial4",
+    start : function() {
+      $(".err").hide();
+      $(".display_sentence").html(exp.context[3] + " " + exp.sentence[3]);
+    },
+    button : function() {
+      response = $("#text_response4").val();
+      if (response.length == 0) {
+        $(".err").show();
+      } else {
+        exp.data_trials.push({
+          "trial_type" : exp.context[3] + " " + exp.sentence[3],
+          "response" : response
+        });
+        exp.go(); //make sure this is at the *end*, after you log your data
+      }
+    },
+  });
+
+  slides.trial5 = slide({
+    name : "trial5",
+    start : function() {
+      $(".err").hide();
+      $(".display_sentence").html(exp.context[4] + " " + exp.sentence[4]);
+    },
+    button : function() {
+      response = $("#text_response5").val();
+      if (response.length == 0) {
+        $(".err").show();
+      } else {
+        exp.data_trials.push({
+          "trial_type" : exp.context[4] + " " + exp.sentence[4],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -112,7 +152,7 @@ function make_slides(f) {
 
 /// init ///
 function init() {
-  exp.trials = 3;
+  exp.trials = 5;
   exp.catch_trials = [];
   
   var sentences = Object.keys(examples);
@@ -134,7 +174,7 @@ function init() {
   };
   
   //blocks of the experiment:
-  exp.structure = ["i0", "instructions", "trial1", "trial2", "trial3", "subj_info", "thanks"];
+  exp.structure = ["i0", "instructions", "trial1", "trial2", "trial3", "trial4", "trial5", "subj_info", "thanks"];
   exp.data_trials = [];
 
   //make corresponding slides:
