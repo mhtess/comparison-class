@@ -37,7 +37,6 @@ var examples = {
 	],
 	/*"The stars are light." : [
 		"John is watching a TV show about dancing.", 
-		"John is at an observatory recording his measurements."
 	],*/
 	"Switzerland is far away." : [ 
 		"John lives in Germany.",
