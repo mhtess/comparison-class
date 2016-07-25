@@ -19,7 +19,9 @@ function make_slides(f) {
     name : "trial1",
     start : function() {
       $(".err").hide();
-      $(".display_sentence").html(exp.context[0] + " " + exp.sentence[0]);
+      $(".display_context").html(exp.names[0] + exp.context[0]);
+      $(".display_target").html(exp.names[0] + " says, " + "\"" + exp.target[0] + "\"");
+      $(".display_question").html("What do you think " + exp.names[0] + " meant?");
     },
     button : function() {
       response = $("#text_response1").val();
@@ -27,7 +29,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : exp.context[0] + " " + exp.sentence[0],
+          "trial_type" : exp.context[0] + " " + exp.target[0],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -39,7 +41,9 @@ function make_slides(f) {
     name : "trial2",
     start : function() {
       $(".err").hide();
-      $(".display_sentence").html(exp.context[1] + " " + exp.sentence[1]);
+      $(".display_context").html(exp.names[1] + exp.context[1]);
+      $(".display_target").html(exp.names[1] + " says, " + "\"" + exp.target[1] + "\"");
+      $(".display_question").html("What do you think " + exp.names[1] + " meant?");
     },
     button : function() {
       response = $("#text_response2").val();
@@ -47,7 +51,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : exp.context[1] + " " + exp.sentence[1],
+          "trial_type" : exp.context[1] + " " + exp.target[1],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -59,7 +63,9 @@ function make_slides(f) {
     name : "trial3",
     start : function() {
       $(".err").hide();
-      $(".display_sentence").html(exp.context[2] + " " + exp.sentence[2]);
+      $(".display_context").html(exp.names[2] + exp.context[2]);
+      $(".display_target").html(exp.names[2] + " says, " + "\"" + exp.target[2] + "\"");
+      $(".display_question").html("What do you think " + exp.names[2] + " meant?");
     },
     button : function() {
       response = $("#text_response3").val();
@@ -67,7 +73,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : exp.context[2] + " " + exp.sentence[2],
+          "trial_type" : exp.context[2] + " " + exp.target[2],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -79,7 +85,9 @@ function make_slides(f) {
     name : "trial4",
     start : function() {
       $(".err").hide();
-      $(".display_sentence").html(exp.context[3] + " " + exp.sentence[3]);
+      $(".display_context").html(exp.names[3] + exp.context[3]);
+      $(".display_target").html(exp.names[3] + " says, " + "\"" + exp.target[3] + "\"");
+      $(".display_question").html("What do you think " + exp.names[3] + " meant?");
     },
     button : function() {
       response = $("#text_response4").val();
@@ -87,7 +95,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : exp.context[3] + " " + exp.sentence[3],
+          "trial_type" : exp.context[3] + " " + exp.target[3],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -99,7 +107,9 @@ function make_slides(f) {
     name : "trial5",
     start : function() {
       $(".err").hide();
-      $(".display_sentence").html(exp.context[4] + " " + exp.sentence[4]);
+      $(".display_context").html(exp.names[4] + exp.context[4]);
+      $(".display_target").html(exp.names[4] + " says, " + "\"" + exp.target[4] + "\"");
+      $(".display_question").html("What do you think " + exp.names[4] + " meant?");
     },
     button : function() {
       response = $("#text_response5").val();
@@ -107,7 +117,7 @@ function make_slides(f) {
         $(".err").show();
       } else {
         exp.data_trials.push({
-          "trial_type" : exp.context[4] + " " + exp.sentence[4],
+          "trial_type" : exp.context[4] + " " + exp.target[4],
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -155,15 +165,18 @@ function init() {
   exp.trials = 5;
   exp.catch_trials = [];
   
-  var sentences = Object.keys(examples);
+  var targets = Object.keys(examples);
   var contexts = examples;
 
-  // samples from sentences (without replacement) 
-  exp.sentence = sampleSentence(sentences, exp.trials);
+  // generate a list of unique names
+  exp.names = sampleNames(characters, exp.trials)
 
-  // uses the results stored in exp.sentence to randomly sample one context phrase from contexts
-  exp.context = sampleContext(exp.sentence, contexts);
-  
+  // samples from the target sentences (without replacement) 
+  exp.target = sampleSentence(targets, exp.trials);
+
+  // uses the results stored in exp.target to randomly sample one context phrase from contexts
+  exp.context = sampleContext(exp.target, contexts);
+
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,
