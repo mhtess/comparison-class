@@ -20,7 +20,7 @@ var examples = {
 		"Bill is a tennis player."
 	],
 	"The necklace is expensive." : [
-		"John is at the jewelry store.",
+		"John is browsing at a jewelry store."
 		"John is buying a diamond necklace.",
 		"John saved up money from his part-time job to buy his prom date a necklace."
 	],
@@ -36,20 +36,22 @@ var examples = {
 		"Beth boxes at the welterweight level."
 	],
 	"The stars are light." : [
-		"John is watching his favorite TV show.", 
-		"John is an looking through a telescope."
+		"John is watching a TV show about dancing.", 
+		"John is at an observatory recording his measurements."
 	],
 	"Switzerland is far away." : [ 
 		"John lives in Germany.",
 		"John lives in the Caribbean."
 	],
-	"The date is nearby." : [
-		"John is waiting for Bailey's date to arrive.",
-		"John has a dental appointment soon."
+	"The duration of the car ride was long." : [
+		"John is driving across the country.",
+		"John is driving to work.",
+		"John is driving to a theme park."
 	],
 	// below here the sentences use repeated adjectives
 	"The crane is tall." : [
 		"Beth is at a construction site.",
-		"Beth is a veterinarian."
+		"Beth is a veterinarian.",
+		"Beth sees many kinds of animals at the city park."
 	]
 };
