@@ -20,7 +20,7 @@ var examples = {
 		"Bill is a tennis player."
 	],
 	"The necklace is expensive." : [
-		"John is browsing at a jewelry store."
+		"John is browsing at a jewelry store.",
 		"John is buying a diamond necklace.",
 		"John saved up money from his part-time job to buy his prom date a necklace."
 	],
@@ -28,17 +28,17 @@ var examples = {
 		"John bought a cruise ticket.",
 		"John bought a movie ticket.",
 		"John bought a plane ticket.",
-		"John got pulled over." // technically not proper English usage
+		"John got pulled over by a police officer." // technically not proper English usage
 	], 
 	"Beth is heavy." : [
 		"Beth is a cow.",
 		"Beth is a person.",
 		"Beth boxes at the welterweight level."
 	],
-	"The stars are light." : [
+	/*"The stars are light." : [
 		"John is watching a TV show about dancing.", 
 		"John is at an observatory recording his measurements."
-	],
+	],*/
 	"Switzerland is far away." : [ 
 		"John lives in Germany.",
 		"John lives in the Caribbean."
