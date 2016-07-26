@@ -47,7 +47,7 @@ examples[" is short"] = [
 examples[" is heavy"] = [
 	" is a cow.",
 	" is a person.",
-	" boxes at the welterweight level."
+	" is a featherweight boxer."
 ];
 
 // additional examples with repeated adjectives
