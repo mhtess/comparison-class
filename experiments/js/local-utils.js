@@ -18,13 +18,14 @@ var sampleContext = function(target, contexts) {
 }
 
 // samples without replacement from a list of names for all of our examples
-var sampleNames = function(characters, examples) {
+var sampleNames = function(characters, trials) {
 	var n = _.pluck(characters, "name");
-	for (var i = 0; i < examples; i++) {
-		n.push(_.sample(characters));
-		characters = _.reject(characters, function(phrase) {
-			return _.contains(n, phrase);
+	var names = [];
+	for (var i = 0; i < (trials * 2); i++) {
+		names.push(_.sample(n));
+		n = _.reject(n, function(phrase) {
+			return _.contains(names, phrase);
 		});
 	}
-	return n;
+	return names;
 }
