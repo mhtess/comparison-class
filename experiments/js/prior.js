@@ -372,7 +372,7 @@ function init() {
   };
   
   //blocks of the experiment:
-  exp.structure = ["i0", "instructions"];
+  exp.structure = ["i0"] //,"instructions"];
   for (var i = 1; i <= exp.trials; i++) {
     exp.structure.push("trial" + i);
   }
