@@ -409,7 +409,7 @@ function init() {
   // generate a list of unique names
   exp.names = sampleNames(characters, exp.trials)
 
-  // samples from targets (without replacement) 
+  // samples without replacement from targets 
   exp.target = sampleTarget(targets, exp.trials);
 
   // uses the results stored in exp.target to randomly sample one context phrase from contexts
@@ -425,7 +425,7 @@ function init() {
       screenUW : exp.width
   };
   
-  //blocks of the experiment:
+  // blocks of the experiment:
   exp.structure = ["i0", "instructions"];
   for (var i = 1; i <= exp.trials; i++) {
     exp.structure.push("trial" + i);
