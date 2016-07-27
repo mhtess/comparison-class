@@ -19,17 +19,23 @@ function make_slides(f) {
     name : "trial" + 1,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[0] + exp.context[0]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[0] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[0] + getPronoun(exp.context[0], exp.names[0]));
+      } else {
+        $(".display_context").html(exp.names[0] + exp.context[0]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[0] === " is short") || (exp.target[0] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials] + " says, " + "\"" + exp.names[0] + exp.target[0] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[0] + exp.target[0] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[0] + exp.target[0] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[0] + " says, " + "\"" + exp.target[0] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[0] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[0] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[0] + samplePhrase());
       }
     },
     button : function() {
@@ -51,17 +57,23 @@ function make_slides(f) {
     name : "trial" + 2,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[1] + exp.context[1]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[1] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[1] + getPronoun(exp.context[1], exp.names[1]));
+      } else {
+        $(".display_context").html(exp.names[1] + exp.context[1]);
+      }
       
       // changes the format when a person is used in the target sentence
       if ((exp.target[1] === " is short") || (exp.target[1] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 1] + " says, " + "\"" + exp.names[1] + exp.target[1] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 1] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[1] + exp.target[1] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[1] + exp.target[1] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[1] + " says, " + "\"" + exp.target[1] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[1] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[1] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[1] + samplePhrase());
       }
     },
     button : function() {
@@ -83,17 +95,23 @@ function make_slides(f) {
     name : "trial" + 3,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[2] + exp.context[2]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[2] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[2] + getPronoun(exp.context[2], exp.names[2]));
+      } else {
+        $(".display_context").html(exp.names[2] + exp.context[2]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[2] === " is short") || (exp.target[2] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 2] + " says, " + "\"" + exp.names[2] + exp.target[2] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 2] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[2] + exp.target[2] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[2] + exp.target[2] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[2] + " says, " + "\"" + exp.target[2] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[2] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[2] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[2] + samplePhrase());
       }
     },
     button : function() {
@@ -115,17 +133,23 @@ function make_slides(f) {
     name : "trial" + 4,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[3] + exp.context[3]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[3] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[3] + getPronoun(exp.context[3], exp.names[3]));
+      } else {
+        $(".display_context").html(exp.names[3] + exp.context[3]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[3] === " is short") || (exp.target[3] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 3] + " says, " + "\"" + exp.names[3] + exp.target[3] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 3] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[3] + exp.target[3] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[3] + exp.target[3] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[3] + " says, " + "\"" + exp.target[3] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[3] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[3] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[3] + samplePhrase());
       }
     },
     button : function() {
@@ -147,17 +171,23 @@ function make_slides(f) {
     name : "trial" + 5,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[4] + exp.context[4]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[4] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[4] + getPronoun(exp.context[4], exp.names[4]));
+      } else {
+        $(".display_context").html(exp.names[4] + exp.context[4]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[4] === " is short") || (exp.target[4] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 4] + " says, " + "\"" + exp.names[4] + exp.target[4] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 4] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[4] + exp.target[4] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[4] + exp.target[4] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[4] + " says, " + "\"" + exp.target[4] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[4] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[4] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[4] + samplePhrase());
       }
     },
     button : function() {
@@ -179,17 +209,23 @@ function make_slides(f) {
     name : "trial" + 6,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[5] + exp.context[5]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[5] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[5] + getPronoun(exp.context[5], exp.names[5]));
+      } else {
+        $(".display_context").html(exp.names[5] + exp.context[5]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[5] === " is short") || (exp.target[5] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 5] + " says, " + "\"" + exp.names[5] + exp.target[5] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 5] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[5] + exp.target[5] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[5] + exp.target[5] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[5] + " says, " + "\"" + exp.target[5] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[5] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[5] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[5] + samplePhrase());
       }
     },
     button : function() {
@@ -211,17 +247,23 @@ function make_slides(f) {
     name : "trial" + 7,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[6] + exp.context[6]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[6] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[6] + getPronoun(exp.context[6], exp.names[6]));
+      } else {
+        $(".display_context").html(exp.names[6] + exp.context[6]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[6] === " is short") || (exp.target[6] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 6] + " says, " + "\"" + exp.names[6] + exp.target[6] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 6] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[6] + exp.target[6] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[6] + exp.target[6] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[6] + " says, " + "\"" + exp.target[6] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[6] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[6] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[6] + samplePhrase());
       }
     },
     button : function() {
@@ -243,17 +285,23 @@ function make_slides(f) {
     name : "trial" + 8,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[7] + exp.context[7]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[7] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[7] + getPronoun(exp.context[7], exp.names[7]));
+      } else {
+        $(".display_context").html(exp.names[7] + exp.context[7]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[7] === " is short") || (exp.target[7] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 7] + " says, " + "\"" + exp.names[7] + exp.target[7] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 7] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[7] + exp.target[7] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[7] + exp.target[7] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[7] + " says, " + "\"" + exp.target[7] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[7] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[7] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[7] + samplePhrase());
       }
     },
     button : function() {
@@ -275,17 +323,23 @@ function make_slides(f) {
     name : "trial" + 9,
     start : function() {
       $(".err").hide();
-      $(".display_context").html(exp.names[8] + exp.context[8]);
+
+      // changes the format based on different pronouns required
+      if (exp.context[8] === " takes a sip of their friend's coffee before returning back to their tea.") {
+        $(".display_context").html(exp.names[8] + getPronoun(exp.context[8], exp.names[8]));
+      } else {
+        $(".display_context").html(exp.names[8] + exp.context[8]);
+      }
 
       // changes the format when a person is used in the target sentence
       if ((exp.target[8] === " is short") || (exp.target[8] === " is heavy")) {
         $(".display_target").html(exp.names[exp.trials + 8] + " says, " + "\"" + exp.names[8] + exp.target[8] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[exp.trials + 8] + " meant?");
-        $(".display_prompt").html("\"" + exp.names[8] + exp.target[8] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.names[8] + exp.target[8] + samplePhrase());
       } else {
         $(".display_target").html(exp.names[8] + " says, " + "\"" + exp.target[8] + "." + "\"");
         $(".display_question").html("What do you think " + exp.names[8] + " meant?");
-        $(".display_prompt").html("\"" + exp.target[8] + "\"" + " relative to ");
+        $(".display_prompt").html("\"" + exp.target[8] + samplePhrase());
       }
     },
     button : function() {
@@ -356,7 +410,7 @@ function init() {
   exp.names = sampleNames(characters, exp.trials)
 
   // samples from targets (without replacement) 
-  exp.target = sampleSentence(targets, exp.trials);
+  exp.target = sampleTarget(targets, exp.trials);
 
   // uses the results stored in exp.target to randomly sample one context phrase from contexts
   exp.context = sampleContext(exp.target, contexts);

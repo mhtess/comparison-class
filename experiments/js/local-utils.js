@@ -1,5 +1,5 @@
 // samples without replacement from a list of target sentences in order to get an array of unique sentences
-var sampleSentence = function(target, trials) {
+var sampleTarget = function(target, trials) {
 	var pairs = [];
 	for (var i = 0; i < trials; i++) {
 		pairs.push(_.sample(target));
@@ -37,4 +37,9 @@ var getPronoun = function(context, name) {
 	})).gender;
 	if (gender === "male") { return context.split("their").join("his"); }
 	else if (gender === "female") { return context.split("their").join("her"); }
+}
+
+// playing around with the effects of using "for a" versus "relative to"
+var samplePhrase = function() {
+	return _.sample([" for a ", " relative to "]);
 }

@@ -8,7 +8,7 @@ var examples = {
 	"The weather is cold" : [
 		" just flew into New York from Florida.",
 		" is a New York native.",
-		" is not wearing any warm clothing." 
+		" is not wearing a jacket or sweater." 
 	],
 	"The necklace is expensive" : [
 		" is browsing at a jewelry store.",
