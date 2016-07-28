@@ -112,6 +112,7 @@ function init() {
   
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
+  $(".display_trials").html(exp.trials);
 
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
