@@ -4,7 +4,7 @@ var examples = [{
 	context : [
 		// " has never been to this coffee shop and buys a cup of coffee.",
 		" is a regular at the coffee shop and buys a cup of coffee.",
-		" takes a sip of their friend's coffee before returning back to their tea."
+		" takes a sip of their friend\'s coffee before returning back to their tea."
 	]
 }, {
 	target : "The weather is cold",
@@ -40,7 +40,7 @@ var examples = [{
 }, {
 	target : "The office is open late",
 	context : [
-		" is making a doctor's appointment.",
+		" is making a doctor\'s appointment.",
 		" works at a call center."
 	]
 }, {

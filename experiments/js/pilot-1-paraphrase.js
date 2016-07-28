@@ -54,7 +54,7 @@ function makeSlides(f) {
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
-        "names" : exp.names[i],
+        "names" : exp.names[i] + "",
         "response" : response
       });
       i++;
