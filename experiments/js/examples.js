@@ -10,14 +10,16 @@ var examples = [{
 	target : "The weather is cold",
 	context : [
 		// " is not wearing a jacket or sweater.",
+		// " is a New York native.",
 		" just flew into New York from Florida.",
-		" is a New York native."
+		" was raised in Russia."
 	]
 }, {
 	target : "The necklace is expensive",
 	context : [
 		// " is buying their high-school date a necklace.",
-		" is browsing at a jewelry store.",
+		// " is trying to pawn their necklace.",
+		" is browsing at a jewelry store and stops to look at a necklace.",
 		" is buying a diamond necklace."
 	]
 }, {
@@ -29,10 +31,12 @@ var examples = [{
 		" got pulled over by a police officer." // technically not proper English usage
 	]
 }, {
-	target : "Switzerland is far away",
+	target : "Switzerland is far",
 	context : [ 
-		" lives in Germany.",
-		" lives in the Caribbean."
+		// " lives in Germany.",
+		// " lives in the Caribbean.",
+		" lives 30 miles away from Switzerland and is planning a vacation.",
+		" lives 10000 miles away from Switzerland and is planning a vacation."
 	]
 }, {
 	target : "This is a long car ride",
@@ -42,11 +46,16 @@ var examples = [{
 		" is driving to work."
 	]
 }, {
-	target : "The crane is tall",
+	target : "The office is open late",
 	context : [
-		// " sees many kinds of animals at the city park.",
-		" is at a construction site.",
-		" is a veterinarian."
+		" is making a doctor's appointment.",
+		" works at a call center."
+	]
+}, {
+	target : " is tall",
+	context : [
+		" is 4 years old.",
+		" is 26 years old."
 	]
 }, {
 	target : " is short",
