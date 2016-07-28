@@ -53,8 +53,8 @@ var examples = [{
 	target : " is short",
 	context : [
 		// " is a tennis player.",
-		" is a goat.",
-		" is a basketball player."
+		" is a greyhound.",
+		" is a professional basketball player."
 	]
 }, {
 	target : " is heavy",
