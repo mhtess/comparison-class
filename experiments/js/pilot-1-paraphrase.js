@@ -30,7 +30,7 @@ function makeSlides(f) {
     }
 
     // changes the format when a person is used in the target sentence
-    if ((exp.examples[i].target === " is short") || (exp.examples[i].target === " is heavy")) {
+    if (exp.examples[i].target[0] === " ") {
 
       // if we need an extra name, pop if off exp.extra
       exp.names[i] = [exp.names[i], exp.extra.pop()];
@@ -122,6 +122,9 @@ function init() {
 
   // names for the trials that require an extra name
   exp.extra = exp.names.slice(exp.trials, exp.names.length);
+
+  // we don't have any catch trials for this experiment
+  exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
