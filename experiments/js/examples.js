@@ -31,14 +31,6 @@ var examples = [{
 		" got pulled over by a police officer." // technically not proper English usage
 	]
 }, {
-	target : "Switzerland is far",
-	context : [ 
-		// " lives in Germany.",
-		// " lives in the Caribbean.",
-		" lives 30 miles away from Switzerland and is planning a vacation.",
-		" lives 10000 miles away from Switzerland and is planning a vacation."
-	]
-}, {
 	target : "This is a long car ride",
 	context : [
 		// " is driving to a theme park.",
@@ -73,3 +65,13 @@ var examples = [{
 		" is a dancer."
 	]
 }];
+
+// {
+// 	target : "Switzerland is far",
+// 	context : [ 
+// 		// " lives in Germany.",
+// 		// " lives in the Caribbean.",
+// 		" lives 30 miles away from Switzerland and is planning a vacation.",
+// 		" lives 10000 miles away from Switzerland and is planning a vacation."
+// 	]
+// } 
