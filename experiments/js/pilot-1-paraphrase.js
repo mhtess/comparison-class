@@ -51,6 +51,7 @@ function makeSlides(f) {
       $(".err").show();
     } else {
       exp.data_trials.push({
+        "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i],
