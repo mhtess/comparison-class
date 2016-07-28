@@ -3,14 +3,10 @@
 <head>
     <title>Comparison Class Study</title>
 
-    <!--JS-->
-
     <!-- external general utilities -->
     <script src="shared/js/jquery-1.11.1.min.js "></script>
     <script src="shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
     <script src="shared/js/underscore-min.js"></script>
-    <!-- if you want to draw stuff: -->
-    <!-- <script src="../_shared/js/raphael-min.js"></script> -->
 
     <!-- cocolab experiment logic -->
     <script src="shared/js/exp-V2.js"></script>
@@ -20,8 +16,6 @@
     <script src="shared/js/mmturkey.js "></script>
     <script src="shared/js/browserCheck.js"></script>
     <script src="shared/js/utils.js"></script>
-    <!-- if you want to draw cute creatures (depends on raphael): -->
-    <!-- <script src="../_shared/js/ecosystem.js"></script> -->
 
     <!-- experiment specific helper functions -->
     <script src="js/local-utils.js"></script>
@@ -35,7 +29,6 @@
     <script src="js/pilot-1-paraphrase.js"></script>
     <script src="js/examples.js"></script>
     <script src="js/names.js"></script>
-    
 </head>
 
 <body onload="init();">
@@ -57,96 +50,17 @@
     <button onclick="_s.button()">Continue</button>
   </div>
 
-  <div class="slide" id="trial1">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response1"></input>."<p></p>
-    </form>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial2">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response2"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial3">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response3"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial4">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response4"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial5">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response5"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial6">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response6"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial7">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response7"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial8">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response8"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
-
-  <div class="slide" id="trial9">
-    <p class="display_context"></p>
-    <p class="display_target"></p>
-    <p class="display_question"></p>
-    <span class="display_prompt"></span><input type="text" id="text_response9"></input>."<p></p>
-    <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
-  </div>
+  <!-- this is where all of the trial slides are embedded -->
+  <div class="trial_slides"></div>
 
   <div class="slide"  id="subj_info">
     <div class="long_form">
       <div class="subj_info_title">Additional information</div>
       <p class="info">Answering these questions is optional, but will help us understand your answers.</p>
       <p>Did you read the instructions and do you think you did the HIT correctly?</p>
-      <label><input type="radio"  name="assess" value="No"/>No</label>
-      <label><input type="radio"  name="assess" value="Yes"/>Yes</label>
-      <label><input type="radio"  name="assess" value="Confused"/>I was confused</label>
+      <label><input type="radio" name="assess" value="No"/>No</label>
+      <label><input type="radio" name="assess" value="Yes"/>Yes</label>
+      <label><input type="radio" name="assess" value="Confused"/>I was confused</label>
 
       <p>Gender:
         <select id="gender">
@@ -188,8 +102,8 @@
     </div>
   </div>
 
-  <div id="thanks" class="slide js" >
-    <p  class="big">Thank you for your time!</p>
+  <div id="thanks" class="slide js">
+    <p class="big">Thank you for your time!</p>
   </div>
 
   <div class="progress">
@@ -199,6 +113,5 @@
       </div>
     </div>
   </div>
-
 </body>
 </html>
