@@ -1,0 +1,133 @@
+---
+title: "Inferring comparison classes through pragmatic reasoning"
+author: "Michael Lopez-Brau"
+output: html_document
+---
+
+```{r setup, echo = FALSE}
+library(ggplot2)
+library(knitr)
+```
+
+<!-- # Introduction
+
+Ontological knowledge refers to one's conception of the basic categories of existence: of what sorts of things there are. These basic categories, or classes, allow us to establish relations between objects, events, or people. In Frank C. Keil's book, Semantic and Conceptual Development, he lays out a framework for a possible theory of the structure of ontological knowledge, simply called Sommers' theory. Specifically, the theory entails two hierarchical trees, where one describes the relationship between predicates and the terms they can be used with while the other describes the ontological classes that encapsulate similar predicates. With this structure in mind, the more general classes and predicates rest towards the top (e.g. living things, events) and specific classes much lower (e.g. dogs, motorcycles). Even though his theory is centered around the relationship between predicates and terms, we can easily draw parallels to features and kinds.
+
+Without getting into excessive detail, Sommer's theory claims that there are four psychological phenomena that are surface manifestations of underlying ontological knowledge. For this reason, Keil makes a point to ensure that the model satisfies these phenomena. The descriptions of how the phenomena are satisfied have been modified to reflect the change from predicates and terms to features and kinds.
+
+* Anomalous sentences - sensible and nonsensible features are dealt with by tree structure. If a feature-kind is sensible, then the feature will dominate that kind in the tree. Conversely, if the feature-kind is nonsensible, the feature will not dominate the kind. "Dominate," in this sense,
+means to be above it in the tree.
+* Natural classes - for a class to be natural, it must exhaustively dominate all and only the kinds in that class. Conversely, non-natural classes are those classes that include kinds on different branches but fail to include all kinds that are common to those branches. The notion of naturalness used here defines ontological classes that can be collapsed into larger classes that also form coherent ontological structures.
+* Similarity - classes of kinds that are closely dominated by a common feature are more similar to each other than classes that are distantly dominated. The relation is also transitive: the theory can make similarity predictions between pairs a-b and a-c but is unable to predict relative similarities between pairs a-b and c-d.
+* Copredication - a natural copredication is when two predicates (features, in our case) are connected through the classical two-place logical connectives, "and," "or," and "if...then," and are sensible. The notion of natural here is synonymous with sensible. Nodes that are on a "common line," or share a branch, are copredicable. Here is an example of a natural copredication: X is tall and X is red. For clarity, here is an example of a non-natural copredication: Either X is fat or X is false.
+
+Generic sentences, also known as generics, are generalizations about the prevalence of features. Here is an example of a generic: Dogs have fur. Clearly, there is some ambiguity here--how many dogs have fur? Though the threshold of prevalence is unknown, it is approximated by the listener through inference. Another interesting question can be derived from this generic: what could I have been comparing dogs to that I had to specify that they had fur (e.g. other animals)? In other words, what is the contrast class of "dogs," given this feature? A contrast class can be seen as a set of possible candidates for comparison with the kind. For this project, the latter question is of interest to us. We would like to use WebPPL and several elements of Sommers' theory to build a computational model that can infer the contrast class, conditioned on a feature, of a kind.
+
+It is helpful to think of this problem in terms of inference due to the nature of natural language. Because natural language can be noisy, there can be uncertainty about the information a listener receives. Consequently, deterministic approaches to the problem will not suffice. On the other hand, a Bayesian model best capitalizes on the fact that, as humans, we have prior beliefs about the world thataid us in our everyday inference tasks. Specifically, our knowledge about the propensity of certain classes over others can help us factor in a prior that is used in our day-to-day conversations. -->
+
+## What are comparison classes?
+
+Given an utterance (and usually some context), a _comparison class_ is the set of candidate entities that are used for comparison with the subject. Here is an example:
+
+> The coffee is hot.
+
+If we know that coffee in this sentence is a <a href="https://en.wikipedia.org/wiki/Jockey">cappuccino</a>, then we can infer that the comparison class is likely cappuccinos.
+
+## What role do comparison classes play in understanding vague language?
+
+Let's say you walk into a coffee shop and you overhear someone utter the previous example. If they were drinking a cappuccino, then _hot_ might mean 
+
+The question of what _hot_ means or how to infer its meaning, or any other _gradable adjective_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, far, etc. 
+
+An inherent property of relative gradable adjectives is that a comparison must be made in order for these words to have meaning. "The coffee is hot" only makes sense if there is a population of entities, for which Bill belongs, that 
+
+we need to first infer what Bill is. Our definitions of tall will vary depending on the class of entities of which Bill belongs. Tall for a 4-year-old may be some height above 3'4" where tall for an adult may be some height above 5'8".
+
+## Experiment
+
+The pilot experiment was run on Amazon Mechanical Turk (MTurk) with 30 participants. Each participant had to answer 18 questions in a fill-in-the-blank and paraphrase format. The experiment took about five minutes and participants were paid $0.60. You can find the experiment at https://mhtess.github.io/comparison-class/.
+
+Here is what a typical experiment trial would look like: 
+
+> Bill is a goat. John says, "Bill is tall." What do you think John meant? "Bill is tall for a `goat`."
+
+The first and second sentences are the context and target sentences, respectively. The 18 questions were unique pairs of these sentences. The third and fourth sentence are the prompts, where the participant gives an answer. The name(s) were assigned to each trial randomly and uniquely from a pool of names normalized for race [citation needed].
+
+In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." In the next section, we graph and analyze the results of peoples' responses.
+
+## Results
+
+```{r, echo = FALSE}
+# set the local path of the comparison-class folder
+local = "~/Desktop"
+```
+
+### Condition 1: for a
+
+```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
+# set the working directory
+setwd(paste(local, "/comparison-class/experiments/pilot-1-paraphrase-results/", sep = ""))
+
+# get the number of files in the current condition folder
+files = list.files("condition-1")
+
+for (pair in 1:length(files)) {
+  # read in the csv file
+  file = read.csv(paste("condition-1", "/pair-", as.character(pair) ,"-condition-1", sep = ""))
+  file["response"] = data.frame(substr(file[,"response"], 1, 20))
+  colnames(file["response"]) = c("response")
+  
+  # generates the base plot
+  pairs = read.csv("pairs.csv")
+  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
+  response = build$panel$ranges[[1]]$x.labels
+  response = data.frame(response)
+  count = build$data[[1]]$count
+  count = data.frame(count)
+
+  # prints the plot
+  title = paste("Pair ", as.character(pair), ", Condition 1", sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ggtitle(title) + ylab("count") + xlab("response") + geom_bar(stat = "identity") + coord_flip()
+  print(plot)
+
+  # make a table of the data
+  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
+  #print(kable(x = table, format = "markdown"))
+}
+```
+
+### Condition 2: relative to
+
+```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
+# set the working directory
+setwd(paste(local, "/comparison-class/experiments/pilot-1-paraphrase-results/", sep = ""))
+
+# get the number of files in the current condition folder
+files = list.files("condition-2")
+
+for (pair in 1:length(files)) {
+  # read in the csv file
+  file = read.csv(paste("condition-2", "/pair-", as.character(pair) ,"-condition-2", sep = ""))
+  file["response"] = data.frame(substr(file[,"response"], 1, 20))
+  colnames(file["response"]) = c("response")
+  
+  # generates the base plot
+  pairs = read.csv("pairs.csv")
+  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
+  response = build$panel$ranges[[1]]$x.labels
+  response = data.frame(response)
+  count = build$data[[1]]$count
+  count = data.frame(count)
+  
+  # prints the plot
+  title = paste("Pair ", as.character(pair), ", Condition 2", sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ggtitle(title) + ylab("count") + xlab("response") + geom_bar(stat = "identity") + coord_flip()
+  print(plot)
+  
+  # make a table of the data
+  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
+  #print(kable(x = table, format = "markdown"))
+}
+```
+
+## References
