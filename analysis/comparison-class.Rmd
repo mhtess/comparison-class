@@ -5,6 +5,10 @@ output: html_document
 ---
 
 ```{r setup, echo = FALSE}
+# set the local path of the comparison-class folder
+path = "~/Desktop/comparison-class/"
+
+# import required libraries
 library(ggplot2)
 library(knitr)
 ```
@@ -25,23 +29,23 @@ Generic sentences, also known as generics, are generalizations about the prevale
 
 It is helpful to think of this problem in terms of inference due to the nature of natural language. Because natural language can be noisy, there can be uncertainty about the information a listener receives. Consequently, deterministic approaches to the problem will not suffice. On the other hand, a Bayesian model best capitalizes on the fact that, as humans, we have prior beliefs about the world thataid us in our everyday inference tasks. Specifically, our knowledge about the propensity of certain classes over others can help us factor in a prior that is used in our day-to-day conversations. -->
 
-## What are comparison classes?
+### Introduction
 
-Given an utterance (and usually some context), a _comparison class_ is the set of candidate entities that are used for comparison with the subject. Here is an example:
+Suppose you walk into a coffee shop and overhear someone say “the coffee is warm.” What do you think they meant by that? If the person is drinking a <a href="https://en.wikipedia.org/wiki/Cappuccino">cappuccino</a>, warm might mean which is around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an <a href="https://en.wikipedia.org/wiki/Iced_coffee">iced coffee</a>, warm might mean around 15&deg;C or 59&deg;F.
 
-> The coffee is hot.
+It is apparent that the meaning of the entire utterance, not just the gradable adjective, is quite flexible. In order for us to ground a quantitative interpretation of the adjective “warm,” we need to know what we are comparing coffee to: we need to know the comparison class.
 
-If we know that coffee in this sentence is a <a href="https://en.wikipedia.org/wiki/Jockey">cappuccino</a>, then we can infer that the comparison class is likely cappuccinos.
+### What are comparison classes?
 
-## What role do comparison classes play in understanding vague language?
+Given an utterance and usually some context, a **comparison class** is the set of candidate entities that are used for comparison with the subject. In our previous example, the comparison class would have been either "cappuccino" or "iced coffee", which may seem trivial when taking the given context into account. We show some non-trivial examples in the results section.
 
-Let's say you walk into a coffee shop and you overhear someone utter the previous example. If they were drinking a cappuccino, then _hot_ might mean 
+### What role do comparison classes play in understanding gradable adjectives?
 
-The question of what _hot_ means or how to infer its meaning, or any other _gradable adjective_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, far, etc. 
+The comparison class also restricts the set of possible meanings of a gradable adjective. For example, it would probably not make sense to describe a warm cappuccino as being 60&deg;F. Alternatively, the value "60&deg;F" would not appear in the set that contains the possible meanings of "warm."
 
-An inherent property of relative gradable adjectives is that a comparison must be made in order for these words to have meaning. "The coffee is hot" only makes sense if there is a population of entities, for which Bill belongs, that 
+The question of what "warm" means and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, and far because they best elicit the comparison class of an utterance.
 
-we need to first infer what Bill is. Our definitions of tall will vary depending on the class of entities of which Bill belongs. Tall for a 4-year-old may be some height above 3'4" where tall for an adult may be some height above 5'8".
+While previous work has focused on building computational models to infer the meaning of such gradable adjectives, the comparison class has always been assumed _a priori_. A good computational model of human inference of gradable adjectives is a model that can first infer the comparison class in order to make an accurate quantitative interpretation of the gradable adjective. 
 
 ## Experiment
 
@@ -57,28 +61,23 @@ In addition, each participant was randomly assigned a condition that changed the
 
 ## Results
 
-```{r, echo = FALSE}
-# set the local path of the comparison-class folder
-local = "~/Desktop"
-```
-
 ### Condition 1: for a
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
-# set the working directory
-setwd(paste(local, "/comparison-class/experiments/pilot-1-paraphrase-results/", sep = ""))
+# set the working directory to the raw data
+setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-1/", sep = ""))
 
 # get the number of files in the current condition folder
-files = list.files("condition-1")
+files = list.files()
 
 for (pair in 1:length(files)) {
   # read in the csv file
-  file = read.csv(paste("condition-1", "/pair-", as.character(pair) ,"-condition-1", sep = ""))
+  file = read.csv(paste("pair-", as.character(pair) ,"-condition-1", sep = ""))
   file["response"] = data.frame(substr(file[,"response"], 1, 20))
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("pairs.csv")
+  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -99,20 +98,20 @@ for (pair in 1:length(files)) {
 ### Condition 2: relative to
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
-# set the working directory
-setwd(paste(local, "/comparison-class/experiments/pilot-1-paraphrase-results/", sep = ""))
+# set the working directory to the raw data
+setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-2", sep = ""))
 
 # get the number of files in the current condition folder
-files = list.files("condition-2")
+files = list.files()
 
 for (pair in 1:length(files)) {
   # read in the csv file
-  file = read.csv(paste("condition-2", "/pair-", as.character(pair) ,"-condition-2", sep = ""))
+  file = read.csv(paste("pair-", as.character(pair) ,"-condition-2", sep = ""))
   file["response"] = data.frame(substr(file[,"response"], 1, 20))
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("pairs.csv")
+  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -131,3 +130,4 @@ for (pair in 1:length(files)) {
 ```
 
 ## References
+_in progress_
