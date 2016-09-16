@@ -139,13 +139,27 @@ for (pair in 1:length(files)) {
 
 In the graphs above, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
 
+### Analysis
+
+#### Condition 1:
+
+* Pair 6: The top two answers for this pair were "diamond necklace" and "diamond." While the former makes sense, given the context, the latter does not. This may have been a mistake rather than an honest interpretation but more data would be needed to confirm if this pair elicits the comparison class "diamond" for the subject "diamond necklace."
+* Pair 7: Most participants chose "movie" instead of "movie ticket," resulting in the following sentence: "The ticket is cheap for a movie." It seems that the subject "ticket" elicits the comparison class "movies," or more generally the price to see a movie.
+* Pair 9: I chose to separate "road trip" and "drive" because the former has the connotation of long trips where the latter is less inclined to any particular length.
+* Pair 11: "doctor's office" and "doctor's appointment" were the two most common answers but elicit different comparison classes. With regard to the "doctor's appointment" response, it seems that participants here relied too heavily on the context.
+* Pair 13 & 14: The top answer was "4-year-old" for the first pair and "man/woman" for the second. This is likely because the distributions of heights among 3-, 4-, and 5-year-olds are much more different than the distributions of heights of 24-, 25-, and 26-year-old adults; hence, it would be more informative to communicate the direct age of toddler than an adult when talking about height.
+
+#### Condition 2:
+
+In general, most of the pairs in this condition experienced too much variability in responses. More of this will be touched on in the next section.
+
 ### Discussion
 
 Looking at the data above, a stark difference between the conditions is the variability in responses: the “relative to” condition elicted far more unique responses than the "for a" condition. Also, the “relative to” condition elicited noun phrases, such as "other 4-year-olds," rather than nouns, such as “4-year-olds,” as in the "for a" condition.
 
-Given that this is the first pilot experiment, response counts for each unique response were low. One of factors that we look to account for in future experiments is how participant responses are encoded. Should the phrases "doctor's appointment" and "doctor's office" be encoded as similar or different responses? Hand-encoding responses can lead to large variations in results, leading to data that is not reproducible. As a result, we seek to apply a formal tool for encoding responses in future experiments.
+To tackle variability in future experiments, we plan to look at how participant responses are encoded. Should the phrases "doctor's appointment" and "doctor's office" be encoded as similar or different responses? Hand-encoding responses can lead to large variations in results, leading to data that is not reproducible. We seek to apply a formal tool for encoding responses in future experiments.
 
-To best elicit the comparison class in our experiments, we need to understand the differences between the conditions we used and which one gives us a more favorable output (i.e. nouns or noun phrases). Once we have these elicited classes, we can then measure participants' background knowledge and interpretations using these contextual manipulations, incorporate it with the adjectives model in [1], and see if the knowledge from the classes we measured makes the right predictions for interpreting gradable adjectives.
+To best elicit the comparison class in our experiments, we have decided to update our "relative to" condition with a "relative to a" condition. Once we improve our experiment design and obtain these elicited classes, we can then measure participants' background knowledge and interpretations using these contextual manipulations, incorporate it with the adjectives model in [1], and see if the knowledge from the classes we measured makes the right predictions for interpreting gradable adjectives.
 
 ### References
 [1] D. Lassiter, & N. D. Goodman. 2013. Context, scale structure, and statistics in the interpretation of positive-form adjectives. _In Semantics and Linguistic Theory_ (SALT) 23.
