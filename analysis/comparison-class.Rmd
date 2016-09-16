@@ -43,11 +43,11 @@ Given an utterance and usually some context, a **comparison class** is the set o
 
 The comparison class also restricts the set of possible meanings of a gradable adjective. For example, it would probably not make sense to describe a warm cappuccino as being 60&deg;F. Alternatively, the value "60&deg;F" would not appear in the set that contains the possible meanings of "warm."
 
-The question of what "warm" means and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, and far because they best elicit the comparison class of an utterance.
+The question of what warm means and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, and far because they best elicit the comparison class of an utterance.
 
 While previous work has focused on building computational models to infer the meaning of such gradable adjectives, the comparison class has always been assumed _a priori_. A good computational model of human inference of gradable adjectives is a model that can first infer the comparison class in order to make an accurate quantitative interpretation of the gradable adjective. 
 
-## Experiment
+### Experiment
 
 The pilot experiment was run on Amazon Mechanical Turk (MTurk) with 30 participants. Each participant had to answer 18 questions in a fill-in-the-blank and paraphrase format. The experiment took about five minutes and participants were paid $0.60. You can find the experiment at https://mhtess.github.io/comparison-class/.
 
@@ -57,11 +57,11 @@ Here is what a typical experiment trial would look like:
 
 The first and second sentences are the context and target sentences, respectively. The 18 questions were unique pairs of these sentences. The third and fourth sentence are the prompts, where the participant gives an answer. The name(s) were assigned to each trial randomly and uniquely from a pool of names normalized for race [citation needed].
 
-In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." In the next section, we graph and analyze the results of peoples' responses.
+In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." In the next section, we graph the results of peoples' responses and finish with a brief analysis and discussion in the section thereafter.
 
-## Results
+### Results
 
-### Condition 1: for a
+#### Condition 1: for a
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
@@ -85,8 +85,12 @@ for (pair in 1:length(files)) {
   count = data.frame(count)
 
   # prints the plot
-  title = paste("Pair ", as.character(pair), ", Condition 1", sep = "")
-  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ggtitle(title) + ylab("count") + xlab("response") + geom_bar(stat = "identity") + coord_flip()
+  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
+  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
+  print(kable(x = data.frame(Target, Context), format = "pandoc"))
+  writeLines("\n")
+  title = paste("Pair ", as.character(pair), sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
   print(plot)
 
   # make a table of the data
@@ -95,7 +99,7 @@ for (pair in 1:length(files)) {
 }
 ```
 
-### Condition 2: relative to
+#### Condition 2: relative to
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
@@ -119,8 +123,12 @@ for (pair in 1:length(files)) {
   count = data.frame(count)
   
   # prints the plot
-  title = paste("Pair ", as.character(pair), ", Condition 2", sep = "")
-  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ggtitle(title) + ylab("count") + xlab("response") + geom_bar(stat = "identity") + coord_flip()
+  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
+  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
+  print(kable(x = data.frame(Target, Context), format = "pandoc"))
+  writeLines("\n")
+  title = paste("Pair ", as.character(pair), sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
   print(plot)
   
   # make a table of the data
@@ -129,5 +137,15 @@ for (pair in 1:length(files)) {
 }
 ```
 
-## References
-_in progress_
+In the graphs above, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
+
+### Discussion
+
+Looking at the data above, a stark difference between the conditions is the variability in responses: the “relative to” condition elicted far more unique responses than the "for a" condition. Also, the “relative to” condition elicited noun phrases, such as "other 4-year-olds," rather than nouns, such as “4-year-olds,” as in the "for a" condition.
+
+Given that this is the first pilot experiment, response counts for each unique response were low. One of factors that we look to account for in future experiments is how participant responses are encoded. Should the phrases "doctor's appointment" and "doctor's office" be encoded as similar or different responses? Hand-encoding responses can lead to large variations in results, leading to data that is not reproducible. As a result, we seek to apply a formal tool for encoding responses in future experiments.
+
+To best elicit the comparison class in our experiments, we need to understand the differences between the conditions we used and which one gives us a more favorable output (i.e. nouns or noun phrases). Once we have these elicited classes, we can then measure participants' background knowledge and interpretations using these contextual manipulations, incorporate it with the adjectives model in [1], and see if the knowledge from the classes we measured makes the right predictions for interpreting gradable adjectives.
+
+### References
+[1] D. Lassiter, & N. D. Goodman. 2013. Context, scale structure, and statistics in the interpretation of positive-form adjectives. _In Semantics and Linguistic Theory_ (SALT) 23.
