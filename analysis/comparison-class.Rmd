@@ -65,7 +65,7 @@ In addition, each participant was randomly assigned a condition that changed the
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-1/", sep = ""))
+setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-1/", sep = ""))
 
 # get the number of files in the current condition folder
 files = list.files()
@@ -77,7 +77,7 @@ for (pair in 1:length(files)) {
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -103,7 +103,7 @@ for (pair in 1:length(files)) {
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-2", sep = ""))
+setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2", sep = ""))
 
 # get the number of files in the current condition folder
 files = list.files()
@@ -115,7 +115,7 @@ for (pair in 1:length(files)) {
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
