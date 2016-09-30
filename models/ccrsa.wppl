@@ -68,7 +68,9 @@ var listener1 = function(utterance, prior) {
     var state = sample(prior)
     var threshold = thresholdPrior()
     var S1 = speaker1(state, threshold, prior)
+    // which one do we use?
     factor(S1.score(utterance))
+    //factor(s1optimality * S1.score(utterance))
     return state
   })
 }

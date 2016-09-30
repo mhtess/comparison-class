@@ -6,14 +6,14 @@ library(ggplot2)
 
 for (condition in c(1, 2)) {
   # set the working directory as the plots folder for the current condition
-  setwd(paste(path, "analysis/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-", as.character(condition), "-plots/", sep = ""))
+  setwd(paste(path, "analysis/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-", as.character(condition), "-plots/", sep = ""))
   
   # get the number of files in the current condition folder
-  files = list.files(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-", as.character(condition), sep = ""))
+  files = list.files(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-", as.character(condition), sep = ""))
   
   for (pair in 1:length(files)) {
     # read in the csv file, plot the data, and save it as a png image
-    file = read.csv(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-", as.character(condition), "/pair-", as.character(pair) ,"-condition-", as.character(condition), sep = ""))
+    file = read.csv(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-", as.character(condition), "/pair-", as.character(pair) ,"-condition-", as.character(condition), sep = ""))
     png(filename = paste("pair-", as.character(pair), "-condition-", as.character(condition), "-plot.png", sep = ""), width = 583, height = 380, units = "px", res = 125)
     build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
     response = build$panel$ranges[[1]]$x.labels

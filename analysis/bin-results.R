@@ -24,10 +24,10 @@ for (c in condition) {
     
     # separate the data files by condition
     if (c == " for a ") {
-      write.csv(results_cond_pair_wrn, file = paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-1/pair-",
+      write.csv(results_cond_pair_wrn, file = paste(path, "data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-1/pair-",
                                                  as.character(p),"-condition-1",sep=""))
     } else {
-      write.csv(results_cond_pair_wrn, file = paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-2/pair-",
+      write.csv(results_cond_pair_wrn, file = paste(path, "data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2/pair-",
                                                  as.character(p),"-condition-2",sep=""))
     }
   }
