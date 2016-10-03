@@ -5,7 +5,7 @@ path = "~/cocolab/comparison-class/"
 experiment = "pilot-1-paraphrase"
 
 # is the data processed by hand or through caveman?
-format = "processed"
+format = "caveman"
 
 # import the ggplot2 library for plotting
 library(ggplot2)
@@ -18,8 +18,14 @@ for (condition in c(1, 2)) {
   files = list.files(paste(path, "data/", experiment, "/", format, "/", experiment, "-trials-condition-", as.character(condition), sep = ""))
   
   for (pair in 1:length(files)) {
-    # read in the csv file, plot the data, and save it as a png image
-    file = read.csv(paste(path, "data/", experiment, "/", format, "/", experiment, "-trials-condition-", as.character(condition), "/pair-", as.character(pair) ,"-condition-", as.character(condition), sep = ""))
+    if(format == "caveman") {
+      file = read.csv(paste(path, "data/", experiment, "/", format, "/", experiment, "-trials-condition-", as.character(condition), "/pair-", as.character(pair) ,"-condition-", as.character(condition), sep = ""), header = FALSE)
+      response = file[,"V1"]
+      file = data.frame(response)
+    } else {
+      # read in the csv file, plot the data, and save it as a png image
+      file = read.csv(paste(path, "data/", experiment, "/", format, "/", experiment, "-trials-condition-", as.character(condition), "/pair-", as.character(pair) ,"-condition-", as.character(condition), sep = ""))
+    }
     png(filename = paste("pair-", as.character(pair), "-condition-", as.character(condition), "-plot.png", sep = ""), width = 583, height = 380, units = "px", res = 125)
     build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
     response = build$panel$ranges[[1]]$x.labels
