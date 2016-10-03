@@ -1,7 +1,7 @@
 workerid,target,condition,response,context,names
 0,The coffee is hot, relative to ,temperature, is a regular at the coffee shop and buys a cup of coffee.,Stephanie
 0, is tall, relative to ,other ppeople, is 26 years old.,"Eric,Laura"
-0,The coffee is hot, relative to ,tea , takes a sip of their friend&quotechars coffee before returning back to their tea.,Alexander
+0,The coffee is hot, relative to ,tea , takes a sip of their friend's coffee before returning back to their tea.,Alexander
 0, is heavy, relative to ,people, is a person.,"Lee,Monica"
 0, is short, relative to ,people, is a professional basketball player.,"Daniel,David"
 0,This is a long car ride, relative to ,driving to work , is driving to work.,Cameron
@@ -9,7 +9,7 @@ workerid,target,condition,response,context,names
 0,The ticket is cheap, relative to ,other tickets, got pulled over by a police officer.,Tom
 0,The necklace is expensive, relative to ,diamond necklaces, is buying a diamond necklace.,Gabriel
 0, is heavy, relative to ,other dancers , is a dancer.,"Julia,Stephen"
-0,The office is open late, relative to ,other offices, is making a doctor&quotechars appointment.,Melinda
+0,The office is open late, relative to ,other offices, is making a doctor's appointment.,Melinda
 0,The weather is cold, relative to ,Russia , was raised in Russia.,Jennifer
 0,The necklace is expensive, relative to ,Others, is browsing at a jewelry store and stops to look at a necklace.,Angela
 0, is tall, relative to ,people, is 4 years old.,"John,Maya"
@@ -25,7 +25,7 @@ workerid,target,condition,response,context,names
 1,The office is open late, for a ,call center, works at a call center.,Sophia
 1, is heavy, for a ,dancer, is a dancer.,"Jennifer,David"
 1,The weather is cold, for a ,New York trip, just flew into New York from Florida.,Michael
-1,The office is open late, for a ,doctor&quotechars, is making a doctor&quotechars appointment.,Melinda
+1,The office is open late, for a ,doctor's, is making a doctor's appointment.,Melinda
 1, is heavy, for a ,woman, is a person.,"Maya,Monica"
 1,The ticket is cheap, for a ,police officer, got pulled over by a police officer.,Daniel
 1,The necklace is expensive, for a ,jewelry, is browsing at a jewelry store and stops to look at a necklace.,Eric
@@ -33,31 +33,31 @@ workerid,target,condition,response,context,names
 1,This is a long car ride, for a ,trip across the country, is driving across the country.,Kim
 1, is short, for a ,greyhound, is a greyhound.,"Cameron,Anthony"
 1, is tall, for a ,for a 4 year old, is 4 years old.,"Greg,Alicia"
-1,The coffee is hot, for a ,drink, takes a sip of their friend&quotechars coffee before returning back to their tea.,Alexander
+1,The coffee is hot, for a ,drink, takes a sip of their friend's coffee before returning back to their tea.,Alexander
 1, is short, for a ,basketball player, is a professional basketball player.,"Veronica,Michelle"
-2, is tall, relative to ,william&quotechars height, is 4 years old.,"Daniel,William"
+2, is tall, relative to ,william's height, is 4 years old.,"Daniel,William"
 2,The ticket is cheap, relative to ,other tickets, got pulled over by a police officer.,John
 2,The necklace is expensive, relative to ,other necklaces, is browsing at a jewelry store and stops to look at a necklace.,Michael
 2,The necklace is expensive, relative to ,other necklaces, is buying a diamond necklace.,Laura
-2,The weather is cold, relative to ,florida&quotechars weather, just flew into New York from Florida.,Alicia
-2, is tall, relative to ,cameron&quotechars height, is 26 years old.,"Michelle,Cameron"
+2,The weather is cold, relative to ,florida's weather, just flew into New York from Florida.,Alicia
+2, is tall, relative to ,cameron's height, is 26 years old.,"Michelle,Cameron"
 2,This is a long car ride, relative to ,other car rides that are shorter, is driving to work.,Lee
 2, is heavy, relative to , his weight compared to others, is a dancer.,"Greg,Maya"
 2,The ticket is cheap, relative to ,other ticket prices, is buying a movie ticket.,Tom
-2, is heavy, relative to ,other people&quotechars weight, is a person.,"Stephanie,Gabriel"
+2, is heavy, relative to ,other people's weight, is a person.,"Stephanie,Gabriel"
 2, is short, relative to ,other basketball players, is a professional basketball player.,"Kim,Claire"
 2,This is a long car ride, relative to ,other rides that are not cross country, is driving across the country.,Jennifer
-2,The office is open late, relative to ,it&quotechars normal hours, works at a call center.,Eric
+2,The office is open late, relative to ,it's normal hours, works at a call center.,Eric
 2,The weather is cold, relative to ,other countries, was raised in Russia.,Alexander
 2,The coffee is hot, relative to ,other days he bought coffee, is a regular at the coffee shop and buys a cup of coffee.,David
 2, is short, relative to ,other greyhounds, is a greyhound.,"Angela,Julia"
-2,The office is open late, relative to ,other doctor offices, is making a doctor&quotechars appointment.,Anthony
-2,The coffee is hot, relative to ,her tea., takes a sip of their friend&quotechars coffee before returning back to their tea.,Kathleen
+2,The office is open late, relative to ,other doctor offices, is making a doctor's appointment.,Anthony
+2,The coffee is hot, relative to ,her tea., takes a sip of their friend's coffee before returning back to their tea.,Kathleen
 3,The weather is cold, relative to ,Russia, was raised in Russia.,Maya
 3, is short, relative to ,Lucas, is a professional basketball player.,"Kathleen,Lucas"
 3,The necklace is expensive, relative to ,another necklace he saw, is browsing at a jewelry store and stops to look at a necklace.,Lee
 3,The ticket is cheap, relative to ,a more expensive ticket, got pulled over by a police officer.,Kim
-3,The coffee is hot, relative to ,her tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Laura
+3,The coffee is hot, relative to ,her tea, takes a sip of their friend's coffee before returning back to their tea.,Laura
 3,This is a long car ride, relative to ,short car ride, is driving across the country.,Stephanie
 3, is heavy, relative to ,other people that are not heavier, is a person.,"Daniel,Sophia"
 3,The ticket is cheap, relative to ,another movie ticket, is buying a movie ticket.,Alicia
@@ -65,24 +65,24 @@ workerid,target,condition,response,context,names
 3, is short, relative to ,another dog breed, is a greyhound.,"Cameron,Michelle"
 3,The coffee is hot, relative to ,something warm, is a regular at the coffee shop and buys a cup of coffee.,Michael
 3, is tall, relative to ,her age, is 4 years old.,"Angela,David"
-3,The office is open late, relative to ,other medical offices, is making a doctor&quotechars appointment.,Tom
+3,The office is open late, relative to ,other medical offices, is making a doctor's appointment.,Tom
 3,This is a long car ride, relative to ,shorter car rider, is driving to work.,Melinda
 3,The office is open late, relative to ,other offices, works at a call center.,Julia
 3, is tall, relative to ,herself, is 26 years old.,"Alexander,Veronica"
-3,The weather is cold, relative to ,where ever it&quotechars warmer, just flew into New York from Florida.,Claire
+3,The weather is cold, relative to ,where ever it's warmer, just flew into New York from Florida.,Claire
 3,The necklace is expensive, relative to ,something cheaper, is buying a diamond necklace.,Jennifer
 4, is heavy, relative to ,herself, is a dancer.,"Alexander,Melinda"
 4,The necklace is expensive, relative to ,most necklaces, is buying a diamond necklace.,Stephen
 4,This is a long car ride, relative to ,most car rides, is driving across the country.,David
 4,The weather is cold, relative to ,most weather, was raised in Russia.,Julia
 4, is short, relative to ,William, is a greyhound.,"Daniel,William"
-4,The office is open late, relative to ,most other businesses, is making a doctor&quotechars appointment.,Gabriel
+4,The office is open late, relative to ,most other businesses, is making a doctor's appointment.,Gabriel
 4,The necklace is expensive, relative to ,most necklaces, is browsing at a jewelry store and stops to look at a necklace.,Greg
 4, is tall, relative to ,Lucas, is 26 years old.,"Eric,Lucas"
 4, is tall, relative to ,Stephanie, is 4 years old.,"Monica,Stephanie"
 4,This is a long car ride, relative to ,most car rides, is driving to work.,Claire
 4,The coffee is hot, relative to ,most coffee, is a regular at the coffee shop and buys a cup of coffee.,Maya
-4,The coffee is hot, relative to ,Most drinks, takes a sip of their friend&quotechars coffee before returning back to their tea.,Alicia
+4,The coffee is hot, relative to ,Most drinks, takes a sip of their friend's coffee before returning back to their tea.,Alicia
 4,The ticket is cheap, relative to ,most tickets, got pulled over by a police officer.,Lee
 4, is short, relative to ,Kathleen, is a professional basketball player.,"Michael,Kathleen"
 4,The ticket is cheap, relative to ,most tickets, is buying a movie ticket.,Veronica
@@ -93,12 +93,12 @@ workerid,target,condition,response,context,names
 5,The ticket is cheap, relative to ,other tickets , got pulled over by a police officer.,Lee
 5,The office is open late, relative to ,its normal hours, works at a call center.,Daniel
 5,The weather is cold, relative to ,florida, just flew into New York from Florida.,Laura
-5,The office is open late, relative to ,its normal business hours, is making a doctor&quotechars appointment.,Tom
+5,The office is open late, relative to ,its normal business hours, is making a doctor's appointment.,Tom
 5,The coffee is hot, relative to ,coffee that is not freshly served, is a regular at the coffee shop and buys a cup of coffee.,Monica
 5, is short, relative to ,other breeds, is a greyhound.,"Alexander,Kim"
 5,The weather is cold, relative to ,other places, was raised in Russia.,Kathleen
 5, is heavy, relative to ,other dancers, is a dancer.,"Stephen,Michelle"
-5,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Anthony
+5,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,Anthony
 5, is heavy, relative to ,thinner people, is a person.,"Veronica,Melinda"
 5,The necklace is expensive, relative to ,cheaper jewelry, is buying a diamond necklace.,Maya
 5,This is a long car ride, relative to ,shorter rides, is driving across the country.,Gabriel
@@ -111,17 +111,17 @@ workerid,target,condition,response,context,names
 6,The necklace is expensive, relative to ,other jewelry, is buying a diamond necklace.,Cameron
 6,The office is open late, relative to ,other call centers, works at a call center.,Michael
 6,The necklace is expensive, relative to ,other jewelry in the store, is browsing at a jewelry store and stops to look at a necklace.,Daniel
-6,The ticket is cheap, relative to ,previous tickets he&quotechars gotten, got pulled over by a police officer.,Anthony
+6,The ticket is cheap, relative to ,previous tickets he's gotten, got pulled over by a police officer.,Anthony
 6, is heavy, relative to ,other dancers, is a dancer.,"Claire,Tom"
 6,The coffee is hot, relative to ,a regular drink, is a regular at the coffee shop and buys a cup of coffee.,Jennifer
 6,The ticket is cheap, relative to ,other movie theatres, is buying a movie ticket.,Maya
 6,This is a long car ride, relative to ,a different day, is driving to work.,Stephen
 6, is short, relative to ,other greyhounds, is a greyhound.,"Julia,Michelle"
 6, is tall, relative to ,other 4 year olds, is 4 years old.,"John,Laura"
-6,The office is open late, relative to ,other doctors offices, is making a doctor&quotechars appointment.,William
+6,The office is open late, relative to ,other doctors offices, is making a doctor's appointment.,William
 6, is tall, relative to ,other women, is 26 years old.,"Sophia,David"
 6,This is a long car ride, relative to ,local car rides, is driving across the country.,Melinda
-6,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Lee
+6,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,Lee
 6, is heavy, relative to ,other people, is a person.,"Eric,Angela"
 6,The weather is cold, relative to ,Russia, was raised in Russia.,Alexander
 6, is short, relative to ,other basketball players, is a professional basketball player.,"Stephanie,Kim"
@@ -130,11 +130,11 @@ workerid,target,condition,response,context,names
 7, is tall, for a ,adult, is 26 years old.,"Stephen,Kathleen"
 7,The weather is cold, for a ,state in the US, just flew into New York from Florida.,Maya
 7,The ticket is cheap, for a ,moving violation, got pulled over by a police officer.,Daniel
-7,The coffee is hot, for a ,drink, takes a sip of their friend&quotechars coffee before returning back to their tea.,David
+7,The coffee is hot, for a ,drink, takes a sip of their friend's coffee before returning back to their tea.,David
 7, is heavy, for a ,dancer, is a dancer.,"Kim,Greg"
 7, is heavy, for a ,woman, is a person.,"Claire,Gabriel"
 7, is tall, for a ,child, is 4 years old.,"William,Jennifer"
-7,The office is open late, for a ,doctor&quotechars office, is making a doctor&quotechars appointment.,Sophia
+7,The office is open late, for a ,doctor's office, is making a doctor's appointment.,Sophia
 7, is short, for a ,dog, is a greyhound.,"Tom,Michelle"
 7,The office is open late, for a ,call center, works at a call center.,Angela
 7,The necklace is expensive, for a ,piece of jewelry, is buying a diamond necklace.,Veronica
@@ -146,7 +146,7 @@ workerid,target,condition,response,context,names
 8, is heavy, for a ,person, is a person.,"Julia,Sophia"
 8, is short, for a ,greyhound, is a greyhound.,"Stephanie,Gabriel"
 8,The necklace is expensive, for a ,piece of jewelry, is buying a diamond necklace.,Kim
-8,The coffee is hot, for a ,drink, takes a sip of their friend&quotechars coffee before returning back to their tea.,Laura
+8,The coffee is hot, for a ,drink, takes a sip of their friend's coffee before returning back to their tea.,Laura
 8,The ticket is cheap, for a ,fie=ne, got pulled over by a police officer.,Alexander
 8,The office is open late, for a ,call center, works at a call center.,Maya
 8,The coffee is hot, for a ,drink, is a regular at the coffee shop and buys a cup of coffee.,William
@@ -158,7 +158,7 @@ workerid,target,condition,response,context,names
 8, is tall, for a ,child, is 4 years old.,"Anthony,Tom"
 8,The weather is cold, for a ,day, was raised in Russia.,Cameron
 8, is heavy, for a ,dancer, is a dancer.,"John,Lucas"
-8,The office is open late, for a ,doctors office, is making a doctor&quotechars appointment.,Michelle
+8,The office is open late, for a ,doctors office, is making a doctor's appointment.,Michelle
 8,The weather is cold, for a ,day in florida, just flew into New York from Florida.,David
 8,This is a long car ride, for a ,drive to work, is driving to work.,Stephen
 9,This is a long car ride, relative to ,a normal drive, is driving across the country.,Alexander
@@ -166,12 +166,12 @@ workerid,target,condition,response,context,names
 9, is short, relative to ,other professional players, is a professional basketball player.,"Kathleen,Kim"
 9,This is a long car ride, relative to ,his normal commute, is driving to work.,David
 9,The coffee is hot, relative to ,how she likes her coffee, is a regular at the coffee shop and buys a cup of coffee.,Angela
-9,The office is open late, relative to ,normal doctors hours, is making a doctor&quotechars appointment.,Michelle
+9,The office is open late, relative to ,normal doctors hours, is making a doctor's appointment.,Michelle
 9, is heavy, relative to ,an average person, is a person.,"Eric,Veronica"
 9,The office is open late, relative to ,other bussiness, works at a call center.,Michael
 9, is short, relative to ,other greyhounds, is a greyhound.,"Lee,Claire"
 9,The necklace is expensive, relative to ,other jewelry , is buying a diamond necklace.,Maya
-9,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Gabriel
+9,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,Gabriel
 9,The weather is cold, relative to ,Florida temperature , just flew into New York from Florida.,John
 9, is tall, relative to ,an average 26 year old, is 26 years old.,"Greg,Cameron"
 9,The ticket is cheap, relative to ,her offence , got pulled over by a police officer.,Sophia
@@ -181,7 +181,7 @@ workerid,target,condition,response,context,names
 9,The necklace is expensive, relative to ,other jewelry , is browsing at a jewelry store and stops to look at a necklace.,Alicia
 10,The necklace is expensive, relative to ,other jewelry, is browsing at a jewelry store and stops to look at a necklace.,William
 10,This is a long car ride, relative to ,other car rides, is driving across the country.,Kim
-10,The office is open late, relative to ,other offices, is making a doctor&quotechars appointment.,Stephen
+10,The office is open late, relative to ,other offices, is making a doctor's appointment.,Stephen
 10, is tall, relative to ,other children, is 4 years old.,"Anthony,Julia"
 10,This is a long car ride, relative to ,other commutes, is driving to work.,Claire
 10,The office is open late, relative to ,other call centers, works at a call center.,Alexander
@@ -191,7 +191,7 @@ workerid,target,condition,response,context,names
 10,The weather is cold, relative to ,Florida, just flew into New York from Florida.,Eric
 10, is heavy, relative to ,other dancers, is a dancer.,"Lee,Sophia"
 10, is tall, relative to ,other people of her age, is 26 years old.,"Veronica,Monica"
-10,The coffee is hot, relative to ,the tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Kathleen
+10,The coffee is hot, relative to ,the tea, takes a sip of their friend's coffee before returning back to their tea.,Kathleen
 10,The necklace is expensive, relative to ,other necklaces, is buying a diamond necklace.,Laura
 10, is short, relative to ,other dogs, is a greyhound.,"Alicia,Tom"
 10,The weather is cold, relative to ,other countries, was raised in Russia.,David
@@ -200,10 +200,10 @@ workerid,target,condition,response,context,names
 11,This is a long car ride, relative to ,other car rides, is driving to work.,Angela
 11,The ticket is cheap, relative to ,past tickets he has received, got pulled over by a police officer.,Greg
 11, is tall, relative to ,other children her age, is 4 years old.,"Sophia,Alexander"
-11,The office is open late, relative to ,other doctor&quotechars offices he has held appointments at., is making a doctor&quotechars appointment.,Daniel
-11,The coffee is hot, relative to ,his cup of tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,William
+11,The office is open late, relative to ,other doctor's offices he has held appointments at., is making a doctor's appointment.,Daniel
+11,The coffee is hot, relative to ,his cup of tea, takes a sip of their friend's coffee before returning back to their tea.,William
 11,This is a long car ride, relative to ,shorter car rides she has taken, is driving across the country.,Alicia
-11,The weather is cold, relative to ,Florida&quotechars weather, just flew into New York from Florida.,Lee
+11,The weather is cold, relative to ,Florida's weather, just flew into New York from Florida.,Lee
 11, is short, relative to ,larger dog breeds, is a greyhound.,"Stephen,Stephanie"
 11, is tall, relative to ,other women her age, is 26 years old.,"Jennifer,Michael"
 11, is short, relative to ,other basketball players, is a professional basketball player.,"Tom,Laura"
@@ -221,8 +221,8 @@ workerid,target,condition,response,context,names
 12, is heavy, for a ,person, is a person.,"Sophia,Eric"
 12, is tall, for a ,4 year old, is 4 years old.,"Anthony,Veronica"
 12, is short, for a ,basketball player, is a professional basketball player.,"Claire,Cameron"
-12,The coffee is hot, for a ,person, takes a sip of their friend&quotechars coffee before returning back to their tea.,Laura
-12,The office is open late, for a ,appointment, is making a doctor&quotechars appointment.,Tom
+12,The coffee is hot, for a ,person, takes a sip of their friend's coffee before returning back to their tea.,Laura
+12,The office is open late, for a ,appointment, is making a doctor's appointment.,Tom
 12,This is a long car ride, for a ,drive across the country, is driving across the country.,Angela
 12,The office is open late, for a ,call center, works at a call center.,Michael
 12,The coffee is hot, for a ,person drinking it, is a regular at the coffee shop and buys a cup of coffee.,David
@@ -235,12 +235,12 @@ workerid,target,condition,response,context,names
 12,The necklace is expensive, for a ,jewelry store, is browsing at a jewelry store and stops to look at a necklace.,Kathleen
 13,The ticket is cheap, for a ,seeing a movie compared to other tickets, is buying a movie ticket.,Alexander
 13,The necklace is expensive, for a ,a piece of jewlery, is buying a diamond necklace.,Greg
-13,The office is open late, for a ,doctors appointment, is making a doctor&quotechars appointment.,Cameron
+13,The office is open late, for a ,doctors appointment, is making a doctor's appointment.,Cameron
 13, is tall, for a ,a woman compared to other woman, is 26 years old.,"Alicia,Claire"
 13, is tall, for a ,a four year old, is 4 years old.,"William,Stephen"
-13,The coffee is hot, for a ,beverage because it burnt her tougue, takes a sip of their friend&quotechars coffee before returning back to their tea.,Gabriel
+13,The coffee is hot, for a ,beverage because it burnt her tougue, takes a sip of their friend's coffee before returning back to their tea.,Gabriel
 13, is short, for a ,dog meant for racing, is a greyhound.,"Stephanie,Michael"
-13,The necklace is expensive, for a ,necklace compared to other store&quotechars prices, is browsing at a jewelry store and stops to look at a necklace.,Eric
+13,The necklace is expensive, for a ,necklace compared to other store's prices, is browsing at a jewelry store and stops to look at a necklace.,Eric
 13,The ticket is cheap, for a ,citation from a police officer, got pulled over by a police officer.,Jennifer
 13,This is a long car ride, for a ,vacation, is driving across the country.,Tom
 13,This is a long car ride, for a ,commute, is driving to work.,Maya
@@ -252,11 +252,11 @@ workerid,target,condition,response,context,names
 13, is short, for a ,person who plays basketball, is a professional basketball player.,"Kim,Sophia"
 13,The weather is cold, for a ,visitor but he is use to it, was raised in Russia.,Lucas
 14,The ticket is cheap, relative to ,10, is buying a movie ticket.,David
-14,The coffee is hot, relative to ,lava, takes a sip of their friend&quotechars coffee before returning back to their tea.,Jennifer
+14,The coffee is hot, relative to ,lava, takes a sip of their friend's coffee before returning back to their tea.,Jennifer
 14, is tall, relative to ,6 foot, is 26 years old.,"Daniel,Melinda"
 14, is heavy, relative to ,non heavy people, is a person.,"Alexander,Tom"
 14,This is a long car ride, relative to ,a short car ride, is driving to work.,Michael
-14,The office is open late, relative to ,closed early, is making a doctor&quotechars appointment.,Alicia
+14,The office is open late, relative to ,closed early, is making a doctor's appointment.,Alicia
 14,The weather is cold, relative to ,warm weather, was raised in Russia.,John
 14,The office is open late, relative to ,closing early, works at a call center.,Lee
 14,The weather is cold, relative to ,warm weather, just flew into New York from Florida.,Claire
@@ -273,13 +273,13 @@ workerid,target,condition,response,context,names
 15, is heavy, for a ,dancer, is a dancer.,"Cameron,Kathleen"
 15,The coffee is hot, for a ,regular brew., is a regular at the coffee shop and buys a cup of coffee.,Melinda
 15, is heavy, for a ,typical person, is a person.,"Julia,Anthony"
-15,The coffee is hot, for a ,beverage, takes a sip of their friend&quotechars coffee before returning back to their tea.,Alexander
+15,The coffee is hot, for a ,beverage, takes a sip of their friend's coffee before returning back to their tea.,Alexander
 15,The necklace is expensive, for a ,gift, is browsing at a jewelry store and stops to look at a necklace.,Stephanie
 15,The ticket is cheap, for a ,violation , got pulled over by a police officer.,Laura
 15,The office is open late, for a ,call center, works at a call center.,Michael
 15, is short, for a ,greyhound, is a greyhound.,"Gabriel,Lee"
 15,The weather is cold, for a ,vacation, just flew into New York from Florida.,Maya
-15,The office is open late, for a ,appointment , is making a doctor&quotechars appointment.,Sophia
+15,The office is open late, for a ,appointment , is making a doctor's appointment.,Sophia
 15,The necklace is expensive, for a ,diamond, is buying a diamond necklace.,Jennifer
 15, is tall, for a ,4 year old, is 4 years old.,"Kim,Greg"
 15,The ticket is cheap, for a ,movie, is buying a movie ticket.,Alicia
@@ -290,8 +290,8 @@ workerid,target,condition,response,context,names
 16, is short, for a ,basketball player, is a professional basketball player.,"Greg,Sophia"
 16,The weather is cold, for a ,Russian, was raised in Russia.,Julia
 16, is tall, for a ,26 year old, is 26 years old.,"Stephanie,Lucas"
-16,The office is open late, for a ,doctor&quotechars appointment, is making a doctor&quotechars appointment.,Angela
-16,The coffee is hot, for a ,tea drinker, takes a sip of their friend&quotechars coffee before returning back to their tea.,Cameron
+16,The office is open late, for a ,doctor's appointment, is making a doctor's appointment.,Angela
+16,The coffee is hot, for a ,tea drinker, takes a sip of their friend's coffee before returning back to their tea.,Cameron
 16, is tall, for a ,4 year old, is 4 years old.,"Tom,Maya"
 16, is heavy, for a ,dancer, is a dancer.,"Eric,Kathleen"
 16,The office is open late, for a ,call center, works at a call center.,Michelle
@@ -306,12 +306,12 @@ workerid,target,condition,response,context,names
 16,The coffee is hot, for a ,coffee that is regularly luke warm, is a regular at the coffee shop and buys a cup of coffee.,Gabriel
 16,The necklace is expensive, for a ,cheap jewelry store, is browsing at a jewelry store and stops to look at a necklace.,Lee
 17,The weather is cold, for a ,Russian, was raised in Russia.,Stephen
-17,The coffee is hot, for a ,second compared to her tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Laura
+17,The coffee is hot, for a ,second compared to her tea, takes a sip of their friend's coffee before returning back to their tea.,Laura
 17,The necklace is expensive, for a ,diamond necklace, is buying a diamond necklace.,Michelle
 17,This is a long car ride, for a ,country road trip, is driving across the country.,Alicia
 17,The weather is cold, for a ,place like Florida, just flew into New York from Florida.,Anthony
 17, is tall, for a ,child, is 4 years old.,"Julia,Claire"
-17,The office is open late, for a ,doctor&quotechars appointment, is making a doctor&quotechars appointment.,Melinda
+17,The office is open late, for a ,doctor's appointment, is making a doctor's appointment.,Melinda
 17, is short, for a ,greyhound, is a greyhound.,"Eric,Tom"
 17,The ticket is cheap, for a ,movie, is buying a movie ticket.,Lee
 17,This is a long car ride, for a ,ride to work, is driving to work.,Maya
@@ -325,7 +325,7 @@ workerid,target,condition,response,context,names
 17,The ticket is cheap, for a ,pulled over ticket, got pulled over by a police officer.,David
 18, is tall, for a ,woman, is 26 years old.,"Sophia,Laura"
 18,The coffee is hot, for a ,change, is a regular at the coffee shop and buys a cup of coffee.,Claire
-18,The coffee is hot, for a ,drink, takes a sip of their friend&quotechars coffee before returning back to their tea.,Daniel
+18,The coffee is hot, for a ,drink, takes a sip of their friend's coffee before returning back to their tea.,Daniel
 18, is short, for a ,basketball player, is a professional basketball player.,"Tom,Alicia"
 18,The ticket is cheap, for a ,motor vehicle violation, got pulled over by a police officer.,Cameron
 18,The ticket is cheap, for a ,movie, is buying a movie ticket.,Monica
@@ -337,16 +337,16 @@ workerid,target,condition,response,context,names
 18, is short, for a ,greyhound, is a greyhound.,"David,Michelle"
 18,The necklace is expensive, for a ,diamond, is buying a diamond necklace.,Veronica
 18,This is a long car ride, for a ,cross country trip, is driving across the country.,Lucas
-18,The office is open late, for a ,doctor&quotechars appointment, is making a doctor&quotechars appointment.,Kathleen
+18,The office is open late, for a ,doctor's appointment, is making a doctor's appointment.,Kathleen
 18, is heavy, for a ,woman, is a person.,"Julia,Angela"
 18, is tall, for a ,4 year old, is 4 years old.,"William,Jennifer"
 18,This is a long car ride, for a ,drive to work, is driving to work.,Melinda
 19,The ticket is cheap, relative to ,other movie tickets, is buying a movie ticket.,Veronica
-19,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,William
+19,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,William
 19,The ticket is cheap, relative to ,how fast she was going, got pulled over by a police officer.,Michelle
 19,The weather is cold, relative to ,Florida, just flew into New York from Florida.,Eric
 19,This is a long car ride, relative to ,flying, is driving across the country.,David
-19,The office is open late, relative to ,typical offices, is making a doctor&quotechars appointment.,Melinda
+19,The office is open late, relative to ,typical offices, is making a doctor's appointment.,Melinda
 19,The necklace is expensive, relative to ,how much he has to spend, is browsing at a jewelry store and stops to look at a necklace.,John
 19,The office is open late, relative to ,typical call centers, works at a call center.,Angela
 19, is heavy, relative to ,other people, is a person.,"Daniel,Kim"
@@ -372,13 +372,13 @@ workerid,target,condition,response,context,names
 20,The coffee is hot, relative to ,room temperature, is a regular at the coffee shop and buys a cup of coffee.,Anthony
 20, is tall, relative to ,other men, is 26 years old.,"Greg,Cameron"
 20,The office is open late, relative to ,other businesses&quotechar hours, works at a call center.,Lee
-20,The office is open late, relative to ,other doctors&quotechar hours, is making a doctor&quotechars appointment.,Veronica
+20,The office is open late, relative to ,other doctors&quotechar hours, is making a doctor's appointment.,Veronica
 20,This is a long car ride, relative to ,a ride to the store, is driving to work.,Lucas
 20,The necklace is expensive, relative to ,how much money she earns in a week, is buying a diamond necklace.,Michelle
-20,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Stephen
+20,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,Stephen
 20, is heavy, relative to ,other dancers, is a dancer.,"Laura,Eric"
 21,The necklace is expensive, for a , Diamond necklace, is buying a diamond necklace.,Michael
-21,The office is open late, for a ,doctor&quotechars visit, is making a doctor&quotechars appointment.,Veronica
+21,The office is open late, for a ,doctor's visit, is making a doctor's appointment.,Veronica
 21,The office is open late, for a ,call center, works at a call center.,Alexander
 21,The necklace is expensive, for a ,jewlery necklace, is browsing at a jewelry store and stops to look at a necklace.,Kim
 21,The coffee is hot, for a ,coffee , is a regular at the coffee shop and buys a cup of coffee.,Monica
@@ -386,7 +386,7 @@ workerid,target,condition,response,context,names
 21, is short, for a ,greyhound, is a greyhound.,"Maya,David"
 21, is short, for a ,basketball player, is a professional basketball player.,"Jennifer,Michelle"
 21,The weather is cold, for a ,russian, was raised in Russia.,Gabriel
-21,The coffee is hot, for a ,coffee shop, takes a sip of their friend&quotechars coffee before returning back to their tea.,Sophia
+21,The coffee is hot, for a ,coffee shop, takes a sip of their friend's coffee before returning back to their tea.,Sophia
 21, is tall, for a ,girl, is 26 years old.,"Kathleen,Tom"
 21, is heavy, for a ,girl, is a person.,"Alicia,William"
 21,The ticket is cheap, for a ,ticket, got pulled over by a police officer.,Daniel
@@ -408,10 +408,10 @@ workerid,target,condition,response,context,names
 22, is short, for a ,racing dog, is a greyhound.,"John,Kim"
 22,This is a long car ride, for a ,road trip, is driving across the country.,Jennifer
 22, is tall, for a ,girl, is 26 years old.,"Sophia,Anthony"
-22,The coffee is hot, for a ,coffee shop, takes a sip of their friend&quotechars coffee before returning back to their tea.,Stephen
+22,The coffee is hot, for a ,coffee shop, takes a sip of their friend's coffee before returning back to their tea.,Stephen
 22, is short, for a ,basketball player, is a professional basketball player.,"Michael,Greg"
 22,The coffee is hot, for a ,coffee shop, is a regular at the coffee shop and buys a cup of coffee.,Angela
-22,The office is open late, for a ,doctor&quotechars office, is making a doctor&quotechars appointment.,Michelle
+22,The office is open late, for a ,doctor's office, is making a doctor's appointment.,Michelle
 22,The ticket is cheap, for a ,speeding ticket, got pulled over by a police officer.,David
 23, is tall, relative to ,other girls that are also four years old, is 4 years old.,"Maya,Kathleen"
 23,The coffee is hot, relative to ,"other beverages (iced coffee, etc)", is a regular at the coffee shop and buys a cup of coffee.,Kim
@@ -428,16 +428,16 @@ workerid,target,condition,response,context,names
 23, is short, relative to ,the average height of greyhounds, is a greyhound.,"Alexander,Monica"
 23,This is a long car ride, relative to ,everyday commute/travel, is driving across the country.,Tom
 23,This is a long car ride, relative to ,the normal amount of time it takes to drive to work, is driving to work.,Gabriel
-23,The office is open late, relative to ,normal hours of operation, is making a doctor&quotechars appointment.,Michael
+23,The office is open late, relative to ,normal hours of operation, is making a doctor's appointment.,Michael
 23,The necklace is expensive, relative to ,the quality of diamonds or other necklaces, is buying a diamond necklace.,Jennifer
-23,The coffee is hot, relative to ,his cup of tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Daniel
+23,The coffee is hot, relative to ,his cup of tea, takes a sip of their friend's coffee before returning back to their tea.,Daniel
 24, is heavy, for a ,dancer, is a dancer.,"Angela,John"
 24,This is a long car ride, for a ,cross-country drive, is driving across the country.,Daniel
 24,The necklace is expensive, for a ,gift purchase, is buying a diamond necklace.,Michael
-24,The coffee is hot, for a ,taste, takes a sip of their friend&quotechars coffee before returning back to their tea.,Anthony
+24,The coffee is hot, for a ,taste, takes a sip of their friend's coffee before returning back to their tea.,Anthony
 24,The necklace is expensive, for a ,splurge, is browsing at a jewelry store and stops to look at a necklace.,Maya
 24,The ticket is cheap, for a ,movie ticket, is buying a movie ticket.,Kim
-24,The office is open late, for a ,doctor&quotechars office, is making a doctor&quotechars appointment.,William
+24,The office is open late, for a ,doctor's office, is making a doctor's appointment.,William
 24, is heavy, for a ,female person, is a person.,"Kathleen,Julia"
 24,The weather is cold, for a ,climate, was raised in Russia.,Lucas
 24, is short, for a ,a professional basketball player, is a professional basketball player.,"Gabriel,Stephen"
@@ -454,11 +454,11 @@ workerid,target,condition,response,context,names
 25, is tall, relative to ,other girls her age, is 26 years old.,"Jennifer,Stephen"
 25, is heavy, relative to ,other women, is a person.,"Maya,Greg"
 25,The ticket is cheap, relative to ,other theaters prices, is buying a movie ticket.,Julia
-25,The office is open late, relative to ,other doctor&quotechars offices, is making a doctor&quotechars appointment.,David
+25,The office is open late, relative to ,other doctor's offices, is making a doctor's appointment.,David
 25,The weather is cold, relative to ,other countries, was raised in Russia.,Michael
 25,The necklace is expensive, relative to ,other brands, is browsing at a jewelry store and stops to look at a necklace.,Veronica
 25,This is a long car ride, relative to ,typical drives around town, is driving across the country.,Angela
-25,The coffee is hot, relative to ,ice cold coffee , takes a sip of their friend&quotechars coffee before returning back to their tea.,Eric
+25,The coffee is hot, relative to ,ice cold coffee , takes a sip of their friend's coffee before returning back to their tea.,Eric
 25,The weather is cold, relative to ,Florida, just flew into New York from Florida.,Kathleen
 25, is short, relative to ,other dogs, is a greyhound.,"Melinda,Claire"
 25,The coffee is hot, relative to ,his typical coffee he buys, is a regular at the coffee shop and buys a cup of coffee.,Anthony
@@ -467,7 +467,7 @@ workerid,target,condition,response,context,names
 25,The ticket is cheap, relative to ,other fines, got pulled over by a police officer.,Michelle
 25,The office is open late, relative to ,typical businesses, works at a call center.,Monica
 25,The necklace is expensive, relative to ,gold necklaces, is buying a diamond necklace.,Daniel
-26,The office is open late, relative to ,normal business hours, is making a doctor&quotechars appointment.,Stephanie
+26,The office is open late, relative to ,normal business hours, is making a doctor's appointment.,Stephanie
 26,The necklace is expensive, relative to ,affordable , is browsing at a jewelry store and stops to look at a necklace.,Kim
 26, is heavy, relative to ,thin, is a dancer.,"Lee,Angela"
 26,The weather is cold, relative to ,the warmer weather in Florida, just flew into New York from Florida.,Veronica
@@ -477,7 +477,7 @@ workerid,target,condition,response,context,names
 26, is heavy, relative to ,being fat, is a person.,"Melinda,Greg"
 26,The ticket is cheap, relative to ,not much money, got pulled over by a police officer.,Maya
 26,This is a long car ride, relative to ,the car ride is long, is driving to work.,Cameron
-26,The coffee is hot, relative to ,the coffee is more hot then his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,John
+26,The coffee is hot, relative to ,the coffee is more hot then his tea, takes a sip of their friend's coffee before returning back to their tea.,John
 26, is short, relative to ,short for a basketball player, is a professional basketball player.,"Gabriel,Lucas"
 26, is tall, relative to ,he is tal compared to most his age, is 26 years old.,"Alexander,Kathleen"
 26, is tall, relative to ,he is taller then most kids his age, is 4 years old.,"Stephen,Laura"
@@ -494,12 +494,12 @@ workerid,target,condition,response,context,names
 27, is tall, relative to ,the average man, is 26 years old.,"William,Greg"
 27, is short, relative to ,the average greyhound, is a greyhound.,"Kim,Eric"
 27,The necklace is expensive, relative to ,many necklaces, is buying a diamond necklace.,Lucas
-27,The office is open late, relative to ,other doctor&quotechars offices, is making a doctor&quotechars appointment.,Michelle
+27,The office is open late, relative to ,other doctor's offices, is making a doctor's appointment.,Michelle
 27,The ticket is cheap, relative to ,how expensive it might have been, got pulled over by a police officer.,Laura
 27,The coffee is hot, relative to ,an average cup of coffee, is a regular at the coffee shop and buys a cup of coffee.,Kathleen
 27, is tall, relative to ,average 4 year old girls, is 4 years old.,"Alicia,Gabriel"
 27, is heavy, relative to ,other females, is a person.,"Veronica,Stephen"
-27,The coffee is hot, relative to ,his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Tom
+27,The coffee is hot, relative to ,his tea, takes a sip of their friend's coffee before returning back to their tea.,Tom
 27,The necklace is expensive, relative to ,other necklaces nearby, is browsing at a jewelry store and stops to look at a necklace.,John
 27,This is a long car ride, relative to ,her endurance, is driving across the country.,Claire
 27,The weather is cold, relative to ,what he is used to, was raised in Russia.,Cameron
@@ -511,17 +511,17 @@ workerid,target,condition,response,context,names
 28, is heavy, relative to ,the average female dancer, is a dancer.,"Melinda,Alexander"
 28,This is a long car ride, relative to ,how long it usually takes him to get to work, is driving to work.,John
 28,The weather is cold, relative to ,the weather in Florida, just flew into New York from Florida.,David
-28,The office is open late, relative to ,regular business hours of doctor&quotechars offices, is making a doctor&quotechars appointment.,Stephanie
+28,The office is open late, relative to ,regular business hours of doctor's offices, is making a doctor's appointment.,Stephanie
 28, is heavy, relative to ,the average person, is a person.,"Maya,Jennifer"
 28, is tall, relative to ,other 4 year olds, is 4 years old.,"Stephen,Anthony"
-28,The coffee is hot, relative to ,the temperature of his tea, takes a sip of their friend&quotechars coffee before returning back to their tea.,Michael
+28,The coffee is hot, relative to ,the temperature of his tea, takes a sip of their friend's coffee before returning back to their tea.,Michael
 28, is short, relative to ,the average greyhound, is a greyhound.,"Lee,Julia"
 28,This is a long car ride, relative to ,a usual car ride, is driving across the country.,Veronica
 28,The necklace is expensive, relative to ,something she would normally purchase, is buying a diamond necklace.,Sophia
 28,The necklace is expensive, relative to ,something he would normally purchase, is browsing at a jewelry store and stops to look at a necklace.,Greg
 28,The ticket is cheap, relative to ,the normal price of the ticket, is buying a movie ticket.,Michelle
 28,The coffee is hot, relative to ,how hot the coffee usually is, is a regular at the coffee shop and buys a cup of coffee.,Kim
-29,The coffee is hot, for a ,short time, takes a sip of their friend&quotechars coffee before returning back to their tea.,Monica
+29,The coffee is hot, for a ,short time, takes a sip of their friend's coffee before returning back to their tea.,Monica
 29,The weather is cold, for a ,while, was raised in Russia.,John
 29,This is a long car ride, for a ,trip, is driving across the country.,Greg
 29,The weather is cold, for a ,summer day, just flew into New York from Florida.,Sophia
@@ -538,4 +538,4 @@ workerid,target,condition,response,context,names
 29,This is a long car ride, for a ,commute, is driving to work.,Lee
 29, is heavy, for a ,man, is a dancer.,"Lucas,Gabriel"
 29, is short, for a ,basketball player, is a professional basketball player.,"Laura,Angela"
-29,The office is open late, for a ,doctor&quotechars office, is making a doctor&quotechars appointment.,Kathleen
+29,The office is open late, for a ,doctor's office, is making a doctor's appointment.,Kathleen
