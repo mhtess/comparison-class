@@ -14,6 +14,10 @@ header-includes:
 - \usepackage{subfig}
 - \usepackage{float}
 fontfamily: times
+<<<<<<< HEAD
+=======
+#bibliography: bibliography.bib
+>>>>>>> cb2ea47e7185f13dbf7aaa4bab2497642c8ed705
 ---
 
 ```{r setup, echo = FALSE}
@@ -47,10 +51,22 @@ Suppose you walk into a coffee shop and overhear someone say “the coffee is wa
 
 It is apparent that the meaning of the entire utterance, not just the gradable adjective, is quite flexible. In order for us to ground a quantitative interpretation of the adjective “warm,” we need to know what we are comparing coffee to: we need to know the comparison class.
 
+<<<<<<< HEAD
+=======
+# Background
+
+_Talk about adjectives model and possibly the Gelmen et al. paper_
+
+>>>>>>> cb2ea47e7185f13dbf7aaa4bab2497642c8ed705
 ## What are comparison classes?
 
 Given an utterance and usually some context, a **comparison class** is the set of candidate entities that are used for comparison with the subject. In our previous example, the comparison class would have been either "cappuccino" or "iced coffee", which may seem trivial when taking the given context into account. We show some non-trivial examples in the results section.
 
+<<<<<<< HEAD
+=======
+$$\sum_{i=1}^n X_i$$
+
+>>>>>>> cb2ea47e7185f13dbf7aaa4bab2497642c8ed705
 ## What role do comparison classes play in understanding gradable adjectives?
 
 The comparison class also restricts the set of possible meanings of a gradable adjective. For example, it would probably not make sense to describe a warm cappuccino as being 60&deg;F. Alternatively, the value "60&deg;F" would not appear in the set that contains the possible meanings of "warm."
