@@ -1,6 +1,8 @@
 # set the working directory to your local path to comparison-class
-path = "~/Desktop/comparison-class/data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2"
-setwd(path)
+path = "~/cocolab/comparison-class/"
+
+# set the working directory to the path we are interested in
+setwd(paste(path, "data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2", sep = ""))
 
 # store the files in the current directory
 files = list.files(".")
