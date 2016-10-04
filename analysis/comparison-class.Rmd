@@ -48,10 +48,7 @@ Suppose you walk into a coffee shop and overhear someone say “the coffee is wa
 
 It is apparent that the meaning of the entire utterance, not just the gradable adjective, is quite flexible. In order for us to ground a quantitative interpretation of the adjective “warm,” we need to know what we are comparing coffee to: we need to know the comparison class.
 
-=======
-# Background
-
-_Talk about adjectives model and possibly the Gelmen et al. paper_
+<!-- Talk about adjectives model and possibly the Gelmen et al. paper -->
 
 ## What are comparison classes?
 
@@ -61,7 +58,7 @@ Given an utterance and usually some context, a **comparison class** is the set o
 
 The comparison class also restricts the set of possible meanings of a gradable adjective. For example, it would probably not make sense to describe a warm cappuccino as being 60&deg;F. Alternatively, the value "60&deg;F" would not appear in the set that contains the possible meanings of "warm."
 
-The question of what warm means and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, and far because they best elicit the comparison class of an utterance.
+The question of what warm means and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. *Fix this* In our work, we focus on relative gradable adjectives, such as tall, heavy, hot, and far because they best elicit the comparison class of an utterance.
 
 While previous work has focused on building computational models to infer the meaning of such gradable adjectives, the comparison class has always been assumed _a priori_. A good computational model of human inference of gradable adjectives is a model that can first infer the comparison class in order to make an accurate quantitative interpretation of the gradable adjective. 
 
@@ -75,27 +72,31 @@ Here is what a typical experiment trial would look like:
 
 The first and second sentences are the context and target sentences, respectively. The 18 questions were unique pairs of these sentences. The third and fourth sentence are the prompts, where the participant gives an answer. The name(s) were assigned to each trial randomly and uniquely from a pool of names normalized for race [citation needed].
 
-In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." In the next section, we graph the results of peoples' responses and finish with a brief analysis and discussion in the section thereafter.
+In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." Given the fact that responses like "Drink" and "drink" might be miscategorized in separate bins, we compare hand-tailored parsing with a parser using Stanford's CoreNLP tools. In the next section, we graph the results of peoples' responses and finish with a brief analysis and discussion in the section thereafter.
 
-# Results
+# Results {.tabset}
 
-## Condition 1: for a
+In the graphs below, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
+
+## Handcrafted
+
+### "for a" Condition
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-1/", sep = ""))
+dataPath = paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-1/", sep = "")
 
 # get the number of files in the current condition folder
-files = list.files()
+files = list.files(dataPath)
 
 for (pair in 1:length(files)) {
   # read in the csv file
-  file = read.csv(paste("pair-", as.character(pair) ,"-condition-1", sep = ""))
+  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-1", sep = ""))
   file["response"] = data.frame(substr(file[,"response"], 1, 20))
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -117,23 +118,23 @@ for (pair in 1:length(files)) {
 }
 ```
 
-## Condition 2: relative to
+### "relative to" Condition
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2", sep = ""))
+dataPath = paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2/", sep = "")
 
 # get the number of files in the current condition folder
-files = list.files()
+files = list.files(dataPath)
 
 for (pair in 1:length(files)) {
   # read in the csv file
-  file = read.csv(paste("pair-", as.character(pair) ,"-condition-2", sep = ""))
+  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-2", sep = ""))
   file["response"] = data.frame(substr(file[,"response"], 1, 20))
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -155,7 +156,87 @@ for (pair in 1:length(files)) {
 }
 ```
 
-In the graphs above, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
+## Caveman-Parsed
+
+### "for a" Condition
+
+```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
+# set the working directory to the raw data
+dataPath = paste(path, "data/pilot-1-paraphrase/caveman/pilot-1-paraphrase-trials-condition-1/", sep = "")
+
+# get the number of files in the current condition folder
+files = list.files(dataPath)
+
+for (pair in 1:length(files)) {
+  # read in the csv file
+  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-1", sep = ""), header = FALSE)
+  response = file[,"V1"]
+  file = data.frame(response)
+  file["response"] = data.frame(substr(file[,"response"], 1, 20))
+  colnames(file["response"]) = c("response")
+  
+  # generates the base plot
+  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
+  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
+  response = build$panel$ranges[[1]]$x.labels
+  response = data.frame(response)
+  count = build$data[[1]]$count
+  count = data.frame(count)
+
+  # prints the plot
+  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
+  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
+  print(kable(x = data.frame(Target, Context), format = "pandoc"))
+  writeLines("\n")
+  title = paste("Pair ", as.character(pair), sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
+  print(plot)
+
+  # make a table of the data
+  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
+  #print(kable(x = table, format = "markdown"))
+}
+```
+
+### "relative to" Condition
+
+```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
+# set the working directory to the raw data
+dataPath = paste(path, "data/pilot-1-paraphrase/caveman/pilot-1-paraphrase-trials-condition-2/", sep = "")
+
+# get the number of files in the current condition folder
+files = list.files(dataPath)
+
+for (pair in 1:length(files)) {
+  # read in the csv file
+  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-2", sep = ""), header = FALSE)
+  response = file[,"V1"]
+  file = data.frame(response)
+  file["response"] = data.frame(substr(file[,"response"], 1, 20))
+  colnames(file["response"]) = c("response")
+  
+  # generates the base plot
+  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
+  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
+  response = build$panel$ranges[[1]]$x.labels
+  response = data.frame(response)
+  count = build$data[[1]]$count
+  count = data.frame(count)
+
+  # prints the plot
+  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
+  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
+  print(kable(x = data.frame(Target, Context), format = "pandoc"))
+  writeLines("\n")
+  title = paste("Pair ", as.character(pair), sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
+  print(plot)
+
+  # make a table of the data
+  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
+  #print(kable(x = table, format = "markdown"))
+}
+```
 
 # Analysis
 
