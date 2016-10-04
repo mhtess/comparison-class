@@ -6,7 +6,8 @@ output: html_document
 
 ```{r setup, echo = FALSE}
 # set the local path of the comparison-class folder
-path = "~/Desktop/comparison-class/"
+#path = "~/Desktop/comparison-class/"
+path = "~/Documents/research/comparison-class/"
 
 # import required libraries
 library(ggplot2)
