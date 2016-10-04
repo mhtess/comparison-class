@@ -1,8 +1,14 @@
 ---
 title: "Inferring comparison classes through pragmatic reasoning"
 author: "Michael Lopez-Brau"
+knit: (function(inputFile, encoding) { 
+  out_dir <- "..";
+  rmarkdown::render(inputFile,
+                  encoding=encoding, 
+                  output_file=file.path(dirname(inputFile), out_dir, "index.html")) })
 output:
   html_document:
+    title: lol
     fig_caption: yes
     highlight: pygments
     toc: yes
@@ -20,6 +26,7 @@ fontfamily: times
 ```{r setup, echo = FALSE}
 # set the local path of the comparison-class folder
 path = "~/cocolab/comparison-class/"
+# set output_file to where you want the .html file to save; same as path usually
 
 # import required libraries
 library(ggplot2)
