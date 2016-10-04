@@ -1,12 +1,25 @@
 ---
 title: "Inferring comparison classes through pragmatic reasoning"
 author: "Michael Lopez-Brau"
-output: html_document
+output:
+  html_document:
+    fig_caption: yes
+    highlight: pygments
+    toc: yes
+    collapsed: false
+    toc_float: false
+fontsize: 11pt
+geometry: margin=1in
+header-includes:
+- \usepackage{subfig}
+- \usepackage{float}
+fontfamily: times
+#bibliography: bibliography.bib
 ---
 
 ```{r setup, echo = FALSE}
 # set the local path of the comparison-class folder
-#path = "~/Desktop/comparison-class/"
+#path = "~/cocolab/comparison-class/"
 path = "~/Documents/research/comparison-class/"
 
 # import required libraries
@@ -30,17 +43,22 @@ Generic sentences, also known as generics, are generalizations about the prevale
 
 It is helpful to think of this problem in terms of inference due to the nature of natural language. Because natural language can be noisy, there can be uncertainty about the information a listener receives. Consequently, deterministic approaches to the problem will not suffice. On the other hand, a Bayesian model best capitalizes on the fact that, as humans, we have prior beliefs about the world thataid us in our everyday inference tasks. Specifically, our knowledge about the propensity of certain classes over others can help us factor in a prior that is used in our day-to-day conversations. -->
 
-### Introduction
+# Introduction
 
 Suppose you walk into a coffee shop and overhear someone say “the coffee is warm.” What do you think they meant by that? If the person is drinking a <a href="https://en.wikipedia.org/wiki/Cappuccino">cappuccino</a>, warm might mean which is around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an <a href="https://en.wikipedia.org/wiki/Iced_coffee">iced coffee</a>, warm might mean around 15&deg;C or 59&deg;F.
 
 It is apparent that the meaning of the entire utterance, not just the gradable adjective, is quite flexible. In order for us to ground a quantitative interpretation of the adjective “warm,” we need to know what we are comparing coffee to: we need to know the comparison class.
 
-### What are comparison classes?
+=======
+# Background
+
+_Talk about adjectives model and possibly the Gelmen et al. paper_
+
+## What are comparison classes?
 
 Given an utterance and usually some context, a **comparison class** is the set of candidate entities that are used for comparison with the subject. In our previous example, the comparison class would have been either "cappuccino" or "iced coffee", which may seem trivial when taking the given context into account. We show some non-trivial examples in the results section.
 
-### What role do comparison classes play in understanding gradable adjectives?
+## What role do comparison classes play in understanding gradable adjectives?
 
 The comparison class also restricts the set of possible meanings of a gradable adjective. For example, it would probably not make sense to describe a warm cappuccino as being 60&deg;F. Alternatively, the value "60&deg;F" would not appear in the set that contains the possible meanings of "warm."
 
@@ -48,7 +66,7 @@ The question of what warm means and how to infer its meaning, as well as many ot
 
 While previous work has focused on building computational models to infer the meaning of such gradable adjectives, the comparison class has always been assumed _a priori_. A good computational model of human inference of gradable adjectives is a model that can first infer the comparison class in order to make an accurate quantitative interpretation of the gradable adjective. 
 
-### Experiment
+# Experiment
 
 The pilot experiment was run on Amazon Mechanical Turk (MTurk) with 30 participants. Each participant had to answer 18 questions in a fill-in-the-blank and paraphrase format. The experiment took about five minutes and participants were paid $0.60. You can find the experiment at https://mhtess.github.io/comparison-class/.
 
@@ -60,13 +78,13 @@ The first and second sentences are the context and target sentences, respectivel
 
 In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." In the next section, we graph the results of peoples' responses and finish with a brief analysis and discussion in the section thereafter.
 
-### Results
+# Results
 
-#### Condition 1: for a
+## Condition 1: for a
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-1/", sep = ""))
+setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-1/", sep = ""))
 
 # get the number of files in the current condition folder
 files = list.files()
@@ -78,7 +96,7 @@ for (pair in 1:length(files)) {
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -100,11 +118,11 @@ for (pair in 1:length(files)) {
 }
 ```
 
-#### Condition 2: relative to
+## Condition 2: relative to
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
-setwd(paste(path, "data/pilot-1-paraphrase/pilot-1-paraphrase-trials-condition-2", sep = ""))
+setwd(paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2", sep = ""))
 
 # get the number of files in the current condition folder
 files = list.files()
@@ -116,7 +134,7 @@ for (pair in 1:length(files)) {
   colnames(file["response"]) = c("response")
   
   # generates the base plot
-  pairs = read.csv("../pilot-1-paraphrase-pairs.csv")
+  pairs = read.csv("../../pilot-1-paraphrase-pairs.csv")
   build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
   response = build$panel$ranges[[1]]$x.labels
   response = data.frame(response)
@@ -140,9 +158,9 @@ for (pair in 1:length(files)) {
 
 In the graphs above, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
 
-### Analysis
+# Analysis
 
-#### Condition 1:
+## Condition 1:
 
 * Pair 6: The top two answers for this pair were "diamond necklace" and "diamond." While the former makes sense, given the context, the latter does not. This may have been a mistake rather than an honest interpretation but more data would be needed to confirm if this pair elicits the comparison class "diamond" for the subject "diamond necklace."
 * Pair 7: Most participants chose "movie" instead of "movie ticket," resulting in the following sentence: "The ticket is cheap for a movie." It seems that the subject "ticket" elicits the comparison class "movies," or more generally the price to see a movie.
@@ -150,11 +168,11 @@ In the graphs above, the names of some of the bins were cut down due to space li
 * Pair 11: "doctor's office" and "doctor's appointment" were the two most common answers but elicit different comparison classes. With regard to the "doctor's appointment" response, it seems that participants here relied too heavily on the context.
 * Pair 13 & 14: The top answer was "4-year-old" for the first pair and "man/woman" for the second. This is likely because the distributions of heights among 3-, 4-, and 5-year-olds are much more different than the distributions of heights of 24-, 25-, and 26-year-old adults; hence, it would be more informative to communicate the direct age of toddler than an adult when talking about height.
 
-#### Condition 2:
+## Condition 2:
 
 In general, most of the pairs in this condition experienced too much variability in responses. More of this will be touched on in the next section.
 
-### Discussion
+# Discussion
 
 Looking at the data above, a stark difference between the conditions is the variability in responses: the “relative to” condition elicted far more unique responses than the "for a" condition. Also, the “relative to” condition elicited noun phrases, such as "other 4-year-olds," rather than nouns, such as “4-year-olds,” as in the "for a" condition.
 
@@ -162,5 +180,5 @@ To tackle variability in future experiments, we plan to look at how participant 
 
 To best elicit the comparison class in our experiments, we have decided to update our "relative to" condition with a "relative to a" condition. Once we improve our experiment design and obtain these elicited classes, we can then measure participants' background knowledge and interpretations using these contextual manipulations, incorporate it with the adjectives model in [1], and see if the knowledge from the classes we measured makes the right predictions for interpreting gradable adjectives.
 
-### References
+# References
 [1] D. Lassiter, & N. D. Goodman. 2013. Context, scale structure, and statistics in the interpretation of positive-form adjectives. _In Semantics and Linguistic Theory_ (SALT) 23.
