@@ -74,13 +74,13 @@ The first and second sentences are the context and target sentences, respectivel
 
 In addition, each participant was randomly assigned a condition that changed the way the final line was phrased. The two conditions were "for a" and "relative to." Given the fact that responses like "Drink" and "drink" might be miscategorized in separate bins, we compare hand-tailored parsing with a parser using Stanford's CoreNLP tools. In the next section, we graph the results of peoples' responses and finish with a brief analysis and discussion in the section thereafter.
 
-# Results {.tabset}
+# Results
 
 In the graphs below, the names of some of the bins were cut down due to space limitations. The full respones can be read from <a href="https://github.com/mhtess/comparison-class/blob/master/data/pilot-1-paraphrase/pilot-1-paraphrase-pairs.csv">here</a>.
 
-## Handcrafted
+## "for a" Condition {.tabset .tabset-fade}
 
-### "for a" Condition
+### Handcrafted
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
@@ -118,47 +118,7 @@ for (pair in 1:length(files)) {
 }
 ```
 
-### "relative to" Condition
-
-```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
-# set the working directory to the raw data
-dataPath = paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2/", sep = "")
-
-# get the number of files in the current condition folder
-files = list.files(dataPath)
-
-for (pair in 1:length(files)) {
-  # read in the csv file
-  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-2", sep = ""))
-  file["response"] = data.frame(substr(file[,"response"], 1, 20))
-  colnames(file["response"]) = c("response")
-  
-  # generates the base plot
-  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
-  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
-  response = build$panel$ranges[[1]]$x.labels
-  response = data.frame(response)
-  count = build$data[[1]]$count
-  count = data.frame(count)
-  
-  # prints the plot
-  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
-  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
-  print(kable(x = data.frame(Target, Context), format = "pandoc"))
-  writeLines("\n")
-  title = paste("Pair ", as.character(pair), sep = "")
-  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
-  print(plot)
-  
-  # make a table of the data
-  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
-  #print(kable(x = table, format = "markdown"))
-}
-```
-
-## Caveman-Parsed
-
-### "for a" Condition
+### Caveman Parser
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
@@ -198,7 +158,47 @@ for (pair in 1:length(files)) {
 }
 ```
 
-### "relative to" Condition
+## "relative to" Condition {.tabset .tabset-fade}
+
+### Handcrafted
+
+```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
+# set the working directory to the raw data
+dataPath = paste(path, "data/pilot-1-paraphrase/processed/pilot-1-paraphrase-trials-condition-2/", sep = "")
+
+# get the number of files in the current condition folder
+files = list.files(dataPath)
+
+for (pair in 1:length(files)) {
+  # read in the csv file
+  file = read.csv(paste(dataPath, "pair-", as.character(pair) ,"-condition-2", sep = ""))
+  file["response"] = data.frame(substr(file[,"response"], 1, 20))
+  colnames(file["response"]) = c("response")
+  
+  # generates the base plot
+  pairs = read.csv(paste(dataPath, "../../pilot-1-paraphrase-pairs.csv", sep = ""))
+  build = ggplot_build(ggplot(data = file["response"], aes(x = file[,"response"])) + geom_bar())
+  response = build$panel$ranges[[1]]$x.labels
+  response = data.frame(response)
+  count = build$data[[1]]$count
+  count = data.frame(count)
+  
+  # prints the plot
+  Target = paste(as.character(pairs[,"target"][pair]), sep = "")
+  Context = paste(as.character(pairs[,"context"][pair]), sep = "")
+  print(kable(x = data.frame(Target, Context), format = "pandoc"))
+  writeLines("\n")
+  title = paste("Pair ", as.character(pair), sep = "")
+  plot = ggplot(data = data.frame(response, count), aes(x = reorder(response, count), y = count)) + ylab("count") + xlab("response") + ggtitle(title) + geom_bar(stat = "identity") + coord_flip()
+  print(plot)
+  
+  # make a table of the data
+  table = data.frame(response = levels(reorder(response, sort.list(count[,"count"], decreasing = TRUE))), count = count[sort.list(count[,"count"], decreasing = TRUE),])
+  #print(kable(x = table, format = "markdown"))
+}
+```
+
+### Caveman
 
 ```{r, echo = FALSE, fig.height = 3.4, fig.width = 3.4, results = "asis"}
 # set the working directory to the raw data
@@ -240,7 +240,7 @@ for (pair in 1:length(files)) {
 
 # Analysis
 
-## Condition 1:
+## "for a" Condition
 
 * Pair 6: The top two answers for this pair were "diamond necklace" and "diamond." While the former makes sense, given the context, the latter does not. This may have been a mistake rather than an honest interpretation but more data would be needed to confirm if this pair elicits the comparison class "diamond" for the subject "diamond necklace."
 * Pair 7: Most participants chose "movie" instead of "movie ticket," resulting in the following sentence: "The ticket is cheap for a movie." It seems that the subject "ticket" elicits the comparison class "movies," or more generally the price to see a movie.
@@ -248,7 +248,7 @@ for (pair in 1:length(files)) {
 * Pair 11: "doctor's office" and "doctor's appointment" were the two most common answers but elicit different comparison classes. With regard to the "doctor's appointment" response, it seems that participants here relied too heavily on the context.
 * Pair 13 & 14: The top answer was "4-year-old" for the first pair and "man/woman" for the second. This is likely because the distributions of heights among 3-, 4-, and 5-year-olds are much more different than the distributions of heights of 24-, 25-, and 26-year-old adults; hence, it would be more informative to communicate the direct age of toddler than an adult when talking about height.
 
-## Condition 2:
+## "relative to" Condition
 
 In general, most of the pairs in this condition experienced too much variability in responses. More of this will be touched on in the next section.
 
