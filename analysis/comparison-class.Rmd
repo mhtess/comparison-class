@@ -19,7 +19,7 @@ geometry: margin=1in
 header-includes:
 - \usepackage{subfig}
 - \usepackage{float}
-- \usepackage{amsfonts}
+- \usepackage{amssymb}
 fontfamily: times
 #bibliography: bibliography.bib
 ---
@@ -51,7 +51,7 @@ It is helpful to think of this problem in terms of inference due to the nature o
 
 # Introduction
 
-Suppose you walk into a coffee shop and overhear someone say “the coffee is warm.” What do you think they meant by that? If the person is drinking a <a href="https://en.wikipedia.org/wiki/Cappuccino">cappuccino</a>, warm might mean which is around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an <a href="https://en.wikipedia.org/wiki/Iced_coffee">iced coffee</a>, warm might mean around 15&deg;C or 59&deg;F.
+Suppose you walk into a coffee shop and overhear someone say “the coffee is warm.” What do you think they meant by that? If the person is drinking a [cappuccino](https://en.wikipedia.org/wiki/Cappuccino), warm might mean which is around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an [iced coffee](https://en.wikipedia.org/wiki/Iced_coffee), warm might mean around 15&deg;C or 59&deg;F.
 
 It is apparent that the meaning of the entire utterance, not just the gradable adjective, is quite flexible. In order for us to ground a quantitative interpretation of the adjective “warm,” we need to know what we are comparing coffee to: we need to know the comparison class.
 
@@ -69,7 +69,7 @@ While previous work has focused on building computational models to infer the me
 
 # Experiment
 
-The pilot experiment was run on Amazon Mechanical Turk (MTurk) with 30 participants. Each participant had to answer 18 questions in a fill-in-the-blank and paraphrase format. The experiment took about five minutes and participants were paid $0.60. You can find the experiment at https://mhtess.github.io/comparison-class/.
+The pilot experiment was run on Amazon Mechanical Turk (MTurk) with 30 participants. Each participant had to answer 18 questions in a fill-in-the-blank and paraphrase format. The experiment took about five minutes and participants were paid $0.60. You can find the experiment [here](https://mhtess.github.io/comparison-class/).
 
 Here is what a typical experiment trial would look like: 
 
