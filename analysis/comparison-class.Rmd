@@ -8,7 +8,6 @@ knit: (function(inputFile, encoding) {
                   output_file=file.path(dirname(inputFile), out_dir, "index.html")) })
 output:
   html_document:
-    title: lol
     fig_caption: yes
     highlight: pygments
     toc: yes
@@ -37,6 +36,7 @@ path = "~/cocolab/comparison-class/"
 library(knitr)
 library(ggplot2)
 library(cowplot)
+library(pander)
 ```
 
 # Introduction
@@ -79,7 +79,7 @@ In the graphs below, the names of some of the bins were cut down due to space li
 
 ## "for a" Condition
 
-```{r fig.align = "center", fig.height = 6, fig.height = 8, echo = FALSE, results = "asis"}
+```{r fig.align = "center", fig.height = 6, fig.width = 8, echo = FALSE, results = "asis"}
 source(paste(path, "scripts/make-plots-condition-1.R", sep = ""))
 ```
 
@@ -106,6 +106,23 @@ In general, most of the pairs in this condition experienced too much variability
 ### Word usage
 
 Participants in the "relative to" condition habitually made use of the words "other" and "typical." A chart with this data is shown below:
+
+```{r fig.align = "center", echo = FALSE, results = "asis"}
+source(paste(path, "scripts/count-words.R", sep = ""))
+panderOptions('table.split.table', Inf)
+cat("<center>", sep = "")
+pandoc.table(chart)
+cat("</center>", sep = "")
+```
+
+<center>Table 1: Word frequency data from the "relative to" condition</center><br>
+
+The columns of the table correspond to:
+
+* other.count: the number of times "other" occurred
+* typical.count: the number of times the word "typical" occurred
+* other.frequency: the frequency that the word "other" occurred (other.count / responses.total)
+* typical.frequency: the frequency that the word "typical" occurred (typical.count / responses.total)
 
 
 
