@@ -101,13 +101,13 @@ In the graphs below, the names of some of the bins were cut down due to space li
 ## "for a" Condition
 
 ```{r fig.align = "center", fig.height = 6, fig.width = 8, echo = FALSE, results = "asis"}
-#source(paste(path, "scripts/make-plots-condition-1.R", sep = ""))
+source(paste(path, "scripts/make-plots-condition-1.R", sep = ""))
 ```
 
 ## "relative to" Condition
 
 ```{r fig.align = "center", fig.height = 6, fig.width = 8, echo = FALSE, results = "asis"}
-#source(paste(path, "scripts/make-plots-condition-2.R", sep = ""))
+source(paste(path, "scripts/make-plots-condition-2.R", sep = ""))
 ```
 
 # Analysis
