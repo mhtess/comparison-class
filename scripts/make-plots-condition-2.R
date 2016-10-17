@@ -1,5 +1,6 @@
 # set the working directory to your local path to comparison-class
-path = "~/cocolab/comparison-class/"
+path = "D:/Desktop/Research/Computation and Cognition Lab/comparison-class/"
+#path = "~/cocolab/comparison-class/"
 
 # set the experiment title
 experiment = "pilot-1-paraphrase"

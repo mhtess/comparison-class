@@ -1,11 +1,11 @@
 ---
 title: "Inferring comparison classes through pragmatic reasoning"
 author: "Michael Lopez-Brau"
-knit: (function(inputFile, encoding) { 
-  out_dir <- "..";
-  rmarkdown::render(inputFile,
-                  encoding=encoding, 
-                  output_file=file.path(dirname(inputFile), out_dir, "index.html")) })
+#knit: (function(inputFile, encoding) { 
+#  out_dir <- ".\"
+#  rmarkdown::render(inputFile,
+#                  encoding=encoding, 
+#                  output_file=file.path(dirname(inputFile), out_dir, #"index.html")) })
 output:
   html_document:
     fig_caption: yes
@@ -30,7 +30,8 @@ nocite: |
 
 ```{r setup, include = FALSE}
 # set the local path of the comparison-class folder
-path = "~/cocolab/comparison-class/"
+path = "D:/Desktop/Research/Computation and Cognition Lab/comparison-class/"
+#path = "~/cocolab/comparison-class/"
 #path = "~/Documents/research/comparison-class/"
 
 # import required libraries
@@ -42,7 +43,7 @@ library(pander)
 
 # Introduction
 
-Suppose you walk into a coffee shop and overhear someone say “the coffee is warm.” What do you think they meant by that? If the person is drinking a [cappuccino](https://en.wikipedia.org/wiki/Cappuccino), warm might mean around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an [iced coffee](https://en.wikipedia.org/wiki/Iced_coffee), warm might mean around 15&deg;C or 59&deg;F. It is apparent that in order for us to ground a quantitative interpretation of the gradable adjective “warm,” we will need to find the set of similar entities that compare with the type of coffee in this utterance: we need to find the comparison class.
+Suppose you walk into a coffee shop and overhear someone say "the coffee is warm." What do you think they meant by that? If the person is drinking a [cappuccino](https://en.wikipedia.org/wiki/Cappuccino), warm might mean around 60&deg;C or 160&deg;F. In contrast, if the person is drinking an [iced coffee](https://en.wikipedia.org/wiki/Iced_coffee), warm might mean around 15&deg;C or 59&deg;F. It is apparent that in order for us to ground a quantitative interpretation of the gradable adjective "warm," we will need to find the set of similar entities that compare with the type of coffee in this utterance: we need to find the comparison class.
 
 The question of what "warm" means directly and how to infer its meaning, as well as many other _gradable adjectives_, is an active area of research. There are two types of gradable adjectives: relative and absolute. In our work, we focus on relative gradable adjectives (e.g., tall, heavy, hot) because of their vagueness and context-sensitivity. We also focus on measurable adjectives for modeling simplicity. This allows us to study how the comparison class varies with respect to context while keeping the utterance fixed; thus, we obtain more flexibility in trying to elicit the comparison class in our experiments.
 
@@ -105,13 +106,13 @@ In the graphs below, the names of some of the bins were cut down due to space li
 ## "for a" Condition
 
 ```{r fig.align = "center", fig.height = 6, fig.width = 8, echo = FALSE, results = "asis"}
-#source(paste(path, "scripts/make-plots-condition-1.R", sep = ""))
+source(paste(path, "scripts/make-plots-condition-1.R", sep = ""))
 ```
 
 ## "relative to" Condition
 
 ```{r fig.align = "center", fig.height = 6, fig.width = 8, echo = FALSE, results = "asis"}
-#source(paste(path, "scripts/make-plots-condition-2.R", sep = ""))
+source(paste(path, "scripts/make-plots-condition-2.R", sep = ""))
 ```
 
 # Analysis
@@ -153,7 +154,7 @@ The columns of the table correspond to:
 
 # Discussion
 
-Looking at the data above, a stark difference between the conditions is the variability in responses: the “relative to” condition elicted far more unique responses than the "for a" condition. Also, the “relative to” condition elicited noun phrases, such as "other 4-year-olds," rather than nouns, such as “4-year-olds,” as in the "for a" condition.
+Looking at the data above, a stark difference between the conditions is the variability in responses: the "relative to" condition elicted far more unique responses than the "for a" condition. Also, the "relative to" condition elicited noun phrases, such as "other 4-year-olds," rather than nouns, such as "4-year-olds," as in the "for a" condition.
 
 To tackle variability in future experiments, we plan to look at how participant responses are encoded. Should the phrases "doctor's appointment" and "doctor's office" be encoded as similar or different responses? Hand-encoding responses can lead to large variations in results, leading to data that is not reproducible. We seek to apply a formal tool for encoding responses in future experiments.
 

@@ -1,5 +1,6 @@
 # set the working directory to your local path to comparison-class
-path = "~/cocolab/comparison-class/data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2/"
+path = "D:/Desktop/Research/Computation and Cognition Lab/comparison-class/data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2/"
+#path = "~/cocolab/comparison-class/data/pilot-1-paraphrase/raw/pilot-1-paraphrase-trials-condition-2/"
 
 # list the files in the current directory
 files = list.files(path)
