@@ -59,7 +59,7 @@ for (pair in 1:length(files)) {
     #title = paste("Pair ", as.character(pair), ", Condition ", as.character(condition), sep = "")
     #plot = plot + ggtitle(title)
     plot = plot + xlab("Responses") + ylab("Count")
-    plot = plot + theme_bw(base_size = 11, base_family = "Helvetica")
+    plot = plot + theme_bw(base_size = 11)
     plot = plot + coord_flip(ylim = c(1:14)) + scale_y_continuous(breaks = pretty(seq(0, 14, by = 2), n = 7))
     
     # logic for placing the plots in a grid
