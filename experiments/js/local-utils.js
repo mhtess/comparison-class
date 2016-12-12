@@ -37,11 +37,30 @@ var sampleCondition = function() {
 function embedSlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
-    slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" + 
+    slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
   		"<span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"<p></p>" +
+  		"<button onclick=\"_s.button()\">Continue</button>" +
+  		"<p class=\"err\">Please write something.</p>" +
+  		"</div>";
+  	$(".trial_slides").html(slides);
+  }
+}
+
+function embedListenerSlides(trials) {
+  var slides = "";
+  for (var i = 1; i <= trials; i++) {
+    slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
+    	"<p class=\"display_context\"></p>" +
+  		"<p class=\"display_target\"></p>" +
+  		"<p class=\"display_question\"></p>" +
+			"<p class=\"slider_number\"></p>" +
+			" <table id=\"slider_table\"class=\"slider_table\">"+
+			"<tr><td class=\"left\"></td><td class=\"right\"></td></tr>"+
+			"<tr><td colspan=\"2\"><div id=\"single_slider\"class=\"slider\"></div></td></tr>"+
+			"</table>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
   		"<p class=\"err\">Please write something.</p>" +
   		"</div>";
