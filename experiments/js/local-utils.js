@@ -30,7 +30,7 @@ var getPronoun = function(context, name) {
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
-	return _.sample([" for a ", " relative to "]);
+	return " for a " //_.sample([" for a ", " relative to "]);
 }
 
 // embeds the trial slides that were generated in the experiment file into the html file
@@ -56,11 +56,16 @@ function embedListenerSlides(trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-			"<p class=\"slider_number\"></p>" +
-			" <table id=\"slider_table\"class=\"slider_table\">"+
-			"<tr><td class=\"left\"></td><td class=\"right\"></td></tr>"+
-			"<tr><td colspan=\"2\"><div id=\"single_slider\"class=\"slider\"></div></td></tr>"+
-			"</table>" +
+    "<input type=\"text\" id=\"measure" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"> </input>"+
+    "<select id=\"unit"+ i +"\">"+
+	" <label><option value=\"F\">degrees Fahrenheit</option></label>"+
+   "<label><option value=\"C\" >degrees Celsius</option></label>"+
+     "</select><br><br>" +
+			// "<p class=\"slider_number\"></p>" +
+			// " <table id=\"slider_table\"class=\"slider_table\">"+
+			// "<tr><td class=\"left\"></td><td class=\"right\"></td></tr>"+
+			// "<tr><td colspan=\"2\"><div id=\"single_slider\"class=\"slider\"></div></td></tr>"+
+			// "</table>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
   		"<p class=\"err\">Please write something.</p>" +
   		"</div>";

@@ -21,9 +21,9 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    init_sliders();
-    $(".slider_number").html("---")
-    exp.sliderPost = null; //erase current slider value
+    // init_sliders();
+    // $(".slider_number").html("---")
+    // exp.sliderPost = null; //erase current slider value
 
     // changes the format based on different pronouns required
     if (exp.examples[i].context === " takes a sip of their friend's coffee before returning back to their tea.") {
@@ -55,7 +55,8 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = exp.sliderPost;
+    response = $("#measure" + (i+1)).val();
+    unit = $("#unit" + (i+1)).val();
     if (response.length == 0) {
       $(".err").show();
     } else {
@@ -64,7 +65,8 @@ function makeSlides(f) {
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i] + "",
-        "response" : response
+        "response" : response,
+        "unit": unit
       });
       i++;
       exp.go();
