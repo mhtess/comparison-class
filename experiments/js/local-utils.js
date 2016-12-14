@@ -30,7 +30,7 @@ var getPronoun = function(context, name) {
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
-	return _.sample([" for a ", " relative to "]);
+	return " for a " //_.sample([" for a ", " relative to "]);
 }
 
 // embeds the trial slides that were generated in the experiment file into the html file
