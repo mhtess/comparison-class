@@ -56,8 +56,8 @@ function embedListenerSlides(trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-    "<input type=\"text\" class=\"measure\" maxlength=\"5\" size =\"5\" tabindex=\"1\"> </input>"+
-    "<select class=\"unit\">"+
+    "<input type=\"text\" id=\"measure" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"> </input>"+
+    "<select id=\"unit"+ i +"\">"+
 	" <label><option value=\"F\">degrees Fahrenheit</option></label>"+
    "<label><option value=\"C\" >degrees Celsius</option></label>"+
      "</select>" +
