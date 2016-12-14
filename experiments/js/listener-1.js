@@ -21,9 +21,9 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    init_sliders();
-    $(".slider_number").html("---")
-    exp.sliderPost = null; //erase current slider value
+    // init_sliders();
+    // $(".slider_number").html("---")
+    // exp.sliderPost = null; //erase current slider value
 
     // changes the format based on different pronouns required
     if (exp.examples[i].context === " takes a sip of their friend's coffee before returning back to their tea.") {
