@@ -10,7 +10,7 @@ var examples = [
 		" buys an iced coffee."
 	],
 	degree: "temperature",
-	units: "degrees Fahrenheit"
+	units: ["degrees Fahrenheit","degrees Celsius"]
 }, {
 	target :"It's cold",
 	context : [
@@ -19,7 +19,7 @@ var examples = [
 		" buys an iced coffee."
 	],
 	degree: "temperature",
-	units: "degrees Fahrenheit"
+	units: ["degrees Fahrenheit","degrees Celsius"]
 }, {
 	target : "It's cold outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -28,7 +28,7 @@ var examples = [
 		" is from Alaska."
 	],
 	degree: "temperature",
-	units: "degrees Fahrenheit"
+	units: ["degrees Fahrenheit","degrees Celsius"]
 }, {
 	target : "It's warm outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -37,7 +37,7 @@ var examples = [
 		" is from Alaska."
 	],
 	degree: "temperature",
-	units: "degrees Fahrenheit"
+	units: ["degrees Fahrenheit","degrees Celsius"]
 }, {
 	target : "This is expensive",
 	context : [
@@ -66,7 +66,7 @@ var examples = [
 		" drove across the country."
 	],
 	degree: "time",
-	units: "minutes"
+	units: ["seconds","minutes","hours","days"]
 }, {
 	target : "That was short", // needs help
 	context : [
@@ -75,7 +75,7 @@ var examples = [
 		" drove across the country."
 	],
 	degree: "time",
-	units: "minutes"
+	units: ["seconds","minutes","hours","days"]
 // }, {
 // 	target : "It's open late.", // this is more like a habitual
 // 	context : [
