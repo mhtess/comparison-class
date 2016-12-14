@@ -60,7 +60,7 @@ function embedListenerSlides(trials) {
     "<select id=\"unit"+ i +"\">"+
 	" <label><option value=\"F\">degrees Fahrenheit</option></label>"+
    "<label><option value=\"C\" >degrees Celsius</option></label>"+
-     "</select>" +
+     "</select><br><br>" +
 			// "<p class=\"slider_number\"></p>" +
 			// " <table id=\"slider_table\"class=\"slider_table\">"+
 			// "<tr><td class=\"left\"></td><td class=\"right\"></td></tr>"+
