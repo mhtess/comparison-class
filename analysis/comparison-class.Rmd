@@ -1,11 +1,12 @@
 ---
 title: "Inferring comparison classes through pragmatic reasoning"
 author: "Michael Lopez-Brau"
+# Does not work in Windows
 #knit: (function(inputFile, encoding) { 
-#  out_dir <- "."
+#  out_dir <- "..";
 #  rmarkdown::render(inputFile,
 #                  encoding=encoding, 
-#                  output_file=file.path(dirname(inputFile), out_dir, #"index.html")) })
+#                  output_file=file.path(dirname(inputFile), out_dir, "index.html")) })
 output:
   html_document:
     fig_caption: yes
