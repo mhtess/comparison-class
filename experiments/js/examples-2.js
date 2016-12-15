@@ -10,9 +10,9 @@ var examples = [
 		" buys an iced coffee."
 	],
 	prompt : [
-		"What do you think the temperature of the cup of coffee is?",
-		"What do you think the temperature of the glass of milk is?",
-		"What do you think the temperature of the iced coffee is?"
+		"What do you think was the temperature of the cup of coffee?",
+		"What do you think was the temperature of the glass of milk?",
+		"What do you think was the temperature of the iced coffee?"
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"]
@@ -24,9 +24,9 @@ var examples = [
 		" buys an iced coffee."
 	],
 	prompt : [
-		"What do you think the temperature of the cup of coffee is?",
-		"What do you think the temperature of the glass of milk is?",
-		"What do you think the temperature of the iced coffee is?"
+		"What do you think was the temperature of the cup of coffee?",
+		"What do you think was the temperature of the glass of milk?",
+		"What do you think was the temperature of the iced coffee?"
 	],
 	degree: "temperature",
 	unit: ["degrees Fahrenheit", "degrees Celsius"]
@@ -38,9 +38,9 @@ var examples = [
 		" is from Alaska."
 	],
 	prompt : [
-		"What do you think the temperature is in Southern California?",
-		"What do you think the temperature is in Kansas?",
-		"What do you think the temperature is in Alaska?"
+		"What do you think was the temperature in Southern California?",
+		"What do you think was the temperature in Kansas?",
+		"What do you think was the temperature in Alaska?"
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"]
@@ -52,9 +52,9 @@ var examples = [
 		" is from Alaska."
 	],
 	prompt : [
-		"What do you think the temperature is in Southern California?",
-		"What do you think the temperature is in Kansas?",
-		"What do you think the temperature is in Alaska?"
+		"What do you think was the temperature in Southern California?",
+		"What do you think was the temperature in Kansas?",
+		"What do you think was the temperature in Alaska?"
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"]
@@ -67,10 +67,10 @@ var examples = [
 		" is buying a truck."
 	],
 	prompt : [
-		"How much do you think the candy bar costs?",
-		"How much do you think the ticket to the movies costs?",
-		"How much do you think the ticket to Europe costs?",
-		"How much do you think the truck costs?"
+		"What do you think was the price of the candy bar?",
+		"What do you think was the price of the movie ticket?",
+		"What do you think was the price of the ticket to Europe?",
+		"What do you think was the price of the truck?"
 	],
 	degree : "price",
 	unit : ["dollars"]
@@ -83,10 +83,10 @@ var examples = [
 		" is buying a truck."
 	],
 	prompt : [
-		"How much do you think the candy bar costs?",
-		"How much do you think the ticket to the movies costs?",
-		"How much do you think the ticket to Europe costs?",
-		"How much do you think the truck costs?"
+		"What do you think was the price of the candy bar?",
+		"What do you think was the price of the movie ticket?",
+		"What do you think was the price of the ticket to Europe?",
+		"What do you think was the price of the truck?"
 	],
 	degree : "price",
 	unit : ["dollars"]
@@ -98,9 +98,9 @@ var examples = [
 		" drove across the country."
 	],
 	prompt : [
-		"What do you think the duration of the movie was?",
-		"What do you think the duration of the traffic was?",
-		"What do you think the duration of the trip was?"
+		"What do you think was the duration of the movie?",
+		"What do you think was the duration of the traffic light?",
+		"What do you think was the duration of the trip?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"]
@@ -112,9 +112,9 @@ var examples = [
 		" drove across the country."
 	],
 	prompt : [
-		"What do you think the duration of the movie was?",
-		"What do you think the duration of the traffic was?",
-		"What do you think the duration of the trip was?"
+		"What do you think was the duration of the movie?",
+		"What do you think was the duration of the traffic light?",
+		"What do you think was the duration of the trip?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"]
@@ -129,32 +129,32 @@ var examples = [
 }, {
 	target : " is tall",
 	context : [
-		" is looking at a 4-year-old.",
-		" is looking at a 25-year-old.",
-		" is looking at the point guard on local basketball team.",
+		" is looking at a 4 year-old boy.",
+		" is looking at a 25 year-old man.",
+		" is looking at the point guard on the local men's basketball team.",
 		" is looking at a tower in a European city."
 	],
 	prompt : [
-		"What do you think the height of the 4-year-old is?",
-		"What do you think the height of the 25-year-old is?",
-		"What do you think the height of the basketball player is?",
-		"What do you think the height of the tower is?"
+		"What do you think is the height of the 4 year-old boy?",
+		"What do you think is the height of the 25 year-old man?",
+		"What do you think is the height of the basketball player?",
+		"What do you think is the height of the tower?"
 	],
 	degree : "height",
 	unit : ["feet"]
 }, {
 	target : " is short",
 	context : [
-		" is looking at a 4 year-old.",
-		" is looking at a 25 year-old.",
-		" is looking at the point guard on local basketball team.",
+		" is looking at a 4 year-old boy.",
+		" is looking at a 25 year-old man.",
+		" is looking at the point guard on the local men's basketball team.",
 		" is looking at a tower in a European city."
 	],
 	prompt : [
-		"What do you think the height of the 4-year-old is?",
-		"What do you think the height of the 25-year-old is?",
-		"What do you think the height of the basketball player is?",
-		"What do you think the height of the tower is?"
+		"What do you think is the height of the 4 year-old boy?",
+		"What do you think is the height of the 25 year-old man?",
+		"What do you think is the height of the basketball player?",
+		"What do you think is the height of the tower?"
 	],
 	degree : "height",
 	unit : ["feet"]
@@ -166,9 +166,9 @@ var examples = [
 		" bought an iPhone, and picked it up"
 	],
 	prompt : [
-		"How much do you think the television weighs?",
-		"How much do you think the book weighs?",
-		"How much do you think the iPhone weighs?"
+		"What do you think is the weight of the television?",
+		"What do you think is the weight of the book?",
+		"What do you think is the weight of the iPhone?"
 	],
 	degree : "weight",
 	unit : ["pounds"]
@@ -180,9 +180,9 @@ var examples = [
 		" bought an iPhone, and picked it up"
 	],
 	prompt : [
-		"How much do you think the television weighs?",
-		"How much do you think the book weighs?",
-		"How much do you think the iPhone weighs?"
+		"What do you think is the weight of the television?",
+		"What do you think is the weight of the book?",
+		"What do you think is the weight of the iPhone?"
 	],
 	degree : "weight",
 	unit : ["pounds"]
