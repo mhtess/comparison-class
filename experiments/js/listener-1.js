@@ -21,16 +21,14 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
+    $(".responseErr").hide();
+    $(".unitErr").hide();
     // init_sliders();
     // $(".slider_number").html("---")
-    // exp.sliderPost = null; //erase current slider value
+    // exp.sliderPost = null; // erase current slider value
 
-    // changes the format based on different pronouns required
-    if (exp.examples[i].context === " takes a sip of their friend's coffee before returning back to their tea.") {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
-    } else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
-    }
+    // display the context sentence
+    $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     // changes the format when a person is used in the target sentence
     if (exp.examples[i].target[0] === " ") {
@@ -57,8 +55,18 @@ function makeSlides(f) {
   function button() {
     response = $("#measure" + (i+1)).val();
     unit = $("#unit" + (i+1)).val();
-    if (response.length == 0) {
+    if ((response.length == 0) && (unit == undefined)) {
+      $(".responseErr").hide();
+      $(".unitErr").hide();
       $(".err").show();
+    } else if (response.length == 0) {
+      $(".err").hide();
+      $(".unitErr").hide();
+      $(".responseErr").show();
+    } else if (unit == undefined) {
+      $(".err").hide();
+      $(".responseErr").hide();
+      $(".unitErr").show();
     } else {
       exp.data_trials.push({
         "condition" : exp.condition,
@@ -129,11 +137,19 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
-  // generate a list of unique names
-  exp.names = sampleNames(characters, exp.trials);
+  // if we have more trials than we do unique names, some names will be reused
+  if (exp.trials > characters.length) {
+    // this needs to be fixed later to account for the possibility of two names on the same trial slide
+    exp.names = sampleNames(characters).concat(sampleNames(characters));
+    exp.extra = sampleNames(characters);
+  } else {
+    // generate a list of unique names
+    exp.names = sampleNames(characters);
 
-  // names for the trials that require an extra name
-  exp.extra = exp.names.slice(exp.trials, exp.names.length);
+    // names for the trials that require an extra name
+    exp.extra = exp.names.slice(exp.trials, exp.names.length);
+  }
+
 
   // we don't have any catch trials for this experiment
   exp.catch_trials = [];
@@ -163,7 +179,8 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedListenerSlides(exp.trials);
+  // embed the slides
+  embedListenerSlides(exp.examples, exp.trials); 
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
