@@ -21,8 +21,9 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    $(".responseErr").hide();
-    $(".unitErr").hide();
+    // $(".responseErr").hide();
+    // $(".unitErr").hide();
+    // $(".subunitErr").hide();
     // init_sliders();
     // $(".slider_number").html("---")
     // exp.sliderPost = null; // erase current slider value
@@ -35,11 +36,12 @@ function makeSlides(f) {
       // if we need an extra name, pop if off exp.extra
       exp.names[i] = [exp.names[i], exp.extra.pop()];
       $(".display_target").html(exp.names[i][1] + " says, " + "\"" + exp.names[i][0] + exp.examples[i].target + "." + "\"");
-      $(".display_question").html("What do you think " + exp.names[i][1] + " meant?");
+      // $(".display_question").html("What do you think " + exp.names[i][1] + " meant?");
+      $(".display_question").html(exp.examples[i].prompt);
       $(".display_prompt").html("\"" + exp.names[i][0] + exp.examples[i].target + exp.condition);
     } else {
       $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
-      $(".display_question").html("What do you think " + exp.names[i] + " meant?");
+      $(".display_question").html(exp.examples[i].prompt);
       $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     }
   }
@@ -55,26 +57,38 @@ function makeSlides(f) {
   function button() {
     response = $("#measure" + (i+1)).val();
     unit = $("#unit" + (i+1)).val();
-    if ((response.length == 0) && (unit == undefined)) {
-      $(".responseErr").hide();
-      $(".unitErr").hide();
+    subunit = $("#subunit" + (i+1)).val();
+    // if there are no subunits for this example, don't expect a response from the Turker
+    if (exp.examples[i].subunit[0] == "none") {
+      subunit = "";
+    }
+    if ((response.length == 0) || (unit == undefined) || (subunit == undefined)) {
       $(".err").show();
-    } else if (response.length == 0) {
-      $(".err").hide();
-      $(".unitErr").hide();
-      $(".responseErr").show();
-    } else if (unit == undefined) {
-      $(".err").hide();
-      $(".responseErr").hide();
-      $(".unitErr").show();
-    } else {
+    }
+    // if ((response.length == 0) && (unit == undefined)) {
+    //   $(".responseErr").hide();
+    //   $(".unitErr").hide();
+    //   $(".err").show();
+    // }
+    // else if (response.length == 0) {
+    //   $(".err").hide();
+    //   $(".unitErr").hide();
+    //   $(".responseErr").show();
+    // }
+    // else if (unit == undefined) {
+    //   $(".err").hide();
+    //   $(".responseErr").hide();
+    //   $(".unitErr").show();
+    // }
+    else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i] + "",
         "response" : response,
-        "unit": unit
+        "unit" : unit,
+        "subunit" : subunit
       });
       i++;
       exp.go();
@@ -178,7 +192,6 @@ function init() {
   // make corresponding slides
   exp.slides = makeSlides(exp);
 
-  // embed the slides
   // embed the slides
   embedListenerSlides(exp.examples, exp.trials); 
 
