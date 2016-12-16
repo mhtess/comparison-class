@@ -76,7 +76,7 @@ function embedListenerSlides(examples, trials) {
     // if there are subunits, generate scripts for them
     if (subunit[i-1][0] != "none") {
       var temp = "<input type=\"text\" id=\"measure2" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
-        "<select id=\"subunit" + i + "\">" + 
+        "<select id=\"subunit" + i + "\">" +
         "<option selected disabled hidden style='display: none' value=''></option>";
       for (var k = 0; k < subunit[i-1].length; k++) {
         su = su + "<label><option value=\"" + subunit[i-1][k] + "\">" + subunit[i-1][k] + "</option></label>";
@@ -89,8 +89,8 @@ function embedListenerSlides(examples, trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-      "<input type=\"text\" id=\"measure1" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
-      "<select id=\"unit" + i + "\">" + 
+      "<input type=\"text\" id=\"measure1" + i + "\" maxlength=\"6\" size =\"7\" tabindex=\"1\"></input>" +
+      "<select id=\"unit" + i + "\">" +
       "<option selected disabled hidden style='display: none' value=''></option>" + u + "</select>" + su +
       "<br><br>" +
   		// "<p class=\"slider_number\"></p>" +
@@ -99,8 +99,8 @@ function embedListenerSlides(examples, trials) {
   		// "<tr><td colspan=\"2\"><div id=\"single_slider\"class=\"slider\"></div></td></tr>" +
   		// "</table>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-      "<p class=\"err\">Please type something and select a unit and subunit.</p>" + 
-      // "<p class=\"err\">Please write something and select a unit.</p>" + 
+      "<p class=\"err\">Please type something and select a unit and subunit.</p>" +
+      // "<p class=\"err\">Please write something and select a unit.</p>" +
       // "<p class=\"responseErr\">Please write something.</p>" +
       // "<p class=\"unitErr\">Please select a unit.</p>" +
   		"</div>";
