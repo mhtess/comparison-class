@@ -5,9 +5,9 @@ var examples = [
 	// the best example is of people from different places
 	target : "It's warm",
 	context : [
-		" buys a cup of coffee.",
-		" buys a glass of milk.",
-		" buys an iced coffee."
+		" takes a sip from a cup of coffee.",
+		" takes a sip from a glass of milk.",
+		" takes a sip from an iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -20,9 +20,9 @@ var examples = [
 }, {
 	target : "It's cold",
 	context : [
-		" buys a cup of coffee.",
-		" buys a glass of milk.",
-		" buys an iced coffee."
+		" takes a sip from a cup of coffee.",
+		" takes a sip from a glass of milk.",
+		" takes a sip from an iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -63,7 +63,7 @@ var examples = [
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
 	subunit : ["none"]
 }, {
-	target : "This is expensive",
+	target : "This one is expensive",
 	context : [
 		" is buying a candy bar.",
 		" is buying a ticket to the movies.",
@@ -80,7 +80,7 @@ var examples = [
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
-	target : "This is cheap",
+	target : "This one is cheap",
 	context : [
 		" is buying a candy bar.",
 		" is buying a ticket to the movies.",
@@ -97,11 +97,11 @@ var examples = [
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
-	target : "That was long", // needs help
+	target : "It was long", // needs help
 	context : [
-		" watched a movie.",
-		" was waiting at a traffic light; the light turned green.",
-		" drove across the country."
+		" is talking about the time they drove across the country.",
+		" is talking about the movie they just saw.",
+		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
 		"What do you think was the duration of the movie?",
@@ -114,9 +114,9 @@ var examples = [
 }, {
 	target : "That was short", // needs help
 	context : [
-		" watched a movie.",
-		" was waiting at a traffic light; the light turned green.",
-		" drove across the country."
+		" is talking about the time they drove across the country.",
+		" is talking about the movie they just saw.",
+		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
 		"What do you think was the duration of the movie?",
@@ -137,10 +137,10 @@ var examples = [
 }, {
 	target : " is tall",
 	context : [
-		" is looking at a 4 year-old boy.",
-		" is looking at a 25 year-old man.",
-		" is looking at the point guard on the local men's basketball team.",
-		" is looking at a tower in a European city."
+		" sees a 4 year-old boy.",
+		" sees a 25 year-old man.",
+		" sees the point guard on the local men's basketball team.",
+		" sees a tower in a European city."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
@@ -154,10 +154,10 @@ var examples = [
 }, {
 	target : " is short",
 	context : [
-		" is looking at a 4 year-old boy.",
-		" is looking at a 25 year-old man.",
-		" is looking at the point guard on the local men's basketball team.",
-		" is looking at a tower in a European city."
+		" sees a 4 year-old boy.",
+		" sees a 25 year-old man.",
+		" sees the point guard on the local men's basketball team.",
+		" sees a tower in a European city."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
@@ -171,9 +171,9 @@ var examples = [
 }, {
 	target : " is heavy",
 	context : [
-		" bought a television, and picked it up",
-		" bought a book, and picked it up",
-		" bought an iPhone, and picked it up"
+		" buys a television, and picks it up",
+		" buys a book, and picks it up",
+		" buys an iPhone, and picks it up"
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
@@ -186,9 +186,9 @@ var examples = [
 },{
 	target : " is light",
 	context : [
-		" bought a television, and picked it up",
-		" bought a book, and picked it up",
-		" bought an iPhone, and picked it up"
+		" buys a television, and picks it up",
+		" buys a book, and picks it up",
+		" buys an iPhone, and picks it up"
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
