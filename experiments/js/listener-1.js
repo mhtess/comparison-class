@@ -31,19 +31,31 @@ function makeSlides(f) {
     // display the context sentence
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
-    // changes the format when a person is used in the target sentence
+    // changes the format when a pronoun is used in the target sentence
     if (exp.examples[i].target[0] === " ") {
       // if we need an extra name, pop if off exp.extra
       exp.names[i] = [exp.names[i], exp.extra.pop()];
-      $(".display_target").html(exp.names[i][1] + " says, " + "\"" + exp.names[i][0] + exp.examples[i].target + "." + "\"");
-      // $(".display_question").html("What do you think " + exp.names[i][1] + " meant?");
-      $(".display_question").html(exp.examples[i].prompt);
-      $(".display_prompt").html("\"" + exp.names[i][0] + exp.examples[i].target + exp.condition);
-    } else {
-      $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
-      $(".display_question").html(exp.examples[i].prompt);
-      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
+
+      // evaluates each target specifically
+      if (exp.examples[i].target == " is tall") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "That" + exp.examples[i].target + "." + "\"");
+      }
+      else if (exp.examples[i].target == " is short") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "That" + exp.examples[i].target + "." + "\"");
+      }
+      else if (exp.examples[i].target == " is heavy") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
+      }
+      else if (exp.examples[i].target == " is light") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
+      }
     }
+    else {
+      $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
+    }
+
+    // display the question
+    $(".display_question").html(exp.examples[i].prompt);
   }
 
   function init_sliders() {

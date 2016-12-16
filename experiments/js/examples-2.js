@@ -104,9 +104,9 @@ var examples = [
 		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
+		"What do you think was the duration of the trip?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the traffic light?",
-		"What do you think was the duration of the trip?"
+		"What do you think was the duration of the traffic light?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -119,9 +119,9 @@ var examples = [
 		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
+		"What do you think was the duration of the trip?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the traffic light?",
-		"What do you think was the duration of the trip?"
+		"What do you think was the duration of the traffic light?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -171,9 +171,9 @@ var examples = [
 }, {
 	target : " is heavy",
 	context : [
-		" buys a television, and picks it up",
-		" buys a book, and picks it up",
-		" buys an iPhone, and picks it up"
+		" buys a television, and picks it up.",
+		" buys a book, and picks it up.",
+		" buys an iPhone, and picks it up."
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
@@ -186,9 +186,9 @@ var examples = [
 },{
 	target : " is light",
 	context : [
-		" buys a television, and picks it up",
-		" buys a book, and picks it up",
-		" buys an iPhone, and picks it up"
+		" buys a television, and picks it up.",
+		" buys a book, and picks it up.",
+		" buys an iPhone, and picks it up."
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
