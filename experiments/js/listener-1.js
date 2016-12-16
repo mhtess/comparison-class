@@ -55,14 +55,16 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = $("#measure" + (i+1)).val();
+    response1 = $("#measure1" + (i+1)).val();
     unit = $("#unit" + (i+1)).val();
+    response2 = $("#measure2" + (i+1)).val();
     subunit = $("#subunit" + (i+1)).val();
     // if there are no subunits for this example, don't expect a response from the Turker
     if (exp.examples[i].subunit[0] == "none") {
+      response2 = -1;
       subunit = "";
     }
-    if ((response.length == 0) || (unit == undefined) || (subunit == undefined)) {
+    if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
       $(".err").show();
     }
     // if ((response.length == 0) && (unit == undefined)) {
@@ -86,8 +88,9 @@ function makeSlides(f) {
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i] + "",
-        "response" : response,
+        "response1" : response1,
         "unit" : unit,
+        "response2" : response2,
         "subunit" : subunit
       });
       i++;

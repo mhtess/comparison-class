@@ -55,20 +55,27 @@ function embedSlides(trials) {
 
 // embeds the trial slides that were generated in the experiment file into the html file for the listener experiment
 function embedListenerSlides(examples, trials) {
-  // get the units 
+  // get the units and subunits
   var unit = _.pluck(examples, "unit");
   var subunit = _.pluck(examples, "subunit");
+
+  // stores the html for the slides
   var slides = "";
   for (var i = 1; i <= trials; i++) {
+    // stores the html script for the units dropdown menu
     var u = "";
+
+    // stores the html script for the subunits dropdown menu
     var su = "";
+
     // generate the script for the units
     for (var j = 0; j < unit[i-1].length; j++) {
       u = u + "<label><option value=\"" + unit[i-1][j] + "\">" + unit[i-1][j] + "</option></label>";
     }
-    // if there are subunits, generate scripts for them, too
+    // if there are subunits, generate scripts for them
     if (subunit[i-1][0] != "none") {
-      var temp = "<select id=\"subunit" + i + "\">" + 
+      var temp = "<input type=\"text\" id=\"measure2" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
+        "<select id=\"subunit" + i + "\">" + 
         "<option selected disabled hidden style='display: none' value=''></option>";
       for (var k = 0; k < subunit[i-1].length; k++) {
         su = su + "<label><option value=\"" + subunit[i-1][k] + "\">" + subunit[i-1][k] + "</option></label>";
@@ -79,7 +86,7 @@ function embedListenerSlides(examples, trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-      "<input type=\"text\" id=\"measure" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
+      "<input type=\"text\" id=\"measure1" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
       "<select id=\"unit" + i + "\">" + 
       "<option selected disabled hidden style='display: none' value=''></option>" + u + "</select>" + su +
       "<br><br>" +
