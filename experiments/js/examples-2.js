@@ -104,9 +104,9 @@ var examples = [
 		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
-		"What do you think was the duration of the trip?"
+		"What do you think was the duration of the trip?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the traffic light?",
+		"What do you think was the duration of the traffic light?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -119,9 +119,9 @@ var examples = [
 		" is talking about the traffic light that just turned green."
 	],
 	prompt : [
-		"What do you think was the duration of the trip?"
+		"What do you think was the duration of the trip?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the traffic light?",
+		"What do you think was the duration of the traffic light?"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],

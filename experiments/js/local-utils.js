@@ -72,6 +72,7 @@ function embedListenerSlides(examples, trials) {
     for (var j = 0; j < unit[i-1].length; j++) {
       u = u + "<label><option value=\"" + unit[i-1][j] + "\">" + unit[i-1][j] + "</option></label>";
     }
+
     // if there are subunits, generate scripts for them
     if (subunit[i-1][0] != "none") {
       var temp = "<input type=\"text\" id=\"measure2" + i + "\" maxlength=\"5\" size =\"5\" tabindex=\"1\"></input>" +
@@ -82,6 +83,8 @@ function embedListenerSlides(examples, trials) {
       }
       su = temp + su + "</select>";
     }
+
+    // finally, combine everything to generate the script for the trial slides
     slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +

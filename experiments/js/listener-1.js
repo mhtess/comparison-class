@@ -43,12 +43,12 @@ function makeSlides(f) {
       else if (exp.examples[i].target == " is short") {
         $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "That" + exp.examples[i].target + "." + "\"");
       }
-      // else if (exp.examples[i].target == " is heavy") {
-      //   $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
-      // }
-      // else if (exp.examples[i].target == " is light") {
-      //   $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
-      // }
+      else if (exp.examples[i].target == " is heavy") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
+      }
+      else if (exp.examples[i].target == " is light") {
+        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
+      }
     }
     else {
       $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
