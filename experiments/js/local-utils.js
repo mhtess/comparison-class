@@ -7,7 +7,8 @@ function getTrials(examples) {
 				target : examples[i].target,
 				context : examples[i].context[j],
         degree : examples[i].degree,
-        unit : examples[i].unit
+        unit : examples[i].unit,
+        subunit : examples[i].subunit
 			});
 		}
 	}
@@ -55,12 +56,17 @@ function embedSlides(trials) {
 function embedListenerSlides(examples, trials) {
   // get the units 
   var unit = _.pluck(examples, "unit");
+  var subunit = _.pluck(examples, "subunit");
   var slides = "";
   for (var i = 1; i <= trials; i++) {
     var u = "";
     // generate the script for the units
     for (var j = 0; j < unit[i-1].length; j++) {
       u = u + "<label><option value=\"" + unit[i-1][j] + "\">" + unit[i-1][j] + "</option></label>";
+      // if there are subunits, generate scripts for them, too
+      // if (subunit[i] > 0) {
+      //   u = u + "<select id=\"unit" + i + "\">" +
+      // }
     }
     slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +

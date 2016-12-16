@@ -15,7 +15,8 @@ var examples = [
 		"What do you think was the temperature of the iced coffee?"
 	],
 	degree : "temperature",
-	unit : ["degrees Fahrenheit", "degrees Celsius"]
+	unit : ["degrees Fahrenheit", "degrees Celsius"],
+	subunit : []
 }, {
 	target : "It's cold",
 	context : [
@@ -29,7 +30,8 @@ var examples = [
 		"What do you think was the temperature of the iced coffee?"
 	],
 	degree: "temperature",
-	unit: ["degrees Fahrenheit", "degrees Celsius"]
+	unit: ["degrees Fahrenheit", "degrees Celsius"],
+	subunit : []
 }, {
 	target : "It's cold outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -43,7 +45,8 @@ var examples = [
 		"What do you think was the temperature in Alaska?"
 	],
 	degree : "temperature",
-	unit : ["degrees Fahrenheit", "degrees Celsius"]
+	unit : ["degrees Fahrenheit", "degrees Celsius"],
+	subunit : []
 }, {
 	target : "It's warm outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -57,7 +60,8 @@ var examples = [
 		"What do you think was the temperature in Alaska?"
 	],
 	degree : "temperature",
-	unit : ["degrees Fahrenheit", "degrees Celsius"]
+	unit : ["degrees Fahrenheit", "degrees Celsius"],
+	subunit : []
 }, {
 	target : "This is expensive",
 	context : [
@@ -73,7 +77,8 @@ var examples = [
 		"What do you think was the price of the truck?"
 	],
 	degree : "price",
-	unit : ["dollars"]
+	unit : ["dollars"],
+	subunit : []
 }, {
 	target : "This is cheap",
 	context : [
@@ -89,7 +94,8 @@ var examples = [
 		"What do you think was the price of the truck?"
 	],
 	degree : "price",
-	unit : ["dollars"]
+	unit : ["dollars"],
+	subunit : []
 }, {
 	target : "That was long", // needs help
 	context : [
@@ -103,7 +109,8 @@ var examples = [
 		"What do you think was the duration of the trip?"
 	],
 	degree : "time",
-	unit : ["seconds", "minutes", "hours", "days"]
+	unit : ["seconds", "minutes", "hours", "days"],
+	subunit : []
 }, {
 	target : "That was short", // needs help
 	context : [
@@ -117,7 +124,8 @@ var examples = [
 		"What do you think was the duration of the trip?"
 	],
 	degree : "time",
-	unit : ["seconds", "minutes", "hours", "days"]
+	unit : ["seconds", "minutes", "hours", "days"],
+	subunit : []
 // }, {
 // 	target : "It's open late.", // this is more like a habitual
 // 	context : [
@@ -141,7 +149,8 @@ var examples = [
 		"What do you think is the height of the tower?"
 	],
 	degree : "height",
-	unit : ["feet"]
+	unit : ["feet", "meters"],
+	subunit : ["inches", "centimeters"]
 }, {
 	target : " is short",
 	context : [
@@ -157,7 +166,8 @@ var examples = [
 		"What do you think is the height of the tower?"
 	],
 	degree : "height",
-	unit : ["feet"]
+	unit : ["feet", "meters"],
+	subunit : ["inches", "centimeters"]
 }, {
 	target : " is heavy",
 	context : [
@@ -171,7 +181,8 @@ var examples = [
 		"What do you think is the weight of the iPhone?"
 	],
 	degree : "weight",
-	unit : ["pounds"]
+	unit : ["pounds", "kilograms"],
+	subunit : ["ounces", "grams"]
 },{
 	target : " is light",
 	context : [
@@ -185,5 +196,6 @@ var examples = [
 		"What do you think is the weight of the iPhone?"
 	],
 	degree : "weight",
-	unit : ["pounds"]
+	unit : ["pounds", "kilograms"],
+	subunit : ["ounces", "grams"]
 }];

@@ -23,6 +23,7 @@ function makeSlides(f) {
     $(".err").hide();
     $(".responseErr").hide();
     $(".unitErr").hide();
+    $(".subunitErr").hide();
     // init_sliders();
     // $(".slider_number").html("---")
     // exp.sliderPost = null; // erase current slider value
@@ -55,26 +56,34 @@ function makeSlides(f) {
   function button() {
     response = $("#measure" + (i+1)).val();
     unit = $("#unit" + (i+1)).val();
+    subunit = $("#subunit" + (i+1)).val();
+    // if ((response.length == 0) || (unit == undefined) || (subunit == undefined)) {
+    //   $(".err").show();
+    // }
     if ((response.length == 0) && (unit == undefined)) {
       $(".responseErr").hide();
       $(".unitErr").hide();
       $(".err").show();
-    } else if (response.length == 0) {
+    }
+    else if (response.length == 0) {
       $(".err").hide();
       $(".unitErr").hide();
       $(".responseErr").show();
-    } else if (unit == undefined) {
+    }
+    else if (unit == undefined) {
       $(".err").hide();
       $(".responseErr").hide();
       $(".unitErr").show();
-    } else {
+    }
+    else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i] + "",
         "response" : response,
-        "unit": unit
+        "unit" : unit,
+        "subunit" : subunit
       });
       i++;
       exp.go();
@@ -178,7 +187,6 @@ function init() {
   // make corresponding slides
   exp.slides = makeSlides(exp);
 
-  // embed the slides
   // embed the slides
   embedListenerSlides(exp.examples, exp.trials); 
 
