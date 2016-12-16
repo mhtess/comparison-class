@@ -61,12 +61,32 @@ var characters = [
 	gender: "male"
 },
 {
+	name: "Robert",
+	gender: "male"
+},
+{
+	name: "Charles",
+	gender: "male"
+},
+{
+	name: "Gary",
+	gender: "male"
+},
+{
+	name: "Josh",
+	gender: "male"
+},
+{
+	name: "Simon",
+	gender: "male"
+},
+{
 	name: "Angela",
 	gender: "female"
 },
 {
 	name: "Jennifer",
-	gender: "female"	
+	gender: "female"
 },
 {
 	name: "Monica",
@@ -78,7 +98,7 @@ var characters = [
 },
 {
 	name: "Veronica",
-	gender: "female"	
+	gender: "female"
 },
 {
 	name: "Alicia",
@@ -89,7 +109,7 @@ var characters = [
 	gender: "female"
 },
 {
-	name: "Sophia",
+	name: "Sophie",
 	gender: "female"
 },
 {
@@ -118,5 +138,25 @@ var characters = [
 },
 {
 	name: "Kathleen",
+	gender: "female"
+},
+{
+	name: "Kim",
+	gender: "female"
+},
+{
+	name: "Jasmine",
+	gender: "female"
+},
+{
+	name: "Tanya",
+	gender: "female"
+},
+{
+	name: "Mika",
+	gender: "female"
+},
+{
+	name: "Natalia",
 	gender: "female"
 }];
