@@ -16,7 +16,7 @@ var examples = [
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "It's cold",
 	context : [
@@ -31,7 +31,7 @@ var examples = [
 	],
 	degree: "temperature",
 	unit: ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "It's cold outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -46,7 +46,7 @@ var examples = [
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "It's warm outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
 	context : [
@@ -61,7 +61,7 @@ var examples = [
 	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "This is expensive",
 	context : [
@@ -78,7 +78,7 @@ var examples = [
 	],
 	degree : "price",
 	unit : ["dollars"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "This is cheap",
 	context : [
@@ -95,7 +95,7 @@ var examples = [
 	],
 	degree : "price",
 	unit : ["dollars"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "That was long", // needs help
 	context : [
@@ -110,7 +110,7 @@ var examples = [
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
-	subunit : []
+	subunit : ["none"]
 }, {
 	target : "That was short", // needs help
 	context : [
@@ -125,7 +125,7 @@ var examples = [
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
-	subunit : []
+	subunit : ["none"]
 // }, {
 // 	target : "It's open late.", // this is more like a habitual
 // 	context : [
