@@ -21,6 +21,7 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
+    $(".numErr").hide();
     // init_sliders();
     // $(".slider_number").html("---")
     // exp.sliderPost = null; // erase current slider value
@@ -31,20 +32,16 @@ function makeSlides(f) {
     // changes the format when a pronoun is used in the target sentence
     if (exp.examples[i].target[0] === " ") {
       // if we need an extra name, pop if off exp.extra
-      exp.names[i] = [exp.names[i], exp.extra.pop()];
+      //exp.names[i] = [exp.names[i], exp.extra.pop()];
 
       // evaluates each target specifically
-      if (exp.examples[i].target == " is tall") {
-        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "That" + exp.examples[i].target + "." + "\"");
+      if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+          exp.examples[i].target + "." + "\"");
       }
-      else if (exp.examples[i].target == " is short") {
-        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "That" + exp.examples[i].target + "." + "\"");
-      }
-      else if (exp.examples[i].target == " is heavy") {
-        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
-      }
-      else if (exp.examples[i].target == " is light") {
-        $(".display_target").html(exp.names[i][1] + " says, " + "\"" + "This" + exp.examples[i].target + "." + "\"");
+      else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+          exp.examples[i].target + "." + "\"");
       }
     }
     else {
@@ -73,8 +70,16 @@ function makeSlides(f) {
       response2 = -1;
       subunit = "";
     }
+    // checks if any of the answers are blank/unanswered
     if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
+      $(".numErr").hide();
       $(".err").show();
+    }
+    // checks if either of the responses are either all letters or floats; still need to make the checks cover responses
+    // with both letters and numbers
+    else if (!Number.isInteger(parseFloat(response1)) || !Number.isInteger(parseFloat(response2))) {
+      $(".err").hide();
+      $(".numErr").show();
     }
     else {
       exp.data_trials.push({
@@ -140,7 +145,8 @@ function init() {
 
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
-
+  //exp.examples = exp.examples.slice(0, 5);
+  
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);

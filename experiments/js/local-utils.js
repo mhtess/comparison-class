@@ -32,6 +32,18 @@ var getPronoun = function(context, name) {
 	else if (gender === "female") { return context.split("their").join("her"); }
 }
 
+var getPronoun2 = function(context, target) {
+  var pronoun = "";
+  if ((target == " is tall") || (target == " is short")) {
+    if (context.search("tower") != -1) { pronoun = "That"; }
+    else { pronoun = "He"; }
+  }
+  else {
+    pronoun = "This";
+  }
+  return pronoun;
+}
+
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
 	return " for a "; //_.sample([" for a ", " relative to "]);
@@ -100,9 +112,7 @@ function embedListenerSlides(examples, trials) {
   		// "</table>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please type something and select a unit and subunit.</p>" +
-      // "<p class=\"err\">Please write something and select a unit.</p>" +
-      // "<p class=\"responseErr\">Please write something.</p>" +
-      // "<p class=\"unitErr\">Please select a unit.</p>" +
+      "<p class=\"numErr\">Please use whole numbers only.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }
