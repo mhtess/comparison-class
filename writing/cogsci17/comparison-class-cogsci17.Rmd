@@ -80,7 +80,7 @@ See all the items [here](http://stanford.edu/~mtessler/comparison-class/experime
 \item \textbf{Comparison class elicitation}
   \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
   \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.'' 
-  \subitem \textbf{Dependent measure}: What do you think Gary meant? ... `` This is heavy \textbf{for a} ...'' (fill in the blank)
+  \subitem \textbf{Dependent measure}: What do you think Gary meant? ``This is heavy \textbf{for a} ...'' (fill in the blank)
   \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
 
 \item \textbf{Prior elicitation}
