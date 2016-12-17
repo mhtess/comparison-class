@@ -35,27 +35,28 @@ library(ggplot2)
 library(xtable)
 library(tidyr)
 library(dplyr)
-library(rwebppl)
+#library(rwebppl)
 ```
 
 # Proposal
 
 How can a cup of coffee be expensive while cheap cars populate the highways?
-Adjectives like *cheap* and *expensive*, *cold* and *hot*, *tall* and *short* are vague descriptions of an underlying (quantitative) measure (e.g., price, temperature).
+Adjectives like *cheap* and *expensive*, *cold* and *hot*, and *tall* and *short* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
 Vague language is ubiquitous in everyday conversation; much more common than actually saying numeric values...
 
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure.
 For example, a cup of coffee is expensive if its price is greater than some number of dollars.
-The crux of such arguments rest of the fact that this threshold is relative to some *comparison class* of other possible entities. 
-For example, a cup of coffee can be expensive *relative to* other possible cups of coffee, or perhaps hot beverages sold at a local coffee shop.
+The crux of such arguments rests on the fact that this threshold is relative to some *comparison class* of other possible entities. 
+Our cup of coffee can be expensive *relative to* other possible cups of coffee, or perhaps hot beverages sold at a local coffee shop.
 
 @Lassiter2013 showed how this idea can be couched in a general pragmatic theory of language understanding.
-In this Rational Speech Act theory, the truth-conditional threshold comes from an uninformative prior distribution (a flat distribution over all possible thresholds).
-Listeners arrive at context-sensitive meanings by integrating their prior beliefs with general principles of communication (be truthful, be informative). 
-The result is vague language understanding that displays context-sensitivity and admits borderline cases[@Lassiter2013; @Lassiter2015]. In this formal theory, the *comparison class* is assumed in the specification of a listener's prior belief distribution.
+In this Rational Speech Act theory, the truth-conditional threshold comes from an uninformative prior distribution: a flat distribution over all possible thresholds.
+Listeners arrive at context-sensitive meanings by integrating their prior beliefs with general principles of communication, such as being truthful or informative. 
+The result is vague language understanding that displays context-sensitivity and admits borderline cases[@Lassiter2013; @Lassiter2015].
+In this formal theory, the comparison class is assumed in the specification of a listener's prior belief distribution.
 
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
-@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little", finding the appropriate object whether the object is in a physical context ("big" compared to other objects in a scene), is in a functional context ("big" compared to its intended use), or out of context ("big" relative to a comparison class). 
+@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to a comparison class). 
 
 In this paper we introduce a free-response paradigm for eliciting comparison classes for gradable adjectives.
 We validate this technique by measuring listeners' prior belief distributions over the measure within the elicited comparison class (e.g., the price of cups of coffee).
@@ -70,14 +71,14 @@ See all the items [here](http://stanford.edu/~mtessler/comparison-class/experime
 
 \begin{enumerate}
 
-\item Stimuli
+\item \textbf{Stimuli}
   \subitem Currently we have 40 unique items, made up of 6 scales x 2 (positive and negative form adjectives)
-  \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (so, touching objects vs. the weather). For the weather, it is really about speaker's beliefs (their own subjective comparison class; e.g. John think its cold because he's from southern california)
+  \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (touching objects vs. the weather). For the weather, it is really about speaker's beliefs--their own subjective comparison class (e.g., John think its cold because he's from Southern California).
   \subitem 3 or 4 contexts by item (different targets of reference)
   \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.'' 
 
 \item \textbf{Comparison class elicitation}
-  \subitem We've run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to". "For a" produced more reliable results, so we'll use that going forward.
+  \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
   \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.'' 
   \subitem \textbf{Dependent measure}: What do you think Gary meant? ... `` This is heavy \textbf{for a} ...'' (fill in the blank)
   \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
