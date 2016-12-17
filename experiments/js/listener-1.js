@@ -21,9 +21,6 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    // $(".responseErr").hide();
-    // $(".unitErr").hide();
-    // $(".subunitErr").hide();
     // init_sliders();
     // $(".slider_number").html("---")
     // exp.sliderPost = null; // erase current slider value
@@ -79,21 +76,6 @@ function makeSlides(f) {
     if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
       $(".err").show();
     }
-    // if ((response.length == 0) && (unit == undefined)) {
-    //   $(".responseErr").hide();
-    //   $(".unitErr").hide();
-    //   $(".err").show();
-    // }
-    // else if (response.length == 0) {
-    //   $(".err").hide();
-    //   $(".unitErr").hide();
-    //   $(".responseErr").show();
-    // }
-    // else if (unit == undefined) {
-    //   $(".err").hide();
-    //   $(".responseErr").hide();
-    //   $(".unitErr").show();
-    // }
     else {
       exp.data_trials.push({
         "condition" : exp.condition,

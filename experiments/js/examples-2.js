@@ -110,7 +110,7 @@ var examples = [
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
-	subunit : ["none"]
+	subunit : ["seconds", "minutes", "hours"]
 }, {
 	target : "That was short", // needs help
 	context : [
@@ -125,7 +125,7 @@ var examples = [
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
-	subunit : ["none"]
+	subunit : ["seconds", "minutes", "hours"]
 // }, {
 // 	target : "It's open late.", // this is more like a habitual
 // 	context : [
