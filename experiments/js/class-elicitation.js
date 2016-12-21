@@ -21,10 +21,6 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    $(".numErr").hide();
-    // init_sliders();
-    // $(".slider_number").html("---")
-    // exp.sliderPost = null; // erase current slider value
 
     // display the context sentence
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
@@ -49,48 +45,29 @@ function makeSlides(f) {
     }
 
     // display the question
-    $(".display_question").html(exp.examples[i].prompt);
-  }
+    $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-  // function init_sliders() {
-  //   utils.make_slider("#single_slider", function(event, ui) {
-  //     exp.sliderPost = ui.value;
-  //     $(".slider_number").html(Math.round(exp.sliderPost*100))
-  //   });
-  // }
+    // display the paraphrase statement
+    if (exp.examples[i].target[0] === " ") {
+      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);  
+    }
+    else {
+      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
+    }
+  }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response1 = $("#measure1" + (i+1)).val();
-    unit = $("#unit" + (i+1)).val();
-    response2 = $("#measure2" + (i+1)).val();
-    subunit = $("#subunit" + (i+1)).val();
-    // if there are no subunits for this example, don't expect a response from the Turker
-    if (exp.examples[i].subunit[0] == "none") {
-      response2 = -1;
-      subunit = "";
-    }
-    // checks if any of the answers are blank/unanswered
-    if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
-      $(".numErr").hide();
+    response = $("#text_response" + (i+1)).val();
+    if (response.length == 0) {
       $(".err").show();
-    }
-    // checks if either of the responses are either all letters or floats; still need to make the checks cover responses
-    // with both letters and numbers
-    else if (!Number.isInteger(parseFloat(response1)) || !Number.isInteger(parseFloat(response2))) {
-      $(".err").hide();
-      $(".numErr").show();
-    }
-    else {
+    } else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "names" : exp.names[i] + "",
-        "response1" : response1,
-        "unit" : unit,
-        "response2" : response2,
-        "subunit" : subunit
+        "response" : response
       });
       i++;
       exp.go();
@@ -145,7 +122,6 @@ function init() {
 
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
-  //exp.examples = exp.examples.slice(0, 5);
   
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
@@ -179,7 +155,7 @@ function init() {
       screenW : screen.width,
       screenUW : exp.width
   };
-
+  
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
   for (var k = 1; k <= exp.trials; k++) {
@@ -193,13 +169,13 @@ function init() {
 
   // make corresponding slides
   exp.slides = makeSlides(exp);
-
+  
   // embed the slides
-  embedListenerSlides(exp.examples, exp.trials); 
+  embedSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
-  exp.nQs = utils.get_exp_length();
+  exp.nQs = utils.get_exp_length(); 
 
   // hide everything
   $(".slide").hide();
