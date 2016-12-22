@@ -30,23 +30,23 @@ function makeSlides(f) {
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     // changes the format when a pronoun is used in the target sentence
-    // if (exp.examples[i].target[0] === " ") {
-    //   // if we need an extra name, pop if off exp.extra
-    //   // exp.names[i] = [exp.names[i], exp.extra.pop()];
+    if (exp.examples[i].target[0] === " ") {
+      // if we need an extra name, pop if off exp.extra
+      // exp.names[i] = [exp.names[i], exp.extra.pop()];
 
-    //   // evaluates each target specifically
-    //   if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
-    //     $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
-    //       exp.examples[i].target + "." + "\"");
-    //   }
-    //   else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
-    //     $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
-    //       exp.examples[i].target + "." + "\"");
-    //   }
-    // }
-    // else {
-    //   $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
-    // }
+      // evaluates each target specifically
+      if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+          exp.examples[i].target + "." + "\"");
+      }
+      else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+          exp.examples[i].target + "." + "\"");
+      }
+    }
+    else {
+      $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
+    }
 
     // display the question
     $(".display_question").html(exp.examples[i].prompt);
