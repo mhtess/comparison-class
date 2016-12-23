@@ -5,9 +5,9 @@ var examples = [
 	// the best example is of people from different places
 	target : "It's warm",
 	context : [
-		" takes a sip from a cup of coffee.",
-		" takes a sip from a glass of milk.",
-		" takes a sip from an iced coffee."
+		" took a sip from a cup of coffee.",
+		" took a sip from a glass of milk.",
+		" took a sip from an iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -20,9 +20,9 @@ var examples = [
 }, {
 	target : "It's cold",
 	context : [
-		" takes a sip from a cup of coffee.",
-		" takes a sip from a glass of milk.",
-		" takes a sip from an iced coffee."
+		" took a sip from a cup of coffee.",
+		" took a sip from a glass of milk.",
+		" took a sip from an iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -32,60 +32,48 @@ var examples = [
 	degree: "temperature",
 	unit: ["degrees Fahrenheit", "degrees Celsius"],
 	subunit : ["none"]
-}, {
-	target : "It's cold outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
+},
+// WEATHER TEMPERATURE ARE MORE ABOUT SUBJECTIVE COMPARISON CLASSES
+// like, a rich boy who has a different sense of what's cheap / expensive
+// i.e., it's about speaker beliefs, not about shared beliefs
+// {
+// 	target : "It's cold outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
+// 	context : [
+// 		" is from Southern California.",
+// 		" is from Kansas.",
+// 		" is from Alaska."
+// 	],
+// 	prompt : [
+// 		"What do you think was the temperature in Southern California?",
+// 		"What do you think was the temperature in Kansas?",
+// 		"What do you think was the temperature in Alaska?"
+// 	],
+// 	degree : "temperature",
+// 	unit : ["degrees Fahrenheit", "degrees Celsius"],
+// 	subunit : ["none"]
+// }, {
+// 	target : "It's warm outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
+// 	context : [
+// 		" is from Southern California.",
+// 		" is from Kansas.",
+// 		" is from Alaska."
+// 	],
+// 	prompt : [
+// 		"What do you think was the temperature in Southern California?",
+// 		"What do you think was the temperature in Kansas?",
+// 		"What do you think was the temperature in Alaska?"
+// 	],
+// 	degree : "temperature",
+// 	unit : ["degrees Fahrenheit", "degrees Celsius"],
+// 	subunit : ["none"]
+// },
+{
+	target : "It was expensive",
 	context : [
-		" is from Southern California.",
-		" is from Kansas.",
-		" is from Alaska."
-	],
-	prompt : [
-		"What do you think was the temperature in Southern California?",
-		"What do you think was the temperature in Kansas?",
-		"What do you think was the temperature in Alaska?"
-	],
-	degree : "temperature",
-	unit : ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : ["none"]
-}, {
-	target : "It's warm outside", // we can go back to the original version ("The weather is cold") but Turkers said it sounded off
-	context : [
-		" is from Southern California.",
-		" is from Kansas.",
-		" is from Alaska."
-	],
-	prompt : [
-		"What do you think was the temperature in Southern California?",
-		"What do you think was the temperature in Kansas?",
-		"What do you think was the temperature in Alaska?"
-	],
-	degree : "temperature",
-	unit : ["degrees Fahrenheit", "degrees Celsius"],
-	subunit : ["none"]
-}, {
-	target : "This one is expensive",
-	context : [
-		" is buying a candy bar.",
-		" is buying a ticket to the movies.",
-		" is buying a ticket to Europe.",
-		" is buying a truck."
-	],
-	prompt : [
-		"What do you think was the price of the candy bar?",
-		"What do you think was the price of the movie ticket?",
-		"What do you think was the price of the ticket to Europe?",
-		"What do you think was the price of the truck?"
-	],
-	degree : "price",
-	unit : ["dollars"],
-	subunit : ["none"]
-}, {
-	target : "This one is cheap",
-	context : [
-		" is buying a candy bar.",
-		" is buying a ticket to the movies.",
-		" is buying a ticket to Europe.",
-		" is buying a truck."
+		" bought a candy bar.",
+		" bought a ticket to the movies.",
+		" bought a ticket to Europe.",
+		" bought a truck."
 	],
 	prompt : [
 		"What do you think was the price of the candy bar?",
@@ -97,11 +85,28 @@ var examples = [
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
-	target : "It was long", // needs help
+	target : "It was cheap",
 	context : [
-		" is talking about the time they drove across the country.",
-		" is talking about the movie they just saw.",
-		" is talking about the traffic light that just turned green."
+		" bought a candy bar.",
+		" bought a ticket to the movies.",
+		" bought a ticket to Europe.",
+		" bought a truck."
+	],
+	prompt : [
+		"What do you think was the price of the candy bar?",
+		"What do you think was the price of the movie ticket?",
+		"What do you think was the price of the ticket to Europe?",
+		"What do you think was the price of the truck?"
+	],
+	degree : "price",
+	unit : ["dollars"],
+	subunit : ["none"]
+}, {
+	target : "That was long", // needs help
+	context : [
+		" was talking about the time they drove across the country.",
+		" was talking about the movie they just saw.",
+		" was talking about the traffic light that just turned green."
 	],
 	prompt : [
 		"What do you think was the duration of the trip?",
@@ -114,9 +119,9 @@ var examples = [
 }, {
 	target : "That was short", // needs help
 	context : [
-		" is talking about the time they drove across the country.",
-		" is talking about the movie they just saw.",
-		" is talking about the traffic light that just turned green."
+		" was talking about the time they drove across the country.",
+		" was talking about the movie they just saw.",
+		" was talking about the traffic light that just turned green."
 	],
 	prompt : [
 		"What do you think was the duration of the trip?",
@@ -135,12 +140,12 @@ var examples = [
 // 	degree: "time",
 // 	unit: "minutes"
 }, {
-	target : " is tall",
+	target : " was tall",
 	context : [
-		" sees a 4 year-old boy.",
-		" sees a 25 year-old man.",
-		" sees the point guard on the local men's basketball team.",
-		" sees a tower in a European city."
+		" saw a 4 year-old boy.",
+		" saw a 25 year-old man.",
+		" saw the point guard on the local men's basketball team.",
+		" saw a tower in a European city."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
@@ -152,12 +157,12 @@ var examples = [
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
 }, {
-	target : " is short",
+	target : " was short",
 	context : [
-		" sees a 4 year-old boy.",
-		" sees a 25 year-old man.",
-		" sees the point guard on the local men's basketball team.",
-		" sees a tower in a European city."
+		" saw a 4 year-old boy.",
+		" saw a 25 year-old man.",
+		" saw the point guard on the local men's basketball team.",
+		" saw a tower in a European city."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
@@ -171,9 +176,9 @@ var examples = [
 }, {
 	target : " is heavy",
 	context : [
-		" buys a television, and picks it up.",
-		" buys a book, and picks it up.",
-		" buys an iPhone, and picks it up."
+		" bought a television and lifted it up.",
+		" bought a book and lifted it up.",
+		" bought an iPhone and lifted it up."
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
@@ -186,9 +191,9 @@ var examples = [
 },{
 	target : " is light",
 	context : [
-		" buys a television, and picks it up.",
-		" buys a book, and picks it up.",
-		" buys an iPhone, and picks it up."
+		" bought a television and lifted it up.",
+		" bought a book and lifted it up.",
+		" bought an iPhone and lifted it up."
 	],
 	prompt : [
 		"What do you think is the weight of the television?",
