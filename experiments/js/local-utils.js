@@ -32,11 +32,12 @@ var getPronoun = function(context, name) {
 	else if (gender === "female") { return context.split("their").join("her"); }
 }
 
+// retrieves the correct pronoun for the context/target pair
 var getPronoun2 = function(context, target) {
   var pronoun = "";
-  if ((target == " is tall") || (target == " is short")) {
-    if (context.search("tower") != -1) { pronoun = "That"; }
-    else { pronoun = "He"; }
+  if ((target.search("tall") != -1) || (target.search("short") != -1)) {
+    if (context.search("tower") == -1) { pronoun = "He"; }
+    else { pronoun = "That"; }
   }
   else {
     pronoun = "This";

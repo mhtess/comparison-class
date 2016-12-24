@@ -31,11 +31,11 @@ function makeSlides(f) {
       // exp.names[i] = [exp.names[i], exp.extra.pop()];
 
       // evaluates each target specifically
-      if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
+      if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
         $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
           exp.examples[i].target + "." + "\"");
       }
-      else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
+      else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
         $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
           exp.examples[i].target + "." + "\"");
       }
