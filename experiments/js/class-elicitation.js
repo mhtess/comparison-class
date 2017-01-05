@@ -54,6 +54,7 @@ function makeSlides(f) {
     else {
       $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     }
+
   }
 
   // runs when the "Continue" button is hit on a slide

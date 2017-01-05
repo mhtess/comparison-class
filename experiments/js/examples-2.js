@@ -72,7 +72,7 @@ var examples = [
 	context : [
 		" bought a candy bar.",
 		" bought a ticket to the movies.",
-		" bought a ticket to Europe.",
+		" bought a round-trip ticket to Europe.",
 		" bought a truck."
 	],
 	prompt : [
@@ -89,7 +89,7 @@ var examples = [
 	context : [
 		" bought a candy bar.",
 		" bought a ticket to the movies.",
-		" bought a ticket to Europe.",
+		" bought a round-trip ticket to Europe.",
 		" bought a truck."
 	],
 	prompt : [
