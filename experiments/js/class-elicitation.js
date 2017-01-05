@@ -32,11 +32,11 @@ function makeSlides(f) {
 
       // evaluates each target specifically
       if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target + "." + "\"");
       }
       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target + "." + "\"");
       }
     }
@@ -49,7 +49,7 @@ function makeSlides(f) {
 
     // display the paraphrase statement
     if (exp.examples[i].target[0] === " ") {
-      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);  
+      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
     }
     else {
       $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
@@ -66,6 +66,7 @@ function makeSlides(f) {
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
+        "degree" : exp.examples[i].degree,
         "names" : exp.names[i] + "",
         "response" : response
       });
@@ -122,7 +123,7 @@ function init() {
 
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
-  
+
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
@@ -155,7 +156,7 @@ function init() {
       screenW : screen.width,
       screenUW : exp.width
   };
-  
+
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
   for (var k = 1; k <= exp.trials; k++) {
@@ -169,13 +170,13 @@ function init() {
 
   // make corresponding slides
   exp.slides = makeSlides(exp);
-  
+
   // embed the slides
   embedSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
-  exp.nQs = utils.get_exp_length(); 
+  exp.nQs = utils.get_exp_length();
 
   // hide everything
   $(".slide").hide();
