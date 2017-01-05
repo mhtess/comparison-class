@@ -103,13 +103,13 @@ function embedListenerSlides(examples, trials) {
 		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
-  		"<p class=\"display_question\"></p>" +
-      "<input type=\"text\" id=\"measure1" + i + "\" maxlength=\"6\" size =\"7\" tabindex=\"1\"></input>" +
+			"<p class=\"display_question\"></p>" +
+			"<div id=\"text_prompt" + i + "\"><span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"</div><p></p>" +
+  		"<p class=\"display_question2\"></p>" +
+      "<div id=\"estimation_prompt" + i + "\"><input type=\"text\" id=\"measure1" + i + "\" maxlength=\"6\" size =\"7\" tabindex=\"1\"></input>" +
       "<select id=\"unit" + i + "\">" +
       "<option selected disabled hidden style='display: none' value=''></option>" + u + "</select>" + su +
-      "<br><br>" +
-			"<p class=\"display_question2\"></p>" +
-			"<div id=\"text_prompt" + i + "\"><span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"</div><p></p>" +
+      "</div><br><br>" +
   		// "<p class=\"slider_number\"></p>" +
   		// " <table id=\"slider_table\"class=\"slider_table\">" +
   		// "<tr><td class=\"left\"></td><td class=\"right\"></td></tr>" +

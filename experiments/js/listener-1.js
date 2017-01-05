@@ -24,30 +24,14 @@ function makeSlides(f) {
     $(".err").hide();
     $(".numErr").hide();
     $(".textErr").hide();
-    $("#text_prompt" + (i+1)).hide();
+    $("#estimation_prompt" + (i+1)).hide();
     $(".display_question2").html('');
-
-    // init_sliders();
-    // $(".slider_number").html("---")
-    // exp.sliderPost = null; // erase current slider value
 
     // display the context sentence
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     // changes the format when a pronoun is used in the target sentence
     if (exp.examples[i].target[0] === " ") {
-      // if we need an extra name, pop if off exp.extra
-      // exp.names[i] = [exp.names[i], exp.extra.pop()];
-
-      // evaluates each target specifically
-      // if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
-      //   $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-      //     exp.examples[i].target + "." + "\"");
-      // }
-      // else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
-      //   $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-      //     exp.examples[i].target + "." + "\"");
-      // }
 
       if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
         $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
@@ -63,16 +47,18 @@ function makeSlides(f) {
       $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
     }
 
-    // display the question
-    $(".display_question").html(exp.examples[i].prompt);
-  }
 
-  // function init_sliders() {
-  //   utils.make_slider("#single_slider", function(event, ui) {
-  //     exp.sliderPost = ui.value;
-  //     $(".slider_number").html(Math.round(exp.sliderPost*100))
-  //   });
-  // }
+    // display the paraphrase question
+    $(".display_question").html("What do you think " + exp.names[i] + " meant?");
+    // display the paraphrase statement
+    if (exp.examples[i].target[0] === " ") {
+      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
+    }
+    else {
+      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
+    }
+
+  }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
@@ -88,7 +74,16 @@ function makeSlides(f) {
       subunit = "";
     }
     // checks if any of the answers are blank/unanswered
-    if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
+   if (response.length == 0) {
+      $(".textErr").show();
+    }  else if (exp.flag === 0) {
+      exp.flag = 1;
+      $(".textErr").hide();
+      // $("#text_prompt" + (i+1)).show();
+      // display the estimation question
+      $(".display_question2").html(exp.examples[i].prompt);
+      $("#estimation_prompt" + (i+1)).show();
+    } else if ((response1.length == 0) || (unit == undefined) || (response2.length == 0) || (subunit == undefined)) {
       $(".numErr").hide();
       $(".err").show();
     }
@@ -97,22 +92,6 @@ function makeSlides(f) {
     else if (!Number.isInteger(parseFloat(response1)) || !Number.isInteger(parseFloat(response2))) {
       $(".err").hide();
       $(".numErr").show();
-    }
-    else if (exp.flag === 0){
-      $(".numErr").hide();
-      exp.flag = 1;
-      $("#text_prompt" + (i+1)).show();
-      // display the question
-      $(".display_question2").html("What would be another way of saying what " + exp.names[i] + " said?");
-      // display the paraphrase statement
-      if (exp.examples[i].target[0] === " ") {
-        $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
-      }
-      else {
-        $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
-      }
-    } else if (response.length == 0) {
-      $(".textErr").show();
     } else {
       exp.data_trials.push({
         "condition" : exp.condition,
