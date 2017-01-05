@@ -20,8 +20,13 @@ function makeSlides(f) {
 
   // runs when a slide is first loaded
   function start() {
+    exp.flag = 0;
     $(".err").hide();
     $(".numErr").hide();
+    $(".textErr").hide();
+    $("#text_prompt" + (i+1)).hide();
+    $(".display_question2").html('');
+
     // init_sliders();
     // $(".slider_number").html("---")
     // exp.sliderPost = null; // erase current slider value
@@ -35,14 +40,24 @@ function makeSlides(f) {
       // exp.names[i] = [exp.names[i], exp.extra.pop()];
 
       // evaluates each target specifically
-      if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+      // if ((exp.examples[i].target == " is tall") || (exp.examples[i].target == " is short")) {
+      //   $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
+      //     exp.examples[i].target + "." + "\"");
+      // }
+      // else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
+      //   $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
+      //     exp.examples[i].target + "." + "\"");
+      // }
+
+      if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target + "." + "\"");
       }
-      else if ((exp.examples[i].target == " is heavy") || (exp.examples[i].target == " is light")) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + 
+      else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
+        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target + "." + "\"");
       }
+
     }
     else {
       $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
@@ -65,6 +80,8 @@ function makeSlides(f) {
     unit = $("#unit" + (i+1)).val();
     response2 = $("#measure2" + (i+1)).val();
     subunit = $("#subunit" + (i+1)).val();
+    response = $("#text_response" + (i+1)).val();
+
     // if there are no subunits for this example, don't expect a response from the Turker
     if (exp.examples[i].subunit[0] == "none") {
       response2 = -1;
@@ -81,16 +98,34 @@ function makeSlides(f) {
       $(".err").hide();
       $(".numErr").show();
     }
-    else {
+    else if (exp.flag === 0){
+      $(".numErr").hide();
+      exp.flag = 1;
+      $("#text_prompt" + (i+1)).show();
+      // display the question
+      $(".display_question2").html("What would be another way of saying what " + exp.names[i] + " said?");
+      // display the paraphrase statement
+      if (exp.examples[i].target[0] === " ") {
+        $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
+      }
+      else {
+        $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
+      }
+    } else if (response.length == 0) {
+      $(".textErr").show();
+    } else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
+        "degree" : exp.examples[i].degree,
+        "prompt" : exp.examples[i].prompt,
         "names" : exp.names[i] + "",
-        "response1" : response1,
+        "response_unit" : response1,
         "unit" : unit,
-        "response2" : response2,
-        "subunit" : subunit
+        "response_subunit" : response2,
+        "subunit" : subunit,
+        "response_class" : response
       });
       i++;
       exp.go();
@@ -146,7 +181,7 @@ function init() {
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
   //exp.examples = exp.examples.slice(0, 5);
-  
+
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
@@ -195,7 +230,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedListenerSlides(exp.examples, exp.trials); 
+  embedListenerSlides(exp.examples, exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined

@@ -75,6 +75,7 @@ function embedListenerSlides(examples, trials) {
   // stores the html for the slides
   var slides = "";
   for (var i = 1; i <= trials; i++) {
+
     // stores the html script for the units dropdown menu
     var u = "";
 
@@ -98,7 +99,8 @@ function embedListenerSlides(examples, trials) {
     }
 
     // finally, combine everything to generate the script for the trial slides
-    slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
+    slides = slides +
+		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
@@ -106,6 +108,8 @@ function embedListenerSlides(examples, trials) {
       "<select id=\"unit" + i + "\">" +
       "<option selected disabled hidden style='display: none' value=''></option>" + u + "</select>" + su +
       "<br><br>" +
+			"<p class=\"display_question2\"></p>" +
+			"<div id=\"text_prompt" + i + "\"><span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"</div><p></p>" +
   		// "<p class=\"slider_number\"></p>" +
   		// " <table id=\"slider_table\"class=\"slider_table\">" +
   		// "<tr><td class=\"left\"></td><td class=\"right\"></td></tr>" +
@@ -114,6 +118,7 @@ function embedListenerSlides(examples, trials) {
   		"<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please type something and select a unit and subunit.</p>" +
       "<p class=\"numErr\">Please use whole numbers only.</p>" +
+			"<p class=\"textErr\">Please write something.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }
