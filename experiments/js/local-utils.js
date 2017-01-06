@@ -9,7 +9,9 @@ function getTrials(examples) {
         prompt : examples[i].prompt[j],
         degree : examples[i].degree,
         unit : examples[i].unit,
-        subunit : examples[i].subunit
+        subunit : examples[i].subunit,
+				low : examples[i].low[j],
+				medium : examples[i].middle[j]
 			});
 		}
 	}
@@ -65,6 +67,38 @@ function embedSlides(trials) {
   	$(".trial_slides").html(slides);
   }
 }
+
+// embeds the trial slides that were generated in the experiment file into the html file
+function embedSliderSlides(trials) {
+  var slides = "", sliderText;
+  for (var i = 1; i <= trials; i++) {
+
+		sliderText = [
+			exp.examples[i-1]["low"],
+			exp.examples[i-1]["medium"]
+		];
+
+    slides = slides +
+		"<div class=\"slide\" id=\"trial" + i + "\">" +
+    	"<p class=\"display_context\"></p>" +
+  		"<p class=\"display_target\"></p>" +
+  		"<p class=\"display_question\"></p>" +
+			"<table id=\"multi_slider_table" + i +"\"" +  "class=\"slider_table\">" +
+			"<tr><td></td>"+
+			"<td class=\"left\">very unlikely</td>"+
+			"<td class=\"right\">very likely</td>" +
+			"</tr> </table>" +
+  		"<span class=\"display_prompt\"></span>"+
+			"<input type=\"text\" id=\"text_response" + i + "\"></input>.\"<p></p>" +
+  		"<button onclick=\"_s.button()\">Continue</button>" +
+  		"<p class=\"err\">Please write something.</p>" +
+  		"</div>";
+			
+  	$(".trial_slides").html(slides);
+  }
+}
+
+
 
 // embeds the trial slides that were generated in the experiment file into the html file for the listener experiment
 function embedListenerSlides(examples, trials) {
