@@ -68,8 +68,8 @@ function makeSlides(f) {
     $(".display_prompt").html(displayPrompt);
 
     sliderText = [
-			adjectivePhrase  + " in comparison to other " + exp.examples[i]["low"],
-			adjectivePhrase  + " in comparison to other " + exp.examples[i]["medium"],
+			adjectivePhrase  + " relative to other " + exp.examples[i]["low"],
+			adjectivePhrase  + " relative to other " + exp.examples[i]["medium"],
       "other (fill in below)"
 		];
 
@@ -202,7 +202,7 @@ function init() {
   };
 
   // the blocks of the experiment
-  // exp.structure = ["i0", "instructions"];
+  exp.structure = ["i0", "instructions"];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
