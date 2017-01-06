@@ -26,42 +26,54 @@ function makeSlides(f) {
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     // changes the format when a pronoun is used in the target sentence
+    var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
       // if we need an extra name, pop if off exp.extra
       // exp.names[i] = [exp.names[i], exp.extra.pop()];
 
       // evaluates each target specifically
       if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target + "." + "\"");
+        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
+          exp.examples[i].target
+        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
+
       }
       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        $(".display_target").html(exp.names[i] + " says, " + "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target + "." + "\"");
+        adjectivePhrase =       getPronoun2(exp.examples[i].context, exp.examples[i].target) +
+                  exp.examples[i].target;
+        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase
       }
     }
     else {
-      $(".display_target").html(exp.names[i] + " says, " + "\"" + exp.examples[i].target + "." + "\"");
+      adjectivePhrase =  exp.examples[i].target;
+      targetSentence = exp.names[i] + " says, " + "\"" +adjectivePhrase;
     }
+
+
+    $(".display_target").html(targetSentence + "." + "\"");
 
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
     var displayPrompt;
     // display the paraphrase statement
-    if (exp.examples[i].target[0] === " ") {
-      displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
-    }
-    else {
-      displayPrompt = "\"" + exp.examples[i].target + exp.condition;
-    }
+    // if (exp.examples[i].target[0] === " ") {
+    //   displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
+    // }
+    // else {
+    //   displayPrompt = "\"" + exp.examples[i].target + exp.condition;
+    // }
+    displayPrompt = "\"";
 
     $(".display_prompt").html(displayPrompt);
 
     sliderText = [
-			exp.examples[i]["low"],
-			exp.examples[i]["medium"]
+			adjectivePhrase  + " in comparison to other " + exp.examples[i]["low"],
+			adjectivePhrase  + " in comparison to other " + exp.examples[i]["medium"],
+      "other (fill in below)"
 		];
+
+    $(".slider_row").remove();
 
     for (var j=0; j<sliderText.length; j++) {
       var sentence = sliderText[j];

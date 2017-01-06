@@ -89,11 +89,11 @@ function embedSliderSlides(trials) {
 			"<td class=\"right\">very likely</td>" +
 			"</tr> </table>" +
   		"<span class=\"display_prompt\"></span>"+
-			"<input type=\"text\" id=\"text_response" + i + "\"></input>.\"<p></p>" +
+			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
   		"<p class=\"err\">Please write something.</p>" +
   		"</div>";
-			
+
   	$(".trial_slides").html(slides);
   }
 }
