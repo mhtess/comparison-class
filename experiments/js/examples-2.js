@@ -14,6 +14,16 @@ var examples = [
 		"What do you think was the temperature of the glass of milk?",
 		"What do you think was the temperature of the iced coffee?"
 	],
+	low : [
+		"cups of coffee",
+		"glasses of milk",
+		"cups of iced coffee"
+	],
+	middle : [
+		"beverages",
+		"beverages",
+		"beverages"
+	],
 	degree : "temperature",
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
 	subunit : ["none"]
@@ -28,6 +38,16 @@ var examples = [
 		"What do you think was the temperature of the cup of coffee?",
 		"What do you think was the temperature of the glass of milk?",
 		"What do you think was the temperature of the iced coffee?"
+	],
+	low : [
+		"cups of coffee",
+		"glasses of milk",
+		"cups of iced coffee"
+	],
+	middle : [
+		"beverages",
+		"beverages",
+		"beverages"
 	],
 	degree: "temperature",
 	unit: ["degrees Fahrenheit", "degrees Celsius"],
@@ -81,6 +101,18 @@ var examples = [
 		"What do you think was the price of the ticket to Europe?",
 		"What do you think was the price of the truck?"
 	],
+	low : [
+		"candy bars",
+		"movie tickets",
+		"round-trip tickets to Europe",
+		"trucks"
+	],
+	middle: [
+		"sweets",
+		"entertainment",
+		"vacation flights",
+		"automobiles"
+	],
 	degree : "price",
 	unit : ["dollars"],
 	subunit : ["none"]
@@ -98,6 +130,18 @@ var examples = [
 		"What do you think was the price of the ticket to Europe?",
 		"What do you think was the price of the truck?"
 	],
+	low : [
+		"candy bars",
+		"movie tickets",
+		"round-trip tickets to Europe",
+		"trucks"
+	],
+	middle: [
+		"sweets",
+		"entertainment",
+		"vacation flights",
+		"automobiles"
+	],
 	degree : "price",
 	unit : ["dollars"],
 	subunit : ["none"]
@@ -113,6 +157,16 @@ var examples = [
 		"What do you think was the duration of the movie?",
 		"What do you think was the duration of the traffic light?"
 	],
+	low: [
+		"stop lights",
+		"movies",
+		"cross-country drives"
+	],
+	middle: [
+		"waiting periods",
+		"forms of entertainment",
+		"car rides"
+	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
 	subunit : ["seconds", "minutes", "hours"]
@@ -127,6 +181,16 @@ var examples = [
 		"What do you think was the duration of the trip?",
 		"What do you think was the duration of the movie?",
 		"What do you think was the duration of the traffic light?"
+	],
+	low: [
+		"stop lights",
+		"movies",
+		"cross-country drives"
+	],
+	middle: [
+		"waiting periods",
+		"forms of entertainment",
+		"car rides"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -153,6 +217,18 @@ var examples = [
 		"What do you think is the height of the basketball player?",
 		"What do you think is the height of the tower?"
 	],
+	low: [
+		"4 year-old boys",
+		"25 year-old men",
+		"point guards",
+		"European towers"
+	],
+	middle: [
+		"boys",
+		"adult men",
+		"basketball players",
+		"buildings"
+	],
 	degree : "height",
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
@@ -170,6 +246,18 @@ var examples = [
 		"What do you think is the height of the basketball player?",
 		"What do you think is the height of the tower?"
 	],
+	low: [
+		"4 year-old boys",
+		"25 year-old men",
+		"point guards",
+		"European towers"
+	],
+	middle: [
+		"boys",
+		"adult men",
+		"basketball players",
+		"buildings"
+	],
 	degree : "height",
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
@@ -185,10 +273,20 @@ var examples = [
 		"What do you think is the weight of the book?",
 		"What do you think is the weight of the iPhone?"
 	],
+	low: [
+		"televisions",
+		"books",
+		"phones"
+	],
+	middle: [
+		"large electronics",
+		"objects",
+		"small electronics"
+	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
 	subunit : ["ounces", "grams"]
-},{
+}, {
 	target : " is light",
 	context : [
 		" bought a television and lifted it up.",
@@ -199,6 +297,16 @@ var examples = [
 		"What do you think is the weight of the television?",
 		"What do you think is the weight of the book?",
 		"What do you think is the weight of the iPhone?"
+	],
+	low: [
+		"televisions",
+		"books",
+		"phones"
+	],
+	middle: [
+		"large electronics",
+		"objects",
+		"small electronics"
 	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
