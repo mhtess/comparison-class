@@ -88,7 +88,7 @@ var examples = [
 // 	subunit : ["none"]
 // },
 {
-	target : "It's expensive",
+	target : "This is expensive",
 	context : [
 		" is buying a lollipop.",
 		" is buying an ice cream cone.",
@@ -113,7 +113,7 @@ var examples = [
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
-	target : "It's cheap",
+	target : "This is cheap",
 	context : [
 		" is buying a lollipop.",
 		" is buying an ice cream cone.",
@@ -206,8 +206,8 @@ var examples = [
 }, {
 	target : " is tall",
 	context : [
-		" sees 4 year-old boy.",
-		" sees 35 year-old man.",
+		" sees a 4 year-old boy.",
+		" sees a 35 year-old man.",
 		" sees a professional basketball player"
 	],
 	prompt : [
@@ -231,8 +231,8 @@ var examples = [
 }, {
 	target : " is short",
 	context : [
-		" sees 4 year-old boy.",
-		" sees 35 year-old man.",
+		" sees a 4 year-old boy.",
+		" sees a 35 year-old man.",
 		" sees a professional basketball player"
 	],
 	prompt : [
