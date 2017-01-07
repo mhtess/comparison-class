@@ -208,7 +208,7 @@ var examples = [
 	context : [
 		" sees a 4 year-old boy.",
 		" sees a 35 year-old man.",
-		" sees a professional basketball player"
+		" sees a professional basketball player."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
@@ -233,7 +233,7 @@ var examples = [
 	context : [
 		" sees a 4 year-old boy.",
 		" sees a 35 year-old man.",
-		" sees a professional basketball player"
+		" sees a professional basketball player."
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
