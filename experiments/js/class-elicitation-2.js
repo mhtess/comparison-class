@@ -111,6 +111,7 @@ function makeSlides(f) {
     response = $("#text_response" + (i+1)).val();
     subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
     superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    otherEndorse = exp.sliderPost[exp.nSentences - 1];
     if (!(subEndorse && superEndorse)) {
       $(".errSliders").show();
     } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
@@ -127,7 +128,7 @@ function makeSlides(f) {
         "other_response": response,
         "sub_endorsement": subEndorse,
         "super_endorsement" : superEndorse,
-        "other_endorsement": exp.sliderPost[exp.nSentences - 1],
+        "other_endorsement":  otherEndorse ? otherEndorse : 0,
       });
       i++;
       exp.go();
@@ -154,7 +155,9 @@ function makeSlides(f) {
         age : $("#age").val(),
         gender : $("#gender").val(),
         education : $("#education").val(),
-        comments : $("#comments").val(),
+        problems: $("#problems").val(),
+        fairprice: $("#fairprice").val(),
+        comments : $("#comments").val()
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
