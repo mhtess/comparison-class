@@ -5,9 +5,9 @@ var examples = [
 	// the best example is of people from different places
 	target : "It's warm",
 	context : [
-		" took a sip from a cup of coffee.",
-		" took a sip from a glass of milk.",
-		" took a sip from an iced coffee."
+		" takes a sip from a cup of coffee.",
+		" takes a sip from a glass of milk.",
+		" takes a sip from a cup of iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -30,9 +30,9 @@ var examples = [
 }, {
 	target : "It's cold",
 	context : [
-		" took a sip from a cup of coffee.",
-		" took a sip from a glass of milk.",
-		" took a sip from an iced coffee."
+		" takes a sip from a cup of coffee.",
+		" takes a sip from a glass of milk.",
+		" takes a sip from a cup of iced coffee."
 	],
 	prompt : [
 		"What do you think was the temperature of the cup of coffee?",
@@ -88,27 +88,23 @@ var examples = [
 // 	subunit : ["none"]
 // },
 {
-	target : "It was expensive",
+	target : "It's expensive",
 	context : [
-		" bought a lollipop.",
-		" bought a cone of ice cream.",
-		" bought a cup of gelato.",
-		" bought a box of chocolates from the local chocolatier."
+		" is buying a lollipop.",
+		" is buying an ice cream cone.",
+		" is buying a box of chocolates from the local chocolatier."
 	],
 	prompt : [
 		"What do you think was the price of the candy bar?",
-		"What do you think was the price of the cone of ice cream?",
-		"What do you think was the price of the cup of gelato?",
+		"What do you think was the price of the ice cream cone?",
 		"What do you think was the price of the box of chocolates?"
 	],
 	sub : [
 		"lollipops",
 		"ice cream cones",
-		"cups of gelato",
 		"boxes of chocolate from the local chocolatier"
 	],
 	super: [
-		"treats",
 		"treats",
 		"treats",
 		"treats"
@@ -117,27 +113,23 @@ var examples = [
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
-	target : "It was cheap",
+	target : "It's cheap",
 	context : [
-		" bought a lollipop.",
-		" bought a cone of ice cream.",
-		" bought a cup of gelato.",
-		" bought a box of chocolates from the local chocolatier."
+		" is buying a lollipop.",
+		" is buying an ice cream cone.",
+		" is buying a box of chocolates from the local chocolatier."
 	],
 	prompt : [
-		"What do you think was the price of the lollipop?",
-		"What do you think was the price of the cone of ice cream?",
-		"What do you think was the price of the cup of gelato?",
+		"What do you think was the price of the candy bar?",
+		"What do you think was the price of the ice cream cone?",
 		"What do you think was the price of the box of chocolates?"
 	],
 	sub : [
 		"lollipops",
 		"ice cream cones",
-		"cups of gelato",
 		"boxes of chocolate from the local chocolatier"
 	],
 	super: [
-		"treats",
 		"treats",
 		"treats",
 		"treats"
@@ -148,29 +140,28 @@ var examples = [
 }, {
 	target : "That was long",
 	context : [
-		" was talking about the episode of the television show they just watched.",
+		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" was talking about the youtube video they just watched.",
-		" was talking about the movie they just watched.",
-		" was talking about the season of television they just watched."
+		" just finished watching a youtube video.",
+		" just finished watching a movie.",
+		" just finished watching a season of a television show."
 	],
 	prompt : [
-		"What do you think was the duration of the television show?",
+		// "What do you think was the duration of the television show?",
 		"What do you think was the duration of the youtube video?",
 		"What do you think was the duration of the movie?",
 		"What do you think was the duration of the season of television?"
 	],
 	sub: [
-		"television shows",
+		// "television shows",
 		"youtube videos",
 		"movies",
 		"television seasons"
 	],
 	super: [
-		"things you watch on a screen",
-		"things you watch on a screen",
-		"things you watch on a screen",
-		"things you watch on a screen"
+		"entertainment",
+		"entertainment",
+		"entertainment"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -178,29 +169,28 @@ var examples = [
 }, {
 	target : "That was short", // needs help
 	context : [
-		" was talking about the television show they just watched.",
+		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" was talking about the youtube video they just watched.",
-		" was talking about the movie they just watched.",
-		" was talking about the television season they just watched."
+		" just finished watching a youtube video.",
+		" just finished watching a movie.",
+		" just finished watching a season of a television show."
 	],
 	prompt : [
-		"What do you think was the duration of the television show?",
+		// "What do you think was the duration of the television show?",
 		"What do you think was the duration of the youtube video?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the television season?"
+		"What do you think was the duration of the season of television?"
 	],
 	sub: [
-		"television shows",
+		// "television shows",
 		"youtube videos",
 		"movies",
 		"television seasons"
 	],
 	super: [
-		"things you watch on a screen",
-		"things you watch on a screen",
-		"things you watch on a screen",
-		"things you watch on a screen"
+		"entertainment",
+		"entertainment",
+		"entertainment"
 	],
 	degree : "time",
 	unit : ["seconds", "minutes", "hours", "days"],
@@ -214,27 +204,23 @@ var examples = [
 // 	degree: "time",
 // 	unit: "minutes"
 }, {
-	target : " was tall",
+	target : "'s tall",
 	context : [
-		" saw a 4 year-old boy.",
-		" saw a 35 year-old man.",
-		" saw a college student.",
-		" saw a professional basketball player"
+		" sees 4 year-old boy.",
+		" sees 35 year-old man.",
+		" sees a professional basketball player"
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
 		"What do you think is the height of the 35 year-old man?",
-		"What do you think is the height of the college student",
 		"What do you think is the height of the basketball player?"
 	],
 	sub: [
 		"4 year-old boys",
 		"men in their 30s",
-		"college students",
 		"basketball players"
 	],
 	super: [
-		"people",
 		"people",
 		"people",
 		"people"
@@ -243,27 +229,23 @@ var examples = [
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
 }, {
-	target : " was short",
+	target : "'s short",
 	context : [
-		" saw a 4 year-old boy.",
-		" saw a 35 year-old man.",
-		" saw a college student.",
-		" saw a professional basketball player"
+		" sees 4 year-old boy.",
+		" sees 35 year-old man.",
+		" sees a professional basketball player"
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
 		"What do you think is the height of the 35 year-old man?",
-		"What do you think is the height of the college student",
 		"What do you think is the height of the basketball player?"
 	],
 	sub: [
 		"4 year-old boys",
 		"men in their 30s",
-		"college students",
 		"basketball players"
 	],
 	super: [
-		"people",
 		"people",
 		"people",
 		"people"
@@ -274,28 +256,28 @@ var examples = [
 }, {
 	target : " is heavy",
 	context : [
-		" bought an iPod mini and lifted it up.",
-		" bought an iPhone and lifted it up.",
-		" bought an iPad and lifted it up.",
-		" bought an Apple Laptop (MacBook) and lifted it up."
+		" is buying an iPod shuffle and lifts it up.",
+		" is buying an iPhone and lifts it up.",
+		" is buying an iPad and lifts it up.",
+		" is buying an Apple Laptop (MacBook) and lifts it up."
 	],
 	prompt : [
-		"What do you think is the weight of the iPod mini?",
+		"What do you think is the weight of the iPod shuffle?",
 		"What do you think is the weight of the iPhone?",
 		"What do you think is the weight of the iPad?",
 		"What do you think is the weight of the Apple Laptop (MacBook)?"
 	],
 	sub: [
-		"iPods",
+		"digital music players",
 		"phones",
 		"tablet computers",
 		"laptop computers"
 	],
 	super: [
-		"personal devices",
-		"personal devices",
-		"personal devices",
-		"personal devices"
+		"personal electronics",
+		"personal electronics",
+		"personal electronics",
+		"personal electronics"
 	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
@@ -303,28 +285,28 @@ var examples = [
 }, {
 	target : " is light",
 	context : [
-		" bought an iPod mini and lifted it up.",
-		" bought an iPhone and lifted it up.",
-		" bought an iPad and lifted it up.",
-		" bought an Apple Laptop (MacBook) and lifted it up.",
+		" is buying an iPod shuffle and lifts it up.",
+		" is buying an iPhone and lifts it up.",
+		" is buying an iPad and lifts it up.",
+		" is buying an Apple Laptop (MacBook) and lifts it up."
 	],
 	prompt : [
-		"What do you think is the weight of the iPod mini?",
+		"What do you think is the weight of the iPod shuffle?",
 		"What do you think is the weight of the iPhone?",
 		"What do you think is the weight of the iPad?",
 		"What do you think is the weight of the Apple Laptop (MacBook)?"
 	],
 	sub: [
-		"iPods",
+		"digital music players",
 		"phones",
 		"tablet computers",
 		"laptop computers"
 	],
 	super: [
-		"personal devices",
-		"personal devices",
-		"personal devices",
-		"personal devices"
+		"personal electronics",
+		"personal electronics",
+		"personal electronics",
+		"personal electronics"
 	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
