@@ -58,13 +58,13 @@ function makeSlides(f) {
 
     var displayPrompt;
     // display the paraphrase statement
-    // if (exp.examples[i].target[0] === " ") {
-    //   displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
-    // }
-    // else {
-    //   displayPrompt = "\"" + exp.examples[i].target + exp.condition;
-    // }
-    displayPrompt = "\"";
+    if (exp.examples[i].target[0] === " ") {
+      displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
+    }
+    else {
+      displayPrompt = "\"" + exp.examples[i].target + exp.condition;
+    }
+    // displayPrompt = "\"";
 
     $(".display_prompt").html(displayPrompt);
 
@@ -109,7 +109,9 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     response = $("#text_response" + (i+1)).val();
-    if (exp.sliderPost.length < exp.nSentences) {
+    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
+    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    if (!(subEndorse && superEndorse)) {
       $(".errSliders").show();
     } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
       $(".err").show();
@@ -123,8 +125,8 @@ function makeSlides(f) {
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
         "other_response": response,
-        "sub_endorsement": exp.sliderPost[exp.sliderOrder.indexOf("sub")],
-        "super_endorsement" : exp.sliderPost[exp.sliderOrder.indexOf("super")],
+        "sub_endorsement": subEndorse,
+        "super_endorsement" : superEndorse,
         "other_endorsement": exp.sliderPost[exp.nSentences - 1],
       });
       i++;
@@ -218,7 +220,7 @@ function init() {
   };
 
   // the blocks of the experiment
-  exp.structure = ["i0", "instructions"];
+  // exp.structure = ["i0", "instructions"];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }

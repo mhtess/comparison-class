@@ -49,7 +49,7 @@ var getPronoun2 = function(context, target) {
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
-	return " for a "; //_.sample([" for a ", " relative to "]);
+	return " relative to other "; //_.sample([" for a ", " relative to "]);
 }
 
 // embeds the trial slides that were generated in the experiment file into the html file
@@ -89,10 +89,10 @@ function embedSliderSlides(trials) {
 			"<td class=\"right\">very likely</td>" +
 			"</tr> </table>" +
   		"<span class=\"display_prompt\"></span>"+
-			'<textarea id="text_response' + i + '" rows="1" cols="75"></textarea>."<br>' +
-			// "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+			// '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
+			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-			'<p class="errSliders">Please adjust all the sliders before continuing.</p>'+
+			'<p class="errSliders">Please adjust the first two sliders before continuing.</p>'+
   		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +
   		"</div>";
 

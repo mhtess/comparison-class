@@ -90,10 +90,10 @@ var examples = [
 {
 	target : "It was expensive",
 	context : [
-		" bought a candy bar.",
+		" bought a lollipop.",
 		" bought a cone of ice cream.",
 		" bought a cup of gelato.",
-		" bought a box of chocolates from the local chocolaterie."
+		" bought a box of chocolates from the local chocolatier."
 	],
 	prompt : [
 		"What do you think was the price of the candy bar?",
@@ -102,16 +102,16 @@ var examples = [
 		"What do you think was the price of the box of chocolates?"
 	],
 	sub : [
-		"candy bars",
+		"lollipops",
 		"ice cream cones",
 		"cups of gelato",
-		"boxes of chocolate from the local chocolaterie"
+		"boxes of chocolate from the local chocolatier"
 	],
 	super: [
-		"sweets",
-		"sweets",
-		"sweets",
-		"sweets"
+		"treats",
+		"treats",
+		"treats",
+		"treats"
 	],
 	degree : "price",
 	unit : ["dollars"],
@@ -119,28 +119,28 @@ var examples = [
 }, {
 	target : "It was cheap",
 	context : [
-		" bought a candy bar.",
+		" bought a lollipop.",
 		" bought a cone of ice cream.",
 		" bought a cup of gelato.",
-		" bought a box of chocolates from the local chocolaterie."
+		" bought a box of chocolates from the local chocolatier."
 	],
 	prompt : [
-		"What do you think was the price of the candy bar?",
+		"What do you think was the price of the lollipop?",
 		"What do you think was the price of the cone of ice cream?",
 		"What do you think was the price of the cup of gelato?",
 		"What do you think was the price of the box of chocolates?"
 	],
 	sub : [
-		"candy bars",
+		"lollipops",
 		"ice cream cones",
 		"cups of gelato",
-		"boxes of chocolate from the local chocolaterie"
+		"boxes of chocolate from the local chocolatier"
 	],
 	super: [
-		"sweets",
-		"sweets",
-		"sweets",
-		"sweets"
+		"treats",
+		"treats",
+		"treats",
+		"treats"
 	],
 	degree : "price",
 	unit : ["dollars"],
@@ -148,17 +148,17 @@ var examples = [
 }, {
 	target : "That was long",
 	context : [
-		" was talking about the television show they just watched.",
+		" was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
 		" was talking about the youtube video they just watched.",
 		" was talking about the movie they just watched.",
-		" was talking about the television season they just watched."
+		" was talking about the season of television they just watched."
 	],
 	prompt : [
 		"What do you think was the duration of the television show?",
 		"What do you think was the duration of the youtube video?",
 		"What do you think was the duration of the movie?",
-		"What do you think was the duration of the television season?"
+		"What do you think was the duration of the season of television?"
 	],
 	sub: [
 		"television shows",
@@ -219,25 +219,25 @@ var examples = [
 		" saw a 4 year-old boy.",
 		" saw a 35 year-old man.",
 		" saw a college student.",
-		" saw a professional basketball player",
+		" saw a professional basketball player"
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
 		"What do you think is the height of the 35 year-old man?",
 		"What do you think is the height of the college student",
-		"What do you think is the height of the basketball player?",
+		"What do you think is the height of the basketball player?"
 	],
 	sub: [
 		"4 year-old boys",
 		"men in their 30s",
 		"college students",
-		"basketball players",
+		"basketball players"
 	],
 	super: [
-		"boys",
-		"adult males",
-		"adult males",
-		"adult males",
+		"people",
+		"people",
+		"people",
+		"people"
 	],
 	degree : "height",
 	unit : ["feet", "meters"],
@@ -248,25 +248,25 @@ var examples = [
 		" saw a 4 year-old boy.",
 		" saw a 35 year-old man.",
 		" saw a college student.",
-		" saw a professional basketball player",
+		" saw a professional basketball player"
 	],
 	prompt : [
 		"What do you think is the height of the 4 year-old boy?",
 		"What do you think is the height of the 35 year-old man?",
 		"What do you think is the height of the college student",
-		"What do you think is the height of the basketball player?",
+		"What do you think is the height of the basketball player?"
 	],
 	sub: [
 		"4 year-old boys",
 		"men in their 30s",
 		"college students",
-		"basketball players",
+		"basketball players"
 	],
 	super: [
-		"boys",
-		"adult males",
-		"adult males",
-		"adult males",
+		"people",
+		"people",
+		"people",
+		"people"
 	],
 	degree : "height",
 	unit : ["feet", "meters"],
@@ -277,13 +277,13 @@ var examples = [
 		" bought an iPod mini and lifted it up.",
 		" bought an iPhone and lifted it up.",
 		" bought an iPad and lifted it up.",
-		" bought an Apple Laptop (MacBook) and lifted it up.",
+		" bought an Apple Laptop (MacBook) and lifted it up."
 	],
 	prompt : [
 		"What do you think is the weight of the iPod mini?",
 		"What do you think is the weight of the iPhone?",
 		"What do you think is the weight of the iPad?",
-		"What do you think is the weight of the Apple Laptop (MacBook) ?"
+		"What do you think is the weight of the Apple Laptop (MacBook)?"
 	],
 	sub: [
 		"iPods",
@@ -292,10 +292,10 @@ var examples = [
 		"laptop computers"
 	],
 	super: [
-		"portable devices",
-		"portable devices",
-		"portable devices",
-		"portable devices"
+		"personal devices",
+		"personal devices",
+		"personal devices",
+		"personal devices"
 	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
@@ -312,7 +312,7 @@ var examples = [
 		"What do you think is the weight of the iPod mini?",
 		"What do you think is the weight of the iPhone?",
 		"What do you think is the weight of the iPad?",
-		"What do you think is the weight of the Apple Laptop (MacBook) ?"
+		"What do you think is the weight of the Apple Laptop (MacBook)?"
 	],
 	sub: [
 		"iPods",
@@ -321,10 +321,10 @@ var examples = [
 		"laptop computers"
 	],
 	super: [
-		"portable devices",
-		"portable devices",
-		"portable devices",
-		"portable devices"
+		"personal devices",
+		"personal devices",
+		"personal devices",
+		"personal devices"
 	],
 	degree : "weight",
 	unit : ["pounds", "kilograms"],
