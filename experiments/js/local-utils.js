@@ -10,8 +10,8 @@ function getTrials(examples) {
         degree : examples[i].degree,
         unit : examples[i].unit,
         subunit : examples[i].subunit,
-				low : examples[i].low[j],
-				medium : examples[i].middle[j]
+				sub : examples[i].sub[j],
+				super : examples[i].super[j]
 			});
 		}
 	}
@@ -91,7 +91,8 @@ function embedSliderSlides(trials) {
   		"<span class=\"display_prompt\"></span>"+
 			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-  		"<p class=\"err\">Please write something.</p>" +
+			'<p class="errSliders">Please adjust all the sliders before continuing.</p>'+
+  		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +
   		"</div>";
 
   	$(".trial_slides").html(slides);

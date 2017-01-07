@@ -14,12 +14,12 @@ var examples = [
 		"What do you think was the temperature of the glass of milk?",
 		"What do you think was the temperature of the iced coffee?"
 	],
-	low : [
+	sub : [
 		"cups of coffee",
 		"glasses of milk",
 		"cups of iced coffee"
 	],
-	middle : [
+	super : [
 		"beverages",
 		"beverages",
 		"beverages"
@@ -39,12 +39,12 @@ var examples = [
 		"What do you think was the temperature of the glass of milk?",
 		"What do you think was the temperature of the iced coffee?"
 	],
-	low : [
+	sub : [
 		"cups of coffee",
 		"glasses of milk",
 		"cups of iced coffee"
 	],
-	middle : [
+	super : [
 		"beverages",
 		"beverages",
 		"beverages"
@@ -101,13 +101,13 @@ var examples = [
 		"What do you think was the price of the cup of gelato?",
 		"What do you think was the price of the box of chocolates?"
 	],
-	low : [
+	sub : [
 		"candy bars",
 		"ice cream cones",
 		"cups of gelato",
 		"boxes of chocolate from the local chocolaterie"
 	],
-	middle: [
+	super: [
 		"sweets",
 		"sweets",
 		"sweets",
@@ -130,13 +130,13 @@ var examples = [
 		"What do you think was the price of the cup of gelato?",
 		"What do you think was the price of the box of chocolates?"
 	],
-	low : [
+	sub : [
 		"candy bars",
 		"ice cream cones",
 		"cups of gelato",
 		"boxes of chocolate from the local chocolaterie"
 	],
-	middle: [
+	super: [
 		"sweets",
 		"sweets",
 		"sweets",
@@ -160,13 +160,13 @@ var examples = [
 		"What do you think was the duration of the movie?",
 		"What do you think was the duration of the television season?"
 	],
-	low: [
+	sub: [
 		"television shows",
 		"youtube videos",
 		"movies",
 		"television seasons"
 	],
-	middle: [
+	super: [
 		"things you watch on a screen",
 		"things you watch on a screen",
 		"things you watch on a screen",
@@ -190,13 +190,13 @@ var examples = [
 		"What do you think was the duration of the movie?",
 		"What do you think was the duration of the television season?"
 	],
-	low: [
+	sub: [
 		"television shows",
 		"youtube videos",
 		"movies",
 		"television seasons"
 	],
-	middle: [
+	super: [
 		"things you watch on a screen",
 		"things you watch on a screen",
 		"things you watch on a screen",
@@ -227,13 +227,13 @@ var examples = [
 		"What do you think is the height of the college student",
 		"What do you think is the height of the basketball player?",
 	],
-	low: [
+	sub: [
 		"4 year-old boys",
 		"men in their 30s",
 		"college students",
 		"basketball players",
 	],
-	middle: [
+	super: [
 		"boys",
 		"adult males",
 		"adult males",
@@ -256,13 +256,13 @@ var examples = [
 		"What do you think is the height of the college student",
 		"What do you think is the height of the basketball player?",
 	],
-	low: [
+	sub: [
 		"4 year-old boys",
 		"men in their 30s",
 		"college students",
 		"basketball players",
 	],
-	middle: [
+	super: [
 		"boys",
 		"adult males",
 		"adult males",
@@ -285,13 +285,13 @@ var examples = [
 		"What do you think is the weight of the iPad?",
 		"What do you think is the weight of the Apple Laptop (MacBook) ?"
 	],
-	low: [
+	sub: [
 		"iPods",
 		"phones",
 		"tablet computers",
 		"laptop computers"
 	],
-	middle: [
+	super: [
 		"portable devices",
 		"portable devices",
 		"portable devices",
@@ -314,13 +314,13 @@ var examples = [
 		"What do you think is the weight of the iPad?",
 		"What do you think is the weight of the Apple Laptop (MacBook) ?"
 	],
-	low: [
+	sub: [
 		"iPods",
 		"phones",
 		"tablet computers",
 		"laptop computers"
 	],
-	middle: [
+	super: [
 		"portable devices",
 		"portable devices",
 		"portable devices",

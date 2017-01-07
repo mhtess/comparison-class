@@ -21,6 +21,7 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
+    $(".errSliders").hide();
 
     // display the context sentence
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
@@ -67,22 +68,27 @@ function makeSlides(f) {
 
     $(".display_prompt").html(displayPrompt);
 
-    sliderText = [
-			adjectivePhrase  + " relative to other " + exp.examples[i]["low"],
-			adjectivePhrase  + " relative to other " + exp.examples[i]["medium"],
-      "other (fill in below)"
-		];
+    sliderText = {
+			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
+			super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
+      other: "Other (fill in below)"
+		};
+
+
 
     $(".slider_row").remove();
 
-    for (var j=0; j<sliderText.length; j++) {
-      var sentence = sliderText[j];
+    for (var j=0; j<exp.nSentences; j++) {
+      var sentence = j == exp.nSentences - 1 ?
+      "Other (fill in below)" :
+      adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]]
+      // var sentence = sliderText[j];
 
      $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
     }
 
-    init_sliders(sliderText.length);
+    init_sliders(exp.nSentences);
     exp.sliderPost = [];
 
   }
@@ -103,7 +109,9 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     response = $("#text_response" + (i+1)).val();
-    if (response.length == 0) {
+    if (exp.sliderPost.length < exp.nSentences) {
+      $(".errSliders").show();
+    } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
       $(".err").show();
     } else {
       exp.data_trials.push({
@@ -112,7 +120,12 @@ function makeSlides(f) {
         "target" : exp.examples[i].target,
         "degree" : exp.examples[i].degree,
         "names" : exp.names[i] + "",
-        "response" : response
+        "sub_category" : exp.examples[i].sub,
+        "super_category" : exp.examples[i].super,
+        "other_response": response,
+        "sub_endorsement": exp.sliderPost[exp.sliderOrder.indexOf("sub")],
+        "super_endorsement" : exp.sliderPost[exp.sliderOrder.indexOf("super")],
+        "other_endorsement": exp.sliderPost[exp.nSentences - 1],
       });
       i++;
       exp.go();
@@ -174,6 +187,9 @@ function init() {
 
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
+
+  exp.sliderOrder = _.shuffle(["sub", "super"]);
+  exp.nSentences = exp.sliderOrder.length + 1;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {
