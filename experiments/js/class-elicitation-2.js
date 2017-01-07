@@ -112,6 +112,9 @@ function makeSlides(f) {
     subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
     superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
     otherEndorse = exp.sliderPost[exp.nSentences - 1];
+
+    adjective = exp.examples[i].target.split(" ").pop();
+
     if (!(subEndorse && superEndorse)) {
       $(".errSliders").show();
     } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
@@ -122,6 +125,7 @@ function makeSlides(f) {
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "degree" : exp.examples[i].degree,
+        "adjective" : adjective,
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
