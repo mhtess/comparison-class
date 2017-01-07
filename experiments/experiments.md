@@ -16,5 +16,5 @@ Subjects rate (using sliders) paraphrases of both a "subordinate" and "superordi
 For example: "Luis sees a basketball player. Luis says, 'He is tall'."
 What did Luis mean?
   - "Luis is tall relative to other basketball players."
-  - "Luis is tall relative to other people."
+  - "Luis is tall relative to other people." \\
 Subjects can also give an "Other" option where they fill in a "relative to other" paraphrase.
