@@ -204,7 +204,7 @@ var examples = [
 // 	degree: "time",
 // 	unit: "minutes"
 }, {
-	target : "'s tall",
+	target : " is tall",
 	context : [
 		" sees 4 year-old boy.",
 		" sees 35 year-old man.",
@@ -229,7 +229,7 @@ var examples = [
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
 }, {
-	target : "'s short",
+	target : " is short",
 	context : [
 		" sees 4 year-old boy.",
 		" sees 35 year-old man.",
