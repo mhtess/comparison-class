@@ -89,7 +89,8 @@ function embedSliderSlides(trials) {
 			"<td class=\"right\">very likely</td>" +
 			"</tr> </table>" +
   		"<span class=\"display_prompt\"></span>"+
-			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+			'<textarea id="text_response' + i + '" rows="1" cols="75"></textarea>."<br>' +
+			// "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
 			'<p class="errSliders">Please adjust all the sliders before continuing.</p>'+
   		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +

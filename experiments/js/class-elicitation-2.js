@@ -81,7 +81,7 @@ function makeSlides(f) {
     for (var j=0; j<exp.nSentences; j++) {
       var sentence = j == exp.nSentences - 1 ?
       "Other (fill in below)" :
-      adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]]
+      '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
       // var sentence = sliderText[j];
 
      $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
