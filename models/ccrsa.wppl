@@ -1,86 +1,117 @@
-// This program must be able to:
-// - sample(threshold)
-// - sample(comparison-class)
-// - sample(prior(comparison-class))
+// can run in webppl.org
+var binParam = 5;
 
-// list of features
-var features = {
-  "is tall": "height"
+var round = function(x){
+  return Math.round(x*10)/10
 }
 
-// *look up what this parameter actually does*
-var s1optimality = 5
-
-var thresholdPrior = function() {
-  return uniformDraw(_.range(-2, 12, 0.5)) - 0.25
+var stateParams = {
+  sub: {mu: 1, sigma: 0.5},
+  super: {mu: 3, sigma: 2}
 }
 
-// the speaker will communicate an utterance or not
-var utterances = ["is tall", ""]
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 2 * stateParams.super.sigma,
+          stateParams.super.mu + 2 * stateParams.super.sigma,
+          stateParams.super.sigma/binParam)
+);
 
-// the cost of each utterance
-var cost = {
-  "is tall": 1,
-  "": 0
-}
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s));
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s));
+  }, stateVals)
+};
 
-var utterancePrior = function() {
-  return utterances[discrete(map(function(u) {
-    return Math.exp(-cost[u])
-  }, utterances))]
-}
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){
+      return categorical({
+        vs: stateVals,
+        ps: stateProbs.super
+//         ps: stateProbs[uniformDraw(["super", "sub"])]
+      })
+    }
+  })
+};
+
+var classPrior = Infer({model: function(){return uniformDraw(["sub", "super"])}});
+
+var alphas = {s1: 1, s2: 1};
+
+var utterances = {
+  positive: ["positiveAdjective", "silence"],
+  negative: ["negativeAdjective", "silence"]
+};
+
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = {
+  positive: Infer({
+    model: function() { return uniformDraw(thresholdBins.positive) }
+  }),
+  negative: Infer({
+    model: function() { return uniformDraw(thresholdBins.negative) }
+  })
+};
+
+var utterancePrior = {
+  positive: Infer({
+    model: function() { return uniformDraw(utterances.positive) }
+  }),
+  negative: Infer({
+    model: function() { return uniformDraw(utterances.negative) }
+  })
+};
 
 var meaning = function(utterance, state, threshold) {
-  if (_.isNumber(utterance)) {
-    return (state == utterance)
-  } else if (utterance == "is tall") {
-    return (state > threshold)
-  } else if (utterance == "") {
-    return true
-  } else {
-    return true
-  }
+  utterance == "positiveAdjective" ? state > threshold :
+  utterance == "negativeAdjective" ? state < threshold :
+  true
 }
 
-// literal listener model
-var listener0 = cache(function(utterance, threshold, prior) {
-  return Infer({method: "enumerate"}, function() {
-    var state = sample(prior)
-    var m = meaning(utterance, state, threshold)
-    condition(m)
-    return state
-  })
+var literalListener = cache(function(utterance, threshold, comparisonClass) {
+  Infer({model: function(){
+    var state = sample(statePrior[comparisonClass]);
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }})
 })
 
-// informative speaker model
-var speaker1 = cache(function(state, threshold, prior) {
-  return Infer({method: "enumerate"}, function() {
-    var utterance = utterancePrior()
-    var L0 = listener0(utterance, threshold, prior)
-    factor(s1optimality * L0.score(state))
+var form = "positive";
+
+var speaker1 = cache(function(state, threshold, comparisonClass) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior[form])
+    var L0 = literalListener(utterance, threshold, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
     return utterance
-  })
+  }})
 })
 
-// pragmatic listener model
-var listener1 = function(utterance, prior) {
-  return Infer({method: "enumerate"}, function() {
-    var state = sample(prior)
-    var threshold = thresholdPrior()
-    var S1 = speaker1(state, threshold, prior)
-    // which one do we use?
-    factor(S1.score(utterance))
-    //factor(s1optimality * S1.score(utterance))
-    return state
-  })
+var pragmaticListener = function(utterance) {
+  Infer({model: function(){
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var threshold = sample(thresholdPrior[form]);
+    var S1 = speaker1(state, threshold, comparisonClass);
+    observe(S1, utterance);
+    return {comparisonClass, state}
+  }})
 }
 
-// finds the prior of humans over height
-var isTallERP = findPrior("humans", "height")
-
-isTallERP
-
-// updates the listener's prior belief of what tall is given an utterance
-var isTallPosterior = listener1("is tall", isTallERP)
-
-isTallPosterior
+viz.marginals(pragmaticListener('positiveAdjective'))
