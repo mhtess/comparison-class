@@ -1,0 +1,44 @@
+var alphas = {s1: 1, s2: 1};
+
+
+var literalListener = cache(function(utterance, threshold) {
+  Infer({model: function(){
+    var state = sample(statePrior["super"]);
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }})
+})
+
+var form = "positive";
+
+var speaker1 = cache(function(state, threshold) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior[form])
+    var L0 = literalListener(utterance, threshold)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+})
+
+var pragmaticListener = function(utterance) {
+  Infer({model: function(){
+    var state = sample(statePrior["super"]);
+    var threshold = sample(thresholdPrior[form]);
+    var S1 = speaker1(state, threshold);
+    observe(S1, utterance);
+    return state
+  }})
+}
+
+var speaker2 = function(comparisonClass){
+  Infer({model: function(){
+    var state = sample(statePrior[comparisonClass]);
+    var utterance = sample(utterancePrior[form]);
+    var L1 = pragmaticListener(utterance)
+    factor( alphas.s2 * L1.score(state) )
+    return utterance
+    }})
+}
+
+speaker2("sub")

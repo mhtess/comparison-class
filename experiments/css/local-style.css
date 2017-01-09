@@ -5,5 +5,9 @@
 }
 
 .textbox{
-  width: 600;
+  width: 250;
+}
+
+.display_prompt{
+  font-size: 16px;
 }

@@ -1,0 +1,33 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(langcog)
+library(tidyverse)
+last <- function(x) { return( x[length(x)] ) }
+```
+
+Data analysis for comparison-class-2 pilot
+
+```{r}
+data.path <- "~/research/comparison-class/mturk/class-elicitation-2/round1/"
+d <- read.csv(paste(data.path, "class-elicitation-2-trials.csv", sep = ""))
+```
+
+```{r}
+d.summary <- d %>%
+  select(sub_category, super_category, target, sub_endorsement, super_endorsement) %>%
+  gather(key, response, -sub_category, -target, -super_category) %>%
+  group_by(key, sub_category, super_category, target) %>%
+  multi_boot_standard(column = "response")
+```
+
+```{r}
+d.summary %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2) %>%
+  select(target)
+```
+

@@ -21,6 +21,7 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
+    $(".errSliders").hide();
 
     // display the context sentence
     if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
@@ -62,32 +63,37 @@ function makeSlides(f) {
 
     var displayPrompt;
     // display the paraphrase statement
-    // if (exp.examples[i].target[0] === " ") {
-    //   displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
-    // }
-    // else {
-    //   displayPrompt = "\"" + exp.examples[i].target + exp.condition;
-    // }
-    displayPrompt = "\"";
+    if (exp.examples[i].target[0] === " ") {
+      displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
+    }
+    else {
+      displayPrompt = "\"" + exp.examples[i].target + exp.condition;
+    }
+    // displayPrompt = "\"";
 
     $(".display_prompt").html(displayPrompt);
 
-    sliderText = [
-			adjectivePhrase  + " relative to other " + exp.examples[i]["low"],
-			adjectivePhrase  + " relative to other " + exp.examples[i]["medium"],
-      "other (fill in below)"
-		];
+    sliderText = {
+			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
+			super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
+      other: "Other (fill in below)"
+		};
+
+
 
     $(".slider_row").remove();
 
-    for (var j=0; j<sliderText.length; j++) {
-      var sentence = sliderText[j];
+    for (var j=0; j<exp.nSentences; j++) {
+      var sentence = j == exp.nSentences - 1 ?
+      "Other (fill in below)" :
+      '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
+      // var sentence = sliderText[j];
 
      $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
     }
 
-    init_sliders(sliderText.length);
+    init_sliders(exp.nSentences);
     exp.sliderPost = [];
 
   }
@@ -108,7 +114,15 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     response = $("#text_response" + (i+1)).val();
-    if (response.length == 0) {
+    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
+    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    otherEndorse = exp.sliderPost[exp.nSentences - 1];
+
+    adjective = exp.examples[i].target.split(" ").pop();
+
+    if (!(subEndorse && superEndorse)) {
+      $(".errSliders").show();
+    } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
       $(".err").show();
     } else {
       exp.data_trials.push({
@@ -116,8 +130,14 @@ function makeSlides(f) {
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "degree" : exp.examples[i].degree,
+        "adjective" : adjective,
         "names" : exp.names[i] + "",
-        "response" : response
+        "sub_category" : exp.examples[i].sub,
+        "super_category" : exp.examples[i].super,
+        "other_response": response,
+        "sub_endorsement": subEndorse,
+        "super_endorsement" : superEndorse,
+        "other_endorsement":  otherEndorse ? otherEndorse : 0,
       });
       i++;
       exp.go();
@@ -144,7 +164,9 @@ function makeSlides(f) {
         age : $("#age").val(),
         gender : $("#gender").val(),
         education : $("#education").val(),
-        comments : $("#comments").val(),
+        problems: $("#problems").val(),
+        fairprice: $("#fairprice").val(),
+        comments : $("#comments").val()
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
@@ -170,6 +192,16 @@ function makeSlides(f) {
 /// init ///
 function init() {
 
+  repeatWorker = false;
+  (function(){
+      var ut_id = "mht-comparisonClass-20170107";
+      if (UTWorkerLimitReached(ut_id)) {
+        $('.slide').empty();
+        repeatWorker = true;
+        alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+      }
+  })();
+
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
 
@@ -179,6 +211,9 @@ function init() {
 
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
+
+  exp.sliderOrder = _.shuffle(["sub", "super"]);
+  exp.nSentences = exp.sliderOrder.length + 1;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {
