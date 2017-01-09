@@ -28,10 +28,10 @@ var sampleNames = function(characters) {
 // swaps out singular "they" for gendered pronoun given a name
 var getPronoun = function(context, name) {
 	var gender = (_.find(characters, function(person) {
-		return person.name === name;
+		return person.name == name;
 	})).gender;
-	if (gender === "male") { return context.split("their").join("his"); }
-	else if (gender === "female") { return context.split("their").join("her"); }
+	if (gender == "male") { return context.split("their").join("his").split("they").join("his"); }
+	else if (gender == "female") { return context.split("their").join("her").split("they").join("her"); }
 }
 
 // retrieves the correct pronoun for the context/target pair
