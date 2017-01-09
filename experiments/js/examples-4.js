@@ -6,17 +6,17 @@ var examples = [
 	target : "It's warm",
 	context : [
 		" lives in Maryland and steps outside in Winter.",
-		" lives in Maryland and steps outside in Spring.",
+		" lives in Maryland and steps outside in Fall.",
 		" lives in Maryland and steps outside in Summer."
 	],
 	prompt : [
 		"What do you think was the temperature outside?",
 		"What do you think was the temperature outside?",
-		"What do you think was the temperature outside?",
+		"What do you think was the temperature outside?"
 	],
 	sub : [
 		"days in Winter",
-		"days in Spring",
+		"days in Fall",
 		"days in Summer"
 	],
 	super : [
@@ -31,17 +31,17 @@ var examples = [
 	target : "It's cold",
 	context : [
 		" lives in Maryland and steps outside in Winter.",
-		" lives in Maryland and steps outside in Spring.",
+		" lives in Maryland and steps outside in Fall.",
 		" lives in Maryland and steps outside in Summer."
 	],
 	prompt : [
 		"What do you think was the temperature outside?",
 		"What do you think was the temperature outside?",
-		"What do you think was the temperature outside?",
+		"What do you think was the temperature outside?"
 	],
 	sub : [
 		"days in Winter",
-		"days in Spring",
+		"days in Fall",
 		"days in Summer"
 	],
 	super : [
@@ -264,7 +264,7 @@ var examples = [
 	context : [
 		" picks up a lime.",
 		" picks up an apple.",
-		" picks up a watermelon.",
+		" picks up a watermelon."
 	],
 	prompt : [
 		"What do you think is the weight of the lime?",
