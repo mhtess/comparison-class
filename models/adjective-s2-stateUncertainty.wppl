@@ -1,0 +1,126 @@
+// can run in webppl.org
+// var binParam = 5;
+//
+// var round = function(x){
+//   return Math.round(x*10)/10
+// }
+//
+// var stateParams = {
+//   sub: {mu: 1, sigma: 0.5},
+//   super: {mu: 3, sigma: 1}
+// }
+//
+// var stateVals = map(
+//   round,
+//   _.range(stateParams.super.mu - 2 * stateParams.super.sigma,
+//           stateParams.super.mu + 2 * stateParams.super.sigma,
+//           stateParams.super.sigma/binParam)
+// );
+//
+// var stateProbs = {
+//   sub: map(function(s){
+//     Math.exp(Gaussian(stateParams.sub).score(s));
+//   }, stateVals),
+//   super: map(function(s){
+//     Math.exp(Gaussian(stateParams.super).score(s));
+//   }, stateVals)
+// };
+//
+// var statePrior = {
+//   sub: Infer({
+//     model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+//   }),
+//   super: Infer({
+//     model: function(){
+//       return categorical({
+//         vs: stateVals,
+//         ps: stateProbs.super
+// //         ps: stateProbs[uniformDraw(["super", "sub"])]
+//       })
+//     }
+//   })
+// };
+//
+// var classPrior = Infer({model: function(){return uniformDraw(["sub", "super"])}});
+
+var alphas = {s1: 3, s2: 1};
+
+// var utterances = {
+//   positive: ["positiveAdjective", "silence"],
+//   negative: ["negativeAdjective", "silence"]
+// };
+
+// var thresholdBins ={
+//   positive: map(function(x){
+//     return  x - (1/(binParam*2));
+//   }, sort(statePrior.super.support())),
+//   negative: map(function(x){
+//     return  x + (1/(binParam*2));
+//   }, sort(statePrior.super.support()))
+// };
+
+// var thresholdPrior = {
+//   positive: Infer({
+//     model: function() { return uniformDraw(thresholdBins.positive) }
+//   }),
+//   negative: Infer({
+//     model: function() { return uniformDraw(thresholdBins.negative) }
+//   })
+// };
+//
+// var utterancePrior = {
+//   positive: Infer({
+//     model: function() { return uniformDraw(utterances.positive) }
+//   }),
+//   negative: Infer({
+//     model: function() { return uniformDraw(utterances.negative) }
+//   })
+// };
+//
+// var meaning = function(utterance, state, threshold) {
+//   utterance == "positiveAdjective" ? state > threshold :
+//   utterance == "negativeAdjective" ? state < threshold :
+//   true
+// }
+
+var literalListener = cache(function(utterance, threshold) {
+  Infer({model: function(){
+    var state = sample(statePrior["super"]);
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }})
+})
+
+var form = "positive";
+
+var speaker1 = cache(function(state, threshold) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior[form])
+    var L0 = literalListener(utterance, threshold)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+})
+
+var pragmaticListener = function(utterance) {
+  Infer({model: function(){
+    var state = sample(statePrior["super"]);
+    var threshold = sample(thresholdPrior[form]);
+    var S1 = speaker1(state, threshold);
+    observe(S1, utterance);
+    return state
+  }})
+}
+
+var speaker2 = function(comparisonClass){
+  Infer({model: function(){
+    var state = sample(statePrior[comparisonClass]);
+    var utterance = sample(utterancePrior[form]);
+    var L1 = pragmaticListener(utterance)
+    factor( alphas.s2 * L1.score(state) )
+    return utterance
+    }})
+}
+
+speaker2("sub")
