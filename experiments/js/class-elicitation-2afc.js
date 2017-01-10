@@ -112,7 +112,9 @@ function makeSlides(f) {
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
-        "paraphrase": exp.sliderOrder[response]
+        "paraphrase": exp.sliderOrder[response],
+        "paraphrase0" : exp.sliderOrder[0],
+        "paraphrase1" : exp.sliderOrder[1]
       });
       i++;
       exp.go();

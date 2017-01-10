@@ -137,10 +137,12 @@ function makeSlides(f) {
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
+        "paraphrase0" : exp.sliderOrder[0],
+        "paraphrase1" : exp.sliderOrder[1],
         "other_response": response,
         "sub_endorsement": subEndorse,
         "super_endorsement" : superEndorse,
-        "other_endorsement":  otherEndorse ? otherEndorse : 0,
+        "other_endorsement":  otherEndorse ? otherEndorse : 0
       });
       i++;
       exp.go();
@@ -183,6 +185,8 @@ function makeSlides(f) {
           "catch_trials" : exp.catch_trials,
           "system" : exp.system,
           "condition" : exp.condition,
+          "paraphrase0" : exp.sliderOrder[0],
+          "paraphrase1" : exp.sliderOrder[1],
           "subject_information" : exp.subj_data,
           "time_in_minutes" : (Date.now() - exp.startT) / 60000
       };
