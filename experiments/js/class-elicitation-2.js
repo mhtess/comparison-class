@@ -49,7 +49,8 @@ function makeSlides(f) {
       adjectivePhrase =  exp.examples[i].target;
       targetSentence = exp.names[i] + " says, " + "\"" +adjectivePhrase;
     }
-
+    // }       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
+    // }
 
     $(".display_target").html(targetSentence + "." + "\"");
 
@@ -71,7 +72,7 @@ function makeSlides(f) {
     sliderText = {
 			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
 			super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
-      other: "Other (fill in below)"
+      other: "Other (optional; fill in below)"
 		};
 
 
@@ -80,7 +81,7 @@ function makeSlides(f) {
 
     for (var j=0; j<exp.nSentences; j++) {
       var sentence = j == exp.nSentences - 1 ?
-      "Other (fill in below)" :
+      "Other (optional; fill in below)" :
       '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
       // var sentence = sliderText[j];
 
