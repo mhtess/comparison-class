@@ -24,7 +24,12 @@ function makeSlides(f) {
     $(".errSliders").hide();
 
     // display the context sentence
-    $(".display_context").html(exp.names[i] + exp.examples[i].context);
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
+      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    }
+    else {
+      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+    }
 
     // changes the format when a pronoun is used in the target sentence
     var targetSentence, adjectivePhrase;
@@ -40,14 +45,14 @@ function makeSlides(f) {
 
       }
       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        adjectivePhrase =       getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-                  exp.examples[i].target;
+        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
+          exp.examples[i].target;
         targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase
       }
     }
     else {
-      adjectivePhrase =  exp.examples[i].target;
-      targetSentence = exp.names[i] + " says, " + "\"" +adjectivePhrase;
+      adjectivePhrase = exp.examples[i].target;
+      targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
     }
     // }       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
     // }
