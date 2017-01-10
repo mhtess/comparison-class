@@ -9,9 +9,11 @@ function getTrials(examples) {
         prompt : examples[i].prompt[j],
         degree : examples[i].degree,
         unit : examples[i].unit,
+				form : examples[i].form,
         subunit : examples[i].subunit,
 				sub : examples[i].sub[j],
-				super : examples[i].super[j]
+				super : examples[i].super[j],
+				strength: examples[i].strength[j]
 			});
 		}
 	}

@@ -24,7 +24,9 @@ var examples = [
 		"days of the year",
 		"days of the year"
 	],
+	strength : [1,2,3], // how high on the scale the sub-cat is expected to be
 	degree : "temperature",
+	form : "positive",
 	unit : ["degrees Fahrenheit", "degrees Celsius"],
 	subunit : ["none"]
 }, {
@@ -49,7 +51,9 @@ var examples = [
 		"days of the year",
 		"days of the year"
 	],
+	strength : [1,2,3], // how high on the scale the sub-cat is expected to be
 	degree: "temperature",
+	form : "negative",
 	unit: ["degrees Fahrenheit", "degrees Celsius"],
 	subunit : ["none"]
 },
@@ -109,7 +113,9 @@ var examples = [
 		"appliances",
 		"appliances"
 	],
+	strength : [1,2,3],
 	degree : "price",
+	form : "positive",
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
@@ -134,7 +140,9 @@ var examples = [
 		"appliances",
 		"appliances"
 	],
+	strength : [1,2,3],
 	degree : "price",
+	form : "negative",
 	unit : ["dollars"],
 	subunit : ["none"]
 }, {
@@ -166,7 +174,9 @@ var examples = [
 		"things you watch on YouTube",
 		"things you watch on YouTube"
 	],
+	strength : [1,2,3],
 	degree : "time",
+	form : "positive",
 	unit : ["seconds", "minutes", "hours", "days"],
 	subunit : ["seconds", "minutes", "hours"]
 }, {
@@ -198,7 +208,9 @@ var examples = [
 		"things you watch on YouTube",
 		"things you watch on YouTube"
 	],
+	strength : [1,2,3],
 	degree : "time",
+	form : "negative",
 	unit : ["seconds", "minutes", "hours", "days"],
 	subunit : ["seconds", "minutes", "hours"]
 // }, {
@@ -231,7 +243,9 @@ var examples = [
 		"people",
 		"people"
 	],
+	strength : [1,2,3],
 	degree : "height",
+	form : "positive",
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
 }, {
@@ -256,7 +270,9 @@ var examples = [
 		"people",
 		"people"
 	],
+	strength : [1,2,3],
 	degree : "height",
+	form : "negative",
 	unit : ["feet", "meters"],
 	subunit : ["inches", "centimeters"]
 }, {
@@ -281,7 +297,9 @@ var examples = [
 		"fruit",
 		"fruit"
 	],
+	strength : [1,2,3],
 	degree : "weight",
+	form : "positive",
 	unit : ["pounds", "kilograms"],
 	subunit : ["ounces", "grams"]
 }, {
@@ -306,7 +324,9 @@ var examples = [
 		"fruit",
 		"fruit"
 	],
+	strength : [1,2,3],
 	degree : "weight",
+	form : "negative",
 	unit : ["pounds", "kilograms"],
 	subunit : ["ounces", "grams"]
 }];
