@@ -1,5 +1,5 @@
 ---
-title: "The Honda was cheap but the coffee was expensive: Validating comparison classes for vague language understanding"
+title: "Cheap cars, expensive coffee: Inferring comparison classes in vague language understanding"
 bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
@@ -22,6 +22,14 @@ keywords:
 output: cogsci2016::cogsci_paper
 ---
 
+\definecolor{Red}{RGB}{255,0,0}
+\definecolor{Green}{RGB}{10,200,100}
+\definecolor{Blue}{RGB}{10,100,200}
+
+\newcommand{\red}[1]{\textcolor{Red}{#1}}  
+\newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
+\newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
+
 ```{r global_options, include=FALSE}
 rm(list=ls())
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
@@ -41,8 +49,10 @@ library(dplyr)
 # Proposal
 
 How can a cup of coffee be expensive while cheap cars populate the highways?
-Adjectives like *cheap* and *expensive*, *cold* and *hot*, and *tall* and *short* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
+Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
 Vague language is ubiquitous in everyday conversation; much more common than actually saying numeric values...
+
+Understanding language that is vague poses a challenge to computational approaches to language. 
 
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure.
 For example, a cup of coffee is expensive if its price is greater than some number of dollars.
@@ -58,7 +68,7 @@ In this formal theory, the comparison class is assumed in the specification of a
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
 @Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to a comparison class). 
 
-In this paper we introduce a free-response paradigm for eliciting comparison classes for gradable adjectives.
+In this paper, we posit that the .
 We validate this technique by measuring listeners' prior belief distributions over the measure within the elicited comparison class (e.g., the price of cups of coffee).
 By measuring a comparison class and a corresponding prior belief distribution, we can derive predictions for adjective interpretation across different contexts using the Rational Speech Act model.
 We then test these predictions using a listener interpretation task.
@@ -115,9 +125,31 @@ What does our intermediate comparison class elicitation step buy us?
 \end{enumerate}
 
 
+# Rational Speech Act model for inferring comparison classes
+
+We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015; @TesslerUnderReview] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
+This uncertainty is posited at the level of the pragmatic listener, and thus is resolved using pragmatic reasoning (i.e., the pressures to be truthful and informative).
+In addition to the uncertainty over the comparison class $c$, the pragmatic listener also have uncertainty over the value of the degree $x$ (e.g., the height of the person) and the semantic threshold variable $\theta$ as in @Lassiter2013. 
+
+\begin{align}
+L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1}\\
+S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c, \theta)})} \label{eq:S1}\\
+L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0}
+\end{align}
+
+Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$. 
+That is, the likely heights of basketball players is different than the likely heights of people in general. 
+
+To test this theory, we consider a simple case: The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people). Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
+We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player.").
+Thus, the listener $L_1$ tries to uncover the speaker's intended comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$.
 
 
-# First-Level Headings
+# Experiment 1: Knowledge elicitation
+
+
+
+# Experiment 2: Comparison class inference
 
 For general information about authoring in markdown, see **[here](http://rmarkdown.rstudio.com/authoring_basics.html).**
 
