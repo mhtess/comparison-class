@@ -103,6 +103,39 @@ function embedSliderSlides(trials) {
 }
 
 
+// embeds the trial slides that were generated in the experiment file into the html file
+function embedSliderSlides(trials) {
+  var slides = "", sliderText;
+  for (var i = 1; i <= trials; i++) {
+
+		sliderText = [
+			exp.examples[i-1]["low"],
+			exp.examples[i-1]["medium"]
+		];
+
+    slides = slides +
+		"<div class=\"slide\" id=\"trial" + i + "\">" +
+    	"<p class=\"display_context\"></p>" +
+  		"<p class=\"display_target\"></p>" +
+  		"<p class=\"display_question\"></p>" +
+			"<table id=\"multi_slider_table" + i +"\"" +  "class=\"slider_table\">" +
+			"<tr><td></td>"+
+			"<td class=\"left\">very unlikely</td>"+
+			"<td class=\"right\">very likely</td>" +
+			"</tr> </table>" +
+  		"<span class=\"display_prompt\"></span>"+
+			// '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
+			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+  		"<button onclick=\"_s.button()\">Continue</button>" +
+			'<p class="errSliders">Please adjust the first two sliders before continuing.</p>'+
+  		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +
+  		"</div>";
+
+  	$(".trial_slides").html(slides);
+  }
+}
+
+
 
 // embeds the trial slides that were generated in the experiment file into the html file for the listener experiment
 function embedListenerSlides(examples, trials) {
@@ -158,6 +191,26 @@ function embedListenerSlides(examples, trials) {
       "<p class=\"numErr\">Please use whole numbers only.</p>" +
 			"<p class=\"textErr\">Please write something.</p>" +
   		"</div>";
+  	$(".trial_slides").html(slides);
+  }
+}
+
+function embed2AFCSlides(trials) {
+  var slides = "";
+  for (var i = 1; i <= trials; i++) {
+
+
+    slides = slides +
+		"<div class=\"slide\" id=\"trial" + i + "\">" +
+    	"<p class=\"display_context\"></p>" +
+  		"<p class=\"display_target\"></p>" +
+  		"<p class=\"display_question\"></p>" +
+			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label><br>"+
+			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br></div>"+
+  		"<button onclick=\"_s.button()\">Continue</button>" +
+			'<p class="err">Please select an option before contining.</p>'+
+  		"</div>";
+
   	$(".trial_slides").html(slides);
   }
 }
