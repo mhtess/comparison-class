@@ -3,7 +3,10 @@ var examples = [
 {
 	// warm and cold are not super context sensitive because of perception
 	// the best example is of people from different places
-	target : "It's warm",
+	target : {
+		positive : "It's warm",
+		negative : "It's cold"
+	},
 	context : [
 		" lives in Maryland and steps outside in Winter.",
 		" lives in Maryland and steps outside in Fall.",
