@@ -2,9 +2,13 @@ caveman
 corenlp
 turk
 Submiterator
-.Rhistory
-*.RData
 analysis/comparison-class.html
-.Rproj.user
 writing/cogsci17/comparison-class-cogsci17.pdf
 writing/cogsci17/comparison-class-cogsci17.tex
+mturk
+*.DS_Store
+*.nb.html
+*.Proj
+*.Rhistory
+*.RData
+*.Rproj.user

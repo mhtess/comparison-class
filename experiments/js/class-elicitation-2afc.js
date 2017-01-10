@@ -21,7 +21,7 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    $(".errSliders").hide();
+    $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
     if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
@@ -80,50 +80,25 @@ function makeSlides(f) {
       other: "Other (optional; fill in below)"
 		};
 
+    $('label[for=0]').html('"' + adjectivePhrase +
+    " relative to other " + exp.examples[i][exp.sliderOrder[0]] +
+    '."');
 
+    $('label[for=1]').html('"' + adjectivePhrase +
+    " relative to other " + exp.examples[i][exp.sliderOrder[1]] +
+    '."');
 
-    $(".slider_row").remove();
-
-    for (var j=0; j<exp.nSentences; j++) {
-      var sentence = j == exp.nSentences - 1 ?
-      "Other (optional; fill in below)" :
-      '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
-      // var sentence = sliderText[j];
-
-     $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
-      utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
-    }
-
-    init_sliders(exp.nSentences);
-    exp.sliderPost = [];
-
-  }
-
-  function init_sliders(nSentences) {
-    for (var j=0; j<nSentences; j++) {
-      utils.make_slider("#slider" + j,
-      make_slider_callback(j));
-    }
-  }
-
-  function make_slider_callback(j) {
-    return function(event, ui) {
-      exp.sliderPost[j] = ui.value;
-    };
   }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = $("#text_response" + (i+1)).val();
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
-    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
-    otherEndorse = exp.sliderPost[exp.nSentences - 1];
-
+    response = $('input[name="paraphrase"]:checked').val()
+    // subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
+    // superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    // otherEndorse = exp.sliderPost[exp.nSentences - 1];
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!(subEndorse && superEndorse)) {
-      $(".errSliders").show();
-    } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
+    if (!response) {
       $(".err").show();
     } else {
       exp.data_trials.push({
@@ -137,12 +112,9 @@ function makeSlides(f) {
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
+        "paraphrase": exp.sliderOrder[response],
         "paraphrase0" : exp.sliderOrder[0],
-        "paraphrase1" : exp.sliderOrder[1],
-        "other_response": response,
-        "sub_endorsement": subEndorse,
-        "super_endorsement" : superEndorse,
-        "other_endorsement":  otherEndorse ? otherEndorse : 0
+        "paraphrase1" : exp.sliderOrder[1]
       });
       i++;
       exp.go();
@@ -201,7 +173,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-comparisonClass-20170107";
+      var ut_id = "mht-comparisonClass-20170110";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
@@ -263,7 +235,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedSliderSlides(exp.trials);
+  embed2AFCSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
