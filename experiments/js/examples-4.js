@@ -150,7 +150,7 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a TV ad on YouTube.",
+		" is about to show their friend a commercial on YouTube.",
 		" is about to show their friend a music video on YouTube.",
 		" is about to show their friend a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
@@ -158,14 +158,14 @@ var examples = [
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the TV ad?",
+		"What do you think was the duration of the commercial?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"TV ads",
+		"commercials",
 		"music videos",
 		"lectures"
 	],
@@ -184,7 +184,7 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a TV ad on YouTube.",
+		" is about to show their friend a commercial on YouTube.",
 		" is about to show their friend a music video on YouTube.",
 		" is about to show their friend a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
@@ -192,14 +192,14 @@ var examples = [
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the TV ad?",
+		"What do you think was the duration of the commercial?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"TV ads",
+		"commercials",
 		"music videos",
 		"lectures"
 	],
@@ -278,17 +278,17 @@ var examples = [
 }, {
 	target : " is heavy",
 	context : [
-		" picks up a lime.",
+		" picks up a grape.",
 		" picks up an apple.",
 		" picks up a watermelon."
 	],
 	prompt : [
-		"What do you think is the weight of the lime?",
+		"What do you think is the weight of the grape?",
 		"What do you think is the weight of the apple?",
 		"What do you think is the weight of the watermelon?"
 	],
 	sub: [
-		"limes",
+		"grapes",
 		"apples",
 		"watermelons"
 	],
@@ -305,17 +305,17 @@ var examples = [
 }, {
 	target : " is light",
 	context : [
-		" picks up a lime.",
+		" picks up a grape.",
 		" picks up an apple.",
 		" picks up a watermelon.",
 	],
 	prompt : [
-		"What do you think is the weight of the lime?",
+		"What do you think is the weight of the grape?",
 		"What do you think is the weight of the apple?",
 		"What do you think is the weight of the watermelon?"
 	],
 	sub: [
-		"limes",
+		"grapes",
 		"apples",
 		"watermelons"
 	],
