@@ -79,7 +79,7 @@ function makeSlides(f) {
 
     $(".slider_row").remove();
 
-    var sentence = 
+    
     for (var j=0; j<exp.nSentences; j++) {
       var sentence = j == exp.nSentences - 1 ?
       "Other (fill in below)" :

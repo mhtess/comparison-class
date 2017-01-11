@@ -150,29 +150,29 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		"Imagine that you are about to be shown a commercial on YouTube.",
-		"Imagine that you are about to be shown a music video on YouTube.",
-		"Imagine that you are about to be shown a lecture on YouTube."
+		"Imagine that you are about to be shown a video of a cute animal online.",
+		"Imagine that you are about to be shown a music video online.",
+		"Imagine that you are about to be shown a lecture online."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the commercial?",
+		"What do you think was the duration of the cute animal video?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"commercials",
+		"videos of cute animals",
 		"music videos",
 		"lectures"
 	],
 	super: [
-		"things you watch on YouTube",
-		"things you watch on YouTube",
-		"things you watch on YouTube"
+		"things you watch online",
+		"things you watch online",
+		"things you watch online"
 	],
 	strength : [1,2,3],
 	degree : "time",
@@ -184,29 +184,29 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		"Imagine that you are about to be shown a commercial on YouTube.",
-		"Imagine that you are about to be shown a music video on YouTube.",
-		"Imagine that you are about to be shown a lecture on YouTube."
+		"Imagine that you are about to be shown a video of a cute animal online.",
+		"Imagine that you are about to be shown a music video online.",
+		"Imagine that you are about to be shown a lecture online."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the commercial?",
+		"What do you think was the duration of the cute animal video?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"commercials",
+		"videos of cute animals",
 		"music videos",
 		"lectures"
 	],
 	super: [
-		"things you watch on YouTube",
-		"things you watch on YouTube",
-		"things you watch on YouTube"
+		"things you watch online",
+		"things you watch online",
+		"things you watch online"
 	],
 	strength : [1,2,3],
 	degree : "time",
