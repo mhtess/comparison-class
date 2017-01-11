@@ -22,71 +22,48 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    // $(".errSliders").hide();
+    $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    $(".display_context").html(exp.examples[i].context + " How likely is the " + exp.examples[i].sub + " to be " + exp.examples[i].target +
-      " relative to other " + exp.examples[i].super + "?");
+    $(".display_context").html(exp.examples[i].context);
 
-    // sliderText = {
-    //   sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
-    //   super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
-    //   other: "Other (fill in below)"
-    // };
+    $(".display_target").html("Do you think the " + exp.examples[i].sub + " would be considered: <strong>" + exp.examples[i].target +
+     " relative to other " + exp.examples[i].super + "?");
 
-    $(".slider_row").remove();
+    $(".display_question").html();
 
-    // display the sliders
-    $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + 0 + '">' + '</td><td colspan="2"><div id="slider' + 0 + '" class="slider">-------[ ]--------</div></td></tr>');
-      utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
+    $('label[for=0]').html('Yes');
+    $('label[for=1]').html('No');
 
-    init_sliders(exp.nSentences);
-    exp.sliderPost = [];
 
-  }
-
-  function init_sliders(nSentences) {
-    for (var j = 0; j < nSentences; j++) {
-      utils.make_slider("#slider" + j,
-      make_slider_callback(j));
-    }
-  }
-
-  function make_slider_callback(j) {
-    return function(event, ui) {
-      exp.sliderPost[j] = ui.value;
-    };
   }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    // response = $("#text_response" + (i+1)).val();
-    // subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
-    // superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
-    // otherEndorse = exp.sliderPost[exp.nSentences - 1];
 
-    // adjective = exp.examples[i].target.split(" ").pop();
+    response = $('input[name="paraphrase"]:checked').val()
+    adjective = exp.examples[i].target.split(" ").pop();
 
-    // if (!(subEndorse && superEndorse)) {
-    //   $(".errSliders").show();
-    // } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
-    //   $(".err").show();
-    if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".err").show(); }
-    else {
+    if (!response) {
+      $(".err").show();
+    } else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "degree" : exp.examples[i].degree,
-        // "adjective" : adjective,
+        "form" : exp.examples[i].form,
+        "adjective" : adjective,
+        "strength" : exp.examples[i].strength,
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
-        "super_category" : exp.examples[i].super//,
-        // "other_response": response,
-        // "sub_endorsement": subEndorse,
-        // "super_endorsement" : superEndorse,
-        // "other_endorsement":  otherEndorse ? otherEndorse : 0,
+        "super_category" : exp.examples[i].super,
+
+        // "paraphrase": exp.sliderOrder[response],
+        // "paraphrase0" : exp.sliderOrder[0],
+        // "paraphrase1" : exp.sliderOrder[1]
       });
+
       i++;
       exp.go();
     }
@@ -141,7 +118,7 @@ function init() {
   // generate all possible target-context pair combinations
   exp.examples = getTrials(examples);
   //exp.examples = exp.examples.slice(0, 5);
-  
+
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
@@ -195,8 +172,8 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  // embedListenerSlides(exp.examples, exp.trials); 
-  embedSliderSlides(exp.trials);
+  // embedListenerSlides(exp.examples, exp.trials);
+  embed2AFCSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
