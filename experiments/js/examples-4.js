@@ -150,7 +150,7 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a commercial on YouTube.",
+		" is about to show their friend a video of cute animals on YouTube.",
 		" is about to show their friend a music video on YouTube.",
 		" is about to show their friend a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
@@ -158,14 +158,14 @@ var examples = [
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the commercial?",
+		"What do you think was the duration of the cute animal video?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"commercials",
+		"videos of cute animals",
 		"music videos",
 		"lectures"
 	],
@@ -184,7 +184,7 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a commercial on YouTube.",
+		" is about to show their friend a video of cute animals on YouTube.",
 		" is about to show their friend a music video on YouTube.",
 		" is about to show their friend a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
@@ -192,14 +192,14 @@ var examples = [
 	],
 	prompt : [
 		// "What do you think was the duration of the television show?",
-		"What do you think was the duration of the commercial?",
+		"What do you think was the duration of the cute animal video?",
 		"What do you think was the duration of the music video?",
 		"What do you think was the duration of the lecture?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"commercials",
+		"videos of cute animals",
 		"music videos",
 		"lectures"
 	],
