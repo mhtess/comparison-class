@@ -14,6 +14,7 @@ function makeSlides(f) {
   slides.instructions = slide({
     name : "instructions",
     button : function() {
+      exp.catch_trials.push($("#catch").val());
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
   });
@@ -163,7 +164,7 @@ function init() {
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
   for (var k = 1; k <= exp.trials; k++) {
-    exp.structure.push("trial" + k);
+    // exp.structure.push("trial" + k);
   }
   exp.structure.push("subj_info");
   exp.structure.push("thanks");
