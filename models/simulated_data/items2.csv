@@ -1,0 +1,31 @@
+,degree,sub_category,super_category,form,adjective,target,prior_response
+1,weight,apples,fruit,negative,light, is light,3
+2,height,soccer players,people,negative,short, is short,3
+3,weight,watermelons,fruit,negative,light, is light,0
+4,height,gymnasts,people,negative,short, is short,9
+5,time,music videos,things you watch on YouTube,negative,short,It&quotechars short,5
+6,temperature,days in Fall,days of the year,negative,cold,It&quotechars cold,5
+7,time,TV ads,things you watch on YouTube,positive,long,It&quotechars long,2
+8,height,soccer players,people,positive,tall, is tall,6
+9,price,ovens,appliances,positive,expensive,This is expensive,9
+10,price,toasters,appliances,positive,expensive,This is expensive,4
+11,price,can openers,appliances,positive,expensive,This is expensive,1
+12,time,lectures,things you watch on YouTube,negative,short,It&quotechars short,1
+13,weight,watermelons,fruit,positive,heavy, is heavy,10
+14,temperature,days in Summer,days of the year,negative,cold,It&quotechars cold,1
+15,weight,apples,fruit,positive,heavy, is heavy,3
+16,time,TV ads,things you watch on YouTube,negative,short,It&quotechars short,9
+17,time,lectures,things you watch on YouTube,positive,long,It&quotechars long,10
+18,height,basketball players,people,positive,tall, is tall,10
+19,weight,limes,fruit,negative,light, is light,9
+20,price,ovens,appliances,negative,cheap,This is cheap,1
+21,time,music videos,things you watch on YouTube,positive,long,It&quotechars long,6
+22,weight,limes,fruit,positive,heavy, is heavy,0
+23,price,toasters,appliances,negative,cheap,This is cheap,2
+24,temperature,days in Winter,days of the year,positive,warm,It&quotechars warm,0
+25,temperature,days in Fall,days of the year,positive,warm,It&quotechars warm,5
+26,temperature,days in Winter,days of the year,negative,cold,It&quotechars cold,10
+27,height,basketball players,people,negative,short, is short,0
+28,height,gymnasts,people,positive,tall, is tall,0
+29,price,can openers,appliances,negative,cheap,This is cheap,9
+30,temperature,days in Summer,days of the year,positive,warm,It&quotechars warm,10
