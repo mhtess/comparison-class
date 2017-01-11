@@ -61,7 +61,7 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     response = $("#text_response" + (i+1)).val();
-    if (response.length == 0) {
+    if ((response.length == 0) || (response > 10) || (response < 0) || isLetter(response)) {
       $(".err").show();
     } else {
       exp.data_trials.push({
