@@ -3,15 +3,15 @@ var utterances = {
   negative: ["negativeAdjective", "silence"]
 };
 
-var utterancePrior = {
-  positive: Infer({
-    model: function() { return uniformDraw(utterances.positive) }
-  }),
-  negative: Infer({
-    model: function() { return uniformDraw(utterances.negative) }
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(utterances[form]) }
   })
-};
+});
 
+var pam = function(lst, fn){
+  return map(fn, lst);
+};
 
 var meaning = function(utterance, state, threshold) {
   utterance == "positiveAdjective" ? state > threshold :
@@ -23,122 +23,134 @@ var classPrior = Infer({
   model: function(){return uniformDraw(["sub", "super"])}
 });
 
-var data = repeat(100, function(){flip(0.9)})
+var round = function(x){
+  return Math.round(x*10)/10
+};
+
+// were it not for speaker optimality
+// this model could be run independently for each item
+
+// pretend like I collected 25 subjects who all gave my response;
+var data = _.flatten(repeat(25, function(){ return dataFromR }))
+
+var subCategories = _.uniq(_.pluck(data, "sub_category"));
 
 var model = function(){
 
-  var mu = uniform(-2, 2); // suncat mean is restricted to be +/- 2 stdev from supercat mean
-  var sigma = uniform(0, 1); // subcat variance should be lower than supercat variance
-
   var alphas = {s1: 3, s2: 1}; // might need to put uncertainty over alphas
 
-  var binParam = 5;
+  var parameters = map(function(subCat){
 
-  var round = function(x){
-    return Math.round(x*10)/10
-  }
+      var mu = uniform(-2, 2); // suncat mean is restricted to be +/- 2 stdev from supercat mean
+      var sigma = uniform(0, 1); // subcat variance probably should be lower than supercat variance
+      var binParam = 5;
 
-  var stateParams = {
-    sub: {mu: mu, sigma: sigma},
-    super: {mu: 0, sigma: 1}
-  }
-
-  var stateVals = map(
-    round,
-    _.range(stateParams.super.mu - 2.5 * stateParams.super.sigma,
-            stateParams.super.mu + 2.5 * stateParams.super.sigma,
-            stateParams.super.sigma/binParam)
-  );
-
-  var stateProbs = {
-    sub: map(function(s){
-      Math.exp(Gaussian(stateParams.sub).score(s));
-    }, stateVals),
-    super: map(function(s){
-      Math.exp(Gaussian(stateParams.super).score(s));
-    }, stateVals)
-  };
-
-  var statePrior = {
-    sub: Infer({
-      model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
-    }),
-    super: Infer({
-      model: function(){
-        return categorical({
-          vs: stateVals,
-          ps: stateProbs.super
-        })
+      var stateParams = {
+        sub: {mu: mu, sigma: sigma},
+        super: {mu: 0, sigma: 1}
       }
-    })
-  };
 
-  var thresholdBins ={
-    positive: map(function(x){
-      return  x - (1/(binParam*2));
-    }, sort(statePrior.super.support())),
-    negative: map(function(x){
-      return  x + (1/(binParam*2));
-    }, sort(statePrior.super.support()))
-  };
+      var stateVals = map(
+        round,
+        _.range(stateParams.super.mu - 2.5 * stateParams.super.sigma,
+                stateParams.super.mu + 2.5 * stateParams.super.sigma,
+                stateParams.super.sigma/binParam)
+      );
 
-  var thresholdPrior = {
-    positive: Infer({
-      model: function() { return uniformDraw(thresholdBins.positive) }
-    }),
-    negative: Infer({
-      model: function() { return uniformDraw(thresholdBins.negative) }
-    })
-  };
+      var stateProbs = {
+        sub: map(function(s){
+          Math.exp(Gaussian(stateParams.sub).score(s))
+        }, stateVals),
+        super: map(function(s){
+          Math.exp(Gaussian(stateParams.super).score(s))
+        }, stateVals)
+      };
+
+      var statePrior = {
+        sub: Infer({
+          model: function(){return categorical({vs:stateVals,ps:stateProbs.sub})}
+        }),
+        super: Infer({
+          model: function(){return categorical({vs:stateVals,ps:stateProbs.super})}
+        })
+      };
+
+      var thresholdBins ={
+        positive: map(function(x){
+          return  x - (1/(binParam*2));
+        }, sort(statePrior.super.support())),
+        negative: map(function(x){
+          return  x + (1/(binParam*2));
+        }, sort(statePrior.super.support()))
+      };
+
+      var thresholdPrior = cache(function(form){
+        return Infer({
+          model: function() { return uniformDraw(thresholdBins[form]) }
+        });
+      });
+
+      var literalListener = cache(function(utterance, threshold) {
+        Infer({model: function(){
+          var state = sample(statePrior["super"]);
+          var m = meaning(utterance, state, threshold);
+          condition(m);
+          return state;
+        }})
+      }, 10000);
+
+      var speaker1 = cache(function(state, threshold, form) {
+        Infer({model: function(){
+          var utterance = sample(utterancePrior(form))
+          var L0 = literalListener(utterance, threshold)
+          factor( alphas.s1 * L0.score(state) )
+          return utterance
+        }})
+      }, 10000)
+
+      var pragmaticListener = cache(function(utterance, form) {
+        Infer({model: function(){
+          var state = sample(statePrior["super"]);
+          var threshold = sample(thresholdPrior(form));
+          var S1 = speaker1(state, threshold, form);
+          observe(S1, utterance);
+          return state
+        }})
+      }, 10000)
+
+      var speaker2 = function(form){
+        Infer({model: function(){
+          // here, the speaker has uncertainty about the state
+          // should probably swithch to factoring based on KL
+          var state = sample(statePrior["sub"]);
+
+          var utterance = sample(utterancePrior(form));
+          var L1 = pragmaticListener(utterance, form)
+          factor( alphas.s2 * L1.score(state) )
+          return utterance == (form + "Adjective")
+          }})
+      }
 
 
-  var literalListener = cache(function(utterance, threshold) {
-    Infer({model: function(){
-      var state = sample(statePrior["super"]);
-      var m = meaning(utterance, state, threshold);
-      condition(m);
-      return state;
-    }})
-  }, 10000)
+      var postPreds = map(function(form){
 
-  var form = "positive";
+        var d_subcat_form = _.pluck(_.where(data, {sub_category: subCat, form:form}), "prior_response");
 
-  var speaker1 = cache(function(state, threshold) {
-    Infer({model: function(){
-      var utterance = sample(utterancePrior[form])
-      var L0 = literalListener(utterance, threshold)
-      factor( alphas.s1 * L0.score(state) )
-      return utterance
-    }})
-  }, 10000)
+        var speakerProbs = speaker2(form);
+        var linkedSpeaker = Binomial({n: 10, p: Math.exp(speakerProbs.score(true))});
 
-  var pragmaticListener = cache(function(utterance) {
-    Infer({model: function(){
-      var state = sample(statePrior["super"]);
-      var threshold = sample(thresholdPrior[form]);
-      var S1 = speaker1(state, threshold);
-      observe(S1, utterance);
-      return state
-    }})
-  }, 10000)
+        mapData({data:d_subcat_form}, function(d){
+          observe(linkedSpeaker, d)
+        })
 
-  var speaker2 = function(comparisonClass){
-    Infer({model: function(){
-      var state = sample(statePrior[comparisonClass]);
-      var utterance = sample(utterancePrior[form]);
-      var L1 = pragmaticListener(utterance)
-      factor( alphas.s2 * L1.score(state) )
-      return utterance == "positiveAdjective"
-      }})
-  }
+        return ["posteriorPredictive_" + form, Math.exp(speakerProbs.score(true))]
 
-  var speakerProbs = speaker2("sub");
+      }, ["positive","negative"])
 
-  mapData({data}, function(d){
-    observe(speakerProbs, d)
-  })
+    return [[subCat, _.object([["mu", mu], ["sigma", sigma], postPreds[0], postPreds[1]])]]
 
-  return mu
+  }, subCategories)
+
+  return _.object(_.flatten(parameters, true));
+
 }
-
-Infer({model, method: "MCMC", samples: 50, burn: 25, verbose: true})
