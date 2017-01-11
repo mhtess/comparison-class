@@ -62,9 +62,10 @@ function embedSlides(trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-  		"<span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"<p></p>" +
+  		"<span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input> " +
+      "<span class=\"display_noun\"></span><p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-  		"<p class=\"err\">Please type something.</p>" +
+  		"<p class=\"err\">Please type a number between 0-10.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }

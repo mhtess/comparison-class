@@ -55,6 +55,7 @@ function makeSlides(f) {
     // else {
     //   $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     // }
+    $(".display_noun").html(exp.examples[i].sub + ".");
   }
 
   // runs when the "Continue" button is hit on a slide
