@@ -14,26 +14,29 @@ function makeSlides(f) {
   slides.instructions = slide({
     name : "instructions",
     start : function() {
-      $(".err").hide();
-      $("#multi_slider_table0").append('<tr class="slider_row"><td class="slider_target" id="sentence' + 0 + '">' + '</td><td colspan="2"><div id="slider' + 0 + '" class="slider">-------[ ]--------</div></td></tr>');
+      $(".errCatch").hide();
+      $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + 0 + "\">" + 
+        "</td><td colspan=\"2\"><div id=\"slider" + 0 + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
       utils.make_slider("#slider" + 0,
-      make_slider_callback(0));
+        make_slider_callback(0));
       exp.sliderPost = [];
     },
     button : function() {
-      if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".err").show(); }
+      exp.catch_trials = exp.sliderPost[0];
+      if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".errCatch").show(); }
       // exp.catch_trials.push($("#catch").val());
-      else { exp.go(); }
+      else { 
+        exp.go(); 
+      }
     }
   });
 
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    // $(".errSliders").hide();
 
     // display the context sentence
-    $(".display_context").html(exp.examples[i].context + " How likely is the " + exp.examples[i].sub + " to be " + exp.examples[i].target +
+    $(".display_context").html(exp.examples[i].context + " How likely is the " + exp.examples[i].sub_singular + " to be " + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "?");
 
     // sliderText = {
@@ -42,6 +45,7 @@ function makeSlides(f) {
     //   other: "Other (fill in below)"
     // };
 
+    // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
 
     // display the slider for each slide
@@ -49,12 +53,13 @@ function makeSlides(f) {
     utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
 
     init_sliders(exp.nSentences);
+    exp.sliderPost = [];
   }
 
   function init_sliders(nSentences) {
     for (var j = 1; j <= nSentences; j++) {
       utils.make_slider("#slider" + j,
-      make_slider_callback(j));
+        make_slider_callback(j));
     }
   }
 
@@ -77,7 +82,10 @@ function makeSlides(f) {
     //   $(".errSliders").show();
     // } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
     //   $(".err").show();
-    if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".err").show(); }
+
+    // stores the slider response from the participant
+    response = exp.sliderPost[exp.nSentences];
+    if (exp.sliderPost[exp.nSentences] == undefined) { $(".err").show(); }
     else {
       exp.data_trials.push({
         "condition" : exp.condition,
@@ -86,12 +94,9 @@ function makeSlides(f) {
         "degree" : exp.examples[i].degree,
         // "adjective" : adjective,
         "names" : exp.names[i] + "",
-        "sub_category" : exp.examples[i].sub,
-        "super_category" : exp.examples[i].super//,
-        // "other_response": response,
-        // "sub_endorsement": subEndorse,
-        // "super_endorsement" : superEndorse,
-        // "other_endorsement":  otherEndorse ? otherEndorse : 0,
+        "sub_category" : exp.examples[i].sub_singular,
+        "super_category" : exp.examples[i].super,
+        "response": response,
       });
       i++;
       exp.go();
@@ -112,13 +117,13 @@ function makeSlides(f) {
     submit : function(e) {
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.subj_data = {
-        language : $("#language").val(),
-        enjoyment : $("#enjoyment").val(),
-        asses : $('input[name="assess"]:checked').val(),
-        age : $("#age").val(),
-        gender : $("#gender").val(),
-        education : $("#education").val(),
-        comments : $("#comments").val(),
+        language: $("#language").val(),
+        enjoyment: $("#enjoyment").val(),
+        asses: $('input[name="assess"]:checked').val(),
+        age: $("#age").val(),
+        gender: $("#gender").val(),
+        education: $("#education").val(),
+        comments: $("#comments").val(),
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
