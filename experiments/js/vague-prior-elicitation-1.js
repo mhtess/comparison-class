@@ -22,69 +22,23 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    $(".errSliders").hide();
+    // $(".errSliders").hide();
 
     // display the context sentence
     $(".display_context").html(exp.examples[i].context + " How likely is the " + exp.examples[i].sub + " to be " + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "?");
 
-    // changes the format when a pronoun is used in the target sentence
-    // var targetSentence, adjectivePhrase;
-    if (exp.examples[i].target[0] === " ") {
-      // if we need an extra name, pop if off exp.extra
-      // exp.names[i] = [exp.names[i], exp.extra.pop()];
-
-      // evaluates each target specifically
-      if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target
-        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
-
-      }
-      else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target;
-        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase
-      }
-    }
-    else {
-      adjectivePhrase = exp.examples[i].target;
-      targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
-    }
-
-    // display the question
-    $(".display_question").html(exp.examples[i].prompt);
-
-    var displayPrompt;
-    // display the paraphrase statement
-    if (exp.examples[i].target[0] === " ") {
-      displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
-    }
-    else {
-      displayPrompt = "\"" + exp.examples[i].target + exp.condition;
-    }
-    // displayPrompt = "\"";
-
-    $(".display_prompt").html(displayPrompt);
-
-    sliderText = {
-      sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
-      super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
-      other: "Other (fill in below)"
-    };
+    // sliderText = {
+    //   sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
+    //   super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
+    //   other: "Other (fill in below)"
+    // };
 
     $(".slider_row").remove();
 
-    
-    for (var j=0; j<exp.nSentences; j++) {
-      var sentence = j == exp.nSentences - 1 ?
-      "Other (fill in below)" :
-      '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
-      // var sentence = sliderText[j];
-
-     $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
+    // display the sliders
+    $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + 0 + '">' + '</td><td colspan="2"><div id="slider' + 0 + '" class="slider">-------[ ]--------</div></td></tr>');
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
-    }
 
     init_sliders(exp.nSentences);
     exp.sliderPost = [];
@@ -92,7 +46,7 @@ function makeSlides(f) {
   }
 
   function init_sliders(nSentences) {
-    for (var j=0; j<nSentences; j++) {
+    for (var j = 0; j < nSentences; j++) {
       utils.make_slider("#slider" + j,
       make_slider_callback(j));
     }
@@ -106,31 +60,32 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = $("#text_response" + (i+1)).val();
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
-    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
-    otherEndorse = exp.sliderPost[exp.nSentences - 1];
+    // response = $("#text_response" + (i+1)).val();
+    // subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
+    // superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    // otherEndorse = exp.sliderPost[exp.nSentences - 1];
 
-    adjective = exp.examples[i].target.split(" ").pop();
+    // adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!(subEndorse && superEndorse)) {
-      $(".errSliders").show();
-    } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
-      $(".err").show();
-    } else {
+    // if (!(subEndorse && superEndorse)) {
+    //   $(".errSliders").show();
+    // } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
+    //   $(".err").show();
+    if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".err").show(); }
+    else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
         "target" : exp.examples[i].target,
         "degree" : exp.examples[i].degree,
-        "adjective" : adjective,
+        // "adjective" : adjective,
         "names" : exp.names[i] + "",
         "sub_category" : exp.examples[i].sub,
-        "super_category" : exp.examples[i].super,
-        "other_response": response,
-        "sub_endorsement": subEndorse,
-        "super_endorsement" : superEndorse,
-        "other_endorsement":  otherEndorse ? otherEndorse : 0,
+        "super_category" : exp.examples[i].super//,
+        // "other_response": response,
+        // "sub_endorsement": subEndorse,
+        // "super_endorsement" : superEndorse,
+        // "other_endorsement":  otherEndorse ? otherEndorse : 0,
       });
       i++;
       exp.go();
@@ -194,8 +149,10 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
-  exp.sliderOrder = _.shuffle(["sub", "super"]);
-  exp.nSentences = exp.sliderOrder.length + 1;
+  // set the number of sliders to use
+  // exp.sliderOrder = _.shuffle(["sub", "super"]);
+  // exp.nSentences = exp.sliderOrder.length + 1;
+  exp.nSentences = 1;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {

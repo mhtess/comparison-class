@@ -91,57 +91,22 @@ function embedSliderSlides(trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-			"<table id=\"multi_slider_table" + i +"\"" +  "class=\"slider_table\">" +
-			"<tr><td></td>"+
+			"<table id=\"multi_slider_table" + i + "\"" + "class=\"slider_table\">" +
+			"<tr><td></td>" +
 			"<td class=\"left\">very unlikely</td>"+
 			"<td class=\"right\">very likely</td>" +
-			"</tr> </table>" +
-  		"<span class=\"display_prompt\"></span>"+
+			"</tr></table>" +
+  		"<span class=\"display_prompt\"></span>" +
 			// '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
-			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+			// "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-			'<p class="errSliders">Please adjust the first two sliders before continuing.</p>'+
-  		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +
+			// '<p class="errSliders">Please adjust the first two sliders before continuing.</p>' +
+  		'<p class="err">Please adjust the slider before continuing.</p>' +
   		"</div>";
 
   	$(".trial_slides").html(slides);
   }
 }
-
-
-// embeds the trial slides that were generated in the experiment file into the html file
-function embedSliderSlides(trials) {
-  var slides = "", sliderText;
-  for (var i = 1; i <= trials; i++) {
-
-		sliderText = [
-			exp.examples[i-1]["low"],
-			exp.examples[i-1]["medium"]
-		];
-
-    slides = slides +
-		"<div class=\"slide\" id=\"trial" + i + "\">" +
-    	"<p class=\"display_context\"></p>" +
-  		"<p class=\"display_target\"></p>" +
-  		"<p class=\"display_question\"></p>" +
-			"<table id=\"multi_slider_table" + i +"\"" +  "class=\"slider_table\">" +
-			"<tr><td></td>"+
-			"<td class=\"left\">very unlikely</td>"+
-			"<td class=\"right\">very likely</td>" +
-			"</tr> </table>" +
-  		"<span class=\"display_prompt\"></span>"+
-			// '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
-			"<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
-  		"<button onclick=\"_s.button()\">Continue</button>" +
-			'<p class="errSliders">Please adjust the first two sliders before continuing.</p>'+
-  		'<p class="err">Please tell us what "other" paraphrase you think is likely.</p>' +
-  		"</div>";
-
-  	$(".trial_slides").html(slides);
-  }
-}
-
-
 
 // embeds the trial slides that were generated in the experiment file into the html file for the listener experiment
 function embedListenerSlides(examples, trials) {
