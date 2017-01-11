@@ -25,8 +25,8 @@ function makeSlides(f) {
     // display the context sentence
     // $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
-    $(".display_target").html("Consider 10 " + exp.examples[i].sub + ". How many of them do you think would be "  + exp.examples[i].target +
-      " relative to other " + exp.examples[i].super + "?");
+    $(".display_target").html("Imagine <strong>10 " + exp.examples[i].sub + "</strong>.<br> How many of them do you think would be considered <strong>"  + exp.examples[i].target +
+      " relative to other " + exp.examples[i].super + "</strong>?");
 
     // changes the format when a pronoun is used in the target sentence
     // if (exp.examples[i].target[0] === " ") {
@@ -55,7 +55,8 @@ function makeSlides(f) {
     // else {
     //   $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     // }
-    $(".display_noun").html(exp.examples[i].sub + ".");
+
+    // $(".display_noun").html(exp.examples[i].sub + ".");
   }
 
   // runs when the "Continue" button is hit on a slide
