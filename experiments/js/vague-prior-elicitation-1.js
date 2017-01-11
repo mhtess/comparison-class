@@ -25,15 +25,11 @@ function makeSlides(f) {
     $(".errSliders").hide();
 
     // display the context sentence
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
-    }
-    else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
-    }
+    $(".display_context").html(exp.examples[i].context + " How likely is the " + exp.examples[i].sub + " to be " + exp.examples[i].target +
+      " relative to other " + exp.examples[i].super + "?");
 
     // changes the format when a pronoun is used in the target sentence
-    var targetSentence, adjectivePhrase;
+    // var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
       // if we need an extra name, pop if off exp.extra
       // exp.names[i] = [exp.names[i], exp.extra.pop()];

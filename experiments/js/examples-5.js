@@ -15,9 +15,9 @@ var examples = [
 		"What do you think was the temperature outside?"
 	],
 	sub : [
-		"days in Winter",
-		"days in Fall",
-		"days in Summer"
+		"day in Winter",
+		"day in Fall",
+		"day in Summer"
 	],
 	super : [
 		"days of the year",
@@ -42,9 +42,9 @@ var examples = [
 		"What do you think was the temperature outside?"
 	],
 	sub : [
-		"days in Winter",
-		"days in Fall",
-		"days in Summer"
+		"day in Winter",
+		"day in Fall",
+		"day in Summer"
 	],
 	super : [
 		"days of the year",
@@ -104,9 +104,9 @@ var examples = [
 		"What do you think was the price of the oven?"
 	],
 	sub : [
-		"can openers",
-		"toasters",
-		"ovens"
+		"can opener",
+		"toaster",
+		"oven"
 	],
 	super: [
 		"appliances",
@@ -131,9 +131,9 @@ var examples = [
 		"What do you think was the price of the oven?"
 	],
 	sub : [
-		"can openers",
-		"toasters",
-		"ovens"
+		"can opener",
+		"toaster",
+		"oven"
 	],
 	super: [
 		"appliances",
@@ -165,9 +165,9 @@ var examples = [
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"videos of cute animals",
-		"music videos",
-		"lectures"
+		"video of cute animals",
+		"music video",
+		"lecture"
 	],
 	super: [
 		"things you watch online",
@@ -199,9 +199,9 @@ var examples = [
 		// "What do you think was the duration of the television series?"
 	],
 	sub: [
-		"videos of cute animals",
-		"music videos",
-		"lectures"
+		"video of cute animals",
+		"music video",
+		"lecture"
 	],
 	super: [
 		"things you watch online",
@@ -234,9 +234,9 @@ var examples = [
 		"What do you think is the height of the basketball player?"
 	],
 	sub: [
-		"gymnasts",
-		"soccer players",
-		"basketball players"
+		"gymnast",
+		"soccer player",
+		"basketball player"
 	],
 	super: [
 		"people",
@@ -261,9 +261,9 @@ var examples = [
 		"What do you think is the height of the basketball player?"
 	],
 	sub: [
-		"gymnasts",
-		"soccer players",
-		"basketball players"
+		"gymnast",
+		"soccer player",
+		"basketball player"
 	],
 	super: [
 		"people",
@@ -288,9 +288,9 @@ var examples = [
 		"What do you think is the weight of the watermelon?"
 	],
 	sub: [
-		"grapes",
-		"apples",
-		"watermelons"
+		"grape",
+		"apple",
+		"watermelon"
 	],
 	super: [
 		"fruit",
@@ -315,9 +315,9 @@ var examples = [
 		"What do you think is the weight of the watermelon?"
 	],
 	sub: [
-		"grapes",
-		"apples",
-		"watermelons"
+		"grape",
+		"apple",
+		"watermelon"
 	],
 	super: [
 		"fruit",
