@@ -5,9 +5,9 @@ var examples = [
 	// the best example is of people from different places
 	target : "warm",
 	context : [
-		" lives in Maryland and steps outside in Winter.",
-		" lives in Maryland and steps outside in Fall.",
-		" lives in Maryland and steps outside in Summer."
+		" Imagine you live in Maryland and you go outside during a day in Winter.",
+		" Imagine you live in Maryland and you go outside during a day in Fall.",
+		" Imagine you live in Maryland and you go outside during a day in Summer."
 	],
 	prompt : [
 		"What do you think was the temperature outside?",
@@ -32,9 +32,9 @@ var examples = [
 }, {
 	target : "cold",
 	context : [
-		" lives in Maryland and steps outside in Winter.",
-		" lives in Maryland and steps outside in Fall.",
-		" lives in Maryland and steps outside in Summer."
+		" Imagine you live in Maryland and you go outside during a day in Winter.",
+		" Imagine you live in Maryland and you go outside during a day in Fall.",
+		" Imagine you live in Maryland and you go outside during a day in Summer."
 	],
 	prompt : [
 		"What do you think was the temperature outside?",
@@ -94,9 +94,9 @@ var examples = [
 {
 	target : "expensive",
 	context : [
-		" is buying a can opener.",
-		" is buying a toaster.",
-		" is buying an oven."
+		"Imagine buying a can opener.",
+		"Imagine buying a toaster.",
+		"Imagine buying an an oven."
 	],
 	prompt : [
 		"What do you think was the price of the can opener?",
@@ -121,9 +121,9 @@ var examples = [
 }, {
 	target : "cheap",
 	context : [
-		" is buying a can opener.",
-		" is buying a toaster.",
-		" is buying an oven."
+		"Imagine buying a can opener.",
+		"Imagine buying a toaster.",
+		"Imagine buying an an oven."
 	],
 	prompt : [
 		"What do you think was the price of the can opener?",
@@ -150,9 +150,9 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a commercial on YouTube.",
-		" is about to show their friend a music video on YouTube.",
-		" is about to show their friend a lecture on YouTube."
+		"Imagine that you are about to be shown a commercial on YouTube.",
+		"Imagine that you are about to be shown a music video on YouTube.",
+		"Imagine that you are about to be shown a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
@@ -184,9 +184,9 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a commercial on YouTube.",
-		" is about to show their friend a music video on YouTube.",
-		" is about to show their friend a lecture on YouTube."
+		"Imagine that you are about to be shown a commercial on YouTube.",
+		"Imagine that you are about to be shown a music video on YouTube.",
+		"Imagine that you are about to be shown a lecture on YouTube."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
@@ -224,9 +224,9 @@ var examples = [
 }, {
 	target : " tall",
 	context : [
-		" sees a professional gymnast.",
-		" sees a professional soccer player.",
-		" sees a professional basketball player."
+		"Imagine seeing a professional gymnast.",
+		"Imagine seeing a professional soccer player.",
+		"Imagine seeing a professional basketball player."
 	],
 	prompt : [
 		"What do you think is the height of the gymnast?",
@@ -251,9 +251,9 @@ var examples = [
 }, {
 	target : " short",
 	context : [
-		" sees a professional gymnast.",
-		" sees a professional soccer player.",
-		" sees a professional basketball player."
+		"Imagine seeing a professional gymnast.",
+		"Imagine seeing a professional soccer player.",
+		"Imagine seeing a professional basketball player."
 	],
 	prompt : [
 		"What do you think is the height of the gymnast?",
@@ -278,9 +278,9 @@ var examples = [
 }, {
 	target : " heavy",
 	context : [
-		" picks up a grape.",
-		" picks up an apple.",
-		" picks up a watermelon."
+		"Imagine picking up a grape.",
+		"Imagine picking up an apple.",
+		"Imagine picking up a watermelon."
 	],
 	prompt : [
 		"What do you think is the weight of the grape?",
@@ -305,9 +305,9 @@ var examples = [
 }, {
 	target : " light",
 	context : [
-		" picks up a grape.",
-		" picks up an apple.",
-		" picks up a watermelon.",
+		"Imagine picking up a grape.",
+		"Imagine picking up an apple.",
+		"Imagine picking up a watermelon."
 	],
 	prompt : [
 		"What do you think is the weight of the grape?",
