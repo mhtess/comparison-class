@@ -13,9 +13,17 @@ function makeSlides(f) {
 
   slides.instructions = slide({
     name : "instructions",
+    start : function() {
+      $(".err").hide();
+      $("#multi_slider_table0").append('<tr class="slider_row"><td class="slider_target" id="sentence' + 0 + '">' + '</td><td colspan="2"><div id="slider' + 0 + '" class="slider">-------[ ]--------</div></td></tr>');
+      utils.make_slider("#slider" + 0,
+      make_slider_callback(0));
+      exp.sliderPost = [];
+    },
     button : function() {
-      exp.catch_trials.push($("#catch").val());
-      exp.go(); // use exp.go() if and only if there is no "present" data
+      if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".err").show(); }
+      // exp.catch_trials.push($("#catch").val());
+      else { exp.go(); }
     }
   });
 
@@ -36,17 +44,15 @@ function makeSlides(f) {
 
     $(".slider_row").remove();
 
-    // display the sliders
-    $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + 0 + '">' + '</td><td colspan="2"><div id="slider' + 0 + '" class="slider">-------[ ]--------</div></td></tr>');
-      utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
+    // display the slider for each slide
+    $("#multi_slider_table" + (i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + 1 + '">' + '</td><td colspan="2"><div id="slider' + 1 + '" class="slider">-------[ ]--------</div></td></tr>');
+    utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
 
     init_sliders(exp.nSentences);
-    exp.sliderPost = [];
-
   }
 
   function init_sliders(nSentences) {
-    for (var j = 0; j < nSentences; j++) {
+    for (var j = 1; j <= nSentences; j++) {
       utils.make_slider("#slider" + j,
       make_slider_callback(j));
     }
