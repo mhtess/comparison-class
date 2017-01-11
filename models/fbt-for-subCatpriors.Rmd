@@ -8,6 +8,23 @@ output: html_notebook
 library(langcog)
 library(tidyverse)
 library(rwebppl)
+library(coda)
+
+estimate_mode <- function(s) {
+  d <- density(s)
+  return(d$x[which.max(d$y)])
+}
+
+HPDhi<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","upper"])
+}
+
+HPDlo<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","lower"])
+}
+
 ```
 
 ```{r}
@@ -31,9 +48,40 @@ d.prior <- read.csv(paste(model.path, "simulated_data/items2.csv", sep = ""))
 ```{r}
 wppl.model <- paste(model.path, "fbt-for-subCatpriors.wppl", sep = "")
 
-webppl(program_file = wppl.model,
+numSamples = 100
+
+rs <- webppl(program_file = wppl.model,
        data = d.prior,
-       data_var = "data")
+       data_var = "dataFromR",
+       inference_opts = list(method = "MCMC", 
+                             samples = numSamples, burn = numSamples / 2, verbose = T),
+       model_var = "model",
+       chains = 1,
+       cores = 1)
+```
+
+
+```{r}
+rs.tidy <- rs %>% select(-score) %>%
+  gather(key, val) %>%
+  separate(key, into=c("blank", "subCat", "param"), sep = "[.]") %>%
+  select(-blank)
+```
+
+```{r}
+rs.summary <- rs.tidy %>%
+  group_by(subCat, param) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_lower = HPDlo(val),
+            cred_upper = HPDhi(val))
+```
+
+```{r}
+ggplot(rs.summary, aes(x = subCat, y = MAP, ymin = cred_lower, ymax = cred_upper))+
+  geom_bar(stat='identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~param, scales = 'free')+
+  coord_flip()
 ```
 
 
