@@ -64,7 +64,7 @@ function embedSlides(trials) {
   		"<p class=\"display_question\"></p>" +
   		"<span class=\"display_prompt\"></span><input type=\"text\" id=\"text_response" + i + "\"></input>.\"<p></p>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-  		"<p class=\"err\">Please write something.</p>" +
+  		"<p class=\"err\">Please type something.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }
