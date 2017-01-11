@@ -26,7 +26,7 @@ function makeSlides(f) {
     // $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     $(".display_target").html("Consider 10 " + exp.examples[i].sub + ". How many of them do you think would be "  + exp.examples[i].target +
-      " relative to other " + exp.examples[i].super + ".");
+      " relative to other " + exp.examples[i].super + "?");
 
     // changes the format when a pronoun is used in the target sentence
     // if (exp.examples[i].target[0] === " ") {
