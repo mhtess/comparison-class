@@ -1,0 +1,39 @@
+---
+title: "BDA of RSA for sub-category priors"
+output: html_notebook
+---
+
+
+```{r}
+library(langcog)
+library(tidyverse)
+library(rwebppl)
+```
+
+```{r}
+model.path <- "/Users/mht/research/comparison-class/models/"
+```
+
+
+## Items v2
+
+```{r}
+data.path <- "/Users/mht/research/comparison-class/data/classElicitation-2-items2/"
+d <- read.csv(paste(data.path, "class-elicitation-2-items2-trials.csv", sep = ""))
+```
+
+Load MHT's responses
+
+```{r}
+d.prior <- read.csv(paste(model.path, "simulated_data/items2.csv", sep = ""))
+```
+
+```{r}
+wppl.model <- paste(model.path, "fbt-for-subCatpriors.wppl", sep = "")
+
+webppl(program_file = wppl.model,
+       data = d.prior,
+       data_var = "data")
+```
+
+
