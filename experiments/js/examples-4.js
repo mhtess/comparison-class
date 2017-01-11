@@ -150,9 +150,9 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a video of cute animals on YouTube.",
-		" is about to show their friend a music video on YouTube.",
-		" is about to show their friend a lecture on YouTube."
+		" is about to show their friend a video of a cute animal online.",
+		" is about to show their friend a music video online.",
+		" is about to show their friend a lecture online."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
@@ -170,9 +170,9 @@ var examples = [
 		"lectures"
 	],
 	super: [
-		"things you watch on YouTube",
-		"things you watch on YouTube",
-		"things you watch on YouTube"
+		"things you watch online",
+		"things you watch online",
+		"things you watch online"
 	],
 	strength : [1,2,3],
 	degree : "time",
@@ -184,9 +184,9 @@ var examples = [
 	context : [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a video of cute animals on YouTube.",
-		" is about to show their friend a music video on YouTube.",
-		" is about to show their friend a lecture on YouTube."
+		" is about to show their friend a video of a cute animal online.",
+		" is about to show their friend a music video online.",
+		" is about to show their friend a lecture online."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
@@ -204,9 +204,9 @@ var examples = [
 		"lectures"
 	],
 	super: [
-		"things you watch on YouTube",
-		"things you watch on YouTube",
-		"things you watch on YouTube"
+		"things you watch online",
+		"things you watch online",
+		"things you watch online"
 	],
 	strength : [1,2,3],
 	degree : "time",
