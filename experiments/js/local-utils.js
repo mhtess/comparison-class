@@ -6,6 +6,7 @@ function getTrials(examples) {
 			trials.push({
 				target: examples[i].target,
 				context: examples[i].context[j],
+        action: examples[i].action[j],
         prompt: examples[i].prompt[j],
         degree: examples[i].degree,
         unit: examples[i].unit,

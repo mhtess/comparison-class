@@ -365,7 +365,12 @@ var examples = [
 	subunit: ["inches", "centimeters"]
 }, {
 	target: " heavy",
-	context: [
+	context : [
+		" picks up a grape.",
+		" picks up an apple.",
+		" picks up a watermelon."
+	],
+	action: [
 		"Imagine you pick up a grape.",
 		"Imagine you pick up an apple.",
 		"Imagine you pick up a watermelon."
@@ -399,7 +404,12 @@ var examples = [
 	subunit: ["ounces", "grams"]
 }, {
 	target: " light",
-	context: [
+	context : [
+		" picks up a grape.",
+		" picks up an apple.",
+		" picks up a watermelon."
+	],
+	action: [
 		"Imagine you pick up a grape.",
 		"Imagine you pick up an apple.",
 		"Imagine you pick up a watermelon."
