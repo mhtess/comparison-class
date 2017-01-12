@@ -27,17 +27,47 @@ var round = function(x){
   return Math.round(x*10)/10
 };
 
+
+var distProbs = function(dist, supp) {
+  return map(function(s) {
+    return Math.exp(dist.score(s))
+  }, supp)
+}
+
+var KL = function(p, q, supp) {
+  var P = distProbs(p, supp), Q = distProbs(q, supp);
+  var diverge = function(xp,xq) {
+    return xp == 0 ? 0 : (xp * Math.log(xp / xq) );
+  };
+  return sum(map2(diverge,P,Q));
+};
+
+
 // were it not for speaker optimality
 // this model could be run independently for each item
 
 // pretend like I collected 25 subjects who all gave my response;
-var data = _.flatten(repeat(25, function(){ return dataFromR }))
+var data_superSpeaker = _.flatten(repeat(25, function(){ return dataFromR.superSpeaker }))
+// pretend like the ave. slider ratings were proportions of forced choice responses
+var data_ccInference = _.flatten(map(function(d){
+  return repeat(Math.round(d.mean*100), function(){
+    return {
+      response: d.key,
+      sub_category: d.sub_category,
+      form: d.form
+    }
+  })
+}, dataFromR.ccInference));
 
-var subCategories = _.uniq(_.pluck(data, "sub_category"));
+// display(data_ccInference)
+
+var subCategories = _.uniq(_.pluck(data_superSpeaker, "sub_category"));
 
 var model = function(){
 
-  var alphas = {s1: 3, s2: 1}; // might need to put uncertainty over alphas
+  // should probably be an s1 for each task
+  var alphas = {s1: {super: 3, cc: 2}, s2: 1};
+  // might need to put uncertainty over alphas
 
   var parameters = map(function(subCat){
 
@@ -92,64 +122,107 @@ var model = function(){
         });
       });
 
-      var literalListener = cache(function(utterance, threshold) {
+      var literalListener = cache(function(utterance, threshold, comparisonClass) {
         Infer({model: function(){
-          var state = sample(statePrior["super"]);
+          var state = sample(statePrior[comparisonClass]);
           var m = meaning(utterance, state, threshold);
           condition(m);
           return state;
         }})
       }, 10000);
 
-      var speaker1 = cache(function(state, threshold, form) {
+      /////////////////////////////////////////////////
+      // for Superordinate class speaker task
+      var speaker1_super = cache(function(state, threshold, form) {
         Infer({model: function(){
           var utterance = sample(utterancePrior(form))
-          var L0 = literalListener(utterance, threshold)
-          factor( alphas.s1 * L0.score(state) )
+          var L0 = literalListener(utterance, threshold, "super")
+          factor( alphas.s1.super * L0.score(state) )
           return utterance
         }})
       }, 10000)
 
-      var pragmaticListener = cache(function(utterance, form) {
+      var pragmaticListener_super = cache(function(utterance, form) {
         Infer({model: function(){
           var state = sample(statePrior["super"]);
           var threshold = sample(thresholdPrior(form));
-          var S1 = speaker1(state, threshold, form);
+          var S1 = speaker1_super(state, threshold, form);
           observe(S1, utterance);
           return state
         }})
       }, 10000)
 
-      var speaker2 = function(form){
+      var speaker2_super = function(form){
         Infer({model: function(){
-          // here, the speaker has uncertainty about the state
-          // should probably swithch to factoring based on KL
-          var state = sample(statePrior["sub"]);
-
+          var speakerBeliefs = statePrior["sub"];
           var utterance = sample(utterancePrior(form));
-          var L1 = pragmaticListener(utterance, form)
-          factor( alphas.s2 * L1.score(state) )
+          var L1 = pragmaticListener_super(utterance, form);
+
+          var _kl = KL(speakerBeliefs, L1, speakerBeliefs.support());
+          factor(-1 * _kl)
+
           return utterance == (form + "Adjective")
           }})
       }
+      ////////////////////////////////////////
 
+      ////////////////////////////////////////
+      // for Comparison Class Inference task
+      var speaker1 = cache(function(state, threshold, comparisonClass, form) {
+        Infer({model: function(){
+          var utterance = sample(utterancePrior(form))
+          var L0 = literalListener(utterance, threshold, comparisonClass)
+          factor( alphas.s1.cc * L0.score(state) )
+          return utterance
+        }})
+      })
+
+      var pragmaticListener = function(form) {
+        Infer({model: function(){
+          var utterance = form + "Adjective";
+          var comparisonClass = sample(classPrior);
+          var state = sample(statePrior["sub"]);
+          var threshold = sample(thresholdPrior(form));
+          var S1 = speaker1(state, threshold, comparisonClass, form);
+          observe(S1, utterance);
+          return comparisonClass
+        }})
+      }
+      //////////////////////////////////////////
 
       var postPreds = map(function(form){
 
-        var d_subcat_form = _.pluck(_.where(data, {sub_category: subCat, form:form}), "prior_response");
+        var d_subcat_superSpeaker = _.pluck(
+          _.where(data_superSpeaker, {sub_category: subCat, form:form}),
+        "prior_response");
+        var d_subcat_ccInference = _.pluck(
+            _.where(data_ccInference, {sub_category: subCat, form:form}),
+        "response");
 
-        var speakerProbs = speaker2(form);
-        var linkedSpeaker = Binomial({n: 10, p: Math.exp(speakerProbs.score(true))});
+        var superSpeakerProbs = speaker2_super(form);
+        var linkedSpeaker = Binomial({n: 10, p: Math.exp(superSpeakerProbs.score(true))});
 
-        mapData({data:d_subcat_form}, function(d){
+        mapData({data:d_subcat_superSpeaker}, function(d){
           observe(linkedSpeaker, d)
         })
 
-        return ["posteriorPredictive_" + form, Math.exp(speakerProbs.score(true))]
+        var ccRSA = pragmaticListener(form);
+
+        mapData({data:d_subcat_ccInference}, function(d){
+          display(d + " " + ccRSA.score(d))
+          observe(ccRSA, d);
+        })
+
+        return [
+          ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
+          ["predictive_superCC_" + form, Math.exp(ccRSA.score("super"))]
+        ]
 
       }, ["positive","negative"])
 
-    return [[subCat, _.object([["mu", mu], ["sigma", sigma], postPreds[0], postPreds[1]])]]
+    return [[subCat, _.object([["mu", mu], ["sigma", sigma],
+    postPreds[0][0], postPreds[1][0],
+    postPreds[1][0], postPreds[1][1]])]]
 
   }, subCategories)
 
