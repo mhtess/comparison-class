@@ -25,9 +25,9 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    $(".display_context").html(exp.examples[i].context);
+    $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
-    $(".display_target").html("Do you think the " + exp.examples[i].sub + " would be considered: <strong>" + exp.examples[i].target +
+    $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
      " relative to other " + exp.examples[i].super + "?");
 
     $(".display_question").html();
