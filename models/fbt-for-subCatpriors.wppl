@@ -41,8 +41,8 @@ var model = function(){
 
   var parameters = map(function(subCat){
 
-      var mu = uniform(-2, 2); // suncat mean is restricted to be +/- 2 stdev from supercat mean
-      var sigma = uniform(0, 1); // subcat variance probably should be lower than supercat variance
+      var mu = uniformDrift({a:-2, b: 2, width:0.5}); // suncat mean is restricted to be +/- 2 stdev from supercat mean
+      var sigma = uniformDrift({a:0, b:1, width: 0.2}); // subcat variance probably should be lower than supercat variance
       var binParam = 5;
 
       var stateParams = {
@@ -59,10 +59,12 @@ var model = function(){
 
       var stateProbs = {
         sub: map(function(s){
-          Math.exp(Gaussian(stateParams.sub).score(s))
+          Math.exp(Gaussian(stateParams.sub).score(s))+
+          Number.EPSILON
         }, stateVals),
         super: map(function(s){
-          Math.exp(Gaussian(stateParams.super).score(s))
+          Math.exp(Gaussian(stateParams.super).score(s))+
+          Number.EPSILON
         }, stateVals)
       };
 
