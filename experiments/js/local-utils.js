@@ -6,17 +6,17 @@ function getTrials(examples) {
 		  for (var k = 0; k < examples[i].context.length; k++) {
         trials.push({
           target: examples[i].target[Object.keys(examples[i].target)[j]],
-  				context: examples[i].context[j],
-          action: examples[i].action[j],
-          prompt: examples[i].prompt[j],
+  				context: examples[i].context[k],
+          action: examples[i].action[k],
+          prompt: examples[i].prompt[k],
           degree: examples[i].degree,
           unit: examples[i].unit,
   				form: examples[i].form,
           subunit: examples[i].subunit,
-  				sub_singular: examples[i].sub.singular[j],
-  				sub_plural: examples[i].sub.plural[j],
-          super: examples[i].super[j],
-  				strength: examples[i].strength[j]
+  				sub_singular: examples[i].sub.singular[k],
+  				sub_plural: examples[i].sub.plural[k],
+          super: examples[i].super[k],
+  				strength: examples[i].strength[k]
 			 });
 		  }
     }
