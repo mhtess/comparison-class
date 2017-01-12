@@ -2,22 +2,24 @@
 function getTrials(examples) {
 	var trials = [];
 	for (var i = 0; i < examples.length; i++) {
-		for (var j = 0; j < examples[i].context.length; j++) {
-			trials.push({
-				target: examples[i].target,
-				context: examples[i].context[j],
-        action: examples[i].action[j],
-        prompt: examples[i].prompt[j],
-        degree: examples[i].degree,
-        unit: examples[i].unit,
-				form: examples[i].form,
-        subunit: examples[i].subunit,
-				sub_singular: examples[i].sub.singular[j],
-				sub_plural: examples[i].sub.plural[j],
-        super: examples[i].super[j],
-				strength: examples[i].strength[j]
-			});
-		}
+    for (var j = 0; j < Object.keys(examples[i].target).length; j++) {
+		  for (var k = 0; k < examples[i].context.length; k++) {
+        trials.push({
+          target: examples[i].target[Object.keys(examples[i].target)[j]],
+  				context: examples[i].context[j],
+          action: examples[i].action[j],
+          prompt: examples[i].prompt[j],
+          degree: examples[i].degree,
+          unit: examples[i].unit,
+  				form: examples[i].form,
+          subunit: examples[i].subunit,
+  				sub_singular: examples[i].sub.singular[j],
+  				sub_plural: examples[i].sub.plural[j],
+          super: examples[i].super[j],
+  				strength: examples[i].strength[j]
+			 });
+		  }
+    }
 	}
 	return _.shuffle(trials);
 }
