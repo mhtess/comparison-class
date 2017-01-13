@@ -12,3 +12,5 @@ mturk
 *.Rhistory
 *.RData
 *.Rproj.user
+*invoice.csv
+.Rproj.user
