@@ -41,11 +41,26 @@ knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", f
 ```{r, libraries}
 library(png)
 library(grid)
-library(ggplot2)
+library(tidyverse)
 library(xtable)
-library(tidyr)
-library(dplyr)
-#library(rwebppl)
+library(rwebppl)
+library(langcog)
+library(coda)
+
+estimate_mode <- function(s) {
+  d <- density(s)
+  return(d$x[which.max(d$y)])
+}
+
+HPDhi<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","upper"])
+}
+
+HPDlo<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","lower"])
+}
 ```
 
 # Introduction
@@ -98,9 +113,28 @@ That is, the plausible heights of basketball players is different than the plaus
 As a first test of this pragmatic theory, we consider a simple case: 
 The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*). 
 Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
-We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."), though doesn't know 
-Thus, the listener $L_1$ tries to uncover the speaker's intended comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$.
+We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."): $P(x \mid c_{sub})$.
+Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$ and the superordinate level category (e.g., people in general) $P(x \mid c_{super})$.
 
+The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
+For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
+
+```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model precictions"}
+## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
+
+model.path <- "/Users/mht/research/comparison-class/models/"
+mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
+       packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
+
+ggplot(mp, aes(x = support, y = prob, fill = support))+
+  geom_bar(stat= 'identity', position = position_dodge())+
+  scale_fill_brewer(palette = "Set1")+
+  theme_bw()
+```
+
+We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*). 
+The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior. 
+We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
 
@@ -109,6 +143,30 @@ Thus, the listener $L_1$ tries to uncover the speaker's intended comparison clas
 ### Participants
 
 ### Materials
+
+\mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
+
+Here are some notes about how to make tables:
+
+Number tables consecutively; place the table number and title (in
+10 point) above the table with one line space above the caption and
+one line space below it, as in Table 1. You may float
+tables to the top or bottom of a column, set wide tables across both
+columns.
+
+You can use the xtable function in the xtable package.
+
+```{r xtable, results="asis"}
+n <- 100
+x <- rnorm(n)
+y <- 2*x + rnorm(n)
+out <- lm(y ~ x)
+
+tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2), 
+                      caption = "This table prints across one column.")
+
+print(tab1, type="latex", comment = F, table.placement = "H")
+```
 
 ### Procedure
 
