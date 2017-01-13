@@ -1,23 +1,23 @@
 ---
-title: "Cheap cars, expensive coffee: Inferring comparison classes in vague language understanding"
+title: "Cheap cars, expensive coffee: Understanding comparison classes in vague language"
 bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
 
 author-information: > 
     \author{{\large \bf Author 1} \\ \texttt{author1@university.edu} \\ Department of Psychology \\ Some University
-    \And {\large \bf Author 2} \\ \texttt{author1@university.edu} \\ Department of Psychology \\ Some University}
+    \And {\large \bf Author 2} \\ \texttt{author2@university.edu} \\ Department of Psychology \\ Some University
+    \And {\large \bf Author 3} \\ \texttt{author3@university.edu} \\ Department of Psychology \\ Some University}
 
 abstract: 
-    "The abstract should be one paragraph, indented 1/8 inch on both sides,
-in 9 point font with single spacing. The heading Abstract should
-be 10 point, bold, centered, with one line space below it. This
-one-paragraph abstract section is required only for standard spoken
-papers and standard posters (i.e., those presentations that will be
-represented by six page papers in the Proceedings)."
+    "Gradeable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
+    In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation. 
+    We introduce a Rational Speech Act model that treats the implicit comparison class as a random variable inferred via pragmatic reasoning.
+    We find this model predicts that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
+    "
     
 keywords:
-    "Add your choice of indexing terms or keywords; kindly use a semi-colon; between each term."
+    "pragmatics; vagueness; comparison class; Bayesian data analysis; Bayesian cognitive model"
     
 output: cogsci2016::cogsci_paper
 ---
@@ -25,10 +25,12 @@ output: cogsci2016::cogsci_paper
 \definecolor{Red}{RGB}{255,0,0}
 \definecolor{Green}{RGB}{10,200,100}
 \definecolor{Blue}{RGB}{10,100,200}
+\definecolor{Orange}{RGB}{255,153,0}
 
 \newcommand{\red}[1]{\textcolor{Red}{#1}}  
 \newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
 \newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
+\newcommand{\mlb}[1]{\textcolor{Orange}{[mlb: #1]}}
 
 ```{r global_options, include=FALSE}
 rm(list=ls())
@@ -46,86 +48,37 @@ library(dplyr)
 #library(rwebppl)
 ```
 
-# Proposal
+# Introduction
 
 How can a cup of coffee be expensive while cheap cars populate the highways?
 Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
-Vague language is ubiquitous in everyday conversation; much more common than actually saying numeric values...
 
-Understanding language that is vague poses a challenge to computational approaches to language. 
-
-Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure.
-For example, a cup of coffee is expensive if its price is greater than some number of dollars.
-The crux of such arguments rests on the fact that this threshold is relative to some *comparison class* of other possible entities. 
-Our cup of coffee can be expensive *relative to* other possible cups of coffee, or perhaps hot beverages sold at a local coffee shop.
+Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure \red{cite Kennedy?}.
+For example, a cup of coffee is expensive if its price is greater than some threshold number of dollars.
+The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities. 
+A cup of coffee can be expensive *relative to* other cups of coffee.
+A car can be cheap *relative to* other cars.
 
 @Lassiter2013 showed how this idea can be couched in a general pragmatic theory of language understanding.
 In this Rational Speech Act theory, the truth-conditional threshold comes from an uninformative prior distribution: a flat distribution over all possible thresholds.
 Listeners arrive at context-sensitive meanings by integrating their prior beliefs with general principles of communication, such as being truthful or informative. 
-The result is vague language understanding that displays context-sensitivity and admits borderline cases[@Lassiter2013; @Lassiter2015].
-In this formal theory, the comparison class is assumed in the specification of a listener's prior belief distribution.
+The result is vague language understanding that displays context-sensitivity and admits borderline cases [@Lassiter2013; @Lassiter2015].
+In this theory, the comparison class is implicit in the listener's prior belief distribution.
+
+Comparison classes are an issue not just for gradaeable adjectives but for any vague language that can be modeled using a threshold semantics.
+Generic language (e.g., *Ducks lay eggs*) have been shown to have this property [@TesslerUnderReview].
 
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
-@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to a comparison class). 
+@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class). 
 
-In this paper, we posit that the .
-We validate this technique by measuring listeners' prior belief distributions over the measure within the elicited comparison class (e.g., the price of cups of coffee).
-By measuring a comparison class and a corresponding prior belief distribution, we can derive predictions for adjective interpretation across different contexts using the Rational Speech Act model.
-We then test these predictions using a listener interpretation task.
-
-# Outline 
-
-## Experiments
-
-See all the items [here](http://stanford.edu/~mtessler/comparison-class/experiments/js/examples-2.js), or see the listener experiment (with all the items) [here](http://stanford.edu/~mtessler/comparison-class/experiments/listener-1.html).
-
-\begin{enumerate}
-
-\item \textbf{Stimuli}
-  \subitem Currently we have 40 unique items, made up of 6 scales x 2 (positive and negative form adjectives)
-  \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (touching objects vs. the weather). For the weather, it is really about speaker's beliefs--their own subjective comparison class (e.g., John think its cold because he's from Southern California).
-  \subitem 3 or 4 contexts by item (different targets of reference)
-  \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.'' 
-
-\item \textbf{Comparison class elicitation}
-  \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
-  \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.'' 
-  \subitem \textbf{Dependent measure}: What do you think Gary meant? ``This is heavy \textbf{for a} ...'' (fill in the blank)
-  \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
-
-\item \textbf{Prior elicitation}
-  \subitem This will refer to the comparison class. 
-  \subitem \textbf{Dependent measure}: What do you think is the weight of a television? Provide number and units (units from a set from a drop-down menu).
-
-\item \textbf{Language understanding (Listener task)}
-  \subitem Same stimuli as the comparison class elicitation.
-  \subitem \textbf{Dependent measure}: same as prior elicitation.
-
-\end{enumerate}
-
-# Model 
-
-uRSA with lifted variable. 
-Plug in different priors.
-
-# Data anlaysis
-
-Probably something similar to the habituals paper. 
-Assume log-normals, do BDA on the prior data.
-
-# Current concerns
-
-\begin{enumerate}
-
-\item In the Justine-way of doing these kinds of experiments, for the prior elicitation, we would have the same context sentence (``Gary buys a television and picks it up.'') without the adjective sentence, and ask about the likely weight.
-What does our intermediate comparison class elicitation step buy us?
-
-\item For many of the our items, it seems that the comparison class we're going to get is the class of the target objects (e.g., televisions, cups of coffee, weather in Southern California)... I have the feeling that some items (e.g., a 30 year old who is tall) have more general classes (e.g., tall for an adult, for a woman) while others (e.g., a 4 year old boy who is tall) have more specific classes (i.e., tall for a 4 year old). This example may be unique / idiosyncractic, but also may suggest that the comparison class needs to be a relative homogeneous category (e.g., 4 year olds are really different than 2 year olds, whereas 30 vs. 28 year olds not so much). If this is interesting, should we try to move our stimuli more in that direction? Any thoughts? 
-
-\end{enumerate}
+In this paper, we posit that pragmatic principles can be used to resolve the comparison class in context.
+We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
+We find this model makes a qualitative prediction about the level of abstraction of a comparison class and test this prediction using a paraphrase experiment in order to elicit the comparison class.
+Quantitative predictions for this model depend upon the quantitative details of listeners' prior distributions over various numeric scales.
+Because people are notoriously bad at numerical estimation \red{(cite something?)}, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
 
 
-# Rational Speech Act model for inferring comparison classes
+# Computational model
 
 We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015; @TesslerUnderReview] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
 This uncertainty is posited at the level of the pragmatic listener, and thus is resolved using pragmatic reasoning (i.e., the pressures to be truthful and informative).
@@ -138,19 +91,50 @@ L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)
 \end{align}
 
 Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$. 
-That is, the likely heights of basketball players is different than the likely heights of people in general. 
+That is, the plausible heights of basketball players is different than the plausible heights of people in general. 
 
-To test this theory, we consider a simple case: The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people). Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
-We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player.").
+## Model predictions
+
+As a first test of this pragmatic theory, we consider a simple case: 
+The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*). 
+Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
+We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."), though doesn't know 
 Thus, the listener $L_1$ tries to uncover the speaker's intended comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$.
 
 
-# Experiment 1: Knowledge elicitation
+# Experiment 1: Comparison class inference
 
+## Methods
 
+### Participants
 
-# Experiment 2: Comparison class inference
+### Materials
 
+### Procedure
+
+## Results
+
+# Experiment 2: Vague speakers
+
+## Methods
+
+### Participants
+
+### Materials
+
+### Procedure
+
+## Results
+
+# Discussion
+
+\begin{enumerate}
+\item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
+\item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
+\item Hyperbole / *normative* comparison classs: If we listen to a lecture, and you say "That *was long*.", it means "Long relative to how long I think it should have been." If we go out for pasta, and you ask how it was, and I say "it was expensive" it means "expensive relative to how much it should have been given the quality".
+\end{enumerate}
+
+<!--
 For general information about authoring in markdown, see **[here](http://rmarkdown.rstudio.com/authoring_basics.html).**
 
 First level headings should be in 12 point , initial caps, bold and
@@ -262,10 +246,65 @@ tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2),
 print(tab1, type="latex", comment = F, table.placement = "H")
 ```
 
+-->
 # Acknowledgements
 
 Place acknowledgments (including funding information) in a section at
 the end of the paper.
+
+
+
+
+<!--
+## Experiments
+
+See all the items [here](http://stanford.edu/~mtessler/comparison-class/experiments/js/examples-2.js), or see the listener experiment (with all the items) [here](http://stanford.edu/~mtessler/comparison-class/experiments/listener-1.html).
+
+\begin{enumerate}
+
+\item \textbf{Stimuli}
+  \subitem Currently we have 40 unique items, made up of 6 scales x 2 (positive and negative form adjectives)
+  \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (touching objects vs. the weather). For the weather, it is really about speaker's beliefs--their own subjective comparison class (e.g., John think its cold because he's from Southern California).
+  \subitem 3 or 4 contexts by item (different targets of reference)
+  \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.'' 
+
+\item \textbf{Comparison class elicitation}
+  \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
+  \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.'' 
+  \subitem \textbf{Dependent measure}: What do you think Gary meant? ``This is heavy \textbf{for a} ...'' (fill in the blank)
+  \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
+
+\item \textbf{Prior elicitation}
+  \subitem This will refer to the comparison class. 
+  \subitem \textbf{Dependent measure}: What do you think is the weight of a television? Provide number and units (units from a set from a drop-down menu).
+
+\item \textbf{Language understanding (Listener task)}
+  \subitem Same stimuli as the comparison class elicitation.
+  \subitem \textbf{Dependent measure}: same as prior elicitation.
+
+\end{enumerate}
+# Model 
+
+uRSA with lifted variable. 
+Plug in different priors.
+
+# Data anlaysis
+
+Probably something similar to the habituals paper. 
+Assume log-normals, do BDA on the prior data.
+
+# Current concerns
+
+\begin{enumerate}
+
+\item In the Justine-way of doing these kinds of experiments, for the prior elicitation, we would have the same context sentence (``Gary buys a television and picks it up.'') without the adjective sentence, and ask about the likely weight.
+What does our intermediate comparison class elicitation step buy us?
+
+\item For many of the our items, it seems that the comparison class we're going to get is the class of the target objects (e.g., televisions, cups of coffee, weather in Southern California)... I have the feeling that some items (e.g., a 30 year old who is tall) have more general classes (e.g., tall for an adult, for a woman) while others (e.g., a 4 year old boy who is tall) have more specific classes (i.e., tall for a 4 year old). This example may be unique / idiosyncractic, but also may suggest that the comparison class needs to be a relative homogeneous category (e.g., 4 year olds are really different than 2 year olds, whereas 30 vs. 28 year olds not so much). If this is interesting, should we try to move our stimuli more in that direction? Any thoughts? 
+
+\end{enumerate}
+
+-->
 
 # References 
 
