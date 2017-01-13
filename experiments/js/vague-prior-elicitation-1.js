@@ -38,8 +38,8 @@ function makeSlides(f) {
     $(".err").hide();
 
     // display the action sentence
-    $(".display_context").html(exp.examples[i].action + " How likely is the " + exp.examples[i].sub_singular + " to be " + exp.examples[i].target +
-      " relative to other " + exp.examples[i].super + "?");
+    $(".display_context").html(exp.examples[i].action + " How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
+      " relative to other " + exp.examples[i].super + "?</strong>");
 
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
@@ -152,17 +152,17 @@ function init() {
   exp.nSentences = 1;
 
   // if we have more trials than we do unique names, some names will be reused
-  if (exp.trials > characters.length) {
-    // this needs to be fixed later to account for the possibility of two names on the same trial slide
-    exp.names = sampleNames(characters).concat(sampleNames(characters));
-    exp.extra = sampleNames(characters);
-  } else {
-    // generate a list of unique names
-    exp.names = sampleNames(characters);
+  // if (exp.trials > characters.length) {
+  //   // this needs to be fixed later to account for the possibility of two names on the same trial slide
+  //   exp.names = sampleNames(characters).concat(sampleNames(characters));
+  //   exp.extra = sampleNames(characters);
+  // } else {
+  //   // generate a list of unique names
+  //   exp.names = sampleNames(characters);
 
-    // names for the trials that require an extra name
-    exp.extra = exp.names.slice(exp.trials, exp.names.length);
-  }
+  //   // names for the trials that require an extra name
+  //   exp.extra = exp.names.slice(exp.trials, exp.names.length);
+  // }
 
   // we don't have any catch trials for this experiment
   // exp.catch_trials = [];
@@ -179,7 +179,7 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
-  for (var k = 1; k <= 5; k++) {
+  for (var k = 1; k <= exp.examples.length; k++) {
     exp.structure.push("trial" + k);
   }
   exp.structure.push("subj_info");

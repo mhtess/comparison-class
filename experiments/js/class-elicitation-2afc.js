@@ -41,18 +41,18 @@ function makeSlides(f) {
       if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
         adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target
-        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
+        targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
 
       }
       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
         adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
           exp.examples[i].target;
-        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase
+        targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
       }
     }
     else {
       adjectivePhrase = exp.examples[i].target;
-      targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
+      targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
     }
     // }       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
     // }
