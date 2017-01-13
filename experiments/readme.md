@@ -25,9 +25,9 @@ Same as previous but with refined stimuli.
 
 1. `class-elicitation-2` and `class-elicitation-2afc`.
   - `class-elicitation-2` is very similar to the pilot. We are removing the "Other" option because it was not often used by participants in the pilot. The items have been subtly modified since the pilot.
-  - `class-elicitation-2afc` is a 2-alternative forced-choice version of the experiment. we use this to provide convergent evidence and for ease of data analysis.
+  - `class-elicitation-2afc` is a 2-alternative forced-choice version of the experiment. We run this first for ease of data analysis. (If it produces different results that what we expected from the pilot, we may run the slider version to see if this is due to the dependent measure.) Since each participant only does one-half of trials, we will collect about 150 participants to get approximately 75 responses for item. 75 responses on a 2AFC will produce confidence intervals with a maximum width of about 0.2-0.25. 
 
 2. `vague-prior-elicitation-1` and `vague-prior-elicitation-2afc`
   - Again, these are slider bar and 2afc versions of the same task.
-  - If they give convergent results, we will use the 2afc data for ease of data analysis
+  - Same data collection plan as above.
   - In these experiments, the participant knows the subordinate category ("Johns sees a basketball player"). Participants are asked if the adjective with an explicit superordinate comparison class would be appropriate (e.g., "How likely is it that the basketball player is tall relative to other people").
