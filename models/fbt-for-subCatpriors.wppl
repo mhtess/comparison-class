@@ -42,6 +42,15 @@ var KL = function(p, q, supp) {
   return sum(map2(diverge,P,Q));
 };
 
+var foreach = function(lst, fn) {
+    var foreach_ = function(i) {
+        if (i < lst.length) {
+            fn(lst[i]);
+            foreach_(i + 1);
+        }
+    };
+    foreach_(0);
+};
 
 // were it not for speaker optimality
 // this model could be run independently for each item
@@ -69,7 +78,8 @@ var model = function(){
   var alphas = {s1: {super: 3, cc: 2}, s2: 1};
   // might need to put uncertainty over alphas
 
-  var parameters = map(function(subCat){
+  // var parameters = map(function(subCat){
+  foreach(subCategories, function(subCat){
 
       var mu = uniformDrift({a:-2, b: 2, width:0.5}); // suncat mean is restricted to be +/- 2 stdev from supercat mean
       var sigma = uniformDrift({a:0, b:1, width: 0.2}); // subcat variance probably should be lower than supercat variance
@@ -190,7 +200,8 @@ var model = function(){
       }
       //////////////////////////////////////////
 
-      var postPreds = map(function(form){
+      foreach(["positive","negative"], function(form){
+        // var postPreds = map(function(form){
 
         var d_subcat_superSpeaker = _.pluck(
           _.where(data_superSpeaker, {sub_category: subCat, form:form}),
@@ -209,23 +220,32 @@ var model = function(){
         var ccRSA = pragmaticListener(form);
 
         mapData({data:d_subcat_ccInference}, function(d){
-          display(d + " " + ccRSA.score(d))
           observe(ccRSA, d);
         })
 
-        return [
-          ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
-          ["predictive_superCC_" + form, Math.exp(ccRSA.score("super"))]
-        ]
+        query.add("superSpeaker",
+          [form, Math.exp(superSpeakerProbs.score(true))])
+        query.add("superCC",
+          [form, Math.exp(ccRSA.score(true))])
 
-      }, ["positive","negative"])
+        // return [
+        //   ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
+        //   ["predictive_superCC_" + form, Math.exp(ccRSA.score("super"))]
+        // ]
 
-    return [[subCat, _.object([["mu", mu], ["sigma", sigma],
-    postPreds[0][0], postPreds[1][0],
-    postPreds[1][0], postPreds[1][1]])]]
+      // }, ["positive","negative"])
+    })
 
-  }, subCategories)
+    query.add(subCat, ["mu", mu])
+    query.add(subCat, ["sigma", sigma])
+    // return [[subCat, _.object([["mu", mu], ["sigma", sigma],
+    // postPreds[0][0], postPreds[1][0],
+    // postPreds[1][0], postPreds[1][1]])]]
 
-  return _.object(_.flatten(parameters, true));
+  })
 
+  // }, subCategories)
+
+  // return _.object(_.flatten(parameters, true));
+  return query
 }
