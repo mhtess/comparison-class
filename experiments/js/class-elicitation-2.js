@@ -34,24 +34,20 @@ function makeSlides(f) {
     // changes the format when a pronoun is used in the target sentence
     var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
-      // if we need an extra name, pop if off exp.extra
-      // exp.names[i] = [exp.names[i], exp.extra.pop()];
 
       // evaluates each target specifically
       if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target
+        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target;
         targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
 
       }
       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target;
-        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase
+        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target;
+        targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
       }
     }
     else {
-      adjectivePhrase = exp.examples[i].target;
+      adjectivePhrase = "It's " + exp.examples[i].target;
       targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
     }
     // }       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
@@ -134,7 +130,7 @@ function makeSlides(f) {
         "form" : exp.examples[i].form,
         "adjective" : adjective,
         "strength" : exp.examples[i].strength,
-        "names" : exp.names[i] + "",
+        "names" : exp.names[i],
         "sub_category" : exp.examples[i].sub,
         "super_category" : exp.examples[i].super,
         "paraphrase0" : exp.sliderOrder[0],
@@ -263,7 +259,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedSliderSlides(exp.trials);
+  embedMultipleSlidersSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined

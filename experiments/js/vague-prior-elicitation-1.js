@@ -49,12 +49,9 @@ function makeSlides(f) {
       $(".display_context").html(exp.names[i] + exp.examples[i].context);
     }
 
-    
+    // display the target 
     $(".display_target").html("How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "</strong>?");
-
-    // $(".display_context").html("<br>"+exp.examples[i].action + " <br><br> How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
-    //   " relative to other " + exp.examples[i].super + "</strong>?");
 
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
@@ -205,7 +202,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedSliderSlides(exp.trials);
+  embedVPESlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
