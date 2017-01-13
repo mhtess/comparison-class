@@ -43,11 +43,9 @@ function makeSlides(f) {
       $(".display_context").html(exp.names[i] + exp.examples[i].context);
     }
 
-
-    $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
+    // display the question
+    $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
      " relative to other " + exp.examples[i].super + "</strong>?");
-
-    $(".display_question").html();
 
     // display the radio buttons
     $('label[for=0]').html(exp.responseOrder[0]);
@@ -186,7 +184,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embed2AFCSlides(exp.trials);
+  embedVPE2AFCSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined

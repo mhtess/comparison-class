@@ -188,7 +188,6 @@ function init() {
   })();
 
   // generate all possible target-context pair combinations
-  // exp.examples = getTrials(examples);
   exp.examples = getUniqueTrials(examples);
 
   // one trial for each unique target-context pair

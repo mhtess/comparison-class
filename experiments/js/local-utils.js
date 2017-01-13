@@ -231,11 +231,6 @@ function embedListenerSlides(examples, trials) {
       "<select id=\"unit" + i + "\">" +
       "<option selected disabled hidden style='display: none' value=''></option>" + u + "</select>" + su +
       "</div><br><br>" +
-  		// "<p class=\"slider_number\"></p>" +
-  		// " <table id=\"slider_table\"class=\"slider_table\">" +
-  		// "<tr><td class=\"left\"></td><td class=\"right\"></td></tr>" +
-  		// "<tr><td colspan=\"2\"><div id=\"single_slider\"class=\"slider\"></div></td></tr>" +
-  		// "</table>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please type something and select a unit and subunit.</p>" +
       "<p class=\"numErr\">Please use whole numbers only.</p>" +
@@ -245,20 +240,37 @@ function embedListenerSlides(examples, trials) {
   }
 }
 
-function embed2AFCSlides(trials) {
+// embed the trial slides for vague-prior-elicitation-2afc
+function embedVPE2AFCSlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
     slides = slides +
 		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
-  		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
 			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>"+
 			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>"+
   		"<button onclick=\"_s.button()\">Continue</button>" +
 			'<p class="err">Please select an option before continuing.</p>'+
   		"</div>";
-
   	$(".trial_slides").html(slides);
+  }
+}
+
+// embed the trial slides for vague-prior-elicitation-2afc
+function embedCE2AFCSlides(trials) {
+  var slides = "";
+  for (var i = 1; i <= trials; i++) {
+    slides = slides +
+    "<div class=\"slide\" id=\"trial" + i + "\">" +
+      "<p class=\"display_context\"></p>" +
+      "<p class=\"display_target\"></p>" +
+      "<p class=\"display_question\"></p>" +
+      "<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>"+
+      "<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>"+
+      "<button onclick=\"_s.button()\">Continue</button>" +
+      '<p class="err">Please select an option before continuing.</p>'+
+      "</div>";
+    $(".trial_slides").html(slides);
   }
 }

@@ -31,62 +31,42 @@ function makeSlides(f) {
       $(".display_context").html(exp.names[i] + exp.examples[i].context);
     }
 
-    // changes the format when a pronoun is used in the target sentence
+    // construct the target sentence
     var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
-      // if we need an extra name, pop if off exp.extra
-      // exp.names[i] = [exp.names[i], exp.extra.pop()];
-
-      // evaluates each target specifically
-      if ((exp.examples[i].target.search("tall") != -1) || (exp.examples[i].target.search("short") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target
-        targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
-
-      }
-      else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-        adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) +
-          exp.examples[i].target;
-        targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
-      }
+      adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
+    }
+    else if (exp.examples[i].context.search("Maryland") != -1) {
+      adjectivePhrase = "It's " + exp.examples[i].target + " outside";
     }
     else {
-      adjectivePhrase = exp.examples[i].target;
-      targetSentence = exp.names[i] + " says, " + "\"This is " + adjectivePhrase;
+      adjectivePhrase = "This is " + exp.examples[i].target;
     }
-    // }       else if ((exp.examples[i].target.search("heavy") != -1) || (exp.examples[i].target.search("light") != -1)) {
-    // }
 
+    // display the target sentence
+    targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
     $(".display_target").html(targetSentence + "." + "\"");
 
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-    var displayPrompt;
     // display the paraphrase statement
     if (exp.examples[i].target[0] === " ") {
-      displayPrompt = "\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition;
+      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
     }
     else {
-      displayPrompt = "\"" + exp.examples[i].target + exp.condition;
+      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     }
-    // displayPrompt = "\"";
-
-    $(".display_prompt").html(displayPrompt);
 
     sliderText = {
-			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub"],
+			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub_plural"],
 			super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
       other: "Other (optional; fill in below)"
 		};
 
-    $('label[for=0]').html('"' + adjectivePhrase +
-    " relative to other " + exp.examples[i][exp.sliderOrder[0]] +
-    '."');
+    $('label[for=0]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[0]] + '."');
 
-    $('label[for=1]').html('"' + adjectivePhrase +
-    " relative to other " + exp.examples[i][exp.sliderOrder[1]] +
-    '."');
+    $('label[for=1]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[1]] + '."');
 
   }
 
@@ -182,7 +162,7 @@ function init() {
   })();
 
   // generate all possible target-context pair combinations
-  exp.examples = getTrials(examples);
+  exp.examples = getUniqueTrials(examples);
 
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
@@ -191,7 +171,7 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
-  exp.sliderOrder = _.shuffle(["sub", "super"]);
+  exp.sliderOrder = _.shuffle(["sub_plural", "super"]);
   exp.nSentences = exp.sliderOrder.length + 1;
 
   // if we have more trials than we do unique names, some names will be reused
@@ -235,7 +215,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embed2AFCSlides(exp.trials);
+  embedCE2AFCSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
