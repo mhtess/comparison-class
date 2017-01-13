@@ -11,23 +11,140 @@ last <- function(x) { return( x[length(x)] ) }
 
 Data analysis for comparison-class-2 pilot
 
+Items v1
 ```{r}
-data.path <- "~/research/comparison-class/mturk/class-elicitation-2/round1/"
+data.path <- "/Users/mht/research/comparison-class/data/classElicitation-2/"
 d <- read.csv(paste(data.path, "class-elicitation-2-trials.csv", sep = ""))
+```
+
+
+```{r}
+d.summary <- d %>%
+  select(sub_category, super_category, adjective, sub_endorsement, super_endorsement, degree) %>%
+  gather(key, response, -sub_category, -adjective, -super_category, -degree) %>%
+  group_by(key, sub_category, super_category, adjective, degree) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
+```
+
+```{r}
+d.summary<- left_join(d.summary, 
+                      data.frame(adjective = c("cheap", "cold", "expensive", "heavy",
+                         "light","long","short", "tall", 
+                         "warm" , "short"),
+                         form = c("negative", "negative", "positive", "positive", "negative", 
+                    "positive", "negative","positive","positive", "negative")))
+
+d.summary <- d.summary %>% 
+  ungroup() %>%
+  mutate(sub_category = factor(sub_category, levels = c("4 year-old boys", "men in their 30s", "basketball players",
+                                                        "cups of iced coffee", "glasses of milk", "cups of coffee",
+                                                        "lollipops", "ice cream cones", 
+                                                        "boxes of chocolate from the local chocolatier",
+                                                        "digital music players", "phones", "tablet computers", 
+                                                        "laptop computers", 
+                                                        "youtube videos", "movies",
+                                                        "television seasons"
+                                                        )), 
+         form = factor(form, levels = c("negative", "positive")))
+
+ggplot(d.summary, aes( x = form, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~sub_category, scales = 'free', nrow = 2)+
+  theme(axis.text.x = element_text(angle = 90))
+
+ggsave("~/research/comparison-class/analysis/fig/comparison-class-2_subCat.pdf", height = 7, width = 16) 
+
+d.summary <- d.summary %>% 
+  mutate(form = factor(form, levels = c("positive", "negative")))
+
+ggplot(d.summary, aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(form~degree, scales = 'free')+
+  theme(axis.text.x = element_text(angle = 90) )
+
+ggsave("~/research/comparison-class/analysis/fig/comparison-class-2_degreeXform.pdf", height = 6, width = 10) 
+  
+```
+
+Several subjects (# 0, 5, 6, 8, 12, 16) reported that they thought the "Other" option was required.
+This may have been an overly rigorous task for them and produced noisier data for the comparisons of interest.
+Let's look at the data without these subjects.
+
+
+```{r}
+omit <- c(0, 5, 6, 8, 12, 16)
+
+d.summary <- d %>%
+  filter(!(workerid %in% omit)) %>%
+  select(sub_category, super_category, adjective, sub_endorsement, super_endorsement) %>%
+  gather(key, response, -sub_category, -adjective, -super_category) %>%
+  group_by(key, sub_category, super_category, adjective) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
+
+ggplot(d.summary, aes( x = key, y = mean, ymin = ci_lower, ymax = ci_upper, group = adjective, fill = adjective ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~sub_category)
+```
+
+## Items v2
+
+```{r}
+data.path <- "/Users/mht/research/comparison-class/data/classElicitation-2-items2/"
+d <- read.csv(paste(data.path, "class-elicitation-2-items2-trials.csv", sep = ""))
 ```
 
 ```{r}
 d.summary <- d %>%
-  select(sub_category, super_category, target, sub_endorsement, super_endorsement) %>%
-  gather(key, response, -sub_category, -target, -super_category) %>%
-  group_by(key, sub_category, super_category, target) %>%
-  multi_boot_standard(column = "response")
+  select(sub_category, super_category, adjective, sub_endorsement, super_endorsement, degree, form, strength) %>%
+  gather(key, response, -sub_category, -adjective, -super_category, -degree, -form, -strength) %>%
+  group_by(key, sub_category, super_category, adjective, degree, form, strength) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
 ```
 
 ```{r}
-d.summary %>% 
-  separate(key, into=c('key', 'd2')) %>%
-  select(-d2) %>%
-  select(target)
+
+d.summary <- d.summary %>% 
+  ungroup() %>%
+  mutate(sub_category = factor(sub_category, levels = c("4 year-old boys", "men in their 30s", "basketball players",
+                                                        "cups of iced coffee", "glasses of milk", "cups of coffee",
+                                                        "lollipops", "ice cream cones", 
+                                                        "boxes of chocolate from the local chocolatier",
+                                                        "digital music players", "phones", "tablet computers", 
+                                                        "laptop computers", 
+                                                        "youtube videos", "movies",
+                                                        "television seasons"
+                                                        )), 
+         form = factor(form, levels = c("negative", "positive")))
+
+ggplot(d.summary, aes( x = form, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~sub_category, scales = 'free', nrow = 3)+
+  theme(axis.text.x = element_text(angle = 90))
+
+ggsave("~/research/comparison-class/analysis/fig/comparison-class-2-v2_subCat.pdf", height = 7, width = 16) 
+
+d.summary <- d.summary %>% 
+  ungroup() %>% 
+  mutate(form = factor(form, levels = c("positive", "negative")))
+
+ggplot(d.summary, aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(form~degree, scales = 'free')+
+  theme(axis.text.x = element_text(angle = 90) )
+
+ggsave("~/research/comparison-class/analysis/fig/comparison-class-2-v2_degreeXform.pdf", height = 6, width = 10) 
+  
 ```
+
 

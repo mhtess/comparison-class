@@ -12,8 +12,11 @@ author-information: >
 abstract: 
     "Gradeable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
     In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation. 
-    We introduce a Rational Speech Act model that treats the implicit comparison class as a random variable inferred via pragmatic reasoning.
-    We find this model predicts that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
+    We introduce a Rational Speech Act model that respresents the implicit comparison class as a random variable inferred via pragmatic reasoning.
+    We find this model makes the prediction that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
+    We test this prediction using a paraphrase experiment.
+    Quantative predictions of the model rely upon quantitative details of relevant prior distributions.
+    We introduce a novel Bayesian data-analytic method for inferred participants' relevant prior knowledge by asking simple, natural language questions.
     "
     
 keywords:
@@ -65,7 +68,7 @@ HPDlo<- function(s){
 
 # Introduction
 
-How can a cup of coffee be expensive while cheap cars populate the highways?
+If you've traveled to San Francisco, you know a cup of coffee can be quite expensive.
 Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
 
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure \red{cite Kennedy?}.
@@ -142,6 +145,42 @@ We test these predictions in our first experiment.
 
 ### Participants
 
+<!--
+Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5. 
+-->
+
+```{r, eval = F, echo=F}
+## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities 
+
+### not written efficiently... will take ~10 minutes to run 
+n_participants <- c(50, 75, 100)
+true_probs <- c(0.1, 0.3, 0.5)
+simulations <- data.frame()
+for (n in n_participants){
+  for (p in true_probs){
+    for (i in seq(1, 25)){
+      simulations <- bind_rows(simulations,
+            bind_rows(data.frame(label = c("a"), 
+                       response = rbinom(n =n, size = 1, prob = p)),
+                data.frame(label = c("b"), 
+                           response = rbinom(n =n, size = 1, prob = p))) %>%
+            group_by(label) %>% 
+            multi_boot_standard(column = "response") %>%
+            mutate(width = ci_upper - ci_lower) %>%
+          ungroup() %>%
+          summarize(w = mean(width)) %>%
+            mutate(n = n, p = p, i=i)
+      )
+    }
+  }
+}
+
+ggplot(simulations, aes(x = w))+
+ geom_histogram()+
+ facet_grid(n~p)
+
+```
+
 ### Materials
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
@@ -174,9 +213,17 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 
 # Experiment 2: Vague speakers
 
+\begin{align}
+S_{2}(u \mid c_{sub}) $ \propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}), \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
+\end{align}
+
 ## Methods
 
 ### Participants
+
+
+
 
 ### Materials
 

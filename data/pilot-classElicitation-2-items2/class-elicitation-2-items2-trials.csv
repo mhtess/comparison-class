@@ -1,0 +1,271 @@
+workerid,super_endorsement,other_response,strength,sub_category,degree,super_category,adjective,other_endorsement,form,names,context,sub_endorsement,condition,target
+0,0.47,,2,apples,weight,fruit,light,0,negative,Angela, picks up an apple.,0.83, relative to other , is light
+0,0.68,,2,soccer players,height,people,short,0,negative,Lee, sees a professional soccer player.,0.45, relative to other , is short
+0,0.47,,3,watermelons,weight,fruit,light,0,negative,Melinda, picks up a watermelon.,0.68, relative to other , is light
+0,0.64,,1,gymnasts,height,people,short,0,negative,Monica, sees a professional gymnast.,0.43, relative to other , is short
+0,0.52,,2,music videos,time,things you watch on YouTube,short,0,negative,Stephanie, is about to show their friend a music video on YouTube.,0.86, relative to other ,It&quotechars short
+0,0.66,,2,days in Fall,temperature,days of the year,cold,0,negative,Cameron, lives in Maryland and steps outside in Fall.,0.48, relative to other ,It&quotechars cold
+0,0.29,,1,TV ads,time,things you watch on YouTube,long,0,positive,Gary, is about to show their friend a TV ad on YouTube.,0.72, relative to other ,It&quotechars long
+0,0.76,,2,soccer players,height,people,tall,0,positive,Daniel, sees a professional soccer player.,0.47, relative to other , is tall
+0,0.71,,3,ovens,price,appliances,expensive,0,positive,Natalia, is buying an oven.,0.47, relative to other ,This is expensive
+0,0.4,,2,toasters,price,appliances,expensive,0,positive,Jennifer, is buying a toaster.,0.7, relative to other ,This is expensive
+0,0.31,,1,can openers,price,appliances,expensive,0,positive,Julia, is buying a can opener.,0.64, relative to other ,This is expensive
+0,0.27,,3,lectures,time,things you watch on YouTube,short,0,negative,Alicia, is about to show their friend a lecture on YouTube.,0.62, relative to other ,It&quotechars short
+0,0.73,,3,watermelons,weight,fruit,heavy,0,positive,Tanya, picks up a watermelon.,0.47, relative to other , is heavy
+0,0.25,,3,days in Summer,temperature,days of the year,cold,0,negative,Simon, lives in Maryland and steps outside in Summer.,0.79, relative to other ,It&quotechars cold
+0,0.3,,2,apples,weight,fruit,heavy,0,positive,Michael, picks up an apple.,0.67, relative to other , is heavy
+0,0.31,,1,TV ads,time,things you watch on YouTube,short,0,negative,Lucas, is about to show their friend a TV ad on YouTube.,0.63, relative to other ,It&quotechars short
+0,0.36,,3,lectures,time,things you watch on YouTube,long,0,positive,Kim, is about to show their friend a lecture on YouTube.,0.67, relative to other ,It&quotechars long
+0,0.78,,3,basketball players,height,people,tall,0,positive,Josh, sees a professional basketball player.,0.46, relative to other , is tall
+0,0.64,,1,limes,weight,fruit,light,0,negative,Robert, picks up a lime.,0.48, relative to other , is light
+0,0.3,,3,ovens,price,appliances,cheap,0,negative,Michelle, is buying an oven.,0.68, relative to other ,This is cheap
+0,0.25,,2,music videos,time,things you watch on YouTube,long,0,positive,Mika, is about to show their friend a music video on YouTube.,0.7, relative to other ,It&quotechars long
+0,0.29,,1,limes,weight,fruit,heavy,0,positive,Alexander, picks up a lime.,0.6, relative to other , is heavy
+0,0.58,,2,toasters,price,appliances,cheap,0,negative,Maya, is buying a toaster.,0.33, relative to other ,This is cheap
+0,0.18,,1,days in Winter,temperature,days of the year,warm,0,positive,Kathleen, lives in Maryland and steps outside in Winter.,0.81, relative to other ,It&quotechars warm
+0,0.26,,2,days in Fall,temperature,days of the year,warm,0,positive,Laura, lives in Maryland and steps outside in Fall.,0.68, relative to other ,It&quotechars warm
+0,0.64,,1,days in Winter,temperature,days of the year,cold,0,negative,Claire, lives in Maryland and steps outside in Winter.,0.36, relative to other ,It&quotechars cold
+0,0.24,,3,basketball players,height,people,short,0,negative,Greg, sees a professional basketball player.,0.8, relative to other , is short
+0,0.26,,1,gymnasts,height,people,tall,0,positive,Jasmine, sees a professional gymnast.,0.69, relative to other , is tall
+0,0.72,,1,can openers,price,appliances,cheap,0,negative,Stephen, is buying a can opener.,0.29, relative to other ,This is cheap
+0,0.3,,3,days in Summer,temperature,days of the year,warm,0,positive,Sophie, lives in Maryland and steps outside in Summer.,0.61, relative to other ,It&quotechars warm
+1,0.13,,2,toasters,price,appliances,expensive,0,positive,Gabriel, is buying a toaster.,0.81, relative to other ,This is expensive
+1,0.79,,3,lectures,time,things you watch on YouTube,long,0,positive,Michael, is about to show their friend a lecture on YouTube.,0.73, relative to other ,It&quotechars long
+1,0.2,,2,days in Fall,temperature,days of the year,warm,0,positive,Greg, lives in Maryland and steps outside in Fall.,0.89, relative to other ,It&quotechars warm
+1,0.62,,2,days in Fall,temperature,days of the year,cold,0,negative,Kim, lives in Maryland and steps outside in Fall.,0.88, relative to other ,It&quotechars cold
+1,0.61,,2,apples,weight,fruit,heavy,0,positive,Robert, picks up an apple.,0.89, relative to other , is heavy
+1,0.35,,2,toasters,price,appliances,cheap,0,negative,Alicia, is buying a toaster.,0.89, relative to other ,This is cheap
+1,0.78,,1,can openers,price,appliances,cheap,0,negative,Julia, is buying a can opener.,0.9, relative to other ,This is cheap
+1,0.52,,1,limes,weight,fruit,heavy,0,positive,Eric, picks up a lime.,0.86, relative to other , is heavy
+1,0.79,,2,music videos,time,things you watch on YouTube,long,0,positive,William, is about to show their friend a music video on YouTube.,0.86, relative to other ,It&quotechars long
+1,0.21,,3,basketball players,height,people,short,0,negative,Laura, sees a professional basketball player.,0.92, relative to other , is short
+1,0.72,,2,music videos,time,things you watch on YouTube,short,0,negative,John, is about to show their friend a music video on YouTube.,0.85, relative to other ,It&quotechars short
+1,0.51,,2,soccer players,height,people,tall,0,positive,Charles, sees a professional soccer player.,0.9, relative to other , is tall
+1,0.72,,3,lectures,time,things you watch on YouTube,short,0,negative,Lee, is about to show their friend a lecture on YouTube.,0.81, relative to other ,It&quotechars short
+1,0.05,,1,days in Winter,temperature,days of the year,warm,0,positive,Maya, lives in Maryland and steps outside in Winter.,0.93, relative to other ,It&quotechars warm
+1,0.84,,3,watermelons,weight,fruit,heavy,0,positive,Stephen, picks up a watermelon.,0.91, relative to other , is heavy
+1,0.8,,2,soccer players,height,people,short,0,negative,Anthony, sees a professional soccer player.,0.92, relative to other , is short
+1,0.73,,1,limes,weight,fruit,light,0,negative,Michelle, picks up a lime.,0.87, relative to other , is light
+1,0.29,,1,days in Winter,temperature,days of the year,cold,0,negative,Natalia, lives in Maryland and steps outside in Winter.,0.88, relative to other ,It&quotechars cold
+1,0.17,,1,can openers,price,appliances,expensive,0,positive,Jasmine, is buying a can opener.,0.92, relative to other ,This is expensive
+1,0.69,,1,TV ads,time,things you watch on YouTube,long,0,positive,Alexander, is about to show their friend a TV ad on YouTube.,0.91, relative to other ,It&quotechars long
+1,0.61,,1,TV ads,time,things you watch on YouTube,short,0,negative,Tom, is about to show their friend a TV ad on YouTube.,0.89, relative to other ,It&quotechars short
+1,0.65,,1,gymnasts,height,people,short,0,negative,Sophie, sees a professional gymnast.,0.87, relative to other , is short
+1,0.14,,3,watermelons,weight,fruit,light,0,negative,Stephanie, picks up a watermelon.,0.91, relative to other , is light
+1,0.81,,3,ovens,price,appliances,expensive,0,positive,Monica, is buying an oven.,0.88, relative to other ,This is expensive
+1,0.12,,3,days in Summer,temperature,days of the year,cold,0,negative,Jennifer, lives in Maryland and steps outside in Summer.,0.94, relative to other ,It&quotechars cold
+1,0.85,,3,days in Summer,temperature,days of the year,warm,0,positive,Claire, lives in Maryland and steps outside in Summer.,0.94, relative to other ,It&quotechars warm
+1,0.77,,3,ovens,price,appliances,cheap,0,negative,Angela, is buying an oven.,0.87, relative to other ,This is cheap
+1,0.4,,1,gymnasts,height,people,tall,0,positive,Gary, sees a professional gymnast.,0.92, relative to other , is tall
+1,0.79,,2,apples,weight,fruit,light,0,negative,Veronica, picks up an apple.,0.94, relative to other , is light
+1,0.92,,3,basketball players,height,people,tall,0,positive,Daniel, sees a professional basketball player.,0.92, relative to other , is tall
+2,0.38,,2,soccer players,height,people,short,0,negative,John, sees a professional soccer player.,0.9, relative to other , is short
+2,0.26,,2,music videos,time,things you watch on YouTube,long,0,positive,Angela, is about to show their friend a music video on YouTube.,0.85, relative to other ,It&quotechars long
+2,0.08,,3,watermelons,weight,fruit,light,0,negative,Eric, picks up a watermelon.,0.86, relative to other , is light
+2,0.63,,3,basketball players,height,people,tall,0,positive,Natalia, sees a professional basketball player.,0.33, relative to other , is tall
+2,0.46,,2,soccer players,height,people,tall,0,positive,Lee, sees a professional soccer player.,0.72, relative to other , is tall
+2,0.34,,2,days in Fall,temperature,days of the year,cold,0,negative,David, lives in Maryland and steps outside in Fall.,0.75, relative to other ,It&quotechars cold
+2,0.12,,1,can openers,price,appliances,cheap,0,negative,Maya, is buying a can opener.,0.84, relative to other ,This is cheap
+2,0.22,,3,basketball players,height,people,short,0,negative,Kathleen, sees a professional basketball player.,0.76, relative to other , is short
+2,0.69,,1,gymnasts,height,people,short,0,negative,Claire, sees a professional gymnast.,0.31, relative to other , is short
+2,0.66,,1,days in Winter,temperature,days of the year,cold,0,negative,Simon, lives in Maryland and steps outside in Winter.,0.36, relative to other ,It&quotechars cold
+2,0.17,,3,watermelons,weight,fruit,heavy,0,positive,Josh, picks up a watermelon.,0.61, relative to other , is heavy
+2,0.17,,2,music videos,time,things you watch on YouTube,short,0,negative,Veronica, is about to show their friend a music video on YouTube.,0.78, relative to other ,It&quotechars short
+2,0.1,,1,can openers,price,appliances,expensive,0,positive,Greg, is buying a can opener.,0.89, relative to other ,This is expensive
+2,0.1,,1,days in Winter,temperature,days of the year,warm,0,positive,Melinda, lives in Maryland and steps outside in Winter.,0.89, relative to other ,It&quotechars warm
+2,0.36,,2,days in Fall,temperature,days of the year,warm,0,positive,Julia, lives in Maryland and steps outside in Fall.,0.62, relative to other ,It&quotechars warm
+2,0.22,,1,TV ads,time,things you watch on YouTube,long,0,positive,Anthony, is about to show their friend a TV ad on YouTube.,0.72, relative to other ,It&quotechars long
+2,0.34,,1,gymnasts,height,people,tall,0,positive,Robert, sees a professional gymnast.,0.78, relative to other , is tall
+2,0.32,,3,ovens,price,appliances,cheap,0,negative,Tanya, is buying an oven.,0.69, relative to other ,This is cheap
+2,0.55,,3,lectures,time,things you watch on YouTube,long,0,positive,Charles, is about to show their friend a lecture on YouTube.,0.36, relative to other ,It&quotechars long
+2,0.26,,3,lectures,time,things you watch on YouTube,short,0,negative,William, is about to show their friend a lecture on YouTube.,0.6, relative to other ,It&quotechars short
+2,0.52,,1,limes,weight,fruit,light,0,negative,Cameron, picks up a lime.,0.32, relative to other , is light
+2,0.55,,2,apples,weight,fruit,light,0,negative,Mika, picks up an apple.,0.38, relative to other , is light
+2,0.33,,3,ovens,price,appliances,expensive,0,positive,Jennifer, is buying an oven.,0.63, relative to other ,This is expensive
+2,0.36,,3,days in Summer,temperature,days of the year,warm,0,positive,Jasmine, lives in Maryland and steps outside in Summer.,0.6, relative to other ,It&quotechars warm
+2,0.33,,2,toasters,price,appliances,cheap,0,negative,Michelle, is buying a toaster.,0.73, relative to other ,This is cheap
+2,0.28,,2,apples,weight,fruit,heavy,0,positive,Alexander, picks up an apple.,0.68, relative to other , is heavy
+2,0.6,,1,TV ads,time,things you watch on YouTube,short,0,negative,Monica, is about to show their friend a TV ad on YouTube.,0.33, relative to other ,It&quotechars short
+2,0.24,,2,toasters,price,appliances,expensive,0,positive,Stephen, is buying a toaster.,0.73, relative to other ,This is expensive
+2,0.15,,3,days in Summer,temperature,days of the year,cold,0,negative,Lucas, lives in Maryland and steps outside in Summer.,0.82, relative to other ,It&quotechars cold
+2,0.2,,1,limes,weight,fruit,heavy,0,positive,Gabriel, picks up a lime.,0.67, relative to other , is heavy
+3,0.04,ovens,3,ovens,price,appliances,cheap,0.11,negative,Gary, is buying an oven.,1, relative to other ,This is cheap
+3,0.81,,1,gymnasts,height,people,short,0,negative,Kathleen, sees a professional gymnast.,0.1, relative to other , is short
+3,0.5,,2,soccer players,height,people,short,0,negative,Angela, sees a professional soccer player.,0.84, relative to other , is short
+3,0.03,,1,can openers,price,appliances,expensive,0,positive,Michelle, is buying a can opener.,1, relative to other ,This is expensive
+3,0.28,,2,days in Fall,temperature,days of the year,warm,0,positive,Jennifer, lives in Maryland and steps outside in Fall.,0.95, relative to other ,It&quotechars warm
+3,0.61,,3,lectures,time,things you watch on YouTube,long,0,positive,William, is about to show their friend a lecture on YouTube.,0.8, relative to other ,It&quotechars long
+3,0.19,,1,limes,weight,fruit,heavy,0,positive,Sophie, picks up a lime.,0.92, relative to other , is heavy
+3,0.09,,2,days in Fall,temperature,days of the year,cold,0,negative,Charles, lives in Maryland and steps outside in Fall.,0.91, relative to other ,It&quotechars cold
+3,0.04,,1,days in Winter,temperature,days of the year,cold,0,negative,John, lives in Maryland and steps outside in Winter.,0.92, relative to other ,It&quotechars cold
+3,0.15,,1,gymnasts,height,people,tall,0,positive,Laura, sees a professional gymnast.,0.91, relative to other , is tall
+3,0.03,,3,days in Summer,temperature,days of the year,cold,0,negative,Natalia, lives in Maryland and steps outside in Summer.,0.96, relative to other ,It&quotechars cold
+3,0.41,,2,apples,weight,fruit,heavy,0,positive,Veronica, picks up an apple.,0.91, relative to other , is heavy
+3,0.55,,2,apples,weight,fruit,light,0,negative,Jasmine, picks up an apple.,0.86, relative to other , is light
+3,0.02,,2,toasters,price,appliances,cheap,0,negative,Julia, is buying a toaster.,0.91, relative to other ,This is cheap
+3,0.02,,3,basketball players,height,people,short,0,negative,Michael, sees a professional basketball player.,0.95, relative to other , is short
+3,0.04,,3,days in Summer,temperature,days of the year,warm,0,positive,Greg, lives in Maryland and steps outside in Summer.,0.99, relative to other ,It&quotechars warm
+3,0.04,,2,toasters,price,appliances,expensive,0,positive,Monica, is buying a toaster.,0.98, relative to other ,This is expensive
+3,0.9,,2,music videos,time,things you watch on YouTube,long,0,positive,Maya, is about to show their friend a music video on YouTube.,0.95, relative to other ,It&quotechars long
+3,0.1,,3,lectures,time,things you watch on YouTube,short,0,negative,Melinda, is about to show their friend a lecture on YouTube.,0.94, relative to other ,It&quotechars short
+3,0.86,,2,soccer players,height,people,tall,0,positive,Josh, sees a professional soccer player.,0.82, relative to other , is tall
+3,0.06,,1,TV ads,time,things you watch on YouTube,short,0,negative,Alicia, is about to show their friend a TV ad on YouTube.,0.96, relative to other ,It&quotechars short
+3,0.1,,2,music videos,time,things you watch on YouTube,short,0,negative,Cameron, is about to show their friend a music video on YouTube.,0.92, relative to other ,It&quotechars short
+3,0.02,,1,can openers,price,appliances,cheap,0,negative,David, is buying a can opener.,0.98, relative to other ,This is cheap
+3,0.03,,1,days in Winter,temperature,days of the year,warm,0,positive,Gabriel, lives in Maryland and steps outside in Winter.,1, relative to other ,It&quotechars warm
+3,0.62,,1,limes,weight,fruit,light,0,negative,Stephen, picks up a lime.,0.91, relative to other , is light
+3,0.96,,3,basketball players,height,people,tall,0,positive,Lucas, sees a professional basketball player.,0.3, relative to other , is tall
+3,0.94,,3,watermelons,weight,fruit,heavy,0,positive,Anthony, picks up a watermelon.,0.24, relative to other , is heavy
+3,0.86,,1,TV ads,time,things you watch on YouTube,long,0,positive,Kim, is about to show their friend a TV ad on YouTube.,0.93, relative to other ,It&quotechars long
+3,0.82,,3,ovens,price,appliances,expensive,0,positive,Stephanie, is buying an oven.,0.95, relative to other ,This is expensive
+3,0.02,,3,watermelons,weight,fruit,light,0,negative,Robert, picks up a watermelon.,0.96, relative to other , is light
+4,0.49,,3,ovens,price,appliances,expensive,0,positive,Monica, is buying an oven.,1, relative to other ,This is expensive
+4,1,,1,gymnasts,height,people,short,0,negative,Alexander, sees a professional gymnast.,0.26, relative to other , is short
+4,0.75,,2,toasters,price,appliances,cheap,0,negative,Charles, is buying a toaster.,0.78, relative to other ,This is cheap
+4,0.33,,3,lectures,time,things you watch on YouTube,short,0,negative,Cameron, is about to show their friend a lecture on YouTube.,0.64, relative to other ,It&quotechars short
+4,0.75,,1,TV ads,time,things you watch on YouTube,long,0,positive,Gabriel, is about to show their friend a TV ad on YouTube.,0.8, relative to other ,It&quotechars long
+4,0.6,,3,lectures,time,things you watch on YouTube,long,0,positive,Angela, is about to show their friend a lecture on YouTube.,0.81, relative to other ,It&quotechars long
+4,0.85,,3,watermelons,weight,fruit,heavy,0,positive,Anthony, picks up a watermelon.,0.32, relative to other , is heavy
+4,0.8,,1,days in Winter,temperature,days of the year,warm,0,positive,John, lives in Maryland and steps outside in Winter.,0.61, relative to other ,It&quotechars warm
+4,0.82,,2,apples,weight,fruit,heavy,0,positive,Laura, picks up an apple.,0.65, relative to other , is heavy
+4,0.66,,2,music videos,time,things you watch on YouTube,long,0,positive,Tom, is about to show their friend a music video on YouTube.,0.78, relative to other ,It&quotechars long
+4,0.6,,1,days in Winter,temperature,days of the year,cold,0,negative,Kim, lives in Maryland and steps outside in Winter.,0.79, relative to other ,It&quotechars cold
+4,0.56,,1,can openers,price,appliances,expensive,0,positive,Melinda, is buying a can opener.,0.86, relative to other ,This is expensive
+4,0.61,,3,ovens,price,appliances,cheap,0,negative,Alicia, is buying an oven.,0.86, relative to other ,This is cheap
+4,0.9,,1,limes,weight,fruit,heavy,0,positive,Tanya, picks up a lime.,0.53, relative to other , is heavy
+4,0.84,,1,limes,weight,fruit,light,0,negative,Greg, picks up a lime.,0.54, relative to other , is light
+4,0.88,,2,soccer players,height,people,tall,0,positive,Kathleen, sees a professional soccer player.,0.58, relative to other , is tall
+4,0.85,,2,soccer players,height,people,short,0,negative,David, sees a professional soccer player.,0.5, relative to other , is short
+4,0.88,,3,watermelons,weight,fruit,light,0,negative,William, picks up a watermelon.,0.72, relative to other , is light
+4,0.88,,1,gymnasts,height,people,tall,0,positive,Mika, sees a professional gymnast.,0.8, relative to other , is tall
+4,0.68,,2,toasters,price,appliances,expensive,0,positive,Josh, is buying a toaster.,0.9, relative to other ,This is expensive
+4,0.82,,2,apples,weight,fruit,light,0,negative,Daniel, picks up an apple.,0.57, relative to other , is light
+4,0.76,,2,days in Fall,temperature,days of the year,warm,0,positive,Jennifer, lives in Maryland and steps outside in Fall.,0.91, relative to other ,It&quotechars warm
+4,0.65,,1,can openers,price,appliances,cheap,0,negative,Kim, is buying a can opener.,0.84, relative to other ,This is cheap
+4,0.76,,2,music videos,time,things you watch on YouTube,short,0,negative,Michael, is about to show their friend a music video on YouTube.,0.92, relative to other ,It&quotechars short
+4,0.77,,1,TV ads,time,things you watch on YouTube,short,0,negative,Veronica, is about to show their friend a TV ad on YouTube.,0.84, relative to other ,It&quotechars short
+4,0.8,,3,basketball players,height,people,tall,0,positive,Julia, sees a professional basketball player.,0.8, relative to other , is tall
+4,0.66,,3,basketball players,height,people,short,0,negative,Robert, sees a professional basketball player.,0.93, relative to other , is short
+4,0.65,,2,days in Fall,temperature,days of the year,cold,0,negative,Claire, lives in Maryland and steps outside in Fall.,0.73, relative to other ,It&quotechars cold
+4,0.8,,3,days in Summer,temperature,days of the year,warm,0,positive,Michelle, lives in Maryland and steps outside in Summer.,0.7, relative to other ,It&quotechars warm
+4,0.74,,3,days in Summer,temperature,days of the year,cold,0,negative,Sophie, lives in Maryland and steps outside in Summer.,0.87, relative to other ,It&quotechars cold
+5,0.06,,3,lectures,time,things you watch on YouTube,short,0,negative,Jasmine, is about to show their friend a lecture on YouTube.,0.98, relative to other ,It&quotechars short
+5,0.19,,1,limes,weight,fruit,heavy,0,positive,Sophie, picks up a lime.,0.64, relative to other , is heavy
+5,0.81,,1,gymnasts,height,people,short,0,negative,Gabriel, sees a professional gymnast.,0.12, relative to other , is short
+5,0.19,,2,music videos,time,things you watch on YouTube,short,0,negative,Kim, is about to show their friend a music video on YouTube.,0.79, relative to other ,It&quotechars short
+5,0.61,,2,days in Fall,temperature,days of the year,cold,0,negative,Cameron, lives in Maryland and steps outside in Fall.,0.21, relative to other ,It&quotechars cold
+5,0.23,,1,limes,weight,fruit,light,0,negative,Greg, picks up a lime.,0.74, relative to other , is light
+5,0.25,,2,apples,weight,fruit,heavy,0,positive,John, picks up an apple.,0.72, relative to other , is heavy
+5,0.7,,2,soccer players,height,people,short,0,negative,Claire, sees a professional soccer player.,0.22, relative to other , is short
+5,0.7,,2,soccer players,height,people,tall,0,positive,Tom, sees a professional soccer player.,0.3, relative to other , is tall
+5,0.65,,3,watermelons,weight,fruit,light,0,negative,Josh, picks up a watermelon.,0.29, relative to other , is light
+5,0.66,,3,basketball players,height,people,tall,0,positive,Kathleen, sees a professional basketball player.,0.25, relative to other , is tall
+5,0.22,,1,days in Winter,temperature,days of the year,cold,0,negative,Tanya, lives in Maryland and steps outside in Winter.,0.61, relative to other ,It&quotechars cold
+5,0.72,,2,apples,weight,fruit,light,0,negative,Robert, picks up an apple.,0.24, relative to other , is light
+5,0.23,,2,toasters,price,appliances,cheap,0,negative,Kim, is buying a toaster.,0.67, relative to other ,This is cheap
+5,0.64,,1,can openers,price,appliances,cheap,0,negative,Veronica, is buying a can opener.,0.31, relative to other ,This is cheap
+5,0.31,,3,days in Summer,temperature,days of the year,cold,0,negative,Melinda, lives in Maryland and steps outside in Summer.,0.67, relative to other ,It&quotechars cold
+5,0.25,,3,basketball players,height,people,short,0,negative,Julia, sees a professional basketball player.,0.72, relative to other , is short
+5,0.27,,1,can openers,price,appliances,expensive,0,positive,Alexander, is buying a can opener.,0.69, relative to other ,This is expensive
+5,0.67,,2,music videos,time,things you watch on YouTube,long,0,positive,Michael, is about to show their friend a music video on YouTube.,0.26, relative to other ,It&quotechars long
+5,0.28,,1,days in Winter,temperature,days of the year,warm,0,positive,Maya, lives in Maryland and steps outside in Winter.,0.67, relative to other ,It&quotechars warm
+5,0.71,,1,TV ads,time,things you watch on YouTube,long,0,positive,Stephanie, is about to show their friend a TV ad on YouTube.,0.33, relative to other ,It&quotechars long
+5,0.23,,3,ovens,price,appliances,expensive,0,positive,Jennifer, is buying an oven.,0.7, relative to other ,This is expensive
+5,0.65,,2,days in Fall,temperature,days of the year,warm,0,positive,Simon, lives in Maryland and steps outside in Fall.,0.25, relative to other ,It&quotechars warm
+5,0.69,,1,TV ads,time,things you watch on YouTube,short,0,negative,Daniel, is about to show their friend a TV ad on YouTube.,0.25, relative to other ,It&quotechars short
+5,0.32,,3,days in Summer,temperature,days of the year,warm,0,positive,Anthony, lives in Maryland and steps outside in Summer.,0.66, relative to other ,It&quotechars warm
+5,0.32,,2,toasters,price,appliances,expensive,0,positive,Michelle, is buying a toaster.,0.7, relative to other ,This is expensive
+5,0.31,,3,lectures,time,things you watch on YouTube,long,0,positive,Alicia, is about to show their friend a lecture on YouTube.,0.7, relative to other ,It&quotechars long
+5,0.64,,3,watermelons,weight,fruit,heavy,0,positive,Lucas, picks up a watermelon.,0.29, relative to other , is heavy
+5,0.28,,3,ovens,price,appliances,cheap,0,negative,David, is buying an oven.,0.64, relative to other ,This is cheap
+5,0.29,,1,gymnasts,height,people,tall,0,positive,Monica, sees a professional gymnast.,0.68, relative to other , is tall
+6,0.74,,3,days in Summer,temperature,days of the year,warm,0,positive,Tom, lives in Maryland and steps outside in Summer.,0.55, relative to other ,It&quotechars warm
+6,0.23,,1,limes,weight,fruit,light,0,negative,Gary, picks up a lime.,0.69, relative to other , is light
+6,0.74,,2,days in Fall,temperature,days of the year,cold,0,negative,Simon, lives in Maryland and steps outside in Fall.,0.73, relative to other ,It&quotechars cold
+6,0.74,,1,TV ads,time,things you watch on YouTube,short,0,negative,Alicia, is about to show their friend a TV ad on YouTube.,0.66, relative to other ,It&quotechars short
+6,0.33,,2,music videos,time,things you watch on YouTube,long,0,positive,Gabriel, is about to show their friend a music video on YouTube.,0.74, relative to other ,It&quotechars long
+6,0.29,,2,apples,weight,fruit,heavy,0,positive,Kim, picks up an apple.,0.8, relative to other , is heavy
+6,0.55,,2,soccer players,height,people,short,0,negative,Claire, sees a professional soccer player.,0.75, relative to other , is short
+6,0.46,,2,music videos,time,things you watch on YouTube,short,0,negative,Melinda, is about to show their friend a music video on YouTube.,0.79, relative to other ,It&quotechars short
+6,0.25,,2,apples,weight,fruit,light,0,negative,Jennifer, picks up an apple.,0.76, relative to other , is light
+6,0.68,,3,lectures,time,things you watch on YouTube,short,0,negative,Veronica, is about to show their friend a lecture on YouTube.,0.7, relative to other ,It&quotechars short
+6,0.35,,1,days in Winter,temperature,days of the year,warm,0,positive,Anthony, lives in Maryland and steps outside in Winter.,0.81, relative to other ,It&quotechars warm
+6,0.78,,3,lectures,time,things you watch on YouTube,long,0,positive,Stephen, is about to show their friend a lecture on YouTube.,0.57, relative to other ,It&quotechars long
+6,0.42,,3,days in Summer,temperature,days of the year,cold,0,negative,Cameron, lives in Maryland and steps outside in Summer.,0.81, relative to other ,It&quotechars cold
+6,0.24,,1,can openers,price,appliances,expensive,0,positive,Alexander, is buying a can opener.,0.75, relative to other ,This is expensive
+6,0.75,,1,days in Winter,temperature,days of the year,cold,0,negative,Monica, lives in Maryland and steps outside in Winter.,0.57, relative to other ,It&quotechars cold
+6,0.7,,3,watermelons,weight,fruit,heavy,0,positive,Daniel, picks up a watermelon.,0.58, relative to other , is heavy
+6,0.66,,3,basketball players,height,people,tall,0,positive,John, sees a professional basketball player.,0.74, relative to other , is tall
+6,0.26,,3,ovens,price,appliances,cheap,0,negative,Maya, is buying an oven.,0.79, relative to other ,This is cheap
+6,0.37,,1,limes,weight,fruit,heavy,0,positive,Michelle, picks up a lime.,0.79, relative to other , is heavy
+6,0.7,,2,soccer players,height,people,tall,0,positive,Kim, sees a professional soccer player.,0.69, relative to other , is tall
+6,0.24,,3,watermelons,weight,fruit,light,0,negative,Josh, picks up a watermelon.,0.81, relative to other , is light
+6,0.36,,2,days in Fall,temperature,days of the year,warm,0,positive,Jasmine, lives in Maryland and steps outside in Fall.,0.79, relative to other ,It&quotechars warm
+6,0.82,,3,ovens,price,appliances,expensive,0,positive,David, is buying an oven.,0.39, relative to other ,This is expensive
+6,0.61,,1,gymnasts,height,people,tall,0,positive,Kathleen, sees a professional gymnast.,0.73, relative to other , is tall
+6,0.24,,3,basketball players,height,people,short,0,negative,Natalia, sees a professional basketball player.,0.78, relative to other , is short
+6,0.77,,1,gymnasts,height,people,short,0,negative,Lee, sees a professional gymnast.,0.72, relative to other , is short
+6,0.75,,2,toasters,price,appliances,cheap,0,negative,Charles, is buying a toaster.,0.64, relative to other ,This is cheap
+6,0.38,,2,toasters,price,appliances,expensive,0,positive,Mika, is buying a toaster.,0.79, relative to other ,This is expensive
+6,0.56,,1,TV ads,time,things you watch on YouTube,long,0,positive,Julia, is about to show their friend a TV ad on YouTube.,0.73, relative to other ,It&quotechars long
+6,0.47,,1,can openers,price,appliances,cheap,0,negative,Robert, is buying a can opener.,0.65, relative to other ,This is cheap
+7,0.78,,2,days in Fall,temperature,days of the year,cold,0,negative,Alexander, lives in Maryland and steps outside in Fall.,0.1, relative to other ,It&quotechars cold
+7,0.74,,3,basketball players,height,people,short,0,negative,Stephen, sees a professional basketball player.,0.1, relative to other , is short
+7,0.21,,1,TV ads,time,things you watch on YouTube,short,0,negative,Jennifer, is about to show their friend a TV ad on YouTube.,0.77, relative to other ,It&quotechars short
+7,0.87,,1,limes,weight,fruit,light,0,negative,Michael, picks up a lime.,0.17, relative to other , is light
+7,0.15,,3,basketball players,height,people,tall,0,positive,Angela, sees a professional basketball player.,0.78, relative to other , is tall
+7,0.15,,2,soccer players,height,people,short,0,negative,Eric, sees a professional soccer player.,0.81, relative to other , is short
+7,0.07,,3,watermelons,weight,fruit,light,0,negative,Tanya, picks up a watermelon.,0.86, relative to other , is light
+7,0.25,,1,can openers,price,appliances,expensive,0,positive,Maya, is buying a can opener.,0.86, relative to other ,This is expensive
+7,0.17,,2,apples,weight,fruit,light,0,negative,Veronica, picks up an apple.,0.77, relative to other , is light
+7,0.09,,1,limes,weight,fruit,heavy,0,positive,Robert, picks up a lime.,0.86, relative to other , is heavy
+7,0.2,,3,days in Summer,temperature,days of the year,cold,0,negative,Melinda, lives in Maryland and steps outside in Summer.,0.88, relative to other ,It&quotechars cold
+7,0.15,,2,soccer players,height,people,tall,0,positive,Greg, sees a professional soccer player.,0.79, relative to other , is tall
+7,0.13,,2,music videos,time,things you watch on YouTube,long,0,positive,David, is about to show their friend a music video on YouTube.,0.87, relative to other ,It&quotechars long
+7,0.13,,1,TV ads,time,things you watch on YouTube,long,0,positive,Cameron, is about to show their friend a TV ad on YouTube.,0.7, relative to other ,It&quotechars long
+7,0.19,,2,toasters,price,appliances,expensive,0,positive,Monica, is buying a toaster.,0.84, relative to other ,This is expensive
+7,0.13,,3,ovens,price,appliances,cheap,0,negative,John, is buying an oven.,0.9, relative to other ,This is cheap
+7,0.15,,2,days in Fall,temperature,days of the year,warm,0,positive,Gabriel, lives in Maryland and steps outside in Fall.,0.92, relative to other ,It&quotechars warm
+7,0.13,,2,toasters,price,appliances,cheap,0,negative,Kim, is buying a toaster.,0.84, relative to other ,This is cheap
+7,0.18,,3,lectures,time,things you watch on YouTube,short,0,negative,Lucas, is about to show their friend a lecture on YouTube.,0.88, relative to other ,It&quotechars short
+7,0.87,,3,watermelons,weight,fruit,heavy,0,positive,Gary, picks up a watermelon.,0.51, relative to other , is heavy
+7,0.12,,2,music videos,time,things you watch on YouTube,short,0,negative,Alicia, is about to show their friend a music video on YouTube.,0.86, relative to other ,It&quotechars short
+7,0.09,,1,gymnasts,height,people,tall,0,positive,Julia, sees a professional gymnast.,0.87, relative to other , is tall
+7,0.13,,2,apples,weight,fruit,heavy,0,positive,Natalia, picks up an apple.,0.83, relative to other , is heavy
+7,0.16,,1,days in Winter,temperature,days of the year,warm,0,positive,William, lives in Maryland and steps outside in Winter.,0.81, relative to other ,It&quotechars warm
+7,0.12,,3,lectures,time,things you watch on YouTube,long,0,positive,Charles, is about to show their friend a lecture on YouTube.,0.86, relative to other ,It&quotechars long
+7,0.16,,3,days in Summer,temperature,days of the year,warm,0,positive,Michelle, lives in Maryland and steps outside in Summer.,0.87, relative to other ,It&quotechars warm
+7,0.58,,1,days in Winter,temperature,days of the year,cold,0,negative,Claire, lives in Maryland and steps outside in Winter.,0.88, relative to other ,It&quotechars cold
+7,0.17,,1,can openers,price,appliances,cheap,0,negative,Anthony, is buying a can opener.,0.91, relative to other ,This is cheap
+7,0.36,,1,gymnasts,height,people,short,0,negative,Tom, sees a professional gymnast.,0.81, relative to other , is short
+7,0.14,,3,ovens,price,appliances,expensive,0,positive,Sophie, is buying an oven.,0.86, relative to other ,This is expensive
+8,0.96,,2,days in Fall,temperature,days of the year,cold,0,negative,Kim, lives in Maryland and steps outside in Fall.,0.57, relative to other ,It&quotechars cold
+8,0.87,,2,music videos,time,things you watch on YouTube,short,0,negative,Alicia, is about to show their friend a music video on YouTube.,0.72, relative to other ,It&quotechars short
+8,0.21,,2,apples,weight,fruit,heavy,0,positive,Jennifer, picks up an apple.,1, relative to other , is heavy
+8,0.31,,2,apples,weight,fruit,light,0,negative,Josh, picks up an apple.,1, relative to other , is light
+8,0.11,,1,gymnasts,height,people,tall,0,positive,Lucas, sees a professional gymnast.,0.95, relative to other , is tall
+8,0.45,,2,toasters,price,appliances,cheap,0,negative,Angela, is buying a toaster.,0.97, relative to other ,This is cheap
+8,0.89,,1,TV ads,time,things you watch on YouTube,short,0,negative,Stephanie, is about to show their friend a TV ad on YouTube.,0.59, relative to other ,It&quotechars short
+8,0.17,,3,basketball players,height,people,short,0,negative,Tanya, sees a professional basketball player.,1, relative to other , is short
+8,0.98,,3,days in Summer,temperature,days of the year,warm,0,positive,Laura, lives in Maryland and steps outside in Summer.,0.35, relative to other ,It&quotechars warm
+8,0.58,,2,music videos,time,things you watch on YouTube,long,0,positive,Stephen, is about to show their friend a music video on YouTube.,0.94, relative to other ,It&quotechars long
+8,0.95,,3,ovens,price,appliances,expensive,0,positive,Gabriel, is buying an oven.,0.78, relative to other ,This is expensive
+8,0.64,,3,ovens,price,appliances,cheap,0,negative,Greg, is buying an oven.,0.9, relative to other ,This is cheap
+8,0.02,,1,limes,weight,fruit,heavy,0,positive,Kathleen, picks up a lime.,0.98, relative to other , is heavy
+8,0.73,,1,can openers,price,appliances,cheap,0,negative,Anthony, is buying a can opener.,0.95, relative to other ,This is cheap
+8,1,,3,basketball players,height,people,tall,0,positive,Maya, sees a professional basketball player.,0.68, relative to other , is tall
+8,0.88,,2,soccer players,height,people,short,0,negative,Daniel, sees a professional soccer player.,0.63, relative to other , is short
+8,0.73,,3,watermelons,weight,fruit,heavy,0,positive,Veronica, picks up a watermelon.,0.97, relative to other , is heavy
+8,1,,1,gymnasts,height,people,short,0,negative,Robert, sees a professional gymnast.,0.85, relative to other , is short
+8,0.03,,1,days in Winter,temperature,days of the year,warm,0,positive,Julia, lives in Maryland and steps outside in Winter.,0.98, relative to other ,It&quotechars warm
+8,0.02,,3,watermelons,weight,fruit,light,0,negative,Natalia, picks up a watermelon.,1, relative to other , is light
+8,0.04,,3,days in Summer,temperature,days of the year,cold,0,negative,John, lives in Maryland and steps outside in Summer.,0.99, relative to other ,It&quotechars cold
+8,0.77,,1,limes,weight,fruit,light,0,negative,Claire, picks up a lime.,0.95, relative to other , is light
+8,0.59,,3,lectures,time,things you watch on YouTube,short,0,negative,Alexander, is about to show their friend a lecture on YouTube.,0.94, relative to other ,It&quotechars short
+8,0.12,,2,days in Fall,temperature,days of the year,warm,0,positive,Sophie, lives in Maryland and steps outside in Fall.,1, relative to other ,It&quotechars warm
+8,0.03,,2,toasters,price,appliances,expensive,0,positive,William, is buying a toaster.,0.98, relative to other ,This is expensive
+8,0.76,,1,days in Winter,temperature,days of the year,cold,0,negative,Eric, lives in Maryland and steps outside in Winter.,0.95, relative to other ,It&quotechars cold
+8,0.61,,1,TV ads,time,things you watch on YouTube,long,0,positive,Jasmine, is about to show their friend a TV ad on YouTube.,0.95, relative to other ,It&quotechars long
+8,0.97,,2,soccer players,height,people,tall,0,positive,Lee, sees a professional soccer player.,0.81, relative to other , is tall
+8,0.05,,1,can openers,price,appliances,expensive,0,positive,Monica, is buying a can opener.,0.97, relative to other ,This is expensive
+8,0.73,,3,lectures,time,things you watch on YouTube,long,0,positive,Michelle, is about to show their friend a lecture on YouTube.,0.94, relative to other ,It&quotechars long

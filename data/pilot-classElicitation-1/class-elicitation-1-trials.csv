@@ -1,0 +1,341 @@
+workerid,target,degree,names,context,response,condition
+0,It&quotechars cold,temperature,Tanya, took a sip from a cup of coffee.,coffee, for a 
+0,That was short,time,Stephanie, was talking about the traffic light that just turned green.,stop, for a 
+0,It was cheap,price,Monica, bought a ticket to the movies.,the price, for a 
+0, is light,weight,Kim, bought a television and lifted it up.,television, for a 
+0,It was expensive,price,Lucas, bought a truck.,truck, for a 
+0,It was cheap,price,Anthony, bought a truck.,truck, for a 
+0,It&quotechars warm,temperature,John, took a sip from an iced coffee.,iced coffee, for a 
+0, was tall,height,Veronica, saw the point guard on the local men&quotechars basketball team.,man, for a 
+0, was tall,height,Kathleen, saw a tower in a European city.,tower, for a 
+0,It was cheap,price,David, bought a round-trip ticket to Europe.,ticket, for a 
+0,It was expensive,price,Michelle, bought a round-trip ticket to Europe.,ticket, for a 
+0, was short,height,Sophie, saw a 25 year-old man.,man, for a 
+0, is heavy,weight,Julia, bought a television and lifted it up.,television, for a 
+0, is heavy,weight,Angela, bought a book and lifted it up.,book, for a 
+0, was tall,height,Eric, saw a 4 year-old boy.,boy, for a 
+0,That was short,time,Simon, was talking about the time they drove across the country.,trip, for a 
+0,It was expensive,price,Stephen, bought a ticket to the movies.,ticket, for a 
+0,That was long,time,Alicia, was talking about the movie they just saw.,movie, for a 
+0, is heavy,weight,Michael, bought an iPhone and lifted it up.,ipone, for a 
+0, was tall,height,Cameron, saw a 25 year-old man.,man, for a 
+0,That was short,time,Jasmine, was talking about the movie they just saw.,movie, for a 
+0, was short,height,William, saw a 4 year-old boy.,boy, for a 
+0,It was cheap,price,Daniel, bought a candy bar.,candy bar, for a 
+0,It&quotechars cold,temperature,Claire, took a sip from an iced coffee.,iced coffee, for a 
+0, is light,weight,Lee, bought a book and lifted it up.,book, for a 
+0,It&quotechars warm,temperature,Charles, took a sip from a cup of coffee.,coffee, for a 
+0,It was expensive,price,Alexander, bought a candy bar.,candy bar, for a 
+0, is light,weight,Mika, bought an iPhone and lifted it up.,iphone, for a 
+0, was short,height,Melinda, saw the point guard on the local men&quotechars basketball team.,man, for a 
+0,That was long,time,Gary, was talking about the time they drove across the country.,trip, for a 
+0,That was long,time,Gabriel, was talking about the traffic light that just turned green.,traffic light, for a 
+0,It&quotechars warm,temperature,Natalia, took a sip from a glass of milk.,milk, for a 
+0,It&quotechars cold,temperature,Josh, took a sip from a glass of milk.,milk, for a 
+0, was short,height,Tom, saw a tower in a European city.,tower, for a 
+1,It was cheap,price,Gabriel, bought a round-trip ticket to Europe.,ticket, for a 
+1,It was expensive,price,Stephanie, bought a round-trip ticket to Europe.,ticket, for a 
+1, is light,weight,Michael, bought a book and lifted it up.,book, for a 
+1,It&quotechars cold,temperature,Lucas, took a sip from an iced coffee.,coffee, for a 
+1, is heavy,weight,William, bought an iPhone and lifted it up.,iPhone, for a 
+1,It was expensive,price,Tanya, bought a ticket to the movies.,movie ticket, for a 
+1,It was expensive,price,Kathleen, bought a candy bar.,candy bar, for a 
+1,It was cheap,price,Monica, bought a truck.,truck, for a 
+1, is heavy,weight,Veronica, bought a television and lifted it up.,television, for a 
+1,It&quotechars warm,temperature,Tom, took a sip from a cup of coffee.,coffee, for a 
+1, was tall,height,Greg, saw a 4 year-old boy.,4 year old boy, for a 
+1, was tall,height,David, saw a tower in a European city.,tower, for a 
+1, is light,weight,Alexander, bought an iPhone and lifted it up.,iPhone, for a 
+1, was tall,height,Anthony, saw a 25 year-old man.,25 year old man, for a 
+1, was short,height,Angela, saw a 25 year-old man.,25 year old man, for a 
+1,That was short,time,Julia, was talking about the traffic light that just turned green.,traffic light, for a 
+1,That was long,time,Simon, was talking about the time they drove across the country.,drive, for a 
+1,That was long,time,John, was talking about the traffic light that just turned green.,traffic light, for a 
+1,It&quotechars cold,temperature,Michelle, took a sip from a glass of milk.,glass of milk, for a 
+1, was short,height,Claire, saw a tower in a European city.,tower, for a 
+1,That was short,time,Jasmine, was talking about the movie they just saw.,movie, for a 
+1,It was cheap,price,Eric, bought a ticket to the movies.,ticket, for a 
+1, is light,weight,Natalia, bought a television and lifted it up.,television, for a 
+1,That was short,time,Maya, was talking about the time they drove across the country.,drive, for a 
+1, was tall,height,Gary, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+1,It&quotechars warm,temperature,Lee, took a sip from a glass of milk.,glass of milk, for a 
+1, was short,height,Cameron, saw a 4 year-old boy.,4 year old boy, for a 
+1,It&quotechars warm,temperature,Daniel, took a sip from an iced coffee.,iced coffee, for a 
+1, was short,height,Jennifer, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+1, is heavy,weight,Kim, bought a book and lifted it up.,book, for a 
+1,That was long,time,Stephen, was talking about the movie they just saw.,movie, for a 
+1,It was cheap,price,Laura, bought a candy bar.,candy bar, for a 
+1,It was expensive,price,Josh, bought a truck.,truck, for a 
+1,It&quotechars cold,temperature,Sophie, took a sip from a cup of coffee.,cup of coffee, for a 
+2,It&quotechars warm,temperature,Michelle, took a sip from a glass of milk.,glass of milk, for a 
+2,It was cheap,price,Monica, bought a candy bar.,a candy bar, for a 
+2,It&quotechars cold,temperature,Laura, took a sip from a glass of milk.,a glass of milk, for a 
+2,That was short,time,John, was talking about the time they drove across the country.,cross country drive, for a 
+2,It was expensive,price,Charles, bought a round-trip ticket to Europe.,for a round trip ticket to europe, for a 
+2, is light,weight,Jennifer, bought a television and lifted it up.,for a television, for a 
+2,It was cheap,price,Josh, bought a truck.,truck, for a 
+2, was short,height,William, saw a tower in a European city.,tower, for a 
+2,It was cheap,price,Michael, bought a round-trip ticket to Europe.,round trip ticket to europe, for a 
+2, was tall,height,Tom, saw a 4 year-old boy.,4 year old, for a 
+2,It was cheap,price,Julia, bought a ticket to the movies.,movie ticket, for a 
+2, is light,weight,Cameron, bought a book and lifted it up.,book, for a 
+2,That was long,time,Gabriel, was talking about the traffic light that just turned green.,traffic light, for a 
+2, is light,weight,Alexander, bought an iPhone and lifted it up.,iphone, for a 
+2, is heavy,weight,Jasmine, bought a book and lifted it up.,book, for a 
+2,That was short,time,Mika, was talking about the traffic light that just turned green.,traffic light, for a 
+2,It&quotechars cold,temperature,Kathleen, took a sip from an iced coffee.,iced coffee, for a 
+2,It&quotechars cold,temperature,Daniel, took a sip from a cup of coffee.,cup of coffee, for a 
+2, was tall,height,Natalia, saw a tower in a European city.,tower, for a 
+2,That was long,time,Gary, was talking about the movie they just saw.,movie, for a 
+2,That was short,time,Robert, was talking about the movie they just saw.,movie, for a 
+2,It was expensive,price,Alicia, bought a truck.,truck, for a 
+2, is heavy,weight,Tanya, bought an iPhone and lifted it up.,iphone, for a 
+2,It&quotechars warm,temperature,Anthony, took a sip from a cup of coffee.,cup of coffee, for a 
+2, was short,height,Eric, saw the point guard on the local men&quotechars basketball team.,point gaurd, for a 
+2,That was long,time,Stephen, was talking about the time they drove across the country.,cross country road trip, for a 
+2, was tall,height,Kim, saw a 25 year-old man.,25 year old man, for a 
+2,It&quotechars warm,temperature,Greg, took a sip from an iced coffee.,iced coffee, for a 
+2, was tall,height,David, saw the point guard on the local men&quotechars basketball team.,point gaurd, for a 
+2, was short,height,Lucas, saw a 25 year-old man.,25 year old man, for a 
+2, is heavy,weight,Angela, bought a television and lifted it up.,television, for a 
+2,It was expensive,price,Claire, bought a ticket to the movies.,ticket to the movies, for a 
+2,It was expensive,price,Veronica, bought a candy bar.,candy bar, for a 
+2, was short,height,Maya, saw a 4 year-old boy.,4 year old boy, for a 
+3,It&quotechars cold,temperature,Lucas, took a sip from an iced coffee.,cup of coffee, for a 
+3,It was cheap,price,David, bought a ticket to the movies.,movie, for a 
+3, was short,height,Robert, saw a 25 year-old man.,man, for a 
+3, is heavy,weight,Michelle, bought an iPhone and lifted it up.,phone, for a 
+3,It was expensive,price,Alexander, bought a truck.,car, for a 
+3, is heavy,weight,Sophie, bought a book and lifted it up.,book, for a 
+3, is light,weight,Kathleen, bought a book and lifted it up.,book, for a 
+3,That was long,time,Greg, was talking about the movie they just saw.,movie, for a 
+3,It&quotechars warm,temperature,Tom, took a sip from a glass of milk.,glass of milk, for a 
+3,It&quotechars cold,temperature,Anthony, took a sip from a cup of coffee.,cup of coffee, for a 
+3, was tall,height,Mika, saw a 4 year-old boy.,child that age, for a 
+3,That was long,time,William, was talking about the time they drove across the country.,for a car trip, for a 
+3,It was cheap,price,Daniel, bought a round-trip ticket to Europe.,flight that far, for a 
+3, is heavy,weight,Gabriel, bought a television and lifted it up.,someone to lift, for a 
+3, was tall,height,Claire, saw a tower in a European city.,building, for a 
+3, was short,height,Michael, saw a tower in a European city.,tower compared to the others, for a 
+3, was short,height,Eric, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+3,It was expensive,price,Alicia, bought a candy bar.,candy bar, for a 
+3, is light,weight,Cameron, bought an iPhone and lifted it up.,phone, for a 
+3,It&quotechars warm,temperature,Monica, took a sip from a cup of coffee.,cup of coffee, for a 
+3, was tall,height,Simon, saw the point guard on the local men&quotechars basketball team.,normal person, for a 
+3,It was cheap,price,Melinda, bought a truck.,truck, for a 
+3, was tall,height,Lee, saw a 25 year-old man.,man of any age, for a 
+3,It&quotechars cold,temperature,Jasmine, took a sip from a glass of milk.,glass of milk, for a 
+3,That was short,time,Maya, was talking about the traffic light that just turned green.,traffic light stop, for a 
+3, was short,height,Kim, saw a 4 year-old boy.,child that age, for a 
+3,It&quotechars warm,temperature,Stephanie, took a sip from an iced coffee.,cup of iced coffee, for a 
+3,It was expensive,price,Julia, bought a round-trip ticket to Europe.,for a plane trip, for a 
+3, is light,weight,Angela, bought a television and lifted it up.,television set, for a 
+3,That was short,time,John, was talking about the time they drove across the country.,ride you would think would take forever, for a 
+3,It was expensive,price,Stephen, bought a ticket to the movies.,movie, for a 
+3,That was long,time,Josh, was talking about the traffic light that just turned green.,light to turn greedn, for a 
+3,That was short,time,Veronica, was talking about the movie they just saw.,movie , for a 
+3,It was cheap,price,Kim, bought a candy bar.,candy bar, for a 
+4,That was short,time,Kim, was talking about the movie they just saw.,movie, for a 
+4,It&quotechars warm,temperature,Laura, took a sip from a glass of milk.,glass of milk, for a 
+4, is heavy,weight,Angela, bought a television and lifted it up.,television, for a 
+4, was tall,height,Alexander, saw a 25 year-old man.,man, for a 
+4,It&quotechars cold,temperature,Melinda, took a sip from a cup of coffee.,coffee, for a 
+4,It&quotechars cold,temperature,Veronica, took a sip from an iced coffee.,coffee, for a 
+4, is light,weight,Stephen, bought a television and lifted it up.,television, for a 
+4, was tall,height,Julia, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+4,That was long,time,David, was talking about the movie they just saw.,movie, for a 
+4, is light,weight,Daniel, bought a book and lifted it up.,book, for a 
+4,That was short,time,Claire, was talking about the time they drove across the country.,cross country drive, for a 
+4, is heavy,weight,Jasmine, bought a book and lifted it up.,book, for a 
+4,It was cheap,price,Greg, bought a round-trip ticket to Europe.,round-trip ticket to Europe, for a 
+4,That was long,time,Lee, was talking about the time they drove across the country.,cross-country trip, for a 
+4,It&quotechars warm,temperature,Anthony, took a sip from an iced coffee.,n iced coffee, for a 
+4,That was short,time,William, was talking about the traffic light that just turned green.,traffic light, for a 
+4,That was long,time,Josh, was talking about the traffic light that just turned green.,traffic light, for a 
+4,It was expensive,price,Mika, bought a candy bar.,candy bar, for a 
+4,It&quotechars cold,temperature,Simon, took a sip from a glass of milk.,glass of milk, for a 
+4, was tall,height,Stephanie, saw a 4 year-old boy.,4 year-old boy, for a 
+4,It was cheap,price,Charles, bought a candy bar.,candy bar, for a 
+4, is light,weight,Eric, bought an iPhone and lifted it up.,iphone, for a 
+4, was tall,height,Robert, saw a tower in a European city.,tower, for a 
+4,It was expensive,price,Tom, bought a round-trip ticket to Europe.,ticket to Europe, for a 
+4, was short,height,Lucas, saw a 25 year-old man.,25 year-old man, for a 
+4,It was expensive,price,Alicia, bought a ticket to the movies.,ticket to the movies, for a 
+4,It&quotechars warm,temperature,Gabriel, took a sip from a cup of coffee.,coffee, for a 
+4,It was cheap,price,Tanya, bought a truck.,truck, for a 
+4, is heavy,weight,Jennifer, bought an iPhone and lifted it up.,iphone, for a 
+4,It was expensive,price,Michelle, bought a truck.,truck, for a 
+4,It was cheap,price,Michael, bought a ticket to the movies.,ticket to the movies, for a 
+4, was short,height,Gary, saw a tower in a European city.,tower, for a 
+4, was short,height,Monica, saw a 4 year-old boy.,4 year-old boy, for a 
+4, was short,height,Sophie, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+5,It was expensive,price,Kim, bought a candy bar.,candy bar, for a 
+5, is light,weight,Julia, bought an iPhone and lifted it up.,iPhone, for a 
+5, is heavy,weight,Michael, bought a book and lifted it up.,book, for a 
+5,It was expensive,price,Kathleen, bought a truck.,truck, for a 
+5,It&quotechars warm,temperature,Stephen, took a sip from an iced coffee.,n iced coffee, for a 
+5,It&quotechars warm,temperature,Natalia, took a sip from a glass of milk.,glass of milk, for a 
+5,That was long,time,Melinda, was talking about the movie they just saw.,movie, for a 
+5, was short,height,Sophie, saw a 25 year-old man.,man, for a 
+5,That was short,time,Daniel, was talking about the traffic light that just turned green.,traffic light, for a 
+5,That was long,time,Stephanie, was talking about the traffic light that just turned green.,traffic light, for a 
+5, was tall,height,Josh, saw a 25 year-old man.,man, for a 
+5,It&quotechars cold,temperature,Gabriel, took a sip from a glass of milk.,glass of milk, for a 
+5, was short,height,Veronica, saw a 4 year-old boy.,boy, for a 
+5,It was expensive,price,Monica, bought a round-trip ticket to Europe.,ticket to Europe, for a 
+5,It&quotechars cold,temperature,Anthony, took a sip from a cup of coffee.,cup of coffee, for a 
+5,It was cheap,price,Michelle, bought a truck.,truck, for a 
+5, was tall,height,Laura, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+5, was short,height,Lee, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+5, is light,weight,Greg, bought a book and lifted it up.,book, for a 
+5, was tall,height,Jennifer, saw a tower in a European city.,tower, for a 
+5, is light,weight,Alicia, bought a television and lifted it up.,television, for a 
+5,It&quotechars warm,temperature,Claire, took a sip from a cup of coffee.,cup of coffee, for a 
+5,It was expensive,price,Maya, bought a ticket to the movies.,ticket to the movies, for a 
+5, was tall,height,Robert, saw a 4 year-old boy.,boy, for a 
+5, is heavy,weight,Charles, bought an iPhone and lifted it up.,iPhone, for a 
+5,It was cheap,price,Tanya, bought a candy bar.,candy bar, for a 
+5,It was cheap,price,Mika, bought a ticket to the movies.,ticket to the movies, for a 
+5, is heavy,weight,William, bought a television and lifted it up.,television, for a 
+5, was short,height,Angela, saw a tower in a European city.,tower, for a 
+5,That was short,time,John, was talking about the time they drove across the country.,drive, for a 
+5,That was short,time,Kim, was talking about the movie they just saw.,movie, for a 
+5,That was long,time,David, was talking about the time they drove across the country.,drive, for a 
+5,It was cheap,price,Gary, bought a round-trip ticket to Europe.,ticket, for a 
+5,It&quotechars cold,temperature,Tom, took a sip from an iced coffee.,n iced coffee, for a 
+6, is light,weight,Stephen, bought a book and lifted it up.,book, for a 
+6, was tall,height,Charles, saw a 4 year-old boy.,4 year-old boy, for a 
+6,It was cheap,price,Daniel, bought a round-trip ticket to Europe.,round-trip ticket to Europe, for a 
+6, is light,weight,Sophie, bought a television and lifted it up.,television , for a 
+6,It was cheap,price,Lee, bought a truck.,truck that runs, for a 
+6,That was long,time,Gary, was talking about the movie they just saw.,movie , for a 
+6, was tall,height,Anthony, saw a 25 year-old man.,person, for a 
+6,It was cheap,price,Maya, bought a candy bar.,piece of candy, for a 
+6, was short,height,Gabriel, saw a 25 year-old man.,person, for a 
+6,It&quotechars cold,temperature,Cameron, took a sip from a cup of coffee.,cup of coffee, for a 
+6, was short,height,Josh, saw a tower in a European city.,tower in a European city, for a 
+6, is heavy,weight,Tom, bought a television and lifted it up.,television, for a 
+6,It was expensive,price,Greg, bought a round-trip ticket to Europe.,round-trip ticket to Europe, for a 
+6,That was long,time,Melinda, was talking about the traffic light that just turned green.,green light, for a 
+6, was tall,height,Tanya, saw a tower in a European city.,tower in a European city, for a 
+6,It&quotechars warm,temperature,Laura, took a sip from a glass of milk.,glass of milk, for a 
+6, is heavy,weight,Jasmine, bought an iPhone and lifted it up.,cell phone, for a 
+6, was short,height,Kathleen, saw a 4 year-old boy.,4 year-old boy, for a 
+6,It was cheap,price,Monica, bought a ticket to the movies.,ticket to the movies, for a 
+6,It&quotechars cold,temperature,Angela, took a sip from a glass of milk.,glass of milk, for a 
+6,That was short,time,Michelle, was talking about the time they drove across the country.,drive across the country, for a 
+6,That was long,time,William, was talking about the time they drove across the country.,drive across the country, for a 
+6,It was expensive,price,Natalia, bought a candy bar.,candy bar, for a 
+6,It&quotechars warm,temperature,Jennifer, took a sip from an iced coffee.,n iced coffee, for a 
+6,It was expensive,price,Alicia, bought a ticket to the movies.,ticket to the movies, for a 
+6,That was short,time,Kim, was talking about the traffic light that just turned green.,red light, for a 
+6, is heavy,weight,Mika, bought a book and lifted it up.,book, for a 
+6,It was expensive,price,Robert, bought a truck.,truck in this condition, for a 
+6, is light,weight,David, bought an iPhone and lifted it up.,cell phone, for a 
+6, was short,height,Michael, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+6, was tall,height,Claire, saw the point guard on the local men&quotechars basketball team.,local basketball team, for a 
+6,That was short,time,Veronica, was talking about the movie they just saw.,movie, for a 
+6,It&quotechars cold,temperature,Alexander, took a sip from an iced coffee.,n iced coffee, for a 
+6,It&quotechars warm,temperature,Eric, took a sip from a cup of coffee.,cup of coffee, for a 
+7,That was short,time,Cameron, was talking about the movie they just saw.,short movie, for a 
+7, was tall,height,Veronica, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+7, is heavy,weight,Charles, bought a book and lifted it up.,book, for a 
+7,It&quotechars cold,temperature,Stephanie, took a sip from a cup of coffee.,coffee, for a 
+7, was tall,height,Jasmine, saw a tower in a European city.,tower, for a 
+7, was short,height,Claire, saw a 25 year-old man.,man, for a 
+7, was short,height,Gabriel, saw a tower in a European city.,tower, for a 
+7,It&quotechars warm,temperature,Simon, took a sip from a cup of coffee.,coffee, for a 
+7,It was expensive,price,Alexander, bought a round-trip ticket to Europe.,trip, for a 
+7, is heavy,weight,Natalia, bought a television and lifted it up.,television, for a 
+7, is light,weight,William, bought a book and lifted it up.,book, for a 
+7,It&quotechars warm,temperature,Angela, took a sip from an iced coffee.,coffee, for a 
+7,That was short,time,Lucas, was talking about the time they drove across the country.,trip, for a 
+7, is light,weight,Gary, bought a television and lifted it up.,television, for a 
+7,It was expensive,price,Daniel, bought a ticket to the movies.,movie, for a 
+7,It&quotechars warm,temperature,Monica, took a sip from a glass of milk.,milk, for a 
+7,It was expensive,price,Melinda, bought a truck.,truck , for a 
+7, is light,weight,Greg, bought an iPhone and lifted it up.,iphone, for a 
+7, was short,height,John, saw a 4 year-old boy.,boy, for a 
+7,It&quotechars cold,temperature,Tanya, took a sip from a glass of milk.,milk, for a 
+7,That was long,time,Alicia, was talking about the traffic light that just turned green.,traffic light, for a 
+7,It was cheap,price,Mika, bought a ticket to the movies.,ticket, for a 
+7,It&quotechars cold,temperature,Robert, took a sip from an iced coffee.,coffee, for a 
+7, is heavy,weight,Michelle, bought an iPhone and lifted it up.,iphone, for a 
+7,It was expensive,price,Kim, bought a candy bar.,candy bar, for a 
+7,It was cheap,price,David, bought a candy bar.,candy bar, for a 
+7, was short,height,Kathleen, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+7, was tall,height,Josh, saw a 4 year-old boy.,boy, for a 
+7, was tall,height,Tom, saw a 25 year-old man.,man, for a 
+7,It was cheap,price,Stephen, bought a round-trip ticket to Europe.,ticket, for a 
+7,That was short,time,Julia, was talking about the traffic light that just turned green.,traffic light, for a 
+7,It was cheap,price,Maya, bought a truck.,truck, for a 
+7,That was long,time,Kim, was talking about the movie they just saw.,movie, for a 
+7,That was long,time,Lee, was talking about the time they drove across the country.,trip, for a 
+8, was short,height,Monica, saw a tower in a European city.,tower, for a 
+8,It&quotechars cold,temperature,Michelle, took a sip from an iced coffee.,coffee, for a 
+8,That was long,time,Gary, was talking about the traffic light that just turned green.,light, for a 
+8, was tall,height,Cameron, saw a 25 year-old man.,man, for a 
+8,It was expensive,price,Daniel, bought a truck.,truck, for a 
+8,It was cheap,price,John, bought a round-trip ticket to Europe.,trip to Europe, for a 
+8, was tall,height,Mika, saw the point guard on the local men&quotechars basketball team.,point guard, for a 
+8,It&quotechars warm,temperature,Stephen, took a sip from an iced coffee.,iced coffee, for a 
+8, was short,height,Jasmine, saw a 4 year-old boy.,4 year-old boy, for a 
+8,It was cheap,price,Eric, bought a ticket to the movies.,movie ticket, for a 
+8,That was short,time,Kathleen, was talking about the time they drove across the country.,drive across the country, for a 
+8,That was short,time,Julia, was talking about the traffic light that just turned green.,traffic light, for a 
+8, is light,weight,Jennifer, bought a television and lifted it up.,television, for a 
+8, is light,weight,Claire, bought an iPhone and lifted it up.,iPhone, for a 
+8,It&quotechars cold,temperature,Melinda, took a sip from a cup of coffee.,coffee, for a 
+8, is heavy,weight,Tom, bought an iPhone and lifted it up.,iPhone, for a 
+8, was tall,height,Natalia, saw a 4 year-old boy.,4 year-old boy, for a 
+8,That was long,time,Josh, was talking about the movie they just saw.,movie, for a 
+8,It&quotechars warm,temperature,Tanya, took a sip from a glass of milk.,glass of milk, for a 
+8, is light,weight,Stephanie, bought a book and lifted it up.,book, for a 
+8,It&quotechars warm,temperature,Alexander, took a sip from a cup of coffee.,cup of coffee, for a 
+8, is heavy,weight,Anthony, bought a television and lifted it up.,television, for a 
+8, was tall,height,Angela, saw a tower in a European city.,tower, for a 
+8, is heavy,weight,Kim, bought a book and lifted it up.,book, for a 
+8,It was expensive,price,Lee, bought a round-trip ticket to Europe.,round-trip ticket, for a 
+8,It was expensive,price,David, bought a ticket to the movies.,ticket to the movies, for a 
+8,It was cheap,price,Kim, bought a truck.,truck, for a 
+8,That was short,time,Maya, was talking about the movie they just saw.,movie, for a 
+8,It was expensive,price,William, bought a candy bar.,candy bar, for a 
+8,That was long,time,Robert, was talking about the time they drove across the country.,drive across the country, for a 
+8,It was cheap,price,Laura, bought a candy bar.,candy bar, for a 
+8,It&quotechars cold,temperature,Michael, took a sip from a glass of milk.,glass of milk, for a 
+8, was short,height,Charles, saw a 25 year-old man.,man, for a 
+8, was short,height,Sophie, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+9,That was long,time,Julia, was talking about the movie they just saw.,movie, for a 
+9, is light,weight,Melinda, bought a book and lifted it up.,book, for a 
+9, was short,height,Charles, saw a tower in a European city.,tower, for a 
+9,That was long,time,Mika, was talking about the time they drove across the country.,drive , for a 
+9,It&quotechars cold,temperature,Robert, took a sip from a cup of coffee.,cup of coffee, for a 
+9,It&quotechars warm,temperature,Tanya, took a sip from a cup of coffee.,cup of coffee, for a 
+9,It was expensive,price,Kim, bought a ticket to the movies.,ticket, for a 
+9,It was expensive,price,Lucas, bought a truck.,truck, for a 
+9, was short,height,Eric, saw a 4 year-old boy.,4 year old boy, for a 
+9,It was cheap,price,Kathleen, bought a truck.,truck, for a 
+9,It was expensive,price,Gabriel, bought a round-trip ticket to Europe.,round-trip ticket, for a 
+9, is light,weight,Claire, bought a television and lifted it up.,television, for a 
+9, is heavy,weight,Sophie, bought a book and lifted it up.,book, for a 
+9, was tall,height,John, saw a 25 year-old man.,man, for a 
+9,That was short,time,Veronica, was talking about the time they drove across the country.,cross country trip, for a 
+9,It was cheap,price,Michael, bought a round-trip ticket to Europe.,round-trip ticket , for a 
+9, was tall,height,Lee, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+9,It&quotechars cold,temperature,Natalia, took a sip from an iced coffee.,iced coffee, for a 
+9, was short,height,Stephanie, saw the point guard on the local men&quotechars basketball team.,basketball player, for a 
+9, is heavy,weight,Greg, bought an iPhone and lifted it up.,iphone, for a 
+9,That was short,time,Kim, was talking about the movie they just saw.,movie, for a 
+9,It was cheap,price,Simon, bought a ticket to the movies.,movie ticket, for a 
+9, was tall,height,William, saw a tower in a European city.,tower, for a 
+9, is light,weight,Daniel, bought an iPhone and lifted it up.,iphone, for a 
+9, was tall,height,Maya, saw a 4 year-old boy.,4 year old, for a 
+9,It&quotechars warm,temperature,David, took a sip from a glass of milk.,glass of milk, for a 
+9,It was expensive,price,Cameron, bought a candy bar.,candy bar, for a 
+9,It was cheap,price,Jasmine, bought a candy bar.,candy bar, for a 
+9,It&quotechars warm,temperature,Monica, took a sip from an iced coffee.,ice coffee, for a 
+9,That was long,time,Tom, was talking about the traffic light that just turned green.,red light, for a 
+9, is heavy,weight,Josh, bought a television and lifted it up.,television, for a 
+9, was short,height,Alexander, saw a 25 year-old man.,25 year old man, for a 
+9,It&quotechars cold,temperature,Stephen, took a sip from a glass of milk.,glass of milk, for a 
+9,That was short,time,Alicia, was talking about the traffic light that just turned green.,red light, for a 
