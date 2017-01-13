@@ -116,7 +116,7 @@ var examples = [{
 	],
 	sub: {
 		singular: [
-			"video of cute animals",
+			"video of the cute animal",
 			"music video",
 			"lecture"
 		],
