@@ -77,9 +77,9 @@ var examples = [{
 		]
 	},
 	super: [
-		"appliances",
-		"appliances",
-		"appliances"
+		"kitchen appliances",
+		"kitchen appliances",
+		"kitchen appliances"
 	],
 	strength: [1,2,3],
 	degree: "price",
