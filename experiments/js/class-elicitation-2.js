@@ -36,6 +36,9 @@ function makeSlides(f) {
     if (exp.examples[i].target[0] === " ") {
       adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
     }
+    else if (exp.examples[i].context.search("Maryland") != -1) {
+      adjectivePhrase = "It's " + exp.examples[i].target + " outside";
+    }
     else {
       adjectivePhrase = "This is " + exp.examples[i].target;
     }
@@ -90,7 +93,7 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     response = $("#text_response" + (i+1)).val();
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
+    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")];
     superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
     otherEndorse = exp.sliderPost[exp.nSentences - 1];
 
