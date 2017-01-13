@@ -75,16 +75,25 @@ data.to.webppl <- list(superSpeaker = d.prior, ccInference = d.summary)
 
 wppl.model <- paste(model.path, "fbt-for-subCatpriors.wppl", sep = "")
 
-numSamples = 10
+numSamples = 2
 
 rs <- webppl(program_file = wppl.model,
-       data = d.prior,
+       data = data.to.webppl,
        data_var = "dataFromR",
-       inference_opts = list(method = "MCMC", 
-                             samples = numSamples, burn = numSamples / 2, verbose = T),
+       inference_opts = list(method = "incrementalMH", 
+                             samples = numSamples, 
+                             burn = numSamples / 2, 
+                             verbose = T,
+                             verboseLag = numSamples/20),
+       # inference_opts = list(method = "MCMC", 
+       #                       kernel = list(HMC = list(stepSize = 0.01, steps = 5)),
+       #                       samples = numSamples, 
+       #                       burn = numSamples / 2, 
+       #                       verbose = T),
        model_var = "model",
        chains = 1,
-       cores = 1)
+       cores = 1
+       )
 ```
 
 
