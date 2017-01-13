@@ -226,8 +226,6 @@ function embedListenerSlides(examples, trials) {
 function embed2AFCSlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
-
-
     slides = slides +
 		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +

@@ -39,7 +39,7 @@ function makeSlides(f) {
 
     // display the action sentence
     $(".display_context").html(exp.examples[i].action + " How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
-      " relative to other " + exp.examples[i].super + "?</strong>");
+      " relative to other " + exp.examples[i].super + "</strong>?");
 
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
@@ -78,6 +78,8 @@ function makeSlides(f) {
         "target": exp.examples[i].target,
         "action": exp.examples[i].action,
         "degree": exp.examples[i].degree,
+        "form": exp.examples[i].form,
+        "strength": exp.examples[i].strength,
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
         "response": response,

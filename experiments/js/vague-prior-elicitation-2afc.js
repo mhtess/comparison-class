@@ -32,10 +32,11 @@ function makeSlides(f) {
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
-     " relative to other " + exp.examples[i].super + "?</strong>");
+     " relative to other " + exp.examples[i].super + "</strong>?");
 
     $(".display_question").html();
 
+    // display the radio buttons
     $('label[for=0]').html('Yes');
     $('label[for=1]').html('No');
   }
@@ -43,24 +44,24 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
 
-    response = $('input[name="paraphrase"]:checked').val()
+    response = $('input[name="paraphrase"]:checked').val() ? "Yes" : "No";
     adjective = exp.examples[i].target.split(" ").pop();
 
     if (!response) { $(".err").show(); }
     else {
       exp.data_trials.push({
-        "condition" : exp.condition,
-        "context" : exp.examples[i].context,
-        "target" : exp.examples[i].target,
-        "degree" : exp.examples[i].degree,
-        "form" : exp.examples[i].form,
-        "adjective" : adjective,
-        "strength" : exp.examples[i].strength,
-        "names" : exp.names[i],
-        "sub_category" : exp.examples[i].sub_singular,
-        "super_category" : exp.examples[i].super,
+        "condition": exp.condition,
+        "target": exp.examples[i].target,
+        "context": exp.examples[i].context,
+        "degree": exp.examples[i].degree,
+        "form": exp.examples[i].form,
+        "adjective": adjective,
+        "strength": exp.examples[i].strength,
+        "names": exp.names[i],
+        "sub_category": exp.examples[i].sub_singular,
+        "super_category": exp.examples[i].super,
+        "response": response
       });
-
       i++;
       exp.go();
     }
@@ -69,39 +70,39 @@ function makeSlides(f) {
   // stitches together all of the trial slides
   for (var j = 1; j <= exp.trials; j++) {
     slides["trial" + j] = slide({
-      name : "trial" + j,
-      start : start,
-      button : button
+      name: "trial" + j,
+      start: start,
+      button: button
     });
   }
 
   slides.subj_info =  slide({
-    name : "subj_info",
-    submit : function(e) {
+    name: "subj_info",
+    submit: function(e) {
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.subj_data = {
-        language : $("#language").val(),
-        enjoyment : $("#enjoyment").val(),
-        asses : $('input[name="assess"]:checked').val(),
-        age : $("#age").val(),
-        gender : $("#gender").val(),
-        education : $("#education").val(),
-        comments : $("#comments").val(),
+        language: $("#language").val(),
+        enjoyment: $("#enjoyment").val(),
+        asses: $('input[name="assess"]:checked').val(),
+        age: $("#age").val(),
+        gender: $("#gender").val(),
+        education: $("#education").val(),
+        comments: $("#comments").val(),
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
   });
 
   slides.thanks = slide({
-    name : "thanks",
-    start : function() {
+    name: "thanks",
+    start: function() {
       exp.data = {
-          "trials" : exp.data_trials,
-          "catch_trials" : exp.catch_trials,
-          "system" : exp.system,
-          "condition" : exp.condition,
-          "subject_information" : exp.subj_data,
-          "time_in_minutes" : (Date.now() - exp.startT) / 60000
+          "trials": exp.data_trials,
+          "catch_trials": exp.catch_trials,
+          "system": exp.system,
+          "condition": exp.condition,
+          "subject_information": exp.subj_data,
+          "time_in_minutes": (Date.now() - exp.startT) / 60000
       };
       setTimeout(function() {turk.submit(exp.data);}, 1000);
     }
