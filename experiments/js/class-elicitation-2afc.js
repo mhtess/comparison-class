@@ -181,12 +181,12 @@ function init() {
 
   // get user system specs
   exp.system = {
-      Browser : BrowserDetect.browser,
-      OS : BrowserDetect.OS,
-      screenH : screen.height,
-      screenUH : exp.height,
-      screenW : screen.width,
-      screenUW : exp.width
+      Browser: BrowserDetect.browser,
+      OS: BrowserDetect.OS,
+      screenH: screen.height,
+      screenUH: exp.height,
+      screenW: screen.width,
+      screenUW: exp.width
   };
 
   // the blocks of the experiment
