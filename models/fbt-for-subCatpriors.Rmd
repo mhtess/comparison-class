@@ -39,16 +39,43 @@ data.path <- "/Users/mht/research/comparison-class/data/classElicitation-2-items
 d <- read.csv(paste(data.path, "class-elicitation-2-items2-trials.csv", sep = ""))
 ```
 
-Load MHT's responses
+Right now, I will imagine that the average (slider based) endorsements for each paraphrase correspond to the proportion of responses in a forced choice task. 
+To actually analyze the slider data, an additional linking function would have to be designed. (ideas described below).
+We plan to run a forced choice, which hopefully will produce similar results to the slider ratings we received in the pilot experiments.
+
+As far as linking function is concerned: 
+The first thing I would try is by taking the posterior probability of each paraphrase (from the RSA model), and assuming that slider ratings are a noisy Beta distribution around that probability. 
+The concentration parameter for the Beta would have to be inferred. 
+This probably will fail because slider ratings tend to not have the properties of a Beta. 
+The next likely function is passing the probability through a logit-function, adding Gaussian noise, and transforming the value back to probability space using the logistic function. 
+
+```{r}
+d.summary <- d %>%
+  select(sub_category, super_category, adjective, sub_endorsement, super_endorsement, degree, form, strength) %>%
+  mutate(total_endorse = sub_endorsement + super_endorsement,
+         sub_norm = sub_endorsement / total_endorse,
+         super_norm = super_endorsement / total_endorse) %>%
+  select(-total_endorse, -sub_endorsement, -super_endorsement) %>% 
+  gather(key, response, -sub_category, -adjective, -super_category, -degree, -form, -strength) %>%
+  group_by(key, sub_category, super_category, adjective, degree, form, strength) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
+```
+
+Load MHT's example responses for the (super class) S2 experiment
 
 ```{r}
 d.prior <- read.csv(paste(model.path, "simulated_data/items2.csv", sep = ""))
 ```
 
 ```{r}
+
+data.to.webppl <- list(superSpeaker = d.prior, ccInference = d.summary)
+
 wppl.model <- paste(model.path, "fbt-for-subCatpriors.wppl", sep = "")
 
-numSamples = 100
+numSamples = 10
 
 rs <- webppl(program_file = wppl.model,
        data = d.prior,
@@ -62,18 +89,76 @@ rs <- webppl(program_file = wppl.model,
 
 
 ```{r}
-rs.tidy <- rs %>% select(-score) %>%
+rs1 <- bind_rows(rs[[1]], rs[[2]])
+
+rs.tidy <- rs1 %>% select(-score) %>%
   gather(key, val) %>%
   separate(key, into=c("blank", "subCat", "param"), sep = "[.]") %>%
   select(-blank)
+
+save(rs.tidy, file = paste(model.path, "simulated_data/simulated_bda_results.RData", sep = ""))
 ```
 
 ```{r}
+load(paste(model.path, "simulated_data/simulated_bda_results.RData", sep = ""))
+
 rs.summary <- rs.tidy %>%
   group_by(subCat, param) %>%
   summarize(MAP = estimate_mode(val),
             cred_lower = HPDlo(val),
             cred_upper = HPDhi(val))
+```
+
+```{r}
+rs.tidy %>% 
+  filter(!(param %in% c("posteriorPredictive_positive", "posteriorPredictive_negative"))) %>%
+  ggplot(., aes( x = val ) ) + 
+  geom_histogram()+
+  facet_grid(subCat ~ param, scales = 'free')+
+  theme(strip.text.y = element_text(angle = 0))
+```
+
+Generate posterior predictive for sub cat priors
+```{r}
+
+postPred.priors <- data.frame()
+
+for (i in levels(factor(rs.tidy$subCat))) {
+  # map.params <- rs.summary %>% 
+  #   filter(subCat == "apples") %>% 
+  #   select(param, MAP) %>%
+  #   filter(!(param %in% c("posteriorPredictive_positive", "posteriorPredictive_negative"))) %>%
+  #   ungroup() %>%
+  #   spread(param, MAP)
+  item.samples <- data.frame()
+  for (j in seq(1, 100)){
+    
+    map.params <- rs.tidy %>% 
+      filter(subCat == i) %>%
+      filter(!(param %in% c("posteriorPredictive_positive", "posteriorPredictive_negative"))) %>%
+      group_by(subCat, param) %>%
+      sample_n(1) %>%
+      spread(param, val) 
+    
+    s <- rnorm(1, mean = map.params[["mu"]], sd = map.params[["sigma"]])
+    item.samples <- bind_rows(item.samples, data.frame(sample = s, subCat = i))
+    
+  }
+
+  postPred.priors <- bind_rows(postPred.priors, item.samples)
+  print(i)
+}
+```
+
+
+```{r}
+stnorm <- data.frame(nrm = rnorm(1000, mean = 0, sd = 1))
+
+ggplot(postPred.priors, aes(x = sample))+
+  geom_density(data = stnorm, aes(x = nrm), fill = 'green')+
+  geom_density(fill = "yellow") + 
+#  geom_histogram() + 
+  facet_wrap(~subCat, scales = 'free')
 ```
 
 ```{r}
@@ -84,4 +169,32 @@ ggplot(rs.summary, aes(x = subCat, y = MAP, ymin = cred_lower, ymax = cred_upper
   coord_flip()
 ```
 
+
+Posterior predictive check
+
+```{r}
+
+md.prior <- left_join(
+
+  d.prior %>%
+    rename(subCat = sub_category) %>%
+    mutate(response = prior_response / 10) %>%
+    select(subCat, form, response),
+  
+  rs.summary %>% 
+    filter(param %in% c("posteriorPredictive_positive", "posteriorPredictive_negative")) %>%
+    separate(param, into=c("param", "form"))
+
+)
+
+with(md.prior, cor(MAP, response))^2
+
+md.prior %>%
+  ggplot(., aes( x = MAP, xmin = cred_lower, xmax = cred_upper,
+                 y = response))+
+  geom_point()+
+  xlim(0, 1)+
+  ylim(0, 1)+
+  coord_fixed()
+```
 
