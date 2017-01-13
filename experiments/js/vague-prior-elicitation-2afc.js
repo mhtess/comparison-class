@@ -18,7 +18,7 @@ function makeSlides(f) {
     },
     button: function() {
       var response = $('input[name="catch"]:checked').val();
-      if (response== undefined) { $(".errCatch").show(); }
+      if (response == undefined) { $(".errCatch").show(); }
       else {
         exp.catch_trials.push({
           object: "basketball",

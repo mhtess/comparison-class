@@ -93,7 +93,7 @@ var getPronoun = function(context, name) {
 	else if (gender == "female") { return context.split("their").join("her").split("they").join("her"); }
 }
 
-// retrieves the correct pronoun for the context/target pair
+// retrieves the correct pronoun for the target-context pair
 var getPronoun2 = function(context, target) {
   var pronoun = "";
   if ((target.search("tall") != -1) || (target.search("short") != -1)) {
@@ -120,7 +120,8 @@ function isLetter(str) {
 function embedSlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
-    slides = slides + "<div class=\"slide\" id=\"trial" + i + "\">" +
+    slides = slides +
+      "<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
@@ -133,7 +134,7 @@ function embedSlides(trials) {
   }
 }
 
-// embeds the trial slides for vague-prior-elicitation-1
+// embeds the trial slides for vague-prior-elicitation
 function embedVPESlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
@@ -154,7 +155,8 @@ function embedVPESlides(trials) {
   }
 }
 
-function embedMultipleSlidersSlides(trials) {
+// embeds the trial slides for class-elicitation
+function embedCESlides(trials) {
   var slides = "", sliderText;
   for (var i = 1; i <= trials; i++) {
 
