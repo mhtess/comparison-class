@@ -52,6 +52,7 @@ function makeSlides(f) {
     exp.sliderPost = [];
   }
 
+  // the two functions below help set up and read info from the sliders
   function init_sliders(nSentences) {
     for (var j = 1; j <= nSentences; j++) {
       utils.make_slider("#slider" + j,
@@ -67,7 +68,6 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    // adjective = exp.examples[i].target.split(" ").pop();
 
     // stores the slider response from the participant
     response = exp.sliderPost[exp.nSentences];
@@ -78,8 +78,6 @@ function makeSlides(f) {
         "target": exp.examples[i].target,
         "action": exp.examples[i].action,
         "degree": exp.examples[i].degree,
-        // "adjective": adjective,
-        // "names": exp.names[i],
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
         "response": response,
@@ -136,8 +134,7 @@ function makeSlides(f) {
 function init() {
 
   // generate all possible target-context pair combinations
-  exp.examples = getTrials(examples);
-  //exp.examples = exp.examples.slice(0, 5);
+  exp.examples = getUniqueTrials(examples);
   
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
@@ -147,25 +144,7 @@ function init() {
   exp.condition = sampleCondition();
 
   // set the number of sliders to use
-  // exp.sliderOrder = _.shuffle(["sub", "super"]);
-  // exp.nSentences = exp.sliderOrder.length + 1;
   exp.nSentences = 1;
-
-  // if we have more trials than we do unique names, some names will be reused
-  // if (exp.trials > characters.length) {
-  //   // this needs to be fixed later to account for the possibility of two names on the same trial slide
-  //   exp.names = sampleNames(characters).concat(sampleNames(characters));
-  //   exp.extra = sampleNames(characters);
-  // } else {
-  //   // generate a list of unique names
-  //   exp.names = sampleNames(characters);
-
-  //   // names for the trials that require an extra name
-  //   exp.extra = exp.names.slice(exp.trials, exp.names.length);
-  // }
-
-  // we don't have any catch trials for this experiment
-  // exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
@@ -179,7 +158,7 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
-  for (var k = 1; k <= exp.examples.length; k++) {
+  for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
   exp.structure.push("subj_info");
@@ -192,7 +171,6 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  // embedListenerSlides(exp.examples, exp.trials); 
   embedSliderSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)

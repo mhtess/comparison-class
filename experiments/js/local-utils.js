@@ -24,6 +24,59 @@ function getTrials(examples) {
 	return _.shuffle(trials);
 }
 
+// creates a randomized sequence of trials with unique subcategories
+function getUniqueTrials(examples) {
+  var trials = [], rand;
+  for (var i = 0; i < examples.length; i++) {
+    rand = Math.ceil(Math.random()*2);
+    for (var j = 0; j < rand; j++) {
+      trials.push({
+        target: examples[i].target["positive"],
+        context: examples[i].context[j],
+        action: examples[i].action[j],
+        prompt: examples[i].prompt[j],
+        degree: examples[i].degree,
+        unit: examples[i].unit,
+        form: examples[i].form,
+        subunit: examples[i].subunit,
+        sub_singular: examples[i].sub.singular[j],
+        sub_plural: examples[i].sub.plural[j],
+        super: examples[i].super[j],
+        strength: examples[i].strength[j]
+      });
+    }
+    for (var j = rand; j < 3; j++) {
+      trials.push({
+        target: examples[i].target["negative"],
+        context: examples[i].context[j],
+        action: examples[i].action[j],
+        prompt: examples[i].prompt[j],
+        degree: examples[i].degree,
+        unit: examples[i].unit,
+        form: examples[i].form,
+        subunit: examples[i].subunit,
+        sub_singular: examples[i].sub.singular[j],
+        sub_plural: examples[i].sub.plural[j],
+        super: examples[i].super[j],
+        strength: examples[i].strength[j]
+      });
+    } 
+  }
+
+  // loops until a suitable trials array is found
+  while(1) {
+    for (var i = 0; i < trials.length-1; i++) {
+      if (trials[i]["degree"] == trials[i+1]["degree"]) {
+        trials = _.shuffle(trials);
+        break;
+      }
+
+      if (i == trials.length-2) { return trials; }
+    }
+  }
+}
+
+
 // samples without replacement from a list of names for all of our trial slides
 // NOTE: 30 NAMES MAX
 var sampleNames = function(characters) {

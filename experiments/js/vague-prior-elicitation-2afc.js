@@ -55,8 +55,8 @@ function makeSlides(f) {
         "form" : exp.examples[i].form,
         "adjective" : adjective,
         "strength" : exp.examples[i].strength,
-        "names" : exp.names[i] + "",
-        "sub_category" : exp.examples[i].sub,
+        "names" : exp.names[i],
+        "sub_category" : exp.examples[i].sub_singular,
         "super_category" : exp.examples[i].super,
 
         // "paraphrase": exp.sliderOrder[response],
@@ -116,7 +116,8 @@ function makeSlides(f) {
 function init() {
 
   // generate all possible target-context pair combinations
-  exp.examples = getTrials(examples);
+  // exp.examples = getTrials(examples);
+  exp.examples = getUniqueTrials(examples);
   //exp.examples = exp.examples.slice(0, 5);
 
   // one trial for each unique target-context pair
