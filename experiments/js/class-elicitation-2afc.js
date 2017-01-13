@@ -50,18 +50,9 @@ function makeSlides(f) {
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-    // display the paraphrase statement
-    if (exp.examples[i].target[0] === " ") {
-      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
-    }
-    else {
-      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
-    }
-
     // display the text next to the radio buttons
     $('label[for=0]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[0]] + '."');
     $('label[for=1]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[1]] + '."');
-
   }
 
   // runs when the "Continue" button is hit on a slide
@@ -163,8 +154,9 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
+  // set the number of sliders to use and their order
   exp.sliderOrder = _.shuffle(["sub_plural", "super"]);
-  exp.nSentences = exp.sliderOrder.length + 1;
+  exp.nSentences = exp.sliderOrder.length;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {
@@ -178,6 +170,9 @@ function init() {
     // names for the trials that require an extra name
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
+
+  // we don't have any catch trials for this experiment
+  // exp.catch_trials = [];
 
   // get user system specs
   exp.system = {

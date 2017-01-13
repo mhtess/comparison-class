@@ -50,22 +50,12 @@ function makeSlides(f) {
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-    // display the paraphrase statement
-    if (exp.examples[i].target[0] === " ") {
-      $(".display_prompt").html("\"" + getPronoun2(exp.examples[i].context, exp.examples[i].target) + exp.examples[i].target + exp.condition);
-    }
-    else {
-      $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
-    }
-
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
 
     // set up the text next to each slider
     for (var j = 0; j < exp.nSentences; j++) {
-      var sentence = j == exp.nSentences - 1 ?
-        "Other (optional; fill in below)" :
-        '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
+      var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + ".\"";
 
       // display the slider for each slide
       $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
@@ -92,19 +82,16 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = $("#text_response" + (i+1)).val();
+
+    // stores the slider results
     subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")];
     superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
-    otherEndorse = exp.sliderPost[exp.nSentences - 1];
 
     // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!(subEndorse && superEndorse)) {
-      $(".errSliders").show();
-    } else if (exp.sliderPost[exp.nSentences - 1] > 0.1 && (response.length == 0)) {
-      $(".err").show();
-    } else {
+    if (!(subEndorse && superEndorse)) { $(".errSliders").show(); }
+    else {
       exp.data_trials.push({
         "condition": exp.condition,
         "context": exp.examples[i].context,
@@ -118,10 +105,8 @@ function makeSlides(f) {
         "super_category": exp.examples[i].super,
         "paraphrase0": exp.sliderOrder[0],
         "paraphrase1": exp.sliderOrder[1],
-        "other_response": response,
         "sub_endorsement": subEndorse,
-        "super_endorsement": superEndorse,
-        "other_endorsement":  otherEndorse ? otherEndorse : 0
+        "super_endorsement": superEndorse
       });
       i++;
       exp.go();
@@ -198,8 +183,9 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
+  // set the number of sliders to use and their order
   exp.sliderOrder = _.shuffle(["sub_plural", "super"]);
-  exp.nSentences = exp.sliderOrder.length + 1;
+  exp.nSentences = exp.sliderOrder.length;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {

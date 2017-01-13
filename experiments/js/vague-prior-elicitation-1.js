@@ -175,7 +175,6 @@ function init() {
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
 
-
   // get user system specs
   exp.system = {
       Browser: BrowserDetect.browser,

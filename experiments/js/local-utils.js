@@ -149,7 +149,7 @@ function embedVPESlides(trials) {
 			"</tr></table>" +
   		"<span class=\"display_prompt\"></span>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-  		'<p class="err">Please adjust the slider before continuing.</p>' +
+  		"<p class=\"err\">Please adjust the slider before continuing.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }
@@ -157,14 +157,8 @@ function embedVPESlides(trials) {
 
 // embeds the trial slides for class-elicitation
 function embedCESlides(trials) {
-  var slides = "", sliderText;
+  var slides = "";
   for (var i = 1; i <= trials; i++) {
-
-    // sliderText = [
-    //   exp.examples[i-1]["low"],
-    //   exp.examples[i-1]["medium"]
-    // ];
-
     slides = slides +
     "<div class=\"slide\" id=\"trial" + i + "\">" +
       "<p class=\"display_context\"></p>" +
@@ -174,15 +168,13 @@ function embedCESlides(trials) {
       "<tr><td></td>" +
       "<td class=\"left\">very unlikely</td>"+
       "<td class=\"right\">very likely</td>" +
-      "</tr></table>" +
-      "<span class=\"display_prompt\"></span>" +
+      "</tr></table><p></p>" +
       // '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
-      "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+      // "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
-      '<p class="errSliders">Please adjust the first two sliders before continuing.</p>' +
-      '<p class="err">Please adjust the slider before continuing.</p>' +
+      "<p class=\"errSliders\">Please adjust the first two sliders before continuing.</p>" +
+      "<p class=\"err\">Please adjust the slider before continuing.</p>" +
       "</div>";
-
     $(".trial_slides").html(slides);
   }
 }
@@ -269,7 +261,7 @@ function embedCE2AFCSlides(trials) {
       "<p class=\"display_question\"></p>" +
       "<div class=\"radioLeft\">" + 
       "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label></div><br>" +
-      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br><br></div>" +
+      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br></div>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please select an option before continuing.</p>" +
       "</div>";
