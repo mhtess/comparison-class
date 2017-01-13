@@ -23,7 +23,7 @@ function makeSlides(f) {
         exp.catch_trials.push({
           object: "basketball",
           property: "is orange",
-          response: exp.sliderPost[0]
+          response: response
         });
         exp.go();
       }
@@ -36,7 +36,7 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    $(".display_context").html(exp.names[i] + exp.examples[i].context);
+    $(".display_context").html("<br>"+exp.names[i] + exp.examples[i].context);
 
     $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
      " relative to other " + exp.examples[i].super + "</strong>?");
@@ -44,14 +44,14 @@ function makeSlides(f) {
     $(".display_question").html();
 
     // display the radio buttons
-    $('label[for=0]').html('Yes');
-    $('label[for=1]').html('No');
+    $('label[for=0]').html(exp.responseOrder[0]);
+    $('label[for=1]').html(exp.responseOrder[1]);
   }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
 
-    response = $('input[name="paraphrase"]:checked').val() ? "Yes" : "No";
+    response = exp.responseOrder[$('input[name="paraphrase"]:checked').val()];
     adjective = exp.examples[i].target.split(" ").pop();
 
     if (!response) { $(".err").show(); }
@@ -67,7 +67,9 @@ function makeSlides(f) {
         "names": exp.names[i],
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
-        "response": response
+        "response": response == "Yes" ? 1 : 0,
+        "leftResponse": exp.responseOrder[0],
+        "rightResponse": exp.responseOrder[1]
       });
       i++;
       exp.go();
@@ -111,6 +113,8 @@ function makeSlides(f) {
           "system": exp.system,
           "condition": exp.condition,
           "subject_information": exp.subj_data,
+          "leftResponse": exp.responseOrder[0],
+          "rightResponse": exp.responseOrder[1],
           "time_in_minutes": (Date.now() - exp.startT) / 60000
       };
       setTimeout(function() {turk.submit(exp.data);}, 1000);
@@ -132,6 +136,8 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
+
+  exp.responseOrder = _.shuffle(["Yes","No"]);
   // set the number of sliders to use
   // exp.nSentences = 1;
 

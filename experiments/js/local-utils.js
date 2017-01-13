@@ -60,7 +60,7 @@ function getUniqueTrials(examples) {
         super: examples[i].super[j],
         strength: examples[i].strength[j]
       });
-    } 
+    }
   }
 
   // loops until a suitable trials array is found
@@ -231,7 +231,7 @@ function embed2AFCSlides(trials) {
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_target\"></p>" +
   		"<p class=\"display_question\"></p>" +
-			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label><br><br>"+
+			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>"+
 			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>"+
   		"<button onclick=\"_s.button()\">Continue</button>" +
 			'<p class="err">Please select an option before continuing.</p>'+
