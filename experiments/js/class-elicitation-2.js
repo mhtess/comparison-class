@@ -97,6 +97,7 @@ function makeSlides(f) {
     superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
     otherEndorse = exp.sliderPost[exp.nSentences - 1];
 
+    // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
     if (!(subEndorse && superEndorse)) {
@@ -105,21 +106,21 @@ function makeSlides(f) {
       $(".err").show();
     } else {
       exp.data_trials.push({
-        "condition" : exp.condition,
-        "context" : exp.examples[i].context,
-        "target" : exp.examples[i].target,
-        "degree" : exp.examples[i].degree,
-        "form" : exp.examples[i].form,
-        "adjective" : adjective,
-        "strength" : exp.examples[i].strength,
-        "names" : exp.names[i],
-        "sub_category" : exp.examples[i].sub,
-        "super_category" : exp.examples[i].super,
-        "paraphrase0" : exp.sliderOrder[0],
-        "paraphrase1" : exp.sliderOrder[1],
+        "condition": exp.condition,
+        "context": exp.examples[i].context,
+        "target": exp.examples[i].target,
+        "degree": exp.examples[i].degree,
+        "form": exp.examples[i].form,
+        "adjective": adjective,
+        "strength": exp.examples[i].strength,
+        "names": exp.names[i],
+        "sub_category": exp.examples[i].sub_singular,
+        "super_category": exp.examples[i].super,
+        "paraphrase0": exp.sliderOrder[0],
+        "paraphrase1": exp.sliderOrder[1],
         "other_response": response,
         "sub_endorsement": subEndorse,
-        "super_endorsement" : superEndorse,
+        "super_endorsement": superEndorse,
         "other_endorsement":  otherEndorse ? otherEndorse : 0
       });
       i++;

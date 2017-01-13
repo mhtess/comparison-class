@@ -5,15 +5,15 @@ function makeSlides(f) {
   var slides = {};
 
   slides.i0 = slide({
-    name : "i0",
-    start : function() {
+    name: "i0",
+    start: function() {
       exp.startT = Date.now();
     }
   });
 
   slides.instructions = slide({
-    name : "instructions",
-    button : function() {
+    name: "instructions",
+    button: function() {
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
   });
@@ -66,29 +66,27 @@ function makeSlides(f) {
 
   // runs when the "Continue" button is hit on a slide
   function button() {
-    response = $('input[name="paraphrase"]:checked').val()
-    // subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub")];
-    // superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
-    // otherEndorse = exp.sliderPost[exp.nSentences - 1];
+    response = $('input[name="paraphrase"]:checked').val();
+
+    // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!response) {
-      $(".err").show();
-    } else {
+    if (!response) { $(".err").show(); }
+    else {
       exp.data_trials.push({
-        "condition" : exp.condition,
-        "context" : exp.examples[i].context,
-        "target" : exp.examples[i].target,
-        "degree" : exp.examples[i].degree,
-        "form" : exp.examples[i].form,
-        "adjective" : adjective,
-        "strength" : exp.examples[i].strength,
-        "names" : exp.names[i] + "",
-        "sub_category" : exp.examples[i].sub,
-        "super_category" : exp.examples[i].super,
+        "condition": exp.condition,
+        "context": exp.examples[i].context,
+        "target": exp.examples[i].target,
+        "degree": exp.examples[i].degree,
+        "form": exp.examples[i].form,
+        "adjective": adjective,
+        "strength": exp.examples[i].strength,
+        "names": exp.names[i], 
+        "sub_category": exp.examples[i].sub_singular,
+        "super_category": exp.examples[i].super,
         "paraphrase": exp.sliderOrder[response],
-        "paraphrase0" : exp.sliderOrder[0],
-        "paraphrase1" : exp.sliderOrder[1]
+        "paraphrase0": exp.sliderOrder[0],
+        "paraphrase1": exp.sliderOrder[1]
       });
       i++;
       exp.go();
@@ -98,9 +96,9 @@ function makeSlides(f) {
   // stitches together all of the trial slides
   for (var j = 1; j <= exp.trials; j++) {
     slides["trial" + j] = slide({
-      name : "trial" + j,
-      start : start,
-      button : button
+      name: "trial" + j,
+      start: start,
+      button: button
     });
   }
 
@@ -109,32 +107,32 @@ function makeSlides(f) {
     submit : function(e) {
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.subj_data = {
-        language : $("#language").val(),
-        enjoyment : $("#enjoyment").val(),
-        asses : $('input[name="assess"]:checked').val(),
-        age : $("#age").val(),
-        gender : $("#gender").val(),
-        education : $("#education").val(),
+        language: $("#language").val(),
+        enjoyment: $("#enjoyment").val(),
+        asses: $('input[name="assess"]:checked').val(),
+        age: $("#age").val(),
+        gender: $("#gender").val(),
+        education: $("#education").val(),
         problems: $("#problems").val(),
         fairprice: $("#fairprice").val(),
-        comments : $("#comments").val()
+        comments: $("#comments").val()
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
   });
 
   slides.thanks = slide({
-    name : "thanks",
-    start : function() {
+    name: "thanks",
+    start: function() {
       exp.data = {
-          "trials" : exp.data_trials,
-          "catch_trials" : exp.catch_trials,
-          "system" : exp.system,
-          "condition" : exp.condition,
-          "paraphrase0" : exp.sliderOrder[0],
-          "paraphrase1" : exp.sliderOrder[1],
-          "subject_information" : exp.subj_data,
-          "time_in_minutes" : (Date.now() - exp.startT) / 60000
+          "trials": exp.data_trials,
+          "catch_trials": exp.catch_trials,
+          "system": exp.system,
+          "condition": exp.condition,
+          "paraphrase0": exp.sliderOrder[0],
+          "paraphrase1": exp.sliderOrder[1],
+          "subject_information": exp.subj_data,
+          "time_in_minutes": (Date.now() - exp.startT) / 60000
       };
       setTimeout(function() {turk.submit(exp.data);}, 1000);
     }
@@ -180,9 +178,6 @@ function init() {
     // names for the trials that require an extra name
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
-
-  // we don't have any catch trials for this experiment
-  exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
