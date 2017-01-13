@@ -160,10 +160,10 @@ function embedCESlides(trials) {
   var slides = "", sliderText;
   for (var i = 1; i <= trials; i++) {
 
-    sliderText = [
-      exp.examples[i-1]["low"],
-      exp.examples[i-1]["medium"]
-    ];
+    // sliderText = [
+    //   exp.examples[i-1]["low"],
+    //   exp.examples[i-1]["medium"]
+    // ];
 
     slides = slides +
     "<div class=\"slide\" id=\"trial" + i + "\">" +

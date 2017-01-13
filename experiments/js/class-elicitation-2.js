@@ -54,30 +54,23 @@ function makeSlides(f) {
     else {
       $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     }
-    
-
-    sliderText = {
-			sub: adjectivePhrase  + " relative to other " + exp.examples[i].sub_plural,
-			super: adjectivePhrase  + " relative to other " + exp.examples[i].super,
-      other: "Other (optional; fill in below)"
-		};
 
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
 
+    // set up the text next to each slider
     for (var j = 0; j < exp.nSentences; j++) {
       var sentence = j == exp.nSentences - 1 ?
-      "Other (optional; fill in below)" :
-      '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
-      // var sentence = sliderText[j];
+        "Other (optional; fill in below)" :
+        '"' + adjectivePhrase  + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + '."'
 
+      // display the slider for each slide
       $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
     }
 
     init_sliders(exp.nSentences);
     exp.sliderPost = [];
-
   }
 
   // the two functions below help set up and read info from the sliders
@@ -202,7 +195,7 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
-  exp.sliderOrder = _.shuffle(["sub", "super"]);
+  exp.sliderOrder = _.shuffle(["sub_plural", "super"]);
   exp.nSentences = exp.sliderOrder.length + 1;
 
   // if we have more trials than we do unique names, some names will be reused
