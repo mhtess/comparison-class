@@ -18,7 +18,7 @@ function makeSlides(f) {
     // set up the slider
     start: function() {
       $(".errCatch").hide();
-      $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + 0 + "\">" + 
+      $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + 0 + "\">" +
         "</td><td colspan=\"2\"><div id=\"slider" + 0 + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
       utils.make_slider("#slider" + 0,
         make_slider_callback(0));
@@ -27,7 +27,11 @@ function makeSlides(f) {
 
     // await slider input from the user and displays an error if the user attempts to continue without responding
     button: function() {
-      exp.catch_trials = exp.sliderPost[0];
+      exp.catch_trials.push({
+        object: "basketball",
+        property: "is orange",
+        response: exp.sliderPost[0]
+      });
       if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".errCatch").show(); }
       else { exp.go(); }
     }
@@ -38,7 +42,7 @@ function makeSlides(f) {
     $(".err").hide();
 
     // display the action sentence
-    $(".display_context").html(exp.examples[i].action + " How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
+    $(".display_context").html("<br>"+exp.examples[i].action + " <br><br> How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "</strong>?");
 
     // removes the slider from the previous slide before making the slider for the current slide
@@ -109,7 +113,9 @@ function makeSlides(f) {
         age: $("#age").val(),
         gender: $("#gender").val(),
         education: $("#education").val(),
-        comments: $("#comments").val(),
+        problems: $("#problems").val(),
+        fairprice: $("#fairprice").val(),
+        comments : $("#comments").val()
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
@@ -137,7 +143,7 @@ function init() {
 
   // generate all possible target-context pair combinations
   exp.examples = getUniqueTrials(examples);
-  
+
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
@@ -168,6 +174,7 @@ function init() {
 
   // holds the data from each trial
   exp.data_trials = [];
+  exp.catch_trials = [];
 
   // make corresponding slides
   exp.slides = makeSlides(exp);

@@ -17,9 +17,16 @@ function makeSlides(f) {
       $(".errCatch").hide();
     },
     button: function() {
-      exp.catch_trials = $('input[name="catch"]:checked').val();
-      if (exp.catch_trials == undefined) { $(".errCatch").show(); }
-      else { exp.go(); }
+      var response = $('input[name="catch"]:checked').val();
+      if (response== undefined) { $(".errCatch").show(); }
+      else {
+        exp.catch_trials.push({
+          object: "basketball",
+          property: "is orange",
+          response: exp.sliderPost[0]
+        });
+        exp.go();
+      }
     }
   });
 
@@ -87,7 +94,9 @@ function makeSlides(f) {
         age: $("#age").val(),
         gender: $("#gender").val(),
         education: $("#education").val(),
-        comments: $("#comments").val(),
+        problems: $("#problems").val(),
+        fairprice: $("#fairprice").val(),
+        comments : $("#comments").val()
       };
       exp.go(); // use exp.go() if and only if there is no "present" data
     }
@@ -159,6 +168,7 @@ function init() {
 
   // holds the data from each trial
   exp.data_trials = [];
+  exp.catch_trials = [];
 
   // make corresponding slides
   exp.slides = makeSlides(exp);
