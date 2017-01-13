@@ -248,10 +248,10 @@ function embedVPE2AFCSlides(trials) {
 		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_question\"></p>" +
-			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>"+
-			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>"+
+			"<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>" +
+			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
-			'<p class="err">Please select an option before continuing.</p>'+
+			"<p class=\"err\">Please select an option before continuing.</p>" +
   		"</div>";
   	$(".trial_slides").html(slides);
   }
@@ -266,10 +266,11 @@ function embedCE2AFCSlides(trials) {
       "<p class=\"display_context\"></p>" +
       "<p class=\"display_target\"></p>" +
       "<p class=\"display_question\"></p>" +
-      "<div class=\"radioLeft\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>"+
-      "<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>"+
+      "<div class=\"radioLeft\">" + 
+      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label></div>" +
+      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br><br></div>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
-      '<p class="err">Please select an option before continuing.</p>'+
+      "<p class=\"err\">Please select an option before continuing.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
   }

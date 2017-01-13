@@ -58,14 +58,8 @@ function makeSlides(f) {
       $(".display_prompt").html("\"" + exp.examples[i].target + exp.condition);
     }
 
-    sliderText = {
-			sub: adjectivePhrase  + " relative to other " + exp.examples[i]["sub_plural"],
-			super: adjectivePhrase  + " relative to other " + exp.examples[i]["super"],
-      other: "Other (optional; fill in below)"
-		};
-
+    // display the text next to the radio buttons
     $('label[for=0]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[0]] + '."');
-
     $('label[for=1]').html('"' + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[1]] + '."');
 
   }
