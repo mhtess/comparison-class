@@ -5,18 +5,18 @@ function makeSlides(f) {
   var slides = {};
 
   slides.i0 = slide({
-    name : "i0",
-    start : function() {
+    name: "i0",
+    start: function() {
       exp.startT = Date.now();
     }
   });
 
   // the various hard-coded 0s correspond to the slider on the instructions slide
   slides.instructions = slide({
-    name : "instructions",
+    name: "instructions",
 
     // set up the slider
-    start : function() {
+    start: function() {
       $(".errCatch").hide();
       $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + 0 + "\">" + 
         "</td><td colspan=\"2\"><div id=\"slider" + 0 + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -26,7 +26,7 @@ function makeSlides(f) {
     },
 
     // await slider input from the user and displays an error if the user attempts to continue without responding
-    button : function() {
+    button: function() {
       exp.catch_trials = exp.sliderPost[0];
       if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".errCatch").show(); }
       else { exp.go(); }
@@ -97,8 +97,8 @@ function makeSlides(f) {
   }
 
   slides.subj_info =  slide({
-    name : "subj_info",
-    submit : function(e) {
+    name: "subj_info",
+    submit: function(e) {
       //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.subj_data = {
         language: $("#language").val(),
@@ -114,8 +114,8 @@ function makeSlides(f) {
   });
 
   slides.thanks = slide({
-    name : "thanks",
-    start : function() {
+    name: "thanks",
+    start: function() {
       exp.data = {
           "trials": exp.data_trials,
           "catch_trials": exp.catch_trials,

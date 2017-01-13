@@ -5,17 +5,21 @@ function makeSlides(f) {
   var slides = {};
 
   slides.i0 = slide({
-    name : "i0",
-    start : function() {
+    name: "i0",
+    start: function() {
       exp.startT = Date.now();
     }
   });
 
   slides.instructions = slide({
-    name : "instructions",
-    button : function() {
-      exp.catch_trials.push($("#catch").val());
-      exp.go(); // use exp.go() if and only if there is no "present" data
+    name: "instructions",
+    start: function() {
+      $(".errCatch").hide();
+    },
+    button: function() {
+      exp.catch_trials = $('input[name="catch"]:checked').val();
+      if (exp.catch_trials == undefined) { $(".errCatch").show(); }
+      else { exp.go(); }
     }
   });
 
@@ -28,14 +32,12 @@ function makeSlides(f) {
     $(".display_context").html(exp.names[i] + exp.examples[i].context);
 
     $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
-     " relative to other " + exp.examples[i].super + "?");
+     " relative to other " + exp.examples[i].super + "?</strong>");
 
     $(".display_question").html();
 
     $('label[for=0]').html('Yes');
     $('label[for=1]').html('No');
-
-
   }
 
   // runs when the "Continue" button is hit on a slide
@@ -44,9 +46,8 @@ function makeSlides(f) {
     response = $('input[name="paraphrase"]:checked').val()
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!response) {
-      $(".err").show();
-    } else {
+    if (!response) { $(".err").show(); }
+    else {
       exp.data_trials.push({
         "condition" : exp.condition,
         "context" : exp.examples[i].context,
@@ -58,10 +59,6 @@ function makeSlides(f) {
         "names" : exp.names[i],
         "sub_category" : exp.examples[i].sub_singular,
         "super_category" : exp.examples[i].super,
-
-        // "paraphrase": exp.sliderOrder[response],
-        // "paraphrase0" : exp.sliderOrder[0],
-        // "paraphrase1" : exp.sliderOrder[1]
       });
 
       i++;
@@ -116,9 +113,7 @@ function makeSlides(f) {
 function init() {
 
   // generate all possible target-context pair combinations
-  // exp.examples = getTrials(examples);
   exp.examples = getUniqueTrials(examples);
-  //exp.examples = exp.examples.slice(0, 5);
 
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
@@ -128,9 +123,7 @@ function init() {
   exp.condition = sampleCondition();
 
   // set the number of sliders to use
-  // exp.sliderOrder = _.shuffle(["sub", "super"]);
-  // exp.nSentences = exp.sliderOrder.length + 1;
-  exp.nSentences = 1;
+  // exp.nSentences = 1;
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {
@@ -144,9 +137,6 @@ function init() {
     // names for the trials that require an extra name
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
-
-  // we don't have any catch trials for this experiment
-  exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
@@ -173,7 +163,6 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  // embedListenerSlides(exp.examples, exp.trials);
   embed2AFCSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
