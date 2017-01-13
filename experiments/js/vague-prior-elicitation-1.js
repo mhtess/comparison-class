@@ -41,9 +41,20 @@ function makeSlides(f) {
   function start() {
     $(".err").hide();
 
-    // display the action sentence
-    $(".display_context").html("<br>"+exp.examples[i].action + " <br><br> How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
+    // display the context sentence
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
+      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    }
+    else {
+      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+    }
+
+    
+    $(".display_target").html("How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "</strong>?");
+
+    // $(".display_context").html("<br>"+exp.examples[i].action + " <br><br> How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
+    //   " relative to other " + exp.examples[i].super + "</strong>?");
 
     // removes the slider from the previous slide before making the slider for the current slide
     $(".slider_row").remove();
@@ -153,6 +164,20 @@ function init() {
 
   // set the number of sliders to use
   exp.nSentences = 1;
+
+  // if we have more trials than we do unique names, some names will be reused
+  if (exp.trials > characters.length) {
+    // this needs to be fixed later to account for the possibility of two names on the same trial slide
+    exp.names = sampleNames(characters).concat(sampleNames(characters));
+    exp.extra = sampleNames(characters);
+  } else {
+    // generate a list of unique names
+    exp.names = sampleNames(characters);
+
+    // names for the trials that require an extra name
+    exp.extra = exp.names.slice(exp.trials, exp.names.length);
+  }
+
 
   // get user system specs
   exp.system = {

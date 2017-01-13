@@ -36,7 +36,13 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    $(".display_context").html("<br>"+exp.names[i] + exp.examples[i].context);
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
+      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    }
+    else {
+      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+    }
+
 
     $(".display_target").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
      " relative to other " + exp.examples[i].super + "</strong>?");
