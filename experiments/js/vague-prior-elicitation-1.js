@@ -26,13 +26,15 @@ function makeSlides(f) {
 
     // await slider input from the user and displays an error if the user attempts to continue without responding
     button: function() {
-      exp.catch_trials = {
-        object: "basketball",
-        property: "is orange",
-        response: exp.sliderPost[0]
-      };
-      if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".errCatch").show(); }
-      else { exp.go(); }
+      if (exp.sliderPost[exp.nSentences-1] === undefined) { $(".errCatch").show(); }
+      else { 
+        exp.catch_trials.push({
+          object: "basketball",
+          property: "is orange",
+          response: exp.sliderPost[0]
+        });
+        exp.go(); 
+      }
     }
   });
 
@@ -82,7 +84,7 @@ function makeSlides(f) {
 
     // stores the slider response from the participant
     response = exp.sliderPost[exp.nSentences];
-    if (exp.sliderPost[exp.nSentences] == undefined) { $(".err").show(); }
+    if (exp.sliderPost[exp.nSentences] === undefined) { $(".err").show(); }
     else {
       exp.data_trials.push({
         "condition": exp.condition,

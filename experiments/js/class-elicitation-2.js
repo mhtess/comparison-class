@@ -21,20 +21,23 @@ function makeSlides(f) {
         $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] + 
           "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
         utils.match_row_height("#multi_slider_table0", ".slider_target");
-        utils.make_slider("#slider" + j,
-          make_slider_callback(j));
+        utils.make_slider("#slider" + j, make_slider_callback(j));
       }
       exp.sliderPost = [];  
     },
     button: function() {
-      exp.catch_trials = {
-        object: "Empire State Building",
-        property: "is tall",
-        response1: exp.sliderPost[0],
-        response2: exp.sliderPost[1]
-      };
       if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
-      else { exp.go(); }
+      else { 
+        exp.catch_trials.push({
+          object: "Empire State Building",
+          property: "is tall",
+          sentence1: "relative to other buildings",
+          response1: exp.sliderPost[0],
+          sentence2: "relative to other people",
+          response2: exp.sliderPost[1]
+        });
+        exp.go(); 
+      }
     }
   });
 

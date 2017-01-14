@@ -13,8 +13,20 @@ function makeSlides(f) {
 
   slides.instructions = slide({
     name: "instructions",
+    start: function() {
+      $(".errCatch").hide();
+    },
     button: function() {
-      exp.go(); // use exp.go() if and only if there is no "present" data
+      var response = $('input[name="catch"]:checked').val();
+      if (response === undefined) { $(".errCatch").show(); }
+      else {
+        exp.catch_trials.push({
+          object: "basketball",
+          property: "is orange",
+          response: response
+        });
+        exp.go();
+      }
     }
   });
 

@@ -18,7 +18,7 @@ function makeSlides(f) {
     },
     button: function() {
       var response = $('input[name="catch"]:checked').val();
-      if (response == undefined) { $(".errCatch").show(); }
+      if (response === undefined) { $(".errCatch").show(); }
       else {
         exp.catch_trials.push({
           object: "basketball",
@@ -176,6 +176,9 @@ function init() {
       screenW : screen.width,
       screenUW : exp.width
   };
+
+  // stores the catch trial results for this experiment
+  exp.catch_trials = [];
 
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];

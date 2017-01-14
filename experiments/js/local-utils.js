@@ -258,7 +258,7 @@ function embedVPE2AFCSlides(trials) {
   }
 }
 
-// embed the trial slides for vague-prior-elicitation-2afc
+// embed the trial slides for class-elicitation-2afc
 function embedCE2AFCSlides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
