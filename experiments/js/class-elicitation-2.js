@@ -16,7 +16,7 @@ function makeSlides(f) {
     name: "instructions",
     start: function() {
       $(".errCatch").hide();
-      var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other people."];
+      var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
       for (var j = 0; j < exp.nCatch; j++) {
         $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] + 
           "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
@@ -46,17 +46,27 @@ function makeSlides(f) {
     $(".err").hide();
 
     // display the context sentence
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    exp.pronoun = 0;
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+      
+      // if "They" is used, we randomly select a pronoun for the other person and record it
+      if (exp.examples[i][exp.condition].search("They") != -1) { 
+        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+        $(".display_context").html(exp.names[i] + exp.pronoun);  
+      }
+      else {
+        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      }
     }
     else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
     }
 
     // construct the target sentence
     var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
-      adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
+      adjectivePhrase = getPronoun2(exp.examples[i][exp.condition], exp.examples[i].target) + " is " + exp.examples[i].target;
     } else {
       adjectivePhrase = "It's " + exp.examples[i].target;
     }
@@ -114,6 +124,8 @@ function makeSlides(f) {
       exp.data_trials.push({
         "condition": exp.condition,
         "context": exp.examples[i].context,
+        "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
+        "contextWithSuperPronoun": exp.pronoun ? (exp.pronoun.search("He") != -1 ? "He" : "She") : "",
         "target": exp.examples[i].target,
         "degree": exp.examples[i].degree,
         "form": exp.examples[i].form,
