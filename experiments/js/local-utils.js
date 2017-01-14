@@ -84,6 +84,7 @@ var sampleNames = function(characters) {
 	return _.shuffle(names);
 }
 
+// get the gender assigned to a particular name
 var getGender = function(name){
 	return (_.find(characters, function(person) {
 		return person.name == name;
@@ -110,9 +111,11 @@ var getPronoun2 = function(context, target) {
   return pronoun;
 }
 
+// retrieve a pronoun based on a name
 var getPronoun3 = function(name){
 	var gender = getGender(name);
-	if (gender == "male") { return "his" } else {return "her" };
+	if (gender == "male") { return "his"; }
+  else { return "her"; }
 }
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
