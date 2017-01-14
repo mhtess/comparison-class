@@ -71,7 +71,7 @@ HPDlo<- function(s){
 If you've traveled to San Francisco, you know a cup of coffee can be quite expensive.
 Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
 
-Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure \red{cite Kennedy?}.
+Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure \red{(cite Kennedy?)}.
 For example, a cup of coffee is expensive if its price is greater than some threshold number of dollars.
 The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities. 
 A cup of coffee can be expensive *relative to* other cups of coffee.
@@ -122,10 +122,10 @@ Then, the listener $L_1$ tries to uncover the speaker's implicit comparison clas
 The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
 For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 
-```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model precictions"}
+```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
 ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
 
-model.path <- "/Users/mht/research/comparison-class/models/"
+model.path <- "/Users/mht/Documents/research/comparison-class/models/"
 mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
        packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
 
@@ -214,8 +214,8 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 # Experiment 2: Vague speakers
 
 \begin{align}
-S_{2}(u \mid c_{sub}) $ \propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}), \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
 \end{align}
 
 ## Methods
@@ -339,19 +339,8 @@ columns.
 
 You can use the xtable function in the xtable package.
 
-```{r xtable, results="asis"}
-n <- 100
-x <- rnorm(n)
-y <- 2*x + rnorm(n)
-out <- lm(y ~ x)
-
-tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2), 
-                      caption = "This table prints across one column.")
-
-print(tab1, type="latex", comment = F, table.placement = "H")
-```
-
 -->
+
 # Acknowledgements
 
 Place acknowledgments (including funding information) in a section at
