@@ -84,11 +84,15 @@ var sampleNames = function(characters) {
 	return _.shuffle(names);
 }
 
-// swaps out singular "they" for gendered pronoun given a name
-var getPronoun = function(context, name) {
-	var gender = (_.find(characters, function(person) {
+var getGender = function(name){
+	return (_.find(characters, function(person) {
 		return person.name == name;
 	})).gender;
+}
+
+// swaps out singular "they" for gendered pronoun given a name
+var getPronoun = function(context, name) {
+	var gender = getGender(name);
 	if (gender == "male") { return context.split("their").join("his").split("they").join("his"); }
 	else if (gender == "female") { return context.split("their").join("her").split("they").join("her"); }
 }
@@ -104,6 +108,11 @@ var getPronoun2 = function(context, target) {
     pronoun = "This";
   }
   return pronoun;
+}
+
+var getPronoun3 = function(name){
+	var gender = getGender(name);
+	if (gender == "male") { return "his" } else {return "her" };
 }
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
