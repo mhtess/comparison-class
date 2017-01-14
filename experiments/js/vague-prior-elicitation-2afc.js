@@ -36,11 +36,21 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    exp.pronoun = 0;
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+      
+      // if "They" is used, we randomly select a pronoun for the other person and record it
+      if (exp.examples[i][exp.condition].search("They") != -1) { 
+        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+        $(".display_context").html(exp.names[i] + exp.pronoun);  
+      }
+      else {
+        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      }
     }
     else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
     }
 
     // display the question
@@ -64,6 +74,7 @@ function makeSlides(f) {
         "condition": exp.condition,
         "target": exp.examples[i].target,
         "context": exp.examples[i].context,
+        "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
         "degree": exp.examples[i].degree,
         "form": exp.examples[i].form,
         "adjective": adjective,
@@ -149,8 +160,9 @@ function init() {
   // sample a phrase for this particular instance
   exp.condition = sampleCondition();
 
+  // sets the other of the radio buttons
+  exp.responseOrder = _.shuffle(["Yes", "No"]);
 
-  exp.responseOrder = _.shuffle(["Yes","No"]);
   // set the number of sliders to use
   // exp.nSentences = 1;
 

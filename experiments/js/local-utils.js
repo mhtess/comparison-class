@@ -97,7 +97,7 @@ var getGender = function(name){
 // swaps out singular "they" for gendered pronoun given a name
 var getPronoun = function(context, name) {
 	var gender = getGender(name);
-	if (context.search("them") != -1) { context = context.split("them").join(_.sample(["his", "her"])); }
+	if (context.search("them") != -1) { context = context.split("them").join(_.sample(["him", "her"])); }
   if (gender == "male") { return context.split("their").join("his").split("they").join("his").split("They").join("He"); }
 	else if (gender == "female") { return context.split("their").join("her").split("they").join("her").split("They").join("She"); }
 }

@@ -43,9 +43,18 @@ function makeSlides(f) {
     $(".err").hide();
 
     // display the context sentence
+    exp.pronoun = 0;
     if((exp.examples[i][exp.condition].search("their") != -1) || (exp.examples[i][exp.condition].search("they") != -1) ||
       exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      
+      // if "They" is used, we randomly select a pronoun for the other person and record it
+      if (exp.examples[i][exp.condition].search("They") != -1) { 
+        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+        $(".display_context").html(exp.names[i] + exp.pronoun);  
+      }
+      else {
+        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      }
     }
     else {
       $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
@@ -90,6 +99,8 @@ function makeSlides(f) {
       exp.data_trials.push({
         "condition": exp.condition,
         "target": exp.examples[i].target,
+        "context": exp.examples[i].context,
+        "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
         "action": exp.examples[i].action,
         "degree": exp.examples[i].degree,
         "form": exp.examples[i].form,
