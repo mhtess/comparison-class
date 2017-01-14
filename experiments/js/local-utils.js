@@ -27,41 +27,24 @@ function getTrials(examples) {
 
 // creates a randomized sequence of trials with unique subcategories
 function getUniqueTrials(examples) {
-  var trials = [], rand;
+  var trials = [], form;
   for (var i = 0; i < examples.length; i++) {
-    rand = Math.ceil(Math.random()*2);
-    for (var j = 0; j < rand; j++) {
+    for (var j = 0; j < examples[i].context.length; j++) {
+      form = _.sample(["positive", "negative"]);
       trials.push({
-        target: examples[i].target["positive"],
+        target: examples[i].target[form],
+        form: form,
         context: examples[i].context[j],
         contextWithSuper: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
         prompt: examples[i].prompt[j],
-        degree: examples[i].degree,
-        unit: examples[i].unit,
-        form: "positive",
-        subunit: examples[i].subunit,
         sub_singular: examples[i].sub.singular[j],
         sub_plural: examples[i].sub.plural[j],
         super: examples[i].super[j],
-        strength: examples[i].strength[j]
-      });
-    }
-    for (var j = rand; j < 3; j++) {
-      trials.push({
-        target: examples[i].target["negative"],
-        context: examples[i].context[j],
-        contextWithSuper: examples[i].contextWithSuper[j],
-        action: examples[i].action[j],
-        prompt: examples[i].prompt[j],
+        strength: examples[i].strength[j],
         degree: examples[i].degree,
         unit: examples[i].unit,
-        form: "negative",
-        subunit: examples[i].subunit,
-        sub_singular: examples[i].sub.singular[j],
-        sub_plural: examples[i].sub.plural[j],
-        super: examples[i].super[j],
-        strength: examples[i].strength[j]
+        subunit: examples[i].subunit
       });
     }
   }
@@ -74,6 +57,7 @@ function getUniqueTrials(examples) {
         break;
       }
 
+      // return once we have reached the end of the trials array without finding adjacent degrees
       if (i == trials.length-2) { return trials; }
     }
   }
