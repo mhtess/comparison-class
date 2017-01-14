@@ -170,9 +170,9 @@ var examples = [{
 		]
 	},
 	super: [
-		"people",
-		"people",
-		"people"
+		"adults",
+		"adults",
+		"adults"
 	],
 	strength: [1,2,3],
 	degree: "height",
@@ -182,8 +182,8 @@ var examples = [{
 },
 {
 	target: {
-		positive: " heavy",
-		negative: " light"
+		positive: "heavy",
+		negative: "light"
 	},
 	context : [
 		" picks up a grape.",
