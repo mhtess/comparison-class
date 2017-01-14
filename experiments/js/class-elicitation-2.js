@@ -37,10 +37,10 @@ function makeSlides(f) {
       adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
     }
     else if (exp.examples[i].context.search("Maryland") != -1) {
-      adjectivePhrase = "It's " + exp.examples[i].target + " outside";
+      adjectivePhrase = "It's " + exp.examples[i].target;
     }
     else {
-      adjectivePhrase = "This is " + exp.examples[i].target;
+      adjectivePhrase = "It's " + exp.examples[i].target;
     }
 
     // display the target sentence
