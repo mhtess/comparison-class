@@ -105,7 +105,7 @@ var examples = [{
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
 		" finds a video of a cute animal to watch online with their friend.",
 		" finds a music video to watch online with their friend.",
-		" finds a lecture to watch online with their friend."
+		" finds a movie to watch online with their friend."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
