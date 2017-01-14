@@ -72,7 +72,7 @@ function makeSlides(f) {
         "form": exp.examples[i].form,
         "adjective": adjective,
         "strength": exp.examples[i].strength,
-        "names": exp.names[i], 
+        "names": exp.names[i],
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
         "paraphrase": exp.sliderOrder[response],
@@ -136,14 +136,13 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-comparisonClass-20170110";
+      var ut_id = "mht-adjectives-20170114";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
         alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
       }
   })();
-
   // generate all possible target-context pair combinations
   exp.examples = getUniqueTrials(examples);
 

@@ -49,7 +49,7 @@ function makeSlides(f) {
       $(".display_context").html(exp.names[i] + exp.examples[i].context);
     }
 
-    // display the target 
+    // display the target
     $(".display_target").html("How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "</strong>?");
 
@@ -148,6 +148,16 @@ function makeSlides(f) {
 
 /// init ///
 function init() {
+  
+  repeatWorker = false;
+  (function(){
+      var ut_id = "mht-adjectives-20170114";
+      if (UTWorkerLimitReached(ut_id)) {
+        $('.slide').empty();
+        repeatWorker = true;
+        alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+      }
+  })();
 
   // generate all possible target-context pair combinations
   exp.examples = getUniqueTrials(examples);

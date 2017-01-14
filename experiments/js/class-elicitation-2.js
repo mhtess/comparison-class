@@ -165,7 +165,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-comparisonClass-20170107";
+      var ut_id = "mht-adjectives-20170114";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
