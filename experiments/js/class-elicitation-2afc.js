@@ -75,6 +75,7 @@ function makeSlides(f) {
     else {
       exp.data_trials.push({
         "condition": exp.condition,
+        "trial_num": i + 1,
         "context": exp.examples[i].context,
         "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
         "contextWithSuperPronoun": exp.pronoun ? (exp.pronoun.search("He") != -1 ? "He" : "She") : "",

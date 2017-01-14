@@ -72,6 +72,7 @@ function makeSlides(f) {
     else {
       exp.data_trials.push({
         "condition": exp.condition,
+        "trial_num": i + 1,
         "target": exp.examples[i].target,
         "context": exp.examples[i].context,
         "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
