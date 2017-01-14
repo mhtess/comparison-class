@@ -36,15 +36,12 @@ function makeSlides(f) {
     if (exp.examples[i].target[0] === " ") {
       adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
     }
-    else if (exp.examples[i].context.search("Maryland") != -1) {
-      adjectivePhrase = "It's " + exp.examples[i].target;
-    }
     else {
       adjectivePhrase = "It's " + exp.examples[i].target;
     }
 
     // display the target sentence
-    targetSentence = exp.names[i] + " says, " + "\"" + adjectivePhrase;
+    targetSentence = exp.names[i] + " says to " + getPronoun3(exp.names[i]) + " friend, " + "\"" + adjectivePhrase;
     $(".display_target").html(targetSentence + "." + "\"");
 
     // display the question
@@ -73,6 +70,7 @@ function makeSlides(f) {
         "adjective": adjective,
         "strength": exp.examples[i].strength,
         "names": exp.names[i],
+        "gender": getGender(exp.names[i]),
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
         "paraphrase": exp.sliderOrder[response],
