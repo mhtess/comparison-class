@@ -60,9 +60,9 @@ var examples = [{
 		" is buying an oven."
 	],
 	contextWithSuper: [
-		" at a kitchen appliance store and is looking at a can opener.",
-		" at a kitchen appliance store and is looking at a toaster.",
-		" at a kitchen appliance store and is looking at an oven."
+		" is at a kitchen appliance store and is looking at a can opener.",
+		" is at a kitchen appliance store and is looking at a toaster.",
+		" is at a kitchen appliance store and is looking at an oven."
 	],
 	action: [
 		"Imagine you are buying a can opener.",
@@ -105,27 +105,27 @@ var examples = [{
 	context: [
 		// " was talking about the episode of the television show they just watched.",
 		// " was talking about the informercial they just watched.", // with informercial, it seems to be a statement meaning "Long, relative to how long informercials SHOULD be" [see 20160106.txt notes]
-		" is about to show their friend a video of a cute animal online.",
-		" is about to show their friend a music video online.",
-		" is about to show their friend a lecture online."
+		" finds a video of a cute animal to watch online with their friend.",
+		" finds a music video to watch online with their friend.",
+		" finds a lecture to watch online with their friend."
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
 	contextWithSuper: [
-		" is watching videos online with their friend and is about to show them a video of a cute animal.",
-		" is watching videos online with their friend and is about to show them a music video.",
-		" is watching videos online with their friend and is about to show them a lecture."		
+		" is searching for things to watch online with their friend and finds a video of a cute animal.",
+		" is searching for things to watch online with their friend and finds a music video.",
+		" is searching for things to watch online with their friend and finds a movie."		
 	],
 	action: [
 		"Imagine you are about to watch a video of a cute animal online.",
 		"Imagine you are about to watch a music video online.",
-		"Imagine you are about to watch a lecture online."
+		"Imagine you are about to watch a movie online."
 	],
 	prompt: [
 		// "What do you think was the duration of the television show?",
 		"What do you think was the duration of the cute animal video?",
 		"What do you think was the duration of the music video?",
-		"What do you think was the duration of the lecture?"
+		"What do you think was the duration of the movie?"
 		// "What do you think was the duration of the movie?",
 		// "What do you think was the duration of the television series?"
 	],
@@ -133,12 +133,12 @@ var examples = [{
 		singular: [
 			"video of the cute animal",
 			"music video",
-			"lecture"
+			"movie"
 		],
 		plural: [
 			"videos of cute animals",
 			"music videos",
-			"lectures"
+			"movies"
 		]
 	},
 	super: [
