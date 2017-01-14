@@ -12,9 +12,9 @@ var examples = [{
 		" lives in Maryland and steps outside in Summer."
 	],
 	contextWithSuper: [
-		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Winter",
-		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Fall",
-		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Summer"
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Winter.",
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Fall.",
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Summer."
 	],
 	action: [
 		" Imagine you live in Maryland and go outside on a day in Winter.",
@@ -163,9 +163,9 @@ var examples = [{
 		" sees a professional basketball player."
 	],
 	contextWithSuper: [
-		" is sitting at a cafe watching people go by and sees a professional gymnast",
-		" is sitting at a cafe watching people go by and sees a professional soccer player",
-		" is sitting at a cafe watching people go by and sees a professional basketball player"
+		" is sitting at a cafe watching people go by and sees a professional gymnast.",
+		" is sitting at a cafe watching people go by and sees a professional soccer player.",
+		" is sitting at a cafe watching people go by and sees a professional basketball player."
 	],
 	action: [
 		"Imagine you see a professional gymnast.",
