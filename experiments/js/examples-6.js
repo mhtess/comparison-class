@@ -11,6 +11,11 @@ var examples = [{
 		" lives in Maryland and steps outside in Fall.",
 		" lives in Maryland and steps outside in Summer."
 	],
+	contextWithSuper: [
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Winter",
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Fall",
+		" lives in Maryland and checks the weather everyday. They look at the weather report for today, a day in Summer"
+	],
 	action: [
 		" Imagine you live in Maryland and go outside on a day in Winter.",
 		" Imagine you live in Maryland and go outside on a day in Fall.",
@@ -53,6 +58,11 @@ var examples = [{
 		" is buying a can opener.",
 		" is buying a toaster.",
 		" is buying an oven."
+	],
+	contextWithSuper: [
+		" at a kitchen appliance store and is looking at a can opener.",
+		" at a kitchen appliance store and is looking at a toaster.",
+		" at a kitchen appliance store and is looking at an oven."
 	],
 	action: [
 		"Imagine you are buying a can opener.",
@@ -101,6 +111,11 @@ var examples = [{
 		// " is about to show their friend an episode of a TV show.",
 		// " is about to show their friend a movie."
 	],
+	contextWithSuper: [
+		" is watching videos online with their friend and is about to show them a video of a cute animal.",
+		" is watching videos online with their friend and is about to show them a music video.",
+		" is watching videos online with their friend and is about to show them a lecture."		
+	],
 	action: [
 		"Imagine you are about to watch a video of a cute animal online.",
 		"Imagine you are about to watch a music video online.",
@@ -147,6 +162,11 @@ var examples = [{
 		" sees a professional soccer player.",
 		" sees a professional basketball player."
 	],
+	contextWithSuper: [
+		" is sitting at a cafe watching people go by and sees a professional gymnast",
+		" is sitting at a cafe watching people go by and sees a professional soccer player",
+		" is sitting at a cafe watching people go by and sees a professional basketball player"
+	],
 	action: [
 		"Imagine you see a professional gymnast.",
 		"Imagine you see a professional soccer player.",
@@ -190,6 +210,11 @@ var examples = [{
 		" picks up an apple.",
 		" picks up a watermelon."
 	],
+	contextWithSuper: [
+		" is in the produce section of the supermarket and picks up a grape.",
+		" is in the produce section of the supermarket and picks up an apple.",
+		" is in the produce section of the supermarket and picks up a watermelon."
+	],
 	action: [
 		"Imagine you pick up a grape.",
 		"Imagine you pick up an apple.",
@@ -213,9 +238,9 @@ var examples = [{
 		]
 	},
 	super: [
-		"fruit",
-		"fruit",
-		"fruit"
+		"produce",
+		"produce",
+		"produce"
 	],
 	strength: [1,2,3],
 	degree: "weight",

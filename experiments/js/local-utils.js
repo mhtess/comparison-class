@@ -6,7 +6,7 @@ function getTrials(examples) {
 		  for (var k = 0; k < examples[i].context.length; k++) {
         trials.push({
           target: examples[i].target[Object.keys(examples[i].target)[j]],
-  				context: examples[i].context[k],
+  				context: examples[i].contextWithSuper[k],
           action: examples[i].action[k],
           prompt: examples[i].prompt[k],
           degree: examples[i].degree,
@@ -32,7 +32,7 @@ function getUniqueTrials(examples) {
     for (var j = 0; j < rand; j++) {
       trials.push({
         target: examples[i].target["positive"],
-        context: examples[i].context[j],
+        context: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
         prompt: examples[i].prompt[j],
         degree: examples[i].degree,
@@ -48,7 +48,7 @@ function getUniqueTrials(examples) {
     for (var j = rand; j < 3; j++) {
       trials.push({
         target: examples[i].target["negative"],
-        context: examples[i].context[j],
+        context: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
         prompt: examples[i].prompt[j],
         degree: examples[i].degree,
