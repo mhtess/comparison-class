@@ -119,7 +119,7 @@ function makeSlides(f) {
     // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!(subEndorse && superEndorse)) { $(".err").show(); }
+    if ((subEndorse === undefined) || (superEndorse === undefined)) { $(".err").show(); }
     else {
       exp.data_trials.push({
         "condition": exp.condition,
