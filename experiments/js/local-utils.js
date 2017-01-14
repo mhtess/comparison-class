@@ -6,7 +6,8 @@ function getTrials(examples) {
 		  for (var k = 0; k < examples[i].context.length; k++) {
         trials.push({
           target: examples[i].target[Object.keys(examples[i].target)[j]],
-  				context: examples[i].contextWithSuper[k],
+  				context: examples[i].context[k],
+          contextWithSuper: examples[i].contextWithSuper[k],
           action: examples[i].action[k],
           prompt: examples[i].prompt[k],
           degree: examples[i].degree,
@@ -32,7 +33,8 @@ function getUniqueTrials(examples) {
     for (var j = 0; j < rand; j++) {
       trials.push({
         target: examples[i].target["positive"],
-        context: examples[i].contextWithSuper[j],
+        context: examples[i].context[j],
+        contextWithSuper: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
         prompt: examples[i].prompt[j],
         degree: examples[i].degree,
@@ -48,7 +50,8 @@ function getUniqueTrials(examples) {
     for (var j = rand; j < 3; j++) {
       trials.push({
         target: examples[i].target["negative"],
-        context: examples[i].contextWithSuper[j],
+        context: examples[i].context[j],
+        contextWithSuper: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
         prompt: examples[i].prompt[j],
         degree: examples[i].degree,
@@ -94,8 +97,9 @@ var getGender = function(name){
 // swaps out singular "they" for gendered pronoun given a name
 var getPronoun = function(context, name) {
 	var gender = getGender(name);
-	if (gender == "male") { return context.split("their").join("his").split("they").join("his"); }
-	else if (gender == "female") { return context.split("their").join("her").split("they").join("her"); }
+	if (context.search("them") != -1) { context = context.split("them").join(_.sample(["his", "her"])); }
+  if (gender == "male") { return context.split("their").join("his").split("they").join("his").split("They").join("He"); }
+	else if (gender == "female") { return context.split("their").join("her").split("they").join("her").split("They").join("She"); }
 }
 
 // retrieves the correct pronoun for the target-context pair

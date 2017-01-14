@@ -43,11 +43,12 @@ function makeSlides(f) {
     $(".err").hide();
 
     // display the context sentence
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    if((exp.examples[i][exp.condition].search("their") != -1) || (exp.examples[i][exp.condition].search("they") != -1) ||
+      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
     }
     else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
     }
 
     // display the target
@@ -167,7 +168,7 @@ function init() {
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
 
-  // sample a phrase for this particular instance
+  // sample a condition for this participant
   exp.condition = sampleCondition();
 
   // set the number of sliders to use
