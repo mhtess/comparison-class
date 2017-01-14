@@ -45,7 +45,6 @@ var examples = [{
 	],
 	strength: [1,2,3], // how high on the scale the sub-cat is expected to be
 	degree: "temperature",
-	form: "positive",
 	unit: ["degrees Fahrenheit", "degrees Celsius"],
 	subunit: ["none"]
 },
@@ -93,7 +92,6 @@ var examples = [{
 	],
 	strength: [1,2,3],
 	degree: "price",
-	form: "positive",
 	unit: ["dollars"],
 	subunit: ["none"]
 },
@@ -148,7 +146,6 @@ var examples = [{
 	],
 	strength: [1,2,3],
 	degree: "time",
-	form: "positive",
 	unit: ["seconds", "minutes", "hours", "days"],
 	subunit: ["seconds", "minutes", "hours"]
 },
@@ -196,7 +193,6 @@ var examples = [{
 	],
 	strength: [1,2,3],
 	degree: "height",
-	form: "positive",
 	unit: ["feet", "meters"],
 	subunit: ["inches", "centimeters"]
 },
@@ -244,7 +240,6 @@ var examples = [{
 	],
 	strength: [1,2,3],
 	degree: "weight",
-	form: "positive",
 	unit: ["pounds", "kilograms"],
 	subunit: ["ounces", "grams"]
 }];
