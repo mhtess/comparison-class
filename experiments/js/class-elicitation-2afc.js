@@ -21,8 +21,8 @@ function makeSlides(f) {
       if (response === undefined) { $(".errCatch").show(); }
       else {
         exp.catch_trials.push({
-          object: "basketball",
-          property: "is orange",
+          object: "Empire State Building",
+          property: "is tall",
           response: response
         });
         exp.go();
@@ -76,6 +76,8 @@ function makeSlides(f) {
       exp.data_trials.push({
         "condition": exp.condition,
         "context": exp.examples[i].context,
+        "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
+        "contextWithSuperPronoun": exp.pronoun ? (exp.pronoun.search("He") != -1 ? "He" : "She") : "",
         "target": exp.examples[i].target,
         "degree": exp.examples[i].degree,
         "form": exp.examples[i].form,

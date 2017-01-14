@@ -33,7 +33,7 @@ function makeSlides(f) {
           property: "is tall",
           sentence1: "relative to other buildings",
           response1: exp.sliderPost[0],
-          sentence2: "relative to other people",
+          sentence2: "relative to other pineapples",
           response2: exp.sliderPost[1]
         });
         exp.go(); 
