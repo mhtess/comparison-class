@@ -172,7 +172,7 @@ function embedCESlides(trials) {
       // '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
       // "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
-      "<p class=\"errSliders\">Please adjust the first two sliders before continuing.</p>" +
+      "<p class=\"errSliders\">Please adjust both sliders before continuing.</p>" +
       "<p class=\"err\">Please adjust the slider before continuing.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
@@ -240,7 +240,7 @@ function embedVPE2AFCSlides(trials) {
 		"<div class=\"slide\" id=\"trial" + i + "\">" +
     	"<p class=\"display_context\"></p>" +
   		"<p class=\"display_question\"></p>" +
-			"<div class=\"radioLeft\">" + 
+			"<div class=\"radioLeft\">" +
       "<input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>" +
 			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
@@ -259,7 +259,7 @@ function embedCE2AFCSlides(trials) {
       "<p class=\"display_context\"></p>" +
       "<p class=\"display_target\"></p>" +
       "<p class=\"display_question\"></p>" +
-      "<div class=\"radioLeft\">" + 
+      "<div class=\"radioLeft\">" +
       "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label></div><br>" +
       "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br></div>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
