@@ -5,23 +5,42 @@ function makeSlides(f) {
   var slides = {};
 
   slides.i0 = slide({
-    name : "i0",
-    start : function() {
+    name: "i0",
+    start: function() {
       exp.startT = Date.now();
     }
   });
 
+  // the catch trial will take the first two indices of the sliders and of exp.sliderPost
   slides.instructions = slide({
-    name : "instructions",
-    button : function() {
-      exp.go(); // use exp.go() if and only if there is no "present" data
+    name: "instructions",
+    start: function() {
+      $(".errCatch").hide();
+      var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other people."];
+      for (var j = 0; j < exp.nCatch; j++) {
+        $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] + 
+          "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
+        utils.match_row_height("#multi_slider_table0", ".slider_target");
+        utils.make_slider("#slider" + j,
+          make_slider_callback(j));
+      }
+      exp.sliderPost = [];  
+    },
+    button: function() {
+      exp.catch_trials.push({
+        object: "Empire State Building",
+        property: "is tall",
+        response1: exp.sliderPost[0],
+        response2: exp.sliderPost[1]
+      });
+      if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
+      else { exp.go(); }
     }
   });
 
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
-    $(".errSliders").hide();
 
     // display the context sentence
     if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
@@ -54,11 +73,12 @@ function makeSlides(f) {
     $(".slider_row").remove();
 
     // set up the text next to each slider
-    for (var j = 0; j < exp.nSentences; j++) {
-      var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j]] + ".\"";
+    for (var j = exp.nCatch; j < exp.nSentences+exp.nCatch; j++) {
+      var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"";
 
       // display the slider for each slide
-      $("#multi_slider_table"+(i+1)).append('<tr class="slider_row"><td class="slider_target" id="sentence' + j + '">' + sentence + '</td><td colspan="2"><div id="slider' + j + '" class="slider">-------[ ]--------</div></td></tr>');
+      $("#multi_slider_table" + (i+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentence + 
+        "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
     }
 
@@ -68,7 +88,7 @@ function makeSlides(f) {
 
   // the two functions below help set up and read info from the sliders
   function init_sliders(nSentences) {
-    for (var j = 0; j < nSentences; j++) {
+    for (var j = exp.nCatch; j < nSentences+exp.nCatch; j++) {
       utils.make_slider("#slider" + j,
         make_slider_callback(j));
     }
@@ -84,13 +104,13 @@ function makeSlides(f) {
   function button() {
 
     // stores the slider results
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")];
-    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")];
+    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")+exp.nCatch];
+    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")+exp.nCatch];
 
     // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if (!(subEndorse && superEndorse)) { $(".errSliders").show(); }
+    if (!(subEndorse && superEndorse)) { $(".err").show(); }
     else {
       exp.data_trials.push({
         "condition": exp.condition,
@@ -200,7 +220,8 @@ function init() {
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
 
-  // we don't have any catch trials for this experiment
+  // stores the catch trial results for this experiment
+  exp.nCatch = 2;
   exp.catch_trials = [];
 
   // get user system specs

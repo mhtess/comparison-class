@@ -172,8 +172,7 @@ function embedCESlides(trials) {
       // '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
       // "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
-      "<p class=\"errSliders\">Please adjust the first two sliders before continuing.</p>" +
-      "<p class=\"err\">Please adjust the slider before continuing.</p>" +
+      "<p class=\"err\">Please adjust both sliders before continuing.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
   }

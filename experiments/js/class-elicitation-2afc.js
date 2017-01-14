@@ -171,8 +171,8 @@ function init() {
     exp.extra = exp.names.slice(exp.trials, exp.names.length);
   }
 
-  // we don't have any catch trials for this experiment
-  // exp.catch_trials = [];
+  // stores the catch trial results for this experiment
+  exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
