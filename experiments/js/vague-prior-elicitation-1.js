@@ -20,8 +20,7 @@ function makeSlides(f) {
       $(".errCatch").hide();
       $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + 0 + "\">" +
         "</td><td colspan=\"2\"><div id=\"slider" + 0 + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-      utils.make_slider("#slider" + 0,
-        make_slider_callback(0));
+      utils.make_slider("#slider" + 0, make_slider_callback(0));
       exp.sliderPost = [];
     },
 
