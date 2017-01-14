@@ -27,12 +27,12 @@ function makeSlides(f) {
       exp.sliderPost = [];  
     },
     button: function() {
-      exp.catch_trials.push({
+      exp.catch_trials = {
         object: "Empire State Building",
         property: "is tall",
         response1: exp.sliderPost[0],
         response2: exp.sliderPost[1]
-      });
+      };
       if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
       else { exp.go(); }
     }

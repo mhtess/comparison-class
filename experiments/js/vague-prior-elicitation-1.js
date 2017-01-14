@@ -26,11 +26,11 @@ function makeSlides(f) {
 
     // await slider input from the user and displays an error if the user attempts to continue without responding
     button: function() {
-      exp.catch_trials.push({
+      exp.catch_trials = {
         object: "basketball",
         property: "is orange",
         response: exp.sliderPost[0]
-      });
+      };
       if (exp.sliderPost[exp.nSentences - 1] == undefined) { $(".errCatch").show(); }
       else { exp.go(); }
     }
