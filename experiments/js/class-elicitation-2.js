@@ -56,10 +56,10 @@ function makeSlides(f) {
       adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
     }
     else if (exp.examples[i].context.search("Maryland") != -1) {
-      adjectivePhrase = "It's " + exp.examples[i].target + " outside";
+      adjectivePhrase = "It's " + exp.examples[i].target;
     }
     else {
-      adjectivePhrase = "This is " + exp.examples[i].target;
+      adjectivePhrase = "It's " + exp.examples[i].target;
     }
 
     // display the target sentence
@@ -185,7 +185,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-comparisonClass-20170107";
+      var ut_id = "mht-adjectives-20170114";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
