@@ -190,9 +190,9 @@ var examples = [{
 		]
 	},
 	super: [
-		"adults",
-		"adults",
-		"adults"
+		"people",
+		"people",
+		"people"
 	],
 	strength: [1,2,3],
 	degree: "height",
