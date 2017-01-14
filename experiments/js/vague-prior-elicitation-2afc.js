@@ -75,6 +75,7 @@ function makeSlides(f) {
         "target": exp.examples[i].target,
         "context": exp.examples[i].context,
         "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
+        "contextWithSuperPronoun": exp.pronoun ? (exp.pronoun.search("He") != -1 ? "He" : "She") : "",
         "degree": exp.examples[i].degree,
         "form": exp.examples[i].form,
         "adjective": adjective,
