@@ -54,33 +54,33 @@ var examples = [{
 		negative: "cheap"
 	},
 	context: [
-		" finds a can opener and looks at the price.",
+		" finds a bottle opener and looks at the price.",
 		" finds a toaster and looks at the price.",
 		" finds a dishwasher and looks at the price."
 	],
 	contextWithSuper: [
-		" is browsing around a kitchen appliance store. They finds a can opener and looks at the price.",
+		" is browsing around a kitchen appliance store. They finds a bottle opener and looks at the price.",
 		" is browsing around a kitchen appliance store. They finds a toaster and looks at the price.",
 		" is browsing around a kitchen appliance store. They finds a dishwasher and looks at the price."
 	],
 	action: [
-		"Imagine you are buying a can opener.",
+		"Imagine you are buying a bottle opener.",
 		"Imagine you are buying a toaster.",
 		"Imagine you are buying a dishwasher."
 	],
 	prompt: [
-		"What do you think was the price of the can opener?",
+		"What do you think was the price of the bottle opener?",
 		"What do you think was the price of the toaster?",
 		"What do you think was the price of the dishwasher?"
 	],
 	sub: {
 		singular: [
-			"can opener",
+			"bottle opener",
 			"toaster",
 			"dishwasher"
 		],
 		plural: [
-			"can openers",
+			"bottle openers",
 			"toasters",
 			"dishwashers"
 		]
