@@ -54,35 +54,35 @@ var examples = [{
 		negative: "cheap"
 	},
 	context: [
-		" is buying a can opener.",
-		" is buying a toaster.",
-		" is buying an oven."
+		" is looking a can opener.",
+		" is looking at a toaster.",
+		" is looking at a dishwasher."
 	],
 	contextWithSuper: [
-		" is at a kitchen appliance store and is looking at a can opener.",
-		" is at a kitchen appliance store and is looking at a toaster.",
-		" is at a kitchen appliance store and is looking at an oven."
+		" is browsing around a kitchen appliance store. They finds a can opener and looks at the price.",
+		" is browsing around a kitchen appliance store. They finds a toaster and looks at the price.",
+		" is browsing around a kitchen appliance store. They finds a dishwasher and looks at the price."
 	],
 	action: [
 		"Imagine you are buying a can opener.",
 		"Imagine you are buying a toaster.",
-		"Imagine you are buying an an oven."
+		"Imagine you are buying a dishwasher."
 	],
 	prompt: [
 		"What do you think was the price of the can opener?",
 		"What do you think was the price of the toaster?",
-		"What do you think was the price of the oven?"
+		"What do you think was the price of the dishwasher?"
 	],
 	sub: {
 		singular: [
 			"can opener",
 			"toaster",
-			"oven"
+			"dishwasher"
 		],
 		plural: [
 			"can openers",
 			"toasters",
-			"ovens"
+			"dishwashers"
 		]
 	},
 	super: [
@@ -112,7 +112,7 @@ var examples = [{
 	contextWithSuper: [
 		" is searching for things to watch online with their friend and finds a video of a cute animal.",
 		" is searching for things to watch online with their friend and finds a music video.",
-		" is searching for things to watch online with their friend and finds a movie."		
+		" is searching for things to watch online with their friend and finds a movie."
 	],
 	action: [
 		"Imagine you are about to watch a video of a cute animal online.",
