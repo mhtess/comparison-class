@@ -39,11 +39,11 @@ function makeSlides(f) {
     exp.pronoun = 0;
     if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
       exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
-      
+
       // if "They" is used, we randomly select a pronoun for the other person and record it
-      if (exp.examples[i][exp.condition].search("They") != -1) { 
+      if (exp.examples[i][exp.condition].search("They") != -1) {
         exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-        $(".display_context").html(exp.names[i] + exp.pronoun);  
+        $(".display_context").html(exp.names[i] + exp.pronoun);
       }
       else {
         $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
@@ -159,7 +159,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20170114";
+      var ut_id = "mht-adjectives-20170115-cce";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;

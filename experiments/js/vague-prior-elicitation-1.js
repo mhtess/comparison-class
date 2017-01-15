@@ -27,13 +27,13 @@ function makeSlides(f) {
     // await slider input from the user and displays an error if the user attempts to continue without responding
     button: function() {
       if (exp.sliderPost[exp.nSentences-1] === undefined) { $(".errCatch").show(); }
-      else { 
+      else {
         exp.catch_trials.push({
           object: "basketball",
           property: "is orange",
           response: exp.sliderPost[0]
         });
-        exp.go(); 
+        exp.go();
       }
     }
   });
@@ -46,11 +46,11 @@ function makeSlides(f) {
     exp.pronoun = 0;
     if((exp.examples[i][exp.condition].search("their") != -1) || (exp.examples[i][exp.condition].search("they") != -1) ||
       exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
-      
+
       // if "They" is used, we randomly select a pronoun for the other person and record it
-      if (exp.examples[i][exp.condition].search("They") != -1) { 
+      if (exp.examples[i][exp.condition].search("They") != -1) {
         exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-        $(".display_context").html(exp.names[i] + exp.pronoun);  
+        $(".display_context").html(exp.names[i] + exp.pronoun);
       }
       else {
         $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
@@ -163,10 +163,10 @@ function makeSlides(f) {
 
 /// init ///
 function init() {
-  
+
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20170114";
+      var ut_id = "mht-adjectives-20170115-vpe";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;

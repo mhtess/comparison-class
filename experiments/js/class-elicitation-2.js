@@ -18,16 +18,16 @@ function makeSlides(f) {
       $(".errCatch").hide();
       var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
       for (var j = 0; j < exp.nCatch; j++) {
-        $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] + 
+        $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] +
           "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
         utils.match_row_height("#multi_slider_table0", ".slider_target");
         utils.make_slider("#slider" + j, make_slider_callback(j));
       }
-      exp.sliderPost = [];  
+      exp.sliderPost = [];
     },
     button: function() {
       if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
-      else { 
+      else {
         exp.catch_trials.push({
           object: "Empire State Building",
           property: "is tall",
@@ -36,7 +36,7 @@ function makeSlides(f) {
           sentence2: "relative to other pineapples",
           response2: exp.sliderPost[1]
         });
-        exp.go(); 
+        exp.go();
       }
     }
   });
@@ -49,11 +49,11 @@ function makeSlides(f) {
     exp.pronoun = 0;
     if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
       exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
-      
+
       // if "They" is used, we randomly select a pronoun for the other person and record it
-      if (exp.examples[i][exp.condition].search("They") != -1) { 
+      if (exp.examples[i][exp.condition].search("They") != -1) {
         exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-        $(".display_context").html(exp.names[i] + exp.pronoun);  
+        $(".display_context").html(exp.names[i] + exp.pronoun);
       }
       else {
         $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
@@ -86,7 +86,7 @@ function makeSlides(f) {
       var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"";
 
       // display the slider for each slide
-      $("#multi_slider_table" + (i+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentence + 
+      $("#multi_slider_table" + (i+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentence +
         "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
       utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
     }
@@ -198,7 +198,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20170114";
+      var ut_id = "mht-adjectives-20170115-cce";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
