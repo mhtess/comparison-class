@@ -36,17 +36,27 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // display the context sentence
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1)) {
-      $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i].context, exp.names[i]));
+    exp.pronoun = 0;
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+      
+      // if "They" is used, we randomly select a pronoun for the other person and record it
+      if (exp.examples[i][exp.condition].search("They") != -1) { 
+        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+        $(".display_context").html(exp.names[i] + exp.pronoun);  
+      }
+      else {
+        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      }
     }
     else {
-      $(".display_context").html(exp.names[i] + exp.examples[i].context);
+      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
     }
 
     // construct the target sentence
     var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
-      adjectivePhrase = getPronoun2(exp.examples[i].context, exp.examples[i].target) + " is " + exp.examples[i].target;
+      adjectivePhrase = getPronoun2(exp.examples[i][exp.condition], exp.examples[i].target) + " is " + exp.examples[i].target;
     }
     else {
       adjectivePhrase = "It's " + exp.examples[i].target;
