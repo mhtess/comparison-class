@@ -19,15 +19,25 @@ What did Luis mean?
   - "Luis is tall relative to other people." \\
 Subjects can also give an "Other" option where they fill in a "relative to other" paraphrase.
 4. `class-elicitation-2-items2` (n=9; January 9, 2017):
-Same as previous but with refined stimuli.
+Same as previous but with refined stimuli. Removed the "Other" option because it was not often used by participants in the earlier pilots.
+5. `class-elicitation-2-items3` (n=18; January 14, 2017):
+To confirm data collectoin and new "superContext" condition.
+6. `class-elicitation-2-items4` (n=9; January 14, 2017):
+To fix randomization scheme, data recording issues.
 
 ## Planned experiments
 
-1. `class-elicitation-2` and `class-elicitation-2afc`.
-  - `class-elicitation-2` is very similar to the pilot. We are removing the "Other" option because it was not often used by participants in the pilot. The items have been subtly modified since the pilot.
-  - `class-elicitation-2afc` is a 2-alternative forced-choice version of the experiment. We run this first for ease of data analysis. (If it produces different results that what we expected from the pilot, we may run the slider version to see if this is due to the dependent measure.) Since each participant only does one-half of trials, we will collect about 150 participants to get approximately 75 responses for item. 75 responses on a 2AFC will produce confidence intervals with a maximum width of about 0.2-0.25. 
+1. `class-elicitation-2afc` (n = 150ish; January 15, 2017)
+A 2-alternative forced-choice version of the `class-elicitation` task used in the pilots using the "superContext" condition which has the promise of eliciting the widest quantitative variability.
+We the 2afc for ease of the (Bayesian) data analysis.
+(If it produces different results that what we expected from the pilot, we may run the slider version to see if this is due to the dependent measure.)
+Since each participant only does one-half of trials, we will collect about 150 participants to get approximately 75 responses for item.
+We choose n = 75 responses on a 2AFC to produce confidence intervals with a maximum width of about 0.2-0.25.
+This is quantitative experiment and we are interested in the precision of our estimates for each item.
+The task involves 15 2-afc trials and I expect will take < 5 minutes.
+We will pay each participant $0.50 for the experiment.
 
-2. `vague-prior-elicitation-1` and `vague-prior-elicitation-2afc`
-  - Again, these are slider bar and 2afc versions of the same task.
-  - Same data collection plan as above.
-  - In these experiments, the participant knows the subordinate category ("Johns sees a basketball player"). Participants are asked if the adjective with an explicit superordinate comparison class would be appropriate (e.g., "How likely is it that the basketball player is tall relative to other people").
+2. `vague-prior-elicitation-2afc` (n = 150ish)
+Same data collection plan as above.
+In these experiments, the participant knows the subordinate category ("Johns sees a basketball player").
+Participants are asked if the adjective with an explicit superordinate comparison class would be appropriate (e.g., Do you think the basketball player would be considered tall relative to other people?")
