@@ -108,8 +108,8 @@ var getPronoun3 = function(name){
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
-  // return _.sample([" for a ", " relative to a "]);
-  return _.sample(["context", "contextWithSuper"]);
+  // return _.sample(["context", "contextWithSuper"]);
+	return "contextWithSuper";
 }
 
 // isAlpha function implemented using regex
