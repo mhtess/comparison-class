@@ -54,9 +54,9 @@ var examples = [{
 		negative: "cheap"
 	},
 	context: [
-		" is looking a can opener.",
-		" is looking at a toaster.",
-		" is looking at a dishwasher."
+		" finds a can opener and looks at the price.",
+		" finds a toaster and looks at the price.",
+		" finds a dishwasher and looks at the price."
 	],
 	contextWithSuper: [
 		" is browsing around a kitchen appliance store. They finds a can opener and looks at the price.",
