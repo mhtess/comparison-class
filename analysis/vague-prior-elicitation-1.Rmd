@@ -1,0 +1,44 @@
+---
+title: "Vague Prior Elicitation 2afc"
+output: html_notebook
+---
+
+```{r}
+library(langcog)
+library(tidyverse)
+```
+
+Data analysis for Class Elicitation experiment
+
+```{r}
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+project.name <- "vague-prior-elicitation-1"
+#data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+data.path <- paste(project.path, "mturk/vague-prior-elicitation-1/sand/", sep = "")
+```
+
+```{r}
+d.subject <- read.csv(paste(data.path, project.name, "-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+Note: `d.catch` and `d` only include 264 rows because I accidentally collected 36 subjects on the slider task. 
+The slider subjects are already removed.
+
+```{r}
+d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "Yes")
+```
+
+
+```{r}
+d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
+```
+
+```{r}
+table(d$sub_category, d$form, d$condition) %>% data.frame() %>% 
+  ggplot(.,aes(x = Freq))+
+  geom_histogram()+
+  xlab("Number of subjects/responses per unique item")
+```

@@ -1,0 +1,103 @@
+---
+title: "Class elicitation 2AFC"
+output: html_notebook
+---
+
+```{r}
+library(langcog)
+library(tidyverse)
+last <- function(x) { return( x[length(x)] ) }
+```
+
+Data analysis for Class Elicitation experiment
+
+```{r}
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+```
+
+```{r}
+d.subject <- read.csv(paste(data.path, "class-elicitation-full-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+Note: `d.catch` and `d` only include 264 rows because I accidentally collected 36 subjects on the slider task. 
+The slider subjects are already removed.
+
+```{r}
+d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "relative to other buildings")
+```
+
+
+```{r}
+d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
+```
+
+```{r}
+table(d$sub_category, d$form, d$condition) %>% data.frame() %>% 
+  ggplot(.,aes(x = Freq))+
+  geom_histogram()+
+  scale_x_continuous(limits = c(50, 80), breaks = c(50, 60, 70, 80))+
+  xlab("Number of subjects/responses per unique item")
+```
+Range of n / item: `r range(table(d$sub_category, d$form, d$condition) %>% data.frame() %>% select(Freq))`
+
+```{r}
+df.summary <- d %>%
+  mutate(superResponse = ifelse(paraphrase == "super", 1, 0)) %>%
+  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
+  multi_boot_standard(column = "superResponse")
+```
+
+```{r}
+df.summary %>% select(-ci_lower, -ci_upper) %>%
+  spread(condition, mean) %>%
+  ggplot(., aes(x = context, y = contextWithSuper, shape = form, color = sub_category))+
+  geom_point() +
+  xlim(0, 1) + 
+  ylim(0, 1)+
+  coord_fixed()+
+  geom_abline(intercept = 0, slope = 1, lty = 3)
+
+df.summary %>% select(-ci_lower, -ci_upper) %>%
+  spread(condition, mean) %>%
+  ungroup() %>%
+  select(context, contextWithSuper) %>%
+  summarize(cor = cor(context, contextWithSuper)^ 2)
+```
+
+
+
+```{r}
+options(warn=-1)
+
+df.summary %>%
+  ungroup() %>%
+  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
+#df.summary %>% #filter(condition == "contextWithSuper") %>%
+  ggplot(., 
+         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(condition~degree, scales = 'free')+#, nrow = 1)+
+  ylim(0, 1) + 
+  theme(axis.text.x = element_text(angle = 90) )
+
+ggsave(file = paste(project.path, "analysis/fig/classElicitation-1-n264.pdf", sep = ""), 
+       width = 12, height = 6)
+options(warn=0)
+```
+
+
+```{r}
+ggplot(df.summary, aes( x = condition, 
+                        y = mean, ymin = ci_lower, ymax = ci_upper, 
+                        group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~sub_category, scales = 'free', nrow = 3)+
+  theme(axis.text.x = element_text(angle = 90))
+```
+
