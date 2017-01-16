@@ -6,7 +6,7 @@ document-params: "10pt, letterpaper"
 
 author-information: > 
     \author{{\large \bf Michael Henry Tessler} \\ mtessler@stanford.edu \\ Department of Psychology \\ Stanford University
-    \And {\large \bf Author 2} \\ author2@university.edu \\ Department of ... \\  University
+    \And {\large \bf Michael Lopez-Brau} \\ author2@university.edu \\ Department of ... \\  University
     \And {\large \bf Noah D. Goodman} \\ ngoodman@stanford.edu \\ Department of Psychology \\ Stanford University}
 
 abstract: 
