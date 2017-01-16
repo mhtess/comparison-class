@@ -9,8 +9,13 @@ mturk
 *.DS_Store
 *.nb.html
 *.Proj
+*.Rproj
 *.Rhistory
 *.RData
 *.Rproj.user
 *invoice.csv
 .Rproj.user
+analysis/fig/
+*.aux
+*.log
+*.out
