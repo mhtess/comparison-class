@@ -54,7 +54,7 @@ function makeSlides(f) {
     }
 
     // display the question
-    $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be considered <strong>" + exp.examples[i].target +
+    $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be <strong>" + exp.examples[i].target +
      " relative to other " + exp.examples[i].super + "</strong>?");
 
     // display the radio buttons

@@ -61,7 +61,7 @@ function makeSlides(f) {
     }
 
     // display the target
-    $(".display_target").html("How likely is the " + exp.examples[i].sub_singular + " to be considered <strong>" + exp.examples[i].target +
+    $(".display_target").html("How likely is the " + exp.examples[i].sub_singular + " to be <strong>" + exp.examples[i].target +
       " relative to other " + exp.examples[i].super + "</strong>?");
 
     // removes the slider from the previous slide before making the slider for the current slide
