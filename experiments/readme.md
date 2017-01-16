@@ -25,9 +25,9 @@ To confirm data collectoin and new "superContext" condition.
 6. `class-elicitation-2-items4` (n=9; January 14, 2017):
 To fix randomization scheme, data recording issues.
 
-## Planned experiments
+## Experiments
 
-1. `class-elicitation-2afc` (n = 75 per item; January 15, 2017)
+1. `class-elicitation-2afc` (n = 300; January 15, 2017)
 A 2-alternative forced-choice version of the `class-elicitation` task used in the pilots.
 We the 2afc for ease of the (Bayesian) data analysis.
 (If it produces different results that what we expected from the pilot, we may run the slider version to see if this is due to the dependent measure.)
@@ -38,7 +38,10 @@ The task involves 15 2-afc trials and I expect will take < 5 minutes.
 Since each participant completes half of all trials for a single condition, we will need N = 300.
 We will pay each participant $0.50 for the experiment.
 
-2. `vague-prior-elicitation-2afc` (n = 75 per item)
+36 participants were accidentally collected on a slider version of the task and must be dropped.
+Another 2 participants failed the simple catch trial at the start, leaving n = 262.
+
+2. `vague-prior-elicitation-2afc` (n = 100; January 16, 2017)
 Same data collection plan as above.
 In these experiments, the participant knows the subordinate category ("Johns sees a basketball player").
 Participants are asked if the adjective with an explicit superordinate comparison class would be appropriate (e.g., Do you think the basketball player would be considered tall relative to other people?")
