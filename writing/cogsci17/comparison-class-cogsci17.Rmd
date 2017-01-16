@@ -162,7 +162,8 @@ For simplicity, we assume the prior distribution over the degree for the superor
 ```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
 ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
 
-model.path <- "/Users/mht/Documents/research/comparison-class/models/"
+#model.path <- "/Users/mht/Documents/research/comparison-class/models/"
+model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
 mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
        packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
 
@@ -183,8 +184,11 @@ We test these predictions in our first experiment.
 ### Participants
 
 <!--
-Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5. 
+Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
+
+We recruited *PARTICIPANTS* participants from Amazon's Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated *PAYMENT* for their work.
+
 
 ```{r, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities 
@@ -220,6 +224,8 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
+We created 30 events using positive- and negative-form adjectives, each conditioned with three context sentences, from five different measureable scales: distance, height, price, time, and weight. 
+
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
 Here are some notes about how to make tables:
@@ -245,6 +251,8 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 ```
 
 ### Procedure
+
+
 
 ## Results
 
