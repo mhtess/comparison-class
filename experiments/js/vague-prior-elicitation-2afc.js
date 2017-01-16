@@ -160,7 +160,8 @@ function init() {
   $(".display_trials").html(exp.trials);
 
   // sample a phrase for this particular instance
-  exp.condition = sampleCondition();
+  // exp.condition = sampleCondition();
+  exp.condition = "context";
 
   // sets the other of the radio buttons
   exp.responseOrder = _.shuffle(["Yes", "No"]);

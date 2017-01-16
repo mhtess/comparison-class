@@ -182,8 +182,9 @@ function init() {
   $(".display_trials").html(exp.trials);
 
   // sample a condition for this participant
-  exp.condition = sampleCondition();
-
+  // exp.condition = sampleCondition();
+  exp.condition = "context";
+  
   // set the number of sliders to use
   exp.nSentences = 1;
 
