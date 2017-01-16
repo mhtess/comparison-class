@@ -5,9 +5,9 @@ csl: "apa6.csl"
 document-params: "10pt, letterpaper"
 
 author-information: > 
-    \author{{\large \bf Author 1} \\ \texttt{author1@university.edu} \\ Department of Psychology \\ Some University
-    \And {\large \bf Author 2} \\ \texttt{author2@university.edu} \\ Department of Psychology \\ Some University
-    \And {\large \bf Author 3} \\ \texttt{author3@university.edu} \\ Department of Psychology \\ Some University}
+    \author{{\large \bf Michael Henry Tessler} \\ mtessler@stanford.edu \\ Department of Psychology \\ Stanford University
+    \And {\large \bf Author 2} \\ author2@university.edu \\ Department of ... \\  University
+    \And {\large \bf Noah D. Goodman} \\ ngoodman@stanford.edu \\ Department of Psychology \\ Stanford University}
 
 abstract: 
     "Gradeable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
@@ -65,6 +65,36 @@ HPDlo<- function(s){
   return(m["var1","lower"])
 }
 ```
+
+<!--
+# Outline
+
+1. We introduce an extension to RSA that does inference over what is the comparison class.
+
+2. We take a simple case, where the comparison class is either a sub- or super-ordinate category. Just playing with the parameters off the model, we see this predicted (qualitative) interaction:
+
+- When the subclass has a high mean relative to the superclass, positive form adjectives signal the superclass, and negative form signals the subclass
+
+- When the subclass has a low mean relative to the superclass, positive form adjectives signal the subclass, and negative form signals the superclass
+
+3. We test this predictions on 5 scales (Expt. 1)
+
+- We see the qualitative effect on all 5 scales, but there is considerable heterogeneity among the scales.
+
+4. This heterogeneity might be attributed to differences in the quantitative details (i.e., the parameters) of the subclass vis-a-vis the superclass
+
+- We can perform BDA to see if this is true, but this model is actually overparameterized.
+
+- We can simplify by assuming each superclass has a unit-normal prior, and infer the mean and standard deviation for each subclass prior.
+
+- That’s 2 parameters for each subclass, and we only have 2 items for each subclass (namely, positive and negative form adjectives e.g., “tall” and “short” bball players)
+
+5. We estimate the prior parameters by asking other questions of our model that should (a) access the same priors; and (b) not add other parameters
+
+so we can ask a vague speaker question (Expt 2. [VPE])
+
+This will alleviate the overparameterization problem and is, in general, a new way of testing language understanding models without having to explicitly measure priors
+-->
 
 # Introduction
 
