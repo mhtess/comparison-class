@@ -10,7 +10,7 @@ author-information: >
     \And {\large \bf Noah D. Goodman} \\ ngoodman@stanford.edu \\ Department of Psychology \\ Stanford University}
 
 abstract: 
-    "Gradeable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
+    "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
     In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation. 
     We introduce a Rational Speech Act model that respresents the implicit comparison class as a random variable inferred via pragmatic reasoning.
     We find this model makes the prediction that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
@@ -20,7 +20,7 @@ abstract:
     "
     
 keywords:
-    "pragmatics; vagueness; comparison class; Bayesian data analysis; Bayesian cognitive model"
+    "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
     
 output: cogsci2016::cogsci_paper
 ---
@@ -96,39 +96,46 @@ so we can ask a vague speaker question (Expt 2. [VPE])
 This will alleviate the overparameterization problem and is, in general, a new way of testing language understanding models without having to explicitly measure priors
 -->
 
-# Introduction
+If you're going to San Francisco, be sure to set aside a few extra dollars for coffee. 
+It's good, but expensive.
+By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way. 
+This may seem obvious, and yet adjectives like *expensive* derive their relatively precise meanings from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
+This *comparison class* is not often explicitly stated, bur rather is latent in the discourse.
 
-If you've traveled to San Francisco, you know a cup of coffee can be quite expensive.
-Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative measure (e.g., price, temperature).
-
-Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure \red{(cite Kennedy?)}.
-For example, a cup of coffee is expensive if its price is greater than some threshold number of dollars.
+Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
+Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
+For example, a good cup of coffee is expensive if its price is greater than some threshold number of dollars.
 The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities. 
-A cup of coffee can be expensive *relative to* other cups of coffee.
-A car can be cheap *relative to* other cars.
+A good cup of coffee in San Francisco is expensive *relative to* other cups of coffee and not *relative to* other things you could buy in San Francisco (including, e.g., a Tesla automobile).
 
-@Lassiter2013 showed how this idea can be couched in a general pragmatic theory of language understanding.
-In this Rational Speech Act theory, the truth-conditional threshold comes from an uninformative prior distribution: a flat distribution over all possible thresholds.
-Listeners arrive at context-sensitive meanings by integrating their prior beliefs with general principles of communication, such as being truthful or informative. 
+@Lassiter2013 demonstrated that listener's with relevant world knowledge (e.g., prices of coffee) can use pragmatic principles to arrive at a context-dependent meaning of a gradable adjective (e.g., expensive) assuming nothing in particular about what the adjective means out of context. 
+They elaborate the Rational Speech Act theory [for a review, see @Goodman2016] such that the truth-conditional threshold for the adjective semantics (i.e., the point at which something becomes expensive) comes from an uninformed prior distribution: *a priori* anything could be expensive.
+Listeners arrive at context-sensitive meanings by integrating their prior beliefs (e.g., knowledge of what a cup of coffee should cost) with general principles of communication: be truthful, be informative. 
 The result is vague language understanding that displays context-sensitivity and admits borderline cases [@Lassiter2013; @Lassiter2015].
-In this theory, the comparison class is implicit in the listener's prior belief distribution.
+See @Qing2014 for a related but alternative derivation of a probabilistic pragmatics model of gradable adjective interpretation.
+\mht{this paragraph sucks}
 
-Comparison classes are an issue not just for gradaeable adjectives but for any vague language that can be modeled using a threshold semantics.
-Generic language (e.g., *Ducks lay eggs*) have been shown to have this property [@TesslerUnderReview].
+In @Lassiter2013's theory of adjective interpretation, the comparison class is implicit in the listener's prior belief distribution.
+But how does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
+This question is not just an issue for gradaable adjectives but in fact for any vague language that can be modeled using a threshold semantics [e.g., generic language, see @Tessler2016]
 
+<!--
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
 @Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class). 
+-->
 
-In this paper, we posit that pragmatic principles can be used to resolve the comparison class in context.
+In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
 We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
-We find this model makes a qualitative prediction about the level of abstraction of a comparison class and test this prediction using a paraphrase experiment in order to elicit the comparison class.
-Quantitative predictions for this model depend upon the quantitative details of listeners' prior distributions over various numeric scales.
-Because people are notoriously bad at numerical estimation \red{(cite something?)}, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
+We test this model in a simplified setting, where the comparison class could either be a subordinate or superordinate class (e.g., toasters vs. kitchen appliances).
+In this simplified setting, we find the model predicts the level of abstraction (sub vs. superordinate) of a comparison class depends upon the quantitative details of the relevant prior beliefs (e.g., the prices of toasters vs. the prices of kitchen appliances in general). 
+We test this prediction using a paraphrase experiment (Expt. 1).
+Quantitative predictions for Bayesian models (including this one) depend upon the quantitative details of listeners' prior distributions over various scales.
+Because it may be difficult for human participants to estimate quantities accurately, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
 
 
 # Computational model
 
-We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015; @TesslerUnderReview] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
+We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
 This uncertainty is posited at the level of the pragmatic listener, and thus is resolved using pragmatic reasoning (i.e., the pressures to be truthful and informative).
 In addition to the uncertainty over the comparison class $c$, the pragmatic listener also have uncertainty over the value of the degree $x$ (e.g., the height of the person) and the semantic threshold variable $\theta$ as in @Lassiter2013. 
 
