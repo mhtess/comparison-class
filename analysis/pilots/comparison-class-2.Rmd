@@ -148,3 +148,129 @@ ggsave("~/research/comparison-class/analysis/fig/comparison-class-2-v2_degreeXfo
 ```
 
 
+
+## Items v3
+
+```{r}
+data.path <- "/Users/mht/Documents/research/comparison-class/data/pilot-classElicitation-2-items3/"
+d <- read.csv(paste(data.path, "class-elicitation-2-items3-trials.csv", sep = ""))
+```
+
+```{r}
+d.summary <- d %>%
+  select(sub_category, super_category, adjective, 
+         sub_endorsement, super_endorsement, degree, 
+         form, strength, condition) %>%
+  gather(key, response, 
+         -sub_category, -adjective, -super_category, 
+         -degree, -form, -strength, -condition) %>%
+  group_by(key, sub_category, super_category, adjective, degree, form, strength, condition) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
+```
+
+```{r}
+
+d.form <- data.frame(
+  adjective = c("heavy", "expensive", "tall", "long", "warm", 
+                "light", "cheap", "short", "short", "cold"),
+  form = c("positive","positive","positive","positive","positive",
+           "negative","negative","negative","negative","negative")
+)
+d.summary <- left_join(
+    d.summary %>%
+    ungroup() %>%
+    select(-form),
+    d.form)
+
+
+ggplot(d.summary, 
+       aes( x = condition, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(form~sub_category, scales = 'free')+
+  theme(axis.text.x = element_text(angle = 90))
+
+#ggsave("~/Documents/research/comparison-class/analysis/fig/comparison-class-2-v3_subCat.pdf", height = 7, width = 16) 
+
+```
+
+
+
+```{r}
+d %>% group_by(condition, sub_category, adjective) %>%
+  summarize(n = n()) %>%
+  kable()
+```
+
+
+
+## Items v4
+
+```{r}
+data.path <- "/Users/mht/Documents/research/comparison-class/data/pilot-classElicitation-2-items4/"
+d <- read.csv(paste(data.path, "class-elicitation-2-items4-trials.csv", sep = ""))
+```
+
+```{r}
+d.summary <- d %>%
+  select(sub_category, super_category, adjective, 
+         sub_endorsement, super_endorsement, degree, 
+         form, strength, condition) %>%
+  gather(key, response, 
+         -sub_category, -adjective, -super_category, 
+         -degree, -form, -strength, -condition) %>%
+  group_by(key, sub_category, super_category, adjective, degree, form, strength, condition) %>%
+  multi_boot_standard(column = "response") %>% 
+  separate(key, into=c('key', 'd2')) %>%
+  select(-d2)
+```
+
+```{r}
+
+# d.form <- data.frame(
+#   adjective = c("heavy", "expensive", "tall", "long", "warm", 
+#                 "light", "cheap", "short", "short", "cold"),
+#   form = c("positive","positive","positive","positive","positive",
+#            "negative","negative","negative","negative","negative")
+# )
+# d.summary <- left_join(
+#     d.summary %>%
+#     ungroup() %>%
+#     select(-form),
+#     d.form)
+
+
+ggplot(d.summary, 
+       aes( x = form, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~sub_category, scales = 'free', nrow = 3)+
+  theme(axis.text.x = element_text(angle = 90))
+
+
+
+d.summary <- d.summary %>% 
+  ungroup() %>% 
+  mutate(form = factor(form, levels = c("positive", "negative")))
+
+ggplot(d.summary, aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = key, fill = key ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(form~degree, scales = 'free')+
+  theme(axis.text.x = element_text(angle = 90) )
+
+
+#ggsave("~/Documents/research/comparison-class/analysis/comparison-class-2-v4_subCat.pdf", height = 7, width = 16) 
+
+
+```
+
+
+
+```{r}
+d %>% group_by(condition, sub_category, adjective) %>%
+  summarize(n = n()) %>%
+  kable()
+```
