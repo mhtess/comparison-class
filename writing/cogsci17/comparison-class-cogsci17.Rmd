@@ -180,6 +180,8 @@ We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
 
+In this experiment, we elicit the comparison class \textit{c} for different events in order to test our model predictions. We use a two-alternative forced choice paradigm.
+
 ## Methods
 
 ### Participants
@@ -188,7 +190,7 @@ We test these predictions in our first experiment.
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited *PARTICIPANTS* participants from Amazon's Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated *PAYMENT* for their work.
+We recruited PARTICIPANTS participants from Amazon's Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work.
 
 
 ```{r, eval = F, echo=F}
@@ -225,7 +227,7 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We created 30 events using positive- and negative-form adjectives, each conditioned with three context sentences, from five different measureable scales: distance, height, price, time, and weight. 
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Items were chosen to be 
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
@@ -253,11 +255,14 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 
 ### Procedure
 
-
+For each event, participants were given a context sentence to introduce the item, followed by a target sentence, which predicated a positive- or negative-form gradable adjective over the item.
+Participants would then be asked if they thought that the The experiment can be viewed in full at LINK.
 
 ## Results
 
 # Experiment 2: Vague speakers
+
+In this experiment, we would like to elicit the priors over comparison 
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
