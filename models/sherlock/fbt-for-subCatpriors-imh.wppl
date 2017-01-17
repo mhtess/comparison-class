@@ -58,7 +58,7 @@ var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
 
 var ccData = dataFrame(utils.readCSV(dataPath + ccDataFile))
-var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile))
+var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"])
 
 
 var subCategories = _.uniq(_.pluck(vsData, "sub_category"));
@@ -204,7 +204,7 @@ var model = function(){
 
         var d_subcat_superSpeaker = _.pluck(
           _.where(vsData, {sub_category: subCat, form:form}),
-        "prior_response");
+        "response");
         var d_subcat_ccInference = _.pluck(
             _.where(ccData, {sub_category: subCat, form:form}),
         "paraphrase");
@@ -212,12 +212,14 @@ var model = function(){
         var superSpeakerProbs = speaker2_super(form);
 
         mapData({data:d_subcat_superSpeaker}, function(d){
+	  // console.log("superSpeaker = " + superSpeakerProbs.score(d))
           observe(superSpeakerProbs, d)
         })
 
         var ccRSA = pragmaticListener(form);
 
         mapData({data:d_subcat_ccInference}, function(d){
+         // console.log("cc = "+ ccRSA.score(d))
           observe(ccRSA, d);
         })
 
