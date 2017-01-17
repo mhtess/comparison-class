@@ -163,8 +163,8 @@ For simplicity, we assume the prior distribution over the degree for the superor
 ```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
 ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
 
-model.path <- "/Users/mht/Documents/research/comparison-class/models/"
-#model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
+#model.path <- "/Users/mht/Documents/research/comparison-class/models/"
+model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
 mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
        packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
 
@@ -190,8 +190,7 @@ In this experiment, we elicit the comparison class \textit{c} for different even
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
-
+We recruited 300 participants from Amazon Mechanical Turk. Two participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. (Include simulation bit here with n = 300?)
 
 ```{r, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
@@ -227,7 +226,7 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales from which we derived these adjectives were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Within each context sentence, an item was introduced. The items served as their own subordinate categories and the item triplets assigned to each scale (e.g., \textit{oven}, \textit{toaster}, \textit{dishwasher} in the scale price}) shared a common supercategory (e.g., \textit{kitchen appliances}).
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
@@ -255,9 +254,7 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 
 ### Procedure
 
-For each event, participants were given a CONTEXT sentence to introduce the item, followed by a TARGET sentence, which predicated a positive- or negative-form gradable adjective over the item. Then, the participant was asked if they would say that the
-For example, one trial read: "Gary finds a music video to watch online with his friend." "Gary says to his friend, "It's short."" "What do you think Gary meant?"
-Every participant saw a randomized and unique set of events and names. The experiment can be viewed in full at LINK.
+For each event, participants were given a context sentence to introduce the item (subordinate category), followed by a target sentence, which predicated a positive- or negative-form gradable adjective over the item. The participant was then asked if they believed that the target sentence was true of the subordinate or superordinate category. For example, one event read: "Gary finds a music video to watch online with his friend." "Gary says to his friend, "It's short."" "What do you think Gary meant?" The participant is then asked if they think that Gary meant that the music video was long relative to music videos (subordinate comparison class) or long relative to videos online (superordinate comparison class). Every participant saw a randomized and unique set of events and names. The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
 ## Results
 
@@ -274,11 +271,15 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
+We recruited 100 participants from Amazon Mechanical Turk. Five participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. (Include simulation bit here for n = 100?)
 
 ### Materials
 
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
+
 ### Procedure
+
+For each event, participants saw a context sentence, 
 
 ## Results
 
