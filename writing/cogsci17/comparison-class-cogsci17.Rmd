@@ -8,7 +8,7 @@ author-information: >
   \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
   {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\
   $^1$Department of Psychology, Stanford University,
-  $^2$Department of Electrical and Computer Engineering, University of Central Florida}
+  $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
     "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding.
@@ -38,6 +38,11 @@ output: cogsci2016::cogsci_paper
 
 ```{r global_options, include=FALSE}
 rm(list=ls())
+
+# set local path for the repo
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+#project.path <- "/media/michael/Data/Desktop/comparison-class/"
+
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
 ```
@@ -160,18 +165,61 @@ Then, the listener $L_1$ tries to uncover the speaker's implicit comparison clas
 The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
 For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 
-```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
+```{r }
 ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
 
-#model.path <- "/Users/mht/Documents/research/comparison-class/models/"
-model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
-mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
-       packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
+model.path <- paste(project.path,"/models/", sep = "")
+
+
+prior.params <- list(
+  sub = data.frame(mu = 1, sigma = 0.5), 
+  super = data.frame(mu = 0 , sigma = 1)
+)
+
+mp <- webppl(
+  program_file = paste(model.path, "ccrsa.wppl", sep = ""),
+  data = prior.params, 
+  data_var = "priorParamsFromR",
+  packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") )
+)
+```
+
+```{r priorModel}
+priorModel <- "
+var stateParams = {
+  sub: priorParamsFromR.sub[0],
+  super: priorParamsFromR.super[0]
+};
+
+var priorModel = function(){
+  var subcat = gaussian(stateParams.sub);
+  var supercat = gaussian(stateParams.super);
+  return {subcat, supercat}
+}
+
+var prior = Infer({method: 'forward', samples: 10000, model: priorModel})
+prior
+"
+
+prior.samples <- webppl(priorModel, data = prior.params, data_var = "priorParamsFromR")
+
+prior.tidy <- prior.samples %>% 
+  rename(subordinate = value.subcat, superordinate = value.supercat) %>%
+  gather(key, val)
+
+ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = key))+
+  geom_density(alpha = 0.5)
+```
+
+
+```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
 
 ggplot(mp, aes(x = support, y = prob, fill = support))+
   geom_bar(stat= 'identity', position = position_dodge())+
   scale_fill_brewer(palette = "Set1")+
   theme_bw()
+
+
 ```
 
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
