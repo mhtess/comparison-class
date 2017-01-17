@@ -5,9 +5,10 @@ csl: "apa6.csl"
 document-params: "10pt, letterpaper"
 
 author-information: > 
-    \author{{\large \bf Michael Henry Tessler} \\ mtessler@stanford.edu \\ Department of Psychology \\ Stanford University
-    \And {\large \bf Michael Lopez-Brau} \\ author2@university.edu \\ Department of ... \\  University
-    \And {\large \bf Noah D. Goodman} \\ ngoodman@stanford.edu \\ Department of Psychology \\ Stanford University}
+  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\ 
+  {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\ 
+  $^1$Department of Psychology, Stanford University \\ 
+  $^2$Department of XYZ, University of Central Florida}
 
 abstract: 
     "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
