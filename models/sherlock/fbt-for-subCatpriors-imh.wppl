@@ -222,9 +222,9 @@ var model = function(){
         })
 
         query.add("superSpeaker",
-          [form, Math.exp(superSpeakerProbs.score(true))])
+          [form, Math.exp(superSpeakerProbs.score(1))])
         query.add("superCC",
-          [form, Math.exp(ccRSA.score(true))])
+          [form, Math.exp(ccRSA.score("super"))])
 
         // return [
         //   ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
