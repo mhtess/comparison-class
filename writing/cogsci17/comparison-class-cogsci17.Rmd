@@ -1,5 +1,5 @@
 ---
-title: "Cheap cars, expensive coffee: Understanding comparison classes in vague language"
+title: "Cheap cars, expensive coffee: Comparison class understanding in vague language"
 bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
@@ -7,7 +7,7 @@ document-params: "10pt, letterpaper"
 author-information: > 
   \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\ 
   {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\ 
-  $^1$Department of Psychology, Stanford University \\ 
+  $^1$Department of Psychology, Stanford University
   $^2$Department of XYZ, University of Central Florida}
 
 abstract: 
@@ -163,8 +163,8 @@ For simplicity, we assume the prior distribution over the degree for the superor
 ```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
 ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
 
-#model.path <- "/Users/mht/Documents/research/comparison-class/models/"
-model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
+model.path <- "/Users/mht/Documents/research/comparison-class/models/"
+#model.path <- "/media/michael/Data/Desktop/comparison-class/models/"
 mp <- webppl(program_file = paste(model.path, "ccrsa.wppl", sep = ""),
        packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ))
 
