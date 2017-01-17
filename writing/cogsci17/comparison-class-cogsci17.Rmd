@@ -180,7 +180,7 @@ We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
 
-In this experiment, we elicit the comparison class \textit{c} for different events in order to test our model predictions. We use a two-alternative forced choice paradigm.
+In this experiment, we elicit the comparison class \textit{c} for different events in order to test our model predictions. We use a two-alternative forced choice paradigm to collect peoples' endorsements of a subordinate or superordinate comparison class.
 
 ## Methods
 
@@ -190,7 +190,7 @@ In this experiment, we elicit the comparison class \textit{c} for different even
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited PARTICIPANTS participants from Amazon's Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work.
+We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
 
 
 ```{r, eval = F, echo=F}
@@ -227,7 +227,7 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Items were chosen to be 
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
