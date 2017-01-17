@@ -260,7 +260,7 @@ For each event, participants were given a context sentence to introduce the item
 
 # Experiment 2: Vague speakers
 
-In this experiment, we would like to elicit the priors over comparison
+In this experiment, we would like to elicit the priors over the subordinate categories. We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
@@ -275,11 +275,12 @@ We recruited 100 participants from Amazon Mechanical Turk. Five participants wer
 
 ### Materials
 
-We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height, price, temperature, time, and weight. Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
 
 ### Procedure
 
-For each event, participants saw a context sentence, 
+For each event, participants see a context sentence where a subordinate item is presented. They are then asked if 
+For example, one event read: "Alicia picks up an apple." "Do you think the apple would be light relative to other produce?" 
 
 ## Results
 
