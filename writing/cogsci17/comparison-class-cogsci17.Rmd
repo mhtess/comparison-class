@@ -4,25 +4,25 @@ bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
 
-author-information: > 
-  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\ 
-  {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\ 
-  $^1$Department of Psychology, Stanford University
-  $^2$Department of XYZ, University of Central Florida}
+author-information: >
+  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
+  {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\
+  $^1$Department of Psychology, Stanford University,
+  $^2$Department of Electrical and Computer Engineering, University of Central Florida}
 
-abstract: 
-    "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding. 
-    In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation. 
-    We introduce a Rational Speech Act model that respresents the implicit comparison class as a random variable inferred via pragmatic reasoning.
+abstract:
+    "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding.
+    In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation.
+    We introduce a Rational Speech Act model that represents the implicit comparison class as a random variable inferred via pragmatic reasoning.
     We find this model makes the prediction that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
     We test this prediction using a paraphrase experiment.
     Quantative predictions of the model rely upon quantitative details of relevant prior distributions.
     We introduce a novel Bayesian data-analytic method for inferred participants' relevant prior knowledge by asking simple, natural language questions.
     "
-    
+
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
-    
+
 output: cogsci2016::cogsci_paper
 ---
 
@@ -97,21 +97,21 @@ so we can ask a vague speaker question (Expt 2. [VPE])
 This will alleviate the overparameterization problem and is, in general, a new way of testing language understanding models without having to explicitly measure priors
 -->
 
-If you're going to San Francisco, be sure to set aside a few extra dollars for coffee. 
+If you're going to San Francisco, be sure to set aside a few extra dollars for coffee.
 It's good, but expensive.
-By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way. 
+By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way.
 This may seem obvious, and yet adjectives like *expensive* derive their relatively precise meanings from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
 This *comparison class* is not often explicitly stated, bur rather is latent in the discourse.
 
 Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
 For example, a good cup of coffee is expensive if its price is greater than some threshold number of dollars.
-The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities. 
+The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities.
 A good cup of coffee in San Francisco is expensive *relative to* other cups of coffee and not *relative to* other things you could buy in San Francisco (including, e.g., a Tesla automobile).
 
-@Lassiter2013 demonstrated that listener's with relevant world knowledge (e.g., prices of coffee) can use pragmatic principles to arrive at a context-dependent meaning of a gradable adjective (e.g., expensive) assuming nothing in particular about what the adjective means out of context. 
+@Lassiter2013 demonstrated that listener's with relevant world knowledge (e.g., prices of coffee) can use pragmatic principles to arrive at a context-dependent meaning of a gradable adjective (e.g., expensive) assuming nothing in particular about what the adjective means out of context.
 They elaborate the Rational Speech Act theory [for a review, see @Goodman2016] such that the truth-conditional threshold for the adjective semantics (i.e., the point at which something becomes expensive) comes from an uninformed prior distribution: *a priori* anything could be expensive.
-Listeners arrive at context-sensitive meanings by integrating their prior beliefs (e.g., knowledge of what a cup of coffee should cost) with general principles of communication: be truthful, be informative. 
+Listeners arrive at context-sensitive meanings by integrating their prior beliefs (e.g., knowledge of what a cup of coffee should cost) with general principles of communication: be truthful, be informative.
 The result is vague language understanding that displays context-sensitivity and admits borderline cases [@Lassiter2013; @Lassiter2015].
 See @Qing2014 for a related but alternative derivation of a probabilistic pragmatics model of gradable adjective interpretation.
 \mht{this paragraph sucks}
@@ -122,13 +122,13 @@ This question is not just an issue for gradaable adjectives but in fact for any 
 
 <!--
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
-@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class). 
+@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
 -->
 
 In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
 We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
 We test this model in a simplified setting, where the comparison class could either be a subordinate or superordinate class (e.g., toasters vs. kitchen appliances).
-In this simplified setting, we find the model predicts the level of abstraction (sub vs. superordinate) of a comparison class depends upon the quantitative details of the relevant prior beliefs (e.g., the prices of toasters vs. the prices of kitchen appliances in general). 
+In this simplified setting, we find the model predicts the level of abstraction (sub vs. superordinate) of a comparison class depends upon the quantitative details of the relevant prior beliefs (e.g., the prices of toasters vs. the prices of kitchen appliances in general).
 We test this prediction using a paraphrase experiment (Expt. 1).
 Quantitative predictions for Bayesian models (including this one) depend upon the quantitative details of listeners' prior distributions over various scales.
 Because it may be difficult for human participants to estimate quantities accurately, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
@@ -138,7 +138,7 @@ Because it may be difficult for human participants to estimate quantities accura
 
 We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
 This uncertainty is posited at the level of the pragmatic listener, and thus is resolved using pragmatic reasoning (i.e., the pressures to be truthful and informative).
-In addition to the uncertainty over the comparison class $c$, the pragmatic listener also have uncertainty over the value of the degree $x$ (e.g., the height of the person) and the semantic threshold variable $\theta$ as in @Lassiter2013. 
+In addition to the uncertainty over the comparison class $c$, the pragmatic listener also have uncertainty over the value of the degree $x$ (e.g., the height of the person) and the semantic threshold variable $\theta$ as in @Lassiter2013.
 
 \begin{align}
 L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1}\\
@@ -146,13 +146,13 @@ S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c,
 L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0}
 \end{align}
 
-Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$. 
-That is, the plausible heights of basketball players is different than the plausible heights of people in general. 
+Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$.
+That is, the plausible heights of basketball players is different than the plausible heights of people in general.
 
 ## Model predictions
 
-As a first test of this pragmatic theory, we consider a simple case: 
-The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*). 
+As a first test of this pragmatic theory, we consider a simple case:
+The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*).
 Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
 We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."): $P(x \mid c_{sub})$.
 Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$ and the superordinate level category (e.g., people in general) $P(x \mid c_{super})$.
@@ -174,11 +174,13 @@ ggplot(mp, aes(x = support, y = prob, fill = support))+
   theme_bw()
 ```
 
-We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*). 
-The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior. 
+We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
+The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
+
+In this experiment, we elicit the comparison class \textit{c} for different events in order to test our model predictions. We use a two-alternative forced choice paradigm to collect peoples' endorsements of a subordinate or superordinate comparison class.
 
 ## Methods
 
@@ -188,13 +190,13 @@ We test these predictions in our first experiment.
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited *PARTICIPANTS* participants from Amazon's Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated *PAYMENT* for their work.
+We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
 
 
 ```{r, eval = F, echo=F}
-## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities 
+## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
 
-### not written efficiently... will take ~10 minutes to run 
+### not written efficiently... will take ~10 minutes to run
 n_participants <- c(50, 75, 100)
 true_probs <- c(0.1, 0.3, 0.5)
 simulations <- data.frame()
@@ -202,11 +204,11 @@ for (n in n_participants){
   for (p in true_probs){
     for (i in seq(1, 25)){
       simulations <- bind_rows(simulations,
-            bind_rows(data.frame(label = c("a"), 
+            bind_rows(data.frame(label = c("a"),
                        response = rbinom(n =n, size = 1, prob = p)),
-                data.frame(label = c("b"), 
+                data.frame(label = c("b"),
                            response = rbinom(n =n, size = 1, prob = p))) %>%
-            group_by(label) %>% 
+            group_by(label) %>%
             multi_boot_standard(column = "response") %>%
             mutate(width = ci_upper - ci_lower) %>%
           ungroup() %>%
@@ -225,7 +227,7 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We created 30 events using positive- and negative-form adjectives, each conditioned with three context sentences, from five different measureable scales: distance, height, price, time, and weight. 
+We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
@@ -245,7 +247,7 @@ x <- rnorm(n)
 y <- 2*x + rnorm(n)
 out <- lm(y ~ x)
 
-tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2), 
+tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2),
                       caption = "This table prints across one column.")
 
 print(tab1, type="latex", comment = F, table.placement = "H")
@@ -253,11 +255,15 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 
 ### Procedure
 
-
+For each event, participants were given a CONTEXT sentence to introduce the item, followed by a TARGET sentence, which predicated a positive- or negative-form gradable adjective over the item. Then, the participant was asked if they would say that the
+For example, one trial read: "Gary finds a music video to watch online with his friend." "Gary says to his friend, "It's short."" "What do you think Gary meant?"
+Every participant saw a randomized and unique set of events and names. The experiment can be viewed in full at LINK.
 
 ## Results
 
 # Experiment 2: Vague speakers
+
+In this experiment, we would like to elicit the priors over comparison
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
@@ -268,8 +274,7 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-
-
+We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
 
 ### Materials
 
@@ -312,7 +317,7 @@ included in the sentence, place only the year in parentheses, as in
 [-@NewellSimon1972a], but otherwise place the entire reference in
 parentheses with the authors and year separated by a comma
 [@NewellSimon1972a]. List multiple references alphabetically and
-separate them by semicolons [@ChalnickBillman1988a; @NewellSimon1972a]. 
+separate them by semicolons [@ChalnickBillman1988a; @NewellSimon1972a].
 Use the et. al. construction only after listing all the authors to a
 publication in an earlier reference and for citations with four or
 more authors.
@@ -338,8 +343,8 @@ set wide figures across both columns.
 
 ## Two-column images
 
-You can read local images using png package for example and plot 
-it like a regular plot using grid.raster from the grid package. 
+You can read local images using png package for example and plot
+it like a regular plot using grid.raster from the grid package.
 With this method you have full control of the size of your image. **Note: Image must be in .png file format for the readPNG function to work.**
 
 You might want to display a wide figure across both columns. To do this, you change the `fig.env` chunk option to `figure*`. To align the image in the center of the page, set `fig.align` option to `center`. To format the width of your caption text, you set the `num.cols.cap` option to `2`.
@@ -368,9 +373,9 @@ fig.pos chunk option to have more control over the location of your plot on the 
 x <- 0:100
 y <- 2 * (x + rnorm(length(x), sd = 3) + 3)
 
-ggplot2::ggplot(data = data.frame(x, y), 
-       aes(x = x, y = y)) + 
-  geom_point() + 
+ggplot2::ggplot(data = data.frame(x, y),
+       aes(x = x, y = y)) +
+  geom_point() +
   geom_smooth(method = "lm")
 ```
 
@@ -406,16 +411,16 @@ See all the items [here](http://stanford.edu/~mtessler/comparison-class/experime
   \subitem Currently we have 40 unique items, made up of 6 scales x 2 (positive and negative form adjectives)
   \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (touching objects vs. the weather). For the weather, it is really about speaker's beliefs--their own subjective comparison class (e.g., John think its cold because he's from Southern California).
   \subitem 3 or 4 contexts by item (different targets of reference)
-  \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.'' 
+  \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.''
 
 \item \textbf{Comparison class elicitation}
   \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
-  \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.'' 
+  \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.''
   \subitem \textbf{Dependent measure}: What do you think Gary meant? ``This is heavy \textbf{for a} ...'' (fill in the blank)
   \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
 
 \item \textbf{Prior elicitation}
-  \subitem This will refer to the comparison class. 
+  \subitem This will refer to the comparison class.
   \subitem \textbf{Dependent measure}: What do you think is the weight of a television? Provide number and units (units from a set from a drop-down menu).
 
 \item \textbf{Language understanding (Listener task)}
@@ -423,14 +428,14 @@ See all the items [here](http://stanford.edu/~mtessler/comparison-class/experime
   \subitem \textbf{Dependent measure}: same as prior elicitation.
 
 \end{enumerate}
-# Model 
+# Model
 
-uRSA with lifted variable. 
+uRSA with lifted variable.
 Plug in different priors.
 
 # Data anlaysis
 
-Probably something similar to the habituals paper. 
+Probably something similar to the habituals paper.
 Assume log-normals, do BDA on the prior data.
 
 # Current concerns
@@ -440,19 +445,19 @@ Assume log-normals, do BDA on the prior data.
 \item In the Justine-way of doing these kinds of experiments, for the prior elicitation, we would have the same context sentence (``Gary buys a television and picks it up.'') without the adjective sentence, and ask about the likely weight.
 What does our intermediate comparison class elicitation step buy us?
 
-\item For many of the our items, it seems that the comparison class we're going to get is the class of the target objects (e.g., televisions, cups of coffee, weather in Southern California)... I have the feeling that some items (e.g., a 30 year old who is tall) have more general classes (e.g., tall for an adult, for a woman) while others (e.g., a 4 year old boy who is tall) have more specific classes (i.e., tall for a 4 year old). This example may be unique / idiosyncractic, but also may suggest that the comparison class needs to be a relative homogeneous category (e.g., 4 year olds are really different than 2 year olds, whereas 30 vs. 28 year olds not so much). If this is interesting, should we try to move our stimuli more in that direction? Any thoughts? 
+\item For many of the our items, it seems that the comparison class we're going to get is the class of the target objects (e.g., televisions, cups of coffee, weather in Southern California)... I have the feeling that some items (e.g., a 30 year old who is tall) have more general classes (e.g., tall for an adult, for a woman) while others (e.g., a 4 year old boy who is tall) have more specific classes (i.e., tall for a 4 year old). This example may be unique / idiosyncractic, but also may suggest that the comparison class needs to be a relative homogeneous category (e.g., 4 year olds are really different than 2 year olds, whereas 30 vs. 28 year olds not so much). If this is interesting, should we try to move our stimuli more in that direction? Any thoughts?
 
 \end{enumerate}
 
 -->
 
-# References 
+# References
 
 ```{r}
 # References will be generated automatically by Pandoc and included here.
 # The following code is some latex to format the bibliography. Do not remove it.
 ```
 
-\setlength{\parindent}{-0.1in} 
+\setlength{\parindent}{-0.1in}
 \setlength{\leftskip}{0.125in}
 \noindent
