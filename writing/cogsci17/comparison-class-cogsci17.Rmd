@@ -255,8 +255,9 @@ print(tab1, type="latex", comment = F, table.placement = "H")
 
 ### Procedure
 
-For each event, participants were given a context sentence to introduce the item, followed by a target sentence, which predicated a positive- or negative-form gradable adjective over the item.
-Participants would then be asked if they thought that the The experiment can be viewed in full at LINK.
+For each event, participants were given a CONTEXT sentence to introduce the item, followed by a TARGET sentence, which predicated a positive- or negative-form gradable adjective over the item. Then, the participant was asked if they would say that the 
+For example, one trial read: "Gary finds a music video to watch online with his friend." "Gary says to his friend, "It's short."" "What do you think Gary meant?"
+Every participant saw a randomized and unique set of events and names. The experiment can be viewed in full at LINK.
 
 ## Results
 
@@ -273,8 +274,7 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-
-
+We recruited PARTICIPANTS participants from Amazon Mechanical Turk. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. Simulations reveal that with $n$ = 75, a 95% confidence interval will have a maximum width of about 0.2 - 0.25. Since each participant reads about half of the events, we collect $n$ = PARTICIPANTS for the entire experiment.
 
 ### Materials
 
