@@ -45,16 +45,6 @@ var KL = function(p, q, supp) {
   return sum(map2(diverge,P,Q));
 };
 
-var foreach = function(lst, fn) {
-    var foreach_ = function(i) {
-        if (i < lst.length) {
-            fn(lst[i]);
-            foreach_(i + 1);
-        }
-    };
-    foreach_(0);
-};
-
 
 // were it not for speaker optimality
 // this model could be run independently for each item
@@ -63,8 +53,8 @@ var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
 var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
 
-var ccData = dataFrame(webpplCsv.readCSV(dataPath + ccDataFile))
-var vsData = dataFrame(webpplCsv.readCSV(dataPath + vsDataFile))
+var ccData = dataFrame(utils.readCSV(dataPath + ccDataFile))
+var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile))
 
 
 var subCategories = _.uniq(_.pluck(vsData, "sub_category"));
@@ -262,4 +252,4 @@ var posterior = Infer({
   // verboseLag: samples / 5
 })
 // model()
-webpplCsv.writeQueryERP(posterior, "results/filename.csv", ["cat", "param", "val"])
+utils.writeQueryERP(posterior, "results/filename.csv", ["cat", "param", "val"])
