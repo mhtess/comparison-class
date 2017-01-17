@@ -1,4 +1,6 @@
-var _ = underscore;
+
+var index = utils.wpParseFloat(last(process.argv)) // load index as last command line index
+
 // requires webppl packages: webppl-csv and webppl-mht custom packages
 // time webppl fbt-for-subCatpriors.wppl --require ~/Documents/research/tools/webppl-csv/ --require mht
 
@@ -66,8 +68,8 @@ var model = function(){
   // should probably be an s1 for each task
   var alphas = {
     s1: {
-      super: 1,//uniformDrift( { a:0, b: 20, width: 2} ),
-      cc: 2//uniformDrift( { a:0, b: 20, width: 2} )
+      super: uniformDrift( { a:0, b: 20, width: 2} ),
+      cc: uniformDrift( { a:0, b: 20, width: 2} )
     }
     // s2: {
     //   super: uniformDrift({a:0, b: 4, width: 0.5}),
@@ -168,7 +170,7 @@ var model = function(){
           var _kl = KL(speakerBeliefs, L1, speakerBeliefs.support());
           factor(-1 * _kl)
 
-          return utterance == (form + "Adjective")
+          return utterance == (form + "Adjective") ? 1 : 0
           }})
       }
       ////////////////////////////////////////
@@ -192,7 +194,7 @@ var model = function(){
           var threshold = sample(thresholdPrior(form));
           var S1 = speaker1(state, threshold, comparisonClass, form);
           observe(S1, utterance);
-          return comparisonClass
+          return comparisonClass == "sub" ? "sub_plural" : "super"
         }})
       }
       ////////////////////////////////////////
@@ -205,19 +207,19 @@ var model = function(){
         "prior_response");
         var d_subcat_ccInference = _.pluck(
             _.where(ccData, {sub_category: subCat, form:form}),
-        "response");
+        "paraphrase");
 
         var superSpeakerProbs = speaker2_super(form);
 
-        // mapData({data:d_subcat_superSpeaker}, function(d){
-        //   observe(superSpeakerProbs, d)
-        // })
+        mapData({data:d_subcat_superSpeaker}, function(d){
+          observe(superSpeakerProbs, d)
+        })
 
         var ccRSA = pragmaticListener(form);
-        //
-        // mapData({data:d_subcat_ccInference}, function(d){
-        //   observe(ccRSA, d);
-        // })
+
+        mapData({data:d_subcat_ccInference}, function(d){
+          observe(ccRSA, d);
+        })
 
         query.add("superSpeaker",
           [form, Math.exp(superSpeakerProbs.score(true))])
@@ -246,12 +248,16 @@ var model = function(){
   return query
 }
 
+var mhiter = 10;
+var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
   method: "MCMC",
-  samples: 2, burn: 2,
+  samples: mhiter, burn: burn,
   verbose: T
   // verboseLag: samples / 5
 })
-// model()
-utils.writeQueryERP(posterior, "results/filename.csv", ["cat", "param", "val"])
+
+var outfile = 'results/fbt-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+
+utils.writeQueryERP(posterior, outfile, ["cat", "param", "val"])
