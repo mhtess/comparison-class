@@ -21,6 +21,9 @@ abstract:
     "
 header-includes:
   - \usepackage{tabularx}
+  - \usepackage{multicol}
+  - \usepackage{wrapfig}
+  
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
 
@@ -287,9 +290,8 @@ one line space below it, as in Table 1. You may float
 tables to the top or bottom of a column, set wide tables across both
 columns.
 
-You can use the xtable function in the xtable package.
+```{r echo = F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
-```{r xtable, results = "asis", fig.align = "center", fig.pos = "H"}
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
 height_super = c("people")
 price_sub = c("dishwasher, oven, toaster")
@@ -305,10 +307,29 @@ scales = c("Height", "Price", "Temperature", "Time", "Weight")
 sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
 super = c(height_super, price_super, temperature_super, time_super, weight_super)
 
-table1 = data.frame(Scale = scales, Sub = sub, Super = super)
+table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
 table1 <- xtable(table1)
-print(table1, type = "latex", comment = F, include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth")
+print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
 ```
+
+<!-- \begin{multicols}{2} -->
+<!-- \begin{table} -->
+<!-- \begin{wraptable}{l}{0.7\linewidth} -->
+<!-- \centering -->
+<!-- \begin{tabularx}{\textwidth}{lll} -->
+<!--   \hline -->
+<!-- Scale & Subordinate & Superordinate \\  -->
+<!--   \hline -->
+<!-- Height & professional basketball player, professional gymnast, professional soccer player & people \\  -->
+<!--   Price & dishwasher, oven, toaster & kitchen appliances \\  -->
+<!--   Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\  -->
+<!--   Time & video of a cute animal, music video, movie & things you watch online \\  -->
+<!--   Weight & apple, grape, watermelon & produce \\  -->
+<!--    \hline -->
+<!-- \end{tabularx} -->
+<!-- \end{wraptable} -->
+<!-- \end{table} -->
+<!-- \end{multicols} -->
 
 ### Procedure
 
