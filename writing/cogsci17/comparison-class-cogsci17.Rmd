@@ -47,6 +47,9 @@ knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", f
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
 ```
 
+
+
+
 ```{r, libraries}
 library(png)
 library(grid)
@@ -71,6 +74,61 @@ HPDlo<- function(s){
   return(m["var1","lower"])
 }
 ```
+
+
+```{r}
+theme_paper <- function(base_size = 12, base_family = "Helvetica") {
+  theme(
+    line =    element_line(colour = "black", size = 0.5, linetype = 1,
+                                      lineend = "butt"),
+    rect =   element_rect(fill = "black", colour = "black", size = 0.5, linetype = 1),
+    text =               element_text(family = base_family, face = "plain",
+                                      colour = "black", size = base_size,
+                                      hjust = 0.5, vjust = 0.5, angle = 0, lineheight = 0.9,
+                                      margin = margin(2,1,3,1), debug = FALSE),
+    axis.text =          element_text(size = 12, colour = "black", margin=margin(1,1,1,1)),
+    strip.text =         element_text(size = 12, colour = "black", margin=margin(1,1,4,1)),
+    
+    axis.line =          element_blank(),
+    axis.ticks =         element_line(colour = "black", size = 0.2),
+    axis.title =         element_text(colour = "black", size=16),
+    axis.ticks.length =  unit(0.3, "lines"),
+
+    legend.background =  element_rect(colour = "white", fill='white'),
+#    legend.margin =      unit(0.2, "cm"),
+    legend.key =         element_rect(fill = "white", colour = "white"),
+    legend.key.size =    unit(1.2, "lines"),
+    legend.key.height =  NULL,
+    legend.key.width =   NULL,
+    legend.text =        element_text(size = rel(1.2), colour = "black"),
+    legend.text.align =  NULL,
+    legend.title =       element_text(size = rel(1.2), face = "bold", hjust = 0, colour = "black"),
+    legend.title.align = NULL,
+    legend.position =    "right",
+    legend.direction =   "vertical",
+    legend.justification = "center",
+    legend.box =         NULL,
+    
+    panel.background =   element_rect(fill = "white", colour = NA),
+    panel.border =       element_rect(fill = NA, colour = "black"),
+    panel.grid.major =   element_line(colour = "white", size = 0.2),
+    panel.grid.minor =   element_line(colour = "white", size = 0.5),
+    panel.spacing =       unit(0.5, "lines"),
+
+    strip.background =   element_rect(fill = "white", colour = "white"),
+    strip.text.x =       element_text(),
+    strip.text.y =       element_text(angle = -90),
+    
+    plot.background =    element_rect(colour = "white", fill = "white"),
+    plot.title =         element_text(size = rel(1.2)),
+    plot.margin =        unit(c(1, 1, 0.5, 0.5), "lines"),
+    
+    complete = TRUE
+  )
+}
+theme_set(theme_classic())
+```
+
 
 <!--
 # Outline
@@ -170,18 +228,30 @@ For simplicity, we assume the prior distribution over the degree for the superor
 
 model.path <- paste(project.path,"/models/", sep = "")
 
-
 prior.params <- list(
   sub = data.frame(mu = 1, sigma = 0.5), 
   super = data.frame(mu = 0 , sigma = 1)
 )
 
-mp <- webppl(
-  program_file = paste(model.path, "ccrsa.wppl", sep = ""),
-  data = prior.params, 
-  data_var = "priorParamsFromR",
-  packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") )
-)
+mp.both <- data.frame()
+
+for (u in c("positive", "negative")){
+  
+  mp <- webppl(
+    program_file = paste(model.path, "ccrsa.wppl", sep = ""),
+    data = list(utt = u, priorParams = prior.params), 
+    data_var = "paramsFromR",
+    packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") )
+  )
+  
+  mp.both <- bind_rows(mp %>% 
+    filter(support == "sub") %>%
+    mutate(u = u),
+    mp.both)
+  
+}
+
+
 ```
 
 ```{r priorModel}
@@ -201,25 +271,39 @@ var prior = Infer({method: 'forward', samples: 10000, model: priorModel})
 prior
 "
 
-prior.samples <- webppl(priorModel, data = prior.params, data_var = "priorParamsFromR")
+prior.samples <- webppl(priorModel, 
+                        data = prior.params, 
+                        data_var = "priorParamsFromR")
 
 prior.tidy <- prior.samples %>% 
   rename(subordinate = value.subcat, superordinate = value.supercat) %>%
-  gather(key, val)
+  gather(key, val) %>%
+  mutate(class = factor(key, levels = c("subordinate", "superordinate")))
 
-ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = key))+
-  geom_density(alpha = 0.5)
+subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+
+  geom_density(alpha = 0.8)+
+  scale_fill_brewer(palette = "Set2") +
+  #guides(fill = F)+
+  ggtitle("Priors on degree")+
+  xlab("Degree")+
+  ylab("Scaled probability")
 ```
 
+```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"}
 
-```{r modelSchematics, fig.env="figure", fig.pos = "H", fig.align = "center", fig.width=2, fig.height=2, fig.cap = "Model predictions"}
-
-ggplot(mp, aes(x = support, y = prob, fill = support))+
-  geom_bar(stat= 'identity', position = position_dodge())+
+subplt2 <- ggplot(mp.both %>%
+                    mutate(Adjective = factor(u, 
+                                      levels = c("positive", "negative"))), 
+                  aes(x = Adjective, y = prob, fill = Adjective))+
+  geom_bar(stat= 'identity', position = position_dodge(), color = 'black')+
   scale_fill_brewer(palette = "Set1")+
-  theme_bw()
+  geom_hline(yintercept = 0.5, lty = 3)+
+  xlab("Inferred comparison class")+
+  ylab("P(Sub Class Interpretation)")+
+  ggtitle("RSA listener model")+
+  theme(text = element_text(size = 8))
 
-
+grid.arrange(subplt1, subplt2, nrow = 1)
 ```
 
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
@@ -228,7 +312,7 @@ We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
 
-In this experiment, we elicit the comparison class \textit{c} for different events in order to test our model predictions. We use a two-alternative forced choice paradigm to collect peoples' endorsements of a subordinate or superordinate comparison class.
+In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of. 
 
 ## Methods
 
@@ -238,7 +322,10 @@ In this experiment, we elicit the comparison class \textit{c} for different even
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited 300 participants from Amazon Mechanical Turk. Two participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. (Include simulation bit here with n = 300?)
+We recruited 264 participants from Amazon Mechanical Turk. 
+2 participants were excluded for failing the catch trial, leaving a total number of 262 participants.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. 
+The experiment took about five minutes and participants were compensated $0.50 for their work. 
 
 ```{r, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
@@ -274,35 +361,26 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales from which we derived these adjectives were height (e.g., \textit{tall basketball player}, \textit{short gymnast}), price (e.g., expensive toaster, cheap oven), temperature (e.g., \textit{warm day in Summer}, \textit{cold day in Winter}) time (e.g., \textit{long music video}, \textit{short movie}), and weight (e.g., \textit{light grape}, \textit{heavy watermelon}). Within each context sentence, an item was introduced. The items served as their own subordinate categories and the item triplets assigned to each scale (e.g., \textit{oven}, \textit{toaster}, \textit{dishwasher} in the scale price}) shared a common supercategory (e.g., \textit{kitchen appliances}).
+We tested our hypothesis using positive and negative form gradable adjectives describing 5 scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
+Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), produce (weight).
+For each superordinate category, we used 3 subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
+This resulted in 30 unique events (\{3 subordinate\} x \{5 scales\} x \{2 adjective forms (positive, negative)\}; see Table 1 for full listing).
 
 \mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
 
-Here are some notes about how to make tables:
-
-Number tables consecutively; place the table number and title (in
-10 point) above the table with one line space above the caption and
-one line space below it, as in Table 1. You may float
-tables to the top or bottom of a column, set wide tables across both
-columns.
-
-You can use the xtable function in the xtable package.
-
-```{r xtable, results="asis"}
-n <- 100
-x <- rnorm(n)
-y <- 2*x + rnorm(n)
-out <- lm(y ~ x)
-
-tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2),
-                      caption = "This table prints across one column.")
-
-print(tab1, type="latex", comment = F, table.placement = "H")
-```
-
 ### Procedure
 
-For each event, participants were given a context sentence to introduce the item (subordinate category), followed by a target sentence, which predicated a positive- or negative-form gradable adjective over the item. The participant was then asked if they believed that the target sentence was true of the subordinate or superordinate category. For example, one event read: "Gary finds a music video to watch online with his friend." "Gary says to his friend, "It's short."" "What do you think Gary meant?" The participant is then asked if they think that Gary meant that the music video was long relative to music videos (subordinate comparison class) or long relative to videos online (superordinate comparison class). Every participant saw a randomized and unique set of events and names. The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g. "Gary finds a music video to watch online with his friend.").
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., Gary says to his friend, 'It's short.'). 
+Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
+"The music video is short relative to music videos" (subordinate comparison class) or "The music video is short relative to things you watch online" (superordinate comparison class). 
+
+Half of participants completed trials where the superordinate category was previously introduced, possibly to make the superordinate paraphrase more likely.
+For example, "Gary is searching for things to watch online with their friend and finds a music video."
+
+Each participant saw 15 trials: one for each subordinate class paired with either the positive or negative form adjective. 
+Participants never rated the same subordinate class for both positive and negative form adjectives and back-to-back trials involved different scales to avoid fatigue.
+The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
 ## Results
 
@@ -319,7 +397,7 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-We recruited 100 participants from Amazon Mechanical Turk. Five participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated PAYMENT for their work. (Include simulation bit here for n = 100?)
+We recruited 100 participants from Amazon Mechanical Turk. Five participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated $0.50 for their work. (Include simulation bit here for n = 100?)
 
 ### Materials
 
