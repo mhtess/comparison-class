@@ -25,9 +25,7 @@ var meaning = function(utterance, state, threshold) {
   true
 }
 
-var classPrior = Infer({
-  model: function(){return uniformDraw(["sub", "super"])}
-});
+
 
 var round = function(x){
   return Math.round(x*10)/10
@@ -61,7 +59,8 @@ var ccData = dataFrame(utils.readCSV(dataPath + ccDataFile))
 var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"])
 
 
-var subCategories = _.uniq(_.pluck(vsData, "sub_category"));
+var subCategories0 = _.uniq(_.pluck(vsData, "sub_category"));
+var subCategories = subCategories0.slice(0, subCategories0.length - 1);
 
 var model = function(){
 
@@ -78,6 +77,12 @@ var model = function(){
 
   // var parameters = map(function(subCat){
   foreach(subCategories, function(subCat){
+
+      var subClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+
+      var classPrior = Infer({
+        model: function(){return flip(subClassPrior) ? "sub" : "super"}
+      });
 
       var mu = uniformDrift( { a: -2, b: 2, width:0.5}); // suncat mean is restricted to be +/- 2 stdev from supercat mean
       var sigma = uniformDrift({a:0, b:2, width: 0.3});
@@ -234,8 +239,9 @@ var model = function(){
       // }, ["positive","negative"])
     })
 
-    query.add([subCat, "mu"], mu)
-    query.add([subCat, "sigma"], sigma)
+    query.add([subCat, "mu"], mu);
+    query.add([subCat, "sigma"], sigma);
+    query.add([subCat, "subCatPrior"], subClassPrior);
     // return [[subCat, _.object([["mu", mu], ["sigma", sigma],
     // postPreds[0][0], postPreds[1][0],
     // postPreds[1][0], postPreds[1][1]])]]
@@ -250,16 +256,16 @@ var model = function(){
   return query
 }
 
-var mhiter = 10;
+var mhiter = 10000;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
   method: "incrementalMH",
   samples: mhiter, burn: burn,
-  verbose: T
-  // verboseLag: samples / 5
+  verbose: T,
+  verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-subcatprior-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "val"])
