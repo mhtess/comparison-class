@@ -41,8 +41,8 @@ output: cogsci2016::cogsci_paper
 rm(list=ls())
 
 # set local path for the repo
-#project.path <- "/Users/mht/Documents/research/comparison-class/"
-project.path <- "/media/michael/Data/Desktop/comparison-class/"
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+#project.path <- "/media/michael/Data/Desktop/comparison-class/"
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
@@ -294,15 +294,15 @@ subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+
 
 subplt2 <- ggplot(mp.both %>%
                     mutate(Adjective = factor(u, 
-                                      levels = c("positive", "negative"))), 
+                                      levels = c( "negative", "positive"))), 
                   aes(x = Adjective, y = prob, fill = Adjective))+
-  geom_bar(stat= 'identity', position = position_dodge(), color = 'black')+
+  geom_bar(stat= 'identity', position = position_dodge(), color = 'black', alpha = 0.8)+
   scale_fill_brewer(palette = "Set1")+
   geom_hline(yintercept = 0.5, lty = 3)+
   xlab("Inferred comparison class")+
   ylab("P(Sub Class Interpretation)")+
   ggtitle("RSA listener model")+
-  theme(text = element_text(size = 8))
+  theme(text = element_text(size = 10))
 
 grid.arrange(subplt1, subplt2, nrow = 1)
 ```
@@ -398,7 +398,7 @@ table1 <- xtable(table1)
 print(table1, type = "latex", comment = F, include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth")
 ```
 
-Half of participants completed trials where the superordinate category was previously introduced, possibly to make the superordinate paraphrase more likely.
+Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely.
 For example, "Gary is searching for things to watch online with their friend and finds a music video."
 
 Each participant saw 15 trials: one for each subordinate class paired with either the positive or negative form adjective. 
@@ -406,6 +406,66 @@ Participants never rated the same subordinate class for both positive and negati
 The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
 ## Results
+
+```{r cache=T} 
+data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+
+d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "relative to other buildings") %>%
+  select(workerid, pass)
+
+d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
+d.tidy <- left_join(d, d.catch) %>%
+  filter(pass) %>%
+  mutate(subResponse = ifelse(paraphrase == "super", 0, 1)) 
+
+df.summary <- d.tidy %>%
+  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
+  multi_boot_standard(column = "subResponse")
+```
+
+```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
+
+
+df.summary %>%
+  ungroup() %>%
+  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)]),
+         condition = factor(condition, levels = c("context","contextWithSuper"),
+                            labels=c("Bare", "Supercat mention"))) %>%
+  ggplot(., 
+         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(condition~degree, scales = 'free')+
+  ylim(0, 1) + 
+  theme(axis.text.x = element_text(angle = 90) )+
+  scale_fill_brewer(palette = 'Set1')+
+  ylab("Proportion Subordinate Comparison Class")+
+  xlab("Item category")+
+  theme(axis.title.y = element_text(size = 10),
+        strip.text = element_text(size = 8))
+```
+
+```{r glm1, cache = T}
+rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength + 
+                   (1 + form | degree) + 
+                   (1 + form | sub_category) + 
+                   (1 | workerid), 
+                 family = 'binomial')
+summ.rs.glmm <- summary(rs.glmm)
+```
+
+On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
+Figure 2 shows the proportion of participants choosing the subordinate category for each item.
+We see considerable variability both within- and across- scales.
+Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (i.e., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
+For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
+
+To assess the strength of this effect, we used a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low, high, or in the middle of the scale), and of critical theoretical interest, the interaction between these two form.
+In addition, we included in the model by-participant random effects of intercept, by-degree (temperature, weight, etc...) random effects of intercept and form, and by-subordinate category random effects of intercept and form to predict the probability with which participants would choose the subordinate category as the paraphrase.
+As predicted, \red{it's all significant}.
+
 
 # Experiment 2: Vague speakers
 
