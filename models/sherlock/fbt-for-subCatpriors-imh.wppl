@@ -52,7 +52,7 @@ var KL = function(p, q, supp) {
 // were it not for speaker optimality
 // this model could be run independently for each item
 
-// var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
+//var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
 var dataPath = "/home/mtessler/projects/comparison-class/data/"
 var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
@@ -223,10 +223,8 @@ var model = function(){
           observe(ccRSA, d);
         })
 
-        query.add("superSpeaker",
-          [form, Math.exp(superSpeakerProbs.score(1))])
-        query.add("superCC",
-          [form, Math.exp(ccRSA.score("super"))])
+        query.add(["superSpeaker",form], Math.exp(superSpeakerProbs.score(1)))
+        query.add(["superCC",form], Math.exp(ccRSA.score("super")))
 
         // return [
         //   ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
@@ -236,14 +234,16 @@ var model = function(){
       // }, ["positive","negative"])
     })
 
-    query.add(subCat, ["mu", mu])
-    query.add(subCat, ["sigma", sigma])
+    query.add([subCat, "mu"], mu)
+    query.add([subCat, "sigma"], sigma)
     // return [[subCat, _.object([["mu", mu], ["sigma", sigma],
     // postPreds[0][0], postPreds[1][0],
     // postPreds[1][0], postPreds[1][1]])]]
 
   })
 
+  query.add(["speakerOptimality","super"],alphas.s1.super)
+  query.add(["speakerOptimality","sub"],alphas.s1.cc)
   // }, subCategories)
 
   // return _.object(_.flatten(parameters, true));
@@ -254,7 +254,7 @@ var mhiter = 10;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
-  method: "MCMC",
+  method: "incrementalMH",
   samples: mhiter, burn: burn,
   verbose: T
   // verboseLag: samples / 5
