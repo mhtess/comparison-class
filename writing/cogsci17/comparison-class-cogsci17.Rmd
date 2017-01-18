@@ -3,6 +3,10 @@ title: "Cheap cars, expensive coffee: Comparison class understanding in vague la
 bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
+header-includes:
+  - \usepackage{tabularx}
+  - \usepackage{multicol}
+  - \usepackage{wrapfig}
 
 author-information: >
   \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
@@ -19,10 +23,7 @@ abstract:
     Quantative predictions of the model rely upon quantitative details of relevant prior distributions.
     We introduce a novel Bayesian data-analytic method for inferred participants' relevant prior knowledge by asking simple, natural language questions.
     "
-header-includes:
-  - \usepackage{tabularx}
-  - \usepackage{multicol}
-  - \usepackage{wrapfig}
+
   
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
@@ -435,7 +436,6 @@ For example, "Gary is searching for things to watch online with their friend and
 Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely.
 For example, "Gary is searching for things to watch online with their friend and finds a music video."
 
->>>>>>> 73a3e709928cd40b6be54ea432fc5b31e0d7c609
 Each participant saw 15 trials: one for each subordinate class paired with either the positive or negative form adjective. 
 Participants never rated the same subordinate class for both positive and negative form adjectives and back-to-back trials involved different scales to avoid fatigue.
 The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
