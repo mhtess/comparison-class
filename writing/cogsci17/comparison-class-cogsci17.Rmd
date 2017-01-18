@@ -19,7 +19,8 @@ abstract:
     Quantative predictions of the model rely upon quantitative details of relevant prior distributions.
     We introduce a novel Bayesian data-analytic method for inferred participants' relevant prior knowledge by asking simple, natural language questions.
     "
-
+header-includes:
+  - \usepackage{tabularx}
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
 
@@ -40,8 +41,8 @@ output: cogsci2016::cogsci_paper
 rm(list=ls())
 
 # set local path for the repo
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-#project.path <- "/media/michael/Data/Desktop/comparison-class/"
+#project.path <- "/Users/mht/Documents/research/comparison-class/"
+project.path <- "/media/michael/Data/Desktop/comparison-class/"
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
@@ -374,6 +375,28 @@ On each trial, participants were given a context sentence to introduce the subor
 This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., Gary says to his friend, 'It's short.'). 
 Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
 "The music video is short relative to music videos" (subordinate comparison class) or "The music video is short relative to things you watch online" (superordinate comparison class). 
+
+
+```{r xtable, results = "asis", fig.align = "center", fig.pos = "H"}
+height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+height_super = c("people")
+price_sub = c("dishwasher, oven, toaster")
+price_super = c("kitchen appliances")
+temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
+temperature_super = c("days of the year in Maryland")
+time_sub = c("video of a cute animal, music video, movie")
+time_super = c("things you watch online")
+weight_sub = c("apple, grape, watermelon")
+weight_super = c("produce")
+
+scales = c("Height", "Price", "Temperature", "Time", "Weight")
+sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
+super = c(height_super, price_super, temperature_super, time_super, weight_super)
+
+table1 = data.frame(Scale = scales, Sub = sub, Super = super)
+table1 <- xtable(table1)
+print(table1, type = "latex", comment = F, include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth")
+```
 
 Half of participants completed trials where the superordinate category was previously introduced, possibly to make the superordinate paraphrase more likely.
 For example, "Gary is searching for things to watch online with their friend and finds a music video."
