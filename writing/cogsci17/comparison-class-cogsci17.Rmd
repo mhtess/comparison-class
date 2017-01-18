@@ -53,8 +53,6 @@ knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", f
 ```
 
 
-
-
 ```{r, libraries}
 library(png)
 library(grid)
@@ -380,10 +378,8 @@ This was followed by an adjective sentence, which predicated a positive- or nega
 Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
 "The music video is short relative to music videos" (subordinate comparison class) or "The music video is short relative to things you watch online" (superordinate comparison class). 
 
-<<<<<<< HEAD
-```{r echo = F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
-=======
->>>>>>> 73a3e709928cd40b6be54ea432fc5b31e0d7c609
+```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+
 
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
 height_super = c("people")
@@ -405,34 +401,26 @@ table1 <- xtable(table1)
 print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
 ```
 
-<<<<<<< HEAD
 
-<!-- \begin{multicols}{2} -->
-<!-- \begin{table} -->
-<!-- \begin{wraptable}{l}{0.7\linewidth} -->
-<!-- \centering -->
-<!-- \begin{tabularx}{\textwidth}{lll} -->
-<!--   \hline -->
-<!-- Scale & Subordinate & Superordinate \\  -->
-<!--   \hline -->
-<!-- Height & professional basketball player, professional gymnast, professional soccer player & people \\  -->
-<!--   Price & dishwasher, oven, toaster & kitchen appliances \\  -->
-<!--   Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\  -->
-<!--   Time & video of a cute animal, music video, movie & things you watch online \\  -->
-<!--   Weight & apple, grape, watermelon & produce \\  -->
-<!--    \hline -->
-<!-- \end{tabularx} -->
-<!-- \end{wraptable} -->
-<!-- \end{table} -->
-<!-- \end{multicols} -->
+\begin{table*}
+\centering
+\begin{tabular}{lll}
+  \hline
+Scale & Subordinate & Superordinate \\
+  \hline
+Height & professional basketball player, professional gymnast, professional soccer player & people \\
+  Price & dishwasher, oven, toaster & kitchen appliances \\
+  Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\
+  Time & video of a cute animal, music video, movie & things you watch online \\
+  Weight & apple, grape, watermelon & produce \\
+   \hline
+\end{tabular}
+\caption{Items used in experiments}
+\label{tab:1}
+\end{table*}
 
 ### Procedure
 
-Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely.
-For example, "Gary is searching for things to watch online with their friend and finds a music video."
-
-
-=======
 Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely.
 For example, "Gary is searching for things to watch online with their friend and finds a music video."
 

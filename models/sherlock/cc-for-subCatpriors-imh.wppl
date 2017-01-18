@@ -224,8 +224,8 @@ var model = function(){
           observe(ccRSA, d);
         })
 
-        query.add(["superSpeaker",form], Math.exp(superSpeakerProbs.score(1)))
-        query.add(["superCC",form], Math.exp(ccRSA.score("super")))
+        query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
+        query.add([subCat, "superCC", form], Math.exp(ccRSA.score("super")))
 
         // return [
         //   ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
@@ -235,8 +235,11 @@ var model = function(){
       // }, ["positive","negative"])
     })
 
-    query.add([subCat, "mu"], mu)
-    query.add([subCat, "sigma"], sigma)
+    query.add([subCat, "mu", "NA"], mu);
+    query.add([subCat, "sigma", "NA"], sigma);
+    query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
+
+    // query.add([subCat, "subCatPrior", "NA"], subClassPrior);
     // return [[subCat, _.object([["mu", mu], ["sigma", sigma],
     // postPreds[0][0], postPreds[1][0],
     // postPreds[1][0], postPreds[1][1]])]]
@@ -244,14 +247,15 @@ var model = function(){
   })
 
   // query.add(["speakerOptimality","super"],alphas.s1.super)
-  query.add(["speakerOptimality","sub"],alphas.s1.cc)
+  query.add(["speakerOptimality","sub", "NA"],alphas.s1.cc)
   // }, subCategories)
 
   // return _.object(_.flatten(parameters, true));
   return query
 }
 
-var mhiter = 10000;
+var mhiter = 5000;
+
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
@@ -263,4 +267,4 @@ var posterior = Infer({
 
 var outfile = 'results/cc-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
-utils.writeQueryERP(posterior, outfile, ["cat", "param", "val"])
+utils.writeQueryERP(posterior, outfile, ["cat", "param", "form","val"])
