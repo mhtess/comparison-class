@@ -40,8 +40,8 @@ output: cogsci2016::cogsci_paper
 rm(list=ls())
 
 # set local path for the repo
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-#project.path <- "/media/michael/Data/Desktop/comparison-class/"
+#project.path <- "/Users/mht/Documents/research/comparison-class/"
+project.path <- "/media/michael/Data/Desktop/comparison-class/"
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
@@ -289,14 +289,26 @@ columns.
 You can use the xtable function in the xtable package.
 
 ```{r xtable, results="asis"}
-n <- 100
-x <- rnorm(n)
-y <- 2*x + rnorm(n)
-out <- lm(y ~ x)
 
-tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2),
-                      caption = "This table prints across one column.")
+#tab1 <- xtable::xtable(summary(out)$coef, digits=c(0, 2, 2, 1, 2),
+#                      caption = "This table prints across one column.")
 
+#print(tab1, type="latex", comment = F, table.placement = "H")
+
+scales = c("Height", "Price", "Temperature", "Time", "Weight")
+height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+height_super = c("people")
+price_sub = c("dishwasher, oven, toaster")
+price_super = c("kitchen appliances")
+temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
+temperature_super = c("days of the year in Maryland")
+time_sub = c("video of a cute animal, music video, movie")
+time_super = c("things you watch online")
+weight_sub = c("apple, grape, watermelon")
+weight_super = c("produce")
+
+f = data.frame(Scale )
+tab1 <- xtable(f)
 print(tab1, type="latex", comment = F, table.placement = "H")
 ```
 
