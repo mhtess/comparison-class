@@ -491,7 +491,8 @@ As predicted, \red{it's all significant}.
 
 # Experiment 2: Vague speakers
 
-In this experiment, we would like to elicit the priors over the subordinate categories. We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
+In this experiment, we would like to elicit the priors over the subordinate categories. 
+We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
