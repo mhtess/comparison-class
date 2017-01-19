@@ -5,6 +5,7 @@ Submiterator
 analysis/comparison-class.html
 writing/cogsci17/comparison-class-cogsci17.pdf
 writing/cogsci17/comparison-class-cogsci17.tex
+writing/cogsci17/comparison-class/
 writing/cogsci17/comparison-class-cogsci17_cache
 writing/cogsci17/figs
 mturk
@@ -21,3 +22,6 @@ analysis/fig/
 *.aux
 *.log
 *.out
+models/sherlock/node_modules/utils/node_modules/
+models/sherlock/results/trash/
+*.synctex.gz
