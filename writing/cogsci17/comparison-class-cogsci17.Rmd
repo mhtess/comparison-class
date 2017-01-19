@@ -502,7 +502,10 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-We recruited 100 participants from Amazon Mechanical Turk. Five participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated $0.50 for their work. (Include simulation bit here for n = 100?)
+We recruited 100 participants from Amazon Mechanical Turk.
+Five participants were excluded due to failing the catch trial.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+On average, the experiment took five minutes and participants were compensated $0.50 for their work. \mlb{Include simulation bit here for why we chose the number of participants we did?}
 
 ### Materials
 
@@ -510,8 +513,10 @@ We created 30 events using positive- and negative-form gradable adjectives from 
 
 ### Procedure
 
-For each event, participants see a context sentence where a subordinate item is presented. They are then asked if 
-For example, one event read: "Alicia picks up an apple." "Do you think the apple would be light relative to other produce?" 
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item. (e.g., *Do you think the apple would be light relative to other produce?*).
 
 ## Results
 
