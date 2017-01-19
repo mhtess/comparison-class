@@ -367,17 +367,17 @@ ggplot(simulations, aes(x = w))+
 We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
 Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), and produce (weight).
 For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
-This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms (positive and negative)\}; see Table 1 for full listing).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table 1 for full listing).
 
 ### Procedure
 
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Gary finds a music video to watch online with his friend.*).
 This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*). 
-Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
-\begin{enumerate*}
+Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{Make this an unordered list.}
+\begin{enumerate}
 \item "The music video is short relative to music videos" (subordinate comparison class) or
 \item "The music video is short relative to things you watch online" (superordinate comparison class). 
-\end{enumerate*}
+\end{enumerate}
 
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
