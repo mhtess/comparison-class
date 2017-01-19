@@ -178,23 +178,14 @@ A good cup of coffee in San Francisco is expensive *relative to* other cups of c
 
 There is substantial evidence that listeners and speakers are sensitive to the comparison class when interpreting and producing adjectives.
 @Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little" can depend on the physical context ("big" relative to other objects in a scene), objects' functional roles ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
-@Salt2012 show how what counts as "dark" or "tall" depends upon the statistics of the comparison class.
+@Solt2012 show how what counts as "dark" or "tall" depends upon the statistics of the comparison class.
 
-@Lassiter2013 demonstrated that listener's with relevant world knowledge (e.g., prices of coffee) can use pragmatic principles to arrive at a context-dependent meaning of a gradable adjective (e.g., expensive) assuming nothing in particular about what the adjective means out of context.
-They elaborate the Rational Speech Act theory [for a review, see @Goodman2016] such that the truth-conditional threshold for the adjective semantics (i.e., the point at which something becomes expensive) comes from an uninformed prior distribution: *a priori* anything could be expensive.
-Listeners arrive at context-sensitive meanings by integrating their prior beliefs (e.g., knowledge of what a cup of coffee should cost) with general principles of communication: be truthful, be informative.
-The result is vague language understanding that displays context-sensitivity and admits borderline cases [@Lassiter2013; @Lassiter2015].
-See @Qing2014 for a related but alternative derivation of a probabilistic pragmatics model of gradable adjective interpretation.
-\mht{this paragraph sucks}
-
-In @Lassiter2013's theory of adjective interpretation, the comparison class is implicit in the listener's prior belief distribution.
-But how does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
-This question is not just an issue for gradable adjectives but in fact for any vague language that can be modeled using a threshold semantics [e.g., generic language, see @Tessler2016]
-
-<!--
-The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
-
--->
+The statistics of the comparison class can be incorporated into rational models of communication to arrive at context-sensitive adjective interpretation.
+@Lassiter2013 elaborate the Rational Speech Act theory [for a review, see @Goodman2016] to accomodate adjectival interpretation by introducing an underspecified threshold criterion that is resolved using pragmatic reasoning.
+^[See @Qing2014 for a related but alternative derivation of a probabilistic pragmatics model of gradable adjective interpretation.]
+This model reasons about a comparison class, but doesn't have anything to say about where the comparison class comes from.
+The issue of the comparison class touches upon not only gradable adjectives, but in fact any language that can be modeled with an underspecified threshold criterion including generic language [@Tessler2016] and vague quantifiers [@Scholler2017].
+How does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
 
 In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
 We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
