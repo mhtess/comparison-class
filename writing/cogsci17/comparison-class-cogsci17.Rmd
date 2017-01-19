@@ -491,7 +491,8 @@ As predicted, \red{it's all significant}.
 
 # Experiment 2: Vague speakers
 
-In this experiment, we would like to elicit the priors over the subordinate categories. We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
+In this experiment, we would like to elicit the priors over the subordinate categories.
+We use a two-alternative forced choice paradigm to collect peoples' prior beliefs on the properties of certain items.
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
@@ -516,7 +517,8 @@ We created 30 events using positive- and negative-form gradable adjectives from 
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
-This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item. (e.g., *Do you think the apple would be light relative to other produce?*).
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item (e.g., *Do you think the apple would be light relative to other produce?*).
+The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html.
 
 ## Results
 
