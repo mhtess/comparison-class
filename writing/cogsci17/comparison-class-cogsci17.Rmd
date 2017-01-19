@@ -45,8 +45,8 @@ output: cogsci2016::cogsci_paper
 rm(list=ls())
 
 # set local path for the repo
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-#project.path <- "/media/michael/Data/Desktop/comparison-class/"
+#project.path <- "/Users/mht/Documents/research/comparison-class/"
+project.path <- "/media/michael/Data/Desktop/comparison-class/"
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
                       echo=F, warning=F, cache=F, message=F, sanitize = T)
@@ -231,88 +231,88 @@ Then, the listener $L_1$ tries to uncover the speaker's implicit comparison clas
 The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
 For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 
-```{r }
-## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program
+<!-- ```{r } -->
+<!-- ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program -->
 
-model.path <- paste(project.path,"/models/", sep = "")
+<!-- model.path <- paste(project.path,"/models/", sep = "") -->
 
-prior.params <- list(
-  sub = data.frame(mu = 1, sigma = 0.5), 
-  super = data.frame(mu = 0 , sigma = 1)
-)
+<!-- prior.params <- list( -->
+<!--   sub = data.frame(mu = 1, sigma = 0.5),  -->
+<!--   super = data.frame(mu = 0 , sigma = 1) -->
+<!-- ) -->
 
-mp.both <- data.frame()
+<!-- mp.both <- data.frame() -->
 
-for (u in c("positive", "negative")){
-  
-  mp <- webppl(
-    program_file = paste(model.path, "ccrsa.wppl", sep = ""),
-    data = list(utt = u, priorParams = prior.params), 
-    data_var = "paramsFromR",
-    packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") )
-  )
-  
-  mp.both <- bind_rows(mp %>% 
-    filter(support == "sub") %>%
-    mutate(u = u),
-    mp.both)
-  
-}
+<!-- for (u in c("positive", "negative")){ -->
+
+<!--   mp <- webppl( -->
+<!--     program_file = paste(model.path, "ccrsa.wppl", sep = ""), -->
+<!--     data = list(utt = u, priorParams = prior.params),  -->
+<!--     data_var = "paramsFromR", -->
+<!--     packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ) -->
+<!--   ) -->
+
+<!--   mp.both <- bind_rows(mp %>%  -->
+<!--     filter(support == "sub") %>% -->
+<!--     mutate(u = u), -->
+<!--     mp.both) -->
+
+<!-- } -->
 
 
-```
+<!-- ``` -->
 
-```{r priorModel}
-priorModel <- "
-var stateParams = {
-  sub: priorParamsFromR.sub[0],
-  super: priorParamsFromR.super[0]
-};
+<!-- ```{r priorModel} -->
+<!-- priorModel <- " -->
+<!-- var stateParams = { -->
+<!--   sub: priorParamsFromR.sub[0], -->
+<!--   super: priorParamsFromR.super[0] -->
+<!-- }; -->
 
-var priorModel = function(){
-  var subcat = gaussian(stateParams.sub);
-  var supercat = gaussian(stateParams.super);
-  return {subcat, supercat}
-}
+<!-- var priorModel = function(){ -->
+<!--   var subcat = gaussian(stateParams.sub); -->
+<!--   var supercat = gaussian(stateParams.super); -->
+<!--   return {subcat, supercat} -->
+<!-- } -->
 
-var prior = Infer({method: 'forward', samples: 10000, model: priorModel})
-prior
-"
+<!-- var prior = Infer({method: 'forward', samples: 10000, model: priorModel}) -->
+<!-- prior -->
+<!-- " -->
 
-prior.samples <- webppl(priorModel, 
-                        data = prior.params, 
-                        data_var = "priorParamsFromR")
+<!-- prior.samples <- webppl(priorModel,  -->
+<!--                         data = prior.params,  -->
+<!--                         data_var = "priorParamsFromR") -->
 
-prior.tidy <- prior.samples %>% 
-  rename(subordinate = value.subcat, superordinate = value.supercat) %>%
-  gather(key, val) %>%
-  mutate(class = factor(key, levels = c("subordinate", "superordinate")))
+<!-- prior.tidy <- prior.samples %>%  -->
+<!--   rename(subordinate = value.subcat, superordinate = value.supercat) %>% -->
+<!--   gather(key, val) %>% -->
+<!--   mutate(class = factor(key, levels = c("subordinate", "superordinate"))) -->
 
-subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+
-  geom_density(alpha = 0.8)+
-  scale_fill_brewer(palette = "Set2") +
-  #guides(fill = F)+
-  ggtitle("Priors on degree")+
-  xlab("Degree")+
-  ylab("Scaled probability")
-```
+<!-- subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+ -->
+<!--   geom_density(alpha = 0.8)+ -->
+<!--   scale_fill_brewer(palette = "Set2") + -->
+<!--   #guides(fill = F)+ -->
+<!--   ggtitle("Priors on degree")+ -->
+<!--   xlab("Degree")+ -->
+<!--   ylab("Scaled probability") -->
+<!-- ``` -->
 
-```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"}
+<!-- ```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"} -->
 
-subplt2 <- ggplot(mp.both %>%
-                    mutate(Adjective = factor(u, 
-                                      levels = c( "negative", "positive"))), 
-                  aes(x = Adjective, y = prob, fill = Adjective))+
-  geom_bar(stat= 'identity', position = position_dodge(), color = 'black', alpha = 0.8)+
-  scale_fill_brewer(palette = "Set1")+
-  geom_hline(yintercept = 0.5, lty = 3)+
-  xlab("Inferred comparison class")+
-  ylab("P(Sub Class Interpretation)")+
-  ggtitle("RSA listener model")+
-  theme(text = element_text(size = 10))
+<!-- subplt2 <- ggplot(mp.both %>% -->
+<!--                     mutate(Adjective = factor(u,  -->
+<!--                                       levels = c( "negative", "positive"))),  -->
+<!--                   aes(x = Adjective, y = prob, fill = Adjective))+ -->
+<!--   geom_bar(stat= 'identity', position = position_dodge(), color = 'black', alpha = 0.8)+ -->
+<!--   scale_fill_brewer(palette = "Set1")+ -->
+<!--   geom_hline(yintercept = 0.5, lty = 3)+ -->
+<!--   xlab("Inferred comparison class")+ -->
+<!--   ylab("P(Sub Class Interpretation)")+ -->
+<!--   ggtitle("RSA listener model")+ -->
+<!--   theme(text = element_text(size = 10)) -->
 
-grid.arrange(subplt1, subplt2, nrow = 1)
-```
+<!-- grid.arrange(subplt1, subplt2, nrow = 1) -->
+<!-- ``` -->
 
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
@@ -335,7 +335,7 @@ Note: We are collecting N = 150 for each experiment. Because each participant re
 -->
 
 We recruited 264 participants from Amazon Mechanical Turk. 
-2 participants were excluded for failing the catch trial, leaving a total number of 262 participants.
+Two participants were excluded for failing the catch trial, leaving a total number of 262 participants.
 Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. 
 The experiment took about five minutes and participants were compensated $0.50 for their work. 
 
@@ -373,19 +373,20 @@ ggplot(simulations, aes(x = w))+
 
 ### Materials
 
-We tested our hypothesis using positive and negative form gradable adjectives describing 5 scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
-Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), produce (weight).
-For each superordinate category, we used 3 subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
-This resulted in 30 unique events (\{3 subordinate\} x \{5 scales\} x \{2 adjective forms (positive, negative)\}; see Table 1 for full listing).
-
-\mht{We should make a nice table showing the degrees, sub ordinate classes, and super ordinate classes}.
+We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
+Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), and produce (weight).
+For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table 1 for full listing).
 
 ### Procedure
 
-On each trial, participants were given a context sentence to introduce the subordinate category (e.g. "Gary finds a music video to watch online with his friend.").
-This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., Gary says to his friend, 'It's short.'). 
-Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
-"The music video is short relative to music videos" (subordinate comparison class) or "The music video is short relative to things you watch online" (superordinate comparison class). 
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Gary finds a music video to watch online with his friend.*).
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*). 
+Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{Make this an unordered list.}
+\begin{enumerate}
+\item "The music video is short relative to music videos" (subordinate comparison class) or
+\item "The music video is short relative to things you watch online" (superordinate comparison class). 
+\end{enumerate}
 
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
@@ -479,14 +480,14 @@ df.summary %>%
         strip.text = element_text(size = 8))
 ```
 
-```{r glm1, cache = T}
-rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength + 
-                   (1 + form | degree) + 
-                   (1 + form | sub_category) + 
-                   (1 | workerid), 
-                 family = 'binomial')
-summ.rs.glmm <- summary(rs.glmm)
-```
+<!-- ```{r glm1, cache = T} -->
+<!-- rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength +  -->
+<!--                    (1 + form | degree) +  -->
+<!--                    (1 + form | sub_category) +  -->
+<!--                    (1 | workerid),  -->
+<!--                  family = 'binomial') -->
+<!-- summ.rs.glmm <- summary(rs.glmm) -->
+<!-- ``` -->
 
 On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
 Figure 2 shows the proportion of participants choosing the subordinate category for each item.
