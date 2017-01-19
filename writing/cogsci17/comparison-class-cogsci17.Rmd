@@ -15,13 +15,13 @@ author-information: >
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "Gradable adjectives (e.g., *expensive*) exhibit a sensitivity to context that poses a challenge to quantitative theories of language understanding.
-    In particular, the issue of how to derive a comparison class---the set of entities against which a target object is implicitly compared---in context has yet to be addressed by formal models of adjective interpretation.
-    We introduce a Rational Speech Act model that represents the implicit comparison class as a random variable inferred via pragmatic reasoning.
-    We find this model makes the prediction that the level of abstraction of the comparison class (e.g., expensive relative to *toasters* or *ovens* vs. *kitchen appliances*) is expected to be modulated by the properties of the target object under consideration (e.g., a toaster or oven).
-    We test this prediction using a paraphrase experiment.
-    Quantative predictions of the model rely upon quantitative details of relevant prior distributions.
-    We introduce a novel Bayesian data-analytic method for inferred participants' relevant prior knowledge by asking simple, natural language questions.
+    "Vague language often communicates relative meanings.
+    For example, the gradable adjective *expensive* conveys that the price of some object is high relative to some comparison class---a set of entities against which the target object is implicitly compared.
+    Comparison classes are known to be central to adjectival interpretation and even have been used to explain other kinds of vague language (e.g., generic language).
+    Yet little is known about where comparison classes come from.
+    Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge.
+    First, we introduce a Rational Speech Act model that makes a novel prediction about the level of abstraction of the comparison class (e.g., expensive relative to a subordinate vs. superordinate class) and validate this prediction using a paraphrase experiment.
+    Quantative predictions of the model rely upon the structure of relevant world knowledge, which we elicit using a novel technique that avoids participants having to esimate quantities.
     "
 
   
@@ -166,14 +166,19 @@ This will alleviate the overparameterization problem and is, in general, a new w
 If you're going to San Francisco, be sure to set aside a few extra dollars for coffee.
 It's good, but expensive.
 By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way.
-This may seem obvious, and yet adjectives like *expensive* derive their relatively precise meanings from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
-This *comparison class* is not often explicitly stated, bur rather is latent in the discourse.
+This may seem obvious, and yet out-of-context, gradable adjectives like *expensive* mean next to nothing. 
+They result in relatively precise interpretations from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
+This *comparison class* is not often explicitly stated, but rather is latent in the discourse.
 
 Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
 For example, a good cup of coffee is expensive if its price is greater than some threshold number of dollars.
 The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities.
 A good cup of coffee in San Francisco is expensive *relative to* other cups of coffee and not *relative to* other things you could buy in San Francisco (including, e.g., a Tesla automobile).
+
+There is substantial evidence that listeners and speakers are sensitive to the comparison class when interpreting and producing adjectives.
+@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little" can depend on the physical context ("big" relative to other objects in a scene), objects' functional roles ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
+@Salt2012 show how what counts as "dark" or "tall" depends upon the statistics of the comparison class.
 
 @Lassiter2013 demonstrated that listener's with relevant world knowledge (e.g., prices of coffee) can use pragmatic principles to arrive at a context-dependent meaning of a gradable adjective (e.g., expensive) assuming nothing in particular about what the adjective means out of context.
 They elaborate the Rational Speech Act theory [for a review, see @Goodman2016] such that the truth-conditional threshold for the adjective semantics (i.e., the point at which something becomes expensive) comes from an uninformed prior distribution: *a priori* anything could be expensive.
@@ -184,11 +189,11 @@ See @Qing2014 for a related but alternative derivation of a probabilistic pragma
 
 In @Lassiter2013's theory of adjective interpretation, the comparison class is implicit in the listener's prior belief distribution.
 But how does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
-This question is not just an issue for gradaable adjectives but in fact for any vague language that can be modeled using a threshold semantics [e.g., generic language, see @Tessler2016]
+This question is not just an issue for gradable adjectives but in fact for any vague language that can be modeled using a threshold semantics [e.g., generic language, see @Tessler2016]
 
 <!--
 The comparison class can depend upon the target object (as in the examples above) as well as the physical context or the Question Under Discussion.
-@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little," finding the appropriate object whether the object is in a physical context ("big" relative to other objects in a scene), a functional context ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
+
 -->
 
 In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
@@ -308,6 +313,10 @@ subplt2 <- ggplot(mp.both %>%
 
 grid.arrange(subplt1, subplt2, nrow = 1)
 ```
+
+<!--
+Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
+-->
 
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
