@@ -182,11 +182,10 @@ There is substantial evidence that listeners and speakers are sensitive to the c
 @Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little" can depend on the physical context ("big" relative to other objects in a scene), objects' functional roles ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
 @Solt2012 show how what counts as "dark" or "tall" depends upon the statistics of the comparison class.
 
-The statistics of the comparison class can be incorporated into rational models of communication to arrive at context-sensitive adjective interpretation.
-@Lassiter2013 elaborate the Rational Speech Act theory [for a review, see @Goodman2016] to accomodate adjectival interpretation by introducing an underspecified threshold criterion that is resolved using pragmatic reasoning.
-^[See @Qing2014 for a related but alternative derivation of a probabilistic pragmatics model of gradable adjective interpretation.]
-This model reasons about a comparison class, but doesn't have anything to say about where the comparison class comes from.
-The issue of the comparison class touches upon not only gradable adjectives, but in fact any language that can be modeled with an underspecified threshold criterion including generic language [@Tessler2016] and vague quantifiers [@Scholler2017].
+The comparison class cam be thought of as a probability distribution over degrees on a scale [@Lassiter2013; @Qing2014].
+A probabilistic model of pragmatic reasoning [e.g., the Rational Speech Act model; @Goodman2016] can use a standard threshold semantics and reason about the comparison class to arrive at context-sensitive adjective interpretation.
+Such a model reasons about a comparison class, but doesn't have anything to say about where the comparison class comes from.
+The issue of the comparison class touches upon not only gradable adjectives, but in fact any language that can be modeled with an underspecified threshold criterion including generic language [@Tessler2016] and vague quantifiers [@SchollerFranke2015].
 How does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
 
 In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
@@ -224,88 +223,224 @@ Then, the listener $L_1$ tries to uncover the speaker's implicit comparison clas
 The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
 For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 
-<!-- ```{r } -->
-<!-- ## to do, pass in the prior params and positive / negative form adjective as arguments to webppl program -->
 
-<!-- model.path <- paste(project.path,"/models/", sep = "") -->
+```{r wpplHelpers}
+webpplHelpers <- '
+var round = function(x){
+  return Math.round(x*10)/10
+}
 
-<!-- prior.params <- list( -->
-<!--   sub = data.frame(mu = 1, sigma = 0.5),  -->
-<!--   super = data.frame(mu = 0 , sigma = 1) -->
-<!-- ) -->
+var distProbs = function(dist, supp) {
+  return map(function(s) {
+    return Math.exp(dist.score(s))
+  }, supp)
+}
 
-<!-- mp.both <- data.frame() -->
+var KL = function(p, q, supp) {
+  var P = distProbs(p, supp), Q = distProbs(q, supp);
+  var diverge = function(xp,xq) {
+    return xp == 0 ? 0 : (xp * Math.log(xp / xq) );
+  };
+  return sum(map2(diverge,P,Q));
+};
+'
+```
 
-<!-- for (u in c("positive", "negative")){ -->
+```{r rsaPrior}
+priorForRSA <- '
+var binParam = 5;
 
-<!--   mp <- webppl( -->
-<!--     program_file = paste(model.path, "ccrsa.wppl", sep = ""), -->
-<!--     data = list(utt = u, priorParams = prior.params),  -->
-<!--     data_var = "paramsFromR", -->
-<!--     packages = c( paste(model.path, "node_modules/adjectiveRSA", sep = "") ) -->
-<!--   ) -->
+var stateParams = {
+  sub: paramsFromR.priorParams.sub[0],
+  super: paramsFromR.priorParams.super[0]
+};
 
-<!--   mp.both <- bind_rows(mp %>%  -->
-<!--     filter(support == "sub") %>% -->
-<!--     mutate(u = u), -->
-<!--     mp.both) -->
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 2 * stateParams.super.sigma,
+          stateParams.super.mu + 2 * stateParams.super.sigma,
+          stateParams.super.sigma/binParam)
+);
 
-<!-- } -->
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s))+
+    Number.EPSILON
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s))+
+    Number.EPSILON
+  }, stateVals)
+};
+
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){ return categorical({ vs: stateVals, ps: stateProbs.super}) }
+  })
+};
+'
+```
+
+```{r rsaLanguage}
+languageForRSA <- '
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+var utterances = {
+  positive: ["positiveAdjective", "silence"],
+  negative: ["negativeAdjective", "silence"]
+};
+
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(utterances[form]) }
+  })
+});
+
+var meaning = function(utterance, state, threshold) {
+  utterance == "positiveAdjective" ? state > threshold ? flip(0.99) : flip(0.01) :
+  utterance == "negativeAdjective" ? state < threshold ? flip(0.99) : flip(0.01) :
+  true
+}
+'
+```
 
 
-<!-- ``` -->
+```{r ccRSA}
+ccrsa <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
 
-<!-- ```{r priorModel} -->
-<!-- priorModel <- " -->
-<!-- var stateParams = { -->
-<!--   sub: priorParamsFromR.sub[0], -->
-<!--   super: priorParamsFromR.super[0] -->
-<!-- }; -->
+var alphas = {s1: 3, s2: 1};
 
-<!-- var priorModel = function(){ -->
-<!--   var subcat = gaussian(stateParams.sub); -->
-<!--   var supercat = gaussian(stateParams.super); -->
-<!--   return {subcat, supercat} -->
-<!-- } -->
+var literalListener = cache(function(utterance, threshold, comparisonClass) {
+  Infer({model: function(){
+    var state = sample(statePrior[comparisonClass]);
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }})
+})
 
-<!-- var prior = Infer({method: 'forward', samples: 10000, model: priorModel}) -->
-<!-- prior -->
-<!-- " -->
 
-<!-- prior.samples <- webppl(priorModel,  -->
-<!--                         data = prior.params,  -->
-<!--                         data_var = "priorParamsFromR") -->
+var speaker1 = cache(function(state, threshold, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, threshold, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+})
 
-<!-- prior.tidy <- prior.samples %>%  -->
-<!--   rename(subordinate = value.subcat, superordinate = value.supercat) %>% -->
-<!--   gather(key, val) %>% -->
-<!--   mutate(class = factor(key, levels = c("subordinate", "superordinate"))) -->
+var pragmaticListener = function(form) {
+  Infer({model: function(){
+    var utterance = form + "Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var threshold = sample(thresholdPrior(form));
+    var S1 = speaker1(state, threshold, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
 
-<!-- subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+ -->
-<!--   geom_density(alpha = 0.8)+ -->
-<!--   scale_fill_brewer(palette = "Set2") + -->
-<!--   #guides(fill = F)+ -->
-<!--   ggtitle("Priors on degree")+ -->
-<!--   xlab("Degree")+ -->
-<!--   ylab("Scaled probability") -->
-<!-- ``` -->
+pragmaticListener(paramsFromR.utt[0])
+'
+```
 
-<!-- ```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"} -->
 
-<!-- subplt2 <- ggplot(mp.both %>% -->
-<!--                     mutate(Adjective = factor(u,  -->
-<!--                                       levels = c( "negative", "positive"))),  -->
-<!--                   aes(x = Adjective, y = prob, fill = Adjective))+ -->
-<!--   geom_bar(stat= 'identity', position = position_dodge(), color = 'black', alpha = 0.8)+ -->
-<!--   scale_fill_brewer(palette = "Set1")+ -->
-<!--   geom_hline(yintercept = 0.5, lty = 3)+ -->
-<!--   xlab("Inferred comparison class")+ -->
-<!--   ylab("P(Sub Class Interpretation)")+ -->
-<!--   ggtitle("RSA listener model")+ -->
-<!--   theme(text = element_text(size = 10)) -->
+```{r }
+prior.params <- list(
+  sub = data.frame(mu = 1, sigma = 0.5),
+  super = data.frame(mu = 0 , sigma = 1)
+)
 
-<!-- grid.arrange(subplt1, subplt2, nrow = 1) -->
-<!-- ``` -->
+mp.both <- data.frame()
+
+fullModel <- paste(webpplHelpers, priorForRSA, languageForRSA, ccrsa, sep = "\n")
+for (u in c("positive", "negative")){
+  
+  mp <- webppl(
+    program_code = fullModel,
+    data = list(utt = u, priorParams = prior.params),
+    data_var = "paramsFromR"
+  )
+  
+  mp.both <- bind_rows(mp %>%
+    filter(support == "sub") %>%
+    mutate(u = u),
+    mp.both)
+}
+```
+
+```{r priorModel}
+priorModel <- "
+var stateParams = {
+  sub: priorParamsFromR.sub[0],
+  super: priorParamsFromR.super[0]
+};
+
+var priorModel = function(){
+  var subcat = gaussian(stateParams.sub);
+  var supercat = gaussian(stateParams.super);
+  return {subcat, supercat}
+}
+
+var prior = Infer({method: 'forward', samples: 10000, model: priorModel})
+prior
+"
+
+prior.samples <- webppl(priorModel,
+                        data = prior.params,
+                        data_var = "priorParamsFromR")
+
+prior.tidy <- prior.samples %>%
+  rename(subordinate = value.subcat, superordinate = value.supercat) %>%
+  gather(key, val) %>%
+  mutate(class = factor(key, levels = c("subordinate", "superordinate")))
+
+subplt1 <- ggplot(prior.tidy, aes(x = val, y=..scaled.., fill = class))+
+  geom_density(alpha = 0.8)+
+  scale_fill_brewer(palette = "Set2") +
+  #guides(fill = F)+
+  ggtitle("Priors on degree")+
+  xlab("Degree")+
+  ylab("Scaled probability")
+```
+
+```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"}
+
+subplt2 <- ggplot(mp.both %>%
+                    mutate(Adjective = factor(u,
+                                      levels = c( "negative", "positive"))),
+                  aes(x = Adjective, y = prob, fill = Adjective))+
+  geom_bar(stat= 'identity', position = position_dodge(), color = 'black', alpha = 0.8)+
+  scale_fill_brewer(palette = "Set1")+
+  geom_hline(yintercept = 0.5, lty = 3)+
+  xlab("Inferred comparison class")+
+  ylab("P(Sub Class Interpretation)")+
+  ggtitle("RSA listener model")+
+  theme(text = element_text(size = 10))
+
+grid.arrange(subplt1, subplt2, nrow = 1)
+```
 
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
