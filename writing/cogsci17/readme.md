@@ -9,3 +9,8 @@
 + [`mhtess/rwebppl`](https://github.com/mhtess/rwebppl) -  running WebPPL
 + `tidyverse` -  data munging, plotting
 + `coda` -  Bayesian credible interval from samples
+
+## Useful rmarkdown writing trips
+
++ Collapse all: Option + Shift + O
++ Expand all: Shift + Option + Shift + O
