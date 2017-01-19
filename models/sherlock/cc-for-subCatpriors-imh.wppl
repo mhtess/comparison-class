@@ -82,17 +82,22 @@ var model = function(){
 
   foreach(degrees, function(degree){
     var subCats = _.uniq(_.pluck(_.where(vsData, {degree:degree}), "sub_category"))
-    var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-
-    var classPrior = Infer({
-      model: function(){return flip(superClassPrior) ? "super": "sub"}
-    });
+    // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+    // var classPrior = Infer({
+    //   model: function(){return flip(superClassPrior) ? "super": "sub"}
+    // });
 
   // var parameters = map(function(subCat){
     foreach(subCats, function(subCat){
 
       var mu = uniformDrift( { a: -3, b: 3, width:0.5});
       var sigma = uniformDrift({a:0, b:3, width: 0.3});
+
+      var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+
+      var classPrior = Infer({
+        model: function(){return flip(superClassPrior) ? "super": "sub"}
+      });
 
       var binParam = 5;
 
@@ -243,11 +248,11 @@ var model = function(){
       query.add([subCat, "sigma", "NA"], sigma);
       query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
 
-      // query.add([subCat, "superCatPrior", "NA"], superClassPrior);
+      query.add([subCat, "superCatPrior", "NA"], superClassPrior);
 
       })
 
-      query.add([degree, "superCatPrior", "NA"], superClassPrior)
+      // query.add([degree, "superCatPrior", "NA"], superClassPrior)
     })
 
   query.add(["speakerOptimality","super", "NA"],alphas.s1.super)
@@ -269,6 +274,6 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/cc-subcatpriorByDegree-mcmc-'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/cc-subcatpriorByCat-mcmc-'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form","val"])
