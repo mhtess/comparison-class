@@ -62,6 +62,9 @@ var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"])
 var subCategories0 = _.uniq(_.pluck(vsData, "sub_category"));
 var subCategories = subCategories0.slice(0, subCategories0.length - 1);
 
+var degrees0 = _.uniq(_.pluck(vsData, "degree"));
+var degrees = degrees0.slice(0, degrees0.length - 1);
+
 var model = function(){
 
   // should probably be an s1 for each task
@@ -75,17 +78,19 @@ var model = function(){
     // }
   };
 
+  foreach(degrees, function(degree){
+    var subCats = _.uniq(_.pluck(_.where(vsData, {degree:degree}), "sub_category"))
+    var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+
+    var classPrior = Infer({
+      model: function(){return flip(superClassPrior) ? "super": "sub"}
+    });
+
   // var parameters = map(function(subCat){
-  foreach(subCategories, function(subCat){
+    foreach(subCats, function(subCat){
 
-      var subClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-
-      var classPrior = Infer({
-        model: function(){return flip(subClassPrior) ? "sub" : "super"}
-      });
-
-      var mu = uniformDrift( { a: -2, b: 2, width:0.5}); // suncat mean is restricted to be +/- 2 stdev from supercat mean
-      var sigma = uniformDrift({a:0, b:2, width: 0.3});
+      var mu = uniformDrift( { a: -3, b: 3, width:0.5});
+      var sigma = uniformDrift({a:0, b:3, width: 0.3});
 
       var binParam = 5;
 
@@ -96,8 +101,8 @@ var model = function(){
 
       var stateVals = map(
         round,
-        _.range(stateParams.super.mu - 2.5 * stateParams.super.sigma,
-                stateParams.super.mu + 2.5 * stateParams.super.sigma,
+        _.range(stateParams.super.mu - 3 * stateParams.super.sigma,
+                stateParams.super.mu + 3 * stateParams.super.sigma,
                 stateParams.super.sigma/binParam)
       );
 
@@ -205,7 +210,6 @@ var model = function(){
       ////////////////////////////////////////
 
       foreach(["positive","negative"], function(form){
-        // var postPreds = map(function(form){
 
         var d_subcat_superSpeaker = _.pluck(
           _.where(vsData, {sub_category: subCat, form:form}),
@@ -217,7 +221,7 @@ var model = function(){
         var superSpeakerProbs = speaker2_super(form);
 
         mapData({data:d_subcat_superSpeaker}, function(d){
-	  // console.log("superSpeaker = " + superSpeakerProbs.score(d))
+	         // console.log("superSpeaker = " + superSpeakerProbs.score(d))
           observe(superSpeakerProbs, d)
         })
 
@@ -231,24 +235,18 @@ var model = function(){
         query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
         query.add([subCat, "superCC", form], Math.exp(ccRSA.score("super")))
 
-        // return [
-        //   ["predictive_superSpeaker_" + form, Math.exp(superSpeakerProbs.score(true))],
-        //   ["predictive_superCC_" + form, Math.exp(ccRSA.score("super"))]
-        // ]
+      })
 
-      // }, ["positive","negative"])
+      query.add([subCat, "mu", "NA"], mu);
+      query.add([subCat, "sigma", "NA"], sigma);
+      query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
+
+      // query.add([subCat, "subCatPrior", "NA"], subClassPrior);
+
+      })
+
+      query.add([degree, "subCatPrior", "NA"], superClassPrior)
     })
-
-    query.add([subCat, "mu", "NA"], mu);
-    query.add([subCat, "sigma", "NA"], sigma);
-    query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
-
-    query.add([subCat, "subCatPrior", "NA"], subClassPrior);
-    // return [[subCat, _.object([["mu", mu], ["sigma", sigma],
-    // postPreds[0][0], postPreds[1][0],
-    // postPreds[1][0], postPreds[1][1]])]]
-
-  })
 
   query.add(["speakerOptimality","super", "NA"],alphas.s1.super)
   query.add(["speakerOptimality","sub", "NA"],alphas.s1.cc)
@@ -258,7 +256,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 5000;
+var mhiter = 30;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
@@ -268,6 +266,6 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-subcatprior-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-subcatpriorByDegree-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
