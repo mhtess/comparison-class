@@ -24,7 +24,7 @@ abstract:
     Quantative predictions of the model rely upon the structure of relevant world knowledge, which we elicit using a novel technique that avoids participants having to estimate quantities.
     "
 
-  
+
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
 
@@ -50,7 +50,7 @@ if (grepl("michael", getwd())) {
 } else {
   project.path <- "/Users/mht/Documents/research/comparison-class/"
 }
-  
+
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
 ```
 
@@ -93,7 +93,7 @@ theme_paper <- function(base_size = 12, base_family = "Helvetica") {
                                       margin = margin(2,1,3,1), debug = FALSE),
     axis.text =          element_text(size = 12, colour = "black", margin=margin(1,1,1,1)),
     strip.text =         element_text(size = 12, colour = "black", margin=margin(1,1,4,1)),
-    
+
     axis.line =          element_blank(),
     axis.ticks =         element_line(colour = "black", size = 0.2),
     axis.title =         element_text(colour = "black", size=16),
@@ -113,7 +113,7 @@ theme_paper <- function(base_size = 12, base_family = "Helvetica") {
     legend.direction =   "vertical",
     legend.justification = "center",
     legend.box =         NULL,
-    
+
     panel.background =   element_rect(fill = "white", colour = NA),
     panel.border =       element_rect(fill = NA, colour = "black"),
     panel.grid.major =   element_line(colour = "white", size = 0.2),
@@ -123,11 +123,11 @@ theme_paper <- function(base_size = 12, base_family = "Helvetica") {
     strip.background =   element_rect(fill = "white", colour = "white"),
     strip.text.x =       element_text(),
     strip.text.y =       element_text(angle = -90),
-    
+
     plot.background =    element_rect(colour = "white", fill = "white"),
     plot.title =         element_text(size = rel(1.2)),
     plot.margin =        unit(c(1, 1, 0.5, 0.5), "lines"),
-    
+
     complete = TRUE
   )
 }
@@ -168,7 +168,7 @@ This will alleviate the overparameterization problem and is, in general, a new w
 If you're going to San Francisco, be sure to set aside a few extra dollars for coffee.
 It's good, but expensive.
 By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way.
-This may seem obvious, and yet out-of-context, gradable adjectives like *expensive* mean next to nothing. 
+This may seem obvious, and yet out-of-context, gradable adjectives like *expensive* mean next to nothing.
 They result in relatively precise interpretations from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
 This *comparison class* is not often explicitly stated, but rather is latent in the discourse.
 
@@ -317,7 +317,7 @@ We test these predictions in our first experiment.
 
 # Experiment 1: Comparison class inference
 
-In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of. 
+In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of.
 
 ## Methods
 
@@ -327,10 +327,10 @@ In this experiment, we test whether the level of abstractness of the comparison 
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 
-We recruited 264 participants from Amazon Mechanical Turk. 
+We recruited 264 participants from Amazon Mechanical Turk.
 Two participants were excluded for failing the catch trial, leaving a total number of 262 participants.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. 
-The experiment took about five minutes and participants were compensated $0.50 for their work. 
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+The experiment took about five minutes and participants were compensated $0.50 for their work.
 
 ```{r, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
@@ -379,7 +379,7 @@ This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Gary finds a music video to watch online with his friend.*).
-This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*). 
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*).
 Participants were asked a question of the form "What do you think Gary meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{change the font to match "DO ACTION"/"DONE ACTION" text in habituals paper}
 \begin{itemize}
 \item The SUBORDINATE CATEGORY is ADJECTIVE relative to SUBORDINATE CATEGORY (e.g., \textit{The music video is short relative to music videos})
@@ -430,18 +430,18 @@ Height & professional basketball player, professional gymnast, professional socc
 
 ## Results
 
-```{r cache=T} 
+```{r cache=T}
 data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
 
 d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
-d.catch <- d.catch %>% 
+d.catch <- d.catch %>%
   mutate(pass = response == "relative to other buildings") %>%
   select(workerid, pass)
 
 d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
 d.tidy <- left_join(d, d.catch) %>%
   filter(pass) %>%
-  mutate(subResponse = ifelse(paraphrase == "super", 0, 1)) 
+  mutate(subResponse = ifelse(paraphrase == "super", 0, 1))
 
 df.summary <- d.tidy %>%
   group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
@@ -456,12 +456,12 @@ df.summary %>%
   mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)]),
          condition = factor(condition, levels = c("context","contextWithSuper"),
                             labels=c("Bare", "Supercat mention"))) %>%
-  ggplot(., 
+  ggplot(.,
          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
   geom_errorbar(position = position_dodge())+
   facet_grid(condition~degree, scales = 'free')+
-  ylim(0, 1) + 
+  ylim(0, 1) +
   theme(axis.text.x = element_text(angle = 90) )+
   scale_fill_brewer(palette = 'Set1')+
   ylab("Proportion Subordinate Comparison Class")+
@@ -491,8 +491,9 @@ As predicted, \red{it's all significant}.
 
 # Experiment 2: Vague speakers
 
-In this experiment, we would like to elicit the priors over the subordinate categories. 
+In this experiment, we would like to elicit the priors over the subordinate categories.
 We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
+
 
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
@@ -503,7 +504,10 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 
 ### Participants
 
-We recruited 100 participants from Amazon Mechanical Turk. Five participants were excluded due to failing the catch trial. Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. On average, the experiment took five minutes and participants were compensated $0.50 for their work. (Include simulation bit here for n = 100?)
+We recruited 100 participants from Amazon Mechanical Turk.
+Five participants were excluded due to failing the catch trial.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+On average, the experiment took five minutes and participants were compensated $0.50 for their work. \mlb{Include simulation bit here for why we chose the number of participants we did?}
 
 ### Materials
 
@@ -511,8 +515,11 @@ We created 30 events using positive- and negative-form gradable adjectives from 
 
 ### Procedure
 
-For each event, participants see a context sentence where a subordinate item is presented. They are then asked if 
-For example, one event read: "Alicia picks up an apple." "Do you think the apple would be light relative to other produce?" 
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
+This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item (e.g., *Do you think the apple would be light relative to other produce?*).
+The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html.
 
 ## Results
 
