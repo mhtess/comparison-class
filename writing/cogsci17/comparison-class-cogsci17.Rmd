@@ -47,8 +47,10 @@ rm(list=ls())
 # set local path for the repo
 if (grepl("michael", getwd())) {
   project.path <- "/media/michael/Data/Desktop/comparison-class/"
-} else {
+} else if (grepl("mht", getwd())) {
   project.path <- "/Users/mht/Documents/research/comparison-class/"
+} else {
+  project.path <- "Noah's path"
 }
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
