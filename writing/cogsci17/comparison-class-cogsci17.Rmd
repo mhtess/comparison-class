@@ -45,11 +45,13 @@ output: cogsci2016::cogsci_paper
 rm(list=ls())
 
 # set local path for the repo
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-#project.path <- "/media/michael/Data/Desktop/comparison-class/"
-
-knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop = F, fig.pos = "tb", fig.path='figs/',
-                      echo=F, warning=F, cache=F, message=F, sanitize = T)
+if (grepl("michael", getwd())) {
+  project.path <- "/media/michael/Data/Desktop/comparison-class/"
+} else {
+  project.path <- "/Users/mht/Documents/research/comparison-class/"
+}
+  
+knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
 ```
 
 
@@ -380,13 +382,19 @@ This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x
 
 ### Procedure
 
+<!-- Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely. -->
+<!-- For example, "Gary is searching for things to watch online with their friend and finds a music video." -->
+
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Gary finds a music video to watch online with his friend.*).
 This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*). 
-Participants were asked: "What do you think Gary meant?" and given two options rephrasing the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{Make this an unordered list.}
-\begin{enumerate}
-\item "The music video is short relative to music videos" (subordinate comparison class) or
-\item "The music video is short relative to things you watch online" (superordinate comparison class). 
-\end{enumerate}
+Participants were asked a question of the form "What do you think Gary meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{change the font to match "DO ACTION"/"DONE ACTION" text in habituals paper}
+\begin{itemize}
+\item The SUBORDINATE CATEGORY is ADJECTIVE relative to SUBORDINATE CATEGORY (e.g., \textit{The music video is short relative to music videos})
+\item The SUBORDINATE CATEGORY is ADJECTIVE relative to SUPERORDINATE CATEGORY (e.g., \textit{The music video is short relative to things you watch online})
+\end{itemize}
+\noindent The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
@@ -428,15 +436,6 @@ Height & professional basketball player, professional gymnast, professional socc
 \caption{Items used in experiments}
 \label{tab:1}
 \end{table*}
-
-### Procedure
-
-Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely.
-For example, "Gary is searching for things to watch online with their friend and finds a music video."
-
-Each participant saw 15 trials: one for each subordinate class paired with either the positive or negative form adjective. 
-Participants never rated the same subordinate class for both positive and negative form adjectives and back-to-back trials involved different scales to avoid fatigue.
-The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
 ## Results
 
@@ -498,7 +497,6 @@ For items that are expected to fall low on the scale (gymnasts, grapes, Winter d
 To assess the strength of this effect, we used a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low, high, or in the middle of the scale), and of critical theoretical interest, the interaction between these two form.
 In addition, we included in the model by-participant random effects of intercept, by-degree (temperature, weight, etc...) random effects of intercept and form, and by-subordinate category random effects of intercept and form to predict the probability with which participants would choose the subordinate category as the paraphrase.
 As predicted, \red{it's all significant}.
-
 
 # Experiment 2: Vague speakers
 
