@@ -139,9 +139,31 @@ theme_set(theme_classic())
 
 # Introduction
 
+When it's warm outside it's still useful to know whether it's July or January
+A warm day in July could be 80 degrees while a warm day in January might not above 60.
+The predicate "warm" is vague, in the sense that there are borderline cases of being warm, interlocutors can faultlessly disagree as to whether or not it is warm, and what it means to be warm is relative to a (often contextually-specified) relevant *comparison class*.
+
+Comparison classes are uncontroversial in the study of vague language. 
+Even, 2 or 3 year olds understand that the words "big" and "little" depend upon the context: 
+An object can be "big" relative to other objects in a scene (i.e., the physical context), 
+an object can be "big" relative to the size it should be for completing its intended function, 
+or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
+Adult judgments of the felicity for gradable adjectives like "dark" or "tall" in adults depend upon the statistics of the comparison class [@Solt2012].
+What is less well understood is how a comparison class becomes contextually-salient. 
+The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
+A warm day in January could be warm for the time of year (i.e., *warm relative to other days in January*^{
+also, *in this location*, where the speaker is]
+or it could just be warm (i.e., *warm relative to any day of the year*)
+
+
+We propose that the selection of a comparison class with respect to which vague languages gets interpreted is arrived upon through a pragmatic reasoning process.
+<!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
+We introduce a novel language understanding model that resolves its uncertainty about the comparison class alongside the uncertainty know to be important for modeling vague language understanding (namely, uncertainty about the world and uncertainty about the precise meaning of the speech act).
+<!--
 "It's warm outside" when heard in July means something very different than when heard in January.
-Warm is vague, in the sense that there are borderline cases of being warm, interlocutors can faultlessly disagree as to whether or not it is warm, and what is means to be warm depends on a (often contextually-specified) relevant *comparison class*.
+Warm is vague,
 When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
+-->
 
 Adjectives like *warm* and *cold*, *cheap* and *expensive*,  are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
@@ -150,8 +172,7 @@ The crux of such theories rests on the fact that this threshold is relative to a
 A day in Winter is warm *relative to* other days in Winter and probably not relative to all days of the year.
 
 There is substantial evidence that listeners and speakers are sensitive to the comparison class when interpreting and producing adjectives.
-@Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little" can depend on the physical context ("big" relative to other objects in a scene), objects' functional roles ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
-@Solt2012 show how what counts as "dark" or "tall" depends upon the statistics of the comparison class.
+
 
 The comparison class cam be thought of as a probability distribution over degrees on a scale [@Lassiter2013; @Qing2014].
 A probabilistic model of pragmatic reasoning [e.g., the Rational Speech Act model; @Goodman2016] can use a standard threshold semantics and reason about the comparison class to arrive at context-sensitive adjective interpretation.
@@ -445,13 +466,13 @@ print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "t
 \centering
 \begin{tabular}{lll}
   \hline
-Scale & Subordinate & Superordinate \\
+Scale \{Adjectives\}& Subordinate & Superordinate \\
   \hline
-Height & professional basketball player, professional gymnast, professional soccer player & people \\
-  Price & dishwasher, oven, toaster & kitchen appliances \\
-  Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\
-  Time & video of a cute animal, music video, movie & things you watch online \\
-  Weight & apple, grape, watermelon & produce \\
+Height \{ \emph{tall}, \emph{short}\} & \{professional basketball player,  professional soccer player, professional gymnast\} & people \\
+  Price \{ \emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
+  Temperature \{\emph{warm}, \emph{cold}\}& \{ Summer, Fall, Winter\} in Maryland & days of the year \\
+  Time \{\emph{long}, \emph{short}\}& \{movie, music video, video of a cute animal\}  & things you watch online \\
+  Weight \{\emph{heavy}, \emph{light}\}& \{watermelon, grape, apple\}  & produce \\
    \hline
 \end{tabular}
 \caption{Items used in experiments}
