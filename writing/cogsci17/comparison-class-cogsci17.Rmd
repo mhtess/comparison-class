@@ -1,5 +1,5 @@
 ---
-title: "Cheap cars, expensive coffee: Comparison class understanding in vague language"
+title: "Warm (for winter): Comparison class understanding in vague language"
 bibliography: [comparison-class.bib, library.bib]
 csl: "apa6.csl"
 document-params: "10pt, letterpaper"
@@ -7,6 +7,7 @@ header-includes:
   - \usepackage{tabularx}
   - \usepackage{multicol}
   - \usepackage{wrapfig}
+  #- \usepackage{stfloats}
 
 author-information: >
   \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
@@ -62,6 +63,8 @@ library(xtable)
 library(rwebppl)
 library(langcog)
 library(coda)
+library(lme4)
+library(lmerTest)
 
 estimate_mode <- function(s) {
   d <- density(s)
@@ -134,18 +137,15 @@ theme_set(theme_classic())
 
 # Introduction
 
-If you're going to San Francisco, be sure to set aside a few extra dollars for coffee.
-It's good, but expensive.
-By expensive, we mean *expensive relative to coffee elsewhere*, and not *expensive relative to other things in San Francisco*: Rent in San Francisco is expensive in a different way.
-This may seem obvious, and yet out-of-context, gradable adjectives like *expensive* mean next to nothing.
-They result in relatively precise interpretations from the category of things against which the target entity (e.g., the price of a good cup of coffee in San Francisco) is compared.
-This *comparison class* is not often explicitly stated, but rather is latent in the discourse.
+"It's warm outside" when heard in July means something very different than when heard in January.
+Warm is vague, in the sense that there are borderline cases of being warm, interlocutors can faultlessly disagree as to whether or not it is warm, and what is means to be warm depends on a (often contextually-specified) relevant *comparison class*.
+When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
 
-Adjectives like *cheap* and *expensive*, *cold* and *warm* are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
+Adjectives like *warm* and *cold*, *cheap* and *expensive*,  are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
-For example, a good cup of coffee is expensive if its price is greater than some threshold number of dollars.
+For example, the weather is *warm* if its temperature is greater than some threshold number of degrees.
 The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities.
-A good cup of coffee in San Francisco is expensive *relative to* other cups of coffee and not *relative to* other things you could buy in San Francisco (including, e.g., a Tesla automobile).
+A day in Winter is warm *relative to* other days in Winter and probably not relative to all days of the year.
 
 There is substantial evidence that listeners and speakers are sensitive to the comparison class when interpreting and producing adjectives.
 @Ebeling1994 demonstrate that 2-4 year olds understand the context-sensitivity of the words "big" and "little" can depend on the physical context ("big" relative to other objects in a scene), objects' functional roles ("big" relative to its intended use), or out of context ("big" relative to an implicit comparison class).
@@ -181,17 +181,7 @@ L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)
 Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$.
 That is, the plausible heights of basketball players is different than the plausible heights of people in general.
 
-## Model predictions
-
-As a first test of this pragmatic theory, we consider a simple case:
-The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*).
-Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
-We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."): $P(x \mid c_{sub})$.
-Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$ and the superordinate level category (e.g., people in general) $P(x \mid c_{super})$.
-
-The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
-For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
-
+## Model simulations
 
 ```{r wpplHelpers}
 webpplHelpers <- '
@@ -289,7 +279,6 @@ var meaning = function(utterance, state, threshold) {
 '
 ```
 
-
 ```{r ccRSA}
 ccrsa <- '
 // webppl ccrsa.wppl --require adjectiveRSA
@@ -334,8 +323,7 @@ pragmaticListener(paramsFromR.utt[0])
 '
 ```
 
-
-```{r }
+```{r runModel}
 prior.params <- list(
   sub = data.frame(mu = 1, sigma = 0.5),
   super = data.frame(mu = 0 , sigma = 1)
@@ -411,6 +399,14 @@ subplt2 <- ggplot(mp.both %>%
 grid.arrange(subplt1, subplt2, nrow = 1)
 ```
 
+As a first test of this pragmatic theory, we consider a simple case:
+The comparison class is either a subordinate level category (e.g., basketball players) or a superordinate level category (e.g., people *in general*).
+Thus, $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
+We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (i.e., "John is a basketball player."): $P(x \mid c_{sub})$.
+Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., basketball players) $P(x \mid c_{sub})$ and the superordinate level category (e.g., people in general) $P(x \mid c_{super})$.
+
+The likely comparison class will depend on the details of the prior distributions over the sub- and super-ordinate level classes (e.g., the heights of basketball players and people in general) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
+For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
@@ -418,6 +414,51 @@ Model schematic. Show "John is tall for a person", "John is tall for a baskebatl
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
+
+```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+
+
+height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+height_super = c("people")
+price_sub = c("dishwasher, oven, toaster")
+price_super = c("kitchen appliances")
+temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
+temperature_super = c("days of the year in Maryland")
+time_sub = c("video of a cute animal, music video, movie")
+time_super = c("things you watch online")
+weight_sub = c("apple, grape, watermelon")
+weight_super = c("produce")
+
+scales = c("Height", "Price", "Temperature", "Time", "Weight")
+sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
+super = c(height_super, price_super, temperature_super, time_super, weight_super)
+
+table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
+table1 <- xtable(table1)
+print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
+```
+
+
+\begin{table*}
+\centering
+\begin{tabular}{lll}
+  \hline
+Scale & Subordinate & Superordinate \\
+  \hline
+Height & professional basketball player, professional gymnast, professional soccer player & people \\
+  Price & dishwasher, oven, toaster & kitchen appliances \\
+  Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\
+  Time & video of a cute animal, music video, movie & things you watch online \\
+  Weight & apple, grape, watermelon & produce \\
+   \hline
+\end{tabular}
+\caption{Items used in experiments}
+\label{tab:1}
+\end{table*}
+
+
+
+
 
 # Experiment 1: Comparison class inference
 
@@ -491,47 +532,6 @@ Participants were asked a question of the form "What do you think Gary meant?" a
 \end{itemize}
 \noindent The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
 
-```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
-
-
-height_sub = c("professional basketball player, professional gymnast, professional soccer player")
-height_super = c("people")
-price_sub = c("dishwasher, oven, toaster")
-price_super = c("kitchen appliances")
-temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
-temperature_super = c("days of the year in Maryland")
-time_sub = c("video of a cute animal, music video, movie")
-time_super = c("things you watch online")
-weight_sub = c("apple, grape, watermelon")
-weight_super = c("produce")
-
-scales = c("Height", "Price", "Temperature", "Time", "Weight")
-sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
-super = c(height_super, price_super, temperature_super, time_super, weight_super)
-
-table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
-table1 <- xtable(table1)
-print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
-```
-
-
-\begin{table*}
-\centering
-\begin{tabular}{lll}
-  \hline
-Scale & Subordinate & Superordinate \\
-  \hline
-Height & professional basketball player, professional gymnast, professional soccer player & people \\
-  Price & dishwasher, oven, toaster & kitchen appliances \\
-  Temperature & Fall in Maryland, Summer in Maryland, Winter in Maryland & days of the year \\
-  Time & video of a cute animal, music video, movie & things you watch online \\
-  Weight & apple, grape, watermelon & produce \\
-   \hline
-\end{tabular}
-\caption{Items used in experiments}
-\label{tab:1}
-\end{table*}
-
 ## Results
 
 ```{r cache=T}
@@ -574,14 +574,14 @@ df.summary %>%
         strip.text = element_text(size = 8))
 ```
 
-<!-- ```{r glm1, cache = T} -->
-<!-- rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength +  -->
-<!--                    (1 + form | degree) +  -->
-<!--                    (1 + form | sub_category) +  -->
-<!--                    (1 | workerid),  -->
-<!--                  family = 'binomial') -->
-<!-- summ.rs.glmm <- summary(rs.glmm) -->
-<!-- ``` -->
+```{r glm1, cache = T}
+rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength +
+                   (1 + form | degree) +
+                   (1 + form | sub_category) +
+                   (1 | workerid),
+                 family = 'binomial')
+summ.rs.glmm <- summary(rs.glmm)
+```
 
 On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
 Figure 2 shows the proportion of participants choosing the subordinate category for each item.
@@ -598,12 +598,6 @@ As predicted, \red{it's all significant}.
 In this experiment, we would like to elicit the priors over the subordinate categories.
 We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
 
-
-\begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
-\end{align}
-
 ## Methods
 
 ### Participants
@@ -611,21 +605,59 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 We recruited 100 participants from Amazon Mechanical Turk.
 Five participants were excluded due to failing the catch trial.
 Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-On average, the experiment took five minutes and participants were compensated $0.50 for their work. \mlb{Include simulation bit here for why we chose the number of participants we did?}
+On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
 
-### Materials
+### Materials and procedure
 
-We created 30 events using positive- and negative-form gradable adjectives from five different measureable scales, each conditioned with three context sentences. The scales we derived adjectives from were height, price, temperature, time, and weight. Three items were assigned to each scale, where each item was its own subordinate category and all had a common superordinate category.
-
-### Procedure
+Materials were the same as Expt. 1 (Table 1).
 
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
 This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item (e.g., *Do you think the apple would be light relative to other produce?*).
-The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html.
+The experiment can be viewed in full at \url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}.
 
-## Results
+## Data analysis and results
+
+```{r, cache = T}
+project.name <- "vague-prior-elicitation-1"
+data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
+d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "Yes")
+
+d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
+
+vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+  filter(pass) %>%
+  group_by(strength, target, degree, adjective, 
+           form, sub_category, super_category) %>%
+  multi_boot_standard(column = "response")
+
+```
+
+```{r expt2results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 2 results. Adjective speaker judgments for 30 items on 5 scales."}
+vs.summary %>%
+  ungroup() %>%
+  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
+  ggplot(.,
+         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(.~degree, scales = 'free')+
+  ylim(0, 1) +
+  theme(axis.text.x = element_text(angle = 90) )+
+  scale_fill_brewer(palette = 'Set1')+
+  ylab("Superordinate adjective endorsement")+
+  xlab("Item category")+
+  theme(axis.title.y = element_text(size = 10),
+        strip.text = element_text(size = 8))
+```
+
+\begin{align}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
+\end{align}
 
 # Discussion
 
