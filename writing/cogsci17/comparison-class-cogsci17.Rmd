@@ -158,21 +158,25 @@ or it could just be warm (i.e., *warm relative to any day of the year*)
 
 We propose that the selection of a comparison class with respect to which vague languages gets interpreted is arrived upon through a pragmatic reasoning process.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
-We introduce a novel language understanding model that resolves its uncertainty about the comparison class alongside the uncertainty know to be important for modeling vague language understanding (namely, uncertainty about the world and uncertainty about the precise meaning of the speech act).
+We introduce a novel language understanding model that can resolve uncertainty about the likely reference class alongside the uncertainty know to be important for modeling vague language understanding (namely, uncertainty about the world and uncertainty about the precise meaning of the speech act).
+From this model, we derive two qualitative predictions which we test in an experiment designed to elicit the likely comparison class.
+\mht{maybe sketch out the two predictions, if they can be explained straightforwardly}.
+Quantitative predictions of the model will depend on the quantitative details of the relevant world knowledge.
+This could be measured by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
+Instead, we build a Bayesian data analysis model to put uncertainty over these paremters and resolve the uncertainty by asking further natural language questions to our language understanding model. 
+This represents a new possibility for Bayesian models of cognition and language: By building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to give multiple judgments on different tasks.
 <!--
 "It's warm outside" when heard in July means something very different than when heard in January.
 Warm is vague,
 When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
 -->
+# Computational model
 
 Adjectives like *warm* and *cold*, *cheap* and *expensive*,  are vague descriptions of an underlying quantitative scale (e.g., price, temperature).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
 For example, the weather is *warm* if its temperature is greater than some threshold number of degrees.
 The crux of such theories rests on the fact that this threshold is relative to a *comparison class* of other possible entities.
 A day in Winter is warm *relative to* other days in Winter and probably not relative to all days of the year.
-
-There is substantial evidence that listeners and speakers are sensitive to the comparison class when interpreting and producing adjectives.
-
 
 The comparison class cam be thought of as a probability distribution over degrees on a scale [@Lassiter2013; @Qing2014].
 A probabilistic model of pragmatic reasoning [e.g., the Rational Speech Act model; @Goodman2016] can use a standard threshold semantics and reason about the comparison class to arrive at context-sensitive adjective interpretation.
@@ -189,7 +193,6 @@ Quantitative predictions for Bayesian models (including this one) depend upon th
 Because it may be difficult for human participants to estimate quantities accurately, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
 
 
-# Computational model
 
 We elaborate the Rational Speech Act model for vague language understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared--- the comparison class $c$.
 This uncertainty is posited at the level of the pragmatic listener, and thus is resolved using pragmatic reasoning (i.e., the pressures to be truthful and informative).
