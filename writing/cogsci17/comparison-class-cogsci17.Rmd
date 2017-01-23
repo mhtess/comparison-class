@@ -529,7 +529,6 @@ We test these predictions in our first experiment.
 -->
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
-
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
 height_super = c("people")
 price_sub = c("dishwasher, oven, toaster")
@@ -550,7 +549,6 @@ table1 <- xtable(table1)
 print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
 ```
 
-
 \begin{table*}
 \centering
 \begin{tabular}{lll}
@@ -567,10 +565,6 @@ Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer 
 \caption{Items used in experiments}
 \label{tab:1}
 \end{table*}
-
-
-
-
 
 # Experiment 1: Comparison class inference
 
@@ -624,25 +618,26 @@ ggplot(simulations, aes(x = w))+
 ### Materials
 
 We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
-Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), and produce (weight).
-For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
+Each scale was paired with a superordinate category: kitchen appliances (price), weather throughout the year (temperature), things you watch online (duration), people (height), and produce (weight).
+For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Prediction section).
 This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table \ref{tab:1} for full listing).
 
 ### Procedure
 
-<!-- Half of participants completed trials where the superordinate category was previously introduced ("Supercat mention"), possibly to make the superordinate paraphrase more likely. -->
-<!-- For example, "Gary is searching for things to watch online with their friend and finds a music video." -->
-
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
-On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Gary finds a music video to watch online with his friend.*).
-This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the item (e.g., *Gary says to his friend, "It's short."*).
-Participants were asked a question of the form "What do you think Gary meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: \mlb{change the font to match "DO ACTION"/"DONE ACTION" text in habituals paper}
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
+This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
+Participants were asked "What do you think Tanya meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
+
 \begin{itemize}
-\item The SUBORDINATE CATEGORY is ADJECTIVE relative to SUBORDINATE CATEGORY (e.g., \textit{The music video is short relative to music videos})
-\item The SUBORDINATE CATEGORY is ADJECTIVE relative to SUPERORDINATE CATEGORY (e.g., \textit{The music video is short relative to things you watch online})
+\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{subordinates} (e.g., \emph{It's warm relative to other days in Winter})
+\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})
 \end{itemize}
-\noindent The experiment can be viewed in full at http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html.
+
+Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
+In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely. 
+The experiment can be viewed in full at:
+\url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
 
 ## Results
 
@@ -660,27 +655,30 @@ d.tidy <- left_join(d, d.catch) %>%
   mutate(subResponse = ifelse(paraphrase == "super", 0, 1))
 
 df.summary <- d.tidy %>%
-  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
+  group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
+#  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
   multi_boot_standard(column = "subResponse")
 ```
 
-```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
+```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
 
 
 df.summary %>%
   ungroup() %>%
-  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)]),
-         condition = factor(condition, levels = c("context","contextWithSuper"),
-                            labels=c("Bare", "Supercat mention"))) %>%
+  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])#,
+          # condition = factor(condition, levels = c("context","contextWithSuper"),
+          #                    labels=c("Bare", "Supercat mention"))
+         ) %>%
   ggplot(.,
          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
   geom_errorbar(position = position_dodge())+
-  facet_grid(condition~degree, scales = 'free')+
+  #facet_grid(condition~degree, scales = 'free')+
+  facet_grid(.~degree, scales = 'free')+
   ylim(0, 1) +
   theme(axis.text.x = element_text(angle = 90) )+
   scale_fill_brewer(palette = 'Set1')+
-  ylab("Proportion Subordinate Comparison Class")+
+  ylab("Proportion subordinate paraphrase")+
   xlab("Item category")+
   theme(axis.title.y = element_text(size = 10),
         strip.text = element_text(size = 8))
@@ -696,6 +694,7 @@ summ.rs.glmm <- summary(rs.glmm)
 ```
 
 On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
+We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for the rest of this paper.
 Figure 2 shows the proportion of participants choosing the subordinate category for each item.
 We see considerable variability both within- and across- scales.
 Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (i.e., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
@@ -727,7 +726,8 @@ Each participant saw 15 trials: one for each subordinate category paired with ei
 Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
 This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item (e.g., *Do you think the apple would be light relative to other produce?*).
-The experiment can be viewed in full at \url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}.
+The experiment can be viewed in full at: 
+\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
 
 ## Data analysis and results
 
