@@ -24,4 +24,5 @@ analysis/fig/
 *.out
 models/sherlock/node_modules/utils/node_modules/
 models/sherlock/results/trash/
+models/sherlock/results/
 *.synctex.gz
