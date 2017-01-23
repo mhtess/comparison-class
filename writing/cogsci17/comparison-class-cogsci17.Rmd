@@ -470,7 +470,7 @@ for (p in sub.prior.params){
 }
 ```
 
-```{r modelSchematics, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Model predictions"}
+```{r modelSchematics, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Left: Three schematic prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution). Right: Predicted listener inference for the probability of an intended subordinate comparison class. Model prediction assume an alpha of 3 and a cost of 2 for the explicit comparison class alternatives. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val, y=..scaled.., fill = class))+
   geom_density(alpha = 0.8)+
@@ -495,7 +495,7 @@ subplt2 <- ggplot(mp.both %>%
   scale_fill_brewer(palette = "Set1")+
   geom_hline(yintercept = 0.5, lty = 3)+
   xlab("Subordinate prior mean")+
-  ylab("Subordinate interpretation)")+
+  ylab("Subordinate interpretation")+
   ggtitle("RSA listener model") +
   theme(title = element_text(size = 8),
         legend.text = element_text(size = 6))+
@@ -516,10 +516,17 @@ For simplicity, we assume the prior distribution over the degree for the superor
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
 
+For purposes of illustration, consider the three subordinate priors to correspond to temperatures in Winter (-1), Fall (0), and Summer (1) in a part of the world that exhibits seasons (e.g., Maryland, USA), and the superordinate prior to corresponds to temperatures including all days of the year (Figure \ref{fig:modelSchematics}, left).
+When the pragmatic listener (Eq. \ref{eq:L1}) is in Winter and hears that "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hear's it cold (Figure \ref{fig:modelSchematics}, right, left-most facet; compare blue vs. red bars).
+The model thinks the opposite is true in Summer: A warm day in summer could be warm for summer, or warm for the year, while a cold day in Summer is much more likely to be cold for summer.
+In all situations, the model thinks it's more likely than not for the comparison class to be the subordinate category (all bars greater than 0.5).
+This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.
+The pragmatic listener overall prefers subordinate comparison classes, though the extent of which is modulated by the relationship of the subordinate to the superordinate class prior.
+<!--
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
-
+-->
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
 
@@ -550,9 +557,9 @@ print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "t
   \hline
 Scale \{Adjectives\}& Subordinate & Superordinate \\
   \hline
-Height \{ \emph{tall}, \emph{short}\} & \{professional basketball player,  professional soccer player, professional gymnast\} & people \\
-  Price \{ \emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
-  Temperature \{\emph{warm}, \emph{cold}\}& \{ Summer, Fall, Winter\} in Maryland & days of the year \\
+Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer player, gymnast\} & people \\
+  Price \{\emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
+  Temperature \{\emph{warm}, \emph{cold}\}& \{Summer, Fall, Winter\} day in Maryland & days of the year \\
   Time \{\emph{long}, \emph{short}\}& \{movie, music video, video of a cute animal\}  & things you watch online \\
   Weight \{\emph{heavy}, \emph{light}\}& \{watermelon, grape, apple\}  & produce \\
    \hline
@@ -619,7 +626,7 @@ ggplot(simulations, aes(x = w))+
 We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
 Each scale was paired with a superordinate category: kitchen appliances (price), weather (temperature), things you watch online (duration), people (height), and produce (weight).
 For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end (e.g., *basketball player*), low-end (e.g., *gymnast*), and intermediate (e.g., *soccer player*) of the degree scale (here, height).
-This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table 1 for full listing).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table \ref{tab:1} for full listing).
 
 ### Procedure
 
