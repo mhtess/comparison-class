@@ -104,20 +104,20 @@ var model = function(){
     })
   });
 
-  // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-  //
-  // var classPrior = Infer({
-  //   model: function(){return flip(superClassPrior) ? "super": "sub"}
-  // });
+  var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+
+  var classPrior = Infer({
+    model: function(){return flip(superClassPrior) ? "super": "sub"}
+  });
 
   foreach(degrees, function(degree){
     var subCats = _.uniq(_.pluck(_.where(vsData, {degree:degree}), "sub_category"))
 
-    var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-
-    var classPrior = Infer({
-      model: function(){return flip(superClassPrior) ? "super": "sub"}
-    });
+    // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+    //
+    // var classPrior = Infer({
+    //   model: function(){return flip(superClassPrior) ? "super": "sub"}
+    // });
 
   // var parameters = map(function(subCat){
     foreach(subCats, function(subCat){
@@ -181,6 +181,9 @@ var model = function(){
                     u.split("_")[1]
           var utterance = u.split("_")[0]
           var state = sample(statePrior[cc]);
+          // display(cc);
+          // display(threshold);
+          // display(utterance);
           var m = meaning(utterance, state, threshold);
           condition(m);
           return state;
@@ -202,8 +205,8 @@ var model = function(){
       var pragmaticListener_super = cache(function(utterance, form) {
         Infer({model: function(){
           var state = sample(statePrior["super"]);
-          var t = sample(thresholdPrior(form));
-          var threshold = form == "positive" ? {positive: t} : {negative: t};
+          var threshold = sample(thresholdPrior(form));
+          // var thresholds = form == "positive" ? {positive: t} : {negative: t};
           var S1 = speaker1_super(state, threshold, form);
           observe(S1, utterance);
           return state
@@ -219,7 +222,7 @@ var model = function(){
           var _kl = KL(speakerBeliefs, L1, speakerBeliefs.support());
           factor(alphas.s2.super * -1 * _kl)
 
-          return utterance == form ? 1 : 0
+          return utterance == form + "_Adjective" ? 1 : 0
           }})
       }
       ////////////////////////////////////////
@@ -288,10 +291,10 @@ var model = function(){
 
       })
 
-      query.add([degree, "superCatPrior", "NA"], superClassPrior)
+      // query.add([degree, "superCatPrior", "NA"], superClassPrior)
     })
 
-  // query.add(["superCatPrior", "NA",  "NA"], superClassPrior)
+  query.add(["superCatPrior", "NA",  "NA"], superClassPrior)
   query.add(["explicitCost", "NA",  "NA"], explicitCost)
   query.add(["speakerOptimality_s1","superSpeaker", "NA"],alphas.s1.super)
   query.add(["speakerOptimality_s2","superSpeaker", "NA"],alphas.s2.super)
@@ -302,7 +305,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 20;
+var mhiter = 500;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
@@ -312,7 +315,7 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-L1-fullAlt-ccPriorByDegree-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-L1-fullAlt-ccPriorGlobal-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
 display("file written to = " + outfile)
