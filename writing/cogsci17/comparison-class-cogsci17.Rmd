@@ -527,7 +527,7 @@ We see that as the mean of the subordinate prior becomes greater than the supero
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
 -->
-```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "h", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
 height_super = c("people")
@@ -553,7 +553,7 @@ print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "t
 \centering
 \begin{tabular}{lll}
   \hline
-Scale \{Adjectives\}& Subordinate & Superordinate \\
+Scale \{\emph{adjectives}\}& Subordinate & Superordinate \\
   \hline
 Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer player, gymnast\} & people \\
   Price \{\emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
@@ -707,7 +707,18 @@ As can be seen in Figure \ref{fig:expt1results}, positive form adjectives with *
 $SE = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","Std. Error"],2)`;$
 $z = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","z value"],2)`$.
 
-# Experiment 2: Vague speakers
+
+The two qualitative predictions of our language understanding model were borne out in Experiment 1.
+The computational model can in principle make quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
+This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available in the prior [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
+These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
+In the next section, we formalize our uncertainty about listeners' prior knowledge, and run a second experiment to gather converging evidence about listeners' knowledge, which we can then use to generate quantitative predictions for Expt. 1.
+
+# Formalizing uncertainty in prior knowledge
+
+
+
+# Experiment 2: Adjective production
 
 In this experiment, we would like to elicit the priors over the subordinate categories.
 We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
