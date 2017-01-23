@@ -60,6 +60,7 @@ knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.p
 ```{r, libraries}
 library(png)
 library(grid)
+library(gridExtra)
 library(tidyverse)
 library(xtable)
 library(rwebppl)
