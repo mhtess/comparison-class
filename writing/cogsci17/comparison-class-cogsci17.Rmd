@@ -714,14 +714,33 @@ This world knowledge is often measured by having participants estimate relevant 
 These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
 In the next section, we formalize our uncertainty about listeners' prior knowledge, and run a second experiment to gather converging evidence about listeners' knowledge, which we can then use to generate quantitative predictions for Expt. 1.
 
-# Formalizing uncertainty in prior knowledge
+# Reducing uncertainty in prior knowledge by asking follow-up questions
 
+Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
+For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
+Certain quantities and probabilities are inherent difficult measure because they are abstract or hard to estimate.
+In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic approach to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which a reduced form of computational model presented in this paper can answer.
+This has the feature of reducing task demand on participants.
+
+As we did for the simulations presented before, we assume the superordinate prior is a unit-normal distribution. 
+We assume the subordinate priors also are normal distributions, but with unknown parameters $\mu_{sub}, \sigma_{sub}$.
+We can wrap the RSA model presented earlier inside a Bayesian data analysis model and infer these parameters likely values.
+Using just the data from Expt.~1, this model would be overparametrized.
+We can make a subtle modification of the RSA model to ask follow-up questions that would rely upon the same prior knowledge. 
+In particular, we will ask participants that assuming a target entity is a member of the subordinate (e.g., it's a day in Winter), would they predict the adjective would apply with an explicit comparison class (e.g., "Is it warm relative to other days of the year?").
+
+This is a simplification of the comparison class inference model because it eliminates the uncertainty in the relevant comparison class.
+Since this question is a felicity-judgment, we model this as a pragmatic speaker [@Qing2014a; @Tessler2016; @Tessler2016cogsci]
+\begin{align}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
+\end{align}
 
 
 # Experiment 2: Adjective production
 
-In this experiment, we would like to elicit the priors over the subordinate categories.
-We use a two-alternative forced choice paradigm to collect peoples' prior belief on the properties of certain items.
+In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
 
 ## Methods
 
@@ -780,10 +799,7 @@ vs.summary %>%
         strip.text = element_text(size = 8))
 ```
 
-\begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
-\end{align}
+
 
 
 # Bayesian data analysis of the Bayesian language model
