@@ -695,14 +695,17 @@ summ.rs.glmm <- summary(rs.glmm)
 
 On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
 We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for the rest of this paper.
-Figure 2 shows the proportion of participants choosing the subordinate category for each item.
+Figure \ref{fig:expt1results} shows the proportion of participants choosing the subordinate category for each item.
 We see considerable variability both within- and across- scales.
 Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (i.e., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
 For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
 
-To assess the strength of this effect, we used a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low, high, or in the middle of the scale), and of critical theoretical interest, the interaction between these two form.
+This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low, high, or in the middle of the scale), and of critical theoretical interest, the interaction between these two variables
 In addition, we included in the model by-participant random effects of intercept, by-degree (temperature, weight, etc...) random effects of intercept and form, and by-subordinate category random effects of intercept and form to predict the probability with which participants would choose the subordinate category as the paraphrase.
-As predicted, \red{it's all significant}.
+\mht{not sure if this is the right test}
+As can be seen in Figure \ref{fig:expt1results}, positive form adjectives with *a priori* stronger subordinate categories produce relatively fewer subordinate paraphrases than negative form adjectives $\beta = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","Estimate"],2)`$;
+$SE = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","Std. Error"],2)`;$
+$z = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","z value"],2)`$.
 
 # Experiment 2: Vague speakers
 
