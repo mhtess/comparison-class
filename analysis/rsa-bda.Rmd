@@ -1,0 +1,280 @@
+---
+title: "Comparison class models (RSA + BDA)"
+output: html_notebook
+---
+
+# Empirical data
+
+```{r}
+library(langcog)
+library(tidyverse)
+library(data.table)
+library(coda)
+library(knitr)
+
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+
+estimate_mode <- function(s) {
+  d <- density(s)
+  return(d$x[which.max(d$y)])
+}
+hdi_upper<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","upper"])
+}
+hdi_lower<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","lower"])
+}
+```
+
+Data analysis for Class Elicitation experiment
+
+Analyzed in terms of proportion *superordinate* responses
+
+```{r}
+data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+
+d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
+
+d.catch <- d.catch %>% 
+  mutate(pass = response == "relative to other buildings") %>%
+  select(workerid, pass)
+
+d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
+d.tidy <- left_join(d, d.catch) %>%
+  filter(pass) %>%
+  mutate(superResponse = ifelse(paraphrase == "super", 1, 0)) 
+
+ce.summary <- d.tidy %>%
+  group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
+  multi_boot_standard(column = "superResponse")
+```
+
+Data analysis for Vague Speaker experiment
+
+```{r}
+project.name <- "vague-prior-elicitation-1"
+data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
+d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "Yes")
+
+d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
+
+vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+  filter(pass) %>%
+  group_by(strength, target, degree, adjective, 
+           form, sub_category, super_category) %>%
+  multi_boot_standard(column = "response")
+
+```
+
+## Model results
+# Models
+
+
+### FBT models
+
+
+```{r}
+n_chains  = 3
+n_samples = 10
+m.samp <- data.frame()
+# just Expt 1 data
+#file.prefix <- "cc-mcmc5000_burn2500_chain"
+# just Expt 1 data, infer prior on comparison class (by degree)
+#file.prefix <- "cc-subcatpriorByDegree-mcmc3000_burn1500_chain"
+# just Expt 1 data, infer prior on comparison class (by subcat)
+#file.prefix <- "cc-subcatpriorByCat-mcmc3000_burn1500_chain"
+
+# just Expt 2 data
+#file.prefix <- "vs-mcmc3000_burn1500_chain"
+
+# expt 1 & expt 2 data, fixed prior on comparison class
+#file.prefix <- "fbt-mcmc5000_burn2500_chain"
+# expt 1 & expt 2 data, infer prior on comparison class (by subcat)
+#file.prefix <- "fbt-subcatprior-mcmc5000_burn2500_chain"
+# expt 1 & expt 2 data, infer prior on cc (by degree)
+#file.prefix <- "fbt-subcatpriorByDegree-mcmc3000_burn1500_chain"
+
+# expt 1 & expt 2 with L2 model (1/20/17)
+#file.prefix <- "fbt-L2-posnegAlt-mcmc3000_burn1500_chain"
+
+# expt 1 & expt 2 with L1 model with pos & neg alternatives (1/20/17)
+#file.prefix <- "fbt-L1-posnegAlt-mcmc1000_burn500_chain"
+# expt 1 & 2, L1 model with pos, neg, and silence alternatives (fixed S2 model from above)
+#file.prefix <- "fbt-L1-posnegAlt-silenceCost-S2flip-mcmc10_burn5_chain"
+
+# expt 1 & 2, L1 model with explicit and silence alternatives
+file.prefix <- "fbt-L1-explAlt-ccPriorByDomain-disc3-mcmc10_burn5_chain"
+
+# expt 1 & expt 2 with L1 model with pos, neg, and explicit alternatives (1/23/17)
+# file.prefix <- "fbt-L1-fullAlt-ccPriorByDegree-disc3-mcmc500_burn250_chain"
+
+for (i in seq(1, n_chains)){
+  m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
+                                 file.prefix, i, ".csv", sep="")))
+  m.samp.i <- rwebppl::get_samples(m, n_samples)
+  m.samp <- bind_rows(m.samp, m.samp.i)
+  print(i)
+}
+
+```
+
+Speaker optimality parameters
+
+```{r}
+m.samp %>% filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2")) %>%
+  separate(cat, into = c("cat", "speaker")) %>%
+#m.samp %>% filter(cat == "speakerOptimality") %>%
+  ggplot(., aes(x = val))+
+  geom_histogram()+
+  facet_wrap(~ param  + speaker)
+```
+
+Other parameters
+
+```{r}
+m.samp %>% 
+  filter(cat %in% c("silenceCost","explicitCost","superCatPrior")) %>%
+  ggplot(., aes(x = val))+
+  geom_histogram()+
+  facet_wrap(~ cat, scales = 'free')
+```
+
+
+Comparison class prior (Probability of subcategory)
+
+```{r}
+m.samp %>% filter(param == "superCatPrior") %>%
+#m.samp %>% filter(param == "subCatPrior") %>%
+  ggplot(., aes(x = val))+
+  geom_histogram()+
+  facet_wrap(~cat)+
+  theme_bw()+
+  scale_x_continuous(limits = c(0,1), breaks = c(0, 0.5, 1))
+```
+
+
+Prior parameters
+
+```{r}
+m.samp %>% filter(param %in% c("mu", "sigma")) %>%
+  filter(cat != "") %>%
+  ggplot(., aes(x = val))+
+  geom_histogram()+
+  facet_grid(cat ~ param, scales = 'free')+
+    theme_bw()+
+  theme(strip.text.y = element_text(angle = 0))
+```
+```{r}
+m.samp %>% filter(param %in% c("mu", "sigma")) %>%
+  filter(cat != "") %>%
+  group_by(cat, param) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_upper = HPDhi(val),
+            cred_lower = HPDlo(val)) %>%
+  kable()
+```
+
+
+
+What do the priors look like?
+
+```{r}
+m.samp %>% filter(param == "prior") %>%
+  ggplot(., aes(x = val, y = ..scaled..))+
+  geom_density()+
+  facet_wrap(~cat, scales = 'fixed')+
+  xlim(-3, 3)+
+  theme_bw()+
+  theme(strip.text.y = element_text(angle = 0)) 
+```
+
+
+Posterior predictives
+
+```{r}
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  group_by(param, cat,form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = hdi_upper(val),
+             cred_lower = hdi_lower(val) )
+```
+
+```{r}
+md.pp <- left_join(
+  bind_rows(vs.summary %>% 
+             mutate(expt = "superSpeaker"),
+           ce.summary %>%
+             mutate(expt = "superCC")) %>% 
+             ungroup() %>%
+             rename(cat = sub_category),
+  m.pp %>% rename(expt = param))
+
+ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = mean, ymin = ci_lower, ymax = ci_upper,
+                  shape = form, color = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3)+
+  geom_errorbar()+
+  geom_errorbarh()+
+  geom_point()+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  xlim(0, 1)+
+  ylim(0, 1)
+
+print(paste("ccRSA model & cc inference task r^2= ", with(md.pp %>%
+       filter(expt == "superCC"), cor(MAP, mean))^2, sep = ""))
+
+print(paste("adjective s2 & vs task r^2= ", with(md.pp %>%
+       filter(expt == "superSpeaker"), cor(MAP, mean))^2))
+```
+### Comparison class inference task
+
+```{r}
+md.pp.long <- bind_rows(
+  md.pp %>% 
+    select(-mean, -ci_lower, -ci_upper) %>%
+    rename(mean = MAP, ci_lower = cred_lower, ci_upper = cred_upper) %>%
+    mutate(src = "model"),
+  md.pp %>%
+    select(-MAP, -cred_lower, -cred_upper) %>%
+    mutate(src = "human")
+)
+
+md.pp.long %>%
+  ungroup() %>%
+  filter(expt == "superCC") %>%
+  mutate(cat = factor(cat, levels = cat[order(strength)])) %>%
+  ggplot(., 
+         aes( x = cat, 
+              y = mean, ymin = ci_lower, ymax = ci_upper, 
+              group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(src~degree, scales = 'free')+#, nrow = 1)+
+  ylim(0, 1) + 
+  theme(axis.text.x = element_text(angle = 90) )
+```
+
+### Adjective speaker inference task
+
+```{r}
+md.pp.long %>%
+  ungroup() %>%
+  filter(expt == "superSpeaker") %>%
+  mutate(cat = factor(cat, levels = cat[order(strength)])) %>%
+  ggplot(., 
+         aes( x = cat, 
+              y = mean, ymin = ci_lower, ymax = ci_upper, 
+              group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(src~degree, scales = 'free')+#, nrow = 1)+
+  ylim(0, 1) + 
+  theme(axis.text.x = element_text(angle = 90) )
+```
+
