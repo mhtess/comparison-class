@@ -88,35 +88,35 @@ HPDlo<- function(s){
 ```{r}
 theme_paper <- function(base_size = 12, base_family = "Helvetica") {
   theme(
-    line =    element_line(colour = "black", size = 0.5, linetype = 1,
-                                      lineend = "butt"),
-    rect =   element_rect(fill = "black", colour = "black", size = 0.5, linetype = 1),
-    text =               element_text(family = base_family, face = "plain",
-                                      colour = "black", size = base_size,
-                                      hjust = 0.5, vjust = 0.5, angle = 0, lineheight = 0.9,
-                                      margin = margin(2,1,3,1), debug = FALSE),
-    axis.text =          element_text(size = 12, colour = "black", margin=margin(1,1,1,1)),
-    strip.text =         element_text(size = 12, colour = "black", margin=margin(1,1,4,1)),
+    line = element_line(colour = "black", size = 0.5, linetype = 1, lineend = "butt"),
+    rect = element_rect(fill = "black", colour = "black", size = 0.5, linetype = 1),
+    text = element_text(family = base_family, face = "plain",
+                        colour = "black", size = base_size,
+                        hjust = 0.5, vjust = 0.5, angle = 0, lineheight = 0.9,
+                        margin = margin(2,1,3,1), debug = FALSE),
+    axis.text = element_text(size = 12, colour = "black", margin=margin(1,1,1,1)),
+    strip.text = element_text(size = 12, colour = "black", margin=margin(1,1,4,1)),
 
-    axis.line =          element_blank(),
-    axis.ticks =         element_line(colour = "black", size = 0.2),
-    axis.title =         element_text(colour = "black", size=16),
-    axis.ticks.length =  unit(0.3, "lines"),
+    axis.line = element_blank(),
+    axis.ticks = element_line(colour = "black", size = 0.2),
+    axis.title = element_text(colour = "black", size = 16),
+    axis.ticks.length = unit(0.3, "lines"),
 
-    legend.background =  element_rect(colour = "white", fill='white'),
+    legend.background = element_rect(colour = "white", fill = 'white'),
 #    legend.margin =      unit(0.2, "cm"),
-    legend.key =         element_rect(fill = "white", colour = "white"),
-    legend.key.size =    unit(1.2, "lines"),
-    legend.key.height =  NULL,
-    legend.key.width =   NULL,
-    legend.text =        element_text(size = rel(1.2), colour = "black"),
-    legend.text.align =  NULL,
-    legend.title =       element_text(size = rel(1.2), face = "bold", hjust = 0, colour = "black"),
+    legend.key = element_rect(fill = "white", colour = "white"),
+    legend.key.size = unit(1.2, "lines"),
+    legend.key.height = NULL,
+    legend.key.width = NULL,
+    legend.text = element_text(size = rel(1.2), colour = "black"),
+    legend.text.align = NULL,
+    legend.title = element_text(size = rel(1.2), face = "bold", hjust = 0, 
+                                colour = "black"),
     legend.title.align = NULL,
-    legend.position =    "right",
-    legend.direction =   "vertical",
+    legend.position = "right",
+    legend.direction = "vertical",
     legend.justification = "center",
-    legend.box =         NULL,
+    legend.box = NULL,
 
     panel.background =   element_rect(fill = "white", colour = NA),
     panel.border =       element_rect(fill = NA, colour = "black"),
@@ -672,15 +672,15 @@ df.summary %>%
          ) %>%
   ggplot(.,
          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
-  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
-  geom_errorbar(position = position_dodge())+
-  #facet_grid(condition~degree, scales = 'free')+
-  facet_grid(.~degree, scales = 'free')+
+  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8) +
+  geom_errorbar(position = position_dodge()) +
+  #facet_grid(condition~degree, scales = 'free') +
+  facet_grid(.~degree, scales = 'free') +
   ylim(0, 1) +
-  theme(axis.text.x = element_text(angle = 90) )+
-  scale_fill_brewer(palette = 'Set1')+
-  ylab("Proportion subordinate paraphrase")+
-  xlab("Item category")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
+  scale_fill_brewer(palette = 'Set1') +
+  ylab("Proportion subordinate paraphrase") +
+  xlab("Item category") +
   theme(axis.title.y = element_text(size = 10),
         strip.text = element_text(size = 8))
 ```
@@ -738,7 +738,32 @@ S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_
 L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
 \end{align}
 
+We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2 (described below). 
+We use Eq.~\ref{eq:L1} to model the comparison class inference task of Experiment 2. 
+Following @Lassiter2013, $P(\theta) = \text{Uniform}(0, 1)$.
 
+$P(c)$ describes the prior probability of the superordinate (or subordinate) comparison class used by the listener in the comparison class inference model (and Expt.~1). 
+This is likely specified by conceptual knowledge and will heavily be influenced by the subordinate and superordinate items we designed (Table \ref{tab:1}).
+This prior in itself is of major theoretical interest and future work should attempt to understand the differences in our items that would lead to different $P(c)$. 
+<!--In an absolute sense, this is the real target of theoretical interest. -->
+In this work, we are interested in a within-domain effect (i.e., the variability within the domain of daytime temperatures).\footnote{
+That is, fixing some prescribed set of potential comparison classes, what is a listener likely to infer is the relevant one. \mht{should come earlier and probably not in a footnote}
+}
+Hence, in our data analysis, we put uncertainty over the prior probability of each of the 5 $i$ superordinate categories: $c^{super}_{i} \sim \text{Uniform}(0,1)$
+\mht{If we keep the domain-wise ccPrior variable, need to square this with the "main effect of subordinate" that I say we're predicted.}
+
+\mht{Insert plate diagram here}
+
+$P(x \mid c)$ describes the likely values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
+With simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
+We fix each superordinate distribution $P(x \mid c^{super})$ to be a Unit-Normal and put uncertainty over the parameters of each subordinate Gaussian. 
+Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 3)$.
+These $P(x \mid c)$ are used in both the experiments, which allows us to both simultaneously gain credibility in our estimates of these parameters as well as in our model, which has to predict data from two distinct experiments.
+
+The model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha$ and the cost $w$
+We put the following priors over these parameters: $\alpha \sim \text{Uniform}(0, 20)$, $w \sim \text{Uniform} (0, 20)$
+\mht{describe task-wise speaker optimalities}
+ 
 # Experiment 2: Adjective production
 
 In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
@@ -792,7 +817,7 @@ vs.summary %>%
   geom_errorbar(position = position_dodge())+
   facet_grid(.~degree, scales = 'free')+
   ylim(0, 1) +
-  theme(axis.text.x = element_text(angle = 90) )+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95))+
   scale_fill_brewer(palette = 'Set1')+
   ylab("Superordinate adjective endorsement")+
   xlab("Item category")+
@@ -803,15 +828,9 @@ vs.summary %>%
 
 
 
-# Bayesian data analysis of the Bayesian language model
 
 # Discussion
 
-\begin{enumerate}
-\item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
-\item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
-\item Hyperbole / *normative* comparison classs: If we listen to a lecture, and you say "That *was long*.", it means "Long relative to how long I think it should have been." If we go out for pasta, and you ask how it was, and I say "it was expensive" it means "expensive relative to how much it should have been given the quality".
-\end{enumerate}
 
 # Acknowledgements
 
