@@ -90,8 +90,9 @@ var model = function(){
   };
 
   var explicitCost = 1;
-  var explicitCost = uniformDrift({a: 0, b: 5, width : 0.5});
-  var utteranceCosts = [1, 1, 1, explicitCost, explicitCost, explicitCost, explicitCost];
+  var explicitCost = uniformDrift({a: 0, b: 10, width : 1});
+  var silenceCost = uniformDrift({a: 0, b: 1, width : 0.1})
+  var utteranceCosts = [1, 1, silenceCost, explicitCost, explicitCost, explicitCost, explicitCost];
   var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var utterancePrior = cache(function(form){
     return Infer({
@@ -104,20 +105,20 @@ var model = function(){
     })
   });
 
-  var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-
-  var classPrior = Infer({
-    model: function(){return flip(superClassPrior) ? "super": "sub"}
-  });
+  // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+  //
+  // var classPrior = Infer({
+  //   model: function(){return flip(superClassPrior) ? "super": "sub"}
+  // });
 
   foreach(degrees, function(degree){
     var subCats = _.uniq(_.pluck(_.where(vsData, {degree:degree}), "sub_category"))
 
-    // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
-    //
-    // var classPrior = Infer({
-    //   model: function(){return flip(superClassPrior) ? "super": "sub"}
-    // });
+    var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+
+    var classPrior = Infer({
+      model: function(){return flip(superClassPrior) ? "super": "sub"}
+    });
 
   // var parameters = map(function(subCat){
     foreach(subCats, function(subCat){
@@ -291,11 +292,12 @@ var model = function(){
 
       })
 
-      // query.add([degree, "superCatPrior", "NA"], superClassPrior)
+      query.add([degree, "superCatPrior", "NA"], superClassPrior)
     })
 
-  query.add(["superCatPrior", "NA",  "NA"], superClassPrior)
+  // query.add(["superCatPrior", "NA",  "NA"], superClassPrior)
   query.add(["explicitCost", "NA",  "NA"], explicitCost)
+  query.add(["silenceCost", "NA",  "NA"], silenceCost)
   query.add(["speakerOptimality_s1","superSpeaker", "NA"],alphas.s1.super)
   query.add(["speakerOptimality_s2","superSpeaker", "NA"],alphas.s2.super)
   query.add(["speakerOptimality_s1","ccRSA", "NA"],alphas.s1.cc)
@@ -305,7 +307,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 500;
+var mhiter = 1500;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
@@ -315,7 +317,7 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-L1-fullAlt-ccPriorGlobal-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-L1-fullAlt-ccPriorByDomain-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
 display("file written to = " + outfile)
