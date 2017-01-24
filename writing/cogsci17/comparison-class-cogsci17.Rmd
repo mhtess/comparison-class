@@ -737,81 +737,32 @@ S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_
 L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
 \end{align}
 
+We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2 (described below). 
+We use Eq.~\ref{eq:L1} to model the comparison class inference task of Experiment 2. 
+Following @Lassiter2013, $P(\theta) = \text{Uniform}(0, 1)$.
 
-# Experiment 2: Adjective production
+$P(c)$ describes the prior probability of the superordinate (or subordinate) comparison class used by the listener in the comparison class inference model (and Expt.~1). 
+This is likely specified by conceptual knowledge and will heavily be influenced by the subordinate and superordinate items we designed (Table \ref{tab:1}).
+This prior in itself is of major theoretical interest and future work should attempt to understand the differences in our items that would lead to different $P(c)$. 
+<!--In an absolute sense, this is the real target of theoretical interest. -->
+In this work, we are interested in a within-domain effect (i.e., the variability within the domain of daytime temperatures).\footnote{
+That is, fixing some prescribed set of potential comparison classes, what is a listener likely to infer is the relevant one. \mht{should come earlier and probably not in a footnote}
+}
+Hence, in our data analysis, we put uncertainty over the prior probability of each of the 5 $i$ superordinate categories: $c^{super}_{i} \sim \text{Uniform}(0,1)$
+\mht{If we keep the domain-wise ccPrior variable, need to square this with the "main effect of subordinate" that I say we're predicted.}
 
-In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
+\mht{Insert plate diagram here}
 
-## Methods
+$P(x \mid c)$ describes the likely values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
+With simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
+We fix each superordinate distribution $P(x \mid c^{super})$ to be a Unit-Normal and put uncertainty over the parameters of each subordinate Gaussian. 
+Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 3)$.
+These $P(x \mid c)$ are used in both the experiments, which allows us to both simultaneously gain credibility in our estimates of these parameters as well as in our model, which has to predict data from two distinct experiments.
 
-### Participants
-
-We recruited 100 participants from Amazon Mechanical Turk.
-Five participants were excluded due to failing the catch trial.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
-
-### Materials and procedure
-
-Materials were the same as Expt. 1 (Table 1).
-
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-Participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
-On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Alicia picks up an apple.*).
-This was followed by an adjective sentence, which predicated a positive- or negative-form gradable adjective over the superordinate category of the item (e.g., *Do you think the apple would be light relative to other produce?*).
-The experiment can be viewed in full at: 
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
-
-## Data analysis and results
-
-```{r, cache = T}
-project.name <- "vague-prior-elicitation-1"
-data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
-d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
-d.catch <- d.catch %>% 
-  mutate(pass = response == "Yes")
-
-d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
-
-vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
-  filter(pass) %>%
-  group_by(strength, target, degree, adjective, 
-           form, sub_category, super_category) %>%
-  multi_boot_standard(column = "response")
-
-```
-
-```{r expt2results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 2 results. Adjective speaker judgments for 30 items on 5 scales."}
-vs.summary %>%
-  ungroup() %>%
-  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
-  ggplot(.,
-         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
-  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
-  geom_errorbar(position = position_dodge())+
-  facet_grid(.~degree, scales = 'free')+
-  ylim(0, 1) +
-  theme(axis.text.x = element_text(angle = 90) )+
-  scale_fill_brewer(palette = 'Set1')+
-  ylab("Superordinate adjective endorsement")+
-  xlab("Item category")+
-  theme(axis.title.y = element_text(size = 10),
-        strip.text = element_text(size = 8))
-```
-
-
-
-
-# Bayesian data analysis of the Bayesian language model
-
-# Discussion
-
-\begin{enumerate}
-\item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
-\item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
-\item Hyperbole / *normative* comparison classs: If we listen to a lecture, and you say "That *was long*.", it means "Long relative to how long I think it should have been." If we go out for pasta, and you ask how it was, and I say "it was expensive" it means "expensive relative to how much it should have been given the quality".
-\end{enumerate}
-
+The model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha$ and the cost $w$
+We put the following priors over these parameters: $\alpha \sim \text{Uniform}(0, 20)$, $w \sim \text{Uniform} (0, 20)$
+\mht{describe task-wise speaker optimalities}
+ 
 # Acknowledgements
 
 Place acknowledgments (including funding information) in a section at
