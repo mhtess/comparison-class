@@ -545,7 +545,7 @@ Note: We are collecting N = 150 for each experiment. Because each participant re
 -->
 
 We recruited 264 participants from Amazon Mechanical Turk.
-Two participants were excluded for failing the catch trial, leaving a total number of 262 participants.
+Two participants were excluded for failing an attention check, leaving a total number of 262 participants.
 Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
 The experiment took about five minutes and participants were compensated $0.50 for their work.
 
@@ -618,15 +618,15 @@ d.catch <- d.catch %>%
 d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
 d.tidy <- left_join(d, d.catch) %>%
   filter(pass) %>%
-  mutate(subResponse = ifelse(paraphrase == "super", 0, 1))
+  mutate(superResponse = ifelse(paraphrase == "super", 1, 0))
 
 df.summary <- d.tidy %>%
   group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
 #  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
-  multi_boot_standard(column = "subResponse")
+  multi_boot_standard(column = "superResponse")
 ```
 
-```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales. Error bars correspond to bootstrapped 95 percent confidence intervals."}
 
 
 df.summary %>%
@@ -639,14 +639,15 @@ df.summary %>%
          )%>%
   ggplot(.,
          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
-  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8) +
-  geom_errorbar(position = position_dodge()) +
+  geom_bar(stat = 'identity', position = position_dodge(), alpha = 1, 
+           color = 'black', width = 0.9) +
+  geom_errorbar(position = position_dodge(0.9), width = 0.3) +
   #facet_grid(condition~degree, scales = 'free') +
   facet_grid(.~degree, scales = 'free') +
   ylim(0, 1) +
   #theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
-  scale_fill_brewer(palette = 'Set1') +
-  ylab("Proportion subordinate paraphrase") +
+  scale_fill_brewer(palette = 'Set3') +
+  ylab("Proportion superordinate paraphrase") +
   xlab("Item category") +
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))
   # theme(axis.title.y = element_text(size = 10),
