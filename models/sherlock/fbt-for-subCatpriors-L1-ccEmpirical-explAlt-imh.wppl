@@ -5,27 +5,89 @@ var index = utils.wpParseFloat(last(process.argv)) // load index as last command
 // time webppl fbt-for-subCatpriors.wppl --require ~/Documents/research/tools/webppl-csv/ --require mht
 
 var utterances = {
-  positive: ["positiveAdjective", "silence"],
-  negative: ["negativeAdjective", "silence"]
+  positive: ["positive_Adjective",
+             "silence_silence",
+             "positive_sub",
+             "positive_super"],
+  negative: ["negative_Adjective",
+             "silence_silence",
+             "negative_sub",
+             "negative_super"]
 };
 
-var utterancePrior = cache(function(form){
-  return Infer({
-    model: function() { return uniformDraw(utterances[form]) }
-  })
-});
+var catFrequencies =  {
+    "day in Fall": 8.7095,
+    "video of the cute animal": 9.4596,
+    "dishwasher": 9.8789,
+    "day in Winter": 10.5067,
+    "days of the year": 11.0254,
+    "day in Summer": 11.6281,
+    "bottle opener": 11.9212,
+    "basketball player": 12.0716,
+    "soccer player": 12.0883,
+    "watermelon": 12.1592,
+    "gymnast": 12.4388,
+    "things you watch online": 12.9126,
+    "toaster": 13.691,
+    "produce": 13.96,
+    "kitchen appliances": 14.2427,
+    "grape": 14.788,
+    "apple": 15.2093,
+    "music video": 15.5094,
+    "movie": 19.0237,
+    "people": 19.99
+}
+
+var subCatLengths =   {
+    "apple": 5,
+    "basketball player": 17,
+    "bottle opener": 13,
+    "day in Fall": 11,
+    "day in Summer": 13,
+    "day in Winter": 13,
+    "dishwasher": 10,
+    "grape": 5,
+    "gymnast": 7,
+    "movie": 5,
+    "music video": 11,
+    "soccer player": 13,
+    "toaster": 7,
+    "video of the cute animal": 24,
+    "watermelon": 10
+};
+
+var superCatFrequencies =     {
+    "height": -3.44,
+    "price": -12.7706,
+    "temperature": -11.2011,
+    "time": -14.0314,
+    "weight": -9.6357
+}
+
+var superCatLengths =  {
+    "height": 6,
+    "price": 18,
+    "temperature": 16,
+    "time": 23,
+    "weight": 7
+};
+
+
+// var utterancePrior = cache(function(form){
+//   return Infer({
+//     model: function() { return uniformDraw(utterances[form]) }
+//   })
+// });
 
 var pam = function(lst, fn){
   return map(fn, lst);
 };
 
 var meaning = function(utterance, state, threshold) {
-  utterance == "positiveAdjective" ? state > threshold :
-  utterance == "negativeAdjective" ? state < threshold :
+  utterance == "positive" ? state > threshold ? flip(0.9999) : flip(0.0001) :
+  utterance == "negative" ? state < threshold ? flip(0.9999) : flip(0.0001) :
   true
 }
-
-
 
 var round = function(x){
   return Math.round(x*10)/10
@@ -50,8 +112,8 @@ var KL = function(p, q, supp) {
 // were it not for speaker optimality
 // this model could be run independently for each item
 
-//var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
- var dataPath = "/home/mtessler/projects/comparison-class/data/"
+// var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
+var dataPath = "/home/mtessler/projects/comparison-class/data/"
 var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
 
@@ -65,27 +127,58 @@ var subCategories = subCategories0.slice(0, subCategories0.length - 1);
 var degrees0 = _.uniq(_.pluck(vsData, "degree"));
 var degrees = degrees0.slice(0, degrees0.length - 1);
 
-
-var classPrior = Infer({
-  model: function(){return flip(0.5) ? "super": "sub"}
-});
-
 var model = function(){
 
   // should probably be an s1 for each task
   var alphas = {
     s1: {
-      super: uniformDrift( { a:0, b: 20, width: 2} )
-      // cc: uniformDrift( { a:0, b: 20, width: 2} )
+      super: uniformDrift( { a:0, b: 20, width: 2} ),
+      cc: uniformDrift( { a:0, b: 20, width: 2} )
+    },
+    s2: {
+      super: uniformDrift({a:0, b: 4, width: 0.5}),
     }
-    // s2: {
-    //   super: uniformDrift({a:0, b: 4, width: 0.5}),
-    // }
   };
+
+  var explicitCost = 1;
+  var explicitCost = 1;//uniformDrift({a: 0, b: 10, width : 1});
+  var silenceCost = 1;//uniformDrift({a: 0, b: 1, width : 0.1})
+  var utteranceCosts = [1, silenceCost, explicitCost, explicitCost];
+  var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
+  var utterancePrior = cache(function(form){
+    return Infer({
+      model: function() {
+        return categorical({
+          vs: utterances[form],
+          ps: utteranceProbs
+        })
+      }
+    })
+  });
+
+  var classParameters = {
+    frequency: uniformDrift({a:0, b: 1, width: 0.05}),
+    charLength: uniformDrift({a:0, b: 1, width: 0.05})
+  };
+
+
+  // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+  //
+  // var classPrior = Infer({
+  //   model: function(){return flip(superClassPrior) ? "super": "sub"}
+  // });
 
   foreach(degrees, function(degree){
     var subCats = _.uniq(_.pluck(_.where(vsData, {degree:degree}), "sub_category"))
+
     // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
+    //
+    // var classPrior = Infer({
+    //   model: function(){return flip(superClassPrior) ? "super": "sub"}
+    // });
+
+    var supercatWeight = exp(classParameters.frequency * superCatFrequencies[degree] +
+                            classParameters.charLength * superCatLengths[degree]);
 
 
   // var parameters = map(function(subCat){
@@ -94,7 +187,16 @@ var model = function(){
       var mu = uniformDrift( { a: -3, b: 3, width:0.5});
       var sigma = uniformDrift({a:0, b:3, width: 0.3});
 
-      var binParam = 5;
+      var subcatWeight = exp(classParameters.frequency * subCatFrequencies[subCat] +
+                            classParameters.charLength * subCatLengths[subCat]);
+
+
+      var classPrior = Infer({
+        model: function(){
+          return categorical({vs: ["super", "sub"], ps:[supercatWeight, subcatWeight]})
+      }});
+
+      var binParam = 3;
 
       var stateParams = {
         sub: {mu: mu, sigma: sigma},
@@ -143,20 +245,28 @@ var model = function(){
         });
       });
 
-      var literalListener = cache(function(utterance, threshold, comparisonClass) {
+      var literalListener = cache(function(u, threshold, comparisonClass) {
         Infer({model: function(){
-          var state = sample(statePrior[comparisonClass]);
+          var cc = u.split("_")[1] == "Adjective" ?  comparisonClass :
+                    u.split("_")[1] == "silence" ?  comparisonClass :
+                    u.split("_")[1]
+          var utterance = u.split("_")[0]
+          var state = sample(statePrior[cc]);
+          // display(cc);
+          // display(threshold);
+          // display(utterance);
           var m = meaning(utterance, state, threshold);
           condition(m);
           return state;
         }})
-      }, 10000);
+      }, 10000)
 
       /////////////////////////////////////////////////
       // for Superordinate class speaker task
+
       var speaker1_super = cache(function(state, threshold, form) {
         Infer({model: function(){
-          var utterance = sample(utterancePrior(form))
+          var utterance = uniformDraw([form + "_Adjective", "silence_silence"]);
           var L0 = literalListener(utterance, threshold, "super")
           factor( alphas.s1.super * L0.score(state) )
           return utterance
@@ -167,6 +277,7 @@ var model = function(){
         Infer({model: function(){
           var state = sample(statePrior["super"]);
           var threshold = sample(thresholdPrior(form));
+          // var thresholds = form == "positive" ? {positive: t} : {negative: t};
           var S1 = speaker1_super(state, threshold, form);
           observe(S1, utterance);
           return state
@@ -176,13 +287,13 @@ var model = function(){
       var speaker2_super = function(form){
         Infer({model: function(){
           var speakerBeliefs = statePrior["sub"];
-          var utterance = sample(utterancePrior(form));
+          var utterance = uniformDraw([form + "_Adjective", "silence_silence"]);
           var L1 = pragmaticListener_super(utterance, form);
 
           var _kl = KL(speakerBeliefs, L1, speakerBeliefs.support());
-          factor(-1 * _kl)
+          factor(alphas.s2.super * -1 * _kl)
 
-          return utterance == (form + "Adjective") ? 1 : 0
+          return utterance == form + "_Adjective" ? 1 : 0
           }})
       }
       ////////////////////////////////////////
@@ -193,14 +304,14 @@ var model = function(){
         Infer({model: function(){
           var utterance = sample(utterancePrior(form))
           var L0 = literalListener(utterance, threshold, comparisonClass)
-          factor( alphas.s1.super * L0.score(state) )
+          factor( alphas.s1.cc * L0.score(state) )
           return utterance
         }})
-      })
+      }, 10000)
 
       var pragmaticListener = function(form) {
         Infer({model: function(){
-          var utterance = form + "Adjective";
+          var utterance = form + "_Adjective";
           var comparisonClass = sample(classPrior);
           var state = sample(statePrior["sub"]);
           var threshold = sample(thresholdPrior(form));
@@ -223,16 +334,16 @@ var model = function(){
         var superSpeakerProbs = speaker2_super(form);
 
         mapData({data:d_subcat_superSpeaker}, function(d){
-	         // console.log("superSpeaker = " + superSpeakerProbs.score(d))
+	        //  console.log("superSpeaker = " + superSpeakerProbs.score(d))
           observe(superSpeakerProbs, d)
         })
 
         var ccRSA = pragmaticListener(form);
 
-        // mapData({data:d_subcat_ccInference}, function(d){
-        //  // console.log("cc = "+ ccRSA.score(d))
-        //   observe(ccRSA, d);
-        // })
+        mapData({data:d_subcat_ccInference}, function(d){
+        //  console.log("cc = "+ ccRSA.score(d))
+          observe(ccRSA, d);
+        })
 
         query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
         query.add([subCat, "superCC", form], Math.exp(ccRSA.score("super")))
@@ -247,18 +358,26 @@ var model = function(){
 
       })
 
-      // query.add([degree, "subCatPrior", "NA"], superClassPrior)
+      // query.add([degree, "superCatPrior", "NA"], superClassPrior)
     })
 
-  query.add(["speakerOptimality","super", "NA"],alphas.s1.super)
-  // query.add(["speakerOptimality","sub", "NA"],alphas.s1.cc)
+  // query.add(["superCatPrior", "NA",  "NA"], superClassPrior)
+  // query.add(["explicitCost", "NA",  "NA"], explicitCost)
+  // query.add(["silenceCost", "NA",  "NA"], silenceCost)
+
+  query.add(["beta", "length",  "NA"], classParameters.charLength)
+  query.add(["beta", "frequency",  "NA"], classParameters.frequency)
+
+  query.add(["speakerOptimality_s1","superSpeaker", "NA"],alphas.s1.super)
+  query.add(["speakerOptimality_s2","superSpeaker", "NA"],alphas.s2.super)
+  query.add(["speakerOptimality_s1","ccRSA", "NA"],alphas.s1.cc)
   // }, subCategories)
 
   // return _.object(_.flatten(parameters, true));
   return query
 }
 
-var mhiter = 3000;
+var mhiter = 20;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
@@ -268,6 +387,7 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/vs-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-L1-explAlt-empiricalCC-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
+display("file written to = " + outfile)
