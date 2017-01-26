@@ -46,6 +46,9 @@ output: cogsci2016::cogsci_paper
 ```{r global_options, include=FALSE}
 rm(list=ls())
 
+rm(list=ls())
+
+
 # set local path for the repo
 if (grepl("michael", getwd())) {
   project.path <- "/media/michael/Data/Desktop/comparison-class/"
@@ -56,6 +59,7 @@ if (grepl("michael", getwd())) {
 }
 
 knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+
 ```
 
 ```{r, libraries}
@@ -136,7 +140,7 @@ theme_paper <- function(base_size = 12, base_family = "Helvetica") {
     complete = TRUE
   )
 }
-theme_set(theme_bw())
+theme_set(theme_bw(8))
 ```
 
 # Introduction
@@ -149,7 +153,8 @@ Comparison classes are uncontroversial in the study of vague language.
 Even 2 or 3 year olds understand that the meaning of the words "big" and "little" depend upon the context: 
 An object can be "big" relative to other objects in a scene (i.e., its physical context), 
 an object can be "big" relative to the size it should be for completing its intended function, 
-or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
+or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. 
+\mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
 Adult judgments of the felicity for gradable adjectives like "dark" or "light", "short" or "tall" depend upon fine-grained details of the statistics of the comparison class [@Solt2012; @Qing2014].
 It is not well undertsood, however, how a comparison class becomes contextually-salient. 
 The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
@@ -160,8 +165,12 @@ or it could just be warm (i.e., *warm relative to any day of the year*)
 We propose that the selection of a comparison class with respect to which vague languages gets interpreted is arrived upon through a pragmatic reasoning process.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
 We introduce a novel language understanding model that can resolve uncertainty about the likely reference class alongside the uncertainty known to be important for modeling vague language understanding (namely, uncertainty about the world and uncertainty about the precise meaning of the vague speech act).
-From this model, we derive two qualitative predictions which we test in an experiment designed to elicit the likely comparison class.
-\mht{maybe sketch out the two predictions, if they can be explained straightforwardly}.
+From this model, we derive two qualitative predictions:
+(1) Ceteris paribus, a listener should prefer reference classes that have lower variance because the vague utterance will have a more specific meaning under a lower variance reference class. 
+(2) When the object of discourse is a member of a subordinate class with a mean significantly greater than the mean of a higher level class (e.g., a day in Summer has an expected temperature higher than the average across the whole year), listeners should prefer the higher level (or, superordinate) class because the vague utterance is more likely to be true of the higher level class. 
+The opposite pattern is predicted to hold for subordinate classes low on the scale (e.g., days in Winter). 
+We test these predictions in an experiment designed to elicit the comparison class.
+
 Quantitative predictions of the model will depend on the quantitative details of the relevant world knowledge.
 This could be measured by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
 Instead, we build a Bayesian data-analytic model to introduce uncertainty over these parameters and resolve the uncertainty by asking similar natural language questions in the domains of inquiry. 
@@ -173,7 +182,7 @@ Warm is vague,
 When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
 -->
 
-# Computational model
+# Language understanding with comparison class uncertainty
 
 Adjectives like *warm* and *cold*, *cheap* and *expensive*,  are vague descriptions of an underlying quantitative scale (e.g., temperature, price).
 Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
@@ -482,9 +491,9 @@ subplt1 <- ggplot(all.priors, aes(x = val, y=..scaled.., fill = class))+
   xlab("Degree")+
   ylab("Scaled probability")+
   facet_wrap(~sub_mu, nrow = 1)+
-  theme(title = element_text(size = 8),
-        legend.text = element_text(size = 6),
-        axis.text = element_text(size = 6))+
+  # theme(title = element_text(size = 8),
+  #       legend.text = element_text(size = 6),
+  #       axis.text = element_text(size = 6))+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   scale_x_continuous(limits = c(-4, 4), breaks = c(-2, 0, 2))
 
@@ -499,8 +508,8 @@ subplt2 <- ggplot(mp.both %>%
   xlab("Subordinate prior mean")+
   ylab("Subordinate interpretation")+
   ggtitle("RSA listener model") +
-  theme(title = element_text(size = 8),
-        legend.text = element_text(size = 6))+
+  # theme(title = element_text(size = 8),
+  #       legend.text = element_text(size = 6))+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))
 
 grid.arrange(subplt1, subplt2, nrow = 1)
@@ -662,15 +671,17 @@ df.summary <- d.tidy %>%
   multi_boot_standard(column = "subResponse")
 ```
 
-```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
+```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
 
 
 df.summary %>%
   ungroup() %>%
-  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])#,
+  mutate(sub_category = 
+           factor(sub_category, 
+                  levels = sub_category[order(strength)])#,
           # condition = factor(condition, levels = c("context","contextWithSuper"),
           #                    labels=c("Bare", "Supercat mention"))
-         ) %>%
+         )%>%
   ggplot(.,
          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8) +
@@ -678,12 +689,13 @@ df.summary %>%
   #facet_grid(condition~degree, scales = 'free') +
   facet_grid(.~degree, scales = 'free') +
   ylim(0, 1) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
+  #theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
   scale_fill_brewer(palette = 'Set1') +
   ylab("Proportion subordinate paraphrase") +
   xlab("Item category") +
-  theme(axis.title.y = element_text(size = 10),
-        strip.text = element_text(size = 8))
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95))
+  # theme(axis.title.y = element_text(size = 10),
+  #       strip.text = element_text(size = 8))
 ```
 
 ```{r glm1, cache = T}
@@ -821,9 +833,9 @@ vs.summary %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))+
   scale_fill_brewer(palette = 'Set1')+
   ylab("Superordinate adjective endorsement")+
-  xlab("Item category")+
-  theme(axis.title.y = element_text(size = 10),
-        strip.text = element_text(size = 8))
+  xlab("Item category")#+
+  # theme(axis.title.y = element_text(size = 10),
+  #       strip.text = element_text(size = 8))
 ```
 
 
@@ -832,65 +844,28 @@ vs.summary %>%
 
 # Discussion
 
+\begin{enumerate}
+\item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
+\item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
+\item Hyperbole / *normative* comparison classs: If we listen to a lecture, and you say "That *was long*.", it means "Long relative to how long I think it should have been." If we go out for pasta, and you ask how it was, and I say "it was expensive" it means "expensive relative to how much it should have been given the quality".
+\item Item heterogeneity: Movies is not a subordinate to "things you watch online", but the model still works
+\item Comparison class prior: There is an interpretation as a noisy-channel model where the semantics of *tall* requires a comparison class, and the listener has to repair the utterance via the comparison class prior. Another (non mutually exlcusive) interpretation is more cognitive that surrounds the heterogeneity of the group w.r.t. dimension.  Basic level effects are also probably here, and correlated with the frequency and length measurements we took. 
+\end{enumerate}
+
+\red{TO DO}
+\begin{enumerate}
+\item Settle on alternative utterances for the final model. (Run full model, then do simulations with inferred parameters)
+\item More model exploration with simulations on the variability vs mean
+\end{enumerate}
+
+
+
+
 
 # Acknowledgements
 
 Place acknowledgments (including funding information) in a section at
 the end of the paper.
-
-
-
-
-<!--
-## Experiments
-
-See all the items [here](http://stanford.edu/~mtessler/comparison-class/experiments/js/examples-2.js), or see the listener experiment (with all the items) [here](http://stanford.edu/~mtessler/comparison-class/experiments/listener-1.html).
-
-\begin{enumerate}
-
-\item \textbf{Stimuli}
-  \subitem Currently we have 40 unique items, made up of 6 scales x 2 (positive and negative form adjectives)
-  \subitem Note we are using temperature that is perceived both through touching and temperature that is perceived in the whole body (touching objects vs. the weather). For the weather, it is really about speaker's beliefs--their own subjective comparison class (e.g., John think its cold because he's from Southern California).
-  \subitem 3 or 4 contexts by item (different targets of reference)
-  \subitem Example: Gary buys a [television, book, iPhone] and picks it up. He says, ``This is heavy.''
-
-\item \textbf{Comparison class elicitation}
-  \subitem We have run a pilot using the paraphrase technique with the helper phrases "for a" and "relative to." "For a" produced more reliable results, so we'll use that going forward.
-  \subitem Example: Gary buys a television and picks it up. He says, ``This is heavy.''
-  \subitem \textbf{Dependent measure}: What do you think Gary meant? ``This is heavy \textbf{for a} ...'' (fill in the blank)
-  \subitem \textbf{Data analysis}: Take modal response, or top 2, and use those in the prior elicitation task.
-
-\item \textbf{Prior elicitation}
-  \subitem This will refer to the comparison class.
-  \subitem \textbf{Dependent measure}: What do you think is the weight of a television? Provide number and units (units from a set from a drop-down menu).
-
-\item \textbf{Language understanding (Listener task)}
-  \subitem Same stimuli as the comparison class elicitation.
-  \subitem \textbf{Dependent measure}: same as prior elicitation.
-
-\end{enumerate}
-# Model
-
-uRSA with lifted variable.
-Plug in different priors.
-
-# Data anlaysis
-
-Probably something similar to the habituals paper.
-Assume log-normals, do BDA on the prior data.
-
-# Current concerns
-
-\begin{enumerate}
-
-\item In the Justine-way of doing these kinds of experiments, for the prior elicitation, we would have the same context sentence (``Gary buys a television and picks it up.'') without the adjective sentence, and ask about the likely weight.
-What does our intermediate comparison class elicitation step buy us?
-
-\item For many of the our items, it seems that the comparison class we're going to get is the class of the target objects (e.g., televisions, cups of coffee, weather in Southern California)... I have the feeling that some items (e.g., a 30 year old who is tall) have more general classes (e.g., tall for an adult, for a woman) while others (e.g., a 4 year old boy who is tall) have more specific classes (i.e., tall for a 4 year old). This example may be unique / idiosyncractic, but also may suggest that the comparison class needs to be a relative homogeneous category (e.g., 4 year olds are really different than 2 year olds, whereas 30 vs. 28 year olds not so much). If this is interesting, should we try to move our stimuli more in that direction? Any thoughts?
-
-\end{enumerate}
-
--->
 
 # References
 
