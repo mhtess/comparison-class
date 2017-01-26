@@ -655,12 +655,34 @@ df.summary %>%
 ```
 
 ```{r glm1, cache = T}
-rs.glmm <- glmer(data = d.tidy, subResponse ~ form*strength +
-                   (1 + form | degree) +
-                   (1 + form | sub_category) +
+d.centered = d.tidy %>%
+                   filter(!(strength == 2)) %>%
+                   mutate(strength = ifelse(strength == 3, 1, 
+                                            ifelse(strength == 1, 0,
+                                                   -99)),
+                          c.strength = strength-mean(strength),
+                          num.form = as.numeric(form) - 1,
+                          c.form = num.form - mean(num.form))
+
+# with interaction random effects
+rs.glmm <- glmer(data = d.centered, 
+                 superResponse ~ c.form*c.strength +
+                   (1 + c.form:c.strength | sub_category) +
                    (1 | workerid),
                  family = 'binomial')
-summ.rs.glmm <- summary(rs.glmm)
+rs.glmm.summary <-  summary(rs.glmm)
+ 
+#simple effect model doesn't converge w/ interaction random effects
+d.centered$strength = as.factor(d.centered$strength)
+rs.glmm.simple <- glmer(data = d.centered, 
+                 superResponse ~ strength*form - form +
+                   (1  | sub_category) +
+                   (1  | workerid),                   
+                 family = 'binomial')
+rs.glmm.simple.summary <- summary(rs.glmm.simple)
+
+
+
 ```
 
 On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
@@ -670,16 +692,32 @@ We see considerable variability both within- and across- scales.
 Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (i.e., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
 For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
 
-This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low, high, or in the middle of the scale), and of critical theoretical interest, the interaction between these two variables
-In addition, we included in the model by-participant random effects of intercept, by-degree (temperature, weight, etc...) random effects of intercept and form, and by-subordinate category random effects of intercept and form to predict the probability with which participants would choose the subordinate category as the paraphrase.
-\mht{not sure if this is the right test}
-As can be seen in Figure \ref{fig:expt1results}, positive form adjectives with *a priori* stronger subordinate categories produce relatively fewer subordinate paraphrases than negative form adjectives $\beta = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","Estimate"],2)`$;
-$SE = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","Std. Error"],2)`;$
-$z = `r round(summ.rs.glmm[["coefficients"]]["formpositive:strength","z value"],2)`$.
+This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
+In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and the iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[
+This was the maximal mixed-effects structure that converged.
+].
+Confirming our two qualitative model predictions, there was an overall preference for subordinate category paraphrases ($\beta = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Estimate"],2)`$;
+$SE = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Std. Error"],2)`;$
+$z = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","z value"],2)`$) and there was an interaction between form and strength 
+($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
+$SE = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Std. Error"],2)`;$
+$z = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","z value"],2)`$).
+The main effects of form and strength were not significant.
+
+Following up on this model, we examine the simple effects of strength for both positive and negative form adjectives.
+We find the predicted effects on superordinate paraphrase probability for items both on the low and high end of the scale. 
+For items on the low end of the scale (e.g., Winter days on temperature), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes (
+$\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Estimate"],2)`$;
+$SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Std. Error"],2)`;$
+$z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","z value"],2)`$), while the opposite is true for items on the high end of the scale (e.g., Summer days; 
+$\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Estimate"],2)`$;
+$SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Std. Error"],2)`;$
+$z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
+All of these effects are also visually apparent in Figure \ref{fig:expt1results}.
 
 
 The two qualitative predictions of our language understanding model were borne out in Experiment 1.
-The computational model can in principle make quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
+Our computational model makes quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
 This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available in the prior [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
 These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
 In the next section, we formalize our uncertainty about listeners' prior knowledge, and run a second experiment to gather converging evidence about listeners' knowledge, which we can then use to generate quantitative predictions for Expt. 1.
