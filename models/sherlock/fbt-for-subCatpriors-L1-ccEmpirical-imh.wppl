@@ -9,59 +9,6 @@ var utterances = {
   negative: ["negativeAdjective","positiveAdjective", "silence"]
 };
 
-var subCatFrequencies =  {
-    "apple": -8.2833,
-    "basketball player": -11.9714,
-    "bottle opener": -14.9218,
-    "day in Fall": -15.5904,
-    "day in Summer": -14.3104,
-    "day in Winter": -15.1287,
-    "dishwasher": -11.6116,
-    "grape": -8.5764,
-    "gymnast": -11.6608,
-    "movie": -7.6716,
-    "music video": -12.0184,
-    "soccer player": -12.6124,
-    "toaster": -12.1227,
-    "video of the cute animal": -18.1497,
-    "watermelon": -10.1096
-};
-
-var subCatLengths =   {
-    "apple": 5,
-    "basketball player": 17,
-    "bottle opener": 13,
-    "day in Fall": 11,
-    "day in Summer": 13,
-    "day in Winter": 13,
-    "dishwasher": 10,
-    "grape": 5,
-    "gymnast": 7,
-    "movie": 5,
-    "music video": 11,
-    "soccer player": 13,
-    "toaster": 7,
-    "video of the cute animal": 24,
-    "watermelon": 10
-};
-
-var superCatFrequencies =     {
-    "height": -3.44,
-    "price": -12.7706,
-    "temperature": -11.2011,
-    "time": -14.0314,
-    "weight": -9.6357
-}
-
-var superCatLengths =  {
-    "height": 6,
-    "price": 18,
-    "temperature": 16,
-    "time": 23,
-    "weight": 7
-};
-
-
 // var utterancePrior = cache(function(form){
 //   return Infer({
 //     model: function() { return uniformDraw(utterances[form]) }
@@ -143,23 +90,25 @@ var model = function(){
   });
 
   var classParameters = {
-    frequency: uniformDrift({a:0, b: 5, width: 0.5}),
-    charLength: uniformDrift({a:0, b: 5, width: 0.5})
+    frequency: uniformDrift({a:0, b: 3, width: 0.2}),
+    charLength: uniformDrift({a:0, b: 3, width: 0.2})
   };
 
   foreach(degrees, function(degree){
 
     var degreeData = _.where(ccData, {degree:degree});
     var subCats = _.uniq(_.pluck(degreeData, "sub_category"));
+    var superCat = degreeData[0]["super_category"];
 
     // var superFreq = degreeData[0]["logSuperFreq"];
     // var superLength = degreeData[0]["superLength"];
 
     // var supercatWeight = exp(classParameters.frequency * superFreq +
                             // classParameters.charLength * superLength);
-    var supercatWeight = exp(classParameters.frequency * superCatFrequencies[degree] +
-                            classParameters.charLength * superCatLengths[degree]);
-    // display(supercatWeight)
+    var supercatWeight = exp(
+      classParameters.frequency * catFrequencies[superCat] +
+      classParameters.charLength * superCatLengths[degree]
+    );
 
   // var parameters = map(function(subCat){
     foreach(subCats, function(subCat){
@@ -173,11 +122,10 @@ var model = function(){
       // var subLength = subCatData[0]["subLength"];
       // display(subCat)
       // display(subFreq)
-      var subcatWeight = exp(classParameters.frequency * subCatFrequencies[subCat] +
-                            classParameters.charLength * subCatLengths[subCat]);
-      // var subcatWeight = exp(classParameters.frequency * subFreq +
-                            // classParameters.charLength * subLength);
-      // display(subcatWeight)
+      var subcatWeight = exp(
+        classParameters.frequency * catFrequencies[subCat] +
+        classParameters.charLength * subCatLengths[subCat]
+      );
 
       var classPrior = Infer({
         model: function(){
@@ -358,7 +306,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 3000;
+var mhiter = 10;
 var burn = mhiter / 2;
 var posterior = Infer({
   model: model,
