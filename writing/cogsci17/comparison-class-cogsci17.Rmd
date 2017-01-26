@@ -17,16 +17,14 @@ author-information: >
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "Vague language often communicates relative meanings.
-    For example, the gradable adjective *expensive* conveys that the price of some object is high relative to some comparison class---a set of entities against which the target object is implicitly compared.
-    Comparison classes are known to be central to adjectival interpretation and even have been used to explain other kinds of vague language (e.g., generic language).
-    Yet little is known about where comparison classes come from.
-    Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge.
-    First, we introduce a Rational Speech Act model that makes a novel prediction about the level of abstraction of the comparison class (e.g., expensive relative to a subordinate vs. superordinate class) and validate this prediction using a paraphrase experiment.
-    Quantative predictions of the model rely upon the structure of relevant world knowledge, which we elicit using a novel technique that avoids participants having to estimate quantities.
-    \ndg{the abstract is too... abstract. add a concrete example. make it interpretable to average cogsci person, not just a semanticist.}
-    "
-
+    "The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
+    The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
+    For example, *It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
+    The issue is that *warm* conveys that the temperature is high relative to some comparison class, but little is known about how a listener decides upon a comparison class. 
+    Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and internal models of speech production.
+    We introduce a Rational Speech Act model and derive two qualitative predictions from the model, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class.
+    We then produce quantitative predictions from the model by asking follow-up questions to the model combined with a novel Bayesian data analytic technique. 
+    We conclude that the listeners are remarkably flexible in their ability to infer speakers' intended reference class when they are absent from the context."
 
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
