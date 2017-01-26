@@ -7,6 +7,7 @@ header-includes:
   - \usepackage{tabularx}
   - \usepackage{multicol}
   - \usepackage{wrapfig}
+  - \usepackage{gensymb}
   #- \usepackage{stfloats}
 
 author-information: >
@@ -140,12 +141,12 @@ theme_set(theme_bw())
 
 # Introduction
 
-When it's warm outside it's still useful to know whether we'rein July or January.
-A warm day in July could be 80 degrees while a warm one in January might not get above 60.
-The predicate "warm" is vague, in the sense that there are borderline cases of being warm, interlocutors can faultlessly disagree as to whether or not it is warm, and what it means to be warm is relative to a relevant *comparison class*.
+When it's warm outside it's still useful to know whether we're in July or January.
+A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.
+The predicate "warm" is vague in the sense that there are borderline cases of being warm--interlocutors can faultlessly disagree as to whether or not it is warm, and what it means to be warm is relative to a relevant *comparison class*.
 
 Comparison classes are uncontroversial in the study of vague language. 
-Even, 2 or 3 year olds understand that the meaning of the words "big" and "little" depend upon the context: 
+Even 2 or 3 year olds understand that the meaning of the words "big" and "little" depend upon the context: 
 An object can be "big" relative to other objects in a scene (i.e., its physical context), 
 an object can be "big" relative to the size it should be for completing its intended function, 
 or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
@@ -163,8 +164,8 @@ From this model, we derive two qualitative predictions which we test in an exper
 \mht{maybe sketch out the two predictions, if they can be explained straightforwardly}.
 Quantitative predictions of the model will depend on the quantitative details of the relevant world knowledge.
 This could be measured by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
-Instead, we build a Bayesian data analytic model to introduce uncertainty over these paremters and resolve the uncertainty by asking similar natural language questions in the domains of inquiry. 
-This represents a new possibility for Bayesian models of cognition and language: By building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to give multiple judgments on different tasks.
+Instead, we build a Bayesian data-analytic model to introduce uncertainty over these parameters and resolve the uncertainty by asking similar natural language questions in the domains of inquiry. 
+This represents a new possibility for Bayesian models of cognition and language: by building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to give multiple judgments on different tasks.
 
 <!--
 "It's warm outside" when heard in July means something very different than when heard in January.
@@ -180,7 +181,7 @@ For example, the weather is *warm* if its temperature is greater than some thres
 The crux of such theories rests on the fact that this threshold is derived relative to a *comparison class* of other possible entities.
 A day in Winter can be warm *relative to* other days in Winter but probably not warm relative to all days of the year.
 
-The comparison class cam be thought of as a probability distribution over degrees on a scale [@Lassiter2013; @Qing2014a].
+The comparison class can be thought of as a probability distribution over degrees on a scale [@Lassiter2013; @Qing2014a].
 We adopt a probabilistic model of adjectival interpretation that is derived from general principles of language understanding [@Lassiter2013].
 The model is an extension of the Rational Speech Act theory of language understanding [for a review see @Goodman2016] and uses a simple threshold semantics for adjectives $[[u]]: x > \theta$ (i.e., warm means greater than some temperature).
 Uncertainty is placed over the threshold $\theta \sim \text{Uniform}(0, 1)$ and is resolved by the pragmatic listener reasoning about the likely values of the degree $P(x)$, given a comparison class.

@@ -1,0 +1,188 @@
+---
+title: "Frequency and length for comparison class prior"
+output: html_notebook
+---
+
+We imagine the utterance "He is tall" is an incomplete utterance, which gets expanded to "He is a tall man" or "He is tall for a man" assuming a noisy channel-style reconstruction.
+The prior distribution on comparison classes (say, between "people" and "basketball players"), then, can be imagined as a prior distribution on the two completions ("He is tall relative to other basketball players" vs. "He is tall relative to other people").
+
+We can thus adopt a "production prior" for the comparison class prior, and can estimate the relative cost of these two utterances by their length and log-frequency.
+
+We will use the `ngramr` package in R to get frequency information from the Google Books corpus, from 1960 - present following Graf, Degen, Hawkins and Goodman (2016, cogsci). 
+
+
+```{r}
+#library(devtools)
+#devtools::install_github("chrismeserole/gbNgram")
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(gbNgram)
+```
+
+```{r, eval = F}
+data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
+
+#sub_categories <- levels(factor(d$sub_category))
+#super_categories <- levels(factor(d$super_category))
+#write.csv(sub_categories, paste(project.path, "analysis/ngrams_subcat.csv", sep = ""))
+#write.csv(super_categories, paste(project.path, "analysis/ngrams_supercat.csv", sep = ""))
+```
+
+```{r}
+sub_categories <- read.csv(paste(project.path, "analysis/ngrams_subcat3.csv", sep = ""))
+super_categories <- read.csv(paste(project.path, "analysis/ngrams_supercat3.csv", sep = ""))
+```
+
+
+```{r}
+words <- as.list(bind_rows(
+  sub_categories %>% select(-X) %>% gather(key, val) %>%
+    filter(!is.na(val)) %>%
+    filter(!(val == "")) %>%
+    select(val),
+  super_categories %>% select(-X) %>% gather(key, val) %>%
+    filter(!is.na(val)) %>%
+    filter(!(val == "")) %>%
+    select(val)
+  ))$val
+
+# ngram only seems to work for 12 or 13 terms at a time...
+df.all <- data.frame()
+
+for (i in 1:ceiling(length(words)/10)){
+  targets <- words[seq((i-1)*10 + 1, i*10)]
+  terms <- targets[!is.na(targets)]
+  df <- gbNgram::ngram(terms, 
+                     yr.start = 1960, yr.end = 2008)
+  df.all <- if (length(df.all) == 0) { df } else { left_join(df.all, df) }
+  print(i)
+}
+
+
+df.tidy <- df.all %>% select(-year) %>%
+  gather(word, val) %>%
+  group_by(word) %>%
+  summarize(freq = sum(val))
+
+
+df.cat.freq <- bind_rows(
+  left_join(sub_categories %>% select(X, x), 
+    left_join( # join df.tidy to sub_category label
+      sub_categories %>% gather(key, word, -X) %>%
+        filter(!is.na(word)) %>%
+        filter(!(word == "")) %>% select(-key),
+        df.tidy) %>%
+      group_by(X) %>%
+      summarize(totalFreq = sum(freq))) %>%
+    ungroup() %>% rename(cat = x) %>% 
+    mutate(category = "sub"),
+  left_join(super_categories %>% select(X, cat), 
+    left_join( # join df.tidy to sub_category label
+      super_categories %>% gather(key, word, -X) %>%
+        filter(!is.na(word)) %>%
+        filter(!(word == "")) %>% select(-key),
+        df.tidy) %>%
+      group_by(X) %>%
+      summarize(totalFreq = sum(freq))) %>%
+    mutate(category = "super")
+)
+
+#df.subcat <- data.frame(word = sub_categories %>% strsplit(" ") %>% unlist()) %>%
+# df.subcat <- data.frame(word = sub_categories %>% strsplit(" ") %>% unlist()) %>%
+#   rowwise() %>%
+#   mutate(subcat_1 = sub_categories[grepl(word, sub_categories)][1],
+#          ncats = length(sub_categories[grepl(word, sub_categories)]),
+#          subcat_2 = ifelse(ncats > 1, sub_categories[grepl(word, sub_categories)][2], NA),
+#          subcat_3 = ifelse(ncats > 2, sub_categories[grepl(word, sub_categories)][3], NA)) %>%
+#   select(-ncats)
+# 
+# df.supercat <- data.frame(word = super_categories %>% strsplit(" ") %>% unlist()) %>%
+#   rowwise() %>%
+#   mutate(supercat_1 = super_categories[grepl(word, super_categories)][1],
+#          ncats = length(super_categories[grepl(word, super_categories)]))
+
+
+```
+
+
+```{r}
+df.cat.freq %>%
+  mutate(logfreq = log(totalFreq),
+         cat = factor(cat, levels = cat[order(logfreq)])) %>%
+  ggplot(., aes( x = cat, y = logfreq, fill = category))+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  coord_flip()
+```
+
+
+```{r}
+
+
+cc.all <- left_join(
+  left_join(
+  #           mutate(superResponse = ifelse(paraphrase == "super", 1, 0)) %>% 
+  #   group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
+  #   multi_boot_standard(column = "superResponse"), 
+  d,
+          df.cat.freq %>% filter(category == "super") %>%
+            select(-X, -category) %>% rename(superFreq = totalFreq, super_category = cat) %>%
+            mutate(super_category = factor(super_category, 
+                                           levels = c("things you watch online","kitchen appliances",
+                                                      "people", "fruits and vegetables",
+                                                      "days of the year"),
+                                           labels = c("things you watch online","kitchen appliances",
+                                                      "people", "produce",
+                                                      "days of the year")
+                                           ))
+  ),
+  df.cat.freq %>% filter(category == "sub") %>%
+   select(-X, -category) %>% rename(subFreq = totalFreq, sub_category = cat) %>%
+    mutate(sub_category = factor(sub_category, 
+                                 levels = c("apples","basketball players",
+                                     "bottle openers","days in Fall",       
+                                      "days in Summer","days in Winter",         
+                                      "dishwashers","grapes",       
+                                      "gymnasts","movies",
+                                     "music videos","soccer players",
+                                     "toasters","video of the cute animal",
+                                     "watermelons"),
+                                 labels = c("apple","basketball player",
+                                     "bottle opener","day in Fall",       
+                                      "day in Summer","day in Winter",         
+                                      "dishwasher","grape",       
+                                      "gymnast","movie",
+                                     "music video","soccer player",
+                                     "toaster","video of the cute animal",
+                                     "watermelon"))
+ ))
+
+#cc.summary %>%
+  #mutate(logFreqRatio = exp(log(superFreq)  - log(subFreq))) %>% View()
+
+# %>%
+#   gather(key, val, mean, logFreqRatio) %>%
+#     ggplot(., 
+#          aes( x = sub_category, 
+#               y = val,
+#               group = form, fill = form ) )+
+#   geom_bar(stat = 'identity', position = position_dodge())+
+#   facet_grid(key~degree, scales = 'free')+#, nrow = 1)+
+#   ylim(0, 1) + 
+#   theme(axis.text.x = element_text(angle = 90) )
+```
+```{r}
+cc.wFreq.Length <- cc.all %>%
+  mutate(logSuperFreq = log(superFreq),
+         logSubFreq = log(subFreq),
+         logSuperFreq = ifelse(logSuperFreq == -Inf, -20, logSuperFreq),
+         superLength = nchar(as.character(super_category)),
+         subLength = nchar(as.character(sub_category)))
+
+#write.csv(cc.wFreq.Length, paste(project.path,
+                                 #"data/classElicitation-1/class-elicitation-full-trials-freq-length.csv", 
+                                 #sep = ""), row.names = F)
+```
+
