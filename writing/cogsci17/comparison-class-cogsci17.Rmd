@@ -1035,6 +1035,20 @@ $\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`,
 
 # Discussion
 
+Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning (e.g, a rough estimate of the temperature) to make sense of what they've heard.
+Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly comparing against.
+Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
+We derive a language understanding model that can flexibly reason about the likely comparison class.
+This model made two qualitative predictions: 
+(1) Listeners should prefer comparison classes that are relatively more specific (i.e., lower variance) as they result in more specific meanings and 
+(2) When the target entity (e.g., the temperature of the day) is towards the upper part of the scale (e.g., during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
+Both of these predictions were borne out in our first experiment.
+
+The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from an experiment that uses similar language about the same domains.
+The major feature of this approach is that participants may respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@Franke2016].
+It also provides a further validation of the language model, which must predict data from two similar but distinct language experiments. 
+
+
 \begin{enumerate}
 \item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
 \item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
@@ -1042,13 +1056,6 @@ $\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`,
 \item Item heterogeneity: Movies is not a subordinate to "things you watch online", but the model still works
 \item Comparison class prior: There is an interpretation as a noisy-channel model where the semantics of *tall* requires a comparison class, and the listener has to repair the utterance via the comparison class prior. Another (non mutually exlcusive) interpretation is more cognitive that surrounds the heterogeneity of the group w.r.t. dimension.  Basic level effects are also probably here, and correlated with the frequency and length measurements we took. 
 \end{enumerate}
-
-\red{TO DO}
-\begin{enumerate}
-\item Settle on alternative utterances for the final model. (Run full model, then do simulations with inferred parameters)
-\item More model exploration with simulations on the variability vs mean
-\end{enumerate}
-
 
 
 
