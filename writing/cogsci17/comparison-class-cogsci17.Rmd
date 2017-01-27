@@ -625,24 +625,52 @@ df.summary <- d.tidy %>%
   multi_boot_standard(column = "superResponse")
 ```
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales. Error bars correspond to bootstrapped 95 percent confidence intervals."}
 
 
-df.summary %>%
-  ungroup() %>%
+```{r, cache = T}
+project.name <- "vague-prior-elicitation-1"
+data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
+d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "Yes")
+
+d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
+
+vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+  filter(pass) %>%
+  group_by(strength, target, degree, adjective, 
+           form, sub_category, super_category) %>%
+  multi_boot_standard(column = "response")
+
+```
+
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=3.75, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Bottom: Experiment 2 results. Adjective endorsement given knowledge of  subordinate membership, with the superordinate category as the explicit comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals."}
+
+bind_rows(
+  df.summary %>%
+    ungroup() %>%
+    mutate(experiment = 'Comparison class inference'),
+  vs.summary %>%
+    ungroup() %>%
+    mutate(experiment = 'Adjective production')
+) %>%
   mutate(sub_category = 
            factor(sub_category, 
-                  levels = sub_category[order(strength)])#,
+                  levels = sub_category[order(strength)]),
+         experiment = factor(experiment, levels = c('Comparison class inference',
+                                                    'Adjective production'))
           # condition = factor(condition, levels = c("context","contextWithSuper"),
           #                    labels=c("Bare", "Supercat mention"))
-         )%>%
+         ) %>%
   ggplot(.,
-         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
+         aes( x = sub_category, y = mean, 
+              ymin = ci_lower, ymax = ci_upper, 
+              group = form, fill = form ) )+
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 1, 
            color = 'black', width = 0.9) +
   geom_errorbar(position = position_dodge(0.9), width = 0.3) +
   #facet_grid(condition~degree, scales = 'free') +
-  facet_grid(.~degree, scales = 'free') +
+  facet_grid(experiment~degree, scales = 'free') +
   ylim(0, 1) +
   #theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
   scale_fill_brewer(palette = 'Set3') +
@@ -651,6 +679,23 @@ df.summary %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))
   # theme(axis.title.y = element_text(size = 10),
   #       strip.text = element_text(size = 8))
+
+
+
+# 
+#     mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
+#   ggplot(.,
+#          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
+#   geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
+#   geom_errorbar(position = position_dodge())+
+#   facet_grid(.~degree, scales = 'free')+
+#   ylim(0, 1) +
+#   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))+
+#   scale_fill_brewer(palette = 'Set1')+
+#   ylab("Superordinate adjective endorsement")+
+#   xlab("Item category")#+
+#   # theme(axis.title.y = element_text(size = 10),
+#   #       strip.text = element_text(size = 8))
 ```
 
 ```{r glm1, cache = T}
@@ -773,7 +818,7 @@ These $P(x \mid c)$ are used in both the experiments, which allows us to both si
 The model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$.
 Experiment 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
 Experiment 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
-$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\} $
+$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
 We put the following priors over these parameters: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
 # Experiment 2: Adjective production
@@ -802,40 +847,6 @@ The experiment can be viewed in full at:
 
 ## Data analysis and results
 
-```{r, cache = T}
-project.name <- "vague-prior-elicitation-1"
-data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
-d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
-d.catch <- d.catch %>% 
-  mutate(pass = response == "Yes")
-
-d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
-
-vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
-  filter(pass) %>%
-  group_by(strength, target, degree, adjective, 
-           form, sub_category, super_category) %>%
-  multi_boot_standard(column = "response")
-
-```
-
-```{r expt2results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 2 results. Adjective speaker judgments for 30 items on 5 scales."}
-vs.summary %>%
-  ungroup() %>%
-  mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
-  ggplot(.,
-         aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
-  geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
-  geom_errorbar(position = position_dodge())+
-  facet_grid(.~degree, scales = 'free')+
-  ylim(0, 1) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 0.95))+
-  scale_fill_brewer(palette = 'Set1')+
-  ylab("Superordinate adjective endorsement")+
-  xlab("Item category")#+
-  # theme(axis.title.y = element_text(size = 10),
-  #       strip.text = element_text(size = 8))
-```
 
 
 
