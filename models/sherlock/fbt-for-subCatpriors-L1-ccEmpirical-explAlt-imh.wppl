@@ -6,11 +6,11 @@ var index = utils.wpParseFloat(last(process.argv)) // load index as last command
 
 var utterances = {
   positive: ["positive_Adjective",
-             "silence_silence",
+            //  "silence_silence",
              "positive_sub",
              "positive_super"],
   negative: ["negative_Adjective",
-             "silence_silence",
+            //  "silence_silence",
              "negative_sub",
              "negative_super"]
 };
@@ -86,8 +86,8 @@ var model = function(){
   var explicitCost = 1;
   var explicitCost = 1;//uniformDrift({a: 0, b: 10, width : 1});
   var silenceCost = 1;//uniformDrift({a: 0, b: 1, width : 0.1})
-  var utteranceCosts = [1, silenceCost, explicitCost, explicitCost];
-  var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
+  var utteranceProbs = [1, explicitCost, explicitCost];
+  // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var utterancePrior = cache(function(form){
     return Infer({
       model: function() {
@@ -100,8 +100,8 @@ var model = function(){
   });
 
   var classParameters = {
-    frequency: uniformDrift({a:0, b: 1, width: 0.1}),
-    charLength: uniformDrift({a:0, b: 1, width: 0.1})
+    frequency: uniformDrift({a:0, b: 3, width: 0.2})//,
+    // charLength: uniformDrift({a:0, b: 3, width: 0.2})
   };
 
 
@@ -122,8 +122,8 @@ var model = function(){
     // });
 
     var supercatWeight = exp(
-      classParameters.frequency * catFrequencies[superCat] +
-      classParameters.charLength * superCatLengths[degree]
+      classParameters.frequency * catFrequencies[superCat]// +
+      // classParameters.charLength * superCatLengths[degree]
     );
 
 
@@ -134,8 +134,8 @@ var model = function(){
       var sigma = uniformDrift({a:0, b:3, width: 0.3});
 
       var subcatWeight = exp(
-        classParameters.frequency * catFrequencies[subCat] +
-        classParameters.charLength * subCatLengths[subCat]
+        classParameters.frequency * catFrequencies[subCat]// +
+        // classParameters.charLength * subCatLengths[subCat]
       );
 
       var classPrior = Infer({
@@ -289,7 +289,7 @@ var model = function(){
 
         mapData({data:d_subcat_ccInference}, function(d){
         //  console.log("cc = "+ ccRSA.score(d))
-          observe(ccRSA, d);
+        //  observe(ccRSA, d);
         })
 
         query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
@@ -312,7 +312,7 @@ var model = function(){
   // query.add(["explicitCost", "NA",  "NA"], explicitCost)
   // query.add(["silenceCost", "NA",  "NA"], silenceCost)
 
-  query.add(["beta", "length",  "NA"], classParameters.charLength)
+  // query.add(["beta", "length",  "NA"], classParameters.charLength)
   query.add(["beta", "frequency",  "NA"], classParameters.frequency)
 
   query.add(["speakerOptimality_s1","superSpeaker", "NA"],alphas.s1.super)
@@ -324,7 +324,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 20;
+var mhiter = 20000;
 
 var burn = mhiter / 2;
 var posterior = Infer({
@@ -335,7 +335,7 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-L1-explAlt-empiricalCC-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-vsOnly-L1-explAltnoSilence-empiricalCC-noLength-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
 display("file written to = " + outfile)
