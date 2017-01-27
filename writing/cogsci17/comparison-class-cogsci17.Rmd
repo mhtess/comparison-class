@@ -69,6 +69,7 @@ library(langcog)
 library(coda)
 library(lme4)
 library(lmerTest)
+library(data.table)
 #install.packages("ggthemes")
 library(ggthemes)
 estimate_mode <- function(s) {
@@ -762,10 +763,14 @@ All of these effects are also visually apparent in Figure \ref{fig:expt1results}
 
 The two qualitative predictions of our language understanding model were borne out in Experiment 1.
 Our computational model makes quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
-This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available in the prior [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
+This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available prior to the linguistic phenomenon of interest [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
 These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
-Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
 
+We take a different approach. 
+We assume a simple functional form to the prior and infer the likely parameter values of those priors from the data and our language model.
+This by itself simply adds extra parameters to the model, and we wouldn't know if the "prior knowledge" we're learning would generalize to other tasks that require the same knowledge. 
+To alleviate this problem of overfitting, we run a second experiment with the same language model as our guide. 
+We ask similar questions in the same domains, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
 
 # Experiment 2: Adjective production
 
@@ -795,7 +800,7 @@ The results of this experiment can be seen in Figure \ref{expt1results} (bottom)
 We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
 In the last section, we formalize our uncertainty about listeners' prior knowledge for these experiments to generate quantitative model predictions for the two data sets.
 
-# Reducing uncertainty in prior knowledge by asking follow-up questions
+# Inferring prior knowledge and quantitative model predictions 
 
 Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
 For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
@@ -833,9 +838,11 @@ We adopt log-frequency as our proxy, which we estimate using the Google Web Gram
 Corpus accessed via \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
 ], and weight it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
 In our data analysis, we put a uniform prior over likely values of $\beta \sim \text{Uniform}(0, 3)$. 
+\mht{Should I include the scraped frequencies in the report? or as a supplement on Rpubs?}
+
 \mht{Insert plate diagram here}
 
-### Inferred priors on degrees
+### Inferring priors on degrees
 
 $P(x \mid c)$ describes the plausible values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
 Rather than measuring these distribution by asking participants to estimate them, we will put uncertainty over their parameters and infer them from participants' responses to our questions from the two expeirments.
@@ -850,7 +857,84 @@ Experiment 2 uses the pragmatic speaker $S_2$ model, which has two speaker optim
 $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
 We put the following priors over these parameters: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
-## Model results
+## Results
+
+We implemented the RSA model and the Bayesian data analysis model in the probabilistic programming language WebPPL [@dippl].
+To learn about the credible values of the parameters and the predictions, we used an incrementalized version of MCMC [@Ritchie2016], collecting 4 independent chains of 30,000 iterations (removing the first 10,000 for burn-in).
+
+```{r}
+# n_chains  = 3
+# n_samples = 15000
+# m.samp <- data.frame()
+# 
+# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
+# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
+# 
+# for (i in seq(1, n_chains)){
+#   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
+#                                  file.prefix, i, ".csv", sep="")))
+#   m.samp.i <- rwebppl::get_samples(m, n_samples)
+#   m.samp <- bind_rows(m.samp, m.samp.i)
+# }
+load(paste(
+   project.path,
+   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
+   sep = ""))
+m.samp.tidy <-left_join(
+  m.samp %>% filter(param == "prior"),
+  d %>% select(degree, sub_category, strength) %>% unique() %>%
+  rename(cat = sub_category)
+) %>% 
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low","medium","high")))
+
+# save(m.samp, file = 
+#        paste(
+#          project.path, 
+#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
+#          sep = ""))
+```
+```{r priorsFig, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Inferred world knowledge used in Experiments 1 and 2."}
+
+ggplot(m.samp.tidy, aes(x = val, y = ..scaled.., 
+                 fill = strength, lty = strength))+
+  geom_density(adjust = 2, size = 0.8, alpha = 0.8)+
+  scale_fill_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
+  #scale_color_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
+  facet_wrap(~degree, scales = 'fixed', nrow = 1)+
+  xlim(-3, 3)+
+  theme(strip.text.y = element_text(angle = 0),
+        legend.position = "bottom", legend.direction = "horizontal") +
+  xlab("Degree value")+
+  ylab("Inferred prior probability")
+```
+
+```{r parameterPosteriors}
+m.so <- m.samp %>% filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2")) %>%
+  separate(cat, into = c("cat", "speaker"))  %>%
+  group_by(cat, param, speaker) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_upper = HPDhi(val),
+            cred_lower = HPDlo(val))
+
+m.freq <- m.samp %>% filter(cat %in% c("silenceCost","explicitCost","superCatPrior", "beta")) %>%
+  group_by(cat) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_upper = HPDhi(val),
+            cred_lower = HPDlo(val))
+
+a1.1 <- filter(m.so, param == "ccRSA" && speaker == "s1")
+a1.2 <- filter(m.so, param == "superSpeaker" && speaker == "s1")
+a2.2 <- filter(m.so, param == "superSpeaker" && speaker == "s2")
+```
+
+Maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1: 
+$\alpha^{1}_{1} = `r round(a1.1[["MAP"]],2)` [`r round(a1.1[["cred_lower"]],2)`, `r round(a1.1[["cred_upper"]],2)`]; \beta = `r round(m.freq[["MAP"]],2)` [`r round(m.freq[["cred_lower"]],2)`, `r round(m.freq[["cred_upper"]],2)`]$ 
+
+Model parameters specific to the $S_2$ model used for Experiment 2: 
+$\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`, `r round(a1.2[["cred_upper"]],2)`]; \alpha^{2}_{2} = `r round(a2.2[["MAP"]],2)` [`r round(a2.2[["cred_lower"]],2)`, `r round(a2.2[["cred_upper"]],2)`]$
+
+
 
 # Discussion
 
