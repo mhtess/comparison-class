@@ -153,50 +153,6 @@ She does this using her prior knowledge of what comparison classes are likely to
 We posit that this knowledge is the listener's internal model of speech production of different classes of entities, and thus this comparison class prior should include information about the frequency of different classes. 
 \mht{mention "basic level" here?}
 
-<!--
-In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
-We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
-We test this model in a simplified setting, where the comparison class could either be a subordinate or superordinate class (e.g., toasters vs. kitchen appliances).
-In this simplified setting, we find the model predicts the level of abstraction (sub vs. superordinate) of a comparison class depends upon the quantitative details of the relevant prior beliefs (e.g., the prices of toasters vs. the prices of kitchen appliances in general).
-We test this prediction using a paraphrase experiment (Expt. 1).
-Quantitative predictions for Bayesian models (including this one) depend upon the quantitative details of listeners' prior distributions over various scales.
-Because it may be difficult for human participants to estimate quantities accurately, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
--->
-
-We elaborate the Rational Speech Act theory for vague language understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared --- the comparison class $c$.
-We posit that pragmatic language interpretaion involves reasoning about the likely reference class.
-In addition to the uncertainty over the comparison class $c$, a pragmatic listener also has uncertainty over the value of the degree $x$ (e.g., the temperature of the day) and the semantic threshold variable $\theta$ as in @Lassiter2013.
-Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$.
-
-
-As a first test of this idea, we consider a simplified case where the comparison class can either be a relatively subordinate or superordinate categorization (e.g., *warm* relative to days in Winter or relative to all days of the year). 
-The listener is aware that the target entity is a member of the subordinate class (e.g., aware that it is winter) and draws likely values of the degree from the subordinate class prior: $P(x \mid c_{sub}$.
-<!---->
-\begin{align}
-L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1}
-\end{align}
-<!---->
-The listener believes the speaker had some intended comparison class in mind, as well as some degree he was trying to communicate and some threshold he was using: $S_{1}(u \mid x, c, \theta)$.
-The speaker's utility function is a standard information-theoretic utility in which the speaker gains higher utility by decreasing a *literal listener*'s surprisal [@Goodman2013].
-The speaker is assumed to be soft-max rational with degree of rationality governed by $\alpha_1$. 
-<!---->
-\begin{align}
-S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot [\ln {L_{0}(x \mid u, c, \theta)} - \text{cost}(u)])} \label{eq:S1}\\
-L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0}
-\end{align}
-<!---->
-In addition, the speaker has a cost function associated with the relative complexity of alternative utterances $\text{cost}(u)$.
-We use a speaker model that considers the alternatives of using the same utterance with the explicit comparison class (e.g., "It is warm relative to other days in Winter.", "It is warm relative to other days of the year.") as well as the alernative of remaining silent (a null utterance with no informational content).
-For simplicity of the model, we assume each utterance has equal cost.
-We are interested in the behavior of the model with the underspecified utterance (e.g., "It is warm").
-<!--
-When the pragmatic listener hears this utterance, she must reason about which comparison class the speaker had in mind.
-When the speaker produces the unambiguous alterantive utterance (e.g., "It is relative to other days in Winter."), the listener 
--->
-In the following section, we explore the predictions of this model.
-
-## Model predictions
-
 ```{r wpplHelpers}
 webpplHelpers <- '
 var round = function(x){
@@ -435,17 +391,19 @@ for (p in sub.prior.params){
 }
 ```
 
-```{r modelSchematics, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=1.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Left: Three schematic prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution). Right: Predicted listener inference for the probability of an intended subordinate comparison class. Model prediction assume an alpha of 3 and a cost of 2 for the explicit comparison class alternatives. The comparison class prior does not favor either the subordinate or superordinate class."}
+```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=3, fig.cap = "Left: Three schematic prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution). Right: Predicted listener inference for the probability of an intended subordinate comparison class. Model prediction assume an alpha of 3 and a cost of 2 for the explicit comparison class alternatives. The comparison class prior does not favor either the subordinate or superordinate class."}
 
-subplt1 <- ggplot(all.priors, aes(x = val, y=..scaled.., fill = class))+
+subplt1 <- ggplot(all.priors, aes(x = val, y=..scaled.., 
+                                  fill = factor(sub_mu), 
+                                  lty = class, group= factor(sub_mu)))+
   geom_density(alpha = 0.8)+
   #scale_fill_brewer(palette = "Set2") +
-  scale_fill_grey()+
+  #scale_fill_gry()+
   #guides(fill = F)+
   ggtitle("Priors on degree")+
   xlab("Degree")+
   ylab("Scaled probability")+
-  facet_wrap(~sub_mu, nrow = 1)+
+  #facet_wrap(~sub_mu, nrow = 1)+
   # theme(title = element_text(size = 8),
   #       legend.text = element_text(size = 6),
   #       axis.text = element_text(size = 6))+
@@ -467,33 +425,26 @@ subplt2 <- ggplot(mp.both %>%
   #       legend.text = element_text(size = 6))+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))
 
-grid.arrange(subplt1, subplt2, nrow = 1)
+grid.arrange(subplt1, subplt2, nrow = 2)
 ```
 
-As a first test of this pragmatic theory, we consider a simple case:
-The comparison class is either a subordinate level category (e.g., days in Winter) or a superordinate level category (e.g., days of the year).
-For purposes of illustration, we assume each class is equally likely *a prior*: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
-We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (e.g., knows that it's Winter): $P(x \mid c_{sub})$.
-Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., temperature of days in winter) $P(x \mid c_{sub})$ and the superordinate level category (e.g., temperature of days in general) $P(x \mid c_{super})$.
 
-The likely comparison class will depend on the details of the prior distributions over the sub- and superordinate level classes (e.g., listener's subjective degrees of belief in various temperatures) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
-For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
 <!--
-Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
+In this paper, we argue that pragmatic principles can be used to resolve the comparison class in context.
+We extend the Rational Speech Act theory of @Lassiter2013 to include uncertainty over the comparison class.
+We test this model in a simplified setting, where the comparison class could either be a subordinate or superordinate class (e.g., toasters vs. kitchen appliances).
+In this simplified setting, we find the model predicts the level of abstraction (sub vs. superordinate) of a comparison class depends upon the quantitative details of the relevant prior beliefs (e.g., the prices of toasters vs. the prices of kitchen appliances in general).
+We test this prediction using a paraphrase experiment (Expt. 1).
+Quantitative predictions for Bayesian models (including this one) depend upon the quantitative details of listeners' prior distributions over various scales.
+Because it may be difficult for human participants to estimate quantities accurately, we introduce a novel Bayesian data-analytic technique for learning about listeners' prior belief distributions using convergent language understanding tasks.
 -->
 
-Consider the three subordinate priors to correspond to temperatures in Winter (-1), Fall (0), and Summer (1) in a part of the world that exhibits seasons (e.g., Maryland, USA), and the superordinate prior to correspond to temperatures including all days of the year (Figure \ref{fig:modelSchematics}, left).
-We see that regardless of the adjective form (positive or negative) or the mean of the prior distribution (-1, 0, 1), the pragmatic listener prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right).
-Note that the only thing differentiating the subordinate from the superordinate class is the variance.
-<!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
-We also see that when the pragmatic listener (Eq. \ref{eq:L1}) is in Winter and hears that "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hear's it's cold (Figure \ref{fig:modelSchematics}, right, left-most facet; compare blue vs. red bars).
-The model thinks the opposite is true in Summer: A warm day in summer could be warm for summer, or warm for the year, while a cold day in Summer is much more likely to be cold for summer.
-In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the relationship of the subordinate to the superordinate class prior.
-<!--
-We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
-The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
-We test these predictions in our first experiment.
--->
+We elaborate the Rational Speech Act theory for vague language understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared --- the comparison class $c$.
+We posit that pragmatic language interpretaion involves reasoning about the likely reference class.
+In addition to the uncertainty over the comparison class $c$, a pragmatic listener also has uncertainty over the value of the degree $x$ (e.g., the temperature of the day) and the semantic threshold variable $\theta$ as in @Lassiter2013.
+Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$.
+
+
 ```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
@@ -533,22 +484,6 @@ Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer 
 \label{tab:1}
 \end{table*}
 
-# Experiment 1: Comparison class inference
-
-In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of.
-
-## Methods
-
-### Participants
-
-<!--
-Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
--->
-
-We recruited 264 participants from Amazon Mechanical Turk.
-Two participants were excluded for failing an attention check, leaving a total number of 262 participants.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-The experiment took about five minutes and participants were compensated $0.50 for their work.
 
 ```{r, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
@@ -581,32 +516,6 @@ ggplot(simulations, aes(x = w))+
  facet_grid(n~p)
 
 ```
-
-### Materials
-
-We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
-Each scale was paired with a superordinate category: kitchen appliances (price), weather throughout the year (temperature), things you watch online (duration), people (height), and produce (weight).
-For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Prediction section).
-This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table \ref{tab:1} for full listing).
-
-### Procedure
-
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
-This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
-Participants were asked "What do you think Tanya meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
-
-\begin{itemize}
-\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{subordinates} (e.g., \emph{It's warm relative to other days in Winter})
-\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})
-\end{itemize}
-
-Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
-In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely. 
-The experiment can be viewed in full at:
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
-
-## Results
 
 ```{r cache=T}
 data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
@@ -698,6 +607,104 @@ bind_rows(
 #   # theme(axis.title.y = element_text(size = 10),
 #   #       strip.text = element_text(size = 8))
 ```
+
+
+As a first test of this idea, we consider a simplified case where the comparison class can either be a relatively subordinate or superordinate categorization (e.g., *warm* relative to days in Winter or relative to all days of the year). 
+The listener is aware that the target entity is a member of the subordinate class (e.g., aware that it is winter) and draws likely values of the degree from the subordinate class prior: $P(x \mid c_{sub}$.
+<!---->
+\begin{align}
+L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1}
+\end{align}
+<!---->
+The listener believes the speaker had some intended comparison class in mind, as well as some degree he was trying to communicate and some threshold he was using: $S_{1}(u \mid x, c, \theta)$.
+The speaker's utility function is a standard information-theoretic utility in which the speaker gains higher utility by decreasing a *literal listener*'s surprisal [@Goodman2013].
+The speaker is assumed to be soft-max rational with degree of rationality governed by $\alpha_1$. 
+<!---->
+\begin{align}
+S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot [\ln {L_{0}(x \mid u, c, \theta)} - \text{cost}(u)])} \label{eq:S1}\\
+L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0}
+\end{align}
+<!---->
+In addition, the speaker has a cost function associated with the relative complexity of alternative utterances $\text{cost}(u)$.
+We use a speaker model that considers the alternatives of using the same utterance with the explicit comparison class (e.g., "It is warm relative to other days in Winter.", "It is warm relative to other days of the year.") as well as the alernative of remaining silent (a null utterance with no informational content).
+For simplicity of the model, we assume each utterance has equal cost.
+We are interested in the behavior of the model with the underspecified utterance (e.g., "It is warm").
+<!--
+When the pragmatic listener hears this utterance, she must reason about which comparison class the speaker had in mind.
+When the speaker produces the unambiguous alterantive utterance (e.g., "It is relative to other days in Winter."), the listener 
+-->
+In the following section, we explore the predictions of this model.
+
+## Model predictions
+
+As a first test of this pragmatic theory, we consider a simple case:
+The comparison class is either a subordinate level category (e.g., days in Winter) or a superordinate level category (e.g., days of the year).
+For purposes of illustration, we assume each class is equally likely *a prior*: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
+We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (e.g., knows that it's Winter): $P(x \mid c_{sub})$.
+Then, the listener $L_1$ tries to uncover the speaker's implicit comparison class $c$ by incorparting what she knows about the subordinate level category (e.g., temperature of days in winter) $P(x \mid c_{sub})$ and the superordinate level category (e.g., temperature of days in general) $P(x \mid c_{super})$.
+
+The likely comparison class will depend on the details of the prior distributions over the sub- and superordinate level classes (e.g., listener's subjective degrees of belief in various temperatures) as well as the polarity of the gradable adjective (i.e., *tall* vs. *short*).
+For simplicity, we assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean and standard deviation for the prior of the subordinate class.
+<!--
+Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
+-->
+
+Consider the three subordinate priors to correspond to temperatures in Winter (-1), Fall (0), and Summer (1) in a part of the world that exhibits seasons (e.g., Maryland, USA), and the superordinate prior to correspond to temperatures including all days of the year (Figure \ref{fig:modelSchematics}, left).
+We see that regardless of the adjective form (positive or negative) or the mean of the prior distribution (-1, 0, 1), the pragmatic listener prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right).
+Note that the only thing differentiating the subordinate from the superordinate class is the variance.
+<!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
+We also see that when the pragmatic listener (Eq. \ref{eq:L1}) is in Winter and hears that "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hear's it's cold (Figure \ref{fig:modelSchematics}, right, left-most facet; compare blue vs. red bars).
+The model thinks the opposite is true in Summer: A warm day in summer could be warm for summer, or warm for the year, while a cold day in Summer is much more likely to be cold for summer.
+In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the relationship of the subordinate to the superordinate class prior.
+<!--
+We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
+The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
+We test these predictions in our first experiment.
+-->
+
+# Experiment 1: Comparison class inference
+
+In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of.
+
+## Methods
+
+### Participants
+
+<!--
+Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
+-->
+
+We recruited 264 participants from Amazon Mechanical Turk.
+Two participants were excluded for failing an attention check, leaving a total number of 262 participants.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+The experiment took about five minutes and participants were compensated $0.50 for their work.
+
+
+### Materials
+
+We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
+Each scale was paired with a superordinate category: kitchen appliances (price), weather throughout the year (temperature), things you watch online (duration), people (height), and produce (weight).
+For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Prediction section).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table \ref{tab:1} for full listing).
+
+### Procedure
+
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
+This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
+Participants were asked "What do you think Tanya meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
+
+\begin{itemize}
+\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{subordinates} (e.g., \emph{It's warm relative to other days in Winter})
+\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})
+\end{itemize}
+
+Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
+In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely. 
+The experiment can be viewed in full at:
+\url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
+
+## Results
 
 ```{r glm1, cache = T}
 d.centered = d.tidy %>%
