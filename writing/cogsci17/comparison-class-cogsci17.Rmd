@@ -135,8 +135,8 @@ When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 8
 
 # Language understanding with comparison class uncertainty
 
-Adjectives like *warm* and *cold*, *cheap* and *expensive*,  are vague descriptions of an underlying quantitative scale (e.g., temperature, price).
-Contemporary linguistic theories posit that the truth-conditional semantics of such vague utterances are simple thresholds on the measure [@Kennedy2007].
+Adjectives like *warm* and *cold*, *cheap* and *expensive*, are vague descriptions of an underlying quantitative scale (e.g., temperature, price).
+Contemporary linguistic theories posit that the meaning of such words are simple thresholds on the measure [@Kennedy2007].
 For example, the weather is *warm* if its temperature is greater than some threshold number of degrees.
 The crux of such theories rests on the fact that this threshold is derived relative to a *comparison class* of other possible entities.
 A day in Winter can be warm *relative to* other days in Winter but probably not warm relative to all days of the year.
@@ -445,7 +445,7 @@ In addition to the uncertainty over the comparison class $c$, a pragmatic listen
 Uncertainty about the value of the degree $x$ is always with respect to a comparison class $c$: $P(x \mid c)$.
 
 
-```{r echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
 
 height_sub = c("professional basketball player, professional gymnast, professional soccer player")
 height_super = c("people")
@@ -485,7 +485,7 @@ Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer 
 \end{table*}
 
 
-```{r, eval = F, echo=F}
+```{r data_collection_plan_simulation, eval = F, echo=F}
 ## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
 
 ### not written efficiently... will take ~10 minutes to run
@@ -517,7 +517,7 @@ ggplot(simulations, aes(x = w))+
 
 ```
 
-```{r cache=T}
+```{r loadExpt1Data, cache=T}
 data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
 
 d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
@@ -537,7 +537,7 @@ df.summary <- d.tidy %>%
 ```
 
 
-```{r, cache = T}
+```{r loadExpt2Data, cache = T}
 project.name <- "vague-prior-elicitation-1"
 data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
 d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
@@ -706,7 +706,7 @@ The experiment can be viewed in full at:
 
 ## Results
 
-```{r glm1, cache = T}
+```{r mixed_model, cache = T}
 d.centered = d.tidy %>%
                    filter(!(strength == 2)) %>%
                    mutate(strength = ifelse(strength == 3, 1, 
@@ -933,7 +933,8 @@ $P(c)$ describes the prior probability of the superordinate (or subordinate) com
 We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class. 
 We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
-Corpus accessed via \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
+Corpus accessed via 
+\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
 ], and weight it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
 In our data analysis, we put a uniform prior over likely values of $\beta \sim \text{Uniform}(0, 3)$. 
 \mht{Should I include the scraped frequencies in the report? or as a supplement on Rpubs?}
@@ -960,7 +961,7 @@ We put the following priors over these parameters: $\alpha_1 \sim \text{Uniform}
 We implemented the RSA model and the Bayesian data analysis model in the probabilistic programming language WebPPL [@dippl].
 To learn about the credible values of the parameters and the predictions, we used an incrementalized version of MCMC [@Ritchie2016], collecting 4 independent chains of 30,000 iterations (removing the first 10,000 for burn-in).
 
-```{r}
+```{r load_model_results, cache = T}
 # n_chains  = 3
 # n_samples = 15000
 # m.samp <- data.frame()
@@ -978,6 +979,7 @@ load(paste(
    project.path,
    "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
    sep = ""))
+
 m.samp.tidy <-left_join(
   m.samp %>% filter(param == "prior"),
   d %>% select(degree, sub_category, strength) %>% unique() %>%
@@ -991,7 +993,60 @@ m.samp.tidy <-left_join(
 #          project.path, 
 #          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
 #          sep = ""))
+
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  group_by(param, cat,form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = HPDhi(val),
+             cred_lower = HPDlo(val) )
 ```
+
+<!--
+Human endorsements of comparison class paraphrases (left) and adjective sentences (right) as a function of listener model and speaker model predictions, respectively. Errorbars correspond to 95 percent bootstrapped confidence intervals for the participant data and 95 percent highest probability density intervals for the model predictions.
+-->
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
+
+md.pp <- left_join(
+  bind_rows(vs.summary %>% 
+             mutate(expt = "superSpeaker"),
+           df.summary %>%
+             mutate(expt = "superCC")) %>% 
+             ungroup() %>%
+             rename(cat = sub_category),
+  m.pp %>% rename(expt = param)) %>%
+  mutate(expt = factor(expt, levels = c( "superCC", "superSpeaker"),
+                       labels = c('Comparison class inference', 'Adjective production')))
+
+ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = mean, ymin = ci_lower, ymax = ci_upper,
+                  shape = form, color = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3)+
+  geom_errorbar(size = 0.3)+
+  geom_errorbarh(size = 0.3)+
+  geom_point(size = 2)+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  scale_color_brewer(palette = "Set1")+
+  xlim(0, 1)+
+  ylim(0, 1)+
+  ylab("Human endorsement")+
+  xlab("Model prediction")
+
+
+expt1.r2 <- round(with(md.pp %>%
+       filter(expt == "Comparison class inference"), cor(MAP, mean))^2, 3)
+
+expt1.n <- length(filter(md.pp, expt == "Comparison class inference")[["MAP"]])
+
+expt2.r2 <- round(with(md.pp %>%
+       filter(expt == "Adjective production"), cor(MAP, mean))^2, 3)
+
+expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
+```
+
+As shown in Figure \ref{fig:posteriorPredictive_scatters}, the model does a good job at reconstructing the variability in responses for Experiment 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Experiment 2: $r^2(`r expt2.n`) = `r expt2.r2`$.
+
 ```{r priorsFig, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Inferred world knowledge used in Experiments 1 and 2."}
 
 ggplot(m.samp.tidy, aes(x = val, y = ..scaled.., 
@@ -1024,16 +1079,31 @@ m.freq <- m.samp %>% filter(cat %in% c("silenceCost","explicitCost","superCatPri
 a1.1 <- filter(m.so, param == "ccRSA" && speaker == "s1")
 a1.2 <- filter(m.so, param == "superSpeaker" && speaker == "s1")
 a2.2 <- filter(m.so, param == "superSpeaker" && speaker == "s2")
+
+a1.1.map <- round(a1.1[["MAP"]],2)
+a1.1.lower <- round(a1.1[["cred_lower"]],2)
+a1.1.upper <- round(a1.1[["cred_upper"]],2)
+
+b.map <- round(m.freq[["MAP"]],2)
+b.lower <- round(m.freq[["cred_lower"]],2)
+b.upper <-  round(m.freq[["cred_upper"]],2)
+
+a1.2.map <- round(a1.2[["MAP"]],2)
+a1.2.lower <- round(a1.2[["cred_lower"]],2)
+a1.2.upper <- round(a1.2[["cred_upper"]],2)
+
+a2.2.map <- round(a2.2[["MAP"]],2)
+a2.2.lower <- round(a2.2[["cred_lower"]],2)
+a2.2.upper <- round(a2.2[["cred_upper"]],2)
 ```
 
 Maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1: 
-$\alpha^{1}_{1} = `r round(a1.1[["MAP"]],2)` [`r round(a1.1[["cred_lower"]],2)`, `r round(a1.1[["cred_upper"]],2)`]$;
-$\beta = `r round(m.freq[["MAP"]],2)` [`r round(m.freq[["cred_lower"]],2)`, `r round(m.freq[["cred_upper"]],2)`]$ 
+$\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$;
+$\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
 
 Model parameters specific to the $S_2$ model used for Experiment 2: 
-$\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`, `r round(a1.2[["cred_upper"]],2)`]$;
-$\alpha^{2}_{2} = `r round(a2.2[["MAP"]],2)` [`r round(a2.2[["cred_lower"]],2)`, `r round(a2.2[["cred_upper"]],2)`]$
-
+$\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$;
+$\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$
 
 
 # Discussion
