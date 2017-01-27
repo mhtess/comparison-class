@@ -819,6 +819,7 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 \begin{figure}[ht]
 \captionsetup{width=0.48\textwidth}
 \begin{center}
+\resizebox{5.5cm}{6.3cm}{
 \begin{tikzpicture}
 
 \node[latent, minimum size=1cm, ] (L0_speaker) {$L_{0}$} ;
@@ -860,6 +861,7 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 } {$\forall sub \in \mathcal{S}$}
 
 \end{tikzpicture}
+}
 \end{center}
 \caption{RSA and data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
 \end{figure}
