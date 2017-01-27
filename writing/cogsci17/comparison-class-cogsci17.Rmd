@@ -96,7 +96,7 @@ theme_set(theme_minimal(8))
 
 # Introduction
 
-When it's warm outside, it's still useful to know whether we're in July or January.
+If someone tells you it's warm outside, it's still useful to remember if it's July or January.
 A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.
 The predicate "warm" is vague in the sense that there are borderline cases of being warm--interlocutors can faultlessly disagree as to whether or not it is warm since what it means to be warm is relative to a relevant *comparison class*.
 
@@ -104,21 +104,21 @@ Comparison classes are uncontroversial in the study of vague language.
 Even 2- or 3-year-olds understand that the meaning of the words "big" and "little" depend upon the context: 
 An object can be "big" relative to other objects in a scene (i.e., its physical context), 
 an object can be "big" relative to the size it should be for completing its intended function, 
-or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. 
+or an object can just be "big" [i.e., big relative to an implicit comparison class; @Ebeling1994]. 
 \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
 Adult judgments of the felicity for gradable adjectives like "dark" or "light", "short" or "tall" depend upon fine-grained details of the statistics of the comparison class [@Solt2012; @Qing2014].
+
 It is not well understood, however, how a comparison class becomes contextually-salient. 
 The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
-A warm day in January could be warm for the time of year (i.e., *warm relative to other days in January*^[
-also, *in this location*, where the speaker is]
-or it could just be warm (i.e., *warm relative to any day of the year*)
+If someone tells you it's warm outside, that could mean it's just warm (i.e., *warm relative to the other days of the year*) or it could mean it's warm for this time of year (e.g., *warm for Winter*).
+The issue of the comparison class touches upon not only adjectives, but in fact any language in which knowledge of the context is critical to the meaning, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly."; @Tessler2016].
 
-We propose that the selection of a comparison class with respect to which vague languages gets interpreted is arrived upon through a pragmatic reasoning process.
+We propose that listeners must actively infer what reference class is being used by the speaker.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
-We introduce a novel language understanding model that can resolve uncertainty about the likely reference class alongside the uncertainty known to be important for modeling vague language understanding (namely, uncertainty about the world and uncertainty about the precise meaning of the vague speech act).
+We introduce a novel language understanding model that can flexibly reason about the likely reference with pragmatic reasoning.
 From this model, we derive two qualitative predictions:
-(1) Ceteris paribus, a listener should prefer reference classes that have lower variance because the vague utterance will have a more specific meaning under a lower variance reference class. 
-(2) When the object of discourse is a member of a subordinate class with a mean significantly greater than the mean of a higher level class (e.g., a day in Summer has an expected temperature higher than the average across the whole year), listeners should prefer the higher level (or, superordinate) class because the vague utterance is more likely to be true of the higher level class. 
+(1) *Ceteris paribus*, a listener should prefer reference classes that are more specific because lower variance in the reference class will provide a more specific meaning to a vague utterance. 
+(2) When the object of discourse (e.g., the day's temperature) is a member of a specific (or, subordinate) class that is expected to fall relatively high on the degree scale (e.g., temperature of a Summer day), positive form adjectives (e.g., *warm*) should lead listeners to prefer the more general (or, superordinate) class than the negative form adjective (e.g., *cold*).
 The opposite pattern is predicted to hold for subordinate classes low on the scale (e.g., days in Winter). 
 We test these predictions in an experiment designed to elicit the comparison class.
 
@@ -146,7 +146,6 @@ We adopt a probabilistic model of adjectival interpretation that is derived from
 The model is an extension of the Rational Speech Act theory of language understanding [for a review see: @Goodman2016] and uses a simple threshold semantics for adjectives $[[u]]: x > \theta$ (i.e., warm means greater than some temperature).
 Uncertainty is placed over the threshold $\theta \sim \text{Uniform}(0, 1)$ and is resolved by the pragmatic listener reasoning about the likely values of the degree $P(x)$, given a comparison class.
 Such a model reasons about a comparison class, but doesn't have anything to say about where the comparison class comes from.
-The issue of the comparison class touches upon not only gradable adjectives, but in fact any language that can be modeled with an underspecified threshold criterion including generic language [@Tessler2016] and vague quantifiers [@SchollerFranke2015].
 How does a listener settle on the appropriate comparison class, when none is specifically articulated by the speaker?
 
 When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "...relative to other days in Winter."), we imagine that a listener must infer the comparison class by imagining the likely the completion of the explicit sentence (i.e., must fill in the comparison class), in a way analagous to noisy-channel models of production and comprehension [@Bergen2016].
