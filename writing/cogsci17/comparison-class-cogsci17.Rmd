@@ -1026,10 +1026,12 @@ a2.2 <- filter(m.so, param == "superSpeaker" && speaker == "s2")
 ```
 
 Maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1: 
-$\alpha^{1}_{1} = `r round(a1.1[["MAP"]],2)` [`r round(a1.1[["cred_lower"]],2)`, `r round(a1.1[["cred_upper"]],2)`]; \beta = `r round(m.freq[["MAP"]],2)` [`r round(m.freq[["cred_lower"]],2)`, `r round(m.freq[["cred_upper"]],2)`]$ 
+$\alpha^{1}_{1} = `r round(a1.1[["MAP"]],2)` [`r round(a1.1[["cred_lower"]],2)`, `r round(a1.1[["cred_upper"]],2)`]$;
+$\beta = `r round(m.freq[["MAP"]],2)` [`r round(m.freq[["cred_lower"]],2)`, `r round(m.freq[["cred_upper"]],2)`]$ 
 
 Model parameters specific to the $S_2$ model used for Experiment 2: 
-$\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`, `r round(a1.2[["cred_upper"]],2)`]; \alpha^{2}_{2} = `r round(a2.2[["MAP"]],2)` [`r round(a2.2[["cred_lower"]],2)`, `r round(a2.2[["cred_upper"]],2)`]$
+$\alpha^{2}_{1} = `r round(a1.2[["MAP"]],2)` [`r round(a1.2[["cred_lower"]],2)`, `r round(a1.2[["cred_upper"]],2)`]$;
+$\alpha^{2}_{2} = `r round(a2.2[["MAP"]],2)` [`r round(a2.2[["cred_lower"]],2)`, `r round(a2.2[["cred_upper"]],2)`]$
 
 
 
@@ -1043,20 +1045,35 @@ This model made two qualitative predictions:
 (1) Listeners should prefer comparison classes that are relatively more specific (i.e., lower variance) as they result in more specific meanings and 
 (2) When the target entity (e.g., the temperature of the day) is towards the upper part of the scale (e.g., during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
 Both of these predictions were borne out in our first experiment.
+To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 
 The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from an experiment that uses similar language about the same domains.
-The major feature of this approach is that participants may respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@Franke2016].
+The major feature of this approach is that participants may respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
 It also provides a further validation of the language model, which must predict data from two similar but distinct language experiments. 
 
+In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt.~1: $P(c)$.
+We posited that the phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2016].
+As a proxy for production or reference probabilities, we gathered empirical priors based on n-gram frequency from the Google WebGram corpus. 
+There are more cognitive interpretations of the comparison class prior, perhaps relating to basic level effects in categorization [@Rosch].
+\mht{Also, heterogeneity of the class w.r.t. dimension, e.g. kitchen appliances}
+It is hard to disentangle these two possibilities in this paradigm, as they are both correlated with frequency.
 
+One small deviation of our model from the human data is seen in the prices of kitchen appliances.
+The model tends to show an intermediate preference for the superordinate comparison class, *kitchen appliances*, because the phrase *kitchen appliances* is relatively frequent in the corpus.
+Participants, however, are quite reluctant to endorse this as a likely reference class.
+This may be because the reference class is also sensitive to the goals of the speaker.
+It's unlikely, for instance, for someone to go to a store to purchase a *kitchen appliance* (any appliance will do).
+Rather, objects are purchased in order to acquire their function, and different kinds of objects have different functions.
+\mht{this is rough... goal of this is to further elucidate the richness of the phenomenon.}
+
+<!--
 \begin{enumerate}
 \item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
 \item QUD: If we're deciding what to do on Friday night, you say "The opera is expensive" it means "Expensive relative to other things we could do on Friday night"
 \item Hyperbole / *normative* comparison classs: If we listen to a lecture, and you say "That *was long*.", it means "Long relative to how long I think it should have been." If we go out for pasta, and you ask how it was, and I say "it was expensive" it means "expensive relative to how much it should have been given the quality".
 \item Item heterogeneity: Movies is not a subordinate to "things you watch online", but the model still works
-\item Comparison class prior: There is an interpretation as a noisy-channel model where the semantics of *tall* requires a comparison class, and the listener has to repair the utterance via the comparison class prior. Another (non mutually exlcusive) interpretation is more cognitive that surrounds the heterogeneity of the group w.r.t. dimension.  Basic level effects are also probably here, and correlated with the frequency and length measurements we took. 
 \end{enumerate}
-
+-->
 
 
 
