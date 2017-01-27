@@ -764,7 +764,36 @@ The two qualitative predictions of our language understanding model were borne o
 Our computational model makes quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
 This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available in the prior [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
 These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
-In the next section, we formalize our uncertainty about listeners' prior knowledge, and run a second experiment to gather converging evidence about listeners' knowledge, which we can then use to generate quantitative predictions for Expt. 1.
+Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
+
+
+# Experiment 2: Adjective production
+
+In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
+
+## Methods
+
+### Participants
+
+We recruited 100 participants from Amazon Mechanical Turk.
+Five participants were excluded due to failing the catch trial.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
+
+### Materials, procedure, and results
+
+Materials were the same as Expt. 1 (Table 1).
+
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
+This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
+As in Expt.~1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
+The experiment can be viewed in full at: 
+\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
+
+The results of this experiment can be seen in Figure \ref{expt1results} (bottom). 
+We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
+In the last section, we formalize our uncertainty about listeners' prior knowledge for these experiments to generate quantitative model predictions for the two data sets.
 
 # Reducing uncertainty in prior knowledge by asking follow-up questions
 
@@ -791,7 +820,7 @@ S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_
 L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
 \end{align}
 <!---->
-We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2 (described below). 
+We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2. 
 We use Eq.~\ref{eq:L1} to model the comparison class inference task of Experiment 2. 
 Following @Lassiter2013, $P(\theta) = \text{Uniform}(0, 1)$.
 
@@ -821,36 +850,7 @@ Experiment 2 uses the pragmatic speaker $S_2$ model, which has two speaker optim
 $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
 We put the following priors over these parameters: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
-# Experiment 2: Adjective production
-
-In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
-
-## Methods
-
-### Participants
-
-We recruited 100 participants from Amazon Mechanical Turk.
-Five participants were excluded due to failing the catch trial.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
-
-### Materials and procedure
-
-Materials were the same as Expt. 1 (Table 1).
-
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
-This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
-As in Expt.~1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
-The experiment can be viewed in full at: 
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
-
-## Data analysis and results
-
-
-
-
-
+## Model results
 
 # Discussion
 
