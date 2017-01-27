@@ -850,7 +850,7 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 
 \end{tikzpicture}
 \end{center}
-\caption{Comparison class RSA model.}
+\caption{RSA and data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
 \end{figure}
 
 Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
