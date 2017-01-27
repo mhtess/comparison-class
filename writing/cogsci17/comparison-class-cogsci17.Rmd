@@ -96,12 +96,8 @@ theme_set(theme_minimal(8))
 
 # Introduction
 
-<<<<<<< HEAD
-When it's warm outside, it's still useful to know whether we're in July or January.
-\ndg{opening line doesn't make much sense. start with a vague utterance, point out that whether it's true and/or its interpretation depends on comparison class.}
-=======
 If someone tells you it's warm outside, it's still useful to remember if it's July or January.
->>>>>>> fbdfbd0ce8eebe13b8231a92fb878bca162b99b1
+\ndg{opening line doesn't make much sense. start with a vague utterance, point out that whether it's true and/or its interpretation depends on comparison class.}
 A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.
 The predicate "warm" is vague in the sense that there are borderline cases of being warm--interlocutors can faultlessly disagree as to whether or not it is warm since what it means to be warm is relative to a relevant *comparison class*.
 
@@ -113,11 +109,8 @@ or an object can just be "big" [i.e., big relative to an implicit comparison cla
 \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
 \ndg{probably the Barner pimwit paper is a better cite}
 Adult judgments of the felicity for gradable adjectives like "dark" or "light", "short" or "tall" depend upon fine-grained details of the statistics of the comparison class [@Solt2012; @Qing2014].
-<<<<<<< HEAD
 \ndg{cite schmidt etal. ask some linguist what the right cites are for comparison classes...}
-=======
 
->>>>>>> fbdfbd0ce8eebe13b8231a92fb878bca162b99b1
 It is not well understood, however, how a comparison class becomes contextually-salient. 
 The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
 If someone tells you it's warm outside, that could mean it's just warm (i.e., *warm relative to the other days of the year*) or it could mean it's warm for this time of year (e.g., *warm for Winter*).
@@ -143,7 +136,7 @@ Warm is vague,
 When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
 -->
 
-# Language understanding with comparison class uncertainty
+# Understanding comparison classes
 
 Adjectives like *warm* and *cold*, *cheap* and *expensive*, are vague descriptions of an underlying quantitative scale (e.g., temperature, price).
 Contemporary linguistic theories posit that the meaning of such words are simple thresholds on the measure [@Kennedy2007].
@@ -1015,7 +1008,7 @@ m.pp <- m.samp %>%
 <!--
 Human endorsements of comparison class paraphrases (left) and adjective sentences (right) as a function of listener model and speaker model predictions, respectively. Errorbars correspond to 95 percent bootstrapped confidence intervals for the participant data and 95 percent highest probability density intervals for the model predictions.
 -->
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
 
 md.pp <- left_join(
   bind_rows(vs.summary %>% 
