@@ -8,6 +8,7 @@ header-includes:
   - \usepackage{multicol}
   - \usepackage{wrapfig}
   - \usepackage{gensymb}
+  - \usepackage{tikz}
   #- \usepackage{stfloats}
 
 author-information: >
@@ -141,17 +142,17 @@ theme_set(theme_bw())
 
 # Introduction
 
-When it's warm outside it's still useful to know whether we're in July or January.
+When it's warm outside, it's still useful to know whether we're in July or January.
 A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.
-The predicate "warm" is vague in the sense that there are borderline cases of being warm--interlocutors can faultlessly disagree as to whether or not it is warm, and what it means to be warm is relative to a relevant *comparison class*.
+The predicate "warm" is vague in the sense that there are borderline cases of being warm--interlocutors can faultlessly disagree as to whether or not it is warm since what it means to be warm is relative to a relevant *comparison class*.
 
 Comparison classes are uncontroversial in the study of vague language. 
-Even 2 or 3 year olds understand that the meaning of the words "big" and "little" depend upon the context: 
+Even 2- or 3-year-olds understand that the meaning of the words "big" and "little" depend upon the context: 
 An object can be "big" relative to other objects in a scene (i.e., its physical context), 
 an object can be "big" relative to the size it should be for completing its intended function, 
 or an object can just be "big" [or, big relative to an implicit comparison class; @Ebeling1994]. \mht{$\leftarrow$ not sure if this is the best evidence for my topic sentence}
 Adult judgments of the felicity for gradable adjectives like "dark" or "light", "short" or "tall" depend upon fine-grained details of the statistics of the comparison class [@Solt2012; @Qing2014].
-It is not well undertsood, however, how a comparison class becomes contextually-salient. 
+It is not well understood, however, how a comparison class becomes contextually-salient. 
 The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
 A warm day in January could be warm for the time of year (i.e., *warm relative to other days in January*^[
 also, *in this location*, where the speaker is]
@@ -664,7 +665,6 @@ df.summary <- d.tidy %>%
 
 ```{r expt1results, fig.env = "figure*", fig.pos = "t", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Experiment 1 results. Comparison class judgments for 30 items on 5 scales."}
 
-
 df.summary %>%
   ungroup() %>%
   mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])#,
@@ -754,6 +754,53 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 \mht{If we keep the domain-wise ccPrior variable, need to square this with the "main effect of subordinate" that I say we're predicted.}
 
 \mht{Insert plate diagram here}
+\usetikzlibrary{bayesnet}
+\begin{figure}[ht]
+\begin{center}
+\begin{tikzpicture}
+
+\node[latent, minimum size=1cm, ] (L0_speaker) {$L_{0}$} ;
+\node[latent, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
+\node[latent, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
+\node[latent, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
+
+\node[latent, minimum size=1cm, left=of S1_speaker] (alpha_1) {$\alpha_1$} ;
+\node[obs, minimum size=1cm, right=of L1_speaker] (comparison_class) {$d_{c}$} ;
+\node[latent, minimum size=1cm, left=of S2_speaker] (alpha_2) {$\alpha_2$} ;
+\node[obs, minimum size=1cm, right=of S2_speaker] (utterance) {$d_{u}$} ;  
+
+\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_prior) {$x | c_{sub}$} ;
+
+\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
+\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
+
+\edge {L0_speaker} {S1_speaker} ;
+\edge {S1_speaker} {L1_speaker} ;
+\edge {L1_speaker} {S2_speaker} ;
+
+\edge {alpha_1} {S1_speaker} ;
+\edge {L1_speaker} {comparison_class} ;
+\edge {alpha_2} {S2_speaker} ;
+\edge {S2_speaker} {utterance} ;
+
+\edge {comparison_class_prior} {L0_speaker} ;
+\edge {comparison_class_prior} {L1_speaker} ;
+
+\edge {mu} {comparison_class_prior} ;
+\edge {sigma} {comparison_class_prior} ;
+
+\plate {} {
+	(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)
+} {RSA}
+
+\plate {} {
+	(mu)(sigma)(comparison_class_prior)
+} {$\forall sub \in \mathcal{S}$}
+
+\end{tikzpicture}
+\end{center}
+\caption{Comparison class RSA model.}
+\end{figure}
 
 $P(x \mid c)$ describes the likely values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
 With simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
