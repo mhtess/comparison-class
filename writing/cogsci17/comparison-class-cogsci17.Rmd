@@ -9,6 +9,7 @@ header-includes:
   - \usepackage{wrapfig}
   - \usepackage{gensymb}
   - \usepackage{tikz}
+  - \usepackage{caption}
   #- \usepackage{stfloats}
 
 author-information: >
@@ -814,6 +815,7 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 
 \usetikzlibrary{bayesnet}
 \begin{figure}[ht]
+\captionsetup{width=0.48\textwidth}
 \begin{center}
 \begin{tikzpicture}
 
