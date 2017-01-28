@@ -130,14 +130,16 @@ We propose that listeners must actively infer what reference class is being used
 We introduce a novel language understanding model that can flexibly reason about the likely reference with pragmatic reasoning.
 From this model, we derive two qualitative predictions:
 (1) *Ceteris paribus*, a listener should prefer reference classes that are more specific because lower variance in the reference class will provide a more specific meaning to a vague utterance. 
-(2) When the object of discourse (e.g., the day's temperature) is a member of a specific (or, subordinate) class that is expected to fall relatively high on the degree scale (e.g., temperature of a Summer day), positive form adjectives (e.g., *warm*) should lead listeners to prefer the more general (or, superordinate) class than the negative form adjective (e.g., *cold*).
-The opposite pattern is predicted to hold for subordinate classes low on the scale (e.g., days in Winter). 
+(2) The likely comparison class will be driven by the *a priori* plausibility of the adjective to the specific class, which in turn depends upon where on the degree scale the class falls (e.g., high or low) and the form the adjective (positive or negative form). 
+For instance, in Winter, the positive form adjective phrase "It's warm" should signal the more specific class (relative to days in Winter) more so than the negative form "It's cold". 
 We test these predictions in an experiment designed to elicit the comparison class.
 
 Quantitative predictions of the model will depend on the quantitative details of the relevant world knowledge.
 This could be measured by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
-Instead, we build a Bayesian data-analytic model to introduce uncertainty over these parameters and resolve the uncertainty by asking similar natural language questions in the domains of inquiry. 
-This represents a new possibility for Bayesian models of cognition and language: by building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to give multiple judgments on different tasks.
+Instead, we build a Bayesian data-analytic model to introduce uncertainty over these parameters.
+This data-analytic model has too many parameters to estimate reliably from the results of just the first experiment. 
+We can use our same RSA model to generate predictions for other similar kinds of language in a follow-up experiment, one that relies upon the same prior knowledge used in Expt.~1.
+This represents a new possibility for Bayesian models of cognition and language: by building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to answer multiple questions about the same domain knowledge.
 
 <!--
 "It's warm outside" when heard in July means something very different than when heard in January.
