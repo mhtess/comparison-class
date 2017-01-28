@@ -19,14 +19,12 @@ author-information: >
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
-    The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
-    For example, *It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
-    The issue is that *warm* conveys that the temperature is high relative to some comparison class, but little is known about how a listener decides upon a comparison class. 
+    "*It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
+    *Warm* conveys that the temperature is high relative to some comparison class, but little is known about how a listener decides upon a comparison class. 
     Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and internal models of speech production.
     We introduce a Rational Speech Act model and derive two qualitative predictions from the model, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class.
-    We then produce quantitative predictions from the model by asking follow-up questions to the model combined with a novel Bayesian data analytic technique. 
-    We conclude that the listeners are remarkably flexible in their ability to infer speakers' intended reference class when they are absent from the context."
+    We generate quantitative model predictionsby asking follow-up questions to participants and the model, combined with a novel Bayesian data analytic technique. 
+    We find that the listeners are remarkably flexible in their ability to infer speakers' intended reference classes when they are absent from the context."
 
 keywords:
     "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
@@ -1148,6 +1146,9 @@ $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$
 
 # Discussion
 
+
+
+
 Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning (e.g, a rough estimate of the temperature) to make sense of what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
@@ -1177,6 +1178,10 @@ It's unlikely, for instance, for someone to go to a store to purchase a *kitchen
 Rather, objects are purchased in order to acquire their function, and different kinds of objects have different functions.
 \mht{this is rough... goal of this is to further elucidate the richness of the phenomenon.}
 
+
+The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
+    The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
+    
 <!--
 \begin{enumerate}
 \item Speaker knowledge: If you're a basketball scout, and you say of a player that "He is tall." it means "Tall relative to basketball players"
