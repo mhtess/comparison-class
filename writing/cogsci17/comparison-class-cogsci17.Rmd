@@ -399,7 +399,7 @@ for (p in sub.prior.params){
 
 ```
 
-```{r, cache = T}
+```{r priorsModel, cache = T}
 all.priors <- bind_rows(
   data.frame(
     val = rnorm(10000, mean = 0, sd = 1),
@@ -631,6 +631,54 @@ We test these predictions in our first experiment.
 
 
 
+```{r load_model_results, cache = T}
+# n_chains  = 3
+# n_samples = 15000
+# m.samp <- data.frame()
+# 
+# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
+# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
+# 
+# for (i in seq(1, n_chains)){
+#   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
+#                                  file.prefix, i, ".csv", sep="")))
+#   m.samp.i <- rwebppl::get_samples(m, n_samples)
+#   m.samp <- bind_rows(m.samp, m.samp.i)
+# }
+load(paste(
+   project.path,
+   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
+   sep = ""))
+
+m.samp.tidy <-left_join(
+  m.samp %>% filter(param == "prior"),
+  d %>% select(degree, sub_category, strength) %>% unique() %>%
+  rename(cat = sub_category)
+) %>% 
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low","medium","high")))
+
+# save(m.samp, file = 
+#        paste(
+#          project.path, 
+#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
+#          sep = ""))
+
+m.freq.summary <- m.samp %>% filter(param == "frequency") %>%
+  group_by(param) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = HPDhi(val),
+             cred_lower = HPDlo(val) )
+
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  group_by(param, cat,form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = HPDhi(val),
+             cred_lower = HPDlo(val) )
+```
+
+
 ```{r scrapedWebGrams}
 sub_categories <- read.csv(paste(project.path, "analysis/webgram_subcat.csv", sep = ""))
 super_categories <- read.csv(paste(project.path, "analysis/webgram_supercat.csv", sep = ""))
@@ -678,62 +726,42 @@ df.freq.long <- data.frame(
   )
 )
 
-df.scaledFreq <- left_join(df.freq.long %>%
-            filter(category != "super"),
-          df.freq.long %>% 
-            filter(category == "super") %>%
-            select(-category, -cat) %>% 
-            rename(superFreq = freq)) %>% 
+df.scaledFreq <- left_join(
+  df.freq.long %>%
+    filter(category != "super"),
+  df.freq.long %>% 
+    filter(category == "super") %>%
+    select(-category, -cat) %>% 
+    rename(superFreq = freq)) %>% 
   gather(key, val, freq, superFreq) %>%
   mutate(logval = log(val),
-         scaledLogval = 0.2*logval,
-         scaledVal = exp(scaledLogval)) %>%
-  select(-logval, -scaledLogval, -val) %>%
-  spread(key, scaledVal) %>%
-  mutate(sumScaledFreq = freq + superFreq,
-         cPrior = freq / sumScaledFreq)
+         scaledLogval = m.freq.summary$MAP *logval,
+         scaledLogval_credLo = m.freq.summary$cred_lower *logval,
+         scaledLogval_credHi = m.freq.summary$cred_upper *logval,
+         scaledVal = exp(scaledLogval),
+         scaledVal_upper = exp(scaledLogval_credHi),
+         scaledVal_lower = exp(scaledLogval_credLo)) %>%
+  select(-logval, -scaledLogval, -val, -scaledLogval_credLo, -scaledLogval_credHi)
+
+df.scaledFreq.wide <- left_join(
+  df.scaledFreq %>% 
+    filter(key == "freq") %>% select(-key),
+  df.scaledFreq %>%
+    filter(key == "superFreq") %>% select(-key, -cat, category) %>%
+    rename(super_val = scaledVal,
+           super_lower = scaledVal_lower,
+           super_upper = scaledVal_upper)
+  ) %>%
+  mutate(
+    sumScaledFreq = scaledVal + super_val,
+    sumScaledLower = scaledVal_lower + super_lower,
+    sumScaledUpper = scaledVal_upper + super_upper,
+    cPrior = super_val / sumScaledFreq,
+    c_lower = super_lower / sumScaledLower,
+    c_upper = super_upper / sumScaledUpper
+    )
 ```
 
-```{r load_model_results, cache = T}
-# n_chains  = 3
-# n_samples = 15000
-# m.samp <- data.frame()
-# 
-# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
-# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
-# 
-# for (i in seq(1, n_chains)){
-#   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
-#                                  file.prefix, i, ".csv", sep="")))
-#   m.samp.i <- rwebppl::get_samples(m, n_samples)
-#   m.samp <- bind_rows(m.samp, m.samp.i)
-# }
-load(paste(
-   project.path,
-   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
-   sep = ""))
-
-m.samp.tidy <-left_join(
-  m.samp %>% filter(param == "prior"),
-  d %>% select(degree, sub_category, strength) %>% unique() %>%
-  rename(cat = sub_category)
-) %>% 
-  mutate(strength = factor(strength, levels = c(1,2,3),
-                           labels = c("low","medium","high")))
-
-# save(m.samp, file = 
-#        paste(
-#          project.path, 
-#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
-#          sep = ""))
-
-m.pp <- m.samp %>% 
-  filter(param %in% c("superCC", "superSpeaker")) %>%
-  group_by(param, cat,form) %>%
-  summarize( MAP = estimate_mode(val),
-             cred_upper = HPDhi(val),
-             cred_lower = HPDlo(val) )
-```
 
 ```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Google WebGram scraped comparison class priors."}
 
@@ -779,8 +807,9 @@ fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Inferred priors"),
   theme(strip.text.x = element_blank())
 
 fig2c <- ggplot(
-  df.scaledFreq %>% 
-  mutate(experiment = "Empirical class prior",
+  df.scaledFreq.wide %>% 
+  mutate(
+    experiment = "Empirical class prior",
    cat = factor(cat, 
   levels = c("gymnast", "soccer player", "basketball player",
              "bottle opener", "toaster", "dishwasher",
@@ -797,8 +826,10 @@ fig2c <- ggplot(
                   labels = c("people", "kitchen appliances",
                              "days of the year", "online videos", "produce")),
   category = factor(category, levels = c("low", "medium", "high"))), 
-  aes( x = cat, y = 1- cPrior, fill = category))+
+  aes( x = cat, y = cPrior, fill = category, 
+       ymin = c_lower, ymax = c_upper))+
   geom_bar(stat = 'identity', position = position_dodge(), color = 'black')+
+  geom_errorbar(position = position_dodge(), width = 0.5)+ 
   scale_fill_manual(values = c("#ffeda0","#feb24c","#f03b20"))+
   facet_wrap(~degree, scales = 'free', nrow = 1)+
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
