@@ -763,7 +763,7 @@ df.scaledFreq.wide <- left_join(
 ```
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Google WebGram scraped comparison class priors."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95 precent credible interval on the beta scale parameter."}
 
 fig2a <- df.summary %>%
   ungroup() %>%
