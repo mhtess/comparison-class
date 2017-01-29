@@ -691,7 +691,7 @@ bind_rows(
 
 # Experiment 1: Comparison class inference
 
-In this experiment, we test whether the level of abstractness of the comparison class \textit{c} (subordinate vs. superordinate category) depends upon the subordinate category that target entity is a member of.
+In this experiment, we test the two predictions of our language model (outlined above).
 
 ## Methods
 
@@ -709,10 +709,9 @@ The experiment took about five minutes and participants were compensated $0.50 f
 
 ### Materials
 
-We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales: price (*expensive*, *cheap*), temperature (*warm*, *cold*), duration (*long*, *short*), height (*tall*, *short*), and weight (*heavy*, *light*).
-Each scale was paired with a superordinate category: kitchen appliances (price), weather throughout the year (temperature), things you watch online (duration), people (height), and produce (weight).
-For each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Prediction section).
-This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}; see Table \ref{tab:1} for full listing).
+We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales (Table \ref{tab:1}).
+Each scale was paired with a superordinate category, and for each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Predictions section).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}).
 
 ### Procedure
 
@@ -722,12 +721,13 @@ This was followed by an adjective sentence, which predicated either a positive- 
 Participants were asked "What do you think Tanya meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
 
 \begin{itemize}
-\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{subordinates} (e.g., \emph{It's warm relative to other days in Winter})
-\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})
+\item \{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \textsc{subordinates} (e.g., \emph{days in Winter}) or \textsc{superordinates} (e.g.,\emph{days of the year})
 \end{itemize}
 
+<!--\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})-->
+
 Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
-In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely. 
+In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
 The experiment can be viewed in full at:
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
 
@@ -764,15 +764,14 @@ rs.glmm.simple.summary <- summary(rs.glmm.simple)
 
 ```
 
-On each trial, the participant was given an utterance with a gradable adjective and asked which comparison class (subordinate vs. superordinate) the speaker meant.
-We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for the rest of this paper.
-Figure \ref{fig:expt1results} shows the proportion of participants choosing the subordinate category for each item.
+We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for all subsequent analyses.
+Figure \ref{fig:expt1results} shows the proportion of participants choosing the superordinate category for each item.
 We see considerable variability both within- and across- scales.
-Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (i.e., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
+Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (e.g., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
 For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
 
 This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
-In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and the iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[
+In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[
 This was the maximal mixed-effects structure that converged.
 ].
 Confirming our two qualitative model predictions, there was an overall preference for subordinate category paraphrases ($\beta = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Estimate"],2)`$;
@@ -794,50 +793,108 @@ $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive"
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
 All of these effects are also visually apparent in Figure \ref{fig:expt1results}.
 
+## Discussion
 
 The two qualitative predictions of our language understanding model were borne out in Experiment 1.
-Our computational model makes quantitative predictions as well, though these will depend on the quantitative details of the pragmatic listener's world knowledge.
-This world knowledge is often measured by having participants estimate relevant quantities assuming only what would be available prior to the linguistic phenomenon of interest [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
-These quantities can be difficult to estimate, however, especially for abstract superordinate quantities (e.g., the temperature in Maryland on a day of the year).
+The RSA model makes quantitative predictions as well, though these will depend on the quantitative details of the listener's world knowledge: $P(x \mid c)$ in Eqs. \ref{eq:L1a} \& \ref{eq:L0a}.
+This kind of world knowledge can be measured by having participants estimate certain quantities without any experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
+In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
+In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which the same RSA model can answer.
 
-In the next section, we formalize our uncertainty about listeners' prior knowledge, and run a second experiment to gather converging evidence about listeners' knowledge, which we can then use to generate quantitative predictions for Expt. 1.
+# Full model and Experiment 2
 
-# Reducing uncertainty in prior knowledge by asking follow-up questions
+The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1).
+In order to make quantitative predictions, we must specify the listener's world knowledge $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ as well as the prior distribution on comparison classes $P(c)$.
 
-Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
-For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
-Certain quantities and probabilities are inherent difficult measure because they are abstract or hard to estimate.
-In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic approach to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which a reduced form of computational model presented in this paper can answer.
-This has the feature of reducing task demand on participants.
+### Empirical prior on comparison classes
 
-As we did for the simulations presented before, we assume the superordinate prior is a unit-normal distribution. 
-We assume the subordinate priors also are normal distributions, but with unknown parameters $\mu_{sub}, \sigma_{sub}$.
-We can wrap the RSA model presented earlier inside a Bayesian data analysis model and infer these parameters likely values.
-Using just the data from Expt.~1, this model would be overparametrized.
-We can make a subtle modification of the RSA model to ask follow-up questions that would rely upon the same prior knowledge. 
-In particular, we will ask participants that assuming a target entity is a member of the subordinate (e.g., it's a day in Winter), would they predict the adjective would apply with an explicit comparison class (e.g., "Is it warm relative to other days of the year?").
+We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
+If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
+We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
+Corpus accessed via 
+\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
+], and scale it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
+\mht{Should I include the scraped frequencies in the report? or as a supplement on Rpubs?}
+In our data analysis, we use the following prior: $\beta \sim \text{Uniform}(0, 3)$.
 
-This is a simplification of the comparison class inference model because it eliminates the uncertainty in the relevant comparison class.
-Since this question is a felicity-judgment, we model this as a pragmatic speaker [@Qing2014a; @Tessler2016; @Tessler2016cogsci]
+
+### Inferring priors on world knowledge
+
+$P(x \mid c)$ describes the plausible values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
+Rather than measuring these distributions, we will make a few assumptions about their functional forms and infer their parameters using Bayesian data analysis.
+This by itself will not be sufficient to fill in the probabilistic knowledge into our model, as the model will be overparameterized.
+We need not worry though; the RSA model is a productive language model, and as such, we can ask it other questions to gain more traction on the latent world knowledge.
+
+For simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
+We fix each superordinate distribution $P(x \mid c_{super})$ to be a Unit-Normal and put priors over the parameters of each subordinate Gaussian. 
+Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
+
+
+### Predicting more data
+
+Currently, the full model has 2 parameters for each subordinate category (the $\mu$ and $\sigma$ of $P(x \mid c_{sub})$), in addition to weight $\beta$ on the empirical ngram frequency for $P(c)$.
+These are too many parameters to estimate reliably using only the data from Expt. 1. 
+Even if they could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
+Both of these considerations lead us to read a second experiment.
+
+We choose an experiment that uses the same domain knowledge as Expt. 1 in order to not add more parameters.
+In addition to helping us gain traction on participants' prior knowledge, a second experiment can further test the RSA model. 
+Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
+Since we have a language understanding model that can make predictions about adjective use, we re-use this model to predict participants' endorsements of adjectives.
+
+## Experiment 2: Adjective endorsement
+
+In this experiment, we use a two-alternative forced choice paradigm to collect participants' adjective endorsements using knowledge that would be relevant for Expt. 1.
+
+### Methods
+
+#### Participants
+
+We recruited 100 participants from Amazon Mechanical Turk.
+Five participants were excluded due to failing the catch trial.
+Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
+
+#### Materials, procedure, and results
+
+Materials were the same as Expt. 1 (Table 1).
+
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
+This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
+As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
+The experiment can be viewed in full at: 
+\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
+
+The results of this experiment can be seen in Figure \ref{expt1results} (bottom). 
+We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
+In the last section, we formalize our uncertainty about listeners' prior knowledge for these experiments to generate quantitative model predictions for the two data sets.
+
+## Bayesian data analysis
+
+We use Eq.~\ref{eq:L1a} to model the comparison class inference task of Experiment 1.
+The model the adjective production data in Experiment 2, we add a level of recursion to use a pragmatic speaker [following: @Qing2014a; @Tessler2016; @Tessler2016cogsci].
+We also remove comparison class uncertainty, since the experiment make use of explicit comparison classes.
+<!---->
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1b}
 \end{align}
+<!---->
+\mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
+We use Eq.~\ref{eq:S2} to model the data from Expt. 2 (Figure \ref{fig:modelDiagram}).
 
-We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2 (described below). 
-We use Eq.~\ref{eq:L1} to model the comparison class inference task of Experiment 2. 
-Following @Lassiter2013, $P(\theta) = \text{Uniform}(0, 1)$.
+The models for the two tasks make use of the same prior knowledge $P(x \mid c)$. 
+We can thus infer the likely values of the parameters of these priors from the two experiments worth of data, and use those inferred parameters and make predictions about what the data should look like. 
 
-$P(c)$ describes the prior probability of the superordinate (or subordinate) comparison class used by the listener in the comparison class inference model (and Expt.~1). 
-This is likely specified by conceptual knowledge and will heavily be influenced by the subordinate and superordinate items we designed (Table \ref{tab:1}).
-This prior in itself is of major theoretical interest and future work should attempt to understand the differences in our items that would lead to different $P(c)$. 
-<!--In an absolute sense, this is the real target of theoretical interest. -->
-In this work, we are interested in a within-domain effect (i.e., the variability within the domain of daytime temperatures).\footnote{
-That is, fixing some prescribed set of potential comparison classes, what is a listener likely to infer is the relevant one. \mht{should come earlier and probably not in a footnote}
-}
-Hence, in our data analysis, we put uncertainty over the prior probability of each of the 5 $i$ superordinate categories: $c^{super}_{i} \sim \text{Uniform}(0,1)$
-\mht{If we keep the domain-wise ccPrior variable, need to square this with the "main effect of subordinate" that I say we're predicted.}
+The full model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which likely vary across the two tasks.
+Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
+Expt. 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
+$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
+We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
+
+
 
 \usetikzlibrary{bayesnet}
 \begin{figure}[ht]
@@ -887,11 +944,29 @@ Hence, in our data analysis, we put uncertainty over the prior probability of ea
 \end{tikzpicture}
 }
 \end{center}
-\caption{RSA and data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
+\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
+\label{fig:modelDiagram}
 \end{figure}
 
-Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
 
+
+
+
+
+
+
+
+
+
+<!--
+Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
+For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
+Certain quantities and probabilities are inherent difficult measure because they are abstract or hard to estimate.
+In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic approach to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+Certain quantities and probabilities are inherently difficult to measure because they are abstract or hard to estimate.
+Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which can be interpreted by the same language model.
+This has the feature of reducing task demand on participants.
+Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
 
 We take a different approach. 
 We assume a simple functional form to the prior and infer the likely parameter values of those priors from the data and our language model.
@@ -899,91 +974,8 @@ This by itself simply adds extra parameters to the model, and we wouldn't know i
 To alleviate this problem of overfitting, we run a second experiment with the same language model as our guide. 
 We ask similar questions in the same domains, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
 
-# Experiment 2: Adjective production
-
-In this experiment, we use a two-alternative forced choice paradigm to collect speaker judgments using the same language model as before.
-
-## Methods
-
-### Participants
-
-We recruited 100 participants from Amazon Mechanical Turk.
-Five participants were excluded due to failing the catch trial.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
-
-### Materials, procedure, and results
-
-Materials were the same as Expt. 1 (Table 1).
-
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
-This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
-As in Expt.~1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
-The experiment can be viewed in full at: 
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
-
-The results of this experiment can be seen in Figure \ref{expt1results} (bottom). 
-We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
-In the last section, we formalize our uncertainty about listeners' prior knowledge for these experiments to generate quantitative model predictions for the two data sets.
-
-# Inferring prior knowledge and quantitative model predictions 
-
-Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
-For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
-Certain quantities and probabilities are inherently difficult to measure because they are abstract or hard to estimate.
-In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which can be interpreted by the same language model.
-This has the feature of reducing task demand on participants.
-
-As we did for the simulations presented before, we assume the superordinate prior is a unit-normal distribution. 
-We assume the subordinate priors also are normal distributions, but with unknown parameters $\mu_{sub}, \sigma_{sub}$.
-We build a Bayesian data analysis model on top of the RSA model presented earlier and infer these parameters likely values.
-Using just the data from Expt.~1, this model would be overparametrized \mht{what do i want to say here?},
-but we can ask related questions in the same domains and use the RSA model to predict those as well
-. 
-In particular, we will ask participants that assuming a target entity is a member of the subordinate (e.g., it's a day in Winter), would they predict the adjective would apply with an explicit comparison class (e.g., "Is it warm relative to other days of the year?").
-This is a simplification of the comparison class inference model because it eliminates the uncertainty in the relevant comparison class.
-Since this question is a felicity-judgment, we model this as a pragmatic speaker [@Qing2014a; @Tessler2016; @Tessler2016cogsci]
-\mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
-<!---->
-\begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1a}
-\end{align}
-<!---->
-We use Eq.~\ref{eq:S2} to model adjective production data in Experiment 2. 
-We use Eq.~\ref{eq:L1} to model the comparison class inference task of Experiment 2. 
-Following @Lassiter2013, $P(\theta) = \text{Uniform}(0, 1)$.
-
-### Empirical prior on comparison classes
-
-$P(c)$ describes the prior probability of the superordinate (or subordinate) comparison class used by the listener in the comparison class inference model (and Expt.~1). 
-We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
-If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class. 
-We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
-Corpus accessed via 
-\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
-], and weight it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
-In our data analysis, we put a uniform prior over likely values of $\beta \sim \text{Uniform}(0, 3)$. 
-\mht{Should I include the scraped frequencies in the report? or as a supplement on Rpubs?}
-
-\mht{Insert plate diagram here}
-
-### Inferring priors on degrees
-
-$P(x \mid c)$ describes the plausible values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
-Rather than measuring these distribution by asking participants to estimate them, we will put uncertainty over their parameters and infer them from participants' responses to our questions from the two expeirments.
-With simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
-We fix each superordinate distribution $P(x \mid c^{super})$ to be a Unit-Normal and put uncertainty over the parameters of each subordinate Gaussian. 
-Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 3)$.
 These $P(x \mid c)$ are used in both the experiments, which allows us to both simultaneously gain credibility in our estimates of these parameters as well as in our model, which has to predict data from two distinct experiments.
-
-The model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$.
-Experiment 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
-Experiment 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
-$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
-We put the following priors over these parameters: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
+-->
 
 ## Results
 
