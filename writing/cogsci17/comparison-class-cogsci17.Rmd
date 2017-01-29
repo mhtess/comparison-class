@@ -633,24 +633,128 @@ We test these predictions in our first experiment.
 -->
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=3.75, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Bottom: Experiment 2 results. Adjective endorsement given knowledge of  subordinate membership, with the superordinate category as the explicit comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals."}
 
-bind_rows(
-  df.summary %>%
-    ungroup() %>%
-    mutate(experiment = 'Comparison class inference'),
-  vs.summary %>%
-    ungroup() %>%
-    mutate(experiment = 'Adjective production')
-) %>%
-  mutate(sub_category = 
-           factor(sub_category, 
-                  levels = sub_category[order(strength)]),
-         experiment = factor(experiment, levels = c('Comparison class inference',
-                                                    'Adjective production'))
-          # condition = factor(condition, levels = c("context","contextWithSuper"),
-          #                    labels=c("Bare", "Supercat mention"))
-         ) %>%
+```{r scrapedWebGrams}
+sub_categories <- read.csv(paste(project.path, "analysis/webgram_subcat.csv", sep = ""))
+super_categories <- read.csv(paste(project.path, "analysis/webgram_supercat.csv", sep = ""))
+
+df.freq <- bind_rows(
+  sub_categories %>% 
+    select(X, web.gram.freq),
+  super_categories %>% 
+    select(X, web.gram.freq)
+) %>% drop_na() %>% spread(X, web.gram.freq)
+
+df.freq.long <- data.frame(
+  cat = c(
+    "grape","apple","watermelon", "produce",
+    "gymnast","soccer player","basketball player","people",
+    "bottle opener", "toaster", "dishwasher", "kitchen appliances",
+    "day in Winter", "day in Fall", "day in Summer", "days of the year",
+    "video of the cute animal", "music video", "movie", "things you watch online"
+  ),
+  category = c(
+    "low", "medium","high","super",
+    "low", "medium","high","super",
+    "low", "medium","high","super",
+    "low", "medium","high","super",
+    "low", "medium","high","super"
+  ),
+  degree = c(
+    "weight","weight","weight","weight",
+    "height","height","height","height",
+    "price","price","price","price",
+    "temperature","temperature","temperature","temperature",
+    "time","time","time","time"
+  ),
+  freq = c(
+    df.freq$grapes, df.freq$apples, df.freq$watermelons, df.freq$`fruits and vegetables`,
+    df.freq$gymnasts, df.freq$`soccer players`, df.freq$`basketball players`, df.freq$people,
+    df.freq$`bottle openers`, df.freq$toasters, df.freq$`dishwashing machines`, df.freq$`kitchen appliances`,
+    (df.freq$`days in Winter` + df.freq$`days of Winter` + df.freq$`Winter days`)/3, 
+    (df.freq$`days in Fall` + df.freq$`days of Fall` + df.freq$`Fall days`)/3,
+    (df.freq$`days in Summer` + df.freq$`days of Summer` + df.freq$`Summer days`)/3, 
+    (df.freq$`days in the year` + df.freq$`days of the year`)/2,
+    (df.freq$`videos of animals` + df.freq$`animal videos`)/2,
+    df.freq$`music videos`, df.freq$movies, 
+    (df.freq$`online videos` + df.freq$`online media`)/2
+  )
+)
+
+df.scaledFreq <- left_join(df.freq.long %>%
+            filter(category != "super"),
+          df.freq.long %>% 
+            filter(category == "super") %>%
+            select(-category, -cat) %>% 
+            rename(superFreq = freq)) %>% 
+  gather(key, val, freq, superFreq) %>%
+  mutate(logval = log(val),
+         scaledLogval = 0.2*logval,
+         scaledVal = exp(scaledLogval)) %>%
+  select(-logval, -scaledLogval, -val) %>%
+  spread(key, scaledVal) %>%
+  mutate(sumScaledFreq = freq + superFreq,
+         cPrior = freq / sumScaledFreq)
+```
+
+```{r load_model_results, cache = T}
+# n_chains  = 3
+# n_samples = 15000
+# m.samp <- data.frame()
+# 
+# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
+# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
+# 
+# for (i in seq(1, n_chains)){
+#   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
+#                                  file.prefix, i, ".csv", sep="")))
+#   m.samp.i <- rwebppl::get_samples(m, n_samples)
+#   m.samp <- bind_rows(m.samp, m.samp.i)
+# }
+load(paste(
+   project.path,
+   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
+   sep = ""))
+
+m.samp.tidy <-left_join(
+  m.samp %>% filter(param == "prior"),
+  d %>% select(degree, sub_category, strength) %>% unique() %>%
+  rename(cat = sub_category)
+) %>% 
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low","medium","high")))
+
+# save(m.samp, file = 
+#        paste(
+#          project.path, 
+#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
+#          sep = ""))
+
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  group_by(param, cat,form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = HPDhi(val),
+             cred_lower = HPDlo(val) )
+```
+
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Google WebGram scraped comparison class priors."}
+
+fig2a <- df.summary %>%
+  ungroup() %>%
+  mutate(experiment = 'Comparison class inference',
+          sub_category = factor(sub_category, 
+                  levels = c("gymnast", "soccer player", "basketball player",
+                             "bottle opener", "toaster", "dishwasher",
+                             "day in Winter", "day in Fall", "day in Summer",
+                             "video of the cute animal", "music video", "movie",
+                             "grape", "apple", "watermelon"),
+                  labels = c("gymnast", "soccer player", "basketball player",
+                             "bottle opener", "toaster", "dishwasher",
+                             "day in Winter", "day in Fall", "day in Summer",
+                             "cute animal video", "music video", "movie",
+                             "grape", "apple", "watermelon") )) %>%
+#                  levels = sub_category[order(strength)])) %>%
   ggplot(.,
          aes( x = sub_category, y = mean, 
               ymin = ci_lower, ymax = ci_upper, 
@@ -658,33 +762,117 @@ bind_rows(
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 1, 
            color = 'black', width = 0.9) +
   geom_errorbar(position = position_dodge(0.9), width = 0.3) +
-  #facet_grid(condition~degree, scales = 'free') +
   facet_grid(experiment~degree, scales = 'free') +
   ylim(0, 1) +
-  #theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
   scale_fill_brewer(palette = 'Set3') +
   ylab("Proportion superordinate paraphrase") +
-  xlab("Item category") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 0.95))
-  # theme(axis.title.y = element_text(size = 10),
-  #       strip.text = element_text(size = 8))
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
+        axis.title.x = element_blank())
 
+fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Inferred priors"), 
+                aes(x = val, y = ..scaled.., 
+                 fill = strength, lty = strength))+
+  geom_density(adjust = 2, size = 0.8, alpha = 0.8)+
+  scale_fill_manual(values = c("#ffeda0","#feb24c","#f03b20"))+
+  #scale_color_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
+  facet_grid(experiment~degree, scales = 'fixed')+
+  xlim(-3, 3)+
+  xlab("Degree value")+
+  ylab("Inferred prior probability")+
+  theme(strip.text.x = element_blank())
 
+fig2c <- ggplot(
+  df.scaledFreq %>% 
+  mutate(experiment = "Empirical class prior",
+   cat = factor(cat, 
+  levels = c("gymnast", "soccer player", "basketball player",
+             "bottle opener", "toaster", "dishwasher",
+             "day in Winter", "day in Fall", "day in Summer",
+             "video of the cute animal", "music video", "movie",
+             "grape", "apple", "watermelon"),
+  labels = c("gymnast", "soccer player", "basketball player",
+             "bottle opener", "toaster", "dishwasher",
+             "day in Winter", "day in Fall", "day in Summer",
+             "cute animal video", "music video", "movie",
+             "grape", "apple", "watermelon") ),
+  degree = factor(degree, levels = c("height", "price", "temperature",
+                                     "time", "weight")),
+  category = factor(category, levels = c("low", "medium", "high"))), 
+  aes( x = cat, y = 1- cPrior, fill = category))+
+  geom_bar(stat = 'identity', position = position_dodge(), color = 'black')+
+  scale_fill_manual(values = c("#ffeda0","#feb24c","#f03b20"))+
+  facet_wrap(~degree, scales = 'free', nrow = 1)+
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
+        axis.title.x = element_blank()) +
+  ylim(0, 1) + 
+  ylab("Prior superordinate class")
 
-# 
-#     mutate(sub_category = factor(sub_category, levels = sub_category[order(strength)])) %>%
+grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
+
+# bind_rows(
+#   df.summary %>%
+#     ungroup() %>%
+#     mutate(experiment = 'Comparison class inference'),
+#   vs.summary %>%
+#     ungroup() %>%
+#     mutate(experiment = 'Adjective production')
+# ) %>%
+#   mutate(sub_category = 
+#            factor(sub_category, 
+#                   levels = sub_category[order(strength)]),
+#          experiment = factor(experiment, levels = c('Comparison class inference',
+#                                                     'Adjective production'))
+#           # condition = factor(condition, levels = c("context","contextWithSuper"),
+#           #                    labels=c("Bare", "Supercat mention"))
+#          ) %>%
 #   ggplot(.,
-#          aes( x = sub_category, y = mean, ymin = ci_lower, ymax = ci_upper, group = form, fill = form ) )+
-#   geom_bar(stat = 'identity', position = position_dodge(), alpha = 0.8)+
-#   geom_errorbar(position = position_dodge())+
-#   facet_grid(.~degree, scales = 'free')+
+#          aes( x = sub_category, y = mean, 
+#               ymin = ci_lower, ymax = ci_upper, 
+#               group = form, fill = form ) )+
+#   geom_bar(stat = 'identity', position = position_dodge(), alpha = 1, 
+#            color = 'black', width = 0.9) +
+#   geom_errorbar(position = position_dodge(0.9), width = 0.3) +
+#   #facet_grid(condition~degree, scales = 'free') +
+#   facet_grid(experiment~degree, scales = 'free') +
 #   ylim(0, 1) +
-#   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))+
-#   scale_fill_brewer(palette = 'Set1')+
-#   ylab("Superordinate adjective endorsement")+
-#   xlab("Item category")#+
+#   #theme(axis.text.x = element_text(angle = 90, hjust = 0.95) ) +
+#   scale_fill_brewer(palette = 'Set3') +
+#   ylab("Proportion superordinate paraphrase") +
+#   xlab("Item category") +
+#   theme(axis.text.x = element_text(angle = 90, hjust = 0.95))
 #   # theme(axis.title.y = element_text(size = 10),
 #   #       strip.text = element_text(size = 8))
+
+
+
+# df.prior.combined <-bind_rows(
+#   df.summary %>%
+#    ungroup() %>%
+#    rename(val = mean, cat = sub_category) %>% 
+#   select(-super_category, -target) %>%
+#   mutate(strength = as.numeric(as.character(strength)),
+#          data_source = "expt1"),
+#   m.samp.tidy %>% 
+#     select(-param) %>% 
+#     mutate(ci_lower = 0, ci_upper = 0,
+#            strength = as.numeric(as.character(strength)),
+#            data_source = "priors")
+# )
+
+  # ggplot(df.prior.combined, aes())+
+  # facet_grid(data_source~degree) + 
+  # geom_density(data = subset(df.prior.combined, data_source == "priors"), 
+  #              aes (x = val, y = ..scaled.., fill = factor(strength), lty = factor(strength)))+
+  # geom_bar(data = subset(df.prior.combined, data_source == "expt1"),
+  #          aes(x = cat, y = mean, 
+  #             group = form, fill = form ), stat = 'identity', 
+  #          position = position_dodge(), alpha = 1, 
+  #          color = 'black', width = 0.9) +
+  # geom_errorbar(data = subset(df.prior.combined, data_source == "expt1"), 
+  #               aes(ymin = ci_lower, ymax = ci_upper),
+  #               position = position_dodge(0.9), width = 0.3)
+
+
 ```
 
 
@@ -964,51 +1152,10 @@ We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uni
 We implemented the RSA model and the Bayesian data analysis model in the probabilistic programming language WebPPL [@dippl].
 To learn about the credible values of the parameters and the predictions, we used an incrementalized version of MCMC [@Ritchie2016], collecting 4 independent chains of 30,000 iterations (removing the first 10,000 for burn-in).
 
-```{r load_model_results, cache = T}
-# n_chains  = 3
-# n_samples = 15000
-# m.samp <- data.frame()
-# 
-# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
-# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
-# 
-# for (i in seq(1, n_chains)){
-#   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
-#                                  file.prefix, i, ".csv", sep="")))
-#   m.samp.i <- rwebppl::get_samples(m, n_samples)
-#   m.samp <- bind_rows(m.samp, m.samp.i)
-# }
-load(paste(
-   project.path,
-   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
-   sep = ""))
-
-m.samp.tidy <-left_join(
-  m.samp %>% filter(param == "prior"),
-  d %>% select(degree, sub_category, strength) %>% unique() %>%
-  rename(cat = sub_category)
-) %>% 
-  mutate(strength = factor(strength, levels = c(1,2,3),
-                           labels = c("low","medium","high")))
-
-# save(m.samp, file = 
-#        paste(
-#          project.path, 
-#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
-#          sep = ""))
-
-m.pp <- m.samp %>% 
-  filter(param %in% c("superCC", "superSpeaker")) %>%
-  group_by(param, cat,form) %>%
-  summarize( MAP = estimate_mode(val),
-             cred_upper = HPDhi(val),
-             cred_lower = HPDlo(val) )
-```
-
 <!--
 Human endorsements of comparison class paraphrases (left) and adjective sentences (right) as a function of listener model and speaker model predictions, respectively. Errorbars correspond to 95 percent bootstrapped confidence intervals for the participant data and 95 percent highest probability density intervals for the model predictions.
 -->
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=3, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
 
 md.pp <- left_join(
   bind_rows(vs.summary %>% 
@@ -1050,20 +1197,6 @@ expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
 
 As shown in Figure \ref{fig:posteriorPredictive_scatters}, the model does a good job at reconstructing the variability in responses for Experiment 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Experiment 2: $r^2(`r expt2.n`) = `r expt2.r2`$.
 
-```{r priorsFig, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Inferred world knowledge used in Experiments 1 and 2."}
-
-ggplot(m.samp.tidy, aes(x = val, y = ..scaled.., 
-                 fill = strength, lty = strength))+
-  geom_density(adjust = 2, size = 0.8, alpha = 0.8)+
-  scale_fill_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
-  #scale_color_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
-  facet_wrap(~degree, scales = 'fixed', nrow = 1)+
-  xlim(-3, 3)+
-  theme(strip.text.y = element_text(angle = 0),
-        legend.position = "bottom", legend.direction = "horizontal") +
-  xlab("Degree value")+
-  ylab("Inferred prior probability")
-```
 
 ```{r parameterPosteriors}
 m.so <- m.samp %>% filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2")) %>%
