@@ -958,24 +958,6 @@ We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uni
 
 
 
-<!--
-Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
-For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
-Certain quantities and probabilities are inherent difficult measure because they are abstract or hard to estimate.
-In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic approach to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-Certain quantities and probabilities are inherently difficult to measure because they are abstract or hard to estimate.
-Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which can be interpreted by the same language model.
-This has the feature of reducing task demand on participants.
-Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
-
-We take a different approach. 
-We assume a simple functional form to the prior and infer the likely parameter values of those priors from the data and our language model.
-This by itself simply adds extra parameters to the model, and we wouldn't know if the "prior knowledge" we're learning would generalize to other tasks that require the same knowledge. 
-To alleviate this problem of overfitting, we run a second experiment with the same language model as our guide. 
-We ask similar questions in the same domains, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
-
-These $P(x \mid c)$ are used in both the experiments, which allows us to both simultaneously gain credibility in our estimates of these parameters as well as in our model, which has to predict data from two distinct experiments.
--->
 
 ## Results
 
@@ -1129,30 +1111,29 @@ $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$
 
 # Discussion
 
-
-
-
-Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning (e.g, a rough estimate of the temperature) to make sense of what they've heard.
-Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly comparing against.
+Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
+Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
-We derive a language understanding model that can flexibly reason about the likely comparison class.
+We introduce a minimal extension of an adjective interpretation RSA model in order to flexibly reason about the likely comparison class.
 This model made two qualitative predictions: 
-(1) Listeners should prefer comparison classes that are relatively more specific (i.e., lower variance) as they result in more specific meanings and 
-(2) When the target entity (e.g., the temperature of the day) is towards the upper part of the scale (e.g., during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
+(1) Listeners should prefer comparison classes that are relatively lower variance as they result in more specific meanings and 
+(2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance class.
+When the target entity is from a subordinate class with a mean towards the upper part of the scale (e.g., temperature during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). 
+The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
 Both of these predictions were borne out in our first experiment.
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 
 The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from an experiment that uses similar language about the same domains.
-The major feature of this approach is that participants may respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
+The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
 It also provides a further validation of the language model, which must predict data from two similar but distinct language experiments. 
 
-In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt.~1: $P(c)$.
-We posited that the phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2016].
+In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt. 1: $P(c)$.
+We posited that the adjective phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2015].
 As a proxy for production or reference probabilities, we gathered empirical priors based on n-gram frequency from the Google WebGram corpus. 
-There are more cognitive interpretations of the comparison class prior, perhaps relating to basic level effects in categorization [@Rosch].
-\mht{Also, heterogeneity of the class w.r.t. dimension, e.g. kitchen appliances}
-It is hard to disentangle these two possibilities in this paradigm, as they are both correlated with frequency.
+These probabilities likely conflate multiple cognitive factors such as the basic level effects in categorization [@Rosch1975] or the hetereogeneity of different classes (e.g., the distribution over prices of kitchen appliances may be more hetereogenous than the distribution of heights for people).
+Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
+<!--
 One small deviation of our model from the human data is seen in the prices of kitchen appliances.
 The model tends to show an intermediate preference for the superordinate comparison class, *kitchen appliances*, because the phrase *kitchen appliances* is relatively frequent in the corpus.
 Participants, however, are quite reluctant to endorse this as a likely reference class.
@@ -1160,10 +1141,11 @@ This may be because the reference class is also sensitive to the goals of the sp
 It's unlikely, for instance, for someone to go to a store to purchase a *kitchen appliance* (any appliance will do).
 Rather, objects are purchased in order to acquire their function, and different kinds of objects have different functions.
 \mht{this is rough... goal of this is to further elucidate the richness of the phenomenon.}
-
+-->
 
 The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
-    The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
+The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
+It seems that listeners can jointly infer a lot from a little: The context and the meaning from a single utterance.
     
 <!--
 \begin{enumerate}
@@ -1176,10 +1158,31 @@ The words we say are often too vague to have a single, precise meaning, and only
 
 
 
+<!--
+Bayesian models of cognition and language strongly rely upon accurate measurement of prior knowledge [@FrankeEtAl2016].
+For models of language understanding, prior elicitation tasks typically take the form of running the same language understanding task but removing the target utterance that is aimed to be model [e.g., @Kao2014]. 
+Certain quantities and probabilities are inherent difficult measure because they are abstract or hard to estimate.
+In previous work, we have attempted to measure prior knowledge by decomposing what would be a single, complicated question into two simpler questions, and then using a Bayesian data analytic approach to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+Certain quantities and probabilities are inherently difficult to measure because they are abstract or hard to estimate.
+Here, we extend this to ask *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which can be interpreted by the same language model.
+This has the feature of reducing task demand on participants.
+Instead, we ask similar questions in the same domains to a separate set of participants, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
+
+We take a different approach. 
+We assume a simple functional form to the prior and infer the likely parameter values of those priors from the data and our language model.
+This by itself simply adds extra parameters to the model, and we wouldn't know if the "prior knowledge" we're learning would generalize to other tasks that require the same knowledge. 
+To alleviate this problem of overfitting, we run a second experiment with the same language model as our guide. 
+We ask similar questions in the same domains, and use the data from both experiments to gain more certainty about the relevant prior knowledge.
+
+These $P(x \mid c)$ are used in both the experiments, which allows us to both simultaneously gain credibility in our estimates of these parameters as well as in our model, which has to predict data from two distinct experiments.
+-->
+
+
+
 # Acknowledgements
 
-Place acknowledgments (including funding information) in a section at
-the end of the paper.
+We got people to thank. 
+We got monies to acknowledge.
 
 # References
 
