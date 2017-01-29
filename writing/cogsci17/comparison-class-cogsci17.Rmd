@@ -889,9 +889,9 @@ Note: We are collecting N = 150 for each experiment. Because each participant re
 -->
 
 We recruited 264 participants from Amazon Mechanical Turk.
-Two participants were excluded for failing an attention check, leaving a total number of 262 participants.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-The experiment took about five minutes and participants were compensated $0.50 for their work.
+2 participants were excluded for failing an attention check.
+Participation was restricted to those with U.S. IP addresses with at least a 95% work approval rating.
+The experiment took about 5 minutes and participants were compensated $0.50 for their work.
 
 
 ### Materials
@@ -902,20 +902,19 @@ This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x
 
 ### Procedure
 
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
 This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
-Participants were asked "What do you think Tanya meant?" and given two options to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
+Participants were asked "What do you think Tanya meant?" and given a two-alternative forced-choice to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
 
 \begin{itemize}
-\item \{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \textsc{subordinates} (e.g., \emph{days in Winter}) or \textsc{superordinates} (e.g.,\emph{days of the year})
+\item \{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \textsc{subordinates} (e.g., \emph{days in Winter}) or \textsc{superordinates} (e.g., \emph{days of the year})
 \end{itemize}
 
 <!--\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})-->
-
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
-In addition to all of the above design parameters, half of participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
-The experiment can be viewed in full at:
+In addition to all of the above design parameters, half of our participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
+The experiment can be viewed at:
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
 
 ## Results
@@ -952,9 +951,9 @@ rs.glmm.simple.summary <- summary(rs.glmm.simple)
 ```
 
 We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for all subsequent analyses.
-Figure \ref{fig:expt1results} shows the proportion of participants choosing the superordinate category for each item.
+Figure \ref{fig:expt1results} (top) shows the proportion of participants choosing the superordinate paraphrase for each item.
 We see considerable variability both within- and across- scales.
-Within each scale, we see the predicted interaction: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (e.g., a basketball player is *tall* relative to other people, but *short* relative to the basketball players).
+Within each scale, the predicted interaction is visually apparent: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (e.g., a basketball player is *tall* relative to other people, but *short* relative to other basketball players).
 For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
 
 This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
@@ -978,18 +977,18 @@ $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive",
 $\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Estimate"],2)`$;
 $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Std. Error"],2)`;$
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
-All of these effects are also visually apparent in Figure \ref{fig:expt1results}.
+All of these effects are also visually apparent in Figure \ref{fig:expt1results} (top).
 
 ## Discussion
 
-The two qualitative predictions of our language understanding model were borne out in Experiment 1.
+The two novel predictions of our language understanding model were borne out in Expt. 1.
 The RSA model makes quantitative predictions as well, though these will depend on the quantitative details of the listener's world knowledge: $P(x \mid c)$ in Eqs. \ref{eq:L1a} \& \ref{eq:L0a}.
 This kind of world knowledge can be measured by having participants estimate certain quantities without any experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
 In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
 In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which the same RSA model can answer.
+Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt. 1 and which the same RSA model can answer.
 
-# Full model and experiment 2
+# Full model and Experiment 2
 
 The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1).
 In order to make quantitative predictions, we must specify the listener's world knowledge $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ as well as the prior distribution on comparison classes $P(c)$.
@@ -1002,20 +1001,74 @@ We adopt log-frequency as our proxy, which we estimate using the Google Web Gram
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
 ], and scale it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
-\mht{Should I include the scraped frequencies in the report? or as a supplement on Rpubs?}
 In our data analysis, we use the following prior: $\beta \sim \text{Uniform}(0, 3)$.
 
 
 ### Inferring priors on world knowledge
 
 $P(x \mid c)$ describes the plausible values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
-Rather than measuring these distributions, we will make a few assumptions about their functional forms and infer their parameters using Bayesian data analysis.
-This by itself will not be sufficient to fill in the probabilistic knowledge into our model, as the model will be overparameterized.
-We need not worry though; the RSA model is a productive language model, and as such, we can ask it other questions to gain more traction on the latent world knowledge.
+Rather than measuring these distributions, we make a few assumptions about their functional forms and infer their parameters using Bayesian data analysis.
+This by itself will not be sufficient to fill in the probabilistic knowledge that our RSA model relies upon; the model as such will be overparameterized.
+We need not worry though; the RSA model is a productive language model, and so we can ask it other questions to gain more traction on the latent world knowledge.
 
 For simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
 We fix each superordinate distribution $P(x \mid c_{super})$ to be a Unit-Normal and put priors over the parameters of each subordinate Gaussian. 
 Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
+
+
+
+\usetikzlibrary{bayesnet}
+\begin{figure}[ht]
+\captionsetup{width=0.48\textwidth}
+\begin{center}
+\resizebox{5.5cm}{6.3cm}{
+\begin{tikzpicture}
+
+\node[latent, minimum size=1cm, ] (L0_speaker) {$L_{0}$} ;
+\node[latent, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
+\node[latent, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
+\node[latent, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
+
+\node[latent, minimum size=1cm, left=of S1_speaker] (alpha_1) {$\alpha_1$} ;
+\node[obs, minimum size=1cm, right=of L1_speaker] (comparison_class) {$d_{\text{Expt 1}}$} ;
+\node[latent, minimum size=1cm, left=of S2_speaker] (alpha_2) {$\alpha_2$} ;
+\node[obs, minimum size=1cm, right=of S2_speaker] (utterance) {$d_{\text{Expt 2}}$} ;  
+
+\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_prior) {$x | c_{sub}$} ;
+
+\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
+\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
+
+\edge {L0_speaker} {S1_speaker} ;
+\edge {S1_speaker} {L1_speaker} ;
+\edge {L1_speaker} {S2_speaker} ;
+
+\edge {alpha_1} {S1_speaker} ;
+\edge {L1_speaker} {comparison_class} ;
+\edge {alpha_2} {S2_speaker} ;
+\edge {S2_speaker} {utterance} ;
+
+\edge {comparison_class_prior} {L0_speaker} ;
+\edge {comparison_class_prior} {L1_speaker} ;
+
+\edge {mu} {comparison_class_prior} ;
+\edge {sigma} {comparison_class_prior} ;
+
+\plate {} {
+	(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)
+} {RSA}
+
+\plate {} {
+	(mu)(sigma)(comparison_class_prior)
+} {$\forall sub \in \mathcal{S}$}
+
+\end{tikzpicture}
+}
+\end{center}
+\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
+\label{fig:modelDiagram}
+\end{figure}
+
 
 
 ### Predicting more data
@@ -1080,69 +1133,6 @@ Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimalit
 Expt. 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
 $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
 We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
-
-
-
-\usetikzlibrary{bayesnet}
-\begin{figure}[ht]
-\captionsetup{width=0.48\textwidth}
-\begin{center}
-\resizebox{5.5cm}{6.3cm}{
-\begin{tikzpicture}
-
-\node[latent, minimum size=1cm, ] (L0_speaker) {$L_{0}$} ;
-\node[latent, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
-\node[latent, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
-\node[latent, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
-
-\node[latent, minimum size=1cm, left=of S1_speaker] (alpha_1) {$\alpha_1$} ;
-\node[obs, minimum size=1cm, right=of L1_speaker] (comparison_class) {$d_{\text{Expt 1}}$} ;
-\node[latent, minimum size=1cm, left=of S2_speaker] (alpha_2) {$\alpha_2$} ;
-\node[obs, minimum size=1cm, right=of S2_speaker] (utterance) {$d_{\text{Expt 2}}$} ;  
-
-\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_prior) {$x | c_{sub}$} ;
-
-\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
-\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
-
-\edge {L0_speaker} {S1_speaker} ;
-\edge {S1_speaker} {L1_speaker} ;
-\edge {L1_speaker} {S2_speaker} ;
-
-\edge {alpha_1} {S1_speaker} ;
-\edge {L1_speaker} {comparison_class} ;
-\edge {alpha_2} {S2_speaker} ;
-\edge {S2_speaker} {utterance} ;
-
-\edge {comparison_class_prior} {L0_speaker} ;
-\edge {comparison_class_prior} {L1_speaker} ;
-
-\edge {mu} {comparison_class_prior} ;
-\edge {sigma} {comparison_class_prior} ;
-
-\plate {} {
-	(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)
-} {RSA}
-
-\plate {} {
-	(mu)(sigma)(comparison_class_prior)
-} {$\forall sub \in \mathcal{S}$}
-
-\end{tikzpicture}
-}
-\end{center}
-\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
-\label{fig:modelDiagram}
-\end{figure}
-
-
-
-
-
-
-
-
-
 
 
 
