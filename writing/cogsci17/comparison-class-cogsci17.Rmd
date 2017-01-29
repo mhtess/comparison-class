@@ -796,7 +796,9 @@ fig2c <- ggplot(
              "cute animal video", "music video", "movie",
              "grape", "apple", "watermelon") ),
   degree = factor(degree, levels = c("height", "price", "temperature",
-                                     "time", "weight")),
+                                     "time", "weight"),
+                  labels = c("people", "kitchen appliances",
+                             "days of the year", "online videos", "produce")),
   category = factor(category, levels = c("low", "medium", "high"))), 
   aes( x = cat, y = 1- cPrior, fill = category))+
   geom_bar(stat = 'identity', position = position_dodge(), color = 'black')+
@@ -990,7 +992,7 @@ In practice, these quantities can be difficult to estimate, especially for more 
 In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
 Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt.~1 and which the same RSA model can answer.
 
-# Full model and Experiment 2
+# Full model and experiment 2
 
 The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1).
 In order to make quantitative predictions, we must specify the listener's world knowledge $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ as well as the prior distribution on comparison classes $P(c)$.
@@ -1242,7 +1244,7 @@ $\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$;
 $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$
 
 
-# Discussion
+# General discussion
 
 Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
