@@ -278,20 +278,14 @@ var thresholdPrior = cache(function(form){
 
 var utterances = {
   positive: ["positive_Adjective",
-             "silence_silence",
              "positive_sub",
              "positive_super"],
   negative: ["negative_Adjective",
-             "silence_silence",
              "negative_sub",
              "negative_super"]
 };
 
-// explicit comparison class is twice as expensive; silence is cheap
-var utteranceProbs = [1, 1, 1, 1];
-// uniform costs
-// var utteranceCosts = [1, 1, 1, 1, 1, 1, 1];
-// var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
+var utteranceProbs = [1, 1, 1];
 var utterancePrior = cache(function(form){
   return Infer({
     model: function() {
