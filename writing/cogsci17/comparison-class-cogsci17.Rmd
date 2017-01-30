@@ -73,6 +73,7 @@ library(lmerTest)
 library(data.table)
 #install.packages("ggthemes")
 library(ggthemes)
+library(RColorBrewer)
 estimate_mode <- function(s) {
   d <- density(s)
   return(d$x[which.max(d$y)])
@@ -632,22 +633,30 @@ We test these predictions in our first experiment.
 
 
 ```{r load_model_results, cache = T}
-# n_chains  = 3
-# n_samples = 15000
-# m.samp <- data.frame()
-# 
-# # expt 1 & 2, L1 model with only explicit and silence alternatives (no pos / neg) (1/26)
-# file.prefix <- "fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_chain"
-# 
-# for (i in seq(1, n_chains)){
+#  n_samples = 50000
+#  m.samp <- data.frame()
+# # 
+#  chains <- c(1, 3)
+#  file.prefix <- "fbt-L1-explAltnoSilence-widerPriorPriors-empiricalCC-noLength-disc3-mcmc50000_burn25000_chain"
+# chains <- c(1,2,3)
+#file.prefix <-"fbt-L1-explAltwSilence-widerPriorPriors-empiricalCC-noLength-disc3-mcmc50000_burn25000_chain"
+# for (i in chains){
 #   m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
 #                                  file.prefix, i, ".csv", sep="")))
 #   m.samp.i <- rwebppl::get_samples(m, n_samples)
 #   m.samp <- bind_rows(m.samp, m.samp.i)
 # }
+
+# save(m.samp, file =
+#        paste(
+#          project.path,
+#          "writing/cogsci17/model_results/fbt-L1-explAlt-wSilence-empiricalCC-disc3-mcmc50000_burn25000_3chain.RData",
+#          sep = ""))
+
 load(paste(
    project.path,
-   "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData",
+   "writing/cogsci17/model_results/fbt-L1-explAlt-noSilence-empiricalCC-disc3-mcmc50000_burn25000_2chain.RData",
+   #"writing/cogsci17/model_results/fbt-L1-explAlt-wSilence-empiricalCC-disc3-mcmc50000_burn25000_3chain.RData",
    sep = ""))
 
 m.samp.tidy <-left_join(
@@ -658,11 +667,7 @@ m.samp.tidy <-left_join(
   mutate(strength = factor(strength, levels = c(1,2,3),
                            labels = c("low","medium","high")))
 
-# save(m.samp, file = 
-#        paste(
-#          project.path, 
-#          "writing/cogsci17/model_results/fbt-L1-explAlt-empiricalCC-disc3-mcmc15000_burn7500_3chain.RData", 
-#          sep = ""))
+
 
 m.freq.summary <- m.samp %>% filter(param == "frequency") %>%
   group_by(param) %>%
@@ -763,7 +768,7 @@ df.scaledFreq.wide <- left_join(
 ```
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95 precent credible interval on the beta scale parameter."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
 
 fig2a <- df.summary %>%
   ungroup() %>%
@@ -1030,22 +1035,21 @@ We posit that $P(c)$ reflects listeners' expectations about the likely completio
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
 We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
 Corpus accessed via 
-\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}
-], and scale it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$
+\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
+Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
+], and scale it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
 In our data analysis, we use the following prior: $\beta \sim \text{Uniform}(0, 3)$.
 
 
 ### Inferring priors on world knowledge
 
-$P(x \mid c)$ describes the plausible values of a degree (e.g., temperature) $x$ given a comparison class $c$ (e.g., days in Winter).
+$P(x \mid c)$ describes the plausible values of a degree $x$ (e.g., temperature) given a comparison class $c$ (e.g., days in Winter).
 Rather than measuring these distributions, we make a few assumptions about their functional forms and infer their parameters using Bayesian data analysis.
-This by itself will not be sufficient to fill in the probabilistic knowledge that our RSA model relies upon; the model as such will be overparameterized.
-We need not worry though; the RSA model is a productive language model, and so we can ask it other questions to gain more traction on the latent world knowledge.
-
 For simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
 We fix each superordinate distribution $P(x \mid c_{super})$ to be a Unit-Normal and put priors over the parameters of each subordinate Gaussian. 
 Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
-
+This by itself will not be sufficient to fill in the probabilistic knowledge that our RSA model relies upon; the model as such would be overparameterized.
+We need not worry though; the RSA model is a productive language model, and so we can ask it other questions to gain more traction on the latent world knowledge.
 
 
 \usetikzlibrary{bayesnet}
@@ -1096,7 +1100,7 @@ Since each domain is using standardized units (given by the superordinate Unit-N
 \end{tikzpicture}
 }
 \end{center}
-\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance.)}
+\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. (See main text for priors.) Note that RSA cannot be visualizing using standard graphical model notation as it's a recursive model.}
 \label{fig:modelDiagram}
 \end{figure}
 
@@ -1107,10 +1111,10 @@ Since each domain is using standardized units (given by the superordinate Unit-N
 Currently, the full model has 2 parameters for each subordinate category (the $\mu$ and $\sigma$ of $P(x \mid c_{sub})$), in addition to weight $\beta$ on the empirical ngram frequency for $P(c)$.
 These are too many parameters to estimate reliably using only the data from Expt. 1. 
 Even if they could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
-Both of these considerations lead us to read a second experiment.
+Both of these considerations lead us to design a second experiment.
 
-We choose an experiment that uses the same domain knowledge as Expt. 1 in order to not add more parameters.
-In addition to helping us gain traction on participants' prior knowledge, a second experiment can further test the RSA model. 
+We choose an experiment that uses the same domain knowledge as Expt. 1 in order restrict the number of parameters in the model.
+In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
 Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
 Since we have a language understanding model that can make predictions about adjective use, we re-use this model to predict participants' endorsements of adjectives.
 
@@ -1118,35 +1122,35 @@ Since we have a language understanding model that can make predictions about adj
 
 In this experiment, we use a two-alternative forced choice paradigm to collect participants' adjective endorsements using knowledge that would be relevant for Expt. 1.
 
-### Methods
-
-#### Participants
+### Participants
 
 We recruited 100 participants from Amazon Mechanical Turk.
-Five participants were excluded due to failing the catch trial.
+5 participants were excluded due to failing the catch trial.
 Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
-On average, the experiment took five minutes and participants were compensated $0.50 for their work. 
+On average, the experiment took 5 minutes and participants were compensated $0.50 for their work. 
 
-#### Materials, procedure, and results
+### Materials and procedure
 
-Materials were the same as Expt. 1 (Table 1).
-
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+Materials were the same as Expt. 1 (Table \ref{tab:1}).
 On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
 This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
-The experiment can be viewed in full at: 
+The experiment can be viewed at: 
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
 
-The results of this experiment can be seen in Figure \ref{expt1results} (bottom). 
+### Results
+
+The results of this experiment were as expected and can be seen roughly in Figure \ref{fig:posteriorPredictive_scatters} (right, y-axis). 
 We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
-In the last section, we formalize our uncertainty about listeners' prior knowledge for these experiments to generate quantitative model predictions for the two data sets.
+
 
 ## Bayesian data analysis
 
-We use Eq.~\ref{eq:L1a} to model the comparison class inference task of Experiment 1.
-The model the adjective production data in Experiment 2, we add a level of recursion to use a pragmatic speaker [following: @Qing2014a; @Tessler2016; @Tessler2016cogsci].
-We also remove comparison class uncertainty, since the experiment make use of explicit comparison classes.
+The goal of this analysis is use data from both experiments to simulatenously reconstruct the prior knowledge used in the tasks and generate predictions for the two data sets.
+We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1).
+We add a level of recursion to the model and use a pragmatic speaker to model the adjective production data [Expt. 2; following @Qing2014a; @Tessler2016; @Tessler2016cogsci].
+For this task, we remove comparison class uncertainty from the model, since the experiment makes use of explicit comparison classes.
 <!---->
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
@@ -1154,28 +1158,22 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 \end{align}
 <!---->
 \mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
-We use Eq.~\ref{eq:S2} to model the data from Expt. 2 (Figure \ref{fig:modelDiagram}).
 
-The models for the two tasks make use of the same prior knowledge $P(x \mid c)$. 
-We can thus infer the likely values of the parameters of these priors from the two experiments worth of data, and use those inferred parameters and make predictions about what the data should look like. 
-
-The full model also has two parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which likely vary across the two tasks.
+The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks (see Figure \ref{fig:modelDiagram} for visual overview of the full model).
 Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
 Expt. 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
 $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
 We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
-
-
 ## Results
 
-We implemented the RSA model and the Bayesian data analysis model in the probabilistic programming language WebPPL [@dippl].
-To learn about the credible values of the parameters and the predictions, we used an incrementalized version of MCMC [@Ritchie2016], collecting 4 independent chains of 30,000 iterations (removing the first 10,000 for burn-in).
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL [@dippl].
+To learn about the credible values of the parameters and the predictions of the model, we used an incrementalized version of MCMC [@Ritchie2016], collecting 2 independent chains of 50,000 iterations (removing the first 25,000 for burn-in).
 
 <!--
-Human endorsements of comparison class paraphrases (left) and adjective sentences (right) as a function of listener model and speaker model predictions, respectively. Errorbars correspond to 95 percent bootstrapped confidence intervals for the participant data and 95 percent highest probability density intervals for the model predictions.
+
 -->
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "caption"}
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=2.5, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (left) and adjective sentences (right) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. Errorbars correspond to 95\\% bootstrapped confidence intervals for the participant data and 95\\% highest probability density intervals for the model predictions."}
 
 md.pp <- left_join(
   bind_rows(vs.summary %>% 
@@ -1186,23 +1184,31 @@ md.pp <- left_join(
              rename(cat = sub_category),
   m.pp %>% rename(expt = param)) %>%
   mutate(expt = factor(expt, levels = c( "superCC", "superSpeaker"),
-                       labels = c('Comparison class inference', 'Adjective production')))
+                       labels = c('Comparison class inference', 'Adjective production')),
+         form = factor(form, levels = c("positive", "negative")))
+
+         
+fill.colors <- RColorBrewer::brewer.pal(5, "Set2")
+names(fill.colors) <- levels(md.pp$degree)
 
 ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
                   y = mean, ymin = ci_lower, ymax = ci_upper,
-                  shape = form, color = degree))+
+                  shape = form, fill = degree))+
   geom_abline(intercept = 0, slope = 1, lty = 3)+
   geom_errorbar(size = 0.3)+
   geom_errorbarh(size = 0.3)+
-  geom_point(size = 2)+
+  geom_point(size = 2, color = 'black')+
+  scale_shape_manual(values = c(24, 25))+
+  scale_fill_brewer(palette = "Set2")+
   facet_wrap(~expt)+
   coord_fixed(ratio = 1)+
-  scale_color_brewer(palette = "Set1")+
   xlim(0, 1)+
   ylim(0, 1)+
   ylab("Human endorsement")+
-  xlab("Model prediction")
-
+  xlab("Model prediction")+
+  theme(legend.box = "horizontal")+
+  guides(fill=guide_legend(override.aes=list(colour=fill.colors)))
+        
 
 expt1.r2 <- round(with(md.pp %>%
        filter(expt == "Comparison class inference"), cor(MAP, mean))^2, 3)
@@ -1214,9 +1220,6 @@ expt2.r2 <- round(with(md.pp %>%
 
 expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
 ```
-
-As shown in Figure \ref{fig:posteriorPredictive_scatters}, the model does a good job at reconstructing the variability in responses for Experiment 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Experiment 2: $r^2(`r expt2.n`) = `r expt2.r2`$.
-
 
 ```{r parameterPosteriors}
 m.so <- m.samp %>% filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2")) %>%
@@ -1232,9 +1235,9 @@ m.freq <- m.samp %>% filter(cat %in% c("silenceCost","explicitCost","superCatPri
             cred_upper = HPDhi(val),
             cred_lower = HPDlo(val))
 
-a1.1 <- filter(m.so, param == "ccRSA" && speaker == "s1")
-a1.2 <- filter(m.so, param == "superSpeaker" && speaker == "s1")
-a2.2 <- filter(m.so, param == "superSpeaker" && speaker == "s2")
+a1.1 <- filter(m.so, param == "ccRSA" & speaker == "s1")
+a1.2 <- filter(m.so, param == "superSpeaker" & speaker == "s1")
+a2.2 <- filter(m.so, param == "superSpeaker" & speaker == "s2")
 
 a1.1.map <- round(a1.1[["MAP"]],2)
 a1.1.lower <- round(a1.1[["cred_lower"]],2)
@@ -1253,14 +1256,16 @@ a2.2.lower <- round(a2.2[["cred_lower"]],2)
 a2.2.upper <- round(a2.2[["cred_upper"]],2)
 ```
 
-Maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1: 
-$\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$;
-$\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
+The full model's posterior predictive distribution does an excellent job at capturing the variability in responses for Expt. 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Expt. 2: $r^2(`r expt2.n`) = `r expt2.r2`$ (Figure \ref{fig:posteriorPredictive_scatters}).
+The inferred values and shapes of the world knowledge used in these tasks is also consistent with intuition, as can be see in Figure \ref{fig:expt1results} (middle).
+The items judged *a priori* to be low the on scale (yellow) tend to be lower than those judged to be in the middle of the scale (orange) and high on the scale (red).
+The most residual uncertainty is in the heights of "soccer players" and the duration of "cute animal videos". 
+The former may be due to a discrepancy between participants' judgments in the comparison class task, where participants tended to say soccer players were either tall or short "relative to other people", suggesting the heights of soccer players and the heights of people in general are similar; in the adjective speaker task, there was a small tendency for participants to say soccer players would be tall (but not short) relative to other people. 
+The uncertainty remanining in the duration of "cute animal videos" may be a result of our empirical corpus frequency $\hat{f}$ for the inferred comparison class prior (Figure \ref{fig:expt1results} bottom): "Cute animal videos" and "online videos", the relevant subordinate and superordinate categoires, were among the most *infrequent* ngrams in the corpus, and thus the relative measurement probably has more noise than other items. 
 
-Model parameters specific to the $S_2$ model used for Experiment 2: 
-$\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$;
-$\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$
 
+The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1 were $\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$; $\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
+Model parameters specific to the $S_2$ model used for Experiment 2: $\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$; $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$.
 
 # General discussion
 
@@ -1268,22 +1273,22 @@ Vagueness in language (e.g., saying "It's warm outside") poses a challenge to li
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
 We introduce a minimal extension of an adjective interpretation RSA model in order to flexibly reason about the likely comparison class.
-This model made two qualitative predictions: 
-(1) Listeners should prefer comparison classes that are relatively lower variance as they result in more specific meanings and 
-(2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance class.
+This model made two novel predictions: 
+(1) Listeners should prefer comparison classes that have relatively lower variance as they result in more specific meanings and 
+(2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance (subordinate) class.
 When the target entity is from a subordinate class with a mean towards the upper part of the scale (e.g., temperature during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). 
 The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
 Both of these predictions were borne out in our first experiment.
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 
-The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from an experiment that uses similar language about the same domains.
+The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
 The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
-It also provides a further validation of the language model, which must predict data from two similar but distinct language experiments. 
+It also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
 
 In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt. 1: $P(c)$.
 We posited that the adjective phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2015].
 As a proxy for production or reference probabilities, we gathered empirical priors based on n-gram frequency from the Google WebGram corpus. 
-These probabilities likely conflate multiple cognitive factors such as the basic level effects in categorization [@Rosch1975] or the hetereogeneity of different classes (e.g., the distribution over prices of kitchen appliances may be more hetereogenous than the distribution of heights for people).
+These probabilities likely conflate multiple cognitive sources such as basic level effects in categorization [@Rosch1975] and the hetereogeneity of different classes (e.g., the distribution over prices of kitchen appliances may be more hetereogenous than the distribution of heights for people).
 Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
 <!--
@@ -1295,10 +1300,11 @@ It's unlikely, for instance, for someone to go to a store to purchase a *kitchen
 Rather, objects are purchased in order to acquire their function, and different kinds of objects have different functions.
 \mht{this is rough... goal of this is to further elucidate the richness of the phenomenon.}
 -->
+### Conclusion 
 
 The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
 The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
-It seems that listeners can jointly infer a lot from a little: The context and the meaning from a single utterance.
+Listeners, however, are able to jointly infer a lot from a little: The context and the meaning from a single utterance.
     
 <!--
 \begin{enumerate}
@@ -1334,8 +1340,8 @@ These $P(x \mid c)$ are used in both the experiments, which allows us to both si
 
 # Acknowledgements
 
-We got people to thank. 
-We got monies to acknowledge.
+This work was supported in part by NSF Graduate Research Fellowship DGE-114747 (to MHT), \red{by ... (to MLB)}, \red{by ... (to NDG)}.
+The authors would like to thank Ali Horowitz for help in stimuli design.
 
 # References
 
