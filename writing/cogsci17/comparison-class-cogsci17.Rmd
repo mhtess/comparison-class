@@ -1061,50 +1061,58 @@ Since each domain is using standardized units (given by the superordinate Unit-N
 This by itself will not be sufficient to fill in the probabilistic knowledge that our RSA model relies upon; the model as such would be overparameterized.
 We need not worry though; the RSA model is a productive language model, and so we can ask it other questions to gain more traction on the latent world knowledge.
 
-
+<!-- Begin LaTeX code for graphical model -->
 \usetikzlibrary{bayesnet}
 \begin{figure}[ht]
 \captionsetup{width=0.48\textwidth}
 \begin{center}
-\resizebox{5.5cm}{6.3cm}{
-\begin{tikzpicture}
+\resizebox{6.5cm}{6.3cm}{
+\begin{tikzpicture}[
+rsa/.style={circle, draw=red!60, fill=red!5, very thick, minimum size=7mm},
+discrete_obs/.style={rectangle,fill=gray!25,draw=black,inner sep=1pt, minimum size=20pt, font=\fontsize{10}{10}\selectfont, node distance=1},
+]
 
-\node[latent, minimum size=1cm, ] (L0_speaker) {$L_{0}$} ;
-\node[latent, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
-\node[latent, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
-\node[latent, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
 
-\node[latent, minimum size=1cm, left=of S1_speaker] (alpha_1) {$\alpha_1$} ;
-\node[obs, minimum size=1cm, right=of L1_speaker] (comparison_class) {$d_{\text{Expt 1}}$} ;
-\node[latent, minimum size=1cm, left=of S2_speaker] (alpha_2) {$\alpha_2$} ;
-\node[obs, minimum size=1cm, right=of S2_speaker] (utterance) {$d_{\text{Expt 2}}$} ;  
+\node[rsa, minimum size=1cm] (L0_speaker) {$L_{0}$} ;
+\node[rsa, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
+\node[rsa, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
+\node[rsa, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
 
-\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_prior) {$x | c_{sub}$} ;
+\node[latent, minimum size=1cm, left=of S1_speaker, xshift=-2cm] (alpha_1) {$\alpha_1$} ;
+\node[discrete_obs, minimum size=1cm, right=of L1_speaker, xshift=2cm] (d_c) {$d_{c}$} ;
+\node[latent, minimum size=1cm, left=of S2_speaker, xshift=-2cm] (alpha_2) {$\alpha_2$} ;
+\node[discrete_obs, minimum size=1cm, right=of S2_speaker, xshift=2cm] (d_u) {$d_{u}$} ;  
 
-\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
-\node[latent, minimum size=1cm, right=of comparison_class_prior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
+\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_posterior) {$x | c_{sub}$} ;
 
-\edge {L0_speaker} {S1_speaker} ;
-\edge {S1_speaker} {L1_speaker} ;
-\edge {L1_speaker} {S2_speaker} ;
+\node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
+\node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
+
+\node[latent, minimum size=1cm, left=of L1_speaker] (comparison_class) {$c$} ;
+\node[latent, minimum size=1cm, left=of comparison_class, yshift=0.6cm] (ngrams) {$\hat{f}$} ;
+\node[latent, minimum size=1cm, left=of comparison_class, yshift=-0.6cm] (beta) {$\beta$} ;
 
 \edge {alpha_1} {S1_speaker} ;
-\edge {L1_speaker} {comparison_class} ;
+\edge {L1_speaker} {d_c} ;
 \edge {alpha_2} {S2_speaker} ;
-\edge {S2_speaker} {utterance} ;
+\edge {S2_speaker} {d_u} ;
 
-\edge {comparison_class_prior} {L0_speaker} ;
-\edge {comparison_class_prior} {L1_speaker} ;
+\edge {comparison_class_posterior} {L0_speaker} ;
+\edge {comparison_class_posterior} {L1_speaker} ;
 
-\edge {mu} {comparison_class_prior} ;
-\edge {sigma} {comparison_class_prior} ;
+\edge {mu} {comparison_class_posterior} ;
+\edge {sigma} {comparison_class_posterior} ;
+
+\edge {comparison_class} {L1_speaker} ;
+\edge {ngrams} {comparison_class} ;
+\edge {beta} {comparison_class} ;
 
 \plate {} {
-	(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)
+	(comparison_class_posterior)(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)(comparison_class)
 } {RSA}
 
 \plate {} {
-	(mu)(sigma)(comparison_class_prior)
+	(mu)(sigma)(comparison_class_posterior)
 } {$\forall sub \in \mathcal{S}$}
 
 \end{tikzpicture}
@@ -1113,8 +1121,7 @@ We need not worry though; the RSA model is a productive language model, and so w
 \caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. (See main text for priors.) Note that RSA cannot be visualizing using standard graphical model notation as it's a recursive model.}
 \label{fig:modelDiagram}
 \end{figure}
-
-
+<!-- End LaTeX code for graphical model -->
 
 ### Predicting more data
 
