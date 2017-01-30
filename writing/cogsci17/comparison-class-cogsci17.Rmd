@@ -768,11 +768,11 @@ df.scaledFreq.wide <- left_join(
 ```
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors.. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
 
 fig2a <- df.summary %>%
   ungroup() %>%
-  mutate(experiment = 'Comparison class inference',
+  mutate(experiment = 'Comparison class data',
           sub_category = factor(sub_category, 
                   levels = c("gymnast", "soccer player", "basketball player",
                              "bottle opener", "toaster", "dishwasher",
@@ -795,11 +795,13 @@ fig2a <- df.summary %>%
   facet_grid(experiment~degree, scales = 'free') +
   ylim(0, 1) +
   scale_fill_brewer(palette = 'Set3') +
-  ylab("Proportion superordinate paraphrase") +
+  ylab("Superordinate paraphrase") +
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
-        axis.title.x = element_blank())
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
 
-fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Inferred priors"), 
+fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Degree priors"), 
                 aes(x = val, y = ..scaled.., 
                  fill = strength, lty = strength))+
   geom_density(adjust = 2, size = 0.8, alpha = 0.8)+
@@ -807,9 +809,12 @@ fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Inferred priors"),
   #scale_color_manual(values = c("#edf8b1","#7fcdbb","#2c7fb8"))+
   facet_grid(experiment~degree, scales = 'fixed')+
   xlim(-3, 3)+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
   xlab("Degree value")+
-  ylab("Inferred prior probability")+
-  theme(strip.text.x = element_blank())
+  ylab("Prior density")+
+  theme(strip.text.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
 
 fig2c <- ggplot(
   df.scaledFreq.wide %>% 
@@ -830,17 +835,20 @@ fig2c <- ggplot(
                                      "time", "weight"),
                   labels = c("people", "kitchen appliances",
                              "days of the year", "online videos", "produce")),
-  category = factor(category, levels = c("low", "medium", "high"))), 
+  category = factor(category, levels = c("low", "medium", "high")),
+  experiment  = "Comparison class prior"), 
   aes( x = cat, y = cPrior, fill = category, 
        ymin = c_lower, ymax = c_upper))+
   geom_bar(stat = 'identity', position = position_dodge(), color = 'black')+
   geom_errorbar(position = position_dodge(), width = 0.5)+ 
   scale_fill_manual(values = c("#ffeda0","#feb24c","#f03b20"))+
-  facet_wrap(~degree, scales = 'free', nrow = 1)+
-  theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
-        axis.title.x = element_blank()) +
+  facet_grid(experiment~degree, scales = 'free')+
+    theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()) +
   ylim(0, 1) + 
-  ylab("Prior superordinate class")
+  ylab("Superordinate probability")
 
 grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
 
@@ -1197,7 +1205,7 @@ ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
   geom_abline(intercept = 0, slope = 1, lty = 3)+
   geom_errorbar(size = 0.3)+
   geom_errorbarh(size = 0.3)+
-  geom_point(size = 2, color = 'black')+
+  geom_point(size = 2.5, color = 'black')+
   scale_shape_manual(values = c(24, 25))+
   scale_fill_brewer(palette = "Set2")+
   facet_wrap(~expt)+
@@ -1206,7 +1214,10 @@ ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
   ylim(0, 1)+
   ylab("Human endorsement")+
   xlab("Model prediction")+
-  theme(legend.box = "horizontal")+
+  theme(legend.box = "horizontal",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
   guides(fill=guide_legend(override.aes=list(colour=fill.colors)))
         
 
