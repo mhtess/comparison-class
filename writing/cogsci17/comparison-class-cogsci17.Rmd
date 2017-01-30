@@ -1118,7 +1118,7 @@ discrete_obs/.style={rectangle,fill=gray!25,draw=black,inner sep=1pt, minimum si
 \end{tikzpicture}
 }
 \end{center}
-\caption{Full RSA - data analysis model. The recursive Bayesian RSA model is visualized in the center block. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. (See main text for priors.) Note that RSA cannot be visualizing using standard graphical model notation as it's a recursive model.}
+\caption{A representation of the full RSA - data analysis model. RSA cannot actually be visualizing using standard graphical model notation; each of its component parts are functions that are defined in terms of each other. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. The comparison class prior $P(c)$ is modeled by an empirical measurement of frequency $\hat{f}$ and a free parameter $\beta$. (See main text for priors.)}
 \label{fig:modelDiagram}
 \end{figure}
 <!-- End LaTeX code for graphical model -->
