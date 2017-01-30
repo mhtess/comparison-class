@@ -923,6 +923,7 @@ grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
 # Experiment 1: Comparison class inference
 
 In this experiment, we test the two predictions of our language model (outlined above).
+The model and methods were preregistered: \url{https://osf.io/hzdtj/}.
 
 ## Methods
 
@@ -958,6 +959,7 @@ Participants were asked "What do you think Tanya meant?" and given a two-alterna
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
 In addition to all of the above design parameters, half of our participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
+
 The experiment can be viewed at:
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
 
