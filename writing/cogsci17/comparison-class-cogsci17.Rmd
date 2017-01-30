@@ -1191,8 +1191,9 @@ md.pp <- left_join(
              ungroup() %>%
              rename(cat = sub_category),
   m.pp %>% rename(expt = param)) %>%
-  mutate(expt = factor(expt, levels = c( "superCC", "superSpeaker"),
-                       labels = c('Comparison class inference', 'Adjective production')),
+  mutate(expt = factor(expt, 
+                       levels = c("superSpeaker", "superCC"),
+                       labels = c('Adjective production', 'Comparison class inference')),
          form = factor(form, levels = c("positive", "negative")))
 
          
@@ -1221,7 +1222,7 @@ scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
         #legend.position = "bottom",
         legend.direction = "horizontal",
         legend.title = element_blank(),
-        legend.position = c(0.4, -0.25))+
+        legend.position = c(0.57, -0.2))+
   guides(fill=guide_legend(override.aes=list(colour=fill.colors)), shape = F)
         
 
@@ -1237,9 +1238,10 @@ expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
 ```
 
 
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (right) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The left facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\\% bootstrapped confidence intervals for the participant data and 95\\% highest probability density intervals for the model predictions."}
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\\% bootstrapped confidence intervals for the participant data and 95\\% highest probability density intervals for the model predictions."}
 scatterSubFig <- ggplot(md.pp %>% filter(mean < 0.30 & expt == "Comparison class inference") %>%
-                          mutate(expt = factor(expt, labels = c("Comparison class inference (subset)"))), 
+                          mutate(expt = factor(expt, 
+                                               labels = c("Comparison class inference (subset)"))), 
        aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
                   y = mean, ymin = ci_lower, ymax = ci_upper,
                   shape = form, fill = degree))+
@@ -1256,7 +1258,7 @@ scatterSubFig <- ggplot(md.pp %>% filter(mean < 0.30 & expt == "Comparison class
   ylab("Human endorsement")+
   xlab("Model prediction")+
   theme(#legend.position = "bottom",
-        legend.position = c(0.92, -0.25),
+        legend.position = c(0.1,-0.2),
         legend.direction = "horizontal",
         legend.title = element_blank(),
        # panel.grid.minor = element_blank(),
@@ -1264,7 +1266,7 @@ scatterSubFig <- ggplot(md.pp %>% filter(mean < 0.30 & expt == "Comparison class
         axis.line = element_line(colour = "black"))+
   guides(fill = F)
   
-grid.arrange(scatterSubFig, scatterFig, nrow = 1, widths = 1.15:2.5)
+grid.arrange(scatterFig, scatterSubFig, nrow = 1, widths = c(2, 1.07))
 ```
 
 
