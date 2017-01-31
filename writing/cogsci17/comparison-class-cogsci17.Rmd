@@ -159,10 +159,12 @@ Warm is vague,
 When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 80.
 -->
 
+\ndg{last paragraph should be clarified and simplified. otherwise intro is good.}
+
 # Understanding comparison classes
 
 Adjectives like *warm* and *cold*, *cheap* and *expensive*, are vague descriptions of an underlying quantitative scale (e.g., temperature, price).
-The vagueness and context-sensitivity of these adjectives can be modeled using a threshold semantics ($[[u]] = x > \theta$) where the threshold $\theta$ comes from an uninformative prior distribution and is inferred in context via pragmatic reasoning [@Lassiter2013; see also @Qing2014a].
+The vagueness and context-sensitivity of these adjectives can be modeled using a threshold semantics ($[[u]] = x > \theta$) \ndg{u not defined yet} where the threshold $\theta$ comes from an uninformative prior distribution and is inferred in context via pragmatic reasoning [@Lassiter2013; see also @Qing2014a].
 <!---->
 \begin{align}
 L_{1}(x, \theta \mid u) &\propto S_{1}(u \mid x, \theta) \cdot P_{c}(x) \cdot P(\theta) \label{eq:L1} \\
@@ -177,6 +179,8 @@ The model of @Lassiter2013 introduced uncertainty over a semantic variable, the 
 The uncertainty over $\theta$ (e.g., the point at which something is *warm*) interacts with the prior distribution over possible states of the world $P_{c}(x)$ (e.g., possible temperatures) and recursive pragmatic reasoning to resolve the meaning of the adjective in context.
 What is made clear from this model is that the prior distribution over world-states is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}).
 But where does such a comparison class come from?
+
+\ndg{next few paragraphs can be tightened up a bit. maybe combine next two?}
 
 When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine that a listener must infer the comparison class by thinking about what would best complete the sentence, in a way analagous to noisy-channel models of production and comprehension [@Bergen2015].
 She does this using her world knowledge of what worlds are plausible given different comparison classes $P(x \mid c)$, what comparison classes are likely to be talked about $P(c)$, and what a rational speaker would say in given a world and comparison class $S_{1}(u \mid x, c, \theta)$.
