@@ -426,47 +426,6 @@ We posit that this knowledge is the listener's internal model of speech producti
 \mht{mention "basic level" here?}
 -->
 
-```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
-
-height_sub = c("professional basketball player, professional gymnast, professional soccer player")
-height_super = c("people")
-price_sub = c("dishwasher, oven, toaster")
-price_super = c("kitchen appliances")
-temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
-temperature_super = c("days of the year in Maryland")
-time_sub = c("video of a cute animal, music video, movie")
-time_super = c("things you watch online")
-weight_sub = c("apple, grape, watermelon")
-weight_super = c("produce")
-
-scales = c("Height", "Price", "Temperature", "Time", "Weight")
-sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
-super = c(height_super, price_super, temperature_super, time_super, weight_super)
-
-table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
-table1 <- xtable(table1)
-print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
-```
-
-\begin{table*}
-\centering
-\begin{tabular}{lll}
-  \hline
-Scale \{\emph{adjectives}\}& Subordinate & Superordinate \\
-  \hline
-Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer player, gymnast\} & people \\
-  Price \{\emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
-  Temperature \{\emph{warm}, \emph{cold}\}& \{Summer, Fall, Winter\} day in Maryland & days of the year \\
-  Time \{\emph{long}, \emph{short}\}& \{movie, music video, video of a cute animal\}  & things you watch online \\
-  Weight \{\emph{heavy}, \emph{light}\}& \{watermelon, grape, apple\}  & produce \\
-   \hline
-\end{tabular}
-\caption{Items used in experiments}
-\label{tab:1}
-\end{table*}
-
-
-
 ```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
@@ -609,35 +568,123 @@ vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
 
 
 
-
-
-
-
 ## Model predictions
 
 As a first test of this pragmatic theory, we consider a simple case:
 The comparison class is either a subordinate level category (e.g., days in Winter) or a superordinate level category (e.g., days of the year).
-For purposes of illustration, we assume each class is equally likely *a priori*^[We will later relax this idealization with an empirically derived prior on comparison classes.]: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$.
-We also assume the listener $L_1$ knows the target entity is a member of the subordinate class (e.g., knows that it's Winter): $P(x \mid c_{sub})$, but that the speaker might have had a different comparison class in mind.
+For purposes of illustration, we assume for now each class is equally likely *a priori*: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$ (this assumption will be relaxed in the next section).
 We assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean for the prior of the subordinate class.
+Throughout, we assume the listener $L_1$ knows the target entity is of the subordinate class (e.g., knows that it's Winter): $P(x \mid c_{sub})$, but that the speaker might have had a different comparison class in mind.
+
 
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
-
 Consider the subordinate priors that correspond to temperatures in Winter (low), Fall (medium), and Summer (high) in a part of the world that exhibits seasons (e.g., Maryland, USA); the superordinate prior will correspond to temperatures over the whole year (Figure \ref{fig:modelSchematics}, left).
 All subordinate priors have lower variance ($\sigma = 0.5$) than the superordinate ($\sigma = 1$).
-We see that regardless of the adjective form (positive or negative) or the mean of the prior distribution (low, medium, high), the pragmatic listener prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
+We see that regardless of the adjective form (positive or negative) or the mean of the subordinate prior (low, medium, high), the pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
 <!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
-We also see that when the pragmatic listener (Eq. \ref{eq:L1}) is in Winter and hears that "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hear's it's cold (Figure \ref{fig:modelSchematics}, right, left-most bars).
-The opposite is true in Summer: A warm day in summer could be warm for summer, or warm for the year, while a cold day in Summer is much more likely to be cold for summer.
+We also see that during Winter, when the pragmatic listener hears "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hears it's cold (Figure \ref{fig:modelSchematics}, right, left-most bars).
+The opposite is true in Summer: A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.
 In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the superordinate category.
-We test these two predictions in our first experiment.
+We will test these two predictions in our first experiment.
 <!--
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
 -->
+
+## Prior knowledge
+
+The RSA model makes quantitative predictions as well, though these depend on the quantitative details of the listener's knowledge of the subordinate and superordinate categories: $P(x \mid c_{sub})$ and $P(x \mid c_{super})$, as well as the prior distribution on comparison classes $P(c)$ in Eq. \ref{eq:L1a}.
+
+
+### Comparison class prior
+
+We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
+As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
+Corpus accessed via 
+\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
+Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
+], and scale it by a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
+
+### Degree priors (world knowledge)
+
+$P(x \mid c_{sub})$ and $P(x \mid c_{super})$ represent listeners' beliefs about the likely values of a degree (e.g., temperature) within a subordinate or superordinate class.
+This kind of world knowledge can be measured by having participants estimate relevant quantities without experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
+In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
+Since the comparison class inference task we've described uses just two-alternatives, the numerical scale of the degree priors is irrelevant.
+All that matters is the relationship between the subordinate and superordinate priors.
+
+We fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions; the subordinate priors thus have standardized units. 
+We put priors over the mean $\mu$ and variance $\sigma$ of each subordinate Gaussian. 
+
+
+## Reducing uncertainty with productive language use
+
+We've articulated a Bayesian treatment of the relevant prior knowledge for comparison class inference.
+This by itself, however, is not sufficient to fill in the probabilistic knowledge that the RSA model relies upon; the full model (RSA + Bayesian data analysis of the priors) has too many parameters to estimate reliably using only the data from a single comparison class experiment 
+Even if they could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
+This need not hold us back though. 
+The RSA model is a productive language model: We can have it predict related language data to gain more traction on the latent world knowledge.
+
+We choose an experiment that uses the same domain knowledge as used in a comparison class inference (Expt. 1) in order restrict the number of parameters in the model.
+In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
+Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
+We re-use the vague adjective interpretation part of the RSA model to predict participants' endorsements of adjectives.
+
+We add a level of recursion to the RSA model and use a pragmatic speaker to model adjective endorsement [Expt. 2; following @Qing2014a; @Tessler2016; @Tessler2016cogsci].
+For this task, we remove comparison class uncertainty from the model, since the experiment makes use of explicit comparison classes.
+<!---->
+\begin{align}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
+L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1b}
+\end{align}
+<!---->
+\mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
+
+We can then use data from both experiments to simulatenously reconstruct the prior knowledge used in the tasks and generate predictions for the two data sets.
+<!-- The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1). -->
+<!-- We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1). -->
+
+```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+
+height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+height_super = c("people")
+price_sub = c("dishwasher, oven, toaster")
+price_super = c("kitchen appliances")
+temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
+temperature_super = c("days of the year in Maryland")
+time_sub = c("video of a cute animal, music video, movie")
+time_super = c("things you watch online")
+weight_sub = c("apple, grape, watermelon")
+weight_super = c("produce")
+
+scales = c("Height", "Price", "Temperature", "Time", "Weight")
+sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
+super = c(height_super, price_super, temperature_super, time_super, weight_super)
+
+table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
+table1 <- xtable(table1)
+print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
+```
+
+\begin{table*}
+\centering
+\begin{tabular}{lll}
+  \hline
+Scale \{\emph{adjectives}\}& Subordinate & Superordinate \\
+  \hline
+Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer player, gymnast\} & people \\
+  Price \{\emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
+  Temperature \{\emph{warm}, \emph{cold}\}& \{Summer, Fall, Winter\} day in Maryland & days of the year \\
+  Time \{\emph{long}, \emph{short}\}& \{movie, music video, video of a cute animal\}  & things you watch online \\
+  Weight \{\emph{heavy}, \emph{light}\}& \{watermelon, grape, apple\}  & produce \\
+   \hline
+\end{tabular}
+\caption{Items used in experiments}
+\label{tab:1}
+\end{table*}
 
 
 
@@ -932,6 +979,9 @@ grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
 
 
 
+
+
+
 # Experiment 1: Comparison class inference
 
 In this experiment, we test the two predictions of our language model (outlined above).
@@ -1037,137 +1087,86 @@ $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive"
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
 All of these effects are also visually apparent in Figure \ref{fig:expt1results} (top).
 
-\ndg{this section can be tightened up a bunch? also, don't need discussion to be separate section.}
+\ndg{this section can be tightened up a bunch?}
 
-## Discussion
-
-The two novel predictions of our language understanding model were borne out in Expt. 1.
-The RSA model makes quantitative predictions as well, though these will depend on the quantitative details of the listener's world knowledge: $P(x \mid c)$ in Eqs. \ref{eq:L1a} \& \ref{eq:L0a}.
-This kind of world knowledge can be measured by having participants estimate certain quantities without any experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
-In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
-In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt. 1 and which the same RSA model can answer.
-
-\ndg{this isn't really a discussio. more a lead in and seguey to next section. so put in intro to next section? also need to simplify and clarify a bunch.}
-
-# Full model and Experiment 2
-
-The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1).
-In order to make quantitative predictions, we must specify the listener's world knowledge $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ as well as the prior distribution on comparison classes $P(c)$.
-
-### Empirical prior on comparison classes
-
-We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
-If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
-\ndg{i'd rather leave some ambiguity: just say we use empirical frequency and that this is reasonable as a proxy for comparison cat usage frequency. in discussion can say that this could be a noisy channel completion thing or a conceptual priors thing.}
-We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
-Corpus accessed via 
-\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
-Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
-], and scale it with a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
-In our data analysis, we use the following prior: $\beta \sim \text{Uniform}(0, 3)$.
+# Experiment 2: Adjective endorsement
 
 
-### Inferring priors on world knowledge
-
-$P(x \mid c)$ describes the plausible values of a degree $x$ (e.g., temperature) given a comparison class $c$ (e.g., days in Winter).
-Rather than measuring these distributions, we make a few assumptions about their functional forms and infer their parameters using Bayesian data analysis.
-For simplicity, we assume each $P(x \mid c)$ is a Gaussian distribution. 
-We fix each superordinate distribution $P(x \mid c_{super})$ to be a Unit-Normal and put priors over the parameters of each subordinate Gaussian. 
-Since each domain is using standardized units (given by the superordinate Unit-Normal), we can put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
-This by itself will not be sufficient to fill in the probabilistic knowledge that our RSA model relies upon; the model as such would be overparameterized.
-We need not worry though; the RSA model is a productive language model, and so we can ask it other questions to gain more traction on the latent world knowledge.
 
 <!-- Begin LaTeX code for graphical model -->
-\usetikzlibrary{bayesnet}
-\begin{figure}[ht]
-\captionsetup{width=0.48\textwidth}
-\begin{center}
-\resizebox{6.5cm}{6.3cm}{
-\begin{tikzpicture}[
-rsa/.style={circle, draw=red!60, fill=red!5, very thick, minimum size=7mm},
-discrete_obs/.style={rectangle,fill=gray!25,draw=black,inner sep=1pt, minimum size=20pt, font=\fontsize{10}{10}\selectfont, node distance=1},
-]
+<!-- \usetikzlibrary{bayesnet} -->
+<!-- \begin{figure}[ht] -->
+<!-- \captionsetup{width=0.48\textwidth} -->
+<!-- \begin{center} -->
+<!-- \resizebox{6.5cm}{6.3cm}{ -->
+<!-- \begin{tikzpicture}[ -->
+<!-- rsa/.style={circle, draw=red!60, fill=red!5, very thick, minimum size=7mm}, -->
+<!-- discrete_obs/.style={rectangle,fill=gray!25,draw=black,inner sep=1pt, minimum size=20pt, font=\fontsize{10}{10}\selectfont, node distance=1}, -->
+<!-- ] -->
 
 
-\node[rsa, minimum size=1cm] (L0_speaker) {$L_{0}$} ;
-\node[rsa, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ;
-\node[rsa, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ;
-\node[rsa, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ;
+<!-- \node[rsa, minimum size=1cm] (L0_speaker) {$L_{0}$} ; -->
+<!-- \node[rsa, minimum size=1cm, below=of L0_speaker] (S1_speaker) {$S_{1}$} ; -->
+<!-- \node[rsa, minimum size=1cm, below=of S1_speaker] (L1_speaker) {$L_{1}$} ; -->
+<!-- \node[rsa, minimum size=1cm, below=of L1_speaker] (S2_speaker) {$S_{2}$} ; -->
 
-\node[latent, minimum size=1cm, left=of S1_speaker, xshift=-2cm] (alpha_1) {$\alpha_1$} ;
-\node[discrete_obs, minimum size=1cm, right=of L1_speaker, xshift=2cm] (d_c) {$d_{c}$} ;
-\node[latent, minimum size=1cm, left=of S2_speaker, xshift=-2cm] (alpha_2) {$\alpha_2$} ;
-\node[discrete_obs, minimum size=1cm, right=of S2_speaker, xshift=2cm] (d_u) {$d_{u}$} ;  
+<!-- \node[latent, minimum size=1cm, left=of S1_speaker, xshift=-2cm] (alpha_1) {$\alpha_1$} ; -->
+<!-- \node[discrete_obs, minimum size=1cm, right=of L1_speaker, xshift=2cm] (d_c) {$d_{c}$} ; -->
+<!-- \node[latent, minimum size=1cm, left=of S2_speaker, xshift=-2cm] (alpha_2) {$\alpha_2$} ; -->
+<!-- \node[discrete_obs, minimum size=1cm, right=of S2_speaker, xshift=2cm] (d_u) {$d_{u}$} ;   -->
 
-\node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_posterior) {$x | c_{sub}$} ;
+<!-- \node[latent, minimum size=1cm, right=of L0_speaker] (comparison_class_posterior) {$x | c_{sub}$} ; -->
 
-\node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=0.6cm] (mu) {$\mu_{sub}$} ;
-\node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ;
+<!-- \node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=0.6cm] (mu) {$\mu_{sub}$} ; -->
+<!-- \node[latent, minimum size=1cm, right=of comparison_class_posterior, yshift=-0.6cm] (sigma) {$\sigma_{sub}$} ; -->
 
-\node[latent, minimum size=1cm, left=of L1_speaker] (comparison_class) {$c$} ;
-\node[latent, minimum size=1cm, left=of comparison_class, yshift=0.6cm] (ngrams) {$\hat{f}$} ;
-\node[latent, minimum size=1cm, left=of comparison_class, yshift=-0.6cm] (beta) {$\beta$} ;
+<!-- \node[latent, minimum size=1cm, left=of L1_speaker] (comparison_class) {$c$} ; -->
+<!-- \node[latent, minimum size=1cm, left=of comparison_class, yshift=0.6cm] (ngrams) {$\hat{f}$} ; -->
+<!-- \node[latent, minimum size=1cm, left=of comparison_class, yshift=-0.6cm] (beta) {$\beta$} ; -->
 
-\edge {alpha_1} {S1_speaker} ;
-\edge {L1_speaker} {d_c} ;
-\edge {alpha_2} {S2_speaker} ;
-\edge {S2_speaker} {d_u} ;
+<!-- \edge {alpha_1} {S1_speaker} ; -->
+<!-- \edge {L1_speaker} {d_c} ; -->
+<!-- \edge {alpha_2} {S2_speaker} ; -->
+<!-- \edge {S2_speaker} {d_u} ; -->
 
-\edge {comparison_class_posterior} {L0_speaker} ;
-\edge {comparison_class_posterior} {L1_speaker} ;
+<!-- \edge {comparison_class_posterior} {L0_speaker} ; -->
+<!-- \edge {comparison_class_posterior} {L1_speaker} ; -->
 
-\edge {mu} {comparison_class_posterior} ;
-\edge {sigma} {comparison_class_posterior} ;
+<!-- \edge {mu} {comparison_class_posterior} ; -->
+<!-- \edge {sigma} {comparison_class_posterior} ; -->
 
-\edge {comparison_class} {L1_speaker} ;
-\edge {ngrams} {comparison_class} ;
-\edge {beta} {comparison_class} ;
+<!-- \edge {comparison_class} {L1_speaker} ; -->
+<!-- \edge {ngrams} {comparison_class} ; -->
+<!-- \edge {beta} {comparison_class} ; -->
 
-\plate {} {
-	(comparison_class_posterior)(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)(comparison_class)
-} {RSA}
+<!-- \plate {} { -->
+<!-- 	(comparison_class_posterior)(L0_speaker)(S1_speaker)(L1_speaker)(S2_speaker)(comparison_class) -->
+<!-- } {RSA} -->
 
-\plate {} {
-	(mu)(sigma)(comparison_class_posterior)
-} {$\forall sub \in \mathcal{S}$}
+<!-- \plate {} { -->
+<!-- 	(mu)(sigma)(comparison_class_posterior) -->
+<!-- } {$\forall sub \in \mathcal{S}$} -->
 
-\end{tikzpicture}
-}
-\end{center}
-\caption{A representation of the full RSA - data analysis model. RSA cannot actually be visualizing using standard graphical model notation; each of its component parts are functions that are defined in terms of each other. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. The comparison class prior $P(c)$ is modeled by an empirical measurement of frequency $\hat{f}$ and a free parameter $\beta$. (See main text for priors.)}
-\label{fig:modelDiagram}
-\end{figure}
+<!-- \end{tikzpicture} -->
+<!-- } -->
+<!-- \end{center} -->
+<!-- \caption{A representation of the full RSA - data analysis model. RSA cannot actually be visualizing using standard graphical model notation; each of its component parts are functions that are defined in terms of each other. $L_1$ is used as a model for Experiment 1 data and  $S_2$ for Experiment 2 data. The subordinate category priors $P(x \mid c_{sub})$ are used in both experiments and are modeled as Gaussians with unknown mean and variance. The comparison class prior $P(c)$ is modeled by an empirical measurement of frequency $\hat{f}$ and a free parameter $\beta$. (See main text for priors.)} -->
+<!-- \label{fig:modelDiagram} -->
+<!-- \end{figure} -->
 <!-- End LaTeX code for graphical model -->
 
-\ndg{i'm afraid the 'graphical model' will have to go...}
-
-### Predicting more data
-
-Currently, the full model has 2 parameters for each subordinate category (the $\mu$ and $\sigma$ of $P(x \mid c_{sub})$), in addition to weight $\beta$ on the empirical ngram frequency for $P(c)$.
-These are too many parameters to estimate reliably using only the data from Expt. 1. 
-Even if they could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
-Both of these considerations lead us to design a second experiment.
-
-We choose an experiment that uses the same domain knowledge as Expt. 1 in order restrict the number of parameters in the model.
-In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
-Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
-Since we have a language understanding model that can make predictions about adjective use, we re-use this model to predict participants' endorsements of adjectives.
-
-\ndg{there's some redundancy between this section and earlier stuff.}
-
-## Experiment 2: Adjective endorsement
+<!-- \ndg{i'm afraid the 'graphical model' will have to go...} -->
 
 In this experiment, we use a two-alternative forced choice paradigm to collect participants' adjective endorsements using knowledge that would be relevant for Expt. 1.
 
-### Participants
+## Participants
 
 We recruited 100 participants from Amazon Mechanical Turk.
 5 participants were excluded due to failing the catch trial.
 Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
 On average, the experiment took 5 minutes and participants were compensated $0.50 for their work. 
 
-### Materials and procedure
+## Materials and procedure
 
 Materials were the same as Expt. 1 (Table \ref{tab:1}).
 On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
@@ -1177,25 +1176,17 @@ As in Expt. 1, participants never rated the same subordinate category for both a
 The experiment can be viewed at: 
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
 
-### Results
+## Results
 
 The results of this experiment were as expected and can be seen roughly in Figure \ref{fig:posteriorPredictive_scatters} (right, y-axis). 
 We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
 
 
-## Bayesian data analysis
+# Bayesian data analysis
 
-The goal of this analysis is use data from both experiments to simulatenously reconstruct the prior knowledge used in the tasks and generate predictions for the two data sets.
-We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1).
-We add a level of recursion to the model and use a pragmatic speaker to model the adjective production data [Expt. 2; following @Qing2014a; @Tessler2016; @Tessler2016cogsci].
-For this task, we remove comparison class uncertainty from the model, since the experiment makes use of explicit comparison classes.
-<!---->
-\begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1b}
-\end{align}
-<!---->
-\mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
+The full RSA model with uncertainty over the priors has a number of parameters. 
+The comparison class prior uses scaling parameter on the empirical frequency $\hat{f}$, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
+Each subordinate category prior uses standardized units (given by the superordinate Unit-Normal), and put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
 
 The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks (see Figure \ref{fig:modelDiagram} for visual overview of the full model).
 Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
@@ -1349,7 +1340,7 @@ The uncertainty remanining in the duration of "cute animal videos" may be a resu
 The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1 were $\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$; $\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
 Model parameters specific to the $S_2$ model used for Experiment 2: $\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$; $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$.
 
-# General discussion
+# Discussion
 
 Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
@@ -1364,11 +1355,12 @@ The opposite is predicted to be true of entities towards the lower end of the sc
 Both of these predictions were borne out in our first experiment.
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 
-The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
+The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian language model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
+In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+We extend this approach to ask related *natural language* questions across two experiments to be able to infer the parameters of the relevant prior knowledge.
 The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
 It also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
-\ndg{even stronger sell! modeling productive language yields productivity of experiment designs which pins down needed parameters....}
-
+Modeling language use, which is itself productive, yields productivity in experiment design, which can be harnessed to reduce uncertainty in the necessary parameters of language model 
 
 In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt. 1: $P(c)$.
 We posited that the adjective phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2015].
