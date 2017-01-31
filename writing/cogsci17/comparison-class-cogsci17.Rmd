@@ -425,15 +425,14 @@ S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c,
 L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0a}
 \end{align}
 <!---->
-We use a speaker model that considers the alternatives of using the same utterance with the explicit comparison class (e.g., "It is warm relative to other days in Winter.", "It is warm relative to other days of the year.") as well as the alternative of remaining silent (a null utterance with no informational content). 
-\mht{<-- modify depending on what the final set of alternatives is}
+We use a speaker model that considers the alternatives of using the same utterance with the explicit comparison class (e.g., "It is warm relative to other days in Winter.", "It is warm relative to other days of the year."). 
 For simplicity of the model, we assume each utterance has equal cost.
 We are interested in the behavior of the model with the underspecified utterance (e.g., "It is warm").
 <!--
 When the pragmatic listener hears this utterance, she must reason about which comparison class the speaker had in mind.
 When the speaker produces the unambiguous alterantive utterance (e.g., "It is relative to other days in Winter."), the listener 
 -->
-In the following section, we explore the predictions of this model.
+<!--In the following section, we explore the predictions of this model.-->
 <!--
 We posit that this knowledge is the listener's internal model of speech production of different classes of entities, and thus this comparison class prior should include information about the frequency of different classes. 
 \mht{mention "basic level" here?}
