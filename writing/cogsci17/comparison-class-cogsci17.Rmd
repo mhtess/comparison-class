@@ -1053,6 +1053,8 @@ $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive"
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
 All of these effects are also visually apparent in Figure \ref{fig:expt1results} (top).
 
+\ndg{this section can be tightened up a bunch? also, don't need discussion to be separate section.}
+
 ## Discussion
 
 The two novel predictions of our language understanding model were borne out in Expt. 1.
@@ -1061,6 +1063,8 @@ This kind of world knowledge can be measured by having participants estimate cer
 In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
 In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
 Here, we extend this approach to ask binary judgment *natural language* questions that use the same prior knowledge as would be relevant for Expt. 1 and which the same RSA model can answer.
+
+\ndg{this isn't really a discussio. more a lead in and seguey to next section. so put in intro to next section? also need to simplify and clarify a bunch.}
 
 # Full model and Experiment 2
 
@@ -1071,6 +1075,7 @@ In order to make quantitative predictions, we must specify the listener's world 
 
 We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
+\ndg{i'd rather leave some ambiguity: just say we use empirical frequency and that this is reasonable as a proxy for comparison cat usage frequency. in discussion can say that this could be a noisy channel completion thing or a conceptual priors thing.}
 We adopt log-frequency as our proxy, which we estimate using the Google Web Gram corpus^[
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
@@ -1151,6 +1156,8 @@ discrete_obs/.style={rectangle,fill=gray!25,draw=black,inner sep=1pt, minimum si
 \end{figure}
 <!-- End LaTeX code for graphical model -->
 
+\ndg{i'm afraid the 'graphical model' will have to go...}
+
 ### Predicting more data
 
 Currently, the full model has 2 parameters for each subordinate category (the $\mu$ and $\sigma$ of $P(x \mid c_{sub})$), in addition to weight $\beta$ on the empirical ngram frequency for $P(c)$.
@@ -1162,6 +1169,8 @@ We choose an experiment that uses the same domain knowledge as Expt. 1 in order 
 In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
 Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
 Since we have a language understanding model that can make predictions about adjective use, we re-use this model to predict participants' endorsements of adjectives.
+
+\ndg{there's some redundancy between this section and earlier stuff.}
 
 ## Experiment 2: Adjective endorsement
 
@@ -1346,10 +1355,12 @@ a2.2.upper <- round(a2.2[["cred_upper"]],2)
 The full model's posterior predictive distribution does an excellent job at capturing the variability in responses for Expt. 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Expt. 2: $r^2(`r expt2.n`) = `r expt2.r2`$ (Figure \ref{fig:posteriorPredictive_scatters}).
 The inferred values and shapes of the world knowledge used in these tasks is also consistent with intuition, as can be see in Figure \ref{fig:expt1results} (middle).
 The items judged *a priori* to be low the on scale (yellow) tend to be lower than those judged to be in the middle of the scale (orange) and high on the scale (red).
+
+\ndg{i don't think we need this:
 The most residual uncertainty is in the heights of "soccer players" and the duration of "cute animal videos". 
 The former may be due to a discrepancy between participants' judgments in the comparison class task, where participants tended to say soccer players were either tall or short "relative to other people", suggesting the heights of soccer players and the heights of people in general are similar; in the adjective speaker task, there was a small tendency for participants to say soccer players would be tall (but not short) relative to other people. 
 The uncertainty remanining in the duration of "cute animal videos" may be a result of our empirical corpus frequency $\hat{f}$ for the inferred comparison class prior (Figure \ref{fig:expt1results} bottom): "Cute animal videos" and "online videos", the relevant subordinate and superordinate categoires, were among the most *infrequent* ngrams in the corpus, and thus the relative measurement probably has more noise than other items. 
-
+}
 
 The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1 were $\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$; $\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
 Model parameters specific to the $S_2$ model used for Experiment 2: $\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$; $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$.
@@ -1365,12 +1376,15 @@ This model made two novel predictions:
 (2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance (subordinate) class.
 When the target entity is from a subordinate class with a mean towards the upper part of the scale (e.g., temperature during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). 
 The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
+\ndg{don't need to reiterate the predictions in such agonizing detail. maybe just say there were two qualitative predictions and quantitative predictions and they all worked out?}
 Both of these predictions were borne out in our first experiment.
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 
 The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
 The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
 It also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
+\ndg{even stronger sell! modeling productive language yields productivity of experiment designs which pins down needed parameters....}
+
 
 In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt. 1: $P(c)$.
 We posited that the adjective phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2015].
