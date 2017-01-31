@@ -19,8 +19,9 @@ author-information: >
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "*It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
-    *Warm* conveys that the temperature is high relative to some comparison class, but little is known about how a listener decides upon such a standard of comparison. 
+    "Speakers are not always explicit when they use vague language.
+    *It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
+    *Warm* vaguely conveys that the temperature is high relative to some comparison class, but little is known about how a listener decides upon such a standard of comparison. 
     Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and listeners' internal models of speech production.
     We introduce a Rational Speech Act model and derive two novel predictions from the model, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
     We generate quantitative model predictions by incorporating our model into Bayesian data analytic framework, and infer the likely priors by collecting further language understanding data in the same domains. 
@@ -91,7 +92,7 @@ HPDlo<- function(s){
 ```
 
 ```{r}
-theme_set(theme_minimal(8))
+theme_set(theme_minimal(9))
 ```
 
 # Introduction
@@ -104,11 +105,11 @@ NOTES:
 - using $cc$ as the var for comparison makes makes Eq. (4) go onto 2 lines
 -->
 
-You might say "It's warm outside" if it's 75\degree F (24\degree C).
-You might not say it's warm if it's 60\degree F (16\degree C).
-That is, unless it's January, in which case, it could be warm for January.
-*Warm* is vague and relative, and its felicitous application depends upon what the speaker is using as a basis of comparison --- the *comparison class*, (e.g., other days in the year or other days in Winter).
-As in the utterance "It's warm outside", this comparison class often goes unsaid.
+If it's 75\degree F (24\degree C) outside, you could say "it's warm".
+But if it's 60\degree F (16\degree C), you might not consider it warm.
+Unless it's January; it could be warm for January.
+*Warm* is relative, and its felicitous application depends upon what the speaker is using as a basis of comparison --- the *comparison class* (e.g., other days of the year or other days in January).
+When you say "It's warm outside", the comparison class goes unsaid.
 <!--
 If someone tells you it's warm outside, it's still useful to remember if it's July or January.
 A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.
@@ -131,27 +132,27 @@ or an object can just be "big" [i.e., big relative to an implicit comparison cla
 
 Less well understood, however, is how a comparison class becomes contextually-salient. 
 The problem is an obvious one because any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
-A day in Winter is also a day of the year, and so if it's warm, it could be *warm for Winter* or *warm relative to other days of the year*. 
+A day in January is also a day of the year; if it's warm, it could be *warm for Winter* or *warm relative to other days of the year*. 
 <!--If someone tells you it's warm outside, that could mean it's just warm (i.e., *warm relative to the other days of the year*) or it could mean it's warm for this time of year (e.g., *warm for Winter*).-->
 The issue of the comparison class touches upon not only adjectives, but in fact any language in which knowledge of the context is critical to the meaning, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly."; @Tessler2016].
 
-We propose that listeners actively use knowledge about possible classes and knowledge about what classes are likely to be talked about to infer what reference class is being used by the speaker.
+We propose that listeners actively use category knowledge and knowledge about what classes are likely to be talked about to infer the reference class  being used by the speaker.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
 We introduce a minimal extension to the Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013] to allow it to flexibly reason about the likely comparison class.
 From this model, we derive two novel predictions:
 (1) *Ceteris paribus*, a listener should prefer reference classes that are more specific. A more specific class will have relatively lower variance, which gives a vague utterance a more specific meaning. 
-(2) The likely comparison class will be modulated by the *a priori* plausibility that the adjective could apply to a member of specific class relative to the general class (e.g., how likely a day in Winter is to be warm relative to other days of the year). 
-This second prediction in turn depends upon the central tendencies of the specific vs. general classes (e.g., is the specific class expected to be high or low relative to the general class?) and the form the adjective (positive or negative form, e.g., warm or cold). 
+(2) The likely comparison class will be modulated by the *a priori* plausibility that the adjective could apply to a member of specific class (e.g., how likely a day in Winter is to be warm relative to other days of the year). 
+This second prediction in turn depends upon the quantitative relationship of the specific to the general class (e.g., is the specific class expected to be high or low relative to the general class?) and the form of the adjective (positive or negative e.g., warm or cold). 
 For instance, in Winter, the positive form adjective phrase "It's warm" should signal the more specific class (relative to days in Winter) more so than the negative form "It's cold". 
 We test these predictions in an experiment designed to elicit the comparison class (Expt. 1).
 
 The RSA model makes quantitative predictions about the comparison class, but these rely upon the fine-grained details of the relevant world knowledge.
-This can be measured by having participants estimate quantities or give likelihood judgments in the same contexts without experimental manipulation [@FrankeEtAl2016].
+World knowledge can often be measured by having participants estimate quantities or give likelihood judgments in the same contexts without experimental manipulation [@FrankeEtAl2016].
 Instead, we build a Bayesian data-analytic model to introduce uncertainty over the parameters of this world knowledge.
 This data-analytic model has too many parameters to estimate reliably from the Expt. 1 data alone.
-We use our same RSA model to predict data for similar kinds of language tasks in a follow-up experiment; critically, the same model with the same prior knowledge is used to predict data from both experiments.
+Thus, we use our same RSA model to predict data for similar kinds of language tasks in a follow-up experiment; critically, the same model with the same prior knowledge is used to predict data from both experiments.
 This represents a new possibility for Bayesian models of cognition and language: by building more complete and coherent models of language understanding, additional parameters can be estimated reliably by asking the model to answer multiple questions about the same domain knowledge.
-
+\mht{<-- this is the same sentence as the last sentence of the abstract}
 <!--
 "It's warm outside" when heard in July means something very different than when heard in January.
 Warm is vague,
@@ -361,8 +362,6 @@ pragmaticListener(paramsFromR.utt[0])
 ```
 
 ```{r runModel, cache = T}
-
-
 sub.prior.params <- c( 
   list( sub = data.frame(mu = 1, sigma = 0.5) ),
    list( sub = data.frame(mu = 0, sigma = 0.5) ),
@@ -480,76 +479,6 @@ Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer 
 \end{table*}
 
 
-```{r data_collection_plan_simulation, eval = F, echo=F}
-## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
-
-### not written efficiently... will take ~10 minutes to run
-n_participants <- c(50, 75, 100)
-true_probs <- c(0.1, 0.3, 0.5)
-simulations <- data.frame()
-for (n in n_participants){
-  for (p in true_probs){
-    for (i in seq(1, 25)){
-      simulations <- bind_rows(simulations,
-            bind_rows(data.frame(label = c("a"),
-                       response = rbinom(n =n, size = 1, prob = p)),
-                data.frame(label = c("b"),
-                           response = rbinom(n =n, size = 1, prob = p))) %>%
-            group_by(label) %>%
-            multi_boot_standard(column = "response") %>%
-            mutate(width = ci_upper - ci_lower) %>%
-          ungroup() %>%
-          summarize(w = mean(width)) %>%
-            mutate(n = n, p = p, i=i)
-      )
-    }
-  }
-}
-
-ggplot(simulations, aes(x = w))+
- geom_histogram()+
- facet_grid(n~p)
-
-```
-
-```{r loadExpt1Data, cache=T}
-data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
-
-d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
-d.catch <- d.catch %>%
-  mutate(pass = response == "relative to other buildings") %>%
-  select(workerid, pass)
-
-d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
-d.tidy <- left_join(d, d.catch) %>%
-  filter(pass) %>%
-  mutate(superResponse = ifelse(paraphrase == "super", 1, 0))
-
-df.summary <- d.tidy %>%
-  group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
-#  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
-  multi_boot_standard(column = "superResponse")
-```
-
-
-```{r loadExpt2Data, cache = T}
-project.name <- "vague-prior-elicitation-1"
-data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
-d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
-d.catch <- d.catch %>% 
-  mutate(pass = response == "Yes")
-
-d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
-
-vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
-  filter(pass) %>%
-  group_by(strength, target, degree, adjective, 
-           form, sub_category, super_category) %>%
-  multi_boot_standard(column = "response")
-
-```
-
-
 
 ```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
@@ -595,6 +524,105 @@ subplt2 <- ggplot(mp.both %>%
 
 grid.arrange(subplt1, subplt2, nrow = 1)
 ```
+
+```{r data_collection_plan_simulation, eval = F, echo=F}
+## simulations to determine width of 95% CI for 2AFC data assuming different sample sizes and true binomial probabilities
+
+### not written efficiently... will take ~10 minutes to run
+n_participants <- c(50, 75, 100)
+true_probs <- c(0.1, 0.3, 0.5)
+simulations <- data.frame()
+for (n in n_participants){
+  for (p in true_probs){
+    for (i in seq(1, 25)){
+      simulations <- bind_rows(simulations,
+            bind_rows(data.frame(label = c("a"),
+                       response = rbinom(n =n, size = 1, prob = p)),
+                data.frame(label = c("b"),
+                           response = rbinom(n =n, size = 1, prob = p))) %>%
+            group_by(label) %>%
+            multi_boot_standard(column = "response") %>%
+            mutate(width = ci_upper - ci_lower) %>%
+          ungroup() %>%
+          summarize(w = mean(width)) %>%
+            mutate(n = n, p = p, i=i)
+      )
+    }
+  }
+}
+
+ggplot(simulations, aes(x = w))+
+ geom_histogram()+
+ facet_grid(n~p)
+
+```
+
+```{r loadExpt1Data, cache=T}
+data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
+
+d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>%
+  mutate(pass = response == "relative to other buildings") %>%
+  select(workerid, pass)
+
+d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
+d.tidy <- left_join(d, d.catch) %>%
+  filter(pass) %>%
+  mutate(superResponse = ifelse(paraphrase == "super", 1, 0))
+
+# df.summary <- d.tidy %>%
+#   group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
+# #  group_by(condition, strength, target, degree, adjective, form, sub_category, super_category) %>%
+#   multi_boot_standard(column = "superResponse")
+
+df.bayes <- d %>%
+  mutate(superResponse = ifelse(paraphrase == "super", 1, 0)) %>%
+  group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
+  summarize(k = sum(superResponse), n = n()) %>%
+  ungroup() %>%
+  mutate(a = 1 + k,
+         b = 1 + n - k,
+         low  = qbeta(.025, a, b),
+         high = qbeta(.975, a, b),
+         MAP_h = (a-1)/(a+b-2),
+         mean = a / (a + b))
+
+```
+
+
+```{r loadExpt2Data, cache = T}
+project.name <- "vague-prior-elicitation-1"
+data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
+d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
+d.catch <- d.catch %>% 
+  mutate(pass = response == "Yes")
+
+d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
+
+# vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+#   filter(pass) %>%
+#   group_by(strength, target, degree, adjective, 
+#            form, sub_category, super_category) %>%
+#   multi_boot_standard(column = "response")
+
+vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+  filter(pass) %>%
+  group_by(strength, target, degree, adjective, 
+           form, sub_category, super_category) %>%
+  summarize(k = sum(response), n = n()) %>%
+  ungroup() %>%
+  mutate(a = 1 + k,
+         b = 1 + n - k,
+         low  = qbeta(.025, a, b),
+         high = qbeta(.975, a, b),
+         MAP_h = (a-1)/(a+b-2),
+         mean = a / (a + b))
+
+```
+
+
+
+
 
 
 
@@ -762,11 +790,11 @@ df.scaledFreq.wide <- left_join(
 ```
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.8, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to bootstrapped 95 percent confidence intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.9, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to 95\\% Bayesian credible intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
 
-fig2a <- df.summary %>%
+fig2a <- df.bayes %>%
   ungroup() %>%
-  mutate(experiment = 'Comparison class data',
+  mutate(experiment = 'Comparison class \n data',
           sub_category = factor(sub_category, 
                   levels = c("gymnast", "soccer player", "basketball player",
                              "bottle opener", "toaster", "dishwasher",
@@ -780,8 +808,8 @@ fig2a <- df.summary %>%
                              "grape", "apple", "watermelon") )) %>%
 #                  levels = sub_category[order(strength)])) %>%
   ggplot(.,
-         aes( x = sub_category, y = mean, 
-              ymin = ci_lower, ymax = ci_upper, 
+         aes( x = sub_category, y = MAP_h, 
+              ymin = low, ymax = high, 
               group = form, fill = form ) )+
   geom_bar(stat = 'identity', position = position_dodge(), alpha = 1, 
            color = 'black', width = 0.9) +
@@ -789,13 +817,14 @@ fig2a <- df.summary %>%
   facet_grid(experiment~degree, scales = 'free') +
   ylim(0, 1) +
   scale_fill_brewer(palette = 'Set3') +
-  ylab("Superordinate paraphrase") +
+  ylab("Superordinate paraphrase   ") +
   theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
         axis.title.x = element_blank(),
         panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank())
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))
 
-fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Degree priors"), 
+fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Degree \n priors"), 
                 aes(x = val, y = ..scaled.., 
                  fill = strength, lty = strength))+
   geom_density(adjust = 2, size = 0.8, alpha = 0.8)+
@@ -808,7 +837,8 @@ fig2b <- ggplot(m.samp.tidy %>% mutate(experiment = "Degree priors"),
   ylab("Prior density")+
   theme(strip.text.x = element_blank(),
         panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank())
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))
 
 fig2c <- ggplot(
   df.scaledFreq.wide %>% 
@@ -829,9 +859,9 @@ fig2c <- ggplot(
                                      "time", "weight"),
                   labels = c("people", "kitchen appliances",
                              "days of the year", "online videos", "produce")),
-  category = factor(category, levels = c("low", "medium", "high")),
-  experiment  = "Comparison class prior"), 
-  aes( x = cat, y = cPrior, fill = category, 
+  strength = factor(category, levels = c("low", "medium", "high")),
+  experiment  = "Comparison class \n priors"), 
+  aes( x = cat, y = cPrior, fill = strength, 
        ymin = c_lower, ymax = c_upper))+
   geom_bar(stat = 'identity', position = position_dodge(), color = 'black')+
   geom_errorbar(position = position_dodge(), width = 0.5)+ 
@@ -840,7 +870,8 @@ fig2c <- ggplot(
     theme(axis.text.x = element_text(angle = 90, hjust = 0.95),
         axis.title.x = element_blank(),
         panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank()) +
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black")) +
   ylim(0, 1) + 
   ylab("Superordinate probability")
 
@@ -1187,9 +1218,9 @@ To learn about the credible values of the parameters and the predictions of the 
 ```{r}
 
 md.pp <- left_join(
-  bind_rows(vs.summary %>% 
+  bind_rows(vs.bayes %>% 
              mutate(expt = "superSpeaker"),
-           df.summary %>%
+           df.bayes %>%
              mutate(expt = "superCC")) %>% 
              ungroup() %>%
              rename(cat = sub_category),
@@ -1204,7 +1235,7 @@ fill.colors <- RColorBrewer::brewer.pal(5, "Set3")
 names(fill.colors) <- levels(md.pp$degree)
 
 scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
-                  y = mean, ymin = ci_lower, ymax = ci_upper,
+                  y = MAP_h, ymin = low, ymax = high,
                   shape = form, fill = degree))+
   geom_abline(intercept = 0, slope = 1, lty = 3)+
   geom_errorbar(size = 0.5, alpha = 0.4)+
@@ -1230,23 +1261,23 @@ scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
         
 
 expt1.r2 <- round(with(md.pp %>%
-       filter(expt == "Comparison class inference"), cor(MAP, mean))^2, 3)
+       filter(expt == "Comparison class inference"), cor(MAP, MAP_h))^2, 3)
 
 expt1.n <- length(filter(md.pp, expt == "Comparison class inference")[["MAP"]])
 
 expt2.r2 <- round(with(md.pp %>%
-       filter(expt == "Adjective production"), cor(MAP, mean))^2, 3)
+       filter(expt == "Adjective production"), cor(MAP, MAP_h))^2, 3)
 
 expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
 ```
 
 
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\\% bootstrapped confidence intervals for the participant data and 95\\% highest probability density intervals for the model predictions."}
-scatterSubFig <- ggplot(md.pp %>% filter(mean < 0.30 & expt == "Comparison class inference") %>%
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\\% Bayesian credible intervals for the participant data and model predictions."}
+scatterSubFig <- ggplot(md.pp %>% filter(MAP_h < 0.30 & expt == "Comparison class inference") %>%
                           mutate(expt = factor(expt, 
                                                labels = c("Comparison class inference (subset)"))), 
        aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
-                  y = mean, ymin = ci_lower, ymax = ci_upper,
+                  y = MAP_h, ymin = low, ymax = high,
                   shape = form, fill = degree))+
   geom_abline(intercept = 0, slope = 1, lty = 3)+
   geom_errorbar(size = 0.5, alpha = 0.2)+
