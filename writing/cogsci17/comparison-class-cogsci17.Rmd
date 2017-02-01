@@ -663,32 +663,37 @@ We test these predictions in our first experiment.
 -->
 
 
-## Reducing uncertainty with productive language use
+### Reducing uncertainty with productive language use
 
+As we've described above, the relevant prior knowledge yields two free parameters per subordinate domain.
+<!--
 We've articulated a Bayesian treatment of the relevant prior knowledge for comparison class inference.
 This by itself, however, is not sufficient to fill in the probabilistic knowledge that the RSA model relies upon; putting uncertainty over the parameters of the prior knowledge in RSA would result in too many parameters to estimate reliably using the data from a single comparison class experiment.
-Even if the parameters could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
-This need not hold us back though.
-The RSA model is a productive language model: We can have it predict related language data to gain more traction on the latent world knowledge.
+-->
+Even if the parameters could be estimated reliably from our target (comparison class) expriment, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
+However, the RSA model is a productive language model: We can use it to predict related language data that rely on the same prior knowledge.
+In particular, Expt. 2 we gather judgements about sentences with vague adjectuives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
 
+
+<!--
 We choose an experiment that uses the same domain knowledge as used in the comparison class inference (Expt. 1; Table \ref{tab:1}) in order to limit the number of parameters in the model.
 In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
-Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
-In particular, we ask them to judge whether or not an adjective would be true (explicitly, relative to the superordinate category) of a subordinate member (e.g., is it warm in Winter?).
-We re-use the vague adjective interpretation part of the RSA model to predict participants' endorsements of adjectives.
+Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities.
+-->
 
-
-
-We add a level of recursion to the RSA model and use a pragmatic speaker to model adjective endorsement [Expt. 2; following @Qing2014a; @Tessler2016; @Tessler2016cogsci].
-For this task, we remove comparison class uncertainty from the model, since the experiment makes use of explicit comparison classes.
+For this data, we remove comparison class uncertainty by setting $P(c_{super}){=}1$, since the sentences provide explicit comparison classes.
+We then model sentence endorsement using a pragmatic speaker [following @Qing2014a; @Tessler2016; @Tessler2016cogsci]:
 \vspace{-0.5cm}
 \begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
-L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1b}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{c_{sub}}} \ln{L_1(x \mid u)})} \label{eq:S2}
 \end{align}
-<!---->
+<!--
 \mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
-We can then use data from both experiments to simulatenously reconstruct the prior knowledge used in both tasks and generate predictions for the two data sets.
+\ndg{yeah, there should be an expectation...}-->
+\noindent Note that $L_1(x \mid u)$ is defined from Eq. \ref{eq:L1a} by marginalization.
+
+Eqs. \ref{eq:L1a} and \ref{eq:S2} define models for the data we will gather from experiments 1 and 2, and depend on the same background knowledge.
+We can thus use data from both experiments to reconstruct the prior knowledge and generate predictions for the two data sets.
 Experimental paradigms, computational models, and data for this paper can be found at \url{https://mhtess.github.io}.
 <!-- The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1). -->
 <!-- We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1). -->
