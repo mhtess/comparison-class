@@ -145,8 +145,8 @@ The RSA model makes quantitative predictions given fine-grained details of the r
 Background knowledge of this sort has previously been measured by having participants estimate quantities or give likelihood judgments directly [@FrankeEtAl2016].
 We pursue a different methodology.
 Because our model captures a productive fragment of natural language, it makes predictions about simpler linguistic tasks (based on the same background knowledge). 
-In Expt. 2 we collect judgements about sentences like "This [winter day] is cold relative to other days of the year," in which domain knowledge is needed but the comparison class is explicit.
-We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgements.
+In Expt. 2 we collect judgments about sentences like "This [winter day] is cold relative to other days of the year," in which domain knowledge is needed but the comparison class is explicit.
+We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgments.
 <!--
 As part of our (Bayesian) data analysis model we put uncertainty over the parameters of the background knowledge being used in our task.
 This strategy has the virtue of avoiding asking participants numerical estimation questions, but it introduces a lot of uncertainty into the model.
@@ -198,7 +198,8 @@ The listener is aware that the target entity is in the subordinate class (e.g., 
 \begin{align}
 L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1a}\\
 S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c, \theta)})} \label{eq:S1a}\\
-L_{0}(x \mid u, c, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(c) \label{eq:L0a}
+L_{0}(x \mid u, c, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)}
+\label{eq:L0a}
 \end{align}
 \noindent We are interested in the behavior of the model with the underspecified utterance (e.g., "It's warm"), and we assume the speaker has two alternative utterances in which the comparison class is explicit (e.g., "It's warm relative to other days in Winter." and "It's warm relative to other days of the year.").
 <!--For simplicity of the model, we assume each utterance has equal cost.-->
@@ -438,7 +439,7 @@ all.priors <- bind_rows(
  
 ```
 
-```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
+```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width = 3.3, fig.height = 2.5, num.cols.cap = 1, set.cap.width = T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
                               lty = cat, group= cat, alpha=cat))+
@@ -607,8 +608,8 @@ colnames(table.1) <- c("Scale (adjectives)", "Subordinate classes", "Superordina
 
 print(xtable(table.1, 
              caption = 
-                   "Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale", 
-             label = "tab:1"), type = "latex", include.rownames = FALSE, 
+                   "Items used in Experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale", 
+             label = "tab:1"), type = "latex", include.rownames = FALSE,
       tabular.environment = "tabularx", 
       width = "\\textwidth", 
       floating.environment = "table*",
@@ -659,7 +660,7 @@ This by itself, however, is not sufficient to fill in the probabilistic knowledg
 -->
 Even if the parameters could be estimated reliably from our target (comparison class) expriment, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
 However, the RSA model is a productive language model: We can use it to predict related language data that rely on the same prior knowledge.
-In particular, Expt. 2 we gather judgements about sentences with vague adjectuives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
+In particular, Expt. 2 we gather judgments about sentences with vague adjectuives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
 
 
 <!--
@@ -668,7 +669,7 @@ In addition to helping us gain traction on participants' prior knowledge, a seco
 Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities.
 -->
 
-For this data, we remove comparison class uncertainty by setting $P(c_{super}){=}1$, since the sentences provide explicit comparison classes.
+For this data, we remove comparison class uncertainty by setting $P(c_{super}) = 1$, since the sentences provide explicit comparison classes.
 We then model sentence endorsement using a pragmatic speaker [following @Qing2014a; @Tessler2016; @Tessler2016cogsci]:
 \vspace{-0.5cm}
 \begin{align}
@@ -1084,7 +1085,7 @@ grid.arrange(scatterFig, scatterSubFig, nrow = 1, widths = c(2, 1.07))
 
 ## Experiment 1: Comparison class inference
 
-In this experiment, we gather human judgements of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
+In this experiment, we gather human judgments of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
 
 ### Participants and procedure
 
