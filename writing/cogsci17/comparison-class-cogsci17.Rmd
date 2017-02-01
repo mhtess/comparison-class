@@ -145,8 +145,8 @@ The RSA model makes quantitative predictions given fine-grained details of the r
 Background knowledge of this sort has previously been measured by having participants estimate quantities or give likelihood judgments directly [@FrankeEtAl2016].
 We pursue a different methodology.
 Because our model captures a productive fragment of natural language, it makes predictions about simpler linguistic tasks (based on the same background knowledge). 
-In Expt. 2 we collect judgements about sentences like "This [winter day] is cold relative to other days of the year," in which domain knowledge is needed but the comparison class is explicit.
-We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgements.
+In Expt. 2 we collect judgments about sentences like "This [winter day] is cold relative to other days of the year," in which domain knowledge is needed but the comparison class is explicit.
+We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgments.
 <!--
 As part of our (Bayesian) data analysis model we put uncertainty over the parameters of the background knowledge being used in our task.
 This strategy has the virtue of avoiding asking participants numerical estimation questions, but it introduces a lot of uncertainty into the model.
@@ -659,7 +659,7 @@ This by itself, however, is not sufficient to fill in the probabilistic knowledg
 -->
 Even if the parameters could be estimated reliably from our target (comparison class) expriment, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
 However, the RSA model is a productive language model: We can use it to predict related language data that rely on the same prior knowledge.
-In particular, Expt. 2 we gather judgements about sentences with vague adjectuives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
+In Expt. 2, we gather judgments about sentences with vague adjectives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
 
 
 <!--
@@ -977,11 +977,10 @@ grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
 
 # Behavioral experiments
 
-## Method
-
 The materials and much of the design of the two experiments are the same and were preregistered:
 \url{https://osf.io/hzdtj/}.
 Participants were recruited from Amazon's Mechanical Turk and were restricted to those with U.S. IP addresses with at least a 95% work approval rating.
+Each experiment took about 5 minutes and participants were compensated $0.50 for their work.
 
 ### Materials
 
@@ -1084,7 +1083,7 @@ grid.arrange(scatterFig, scatterSubFig, nrow = 1, widths = c(2, 1.07))
 
 ## Experiment 1: Comparison class inference
 
-In this experiment, we gather human judgements of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
+In this experiment, we gather human judgments of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
 
 ### Participants and procedure
 
@@ -1092,11 +1091,9 @@ In this experiment, we gather human judgements of comparison classes in ambiguou
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
 We recruited 264 participants and 2 were excluded for failing an attention check.
-The experiment took about 5 minutes and participants were compensated $0.50 for their work.
-
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
 This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
-Participants were asked "What do you think Tanya meant?" and given a two-alternative forced-choice to rephrase the adjective sentence with an explicit comparison class of either the subordinate or superordinate category: 
+Participants were asked "What do you think Tanya meant?" and given a two-alternative forced-choice to rephrase the adjective sentence with either an explicit subordinate or superordinate comparison class: 
 
 \begin{itemize}
 \item \{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \textsc{subordinates} (e.g., \emph{days in Winter}) or \textsc{superordinates} (e.g., \emph{days of the year})
@@ -1149,7 +1146,7 @@ Figure \ref{fig:expt1results} (top) shows the proportion of participants choosin
 The predicted effects are visually apparent within each scale.
 
 Our predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables.
-In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[This was the maximal mixed-effects structure that converged.].
+In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to participants' responses^[This was the maximal mixed-effects structure that converged.].
 Confirming our two qualitative model predictions, there was an interaction between form and strength 
 ($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
 $SE = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Std. Error"],2)`;$
@@ -1159,7 +1156,8 @@ $SE = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Std. Error"],2)`
 $z = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","z value"],2)`$). 
 The effects of form and strength were not significant.
 
-Following up on this model, we examine the simple effects of strength for both positive and negative form adjectives.
+<!-- Following up on this model, we examine the simple effects of strength for both positive and negative form adjectives. -->
+We then test the simple effects.
 <!-- We find the predicted effects on superordinate paraphrase probability for items both on the low and high end of the scale.  -->
 For items on the low end of the scale (e.g., temperature on Winter days), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes ($\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Estimate"],2)`$;
 $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Std. Error"],2)`;$
@@ -1248,10 +1246,9 @@ In this experiment, we use a two-alternative forced choice paradigm to collect p
 
 We recruited 100 participants and 5 were excluded for failing an attention check.
 <!-- Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. -->
-On average, the experiment took 5 minutes and participants were compensated $0.50 for their work. 
-
+<!-- On average, the experiment took 5 minutes and participants were compensated $0.50 for their work.  -->
 On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
-This was followed by a question asking if the participant would endorse the positive- or negative-form adjective explicitly relative to the superordinate category (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
+This was followed by a question asking if the participant would endorse an adjective explicitly relative to the superordinate category (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
 <!-- Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective. -->
 <!-- As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue. -->
 
@@ -1264,7 +1261,7 @@ We see that the endorsement of adjectival phrases in these domains is markedly m
 
 The full RSA model has a number of parameters; we now describe the Bayesian data analysis model used to treat these parameters and generate predictions. 
 The comparison class prior uses scaling parameter on the empirical frequency $\hat{f}$, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
-Each subordinate category prior uses standardized units (given by the superordinate Unit-Normal), and we put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
+We put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$, since they use standardized units.
 
 The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks.
 Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
