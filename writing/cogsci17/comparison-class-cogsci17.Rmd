@@ -141,9 +141,9 @@ We introduce a minimal extension to the Rational Speech Act (RSA) model for grad
 
 From this model, we derive two novel qualitative predictions.
 For illustration, consider the weather. 
-In Winter, the *positive* adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
+In Winter, the *positive* form of the adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
 The opposite should be true in Summer, where *negative* forms should be more likely to signal the specific class (i.e., cold for Summer). 
-This is driven by the *a priori* probability that the adjective could apply to the specific class e.g., the chance that it's warm in Winter (Prediction 1).
+This is driven by the prior probability that the adjective could apply to the specific class, such as the chance that it's warm in Winter (Prediction 1).
 In addition, regardless of the season, a listener should prefer "it's warm" to be relative to the current season, a more specific reference class. 
 All else being equal, classes that are more specific will have relatively lower variance, which gives a vague utterance a more specific meaning (Prediction 2). 
 We test these predictions in an experiment designed to elicit the comparison class using a paraphrase dependent measure (Expt. 1).
