@@ -14,13 +14,13 @@ header-includes:
   - \usepackage{booktabs}
 
 author-information: >
-  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
+  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu), {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
   {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\
   $^1$Department of Psychology, Stanford University,
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "Speakers implicitly refer to categories when predicating properties of objects or entities.
+    "Speakers often only implicitly refer to a context when using vague language.
     *It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
     *Warm* vaguely conveys that the temperature is high relative to some *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
     Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and listeners' internal models of speech production.
@@ -707,6 +707,7 @@ L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \
 <!---->
 \mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
 We can then use data from both experiments to simulatenously reconstruct the prior knowledge used in both tasks and generate predictions for the two data sets.
+Experimental paradigms, computational models, and data for this paper can be found at \url{https://mhtess.github.io}.
 <!-- The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1). -->
 <!-- We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1). -->
 
@@ -849,7 +850,7 @@ df.scaledFreq.wide <- left_join(
 ```
 
 
-```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4.9, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to 95\\% Bayesian credible intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
+```{r expt1results, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height = 4.9, out.width="0.9\\textwidth", fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Empirical data, model inferred world priors, and empirically measured comparison class priors. Top: Experiment 1 results. Comparison class judgments in terms of proportion judgments in favor of superordinate comparison class. Error bars correspond to 95\\% Bayesian credible intervals. Middle: Inferred prior distributions of world knowledge used in Experiments 1 and 2. Bottom: Inferred prior probability of the superordinate comparison class based on Google WebGram frequencies. Error bars are derived from the 95\\% credible interval on the $\\beta$ scale parameter."}
 
 fig2a <- df.bayes %>%
   ungroup() %>%
@@ -1040,9 +1041,6 @@ Participants were asked "What do you think Tanya meant?" and given a two-alterna
 <!--\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})-->
 
 In addition to all of the above design parameters, half of our participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
-The experiment can be viewed at:
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
-
 
 ```{r mixed_model, cache = T}
 d.centered = d.tidy %>%
@@ -1193,8 +1191,6 @@ On each trial, participants were given a sentence introducing the subordinate ca
 This was followed by a question asking if the participant would endorse the positive- or negative-form adjective explicitly relative to the superordinate category (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
 <!-- Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective. -->
 <!-- As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue. -->
-The experiment can be viewed at: 
-\url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
 
 ### Results
 
@@ -1365,7 +1361,7 @@ Finally, the full model's posterior predictive distribution does an excellent jo
 
 # Discussion
 
-Speakers of a language are often vague (e.g., saying "It's warm outside").
+Language users are often vague, saying things like "It's warm outside".
 This poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
@@ -1444,10 +1440,10 @@ These $P(x \mid c)$ are used in both the experiments, which allows us to both si
 
 
 
-# Acknowledgements
+<!-- # Acknowledgements -->
 
-This work was supported in part by NSF Graduate Research Fellowship DGE-114747 (to MHT), \red{by ... (to MLB)}, \red{by ... (to NDG)}.
-The authors would like to thank Ali Horowitz for help in stimuli design.
+<!-- This work was supported in part by NSF Graduate Research Fellowship DGE-114747 (to MHT), \red{by ... (to MLB)}, \red{by ... (to NDG)}. -->
+<!-- The authors would like to thank Ali Horowitz for help in stimuli design. -->
 
 # References
 
