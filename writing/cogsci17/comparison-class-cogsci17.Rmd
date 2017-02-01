@@ -995,6 +995,96 @@ Each participant saw 15 trials: one for each subordinate category paired with ei
 Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
 
 
+```{r cache = T}
+
+md.pp <- left_join(
+  bind_rows(vs.bayes %>% 
+             mutate(expt = "superSpeaker"),
+           df.bayes %>%
+             mutate(expt = "superCC")) %>% 
+             ungroup() %>%
+             rename(cat = sub_category),
+  m.pp %>% rename(expt = param)) %>%
+  mutate(expt = factor(expt, 
+                       levels = c("superSpeaker", "superCC"),
+                       labels = c('Adjective production', 'Comparison class inference')),
+         form = factor(form, levels = c("positive", "negative")))
+
+         
+fill.colors <- RColorBrewer::brewer.pal(5, "Set3")
+names(fill.colors) <- levels(md.pp$degree)
+
+scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = MAP_h, ymin = low, ymax = high,
+                  shape = form, fill = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3)+
+  geom_errorbar(size = 0.5, alpha = 0.4)+
+  geom_errorbarh(size = 0.5, alpha =0.4)+
+  geom_point(size = 2.5, color = 'black')+
+  scale_shape_manual(values = c(24, 25))+
+  scale_fill_brewer(palette = "Set3")+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  xlim(0, 1)+
+  ylim(0, 1)+
+  ylab("Human endorsement")+
+  xlab("Model prediction")+
+  theme(legend.box = "horizontal",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"),
+        #legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        legend.position = c(0.57, -0.2))+
+  guides(fill=guide_legend(override.aes=list(colour=fill.colors)), shape = F)
+        
+
+expt1.r2 <- round(with(md.pp %>%
+       filter(expt == "Comparison class inference"), cor(MAP, MAP_h))^2, 3)
+
+expt1.n <- length(filter(md.pp, expt == "Comparison class inference")[["MAP"]])
+
+expt2.r2 <- round(with(md.pp %>%
+       filter(expt == "Adjective production"), cor(MAP, MAP_h))^2, 3)
+
+expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
+```
+
+
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. All error bars correspond to 95\\% Bayesian credible intervals."}
+scatterSubFig <- ggplot(md.pp %>% filter(MAP_h < 0.30 & expt == "Comparison class inference") %>%
+                          mutate(expt = factor(expt, 
+                                               labels = c("Comparison class inference (subset)"))), 
+       aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = MAP_h, ymin = low, ymax = high,
+                  shape = form, fill = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3)+
+  geom_errorbar(size = 0.5, alpha = 0.2)+
+  geom_errorbarh(size = 0.5, alpha = 0.2)+
+  geom_point(size = 2.5, color = 'black')+
+  scale_shape_manual(values = c(24, 25))+
+  scale_fill_brewer(palette = "Set3")+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  xlim(0, 0.3)+
+  ylim(0, 0.3)+
+  ylab("Human endorsement")+
+  xlab("Model prediction")+
+  theme(#legend.position = "bottom",
+        legend.position = c(0.1,-0.2),
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+       # panel.grid.minor = element_blank(),
+      #  panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  guides(fill = F)
+  
+grid.arrange(scatterFig, scatterSubFig, nrow = 1, widths = c(2, 1.07))
+```
+
+
+
 ## Experiment 1: Comparison class inference
 
 In this experiment, we gather human judgements of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
@@ -1089,7 +1179,6 @@ $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive",
 <!-- \ndg{this section can be tightened up a bunch?} -->
 
 ## Experiment 2: Adjective endorsement
-
 
 
 <!-- Begin LaTeX code for graphical model -->
@@ -1190,98 +1279,6 @@ We use priors consistent with previous literature: $\alpha_1 \sim \text{Uniform}
 
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL [@dippl].
 To learn about the credible values of the parameters and the predictions of the model, we used an incrementalized version of MCMC [@Ritchie2016], collecting 2 independent chains of 75,000 iterations (removing the first 25,000 for burn-in).
-
-<!--
-
--->
-```{r cache = T}
-
-md.pp <- left_join(
-  bind_rows(vs.bayes %>% 
-             mutate(expt = "superSpeaker"),
-           df.bayes %>%
-             mutate(expt = "superCC")) %>% 
-             ungroup() %>%
-             rename(cat = sub_category),
-  m.pp %>% rename(expt = param)) %>%
-  mutate(expt = factor(expt, 
-                       levels = c("superSpeaker", "superCC"),
-                       labels = c('Adjective production', 'Comparison class inference')),
-         form = factor(form, levels = c("positive", "negative")))
-
-         
-fill.colors <- RColorBrewer::brewer.pal(5, "Set3")
-names(fill.colors) <- levels(md.pp$degree)
-
-scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
-                  y = MAP_h, ymin = low, ymax = high,
-                  shape = form, fill = degree))+
-  geom_abline(intercept = 0, slope = 1, lty = 3)+
-  geom_errorbar(size = 0.5, alpha = 0.4)+
-  geom_errorbarh(size = 0.5, alpha =0.4)+
-  geom_point(size = 2.5, color = 'black')+
-  scale_shape_manual(values = c(24, 25))+
-  scale_fill_brewer(palette = "Set3")+
-  facet_wrap(~expt)+
-  coord_fixed(ratio = 1)+
-  xlim(0, 1)+
-  ylim(0, 1)+
-  ylab("Human endorsement")+
-  xlab("Model prediction")+
-  theme(legend.box = "horizontal",
-        panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank(),
-        axis.line = element_line(colour = "black"),
-        #legend.position = "bottom",
-        legend.direction = "horizontal",
-        legend.title = element_blank(),
-        legend.position = c(0.57, -0.2))+
-  guides(fill=guide_legend(override.aes=list(colour=fill.colors)), shape = F)
-        
-
-expt1.r2 <- round(with(md.pp %>%
-       filter(expt == "Comparison class inference"), cor(MAP, MAP_h))^2, 3)
-
-expt1.n <- length(filter(md.pp, expt == "Comparison class inference")[["MAP"]])
-
-expt2.r2 <- round(with(md.pp %>%
-       filter(expt == "Adjective production"), cor(MAP, MAP_h))^2, 3)
-
-expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
-```
-
-
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. All error bars correspond to 95\\% Bayesian credible intervals."}
-scatterSubFig <- ggplot(md.pp %>% filter(MAP_h < 0.30 & expt == "Comparison class inference") %>%
-                          mutate(expt = factor(expt, 
-                                               labels = c("Comparison class inference (subset)"))), 
-       aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
-                  y = MAP_h, ymin = low, ymax = high,
-                  shape = form, fill = degree))+
-  geom_abline(intercept = 0, slope = 1, lty = 3)+
-  geom_errorbar(size = 0.5, alpha = 0.2)+
-  geom_errorbarh(size = 0.5, alpha = 0.2)+
-  geom_point(size = 2.5, color = 'black')+
-  scale_shape_manual(values = c(24, 25))+
-  scale_fill_brewer(palette = "Set3")+
-  facet_wrap(~expt)+
-  coord_fixed(ratio = 1)+
-  xlim(0, 0.3)+
-  ylim(0, 0.3)+
-  ylab("Human endorsement")+
-  xlab("Model prediction")+
-  theme(#legend.position = "bottom",
-        legend.position = c(0.1,-0.2),
-        legend.direction = "horizontal",
-        legend.title = element_blank(),
-       # panel.grid.minor = element_blank(),
-      #  panel.grid.major = element_blank(),
-        axis.line = element_line(colour = "black"))+
-  guides(fill = F)
-  
-grid.arrange(scatterFig, scatterSubFig, nrow = 1, widths = c(2, 1.07))
-```
-
 
 
 ```{r parameterPosteriors}
