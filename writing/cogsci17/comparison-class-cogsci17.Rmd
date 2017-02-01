@@ -1352,10 +1352,10 @@ To our knowledge, this is the first experiment to demonstrate how reference clas
 
 In our modeling work, we had to specify a prior distribution over the two comparison class alternatives $P(c)$, used in Expt. 1.
 There are at least two (non-mutually exclusive) ways of interpreting this prior distribution. 
-The prior may reflect basic level effects in categorization [@Rosch1975] or the hetereogeneity of the property within different classes.
+The prior may reflect basic level effects in categorization [@Rosch1975] or the heterogeneity of the property within different classes.
 For instance, the distribution over prices for kitchen appliances may be more hetereogenous than the distribution of heights for people, making "kitchen appliances" a relatively poorer reference class for the price of a specific kitchen appliance than "people" is for the height of a specific person.
-A more heteregeneous class may make a vague utterance less informative.
-Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analagous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
+A more heterogeneous class may make a vague utterance less informative.
+Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
 Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
