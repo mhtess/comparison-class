@@ -438,7 +438,7 @@ all.priors <- bind_rows(
  
 ```
 
-```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
+```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width = 3.3, fig.height = 2.5, num.cols.cap = 1, set.cap.width = T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
                               lty = cat, group= cat, alpha=cat))+
@@ -607,8 +607,8 @@ colnames(table.1) <- c("Scale (adjectives)", "Subordinate classes", "Superordina
 
 print(xtable(table.1, 
              caption = 
-                   "Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale", 
-             label = "tab:1"), type = "latex", include.rownames = FALSE, 
+                   "Items used in Experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale", 
+             label = "tab:1"), type = "latex", include.rownames = FALSE,
       tabular.environment = "tabularx", 
       width = "\\textwidth", 
       floating.environment = "table*",
@@ -668,7 +668,7 @@ In addition to helping us gain traction on participants' prior knowledge, a seco
 Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities.
 -->
 
-For this data, we remove comparison class uncertainty by setting $P(c_{super}){=}1$, since the sentences provide explicit comparison classes.
+For this data, we remove comparison class uncertainty by setting $P(c_{super}) = 1$, since the sentences provide explicit comparison classes.
 We then model sentence endorsement using a pragmatic speaker [following @Qing2014a; @Tessler2016; @Tessler2016cogsci]:
 \vspace{-0.5cm}
 \begin{align}
@@ -1349,10 +1349,10 @@ To our knowledge, this is the first experiment to demonstrate how reference clas
 
 In our modeling work, we had to specify a prior distribution over the two comparison class alternatives $P(c)$, used in Expt. 1.
 There are at least two (non-mutually exclusive) ways of interpreting this prior distribution. 
-The prior may reflect basic level effects in categorization [@Rosch1975] or the hetereogeneity of the property within different classes.
+The prior may reflect basic level effects in categorization [@Rosch1975] or the heterogeneity of the property within different classes.
 For instance, the distribution over prices for kitchen appliances may be more hetereogenous than the distribution of heights for people, making "kitchen appliances" a relatively poorer reference class for the price of a specific kitchen appliance than "people" is for the height of a specific person.
-A more heteregeneous class may make a vague utterance less informative.
-Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analagous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
+A more heterogeneous class may make a vague utterance less informative.
+Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
 Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
