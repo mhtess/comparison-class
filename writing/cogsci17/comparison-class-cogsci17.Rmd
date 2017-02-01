@@ -194,7 +194,7 @@ But where does such a comparison class come from?
 
 <!--\ndg{next few paragraphs can be tightened up a bit. maybe combine next two?}-->
 
-When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine the listener must infer the comparison class by thinking about what would best complete the sentence, in a way analagous to noisy-channel models of production and comprehension [@Bergen2015].
+When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine the listener must infer the comparison class by thinking about what would best complete the sentence.
 She does this using her world knowledge of what worlds are plausible given different comparison classes $P(x \mid c)$, what comparison classes are likely to be talked about $P(c)$, and what a rational speaker would say in given a world and comparison class $S_{1}(u \mid x, c, \theta)$ (Eq. \ref{eq:L1a}).
 <!--We elaborate the Rational Speech Act theory for adjective understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared --- the comparison class $c$ .-->
 As a first test of this idea, we consider an idealized case where the comparison class can be either a relatively specific (subordinate) or relatively general (superordinate) categorization (e.g., warm relative to days in Winter or relative to days of the year). 
@@ -589,45 +589,54 @@ We assume the prior distribution over the degree for the superordinate class is 
 Throughout, we assume the listener $L_1$ knows the target entity is of the subordinate class (e.g., knows that it's Winter; Eq. \ref{eq:L1a}})$, but that the speaker might have had a different comparison class in mind.
 
 
-
-
-```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
-
-height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+```{r stim_table, results="asis"}
+height_sub = c("(professional) gymnast, soccer player, basketball player")
 height_super = c("people")
-price_sub = c("dishwasher, oven, toaster")
+price_sub = c("bottle opener, toaster, dishwasher")
 price_super = c("kitchen appliances")
-temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
-temperature_super = c("days of the year in Maryland")
+temperature_sub = c("Winter, Fall, Summer (day in Maryland)")
+temperature_super = c("days in the year")
 time_sub = c("video of a cute animal, music video, movie")
 time_super = c("things you watch online")
-weight_sub = c("apple, grape, watermelon")
+weight_sub = c("grape, apple, watermelon")
 weight_super = c("produce")
 
-scales = c("Height", "Price", "Temperature", "Time", "Weight")
+scales = c("Height (tall, short)", 
+           "Price (expensive, cheap)", 
+           "Temperature (warm, cold)", 
+           "Time (long, short)", 
+           "Weight (heavy, light)")
 sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
 super = c(height_super, price_super, temperature_super, time_super, weight_super)
 
-table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
-table1 <- xtable(table1)
-print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
+table.1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
+colnames(table.1) <- c("Scale (adjectives)", "Subordinate classes", "Superordinate")
+
+print(xtable(table.1, 
+             caption = 
+                   "Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale", 
+             label = "tab:1"), type = "latex", include.rownames = FALSE, 
+      tabular.environment = "tabularx", 
+      width = "\\textwidth", 
+      floating.environment = "table*",
+      comment = F)
 ```
 
-\begin{table*}
-<!-- \captionsetup{width=0.98\textwidth} -->
-\centering
-\begin{tabular}{@{}lll@{}}
-\toprule
-Scale \{\emph{adjectives}\}                & Subordinate  classes                                       & Superordinate           \\ \midrule
-Height \{\emph{tall}, \emph{short}\}     & professional \{basketball player, soccer player, gymnast\} & people                  \\
-Price \{\emph{expensive}, \emph{cheap}\} & \{dishwasher, toaster, oven\}                              & kitchen appliances      \\
-Temperature \{\emph{warm}, \emph{cold}\} & \{Summer, Fall, Winter\} day in Maryland                   & days of the year        \\
-Time \{\emph{long}, \emph{short}\}       & \{movie, music video, video of a cute animal\}             & things you watch online \\
-Weight \{\emph{heavy}, \emph{light}\}    & \{watermelon, grape, apple\}                               & produce                 \\ \bottomrule
-\end{tabular}
-\caption{Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale.}
-\label{tab:1}
-\end{table*}
+<!-- \begin{table*} -->
+<!-- <!-- \captionsetup{width=0.98\textwidth} --> -->
+<!-- \centering -->
+<!-- \begin{tabular}{@{}lll@{}} -->
+<!-- \toprule -->
+<!-- Scale \{\emph{adjectives}\}                & Subordinate  classes                                       & Superordinate           \\ \midrule -->
+<!-- Height \{\emph{tall}, \emph{short}\}     & professional \{basketball player, soccer player, gymnast\} & people                  \\ -->
+<!-- Price \{\emph{expensive}, \emph{cheap}\} & \{dishwasher, toaster, oven\}                              & kitchen appliances      \\ -->
+<!-- Temperature \{\emph{warm}, \emph{cold}\} & \{Summer, Fall, Winter\} day in Maryland                   & days of the year        \\ -->
+<!-- Time \{\emph{long}, \emph{short}\}       & \{movie, music video, video of a cute animal\}             & things you watch online \\ -->
+<!-- Weight \{\emph{heavy}, \emph{light}\}    & \{watermelon, grape, apple\}                               & produce                 \\ \bottomrule -->
+<!-- \end{tabular} -->
+<!-- \caption{Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale.} -->
+<!-- \label{tab:1} -->
+<!-- \end{table*} -->
 
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
@@ -653,7 +662,7 @@ The RSA model makes quantitative predictions as well, though these depend on the
 
 ### Comparison class prior
 
-We posit that $P(c)$ reflects listeners' expectations about the likely completions of the (otherwise incomplete) adjective sentence (e.g., "It's warm relative to other $c$").
+$P(c)$ reflects listeners' expectations what classes are likely to be discussed.
 As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
@@ -991,8 +1000,6 @@ grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
   #               position = position_dodge(0.9), width = 0.3)
 ```
 
-
-
 # Behavioral experiments
 
 ## Method
@@ -1019,8 +1026,7 @@ In this experiment, we test the two qualitative predictions of our language mode
 <!--
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
-We recruited 264 participants from Amazon Mechanical Turk.
-2 participants were excluded for failing an attention check.
+We recruited 264 participants and 2 were excluded for failing an attention check.
 The experiment took about 5 minutes and participants were compensated $0.50 for their work.
 
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
@@ -1069,14 +1075,18 @@ rs.glmm.simple.summary <- summary(rs.glmm.simple)
 
 ```
 
+
+
+
+
+
 ### Results
 
-We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for all subsequent analyses.
-Figure \ref{fig:expt1results} (top) shows the proportion of participants choosing the superordinate paraphrase for each item.
-We see considerable variability both within- and across- scales.
-Within each scale, the predicted effects are visually apparent.
+We observe no systematic differences between participants' responses when the superordinate category was previously mentioned in the context and those when it was not; thus we collapse across these two conditions for subsequent analyses.
+Figure \ref{fig:expt1results} (top) shows the proportion of participants choosing the superordinate paraphrase for each item, revealing considerable variability both within- and across- scales.
+The predicted effects are visually apparent within each scale.
 
-Our predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
+Our predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables.
 In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[This was the maximal mixed-effects structure that converged.].
 Confirming our two qualitative model predictions, there was an interaction between form and strength 
 ($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
@@ -1085,12 +1095,11 @@ $z = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","z value"],2
 there was an overall preference for subordinate category paraphrases ($\beta = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Estimate"],2)`$;
 $SE = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Std. Error"],2)`;$
 $z = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","z value"],2)`$). 
-The main effects of form and strength were not significant.
+The effects of form and strength were not significant.
 
 Following up on this model, we examine the simple effects of strength for both positive and negative form adjectives.
-We find the predicted effects on superordinate paraphrase probability for items both on the low and high end of the scale. 
-For items on the low end of the scale (e.g., temperature on Winter days), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes (
-$\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Estimate"],2)`$;
+<!-- We find the predicted effects on superordinate paraphrase probability for items both on the low and high end of the scale.  -->
+For items on the low end of the scale (e.g., temperature on Winter days), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes ($\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Estimate"],2)`$;
 $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Std. Error"],2)`;$
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","z value"],2)`$), while the opposite is true for items on the high end of the scale (e.g., Summer days; 
 $\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Estimate"],2)`$;
@@ -1176,13 +1185,12 @@ In this experiment, we use a two-alternative forced choice paradigm to collect p
 
 ### Participants and procedure
 
-We recruited 100 participants from Amazon Mechanical Turk.
-5 participants were excluded due to failing the catch trial.
+We recruited 100 participants and 5 were excluded for failing an attention check.
 <!-- Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. -->
 On average, the experiment took 5 minutes and participants were compensated $0.50 for their work. 
 
 On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
-This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
+This was followed by a question asking if the participant would endorse the positive- or negative-form adjective explicitly relative to the superordinate category (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
 <!-- Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective. -->
 <!-- As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue. -->
 The experiment can be viewed at: 
@@ -1197,18 +1205,18 @@ We see that the endorsement of adjectival phrases in these domains is markedly m
 
 The full RSA model with uncertainty over the priors has a number of parameters. 
 The comparison class prior uses scaling parameter on the empirical frequency $\hat{f}$, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
-Each subordinate category prior uses standardized units (given by the superordinate Unit-Normal), and put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
+Each subordinate category prior uses standardized units (given by the superordinate Unit-Normal), and we put the same priors over the parameters of each subordinate Gaussian: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$.
 
-The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks (see Figure \ref{fig:modelDiagram} for visual overview of the full model).
+The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks.
 Expt. 1 uses the pragmatic listener $L_1$ model, which has one speaker optimality: $\alpha^\text{1}_{1}$.
 Expt. 2 uses the pragmatic speaker $S_2$ model, which has two speaker optimality parameters: 
 $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$
-We use the priors consistent with models of this class: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
+We use priors consistent with previous literature: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
 ## Results
 
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL [@dippl].
-To learn about the credible values of the parameters and the predictions of the model, we used an incrementalized version of MCMC [@Ritchie2016], collecting 2 independent chains of 50,000 iterations (removing the first 25,000 for burn-in).
+To learn about the credible values of the parameters and the predictions of the model, we used an incrementalized version of MCMC [@Ritchie2016], collecting 2 independent chains of 75,000 iterations (removing the first 25,000 for burn-in).
 
 <!--
 
@@ -1338,45 +1346,55 @@ a2.2.lower <- round(a2.2[["cred_lower"]],2)
 a2.2.upper <- round(a2.2[["cred_upper"]],2)
 ```
 
-The full model's posterior predictive distribution does an excellent job at capturing the variability in responses for Expt. 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Expt. 2: $r^2(`r expt2.n`) = `r expt2.r2`$ (Figure \ref{fig:posteriorPredictive_scatters}).
-The inferred values and shapes of the world knowledge used in these tasks is also consistent with intuition, as can be see in Figure \ref{fig:expt1results} (middle).
-The items judged *a priori* to be low the on scale (yellow) tend to be lower than those judged to be in the middle of the scale (orange) and high on the scale (red).
-
-\ndg{i don't think we need this:
-The most residual uncertainty is in the heights of "soccer players" and the duration of "cute animal videos".
-The former may be due to a discrepancy between participants' judgments in the comparison class task, where participants tended to say soccer players were either tall or short "relative to other people", suggesting the heights of soccer players and the heights of people in general are similar; in the adjective speaker task, there was a small tendency for participants to say soccer players would be tall (but not short) relative to other people.
-The uncertainty remanining in the duration of "cute animal videos" may be a result of our empirical corpus frequency $\hat{f}$ for the inferred comparison class prior (Figure \ref{fig:expt1results} bottom): "Cute animal videos" and "online videos", the relevant subordinate and superordinate categoires, were among the most *infrequent* ngrams in the corpus, and thus the relative measurement probably has more noise than other items.
-}
-
+The full model's posterior over the RSA and data-analytic parameters were consistent with results in prior literature and intuition.
 The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) interval for model parameters specific to the $L_1$ model used for Experiment 1 were $\alpha^{1}_{1} = `r a1.1.map` [`r a1.1.lower`, `r a1.1.upper`]$; $\beta = `r b.map` [`r b.lower`, `r b.upper`]$ 
 Model parameters specific to the $S_2$ model used for Experiment 2: $\alpha^{2}_{1} = `r a1.2.map` [`r a1.2.lower`, `r a1.2.upper`]$; $\alpha^{2}_{2} = `r a2.2.map` [`r a2.2.lower`, `r a2.2.upper`]$.
 
+The inferred values and shapes of the subordinate class knowledge used in these tasks is also consistent with intuition, as can be see in Figure \ref{fig:expt1results} (middle).
+The items judged *a priori* to be low the on scale (yellow) tend to be lower than those judged to be in the middle of the scale (orange) and high on the scale (red).
+
+Finally, the full model's posterior predictive distribution does an excellent job at capturing the variability in responses for Expt. 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Expt. 2: $r^2(`r expt2.n`) = `r expt2.r2`$ (Figure \ref{fig:posteriorPredictive_scatters}).
+
+<!-- \ndg{i don't think we need this: -->
+<!-- The most residual uncertainty is in the heights of "soccer players" and the duration of "cute animal videos". -->
+<!-- The former may be due to a discrepancy between participants' judgments in the comparison class task, where participants tended to say soccer players were either tall or short "relative to other people", suggesting the heights of soccer players and the heights of people in general are similar; in the adjective speaker task, there was a small tendency for participants to say soccer players would be tall (but not short) relative to other people. -->
+<!-- The uncertainty remanining in the duration of "cute animal videos" may be a result of our empirical corpus frequency $\hat{f}$ for the inferred comparison class prior (Figure \ref{fig:expt1results} bottom): "Cute animal videos" and "online videos", the relevant subordinate and superordinate categoires, were among the most *infrequent* ngrams in the corpus, and thus the relative measurement probably has more noise than other items. -->
+<!-- } -->
+
+
+
 # Discussion
 
-Vagueness in language (e.g., saying "It's warm outside") poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
+Speakers of a language are often vague (e.g., saying "It's warm outside").
+This poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
-We introduce a minimal extension of an adjective interpretation RSA model in order to flexibly reason about the likely comparison class.
-This model made two novel predictions: 
-(1) Listeners should prefer comparison classes that have relatively lower variance as they result in more specific meanings and 
-(2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance (subordinate) class.
-When the target entity is from a subordinate class with a mean towards the upper part of the scale (e.g., temperature during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold). 
-The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter).
-<!-- \ndg{don't need to reiterate the predictions in such agonizing detail. maybe just say there were two qualitative predictions and quantitative predictions and they all worked out?} -->
-Both of these predictions were borne out in our first experiment.
+We introduced a minimal extension to an adjective interpretation RSA model in order to flexibly reason about the likely comparison class.
+This model made two novel predictions about what comparison classes listeners should prioritize.
+It also made quantitative predictions about how background knowledge about the degree scale should translate into the probability with which a speaker will use a comparison class. 
+Both of the qualitative and the quantitative predictions from the model were borne our in our first experiment. 
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
+<!-- (1) Listeners should prefer comparison classes that have relatively lower variance as they result in more specific meanings and  -->
+<!-- (2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance (subordinate) class. -->
+<!-- When the target entity is from a subordinate class with a mean towards the upper part of the scale (e.g., temperature during Summer), a positive form adjective (e.g., warm) should lead listeners to infer a more general comparison class than a negative form adjective (e.g., cold).  -->
+<!-- The opposite is predicted to be true of entities towards the lower end of the scale (e.g., days in Winter). -->
+<!-- \ndg{don't need to reiterate the predictions in such agonizing detail. maybe just say there were two qualitative predictions and quantitative predictions and they all worked out?} -->
+<!-- Both of these predictions were borne out in our first experiment. -->
 
 The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian language model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
-In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-We extend this approach to ask related *natural language* questions across two experiments to be able to infer the parameters of the relevant prior knowledge.
+In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered estimation questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
+We extend this approach to ask related *natural language* questions across two experiments to infer the parameters of the relevant prior knowledge.
 The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
-It also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
-Modeling language use, which is itself productive, yields productivity in experiment design, which can be harnessed to reduce uncertainty in the necessary parameters of language model 
+The fully Bayesian language approach we pioneer here also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
+Language is productive. 
+Modeling language use thus yields productivity in experiment design, which can be harnessed to reduce uncertainty in the necessary parameters of language and cognitive models.
 
-In our modeling work, we had to specify a prior distribution over the two comparison class alternatives used in Expt. 1: $P(c)$.
-We posited that the adjective phrase "It's warm outside" is an incomplete sentence requiring a completion analagous to those investigated with noisy-channel models of production and comprehension [e.g., @Bergen2015].
-As a proxy for production or reference probabilities, we gathered empirical priors based on n-gram frequency from the Google WebGram corpus. 
-These probabilities likely conflate multiple cognitive sources such as basic level effects in categorization [@Rosch1975] and the hetereogeneity of different classes (e.g., the distribution over prices of kitchen appliances may be more hetereogenous than the distribution of heights for people).
+In our modeling work, we had to specify a prior distribution over the two comparison class alternatives $P(c)$, used in Expt. 1.
+There are at least two (non-mutually exclusive) ways of interpreting this prior distribution. 
+The prior may reflect basic level effects in categorization [@Rosch1975] or the hetereogeneity of the property within different classes.
+For instance, the distribution over prices for kitchen appliances may be more hetereogenous than the distribution of heights for people, making "kitchen appliances" a relatively poorer reference class for the price of a specific kitchen appliance than "people" is for the height of a specific person.
+Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analagous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
+If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
 Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
 <!--
@@ -1392,7 +1410,7 @@ Rather, objects are purchased in order to acquire their function, and different 
 
 The words we say are often too vague to have a single, precise meaning, and only make sense in context. 
 The context, however, can also be underspecified, leaving the listener in the dark about both the speaker's intended meaning and about the context through which the listener is to make sense of the conversation.
-Listeners, however, are able to jointly infer a lot from a little: The context and the meaning from a single utterance.
+This work suggests, however, that listeners are able to jointly infer a lot from a little: The meaning and the context from a single vague utterance.
     
 <!--
 \begin{enumerate}
