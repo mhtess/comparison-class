@@ -152,7 +152,7 @@ The RSA model makes quantitative predictions given fine-grained details of the r
 Background knowledge of this sort has previously been measured by having participants estimate quantities or give likelihood judgments directly [@FrankeEtAl2016].
 We pursue a different methodology.
 Because our model captures a productive fragment of natural language, it makes predictions about simpler linguistic tasks (based on the same background knowledge). 
-In Expt. 2 we collect judgements about sentences like "It is warm for a winter day," in which domain knowledge is needed but the comparison class is explicit.
+In Expt. 2 we collect judgements about sentences like "This [winter day] is cold relative to other days of the year," in which domain knowledge is needed but the comparison class is explicit.
 We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgements.
 <!--
 As part of our (Bayesian) data analysis model we put uncertainty over the parameters of the background knowledge being used in our task.
