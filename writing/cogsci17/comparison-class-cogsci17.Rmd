@@ -185,21 +185,20 @@ L_{0}(x \mid u, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P_{c}(x)}.
 \noindent This is a Rational Speech Act (RSA) model, a recursive Bayesian model where speaker $S$ and listener $L$ coordinate on an intended meaning [for a review, see @Goodman2016].
 In this framework, the pragmatic listener $L_1$ tries to resolve the state of the world $x$ (e.g., the temperature) from the utterance she heard $u$ (e.g., "it's warm").
 She imagines the utterance coming from an approximately rational Bayesian speaker $S_1$ trying to inform a naive listener $L_0$, who in turn updates her prior beliefs $P(x)$ via an utterance's literal meaning $[\![u]\!](x)$.
-@Lassiter2013 introduced into RSA uncertainty over a semantic variable, the truth-functional threshold $\theta$ (Eq. \ref{eq:L1}).
+@Lassiter2013 introduced into RSA uncertainty over a semantic variable: the truth-functional threshold $\theta$ (Eq. \ref{eq:L1}).
 The uncertainty over $\theta$ (e.g., the point at which something is *warm*) interacts with the prior distribution over possible states of the world $P_{c}(x)$ (e.g., possible temperatures) to resolve the meaning of the adjective in context.
-The prior distribution over world-states is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}).
-But where does such a comparison class come from?
+The prior distribution over world-states is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}) but where does such a comparison class come from?
 
-When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine the listener must infer the comparison class by thinking about what would best complete the sentence.
+When a listener hears only that "it's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine the listener must infer the comparison class by thinking about what would best complete the sentence.
 She does this using her world knowledge of what worlds are plausible given different comparison classes $P(x \mid c)$, what comparison classes are likely to be talked about $P(c)$, and what a rational speaker would say in given a world and comparison class $S_{1}(u \mid x, c, \theta)$ (Eq. \ref{eq:L1a}).
 <!--We elaborate the Rational Speech Act theory for adjective understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared --- the comparison class $c$ .-->
 As a first test of this idea, we consider an idealized case where the comparison class can be either a relatively specific (subordinate) or relatively general (superordinate) categorization (e.g., warm relative to days in Winter or relative to days of the year). 
-The listener is aware that the target entity is in the subordinate class (e.g., aware that it is winter) and draws likely values of the degree (e.g., temperature) from the subordinate class prior: $P(x \mid c_{sub})$. With these assumptions the model becomes:
+The listener is aware that the target entity is in the subordinate class (e.g., aware that it is winter) and draws likely values of the degree (e.g., temperature) from the subordinate class prior $P(x \mid c_{sub})$. With these assumptions, the model becomes:
 \vspace{-0.5cm}
 \begin{align}
 L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1a}\\
 S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c, \theta)})} \label{eq:S1a}\\
-L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0a}
+L_{0}(x \mid u, c, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(c) \label{eq:L0a}
 \end{align}
 \noindent We are interested in the behavior of the model with the underspecified utterance (e.g., "It's warm"), and we assume the speaker has two alternative utterances in which the comparison class is explicit (e.g., "It's warm relative to other days in Winter." and "It's warm relative to other days of the year.").
 <!--For simplicity of the model, we assume each utterance has equal cost.-->
@@ -214,15 +213,13 @@ As a proxy for comparison class usage frequency, we use empirical frequency $\ha
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
 Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
-], and scale it by a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
+], and scale it by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
 
 ### Degree priors (world knowledge)
 
 Only the relative values for $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ affect model predictions.
-Hence we fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \text{Gaussian}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
+Hence we fix each superordinate distribution to be a standard normal distribution $P(x \mid c_{super}) = \mathcal{N}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
 We will eventually infer the parameters of the subordinate priors from experimental data.
-
-
 
 ```{r wpplHelpers}
 webpplHelpers <- '
@@ -441,7 +438,6 @@ all.priors <- bind_rows(
  
 ```
 
-
 ```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
@@ -638,8 +634,8 @@ print(xtable(table.1,
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
-For purposes of illustration, assume for the moment that each class is equally likely *a priori*: $P(c){=}0.5$.
-Figure \ref{fig:modelSchematics}, left, illustrates superordinate and possibel subordinate priors; e.g. temperatures over the whole year, in Winter (low), Fall (medium), and Summer (high), in a part of the world that exhibits seasons (e.g., Maryland, USA).
+For purposes of illustration, assume for the moment that each class is equally likely *a priori*: $P(c) = 0.5$.
+Figure \ref{fig:modelSchematics}, left, illustrates superordinate and possible subordinate priors; e.g. temperatures over the whole year, in Winter (low), Fall (medium), and Summer (high), in a part of the world that exhibits seasons (e.g., Maryland, USA).
 We see that regardless of the adjective polarity (e.g. warm vs. cold) or the mean of the subordinate prior (low, medium, high), the pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
 <!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
 We also see that during Winter, when the pragmatic listener hears "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hears it's cold (Figure \ref{fig:modelSchematics}, right, left-most bars).
