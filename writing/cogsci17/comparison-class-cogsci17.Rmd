@@ -20,11 +20,11 @@ author-information: >
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
 abstract:
-    "Speakers often only implicitly refer to a context when using vague language.
+    "Speakers often refer only implicitly to context when using language.
     *It's warm outside* could mean it's warm relative to other days of the year, or just relative to the current season (e.g., it's warm for winter).
-    *Warm* vaguely conveys that the temperature is high relative to some *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
+    *Warm* vaguely conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
     Here, we propose that the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and listeners' internal models of speech production.
-    We introduce a Rational Speech Act model and derive two novel predictions from the model, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
+    We introduce a Rational Speech Act model and derive two novel predictions from it, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
     Our model makes quantitative predictions given prior world knowledge for the domains in question.
     We triangulate this knowledge by a second language task in the same domains, using Bayesian data analysis to infer priors from both data sets.
     "
@@ -447,8 +447,6 @@ all.priors <- bind_rows(
 ) %>% mutate(cat = factor(cat, levels = c("super", "low", "medium", "high")))
  
 ```
-
-
 
 
 ```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
