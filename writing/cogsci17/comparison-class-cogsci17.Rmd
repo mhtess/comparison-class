@@ -25,12 +25,12 @@ abstract:
     *Warm* vaguely conveys that the temperature is high relative to some *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
     Here, we propose the resolution of a comparison class in context is a pragmatic inference driven by world knowledge and listeners' internal models of speech production.
     We introduce a Rational Speech Act model and derive two novel predictions from the model, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
-    We generate quantitative model predictions by incorporating our model into Bayesian data analytic framework, and infer the likely priors by collecting further language understanding data in the same domains. 
-    This represents a new possibility for Bayesian models of cognition and language: by building more complete and coherent models of language, additional parameters can be estimated reliably by asking the model to say different things using the same domain knowledge.
+    Our model makes quantitative predictions given prior world knowledge for the domains in question.
+    We trianguate this knowledge by a second language task in the same domains, using Bayesian data analysis to infer priors from both data sets.
     "
 
 keywords:
-    "comparison class; pragmatics; Bayesian cognitive model; Bayesian data analysis"
+    "comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis"
 
 output: cogsci2016::cogsci_paper
 ---
@@ -108,7 +108,7 @@ If it's 75\degree F (24\degree C) outside, you could say "it's warm".
 But if it's 60\degree F (16\degree C), you might not consider it warm.
 Unless it's January; it could be warm for January.
 *Warm* is relative, and its felicitous application depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
-Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction of context is critical, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
+Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction from context is critical, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
 The problem for listeners is that the comparison class often goes unsaid (e.g., in "it's warm outside").
 
 <!--
@@ -139,21 +139,26 @@ We propose that listeners actively combine category knowledge with knowledge abo
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
 We introduce a minimal extension to the Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013] to allow it to flexibly reason about the likely comparison class.
 
-From this model, we derive two novel predictions.
+From this model, we derive two novel qualitative predictions.
 For illustration, consider the weather. 
 In Winter, the *positive* adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
 The opposite should be true in Summer, where *negative* forms should be more likely to signal the specific class (i.e., cold for Summer). 
 This is driven by the *a priori* probability that the adjective could apply to the specific class e.g., the chance that it's warm in Winter (Prediction 1).
 In addition, regardless of the season, a listener should prefer "it's warm" to be relative to the current season, a more specific reference class. 
 All else being equal, classes that are more specific will have relatively lower variance, which gives a vague utterance a more specific meaning (Prediction 2). 
-We test these predictions in an experiment designed to elicit the comparison class (Expt. 1).
+We test these predictions in an experiment designed to elicit the comparison class using a paraphrase dependent measure (Expt. 1).
 
-The RSA model makes quantitativs predictions contingent upon the fine-grained details of the relevant prior knowledge.
-This background knowledge can often be measured by having participants estimate quantities or give likelihood judgments in the same contexts without experimental manipulation [@FrankeEtAl2016].
+The RSA model makes quantitative predictions given fine-grained details of the relevant prior knowledge: the distribution of temperatures for days in winter, in the whole year, and so on.
+Background knowledge of this sort has previously been measured by having participants estimate quantities or give likelihood judgments directly [@FrankeEtAl2016].
 We pursue a different methodology.
-We explicitly put uncertainty over the parameters of the background knowledge being used in our task.
+Because our model captures a productive fragment of natural language, it makes predictions about simpler linguistic tasks (based on the same background knowledge). 
+In Expt. 2 we collect judgements about sentences like "It is warm for a winter day," in which domain knowledge is needed but the comparison class is explicit.
+We then use a Bayesian data analysis model to infer the parameters of the background knowledge from linguistic judgements.
+<!--
+As part of our (Bayesian) data analysis model we put uncertainty over the parameters of the background knowledge being used in our task.
 This strategy has the virtue of avoiding asking participants numerical estimation questions, but it introduces a lot of uncertainty into the model.
 We can reuse the RSA model to predict simple natural language data in the same domains (e.g., is it warm in Winter? Expt. 2), allowing us to estimate the model parameters reliably.
+-->
 By harnessing the productive nature of language into experiment design, we are able to learn jointly about interlocutors' latent knowledge and language use.
 
 
