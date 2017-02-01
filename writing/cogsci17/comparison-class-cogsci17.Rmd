@@ -111,9 +111,10 @@ The predicate "warm" is vague in the sense that there are borderline cases of be
 <!--\ndg{opening line doesn't make much sense. start with a vague utterance, point out that whether it's true and/or its interpretation depends on comparison class.}-->
 <!--A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.-->
 
-The existence of reference classes in the study of vague language is uncontroversial [@Solt2009; @Bale2011]. 
+The existence of reference classes for understanding vague language is uncontroversial. 
 4 year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; the comparison class here is other pimwits, because children's judgments are unaffected by the heights of creatures that aren't pimwits [@Barner2008].
 Adult judgments of the felicity for adjectives like "dark" or "tall" similarly depend upon fine-grained details of the statistics of the comparison class [@Schmidt2009; @Solt2012; @Qing2014].
+Theoretical work in semantics has focused on how information from a comparison class is used and what representations might be preferred [@Solt2009; @Bale2011].
 
 <!--
 Even 4 year-olds understand that what counts as "tall" or "short" depends upon the comparison class. 
@@ -123,11 +124,11 @@ an object can be "big" relative to the size it should be for completing its inte
 or an object can just be "big" [i.e., big relative to an implicit comparison class; @Ebeling1994]. 
 -->
 
-Less well understood, however, is how a comparison class becomes contextually salient. 
+It is not well understood, however, how a comparison class becomes contextually salient. 
 Any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
 A day in January is also a day of the year; if it's warm, it could be *warm for Winter* or *warm relative to the year*. 
 <!--If someone tells you it's warm outside, that could mean it's just warm (i.e., *warm relative to the other days of the year*) or it could mean it's warm for this time of year (e.g., *warm for Winter*).-->
-We propose that listeners actively combine category knowledge with knowledge about what classes are likely to be talked about to infer the reference class being used by the speaker.
+We propose that listeners actively combine category knowledge with knowledge about what classes are likely to be talked about to infer the implicit reference class used by the speaker.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
 We introduce a minimal extension to the Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013] to allow it to flexibly reason about the likely comparison class.
 
@@ -136,8 +137,8 @@ For illustration, consider the weather.
 In Winter, the *positive* adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
 The opposite should be true in Summer, where *negative* forms should be more likely to signal the specific class (i.e., cold for Summer). 
 This is driven by the *a priori* probability that the adjective could apply to the specific class e.g., the chance that it's warm in Winter (Prediction 1).
-In addition, regardless of the season, a listener should prefer "it's warm" to be relative to the current season, a more specific reference class. 
-All else being equal, classes that are more specific will have relatively lower variance, which gives a vague utterance a more specific meaning (Prediction 2). 
+In addition, regardless of the season, a listener should prefer "warm" or "cold" to be relative to the current season, a more specific reference class. 
+All else being equal, classes that are more specific will have relatively lower variance, which results in a more specific meaning for a vague utterance (Prediction 2). 
 We test these predictions in an experiment designed to elicit the comparison class using a paraphrase dependent measure (Expt. 1).
 
 The RSA model makes quantitative predictions given fine-grained details of the relevant prior knowledge: the distribution of temperatures for days in winter, in the whole year, and so on.
