@@ -100,7 +100,7 @@ If it's 75\degree F (24\degree C) outside, you could say "it's warm".
 But if it's 60\degree F (16\degree C), you might not consider it warm.
 Unless it's January; it could be warm for January.
 *Warm* is relative, and its felicitous application depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
-Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction from context is critical, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
+Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction from context is critical, including vague quantifiers [e.g., "He ate a lot of burgers [*for an American / vegetarian*]."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly [*in comparison to other pets / animals that hunt*]"; @Tessler2016].
 The problem for listeners is that the comparison class often goes unsaid (e.g., in "it's warm outside").
 
 <!--
@@ -112,7 +112,7 @@ The predicate "warm" is vague in the sense that there are borderline cases of be
 <!--A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.-->
 
 The existence of reference classes for understanding vague language is uncontroversial. 
-4 year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; the comparison class here is other pimwits, because children's judgments are unaffected by the heights of creatures that aren't pimwits [@Barner2008].
+4-year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; the comparison class here is other pimwits, because children's judgments are unaffected by the heights of creatures that aren't pimwits [@Barner2008].
 Adult judgments of the felicity for adjectives like "dark" or "tall" similarly depend upon fine-grained details of the statistics of the comparison class [@Schmidt2009; @Solt2012; @Qing2014].
 Theoretical work in semantics has focused on how information from a comparison class is used and what representations might be preferred [@Solt2009; @Bale2011].
 
@@ -141,7 +141,7 @@ In addition, regardless of the season, a listener should prefer "warm" or "cold"
 All else being equal, classes that are more specific will have relatively lower variance, which results in a more specific meaning for a vague utterance (Prediction 2). 
 We test these predictions in an experiment designed to elicit the comparison class using a paraphrase dependent measure (Expt. 1).
 
-The RSA model makes quantitative predictions given fine-grained details of the relevant prior knowledge: the distribution of temperatures for days in winter, in the whole year, and so on.
+The RSA model makes quantitative predictions given fine-grained details of the relevant prior knowledge: the distribution of temperatures for days in winter, days in the whole year, and so on.
 Background knowledge of this sort has previously been measured by having participants estimate quantities or give likelihood judgments directly [@FrankeEtAl2016].
 We pursue a different methodology.
 Because our model captures a productive fragment of natural language, it makes predictions about simpler linguistic tasks (based on the same background knowledge). 
@@ -198,7 +198,7 @@ The listener is aware that the target entity is in the subordinate class (e.g., 
 \begin{align}
 L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1a}\\
 S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c, \theta)})} \label{eq:S1a}\\
-L_{0}(x \mid u, c, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(c) \label{eq:L0a}
+L_{0}(x \mid u, c, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \label{eq:L0a}
 \end{align}
 \noindent We are interested in the behavior of the model with the underspecified utterance (e.g., "It's warm"), and we assume the speaker has two alternative utterances in which the comparison class is explicit (e.g., "It's warm relative to other days in Winter." and "It's warm relative to other days of the year.").
 <!--For simplicity of the model, we assume each utterance has equal cost.-->
@@ -212,7 +212,7 @@ $P(c)$ reflects listeners' expectations what classes are likely to be discussed.
 As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
-Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
+Due to the idiosyncracies of our categories and potential polysemy in some of the words (Table 1), we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
 ], and scale it by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
 
 ### Degree priors (world knowledge)
@@ -635,10 +635,10 @@ print(xtable(table.1,
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
 For purposes of illustration, assume for the moment that each class is equally likely *a priori*: $P(c) = 0.5$.
-Figure \ref{fig:modelSchematics}, left, illustrates superordinate and possible subordinate priors; e.g. temperatures over the whole year, in Winter (low), Fall (medium), and Summer (high), in a part of the world that exhibits seasons (e.g., Maryland, USA).
+Figure \ref{fig:modelSchematics} (left) illustrates superordinate and possible subordinate priors; e.g. temperatures over the whole year, in Winter (low), Fall (medium), and Summer (high), in a part of the world that exhibits seasons (e.g., Maryland, USA).
 We see that regardless of the adjective polarity (e.g. warm vs. cold) or the mean of the subordinate prior (low, medium, high), the pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
 <!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
-We also see that during Winter, when the pragmatic listener hears "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hears it's cold (Figure \ref{fig:modelSchematics}, right, left-most bars).
+We also see that during Winter, when the pragmatic listener hears "it's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hears "it's cold" (Figure \ref{fig:modelSchematics}, right, left-most bars).
 The opposite is true in Summer.
 <!--A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.-->
 In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the superordinate category (which depends on it's polarity).
