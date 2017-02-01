@@ -999,7 +999,7 @@ Participants were recruited from Amazon's Mechanical Turk and were restricted to
 ### Materials
 
 We used positive- and negative-form gradable adjectives describing five scales (Table \ref{tab:1}).
-Each scale was paired with a superordinate category, and for each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in the Model Predictions section).
+Each scale was paired with a superordinate category, and for each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Figure \ref{fig:modelSchematics}).
 This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}).
 Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
 Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
@@ -1007,7 +1007,7 @@ Participants never judged the same subordinate category for both adjective forms
 
 ## Experiment 1: Comparison class inference
 
-In this experiment, we test the two qualitative predictions of our language model (described in \textbf{Model Predictions}).
+In this experiment, we gather human judgements of comparison classes in ambiguous contexts, testing the two predictions described in \textbf{Qualitative Model Predictions}.
 
 ### Participants and procedure
 
