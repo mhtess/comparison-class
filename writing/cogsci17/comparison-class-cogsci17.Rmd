@@ -10,7 +10,8 @@ header-includes:
   - \usepackage{gensymb}
   - \usepackage{tikz}
   - \usepackage{caption}
-  #- \usepackage{stfloats}
+  # - \usepackage{stfloats}
+  - \usepackage{booktabs}
 
 author-information: >
   \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu) \and {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
@@ -152,7 +153,7 @@ This background knowledge can often be measured by having participants estimate 
 We pursue a different methodology.
 We explicitly put uncertainty over the parameters of the background knowledge being used in our task.
 This strategy has the virtue of avoiding asking participants numerical estimation questions, but it introduces a lot of uncertainty into the model.
-We can reuse the RSA model to predict simple natural language data in the same domains (e.g., is it warm in Winter? Expt. 2), allowing us to reliably estimate the model parameters.
+We can reuse the RSA model to predict simple natural language data in the same domains (e.g., is it warm in Winter? Expt. 2), allowing us to estimate the model parameters reliably.
 By harnessing the productive nature of language into experiment design, we are able to learn jointly about interlocutors' latent knowledge and language use.
 
 
@@ -584,9 +585,49 @@ vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
 As a first test of this pragmatic theory, we consider a simple case:
 The comparison class is either a subordinate level category (e.g., days in Winter) or a superordinate level category (e.g., days of the year).
 For purposes of illustration, we assume for now each class is equally likely *a priori*: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$ (this assumption will be relaxed in the next section).
-We assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean for the prior of the subordinate class.
-Throughout, we assume the listener $L_1$ knows the target entity is of the subordinate class (e.g., knows that it's Winter): $P(x \mid c_{sub})$, but that the speaker might have had a different comparison class in mind.
+We assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x \mid c_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean for the prior of the subordinate class.
+Throughout, we assume the listener $L_1$ knows the target entity is of the subordinate class (e.g., knows that it's Winter; Eq. \ref{eq:L1a}})$, but that the speaker might have had a different comparison class in mind.
 
+
+
+
+```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
+
+height_sub = c("professional basketball player, professional gymnast, professional soccer player")
+height_super = c("people")
+price_sub = c("dishwasher, oven, toaster")
+price_super = c("kitchen appliances")
+temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
+temperature_super = c("days of the year in Maryland")
+time_sub = c("video of a cute animal, music video, movie")
+time_super = c("things you watch online")
+weight_sub = c("apple, grape, watermelon")
+weight_super = c("produce")
+
+scales = c("Height", "Price", "Temperature", "Time", "Weight")
+sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
+super = c(height_super, price_super, temperature_super, time_super, weight_super)
+
+table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
+table1 <- xtable(table1)
+print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
+```
+
+\begin{table*}
+<!-- \captionsetup{width=0.98\textwidth} -->
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Scale \{\emph{adjectives}\}                & Subordinate  classes                                       & Superordinate           \\ \midrule
+Height \{\emph{tall}, \emph{short}\}     & professional \{basketball player, soccer player, gymnast\} & people                  \\
+Price \{\emph{expensive}, \emph{cheap}\} & \{dishwasher, toaster, oven\}                              & kitchen appliances      \\
+Temperature \{\emph{warm}, \emph{cold}\} & \{Summer, Fall, Winter\} day in Maryland                   & days of the year        \\
+Time \{\emph{long}, \emph{short}\}       & \{movie, music video, video of a cute animal\}             & things you watch online \\
+Weight \{\emph{heavy}, \emph{light}\}    & \{watermelon, grape, apple\}                               & produce                 \\ \bottomrule
+\end{tabular}
+\caption{Items used in experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale.}
+\label{tab:1}
+\end{table*}
 
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
@@ -622,80 +663,44 @@ Due to the idiosyncracies of our items and potential polysemy in some of words, 
 ### Degree priors (world knowledge)
 
 $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ represent listeners' beliefs about the likely values of a degree (e.g., temperature) within a subordinate or superordinate class.
-This kind of world knowledge can be measured by having participants estimate relevant quantities without experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016].
-In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year).
+<!-- This kind of world knowledge can be measured by having participants estimate relevant quantities without experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016]. -->
+<!-- In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year). -->
 Since the comparison class inference task we've described uses just two-alternatives, the numerical scale of the degree priors is irrelevant.
 All that matters is the relationship between the subordinate and superordinate priors.
+We fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \text{Gaussian}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
 
-We fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions; the subordinate priors thus have standardized units. 
-We put priors over the mean $\mu$ and variance $\sigma$ of each subordinate Gaussian. 
+<!-- We put priors over the mean $\mu$ and variance $\sigma$ of each subordinate category Gaussian.  -->
 
 
 ## Reducing uncertainty with productive language use
 
 We've articulated a Bayesian treatment of the relevant prior knowledge for comparison class inference.
-This by itself, however, is not sufficient to fill in the probabilistic knowledge that the RSA model relies upon; the full model (RSA + Bayesian data analysis of the priors) has too many parameters to estimate reliably using only the data from a single comparison class experiment 
-Even if they could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
-This need not hold us back though. 
+This by itself, however, is not sufficient to fill in the probabilistic knowledge that the RSA model relies upon; putting uncertainty over the parameters of the prior knowledge in RSA would result in too many parameters to estimate reliably using the data from a single comparison class experiment.
+Even if the parameters could be estimated, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
+This need not hold us back though.
 The RSA model is a productive language model: We can have it predict related language data to gain more traction on the latent world knowledge.
 
-We choose an experiment that uses the same domain knowledge as used in a comparison class inference (Expt. 1) in order restrict the number of parameters in the model.
+We choose an experiment that uses the same domain knowledge as used in the comparison class inference (Expt. 1; Table \ref{tab:1}) in order to limit the number of parameters in the model.
 In addition to helping us gain traction on participants' prior knowledge, a second experiment can provide a further test for the RSA model. 
 Thus, we design an experiment where participants are asked to use both subordinate and superordinate category knowledge about the degree, while avoiding asking them to estimate quantities. 
+In particular, we ask them to judge whether or not an adjective would be true (explicitly, relative to the superordinate category) of a subordinate member (e.g., is it warm in Winter?).
 We re-use the vague adjective interpretation part of the RSA model to predict participants' endorsements of adjectives.
+
+
 
 We add a level of recursion to the RSA model and use a pragmatic speaker to model adjective endorsement [Expt. 2; following @Qing2014a; @Tessler2016; @Tessler2016cogsci].
 For this task, we remove comparison class uncertainty from the model, since the experiment makes use of explicit comparison classes.
-<!---->
+\vspace{-0.5cm}
 \begin{align}
 S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot \ln{L_1(x, \theta \mid u, c_{super})})} \label{eq:S2} \\
 L_{1}(x, \theta \mid u, c_{super}) &\propto S_{1}(u \mid x, c_{super}, \theta) \cdot P(x \mid c_{sub}) \cdot P(\theta) \label{eq:L1b}
 \end{align}
 <!---->
 \mht{In this model, I use a KL-speaker (rather than the usual factor based on the true state of the world speaker). is that math different?}
-
-We can then use data from both experiments to simulatenously reconstruct the prior knowledge used in the tasks and generate predictions for the two data sets.
+We can then use data from both experiments to simulatenously reconstruct the prior knowledge used in both tasks and generate predictions for the two data sets.
 <!-- The pragmatic listener model in Eq. \ref{eq:L1a} is a model of comparison class inference (Expt. 1). -->
 <!-- We use Eq. \ref{eq:L1a} to model the comparison class inference task (Expt. 1). -->
 
-```{r stim_table, echo = F, eval =F, results = "asis", fig.env = "table*", fig.pos = "b", fig.width = 4, fig.height = 2, fig.align = "center", set.cap.width = T, num.cols.cap = 2, fig.cap = "This image spans both columns. And the caption text is limited to 0.8 of the width of the document."}
-
-height_sub = c("professional basketball player, professional gymnast, professional soccer player")
-height_super = c("people")
-price_sub = c("dishwasher, oven, toaster")
-price_super = c("kitchen appliances")
-temperature_sub = c("Fall in Maryland, Summer in Maryland, Winter in Maryland")
-temperature_super = c("days of the year in Maryland")
-time_sub = c("video of a cute animal, music video, movie")
-time_super = c("things you watch online")
-weight_sub = c("apple, grape, watermelon")
-weight_super = c("produce")
-
-scales = c("Height", "Price", "Temperature", "Time", "Weight")
-sub = c(height_sub, price_sub, temperature_sub, time_sub, weight_sub)
-super = c(height_super, price_super, temperature_super, time_super, weight_super)
-
-table1 = data.frame(Scale = scales, Subordinate = sub, Superordinate = super)
-table1 <- xtable(table1)
-print(table1, type = "latex", include.rownames = FALSE, tabular.environment = "tabularx", width = "\\textwidth", floating.environment = "table*")
-```
-
-\begin{table*}
-\centering
-\begin{tabular}{lll}
-  \hline
-Scale \{\emph{adjectives}\}& Subordinate & Superordinate \\
-  \hline
-Height \{\emph{tall}, \emph{short}\} & professional \{basketball player, soccer player, gymnast\} & people \\
-  Price \{\emph{expensive}, \emph{cheap}\}& \{dishwasher, toaster, oven\} & kitchen appliances \\
-  Temperature \{\emph{warm}, \emph{cold}\}& \{Summer, Fall, Winter\} day in Maryland & days of the year \\
-  Time \{\emph{long}, \emph{short}\}& \{movie, music video, video of a cute animal\}  & things you watch online \\
-  Weight \{\emph{heavy}, \emph{light}\}& \{watermelon, grape, apple\}  & produce \\
-   \hline
-\end{tabular}
-\caption{Items used in experiments}
-\label{tab:1}
-\end{table*}
 
 
 
@@ -984,41 +989,39 @@ grid.arrange(fig2a, fig2b,fig2c, nrow = 3, heights = c(2,1,2))
   # geom_errorbar(data = subset(df.prior.combined, data_source == "expt1"), 
   #               aes(ymin = ci_lower, ymax = ci_upper),
   #               position = position_dodge(0.9), width = 0.3)
-
-
 ```
 
 
 
+# Behavioral experiments
+
+## Method
+
+The materials and much of the design of the two experiments are the same and were preregistered:
+\url{https://osf.io/hzdtj/}.
+Participants were recruited from Amazon's Mechanical Turk and were restricted to those with U.S. IP addresses with at least a 95% work approval rating.
+
+### Materials
+
+We used positive- and negative-form gradable adjectives describing five scales (Table \ref{tab:1}).
+Each scale was paired with a superordinate category, and for each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in the Model Predictions section).
+This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}).
+Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
+Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
 
 
+## Experiment 1: Comparison class inference
 
-# Experiment 1: Comparison class inference
+In this experiment, we test the two qualitative predictions of our language model (described in \textbf{Model Predictions}).
 
-In this experiment, we test the two predictions of our language model (outlined above).
-The model and methods were preregistered: \url{https://osf.io/hzdtj/}.
-
-## Methods
-
-### Participants
+### Participants and procedure
 
 <!--
 Note: We are collecting N = 150 for each experiment. Because each participant reads have of the prompts, we expect about n = 75 per item. Simulations reveal that with n = 75, a 95% CI will have maximum width of about 0.2 - 0.25. Note that maximum width occurs when true probability is 0.5.
 -->
-
 We recruited 264 participants from Amazon Mechanical Turk.
 2 participants were excluded for failing an attention check.
-Participation was restricted to those with U.S. IP addresses with at least a 95% work approval rating.
 The experiment took about 5 minutes and participants were compensated $0.50 for their work.
-
-
-### Materials
-
-We tested our hypothesis using positive- and negative-form gradable adjectives describing five scales (Table \ref{tab:1}).
-Each scale was paired with a superordinate category, and for each superordinate category, we used three subordinate categories that aimed to be situated near the high-end, low-end, and intermediate part of the degree scale (as in Model Predictions section).
-This resulted in 30 unique events (\{3 subordinate categories\} x \{5 scales\} x \{2 adjective forms\}).
-
-### Procedure
 
 On each trial, participants were given a context sentence to introduce the subordinate category (e.g., *Tanya lives in Maryland and steps outside in Winter.*).
 This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., *Tanya says to her friend, "It's warm."*).
@@ -1029,14 +1032,11 @@ Participants were asked "What do you think Tanya meant?" and given a two-alterna
 \end{itemize}
 
 <!--\item \{She / He / It\} is \textsc{adjective} relative to other \textsc{superordinates} (e.g., \emph{It's warm relative to other days of the year})-->
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-Participants never judged the same subordinate category for both adjective forms (e.g., cold and warm Winter days) and back-to-back trials involved different scales to avoid fatigue.
-In addition to all of the above design parameters, half of our participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
 
+In addition to all of the above design parameters, half of our participants completed trials where an additional sentence introduced the superordinate category at the beginning (e.g., *Tanya lives in Maryland and checks the weather every day.*), with the intention of making the superordinate paraphrase more likely.
 The experiment can be viewed at:
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/class-elicitation-2afc.html}
 
-## Results
 
 ```{r mixed_model, cache = T}
 d.centered = d.tidy %>%
@@ -1069,38 +1069,42 @@ rs.glmm.simple.summary <- summary(rs.glmm.simple)
 
 ```
 
+### Results
+
 We observe no systematic differences between participants' responses when the superordinate category was explicitly mentioned previously in the context and those when it was not; thus we collapse across these two conditions for all subsequent analyses.
 Figure \ref{fig:expt1results} (top) shows the proportion of participants choosing the superordinate paraphrase for each item.
 We see considerable variability both within- and across- scales.
-Within each scale, the predicted interaction is visually apparent: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (e.g., a basketball player is *tall* relative to other people, but *short* relative to other basketball players).
-For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals).
+Within each scale, the predicted effects are visually apparent.
 
-This is confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
-In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[
-This was the maximal mixed-effects structure that converged.
-].
-Confirming our two qualitative model predictions, there was an overall preference for subordinate category paraphrases ($\beta = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Estimate"],2)`$;
-$SE = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Std. Error"],2)`;$
-$z = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","z value"],2)`$) and there was an interaction between form and strength 
+Our predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of the relative position on the scale of the sub-category (i.e., sub-category item expected to be low or high), and of critical theoretical interest, the interaction between these two variables
+In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[This was the maximal mixed-effects structure that converged.].
+Confirming our two qualitative model predictions, there was an interaction between form and strength 
 ($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
 $SE = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Std. Error"],2)`;$
-$z = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","z value"],2)`$).
+$z = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","z value"],2)`$) and
+there was an overall preference for subordinate category paraphrases ($\beta = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Estimate"],2)`$;
+$SE = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","Std. Error"],2)`;$
+$z = `r round(rs.glmm.summary[["coefficients"]]["(Intercept)","z value"],2)`$). 
 The main effects of form and strength were not significant.
 
 Following up on this model, we examine the simple effects of strength for both positive and negative form adjectives.
 We find the predicted effects on superordinate paraphrase probability for items both on the low and high end of the scale. 
-For items on the low end of the scale (e.g., Winter days on temperature), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes (
+For items on the low end of the scale (e.g., temperature on Winter days), positive form adjectives are significantly more likely to lead *away* from superordinate comparison classes (
 $\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Estimate"],2)`$;
 $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","Std. Error"],2)`;$
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength0:formpositive","z value"],2)`$), while the opposite is true for items on the high end of the scale (e.g., Summer days; 
 $\beta = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Estimate"],2)`$;
 $SE = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","Std. Error"],2)`;$
 $z = `r round(rs.glmm.simple.summary[["coefficients"]]["strength1:formpositive","z value"],2)`$).
-All of these effects are also visually apparent in Figure \ref{fig:expt1results} (top).
 
-\ndg{this section can be tightened up a bunch?}
 
-# Experiment 2: Adjective endorsement
+<!-- 
+: For items that are expected to fall high on the scale (basketball players, watermelons, Summer days, dishwashers, movies), positive form adjectives tend to elicit superordinate comparison classes while negative form adjectives tend to elicit subordinate comparison classes (e.g., a basketball player is *tall* relative to other people, but *short* relative to other basketball players). -->
+<!-- For items that are expected to fall low on the scale (gymnasts, grapes, Winter days, bottle openers, videos of cute animals), the opposite effect is observed (i.e., a video of a cute animal is *short* relative to other things you watch online, but *long* relative to other videos of cute animals). 
+-->
+<!-- \ndg{this section can be tightened up a bunch?} -->
+
+## Experiment 2: Adjective endorsement
 
 
 
@@ -1170,30 +1174,26 @@ All of these effects are also visually apparent in Figure \ref{fig:expt1results}
 
 In this experiment, we use a two-alternative forced choice paradigm to collect participants' adjective endorsements using knowledge that would be relevant for Expt. 1.
 
-## Participants
+### Participants and procedure
 
 We recruited 100 participants from Amazon Mechanical Turk.
 5 participants were excluded due to failing the catch trial.
-Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating.
+<!-- Participation was restricted to those with U.S. IP addresses and who had at least a 95% work approval rating. -->
 On average, the experiment took 5 minutes and participants were compensated $0.50 for their work. 
 
-## Materials and procedure
-
-Materials were the same as Expt. 1 (Table \ref{tab:1}).
 On each trial, participants were given a sentence introducing the subordinate category (e.g., *Alicia lives in Maryland and steps outside in Winter.*).
 This was followed by a target sentence, which predicated a positive- or negative-form adjective over the superordinate category of the item (e.g., *Do you think the day in Winter would be warm relative to other days of the year?*).
-Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective.
-As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue.
+<!-- Each participant saw 15 trials: one for each subordinate category paired with either the positive or negative form of its corresponding adjective. -->
+<!-- As in Expt. 1, participants never rated the same subordinate category for both adjective forms and back-to-back trials involved different scales to avoid fatigue. -->
 The experiment can be viewed at: 
 \url{http://stanford.edu/~mtessler/comparison-class/experiments/vague-prior-elicitation-2afc.html}
 
-## Results
+### Results
 
-The results of this experiment were as expected and can be seen roughly in Figure \ref{fig:posteriorPredictive_scatters} (right, y-axis). 
-We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task.
+The results of this experiment were as expected and can be seen roughly in Figure \ref{fig:posteriorPredictive_scatters} (left, y-axis). 
+We see that the endorsement of adjectival phrases in these domains is markedly more categorical than the comparison class inference task (compare vertical spread of left and middle facets).
 
-
-# Bayesian data analysis
+# Full model analysis and results
 
 The full RSA model with uncertainty over the priors has a number of parameters. 
 The comparison class prior uses scaling parameter on the empirical frequency $\hat{f}$, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
@@ -1213,7 +1213,7 @@ To learn about the credible values of the parameters and the predictions of the 
 <!--
 
 -->
-```{r}
+```{r cache = T}
 
 md.pp <- left_join(
   bind_rows(vs.bayes %>% 
