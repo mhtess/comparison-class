@@ -182,7 +182,7 @@ When heard in Winter, "It's warm" might mean it's 50 degrees; in Summer, maybe 8
 # Understanding comparison classes
 
 Adjectives like *warm* and *cold* are vague descriptions of an underlying quantitative scale (e.g., temperature).
-The vagueness and context-sensitivity of these adjectival utterances $u$ can be modeled using a threshold semantics ($[[u]] = x > \theta$) where the threshold $\theta$ comes from an uninformed prior distribution and is inferred in context via pragmatic reasoning [@Lassiter2013; see also @Qing2014a].
+The vagueness and context-sensitivity of these adjectival utterances can be modeled using a threshold semantics ($[[u]] = x > \theta$, for utterance $u$, scalar degree $x$, and threshold $\theta$), where the threshold comes from an uninformed prior distribution and is inferred in context via pragmatic reasoning [@Lassiter2013; see also @Qing2014a]:
 \vspace{-0.5cm}
 \begin{align}
 L_{1}(x, \theta \mid u) &\propto S_{1}(u \mid x, \theta) \cdot P_{c}(x) \cdot P(\theta) \label{eq:L1} \\
@@ -193,26 +193,42 @@ L_{0}(x \mid u, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P_{c}(x)}. \la
 In this framework, the pragmatic listener $L_1$ tries to resolve the state of the world $x$ (e.g., the temperature) from the utterance she heard $u$ (e.g., "It's warm").
 She assumes the utterance came from an approximately rational Bayesian speaker $S_1$ trying to inform a naive listener $L_0$, who in turn updates her prior beliefs $P(x)$ via an utterance's literal meaning $[[u]](x)$.
 @Lassiter2013 introduced into RSA uncertainty over a semantic variable, the truth-functional threshold $\theta$ (Eq. \ref{eq:L1}).
-The uncertainty over $\theta$ (e.g., the point at which something is *warm*) interacts with the prior distribution over possible states of the world $P_{c}(x)$ (e.g., possible temperatures) and the recursive pragmatic reasoning of the model to resolve the meaning of the adjective in context.
-What is made clear from this model is that the prior distribution over world-states is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}).
+The uncertainty over $\theta$ (e.g., the point at which something is *warm*) interacts with the prior distribution over possible states of the world $P_{c}(x)$ (e.g., possible temperatures) to resolve the meaning of the adjective in context.
+The prior distribution over world-states is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}).
 But where does such a comparison class come from?
-
-<!--\ndg{next few paragraphs can be tightened up a bit. maybe combine next two?}-->
 
 When a listener hears only that "It's warm outside" without an explicit comparison class (e.g., "warm for the season"), we imagine the listener must infer the comparison class by thinking about what would best complete the sentence.
 She does this using her world knowledge of what worlds are plausible given different comparison classes $P(x \mid c)$, what comparison classes are likely to be talked about $P(c)$, and what a rational speaker would say in given a world and comparison class $S_{1}(u \mid x, c, \theta)$ (Eq. \ref{eq:L1a}).
 <!--We elaborate the Rational Speech Act theory for adjective understanding [@Lassiter2013; @Lassiter2015] by introducing uncertainty over the class of entities against which the target entity is compared --- the comparison class $c$ .-->
 As a first test of this idea, we consider an idealized case where the comparison class can be either a relatively specific (subordinate) or relatively general (superordinate) categorization (e.g., warm relative to days in Winter or relative to days of the year). 
-The listener is aware that the target entity is in the subordinate class (e.g., aware that it is winter) and draws likely values of the degree (e.g., temperature) from the subordinate class prior: $P(x \mid c_{sub})$.
+The listener is aware that the target entity is in the subordinate class (e.g., aware that it is winter) and draws likely values of the degree (e.g., temperature) from the subordinate class prior: $P(x \mid c_{sub})$. With these assumptions the model becomes:
 \vspace{-0.5cm}
 \begin{align}
 L_{1}(x, c, \theta \mid u) &\propto S_{1}(u \mid x, c, \theta) \cdot P(x \mid c_{sub}) \cdot P(c) \cdot P(\theta) \label{eq:L1a}\\
 S_{1}(u \mid x, c, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, c, \theta)})} \label{eq:S1a}\\
 L_{0}(x \mid u, c, \theta) &\propto {\delta_{[[u]](x, \theta)} \cdot P(x \mid c)}. \label{eq:L0a}
 \end{align}
-\noindent We use a speaker model that considers the alternatives of using the same utterance with the explicit comparison class (e.g., "It's warm relative to other days in Winter." or "It's warm relative to other days of the year."), for which we assume equal production cost for simplicity. 
+\noindent We are interested in the behavior of the model with the underspecified utterance (e.g., "It's warm"), and we assume the speaker has two alternative utterances in which the comparison class is explicit (e.g., "It's warm relative to other days in Winter." and "It's warm relative to other days of the year.").
 <!--For simplicity of the model, we assume each utterance has equal cost.-->
-We are interested in the behavior of the model with the underspecified utterance (e.g., "It's warm").
+
+The quantitative predictions of this model depend on the details of the listener's knowledge of the subordinate and superordinate categories: $P(x \mid c_{sub})$ and $P(x \mid c_{super})$, as well as the prior distribution on comparison classes $P(c)$ in Eq. \ref{eq:L1a}.
+
+
+### Comparison class prior
+
+$P(c)$ reflects listeners' expectations what classes are likely to be discussed.
+As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
+Corpus accessed via 
+\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
+Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
+], and scale it by a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
+
+### Degree priors (world knowledge)
+
+Only the relative values for $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ affect model predictions.
+Hence we fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \text{Gaussian}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
+We will eventually infer the parameters of the subordinate priors from experimental data.
+
 
 
 ```{r wpplHelpers}
@@ -433,15 +449,7 @@ all.priors <- bind_rows(
 ```
 
 
-<!--
-When the pragmatic listener hears this utterance, she must reason about which comparison class the speaker had in mind.
-When the speaker produces the unambiguous alterantive utterance (e.g., "It is relative to other days in Winter."), the listener 
--->
-<!--In the following section, we explore the predictions of this model.-->
-<!--
-We posit that this knowledge is the listener's internal model of speech production of different classes of entities, and thus this comparison class prior should include information about the frequency of different classes. 
-\mht{mention "basic level" here?}
--->
+
 
 ```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width=3.3, fig.height=2.5, num.cols.cap=1, set.cap.width=T, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
@@ -585,14 +593,7 @@ vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
 
 
 
-## Model predictions
-
-As a first test of this pragmatic theory, we consider a simple case:
-The comparison class is either a subordinate level category (e.g., days in Winter) or a superordinate level category (e.g., days of the year).
-For purposes of illustration, we assume for now each class is equally likely *a priori*: $c \sim \text{UniformDraw}([c_{sub}, c_{super}])$ (this assumption will be relaxed in the next section).
-We assume the prior distribution over the degree for the superordinate class is a unit-normal distribution $x \mid c_{super} \sim \mathcal{N}(0, 1)$ and explore the model predictions as we vary the mean for the prior of the subordinate class.
-Throughout, we assume the listener $L_1$ knows the target entity is of the subordinate class (e.g., knows that it's Winter; Eq. \ref{eq:L1a}})$, but that the speaker might have had a different comparison class in mind.
-
+### Qualitative model predictions
 
 ```{r stim_table, results="asis"}
 height_sub = c("(professional) gymnast, soccer player, basketball player")
@@ -628,7 +629,7 @@ print(xtable(table.1,
 ```
 
 <!-- \begin{table*} -->
-<!-- <!-- \captionsetup{width=0.98\textwidth} --> -->
+<!-- <!-- \captionsetup{width=0.98\textwidth} -->
 <!-- \centering -->
 <!-- \begin{tabular}{@{}lll@{}} -->
 <!-- \toprule -->
@@ -646,44 +647,20 @@ print(xtable(table.1,
 <!--
 Model schematic. Show "John is tall for a person", "John is tall for a baskebatll player", "John is tall."
 -->
-Consider the subordinate priors that correspond to temperatures in Winter (low), Fall (medium), and Summer (high) in a part of the world that exhibits seasons (e.g., Maryland, USA); the superordinate prior will correspond to temperatures over the whole year (Figure \ref{fig:modelSchematics}, left).
-All subordinate priors have lower variance ($\sigma = 0.5$) than the superordinate ($\sigma = 1$).
-We see that regardless of the adjective form (positive or negative) or the mean of the subordinate prior (low, medium, high), the pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
+For purposes of illustration, assume for the moment that each class is equally likely *a priori*: $P(c){=}0.5$.
+Figure \ref{fig:modelSchematics}, left, illustrates superordinate and possibel subordinate priors; e.g. temperatures over the whole year, in Winter (low), Fall (medium), and Summer (high), in a part of the world that exhibits seasons (e.g., Maryland, USA).
+We see that regardless of the adjective polarity (e.g. warm vs. cold) or the mean of the subordinate prior (low, medium, high), the pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class (i.e., the subordinate class; Figure \ref{fig:modelSchematics}, right; all bars below baseline).
 <!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
 We also see that during Winter, when the pragmatic listener hears "It's warm" (positive adjective), she thinks it's more likely that it's warm relative to days in Winter than when she hears it's cold (Figure \ref{fig:modelSchematics}, right, left-most bars).
-The opposite is true in Summer: A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.
-In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the superordinate category.
+The opposite is true in Summer.
+<!--A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.-->
+In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the superordinate category (which depends on it's polarity).
 We will test these two predictions in our first experiment.
 <!--
 We see that as the mean of the subordinate prior becomes greater than the superordinate prior, positive form adjectives (e.g., *tall*, *expensive*, *warm*) will be more likely to imply a superordinate comparison class (e.g., *people in general*), while negative form adjectives (e.g., *short*, *cheap*, *cold*) will imply a subordinate class (e.g., *basketball players*).
 The opposite pattern is observed for subordinates priors with a mean substantially lower than the superordinate prior.
 We test these predictions in our first experiment.
 -->
-
-## Prior knowledge
-
-The RSA model makes quantitative predictions as well, though these depend on the quantitative details of the listener's knowledge of the subordinate and superordinate categories: $P(x \mid c_{sub})$ and $P(x \mid c_{super})$, as well as the prior distribution on comparison classes $P(c)$ in Eq. \ref{eq:L1a}.
-
-
-### Comparison class prior
-
-$P(c)$ reflects listeners' expectations what classes are likely to be discussed.
-As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
-Corpus accessed via 
-\url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
-Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
-], and scale it by a free parameter $\beta$: $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
-
-### Degree priors (world knowledge)
-
-$P(x \mid c_{sub})$ and $P(x \mid c_{super})$ represent listeners' beliefs about the likely values of a degree (e.g., temperature) within a subordinate or superordinate class.
-<!-- This kind of world knowledge can be measured by having participants estimate relevant quantities without experimental manipulation [e.g., the temperature in Maryland on a day in Winter; @FrankeEtAl2016]. -->
-<!-- In practice, these quantities can be difficult to estimate, especially for more abstract priors (e.g., the temperature in Maryland on any given day of the year). -->
-Since the comparison class inference task we've described uses just two-alternatives, the numerical scale of the degree priors is irrelevant.
-All that matters is the relationship between the subordinate and superordinate priors.
-We fix each superordinate distribution to be a Unit-Normal $P(x \mid c_{super}) = \text{Gaussian}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \text{Gaussian}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
-
-<!-- We put priors over the mean $\mu$ and variance $\sigma$ of each subordinate category Gaussian.  -->
 
 
 ## Reducing uncertainty with productive language use
