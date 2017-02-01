@@ -96,16 +96,8 @@ HPDlo<- function(s){
 theme_set(theme_minimal(9))
 ```
 
-<!-- 
-TO DO: 
-[ ] unify treatment of subordinate / superordinate vs. specific / general... which is clearer? [ ] have lassiter RSA model appear on page 1 (intro should be condensed)
-
-NOTES:
-- using $cc$ as the var for comparison makes makes Eq. (4) go onto 2 lines
--->
-
-If it's 75 \degree F (24 \degree C) outside, one might say "it's warm."
-On the other hand, if it's 60 \degree F (16 \degree C), one might not consider it warm.
+If it's 75\degree F (24\degree C) outside, you could say "it's warm".
+But if it's 60\degree F (16\degree C), you might not consider it warm.
 Unless it's January; it could be warm for January.
 *Warm* is relative, and its felicitous application depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
 Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction from context is critical, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
@@ -119,8 +111,8 @@ The predicate "warm" is vague in the sense that there are borderline cases of be
 <!--\ndg{opening line doesn't make much sense. start with a vague utterance, point out that whether it's true and/or its interpretation depends on comparison class.}-->
 <!--A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.-->
 
-The existence of comparison classes in the study of vague language is uncontroversial [@Solt2009; @Bale2011]. 
-4-year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; because children's judgments are unaffected by the heights of creatures that aren't pimwits, the comparison class here is other pimwits [@Barner2008].
+The existence of reference classes in the study of vague language is uncontroversial [@Solt2009; @Bale2011]. 
+4 year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; the comparison class here is other pimwits, because children's judgments are unaffected by the heights of creatures that aren't pimwits [@Barner2008].
 Adult judgments of the felicity for adjectives like "dark" or "tall" similarly depend upon fine-grained details of the statistics of the comparison class [@Schmidt2009; @Solt2012; @Qing2014].
 
 <!--
@@ -133,7 +125,7 @@ or an object can just be "big" [i.e., big relative to an implicit comparison cla
 
 Less well understood, however, is how a comparison class becomes contextually salient. 
 Any particular object of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
-A day in January is also a day of the year; if it's warm, it could be *warm for Winter* or *warm relative to other days of the year*. 
+A day in January is also a day of the year; if it's warm, it could be *warm for Winter* or *warm relative to the year*. 
 <!--If someone tells you it's warm outside, that could mean it's just warm (i.e., *warm relative to the other days of the year*) or it could mean it's warm for this time of year (e.g., *warm for Winter*).-->
 We propose that listeners actively combine category knowledge with knowledge about what classes are likely to be talked about to infer the reference class being used by the speaker.
 <!--We propose that vague language gets interpreted with respect to a particular comparison class via a pragmatic reasoning process.-->
@@ -141,9 +133,9 @@ We introduce a minimal extension to the Rational Speech Act (RSA) model for grad
 
 From this model, we derive two novel qualitative predictions.
 For illustration, consider the weather. 
-In Winter, the *positive* form of the adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
+In Winter, the *positive* adjective phrase "it's warm" should signal a specific class (i.e., relative to days in Winter) more so than the *negative* "it's cold" (which could signal a specific or general class, e.g., relative to the year). 
 The opposite should be true in Summer, where *negative* forms should be more likely to signal the specific class (i.e., cold for Summer). 
-This is driven by the prior probability that the adjective could apply to the specific class, such as the chance that it's warm in Winter (Prediction 1).
+This is driven by the *a priori* probability that the adjective could apply to the specific class e.g., the chance that it's warm in Winter (Prediction 1).
 In addition, regardless of the season, a listener should prefer "it's warm" to be relative to the current season, a more specific reference class. 
 All else being equal, classes that are more specific will have relatively lower variance, which gives a vague utterance a more specific meaning (Prediction 2). 
 We test these predictions in an experiment designed to elicit the comparison class using a paraphrase dependent measure (Expt. 1).
@@ -1259,7 +1251,7 @@ expt2.n <- length(filter(md.pp, expt == "Adjective production")[["MAP"]])
 ```
 
 
-```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\\% Bayesian credible intervals for the participant data and model predictions."}
+```{r posteriorPredictive_scatters, fig.env = "figure*", fig.pos = "htb", fig.width=6.6, fig.height=4, fig.align='center', set.cap.width=T, num.cols.cap=2, fig.cap = "Human endorsement of comparison class paraphrases (middle) and adjective sentences (left) as a function of listener model $L_{1}$ and speaker model $S_{2}$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. All error bars correspond to 95\\% Bayesian credible intervals."}
 scatterSubFig <- ggplot(md.pp %>% filter(MAP_h < 0.30 & expt == "Comparison class inference") %>%
                           mutate(expt = factor(expt, 
                                                labels = c("Comparison class inference (subset)"))), 
@@ -1335,7 +1327,8 @@ The inferred values and shapes of the subordinate class knowledge used in these 
 The items judged *a priori* to be low the on scale (yellow) tend to be lower than those judged to be in the middle of the scale (orange) and high on the scale (red).
 
 Finally, the full model's posterior predictive distribution does an excellent job at capturing the variability in responses for Expt. 1: $r^2(`r expt1.n`) = `r expt1.r2`$, and Expt. 2: $r^2(`r expt2.n`) = `r expt2.r2`$ (Figure \ref{fig:posteriorPredictive_scatters}).
-\ndg{this feels like an abrupt end... one more sentences glossing the results?}
+Because of the overall preference for the subordinate comparison class, many of the data points are distributed below 0.5.
+Even for these fine-grained inferences, the model does a good job at explaining human participants' behavior (Figure \ref{fig:posteriorPredictive_scatters} right).
 
 <!-- \ndg{i don't think we need this: -->
 <!-- The most residual uncertainty is in the heights of "soccer players" and the duration of "cute animal videos". -->
@@ -1348,13 +1341,13 @@ Finally, the full model's posterior predictive distribution does an excellent jo
 # Discussion
 
 Language users are often vague, saying things like "It's warm outside".
-This poses a challenge to listeners, who have to use context to uncover a more precise meaning to make sense of what they've heard.
+This poses a challenge to listeners, who have to use context to uncover a more precise meaning from what they've heard.
 Context, however, can also be underspecified, as there are many possible dimensions or categories that the speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the reference class against which an entity can be implicitly compared.
 We introduced a minimal extension to an adjective interpretation RSA model in order to flexibly reason about the likely comparison class.
-This model made two novel predictions about what comparison classes listeners would prioritize.
-It also made quantitative predictions about how background knowledge about the degree scale should translate into the probability with which a speaker will use a comparison class. 
-Both of the qualitative and the quantitative predictions from the model were borne our in our first experiment. 
+This model made two novel predictions about the comparison class listeners should prioritize.
+It also made quantitative predictions about how background knowledge about the degree scale should inform this inference. 
+The quantitative and both of the qualitative predictions from the model were borne our in our first experiment. 
 To our knowledge, this is the first experiment to demonstrate how reference classes for adjective interpretation can adjust based on world knowledge.
 <!-- (1) Listeners should prefer comparison classes that have relatively lower variance as they result in more specific meanings and  -->
 <!-- (2) The comparison class will shift with the *a priori* probability of the adjective being true of the lower variance (subordinate) class. -->
@@ -1367,17 +1360,18 @@ In our modeling work, we had to specify a prior distribution over the two compar
 There are at least two (non-mutually exclusive) ways of interpreting this prior distribution. 
 The prior may reflect basic level effects in categorization [@Rosch1975] or the hetereogeneity of the property within different classes.
 For instance, the distribution over prices for kitchen appliances may be more hetereogenous than the distribution of heights for people, making "kitchen appliances" a relatively poorer reference class for the price of a specific kitchen appliance than "people" is for the height of a specific person.
+A more heteregeneous class may make a vague utterance less informative.
 Alternatively, the adjective phrase "It's warm outside" may in fact be an incomplete sentence, in a way analagous to sentence fragments studied in noisy-channel models of production and comprehension [@Bergen2015].
 If this is so, we would expect $P(c)$ to be correlated with factors relevant for speech production, e.g., the frequency of the comparison class in a corpus. 
 Future work should attempt to disentangle these factors to construct a more complete theory of the comparison class prior.
 
 The second contribution of this paper is a novel data-analytic approach, where prior knowledge used in the Bayesian language model is reconstructed from converging evidence gathered from experiments that use similar language about the same domains.
 In previous work, we have attempted to measure prior knowledge by decomposing what would be implicitly multilayered estimation questions into multiple simpler questions, and then using a Bayesian data analytic model to reconstruct the prior knowledge [@Tessler2016; @Tessler2016cogsci].
-We extend this approach to ask related *natural language* questions across two experiments to infer the parameters of the relevant prior knowledge.
+We extend this approach to ask related questions across two experiments to infer the parameters of the relevant prior knowledge.
 The major feature of this approach is that participants respond only to simple natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed [@FrankeEtAl2016].
 The fully Bayesian language approach we pioneer here also provides a further test of the language model, which must predict data from two similar but distinct language experiments. 
 Language is productive. 
-Modeling language use thus yields productivity in experiment design, which can be harnessed to reduce uncertainty in the necessary parameters of language and cognitive models.
+We channel the productivity of language into experiment design, which can be harnessed to reduce uncertainty in the necessary parameters of language and cognitive models.
 
 
 
@@ -1446,7 +1440,7 @@ These $P(x \mid c)$ are used in both the experiments, which allows us to both si
 \setlength{\parindent}{-0.1in}
 \setlength{\leftskip}{0.125in}
 \noindent
-
+<!-- \small -->
 
 <!--
 # Outline
