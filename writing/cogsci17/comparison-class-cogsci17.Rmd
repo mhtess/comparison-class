@@ -213,7 +213,7 @@ $P(c)$ reflects listeners' expectations what classes are likely to be discussed.
 As a proxy for comparison class usage frequency, we use empirical frequency $\hat{f}$ estimated from the Google WebGram corpus^[
 Corpus accessed via 
 \url{http://corpora.linguistik.uni-erlangen.de/demos/cgi-bin/Web1T5/Web1T5_freq.perl}.
-Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for emprical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
+Due to the idiosyncracies of our items and potential polysemy in some of words, we made the following substitutions when querying the database for empirical frequency: produce $\rightarrow$ "fruits and vegetables"; things you watch online $\rightarrow$ "online videos"; days in \{season\} $\rightarrow$ "\{season\} days"; dishwashers $\rightarrow$ "dishwashing machines"; videos of cute animals $\rightarrow$ "animal videos".
 ], and scale it by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
 
 ### Degree priors (world knowledge)
@@ -660,7 +660,7 @@ This by itself, however, is not sufficient to fill in the probabilistic knowledg
 -->
 Even if the parameters could be estimated reliably from our target (comparison class) expriment, it's hard to know if the parameters we're uncovering are the true priors for participants' knowledge, or just extra parameters used to fit the data. 
 However, the RSA model is a productive language model: We can use it to predict related language data that rely on the same prior knowledge.
-In particular, Expt. 2 we gather judgments about sentences with vague adjectuives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
+In particular, Expt. 2 we gather judgments about sentences with vague adjectives but explicit comparison classes: whether or not an adjective would be true relative to the superordinate category of a subordinate member (e.g., it is a winter day, is it warm relative to days of the year?).
 
 
 <!--
@@ -1150,7 +1150,7 @@ Figure \ref{fig:expt1results} (top) shows the proportion of participants choosin
 The predicted effects are visually apparent within each scale.
 
 Our predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables.
-In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[This was the maximal mixed-effects structure that converged.].
+In addition, we included in the model by-participant random effects of intercept and by-subordinate category random effects of intercept and interaction between form and strength to predict the probability with which participants would choose the superordinate category as the paraphrase^[This was the maximal mixed-effects structure that converged.].
 Confirming our two qualitative model predictions, there was an interaction between form and strength 
 ($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
 $SE = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Std. Error"],2)`;$
