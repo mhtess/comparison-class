@@ -14,8 +14,8 @@ header-includes:
   - \usepackage{booktabs}
 
 author-information: >
-  \author{{\large \bf Michael Henry Tessler$^1$} (mtessler@stanford.edu), {\large \bf Michael Lopez-Brau$^2$} (lopez\_mic@knights.ucf.edu) \\
-  {\large \bf Noah D. Goodman$^1$} (ngoodman@stanford.edu) \\
+  \author{{\large \bf Michael Henry Tessler$^1$}, {\large \bf Michael Lopez-Brau$^2$}, and {\large \bf Noah D. Goodman$^1$} \\ 
+   \texttt{mtessler@stanford.edu, lopez\_mic@knights.ucf.edu, ngoodman@stanford.edu} \\
   $^1$Department of Psychology, Stanford University,
   $^2$Department of Electrical \& Computer Engineering, University of Central Florida}
 
