@@ -438,7 +438,7 @@ all.priors <- bind_rows(
  
 ```
 
-```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width = 3.3, fig.height = 2.5, num.cols.cap = 1, fig.cap = "Left: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in grey). Right: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
+```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width = 3.3, fig.height = 2.5, num.cols.cap = 1, fig.cap = "Top: Three hypothetical prior distributions over subordinate comparison class (fixing the superordinate comparison class to be a unit-normal distribution, in green). Bottom: Predicted listener inference for the probability of an intended superordinate comparison class. The comparison class prior does not favor either the subordinate or superordinate class."}
 
 subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
                               lty = cat, group= cat, alpha=cat))+
