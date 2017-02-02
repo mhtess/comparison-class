@@ -73,9 +73,9 @@ library(coda)
 library(lme4)
 library(lmerTest)
 library(data.table)
-#install.packages("ggthemes")
 library(ggthemes)
 library(RColorBrewer)
+
 estimate_mode <- function(s) {
   d <- density(s)
   return(d$x[which.max(d$y)])
@@ -92,12 +92,12 @@ HPDlo<- function(s){
 }
 ```
 
-```{r}
+```{r, theme}
 theme_set(theme_minimal(9))
 ```
 
-If it's 75\degree F (24\degree C) outside, you could say "it's warm".
-But if it's 60\degree F (16\degree C), you might not consider it warm.
+If it's 75 \degree F (24 \degree C) outside, one might say "it's warm."
+On the other hand, if it's 60 \degree F (16 \degree C), one might not consider it warm.
 Unless it's January; it could be warm for January.
 *Warm* is relative, and its felicitous application depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
 Comparison classes are necessary for understanding adjectives and, in fact, any use of language in which pragmatic reconstruction from context is critical, including vague quantifiers [e.g., "He ate a lot of burgers [*for an American / vegetarian*]."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly [*in comparison to other pets / animals that hunt*]"; @Tessler2016].
@@ -111,8 +111,8 @@ The predicate "warm" is vague in the sense that there are borderline cases of be
 <!--\ndg{opening line doesn't make much sense. start with a vague utterance, point out that whether it's true and/or its interpretation depends on comparison class.}-->
 <!--A warm day in July could be 80\degree F while a warm one in January might not get above 60\degree F.-->
 
-The existence of reference classes for understanding vague language is uncontroversial. 
-4-year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; the comparison class here is other pimwits, because children's judgments are unaffected by the heights of creatures that aren't pimwits [@Barner2008].
+The existence of comparison classes for understanding vague language is uncontroversial. 
+4-year-olds categorize novel creatures (*pimwits*) as either *tall* or *short* depending on the distribution of heights of pimwits; because children's judgments are unaffected by the heights of creatures that aren't pimwits, the comparison class here is other pimwits [@Barner2008].
 Adult judgments of the felicity for adjectives like "dark" or "tall" similarly depend upon fine-grained details of the statistics of the comparison class [@Schmidt2009; @Solt2012; @Qing2014].
 Theoretical work in semantics has focused on how information from a comparison class is used and what representations might be preferred [@Solt2009; @Bale2011].
 
