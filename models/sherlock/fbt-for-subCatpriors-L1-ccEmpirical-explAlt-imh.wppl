@@ -131,7 +131,7 @@ var model = function(){
     foreach(subCats, function(subCat){
 
       var mu = uniformDrift( { a: -3, b: 3, width:0.5});
-      var sigma = uniformDrift({a:0, b:3, width: 0.3});
+      var sigma = uniformDrift({a:0, b:5, width: 0.5});
 
       var subcatWeight = exp(
         classParameters.frequency * catFrequencies[subCat]// +
@@ -289,7 +289,7 @@ var model = function(){
 
         mapData({data:d_subcat_ccInference}, function(d){
         //  console.log("cc = "+ ccRSA.score(d))
-        //  observe(ccRSA, d);
+          observe(ccRSA, d);
         })
 
         query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
@@ -324,7 +324,7 @@ var model = function(){
   return query
 }
 
-var mhiter = 20000;
+var mhiter = 50000;
 
 var burn = mhiter / 2;
 var posterior = Infer({
@@ -335,7 +335,7 @@ var posterior = Infer({
   verboseLag: mhiter / 20
 })
 
-var outfile = 'results/fbt-vsOnly-L1-explAltnoSilence-empiricalCC-noLength-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'results/fbt-L1-explAltnoSilence-widerPriorPriors-empiricalCC-noLength-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
 display("file written to = " + outfile)
