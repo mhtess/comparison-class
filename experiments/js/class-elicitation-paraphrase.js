@@ -14,30 +14,12 @@ function makeSlides(f) {
   // the catch trial will take the first two indices of the sliders and of exp.sliderPost
   slides.instructions = slide({
     name: "instructions",
-    start: function() {
-      $(".errCatch").hide();
-      var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
-      for (var j = 0; j < exp.nCatch; j++) {
-        $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] +
-          "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-        utils.match_row_height("#multi_slider_table0", ".slider_target");
-        utils.make_slider("#slider" + j, make_slider_callback(j));
-      }
-      exp.sliderPost = [];
-    },
+    // start: function() {
+    //   $(".errCatch").hide();
+    //   var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
+    // },
     button: function() {
-      if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
-      else {
-        exp.catch_trials.push({
-          object: "Empire State Building",
-          property: "is tall",
-          sentence1: "relative to other buildings",
-          response1: exp.sliderPost[0],
-          sentence2: "relative to other pineapples",
-          response2: exp.sliderPost[1]
-        });
-        exp.go();
-      }
+      exp.go();
     }
   });
 
@@ -78,48 +60,18 @@ function makeSlides(f) {
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-    // removes the slider from the previous slide before making the slider for the current slide
-    $(".slider_row").remove();
-
-    // set up the text next to each slider
-    for (var j = exp.nCatch; j < exp.nSentences+exp.nCatch; j++) {
-      var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"";
-
-      // display the slider for each slide
-      $("#multi_slider_table" + (i+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentence +
-        "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-      utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
-    }
-
-    init_sliders(exp.nSentences);
-    exp.sliderPost = [];
-  }
-
-  // the two functions below help set up and read info from the sliders
-  function init_sliders(nSentences) {
-    for (var j = exp.nCatch; j < nSentences+exp.nCatch; j++) {
-      utils.make_slider("#slider" + j,
-        make_slider_callback(j));
-    }
-  }
-
-  function make_slider_callback(j) {
-    return function(event, ui) {
-      exp.sliderPost[j] = ui.value;
-    };
+    // set up the text next to each input box
+    $(".display_paraphrase").html("\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"");
   }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
 
-    // stores the slider results
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")+exp.nCatch];
-    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")+exp.nCatch];
+    // stores the text response
+    response = $("#text_response" + (i+1)).val();
 
-    // stores the adjective used in this experiment; same as the target
-    adjective = exp.examples[i].target.split(" ").pop();
-
-    if ((subEndorse === undefined) || (superEndorse === undefined)) { $(".err").show(); }
+    // displays an error if no response has been entered
+    if (response.length == 0) { $(".err").show(); }
     else {
       exp.data_trials.push({
         "condition": exp.condition,
@@ -262,7 +214,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedCESlides(exp.trials);
+  embedCEPSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
