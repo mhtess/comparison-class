@@ -276,7 +276,8 @@ function embedCEPSlides(trials) {
       "<p class=\"display_context\"></p>" +
       "<p class=\"display_target\"></p>" +
       "<p class=\"display_question\"></p>" +
-      "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
+      "<span class=\"display_paraphrase\"></span>" + 
+      "<input type=\"text\" class=\"textbox\" id=\"text_response" + i + "\" style=\"width:120px;\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please enter a text response before continuing.</p>" +
       "</div>";
