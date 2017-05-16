@@ -262,7 +262,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedCESlides(exp.trials);
+  embedCE2Slides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined

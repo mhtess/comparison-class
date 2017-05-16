@@ -14,30 +14,12 @@ function makeSlides(f) {
   // the catch trial will take the first two indices of the sliders and of exp.sliderPost
   slides.instructions = slide({
     name: "instructions",
-    start: function() {
-      $(".errCatch").hide();
-      var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
-      for (var j = 0; j < exp.nCatch; j++) {
-        $("#multi_slider_table0").append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentenceCatch[j] +
-          "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-        utils.match_row_height("#multi_slider_table0", ".slider_target");
-        utils.make_slider("#slider" + j, make_slider_callback(j));
-      }
-      exp.sliderPost = [];
-    },
+    // start: function() {
+    //   $(".errCatch").hide();
+    //   var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
+    // },
     button: function() {
-      if ((exp.sliderPost[0] === undefined) || (exp.sliderPost[1] === undefined)) { $(".errCatch").show(); }
-      else {
-        exp.catch_trials.push({
-          object: "Empire State Building",
-          property: "is tall",
-          sentence1: "relative to other buildings",
-          response1: exp.sliderPost[0],
-          sentence2: "relative to other pineapples",
-          response2: exp.sliderPost[1]
-        });
-        exp.go();
-      }
+      exp.go();
     }
   });
 
@@ -67,7 +49,8 @@ function makeSlides(f) {
     var targetSentence, adjectivePhrase;
     if (exp.examples[i].target[0] === " ") {
       adjectivePhrase = getPronoun2(exp.examples[i][exp.condition], exp.examples[i].target) + " is " + exp.examples[i].target;
-    } else {
+    }
+    else {
       adjectivePhrase = "It's " + exp.examples[i].target;
     }
 
@@ -78,48 +61,24 @@ function makeSlides(f) {
     // display the question
     $(".display_question").html("What do you think " + exp.names[i] + " meant?");
 
-    // removes the slider from the previous slide before making the slider for the current slide
-    $(".slider_row").remove();
-
-    // set up the text next to each slider
-    for (var j = exp.nCatch; j < exp.nSentences+exp.nCatch; j++) {
-      var sentence = "\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"";
-
-      // display the slider for each slide
-      $("#multi_slider_table" + (i+1)).append("<tr class=\"slider_row\"><td class=\"slider_target\" id=\"sentence" + j + "\">" + sentence +
-        "</td><td colspan=\"2\"><div id=\"slider" + j + "\" class=\"slider\">-------[ ]--------</div></td></tr>");
-      utils.match_row_height("#multi_slider_table" + (i+1), ".slider_target");
-    }
-
-    init_sliders(exp.nSentences);
-    exp.sliderPost = [];
-  }
-
-  // the two functions below help set up and read info from the sliders
-  function init_sliders(nSentences) {
-    for (var j = exp.nCatch; j < nSentences+exp.nCatch; j++) {
-      utils.make_slider("#slider" + j,
-        make_slider_callback(j));
-    }
-  }
-
-  function make_slider_callback(j) {
-    return function(event, ui) {
-      exp.sliderPost[j] = ui.value;
-    };
+    // set up the text next to each input box
+    // $(".display_paraphrase").html("\"" + adjectivePhrase + " relative to other " + exp.examples[i][exp.sliderOrder[j-exp.nCatch]] + ".\"");
+    $(".display_paraphrase").html("\"" + adjectivePhrase + " relative to other ");
   }
 
   // runs when the "Continue" button is hit on a slide
   function button() {
 
-    // stores the slider results
-    subEndorse = exp.sliderPost[exp.sliderOrder.indexOf("sub_plural")+exp.nCatch];
-    superEndorse = exp.sliderPost[exp.sliderOrder.indexOf("super")+exp.nCatch];
-
     // stores the adjective used in this experiment; same as the target
     adjective = exp.examples[i].target.split(" ").pop();
 
-    if ((subEndorse === undefined) || (superEndorse === undefined)) { $(".err").show(); }
+    // stores the text response
+    response = $("#text_response" + (i+1)).val();
+
+    // displays an error if no response has been entered
+    if (response.length == 0) { $(".err").show(); }
+
+    // otherwise, stores the data relevant to the current trial
     else {
       exp.data_trials.push({
         "condition": exp.condition,
@@ -138,8 +97,7 @@ function makeSlides(f) {
         "super_category": exp.examples[i].super,
         "paraphrase0": exp.sliderOrder[0],
         "paraphrase1": exp.sliderOrder[1],
-        "sub_endorsement": subEndorse,
-        "super_endorsement": superEndorse
+        "response": response
       });
       i++;
       exp.go();
@@ -158,7 +116,6 @@ function makeSlides(f) {
   slides.subj_info =  slide({
     name : "subj_info",
     submit : function(e) {
-      //if (e.preventDefault) e.preventDefault(); // I don't know what this means.
       exp.subj_data = {
         language: $("#language").val(),
         enjoyment: $("#enjoyment").val(),
@@ -170,7 +127,7 @@ function makeSlides(f) {
         fairprice: $("#fairprice").val(),
         comments: $("#comments").val()
       };
-      exp.go(); // use exp.go() if and only if there is no "present" data
+      exp.go();
     }
   });
 
@@ -225,7 +182,8 @@ function init() {
     // this needs to be fixed later to account for the possibility of two names on the same trial slide
     exp.names = sampleNames(characters).concat(sampleNames(characters));
     exp.extra = sampleNames(characters);
-  } else {
+  }
+  else {
     // generate a list of unique names
     exp.names = sampleNames(characters);
 
@@ -262,7 +220,7 @@ function init() {
   exp.slides = makeSlides(exp);
 
   // embed the slides
-  embedCESlides(exp.trials);
+  embedCEPSlides(exp.trials);
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined

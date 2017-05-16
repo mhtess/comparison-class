@@ -156,8 +156,8 @@ function embedVPESlides(trials) {
   }
 }
 
-// embeds the trial slides for class-elicitation
-function embedCESlides(trials) {
+// embeds the trial slides for class-elicitation-2
+function embedCE2Slides(trials) {
   var slides = "";
   for (var i = 1; i <= trials; i++) {
     slides = slides +
@@ -170,8 +170,6 @@ function embedCESlides(trials) {
       "<td class=\"left\">very unlikely</td>"+
       "<td class=\"right\">very likely</td>" +
       "</tr></table><p></p>" +
-      // '<textarea id="text_response' + i + '" rows="1" cols="50"></textarea>."<br>' +
-      // "<input type=\"text\" class='textbox' id=\"text_response" + i + "\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please adjust both sliders before continuing.</p>" +
       "</div>";
@@ -264,6 +262,24 @@ function embedCE2AFCSlides(trials) {
       "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br></div>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please select an option before continuing.</p>" +
+      "</div>";
+    $(".trial_slides").html(slides);
+  }
+}
+
+// embeds the trial slides for class-elicitation-paraphrase
+function embedCEPSlides(trials) {
+  var slides = "";
+  for (var i = 1; i <= trials; i++) {
+    slides = slides +
+    "<div class=\"slide\" id=\"trial" + i + "\">" +
+      "<p class=\"display_context\"></p>" +
+      "<p class=\"display_target\"></p>" +
+      "<p class=\"display_question\"></p>" +
+      "<span class=\"display_paraphrase\"></span>" + 
+      "<input type=\"text\" class=\"textbox\" id=\"text_response" + i + "\" style=\"width:120px;\"></input>.\"<p></p>" +
+      "<button onclick=\"_s.button()\">Continue</button>" +
+      "<p class=\"err\">Please enter a text response before continuing.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
   }
