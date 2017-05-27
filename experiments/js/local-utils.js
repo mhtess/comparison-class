@@ -280,6 +280,7 @@ function embedCEPSlides(trials) {
       "<input type=\"text\" class=\"textbox\" id=\"text_response" + i + "\" style=\"width:120px;\"></input>.\"<p></p>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please enter a text response before continuing.</p>" +
+      "<p class=\"inputErr\">Please use only alphabetic characters in your response.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
   }

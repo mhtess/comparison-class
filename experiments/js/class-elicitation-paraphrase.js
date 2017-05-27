@@ -26,6 +26,7 @@ function makeSlides(f) {
   // runs when a slide is first loaded
   function start() {
     $(".err").hide();
+    $(".inputErr").hide();
 
     // display the context sentence
     exp.pronoun = 0;
@@ -76,7 +77,16 @@ function makeSlides(f) {
     response = $("#text_response" + (i+1)).val();
 
     // displays an error if no response has been entered
-    if (response.length == 0) { $(".err").show(); }
+    if (response.length == 0) { 
+      $(".inputErr").hide();
+      $(".err").show();
+    }
+
+    // displays an error if a number is used in the response
+    else if (/\d/.test(response)) {
+      $(".err").hide();
+      $(".inputErr").show();
+    }
 
     // otherwise, stores the data relevant to the current trial
     else {
@@ -95,8 +105,6 @@ function makeSlides(f) {
         "gender": getGender(exp.names[i]),
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
-        "paraphrase0": exp.sliderOrder[0],
-        "paraphrase1": exp.sliderOrder[1],
         "response": response
       });
       i++;
