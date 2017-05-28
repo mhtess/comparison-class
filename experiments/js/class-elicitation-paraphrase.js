@@ -14,10 +14,9 @@ function makeSlides(f) {
   // the catch trial will take the first two indices of the sliders and of exp.sliderPost
   slides.instructions = slide({
     name: "instructions",
-    // start: function() {
-    //   $(".errCatch").hide();
-    //   var sentenceCatch = ["The Empire State Building is tall relative to other buildings.", "The Empire State Building is tall relative to other pineapples."];
-    // },
+    start: function() {
+      $(".errCatch").hide();
+    },
     button: function() {
       exp.go();
     }

@@ -54,11 +54,13 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>On each trial, you will be asked to rephrase something a person said. You will be given two possible rephrasings and asked to rate each of them.</p>
+    <p>On each trial, you will be asked to rephrase something a person said. You will be presented with a sentence from an arbitrary speaker and asked to paraphrase what might be implicitly meant by the speaker.</p>
     <p>For example: Imagine hearing someone say, "The Empire State Building is tall."</p>
     <p>What do you think they meant?</p>
+    <p>"The Empire State Building is tall relative to other <input type="text" class="textbox" id="catch_response" style="width:120px;"></input>."<p></p></p>
+    <p>Just for this example, enter <b>pineapples</b> into the text box.</p>
     <p>There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
-    <!-- <p class="errCatch">Please adjust both sliders before continuing.</p> -->
+    <p class="catchErr">Please enter a text response before continuing.</p>
     <button onclick="_s.button()">Continue</button>
   </div>
 
