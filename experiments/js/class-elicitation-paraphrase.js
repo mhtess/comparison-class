@@ -15,10 +15,18 @@ function makeSlides(f) {
   slides.instructions = slide({
     name: "instructions",
     start: function() {
-      $(".errCatch").hide();
+      $(".catchErr").hide();
     },
     button: function() {
-      exp.go();
+      catch_response = $("#catch_response").val();
+
+      // displays an error if no response has been entered
+      if (catch_response.length == 0) {
+        $(".catchErr").show();
+      }
+      else {
+        exp.go();
+      }
     }
   });
 
