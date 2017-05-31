@@ -25,7 +25,7 @@ function makeSlides(f) {
         $(".catchErr").show();
       }
       else {
-        exp.catch_trial = catch_response;
+        exp.catch_trials = catch_response;
         exp.go();
       }
     }
@@ -152,7 +152,7 @@ function makeSlides(f) {
     start: function() {
       exp.data = {
           "trials": exp.data_trials,
-          "catch_trial": exp.catch_trial,
+          "catch_trials": exp.catch_trials,
           "system": exp.system,
           "condition": exp.condition,
           "paraphrase0": exp.sliderOrder[0],
@@ -209,7 +209,7 @@ function init() {
 
   // stores the catch trial results for this experiment
   exp.nCatch = 2;
-  exp.catch_trial = [];
+  exp.catch_trials = [];
 
   // get user system specs
   exp.system = {
