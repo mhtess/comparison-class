@@ -171,7 +171,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20170115-cce";
+      var ut_id = "mlb-adjectives-20170531-ccep";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
