@@ -25,7 +25,7 @@ function makeSlides(f) {
         $(".catchErr").show();
       }
       else {
-        exp.catch_trials = catch_response;
+        exp.catch_trials.push({catch_response: catch_response});
         exp.go();
       }
     }
@@ -85,7 +85,7 @@ function makeSlides(f) {
     response = $("#text_response" + (i+1)).val();
 
     // displays an error if no response has been entered
-    if (response.length == 0) { 
+    if (response.length == 0) {
       $(".inputErr").hide();
       $(".err").show();
     }
