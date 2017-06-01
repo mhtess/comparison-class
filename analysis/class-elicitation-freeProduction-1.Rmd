@@ -1,0 +1,30 @@
+---
+title: "Class Elicitation Free Production"
+output: html_notebook
+---
+
+```{r}
+library(langcog)
+library(tidyverse)
+library(data.table)
+```
+
+Data analysis for Class Elicitation experiment
+
+```{r}
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+data.path <- paste(project.path, "data/pilot-classElicitation-paraphrase-1/", sep = "")
+```
+
+```{r}
+d.subject <- read.csv(paste(data.path, "class-elicitation-paraphrase-1-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+```{r}
+d <- read.csv(paste(data.path, 
+                    "class-elicitation-paraphrase-1-trials.csv", sep = ""))
+```
+
+Need to clean up responses...
+
