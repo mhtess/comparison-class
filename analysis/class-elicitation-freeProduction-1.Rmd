@@ -1,30 +1,112 @@
 ---
 title: "Class Elicitation Free Production"
-output: html_notebook
+author: "mht"
+date: "7/12/2017"
+output: github_document
 ---
 
-```{r}
+```{r global_options, include=FALSE}
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+data.path <- paste(project.path, "data/pilot-classElicitation-paraphrase-1/", sep = "")
+knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+```
+
+```{r libraries}
 library(langcog)
 library(tidyverse)
 library(data.table)
+library(tidytext)
+library(knitr)
 ```
 
-Data analysis for Class Elicitation experiment
 
-```{r}
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-data.path <- paste(project.path, "data/pilot-classElicitation-paraphrase-1/", sep = "")
-```
+### Pilot data (n = 18)
 
-```{r}
+#### Subject enjoyment (0 - 2 scale)
+
+There was an error in recording *subject information* for the first 9 subjects and those were not parsed properly. Kind of hard to recover (and it's only the survey infor).
+
+
+```{r subjinfo}
 d.subject <- read.csv(paste(data.path, "class-elicitation-paraphrase-1-subject_information.csv", sep = ""))
 table(d.subject$enjoyment)
 ```
 
-```{r}
+
+Preview of raw data 
+
+```{r loadData}
 d <- read.csv(paste(data.path, 
                     "class-elicitation-paraphrase-1-trials.csv", sep = ""))
+
+sample_n(d, 10) %>%
+  select(super_category, sub_category, adjective, response)
 ```
 
-Need to clean up responses...
+```{r}
+my_stop_words <- bind_rows(
+  stop_words %>%
+    filter(!(word %in% c("men", "kind"))),
+  data.frame(
+    word = c("relative", "compare"),
+    lexicon = 'mh'
+  ))
+
+
+d.tidy <- d %>%
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "'", response)) %>%
+  unnest_tokens(word, response)  %>% 
+  anti_join(my_stop_words)  # remove stop words
+```
+
+## Analysis by words
+
+```{r}
+d.tidy.wordCounts <- d.tidy %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(word)
+
+d.tidy.wordCounts[with(d.tidy.wordCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+## Analysis by phrases
+
+After removing stop words, I reconstruct the phrases...
+
+```{r}
+d.tidy.phrase <- d.tidy %>%
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase))
+```
+
+#### How well do we do cleaning the phrases?
+
+```{r}
+left_join(d.tidy.phrase, d %>% select(workerid, trial_num, response)) %>% 
+  select(phrase, response) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response) %>% 
+  head(40) %>% kable()
+```
+
+### Results
+
+```{r}
+d.tidy.phraseCounts <- d.tidy.phrase %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(phrase)
+
+
+d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+
+
 
