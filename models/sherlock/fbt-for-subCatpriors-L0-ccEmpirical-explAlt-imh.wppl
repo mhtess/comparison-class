@@ -76,6 +76,8 @@ var model = function(){
         super: {mu: 0, sigma: 1}
       }
 
+      // displayObj(stateParams.sub)
+
       var statePrior = {
         sub: DiscretizedGaussian(stateParams.sub),
         super: DiscretizedGaussian(stateParams.super)
@@ -133,7 +135,7 @@ var model = function(){
       // for Comparison Class Inference task
       var literalListener_classInference = cache(function(form) {
         Infer({model: function(){
-          var utterance = form + "_Adjective";
+          var utterance = form;
           var comparisonClass = sample(classPrior);
           var state = sample(statePrior[comparisonClass]);
           // var threshold = sample(thresholdPrior(form));
@@ -163,7 +165,7 @@ var model = function(){
         })
 
         var ccRSA = literalListener_classInference(form);
-
+        // displayObj(ccRSA)
         mapData({data:d_subcat_ccInference}, function(d){
         //  console.log("cc = "+ ccRSA.score(d))
           observe(ccRSA, d);
@@ -199,7 +201,7 @@ var model = function(){
   // return _.object(_.flatten(parameters, true));
   return query
 }
-
+// 500 iterations (+ 250 burn) = 2 min
 var mhiter = 500;
 
 var burn = mhiter / 2;
@@ -222,3 +224,57 @@ var posterior = Infer({
 // display(sort(thetaPrior.support()))
 // sort(DiscretizedGaussian({mu:0, sigma:1}).support())
 // ccData
+
+
+// var stateParams = {
+//   sub: {"mu":-2.92446325533092,"sigma":0.4532203997951001},
+//   super: {mu: 0, sigma: 1}
+// }
+// //
+// var statePrior = {
+//   sub: DiscretizedGaussian(stateParams.sub),
+//   super: DiscretizedGaussian(stateParams.super)
+// }
+//
+// var classPrior = Infer({
+//   model: function(){
+//     return categorical({vs: ["super", "sub"], ps:[1, 1]})
+// }});
+//
+//
+// var literalListener_classInference = cache(function(form) {
+//   Infer({model: function(){
+//     var utterance = form;
+//     var comparisonClass = sample(classPrior);
+//     var state = sample(statePrior[comparisonClass]);
+//     // var threshold = sample(thresholdPrior(form));
+//     var threshold = sample(thetaPrior);
+//     var m = meaning(utterance, state, threshold);
+//     condition(m);
+//     return comparisonClass == "sub" ? "sub_plural" : "super"
+//   }})
+// }, 10000)
+
+
+// var L0_uncertain = cache(function(form) {
+//   Infer({model: function(){
+//     var utterance = form + "_Adjective";
+//     var comparisonClass = sample(classPrior);
+//     var state = sample(statePrior[comparisonClass]);
+//     var threshold = sample(thetaPrior);
+//
+//     var m = meaning(utterance, state, threshold);
+//     condition(m);
+//     return comparisonClass;
+//   }})
+// })
+
+
+
+// pragmaticListener("positive")
+// L0_uncertain("positive")
+
+
+
+
+// literalListener_classInference("negative")
