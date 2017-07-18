@@ -2,35 +2,14 @@
 var index = utils.wpParseFloat(last(process.argv)) // load index as last command line index
 
 // requires webppl packages: webppl-csv and webppl-mht custom packages
+// time ~/webppl-fork/webppl fbt-for-subCatpriors-L0-ccEmpirical-explAlt-imh.wppl --require utils 1
 
-var pam = function(lst, fn){
-  return map(fn, lst);
-};
 
 var meaning = function(utterance, state, threshold) {
   utterance == "positive" ? state > threshold ? flip(0.9999) : flip(0.0001) :
   utterance == "negative" ? state < threshold ? flip(0.9999) : flip(0.0001) :
   true
 }
-
-var round = function(x){
-  return Math.round(x*10)/10
-};
-
-var distProbs = function(dist, supp) {
-  return map(function(s) {
-    return Math.exp(dist.score(s))
-  }, supp)
-}
-
-var KL = function(p, q, supp) {
-  var P = distProbs(p, supp), Q = distProbs(q, supp);
-  var diverge = function(xp,xq) {
-    return xp == 0 ? 0 : (xp * Math.log(xp / xq) );
-  };
-  return sum(map2(diverge,P,Q));
-};
-
 
 // were it not for speaker optimality
 // this model could be run independently for each item
@@ -41,14 +20,14 @@ var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
 var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
 
-var ccData = dataFrame(utils.readCSV(dataPath + ccDataFile))
-var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"])
+var ccData = removeExtraRow(dataFrame(utils.readCSV(dataPath + ccDataFile)))
+var vsData = removeExtraRow(dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"]))
 
 
-var subCategories0 = _.uniq(_.pluck(vsData, "sub_category"));
+var subCategories0 = levels(vsData, "sub_category");
 var subCategories = subCategories0.slice(0, subCategories0.length - 1);
 
-var degrees0 = _.uniq(_.pluck(vsData, "degree"));
+var degrees0 = levels(vsData, "degree");
 var degrees = degrees0.slice(0, degrees0.length - 1);
 
 var model = function(){
@@ -66,8 +45,8 @@ var model = function(){
   };
 
   foreach(degrees, function(degree){
-    var degreeData = _.where(ccData, {degree:degree});
-    var subCats = _.uniq(_.pluck(degreeData, "sub_category"));
+    var degreeData = _.filter(ccData, {degree:degree});
+    var subCats = levels(degreeData, "sub_category");
     var superCat = degreeData[0]["super_category"];
 
 
@@ -91,62 +70,40 @@ var model = function(){
           return categorical({vs: ["super", "sub"], ps:[supercatWeight, subcatWeight]})
       }});
 
-      var binParam = 3;
 
       var stateParams = {
         sub: {mu: mu, sigma: sigma},
         super: {mu: 0, sigma: 1}
       }
 
-      var stateVals = map(
-        round,
-        _.range(stateParams.super.mu - 3 * stateParams.super.sigma,
-                stateParams.super.mu + 3 * stateParams.super.sigma,
-                stateParams.super.sigma/binParam)
-      );
-
-      var stateProbs = {
-        sub: map(function(s){
-          Math.exp(Gaussian(stateParams.sub).score(s))+
-          Number.EPSILON
-        }, stateVals),
-        super: map(function(s){
-          Math.exp(Gaussian(stateParams.super).score(s))+
-          Number.EPSILON
-        }, stateVals)
-      };
-
       var statePrior = {
-        sub: Infer({
-          model: function(){return categorical({vs:stateVals,ps:stateProbs.sub})}
-        }),
-        super: Infer({
-          model: function(){return categorical({vs:stateVals,ps:stateProbs.super})}
-        })
-      };
+        sub: DiscretizedGaussian(stateParams.sub),
+        super: DiscretizedGaussian(stateParams.super)
+      }
 
-      var thresholdBins ={
-        positive: map(function(x){
-          return  x - (1/(binParam*2));
-        }, sort(statePrior.super.support())),
-        negative: map(function(x){
-          return  x + (1/(binParam*2));
-        }, sort(statePrior.super.support()))
-      };
+      // var thresholdBins ={
+      //   positive: map(function(x){
+      //     return  x - (1/(binParam*2));
+      //   }, sort(statePrior.super.support())),
+      //   negative: map(function(x){
+      //     return  x + (1/(binParam*2));
+      //   }, sort(statePrior.super.support()))
+      // };
+      //
+      // var thresholdPrior = cache(function(form){
+      //   return Infer({
+      //     model: function() { return uniformDraw(thresholdBins[form]) }
+      //   });
+      // });
 
-      var thresholdPrior = cache(function(form){
-        return Infer({
-          model: function() { return uniformDraw(thresholdBins[form]) }
-        });
-      });
-
-      var literalListener = cache(function(u, threshold, comparisonClass) {
+      var literalListener = cache(function(u, comparisonClass) {
         Infer({model: function(){
           var cc = u.split("_")[1] == "Adjective" ?  comparisonClass :
                     u.split("_")[1] == "silence" ?  comparisonClass :
                     u.split("_")[1]
           var utterance = u.split("_")[0]
           var state = sample(statePrior[cc]);
+          var threshold = sample(thetaPrior);
           // display(cc);
           // display(threshold);
           // display(utterance);
@@ -165,7 +122,7 @@ var model = function(){
           var utterance = uniformDraw([form + "_Adjective", "silence_silence"]);
 
           var L0 = literalListener(utterance, "super")
-          var _kl = KL(speakerBeliefs, L1, speakerBeliefs.support());
+          var _kl = KL(speakerBeliefs, L0, speakerBeliefs.support());
           factor(alphas.s1.super * -1 * _kl)
           return utterance == form + "_Adjective" ? 1 : 0
         }})
@@ -179,7 +136,8 @@ var model = function(){
           var utterance = form + "_Adjective";
           var comparisonClass = sample(classPrior);
           var state = sample(statePrior[comparisonClass]);
-          var threshold = sample(thresholdPrior(form));
+          // var threshold = sample(thresholdPrior(form));
+          var threshold = sample(thetaPrior);
           var m = meaning(utterance, state, threshold);
           condition(m);
           return comparisonClass == "sub" ? "sub_plural" : "super"
@@ -190,35 +148,34 @@ var model = function(){
 
       foreach(["positive","negative"], function(form){
 
-        var d_subcat_superSpeaker = _.pluck(
-          _.where(vsData, {sub_category: subCat, form:form}),
+        var d_subcat_superSpeaker = _.map(
+          _.filter(vsData, {sub_category: subCat, form:form}),
         "response");
-        var d_subcat_ccInference = _.pluck(
-            _.where(ccData, {sub_category: subCat, form:form}),
+        var d_subcat_ccInference = _.map(
+            _.filter(ccData, {sub_category: subCat, form:form}),
         "paraphrase");
 
-        var superSpeakerProbs = speaker2_super(form);
+        var superSpeakerProbs = speaker1_super(form);
 
         mapData({data:d_subcat_superSpeaker}, function(d){
 	        //  console.log("superSpeaker = " + superSpeakerProbs.score(d))
           observe(superSpeakerProbs, d)
         })
 
-        var ccRSA = pragmaticListener(form);
+        var ccRSA = literalListener_classInference(form);
 
         mapData({data:d_subcat_ccInference}, function(d){
         //  console.log("cc = "+ ccRSA.score(d))
           observe(ccRSA, d);
         })
 
-        query.add([subCat, "superSpeaker", form], Math.exp(superSpeakerProbs.score(1)))
-        query.add([subCat, "superCC", form], Math.exp(ccRSA.score("super")))
+        query.add([subCat, "superSpeaker", form], exp(superSpeakerProbs.score(1)))
+        query.add([subCat, "superCC", form], exp(ccRSA.score("super")))
 
       })
 
       query.add([subCat, "mu", "NA"], mu);
       query.add([subCat, "sigma", "NA"], sigma);
-      query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
 
       // query.add([subCat, "subCatPrior", "NA"], subClassPrior);
 
@@ -235,26 +192,33 @@ var model = function(){
   query.add(["beta", "frequency",  "NA"], classParameters.frequency)
 
   query.add(["speakerOptimality_s1","superSpeaker", "NA"],alphas.s1.super)
-  query.add(["speakerOptimality_s2","superSpeaker", "NA"],alphas.s2.super)
-  query.add(["speakerOptimality_s1","ccRSA", "NA"],alphas.s1.cc)
+  // query.add(["speakerOptimality_s2","superSpeaker", "NA"],alphas.s2.super)
+  // query.add(["speakerOptimality_s1","ccRSA", "NA"],alphas.s1.cc)
   // }, subCategories)
 
   // return _.object(_.flatten(parameters, true));
   return query
 }
 
-var mhiter = 50;
+var mhiter = 500;
 
 var burn = mhiter / 2;
+var outfile = 'fbt-L0-empiricalCC--disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+
+
 var posterior = Infer({
   model: model,
   method: "incrementalMH",
   samples: mhiter, burn: burn,
   verbose: T,
-  verboseLag: mhiter / 20
+  verboseLag: mhiter / 20,
+  stream: {
+    path: "results/" + outfile,
+    header: ["cat", "param", "form", "val"]
+  }
 })
 
-var outfile = 'results/fbt-L0-empiricalCC--disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
-
-utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
-display("file written to = " + outfile)
+"file written to = " + outfile;
+// display(sort(thetaPrior.support()))
+// sort(DiscretizedGaussian({mu:0, sigma:1}).support())
+// ccData
