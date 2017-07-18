@@ -24,11 +24,8 @@ var ccData = removeExtraRow(dataFrame(utils.readCSV(dataPath + ccDataFile)))
 var vsData = removeExtraRow(dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"]))
 
 
-var subCategories0 = levels(vsData, "sub_category");
-var subCategories = subCategories0.slice(0, subCategories0.length - 1);
-
-var degrees0 = levels(vsData, "degree");
-var degrees = degrees0.slice(0, degrees0.length - 1);
+var subCategories = levels(vsData, "sub_category");
+var degrees = levels(vsData, "degree");
 
 var model = function(){
 
@@ -202,23 +199,23 @@ var model = function(){
   return query
 }
 // 500 iterations (+ 250 burn) = 2 min
-var mhiter = 500;
+var mhiter = 100000;
 
 var burn = mhiter / 2;
-var outfile = 'fbt-L0-empiricalCC--disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+var outfile = 'fbt-L0-empiricalCC-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
 
-var posterior = Infer({
-  model: model,
-  method: "incrementalMH",
-  samples: mhiter, burn: burn,
-  verbose: T,
-  verboseLag: mhiter / 20,
-  stream: {
-    path: "results/" + outfile,
-    header: ["cat", "param", "form", "val"]
-  }
-})
+// var posterior = Infer({
+//   model: model,
+//   method: "incrementalMH",
+//   samples: mhiter, burn: burn,
+//   verbose: T,
+//   verboseLag: mhiter / 20,
+//   stream: {
+//     path: "results/" + outfile,
+//     header: ["cat", "param", "form", "val"]
+//   }
+// })
 
 "file written to = " + outfile;
 // display(sort(thetaPrior.support()))
