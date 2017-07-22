@@ -1,11 +1,16 @@
 ---
 title: "Comparison class models (RSA + BDA)"
-output: html_notebook
+author: "M. H. Tessler"
+date: "7/21/2017"
+output: github_document
 ---
 
-# Empirical data
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+theme_set(theme_few())
+```
 
-```{r}
+```{r libraries}
 library(langcog)
 library(tidyverse)
 library(data.table)
@@ -28,11 +33,8 @@ hdi_lower<- function(s){
 }
 ```
 
-Data analysis for Class Elicitation experiment
 
-Analyzed in terms of proportion *superordinate* responses
-
-```{r}
+```{r ce.data}
 data.path <- paste(project.path, "data/classElicitation-1/", sep = "")
 
 d.catch <- read.csv(paste(data.path, "class-elicitation-full-catch_trials.csv", sep = ""))
@@ -42,18 +44,24 @@ d.catch <- d.catch %>%
   select(workerid, pass)
 
 d <- read.csv(paste(data.path, "class-elicitation-full-trials.csv", sep = ""))
-d.tidy <- left_join(d, d.catch) %>%
-  filter(pass) %>%
-  mutate(superResponse = ifelse(paraphrase == "super", 1, 0)) 
 
-ce.summary <- d.tidy %>%
+
+df.bayes <- left_join(d, d.catch) %>%
+  filter(pass) %>%
+  mutate(subResponse = ifelse(paraphrase == "super", 0, 1)) %>%
   group_by(strength, target, degree, adjective, form, sub_category, super_category) %>%
-  multi_boot_standard(column = "superResponse")
+  summarize(k = sum(subResponse), n = n()) %>%
+  ungroup() %>%
+  mutate(a = 1 + k,
+         b = 1 + n - k,
+         low  = qbeta(.025, a, b),
+         high = qbeta(.975, a, b),
+         MAP_h = (a-1)/(a+b-2),
+         mean = a / (a + b))
+
 ```
 
-Data analysis for Vague Speaker experiment
-
-```{r}
+```{r vs.data}
 project.name <- "vague-prior-elicitation-1"
 data.path <- paste(project.path, "data/vagueSpeaker-1/", sep = "")
 d.catch <- read.csv(paste(data.path, project.name, "-catch_trials.csv", sep = ""))
@@ -62,98 +70,289 @@ d.catch <- d.catch %>%
 
 d <- read.csv(paste(data.path, project.name, "-trials.csv", sep = ""))
 
-vs.summary <- left_join(d, d.catch %>% select(workerid, pass)) %>%
+
+
+vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
   filter(pass) %>%
   group_by(strength, target, degree, adjective, 
            form, sub_category, super_category) %>%
-  multi_boot_standard(column = "response")
+  summarize(k = sum(response), n = n()) %>%
+  ungroup() %>%
+  mutate(a = 1 + k,
+         b = 1 + n - k,
+         low  = qbeta(.025, a, b),
+         high = qbeta(.975, a, b),
+         MAP_h = (a-1)/(a+b-2),
+         mean = a / (a + b))
+```
+
+
+
+## Model results
+
+#### CogSci results (L1 model)
+
+```{r load_model_results, cache = T}
+load(paste(
+   project.path,
+   "writing/cogsci17/model_results/fbt-L1-explAlt-noSilence-empiricalCC-disc3-mcmc50000_burn25000_2chain.RData",
+   sep = ""))
+
+m.samp.tidy <-left_join(
+  m.samp %>% filter(param == "prior"),
+  d %>% select(degree, sub_category, strength) %>% unique() %>%
+  rename(cat = sub_category)
+) %>% 
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low","medium","high")))
+
+
+
+m.freq.summary <- m.samp %>% filter(param == "frequency") %>%
+  group_by(param) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = hdi_upper(val),
+             cred_lower = hdi_lower(val) )
+
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  # rowwise() %>%
+  # mutate(val = ifelse(param == "superCC", 1 - val, val)) %>%  
+  group_by(param, cat,form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = hdi_upper(val),
+             cred_lower = hdi_lower(val) )
+```
+
+```{r l1.model.figure}
+md.pp <- left_join(
+  bind_rows(vs.bayes %>% 
+             mutate(expt = "superSpeaker"),
+           df.bayes %>%
+             mutate(expt = "superCC")) %>% 
+             ungroup() %>%
+             rename(cat = sub_category),
+  m.pp %>% rename(expt = param)) %>%
+  rowwise() %>%
+  mutate(
+         form = factor(form, levels = c("positive", "negative")),
+         MAP = ifelse(expt == "superCC", 1 - MAP, MAP),
+         cred_lower = ifelse(expt == "superCC", 1 - cred_lower, cred_lower),
+         cred_upper = ifelse(expt == "superCC", 1 - cred_upper, cred_upper),
+         degree = factor(degree,
+                         levels = c("height", "temperature", "weight",
+                                    "time", "price"),
+                         labels = c("short / tall","cold / warm",
+                                    "light / heavy", "short / long", 
+                                    "cheap / expensive" )),
+         expt = factor(expt, 
+                       levels = c("superCC", "superSpeaker"),
+                       labels = c('Experiment 1 \n (Comparison class inference)', ' Experiment 2 \n (Adjective production)'))) 
+
+         
+fill.colors <- RColorBrewer::brewer.pal(5, "Set3")
+names(fill.colors) <- levels(md.pp$degree)
+
+scatterFig <- ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = MAP_h, ymin = low, ymax = high,
+                  shape = form, fill = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3, color = 'black')+
+  geom_errorbar(size = 0.5, alpha = 0.4, color = 'black')+
+  geom_errorbarh(size = 0.5, alpha =0.4, color = 'black')+
+  geom_point(size = 2.5, color = 'black')+
+  scale_shape_manual(values = c(24, 25))+
+  scale_fill_brewer(palette = "Set3")+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  scale_x_continuous(limits = c(0, 1), breaks = c(0,1))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,1))+
+  ylab("Human judgment")+
+  xlab("Model prediction")+
+  theme(legend.box = "horizontal",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"),
+        #legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank())+
+        #legend.position = c(0.57, -0.2))+
+  guides(fill=guide_legend(override.aes=list(colour=fill.colors)),
+         shape = guide_legend(override.aes= list(colour = 'black')))
+        
+scatterFig
+#ggsave(scatterFig, 
+ #      file = paste(talk.fig.path, "model-scatters.pdf"), width = 7, height = 5)
 
 ```
 
-## Model results
-# Models
+### L0 model
 
-
-### FBT models
-
-
-```{r}
+```{r cache = T}
 n_chains  = 3
-n_samples = 10
+n_samples = 100000
+burn <- n_samples / 2
 m.samp <- data.frame()
-# just Expt 1 data
-#file.prefix <- "cc-mcmc5000_burn2500_chain"
-# just Expt 1 data, infer prior on comparison class (by degree)
-#file.prefix <- "cc-subcatpriorByDegree-mcmc3000_burn1500_chain"
-# just Expt 1 data, infer prior on comparison class (by subcat)
-#file.prefix <- "cc-subcatpriorByCat-mcmc3000_burn1500_chain"
 
-# just Expt 2 data
-#file.prefix <- "vs-mcmc3000_burn1500_chain"
-
-# expt 1 & expt 2 data, fixed prior on comparison class
-#file.prefix <- "fbt-mcmc5000_burn2500_chain"
-# expt 1 & expt 2 data, infer prior on comparison class (by subcat)
-#file.prefix <- "fbt-subcatprior-mcmc5000_burn2500_chain"
-# expt 1 & expt 2 data, infer prior on cc (by degree)
-#file.prefix <- "fbt-subcatpriorByDegree-mcmc3000_burn1500_chain"
-
-# expt 1 & expt 2 with L2 model (1/20/17)
-#file.prefix <- "fbt-L2-posnegAlt-mcmc3000_burn1500_chain"
-
-# expt 1 & expt 2 with L1 model with pos & neg alternatives (1/20/17)
-#file.prefix <- "fbt-L1-posnegAlt-mcmc1000_burn500_chain"
-# expt 1 & 2, L1 model with pos, neg, and silence alternatives (fixed S2 model from above)
-#file.prefix <- "fbt-L1-posnegAlt-silenceCost-S2flip-mcmc10_burn5_chain"
-
-# expt 1 & 2, L1 model with explicit and silence alternatives
-file.prefix <- "fbt-L1-explAlt-ccPriorByDomain-disc3-mcmc10_burn5_chain"
-
-# expt 1 & expt 2 with L1 model with pos, neg, and explicit alternatives (1/23/17)
-# file.prefix <- "fbt-L1-fullAlt-ccPriorByDegree-disc3-mcmc500_burn250_chain"
+file.prefix <- "fbt-L0-empiricalCC-disc3-mcmc"
 
 for (i in seq(1, n_chains)){
-  m <- as.data.frame(fread(paste(project.path,"models/sherlock/results/",
-                                 file.prefix, i, ".csv", sep="")))
-  m.samp.i <- rwebppl::get_samples(m, n_samples)
-  m.samp <- bind_rows(m.samp, m.samp.i)
+  m <- as.data.frame(fread(paste(project.path,
+                                 "models/sherlock/results/",
+                                 file.prefix, n_samples, "_burn", 
+                                 burn, "_chain", 
+                                 i, ".csv", sep="")))
+  m.samp <- bind_rows(m.samp, m)
   print(i)
 }
 
 ```
 
-Speaker optimality parameters
+#### Posterior predictives
 
 ```{r}
-m.samp %>% filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2")) %>%
-  separate(cat, into = c("cat", "speaker")) %>%
-#m.samp %>% filter(cat == "speakerOptimality") %>%
-  ggplot(., aes(x = val))+
-  geom_histogram()+
-  facet_wrap(~ param  + speaker)
+m.pp <- m.samp %>% 
+  filter(param %in% c("superCC", "superSpeaker")) %>%
+  group_by(param, cat, form) %>%
+  summarize( MAP = estimate_mode(val),
+             cred_upper = hdi_upper(val),
+             cred_lower = hdi_lower(val) )
 ```
 
-Other parameters
+```{r}
+md.pp <- left_join(
+  bind_rows(vs.bayes %>% 
+             mutate(expt = "superSpeaker"),
+           df.bayes %>%
+             mutate(expt = "superCC")) %>% 
+             ungroup() %>%
+             rename(cat = sub_category),
+  m.pp %>% rename(expt = param)) %>%
+  rowwise() %>%
+  mutate(
+         form = factor(form, levels = c("positive", "negative")),
+         MAP = ifelse(expt == "superCC", 1 - MAP, MAP),
+         cred_lower = ifelse(expt == "superCC", 1 - cred_lower, cred_lower),
+         cred_upper = ifelse(expt == "superCC", 1 - cred_upper, cred_upper),
+         degree = factor(degree,
+                         levels = c("height", "temperature", "weight",
+                                    "time", "price"),
+                         labels = c("short / tall","cold / warm",
+                                    "light / heavy", "short / long", 
+                                    "cheap / expensive" )),
+         expt = factor(expt, 
+                       levels = c("superCC", "superSpeaker"),
+                       labels = c('Experiment 1 \n (Comparison class inference)', ' Experiment 2 \n (Adjective production)'))) 
+
+         
+fill.colors <- RColorBrewer::brewer.pal(5, "Set3")
+names(fill.colors) <- levels(md.pp$degree)
+
+ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+                  y = MAP_h, ymin = low, ymax = high,
+                  shape = form, fill = degree))+
+  geom_abline(intercept = 0, slope = 1, lty = 3,color = 'black')+
+  geom_errorbar(size = 0.5, alpha = 0.4, color = 'black')+
+  geom_errorbarh(size = 0.5, alpha =0.4, color = 'black')+
+  geom_point(size = 2.5, color = 'black')+
+  scale_shape_manual(values = c(24, 25))+
+  scale_fill_brewer(palette = "Set3")+
+  facet_wrap(~expt)+
+  coord_fixed(ratio = 1)+
+  scale_x_continuous(limits = c(0, 1), breaks = c(0,1))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,1))+
+  ylab("Human judgment")+
+  xlab("Model prediction")+
+  theme(legend.box = "horizontal",
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"),
+        #legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank())+
+        #legend.position = c(0.57, -0.2))+
+  guides(fill=guide_legend(override.aes=list(colour=fill.colors)),
+         shape = guide_legend(override.aes= list(colour = 'black')))
+
+
+
+
+# md.pp <- left_join(
+#   bind_rows(vs.summary %>% 
+#              mutate(expt = "superSpeaker"),
+#            ce.summary %>%
+#              mutate(expt = "superCC")) %>% 
+#              ungroup() %>%
+#              rename(cat = sub_category),
+#   m.pp %>% rename(expt = param))
+# 
+# ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
+#                   y = mean, ymin = ci_lower, ymax = ci_upper,
+#                   shape = form, color = degree))+
+#   geom_abline(intercept = 0, slope = 1, lty = 3)+
+#   geom_errorbar()+
+#   geom_errorbarh()+
+#   geom_point()+
+#   facet_wrap(~expt)+
+#   coord_fixed(ratio = 1)+
+#   xlim(0, 1)+
+#   ylim(0, 1)
+
+```
+
+
+```{r}
+print(paste("ccRSA model & cc inference task r^2= ", with(md.pp %>%
+       filter(expt == 'Experiment 1 \n (Comparison class inference)'), cor(MAP, MAP_h))^2, sep = ""))
+
+print(paste("adjective s2 & vs task r^2= ", with(md.pp %>%
+       filter(expt == ' Experiment 2 \n (Adjective production)'), cor(MAP, MAP_h))^2))
+```
+
+### Comparison class inference task
+
+```{r}
+md.pp.long <- bind_rows(
+  md.pp %>% 
+    select(-MAP_h, -low, -high) %>%
+    mutate(src = "model"),
+  md.pp %>%
+    select(-MAP, -cred_lower, -cred_upper) %>%
+    rename(MAP = MAP_h, cred_lower = low, cred_upper = high) %>%
+    mutate(src = "human")
+)
+
+md.pp.long %>%
+  ungroup() %>%
+  filter(expt == 'Experiment 1 \n (Comparison class inference)') %>%
+  mutate(cat = factor(cat, levels = cat[order(strength)])) %>%
+  ggplot(., 
+         aes( x = cat, 
+              y = MAP, ymin = cred_lower, ymax = cred_upper, 
+              group = form, fill = form ) )+
+  geom_bar(stat = 'identity', position = position_dodge())+
+  geom_errorbar(position = position_dodge())+
+  facet_grid(src~degree, scales = 'free')+#, nrow = 1)+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1)) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1) )+
+  ylab("Proportion Subordinate response")
+```
+
+
+It looks that the L0 model is making the exact wrong prediction (i.e., the interaction). The L0 model doesn't have a way of separating listener knowledge (i.e., the comparison class used in the listener's degree prior) from speaker's intent (i.e., the comparison class used by the speaker). In our setup, the listener knows the target is a basketball player. The L0 model doens't have a way of knowing this, so it instead just samples a comparison class from the comparison class prior. So when it hears "tall", it thinks "basketball player" is the more likely comparison class.  
+
+Basically, the L0 model is answering "what do you think it is: Basketball player or person"? When it hears "he's tall", L0 thinks "basketball player!"
+
+
+
+#### Speaker optimality parameters
 
 ```{r}
 m.samp %>% 
-  filter(cat %in% c("silenceCost","explicitCost","superCatPrior")) %>%
+  filter(cat %in% c("speakerOptimality_s1", "speakerOptimality_s2", "beta")) %>%
+  separate(cat, into = c("cat", "speaker")) %>%
   ggplot(., aes(x = val))+
   geom_histogram()+
-  facet_wrap(~ cat, scales = 'free')
-```
-
-
-Comparison class prior (Probability of subcategory)
-
-```{r}
-m.samp %>% filter(param == "superCatPrior") %>%
-#m.samp %>% filter(param == "subCatPrior") %>%
-  ggplot(., aes(x = val))+
-  geom_histogram()+
-  facet_wrap(~cat)+
-  theme_bw()+
-  scale_x_continuous(limits = c(0,1), breaks = c(0, 0.5, 1))
+  facet_wrap(~ param  + speaker, scales = 'free')
 ```
 
 
@@ -168,101 +367,47 @@ m.samp %>% filter(param %in% c("mu", "sigma")) %>%
     theme_bw()+
   theme(strip.text.y = element_text(angle = 0))
 ```
+
+
 ```{r}
 m.samp %>% filter(param %in% c("mu", "sigma")) %>%
   filter(cat != "") %>%
   group_by(cat, param) %>%
   summarize(MAP = estimate_mode(val),
-            cred_upper = HPDhi(val),
-            cred_lower = HPDlo(val)) %>%
+            cred_upper = hdi_upper(val),
+            cred_lower = hdi_lower(val)) %>%
   kable()
 ```
 
 
 
-What do the priors look like?
 
-```{r}
-m.samp %>% filter(param == "prior") %>%
-  ggplot(., aes(x = val, y = ..scaled..))+
-  geom_density()+
-  facet_wrap(~cat, scales = 'fixed')+
-  xlim(-3, 3)+
+```{r eval = F}
+# What do the priors look like?
+
+left_join(
+  m.samp %>% filter(param == "prior"),
+  d %>% select(degree, sub_category, strength) %>% unique() %>%
+  rename(cat = sub_category)
+) %>% 
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low", "medium", "high"))
+         ) %>%
+  ggplot(., aes(x = val, y = ..scaled.., 
+                color = strength, fill = strength))+
+  geom_density(alpha=0.4)+
+  facet_wrap(~degree, scales = 'fixed')+
+  xlim(-4, 4)+
   theme_bw()+
   theme(strip.text.y = element_text(angle = 0)) 
 ```
 
 
-Posterior predictives
 
-```{r}
-m.pp <- m.samp %>% 
-  filter(param %in% c("superCC", "superSpeaker")) %>%
-  group_by(param, cat,form) %>%
-  summarize( MAP = estimate_mode(val),
-             cred_upper = hdi_upper(val),
-             cred_lower = hdi_lower(val) )
-```
 
-```{r}
-md.pp <- left_join(
-  bind_rows(vs.summary %>% 
-             mutate(expt = "superSpeaker"),
-           ce.summary %>%
-             mutate(expt = "superCC")) %>% 
-             ungroup() %>%
-             rename(cat = sub_category),
-  m.pp %>% rename(expt = param))
-
-ggplot(md.pp, aes(x = MAP, xmin = cred_lower, xmax = cred_upper,
-                  y = mean, ymin = ci_lower, ymax = ci_upper,
-                  shape = form, color = degree))+
-  geom_abline(intercept = 0, slope = 1, lty = 3)+
-  geom_errorbar()+
-  geom_errorbarh()+
-  geom_point()+
-  facet_wrap(~expt)+
-  coord_fixed(ratio = 1)+
-  xlim(0, 1)+
-  ylim(0, 1)
-
-print(paste("ccRSA model & cc inference task r^2= ", with(md.pp %>%
-       filter(expt == "superCC"), cor(MAP, mean))^2, sep = ""))
-
-print(paste("adjective s2 & vs task r^2= ", with(md.pp %>%
-       filter(expt == "superSpeaker"), cor(MAP, mean))^2))
-```
-### Comparison class inference task
-
-```{r}
-md.pp.long <- bind_rows(
-  md.pp %>% 
-    select(-mean, -ci_lower, -ci_upper) %>%
-    rename(mean = MAP, ci_lower = cred_lower, ci_upper = cred_upper) %>%
-    mutate(src = "model"),
-  md.pp %>%
-    select(-MAP, -cred_lower, -cred_upper) %>%
-    mutate(src = "human")
-)
-
-md.pp.long %>%
-  ungroup() %>%
-  filter(expt == "superCC") %>%
-  mutate(cat = factor(cat, levels = cat[order(strength)])) %>%
-  ggplot(., 
-         aes( x = cat, 
-              y = mean, ymin = ci_lower, ymax = ci_upper, 
-              group = form, fill = form ) )+
-  geom_bar(stat = 'identity', position = position_dodge())+
-  geom_errorbar(position = position_dodge())+
-  facet_grid(src~degree, scales = 'free')+#, nrow = 1)+
-  ylim(0, 1) + 
-  theme(axis.text.x = element_text(angle = 90) )
-```
-
+```{r eval = F}
 ### Adjective speaker inference task
 
-```{r}
 md.pp.long %>%
   ungroup() %>%
   filter(expt == "superSpeaker") %>%
