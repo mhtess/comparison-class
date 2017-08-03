@@ -31,13 +31,14 @@ author_note: >
   Enter author note here.
 
 abstract: >
-  Speakers often refer to context only implicitly when using language. 
+  Understanding language requires knowledge of the context.
+  Yet, relevant context is often only implicit in everyday conversation.
   The utterance \"it's warm outside\" could signal it's warm relative to other days of the year or just relative to the current season (e.g., it's warm for winter).
   *Warm* vaguely conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
-  Here, we formalize how world knowledge and listeners' internal models of speech production can drive the resolution of a comparison class in context.
-  We introduce a Rational Speech Act model and derive two novel predictions from it, which we validate using a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
-  Our model makes quantitative predictions given prior world knowledge for the domains in question.
-  We triangulate this knowledge with a follow-up language task in the same domains, using Bayesian data analysis to infer priors from both data sets.
+  Here, we formalize how world knowledge and pragmatic reasoning can drive the resolution of a comparison class.
+  We introduce a Rational Speech Act model and derive two novel predictions from it.
+  We validate these predictions using both a free production and a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
+  
   
 keywords          : "comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis"
 
@@ -86,7 +87,8 @@ library(lmerTest)
 library(data.table)
 library(ggthemes)
 library(RColorBrewer)
-library("papaja")
+library(tidytext)
+library(papaja)
 
 estimate_mode <- function(s) {
   d <- density(s)
@@ -109,7 +111,7 @@ theme_set(theme_minimal(9))
 ```
 
 <!-- 
-Reviewer comments to address:
+CogSci Reviwer comments to address:
 [X] why does the model make the predictions that it does?
 [X] why experiment 2?
 [X] why no alternative models? [no work has been done on this]
@@ -118,27 +120,26 @@ Reviewer comments to address:
 
 # Introduction
 
-If it's 75 \degree F (24 \degree C) outside, you could say "it's warm."
-If it's 60 \degree F (16 \degree C), you might not consider it warm.
-Unless it's January; it could be warm for January.
+A 75 \degree F (24 \degree C) day is warm.
+A 60 \degree F (16 \degree C) day is not, unless it's January; it could be warm for January.
 *Warm* is relative, and its felicity depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
 Comparison classes are necessary for understanding adjectives and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
-The challenge for listeners is that the comparison class often goes unsaid (e.g., in "It's warm outside.").
+A key challenge for listeners is that the comparison class often goes unsaid (e.g., in "It's warm outside.").
 
 The existence of comparison classes for understanding vague language is uncontroversial [@Solt2009; @Bale2011].
 Four-year-olds categorize novel creatures (*pimwits*) as either "tall" or "short" depending on the distribution of heights of *pimwits* and not the heights of creatures that are not called *pimwits*, suggesting the comparison class in that context is *other pimwits* [@Barner2008].
 Adult judgments of the felicity for adjectives like "dark" or "tall" similarly depend upon fine-grained details of the statistics of the comparison class [@Schmidt2009; @Solt2012; @Qing2014].
+In these experiments, however, the comparison class is explicit: Participants are given exemplars of a distribution, and asked to derive a context-specific interpretation. 
 
 Any particular object of discourse, however, can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
 A day in January is also a day of the year; if it's warm, it could be *warm for winter* or *warm for the year*.
-How should a listener decide what comparison class a speaker is considering, when the comparison class goes unsaid? 
+How should a listener decide what comparison class a speaker is considering, when the comparison class is unsaid? 
 To our knowledge, this question has been addressed neither formally nor empirically.^[
 Theoretical work in semantics has instead focused on how information from a comparison class is used and what representations might be preferred [@Solt2009; @Bale2011].
 ]
-We propose that listeners actively combine category knowledge with pragmatic considerations to infer the comparison class implicitly used by the speaker.
-We introduce a minimal extension to the Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013] to allow it to flexibly reason about the implicit comparison class.
+We propose that listeners actively combine category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
 
-
+We extend a Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013] to allow it to flexibly reason about the implicit comparison class.
 From this model, we derive two novel **qualitative predictions**.
 Saying "it's warm" in winter should signal it's warm *for winter* (as opposed to *for the year*) more so than saying "it's cold". 
 The opposite relationship should hold in summer, where "it's cold" should signal it's cold *for summer* more so than "it's warm".
@@ -149,18 +150,14 @@ We test these predictions by eliciting the comparison class using a paraphrase d
 As with any Bayesian cognitive model, it is necessary to explicitly specify relevant prior knowledge (e.g., beliefs about temperatures) in order for the model to make **quantitative predictions**.
 The current methodological standard is to measure beliefs by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
 We pursue a different methodology.
-<!-- merging Bayesian cognitive models with Bayesian data analysis. -->
 The RSA model captures a productive fragment of natural language; thus, it makes predictions about a related natural language task (Expt. 2).
 Critically, we can use the model to predict natural language judgments that require the *same prior knowledge* as in Expt. 1 and use Bayesian data analysis to jointly infer the shared priors.
-<!-- We do this using endorsements of adjective sentences like "A winter day is cold relative to other days of the year" . -->
 This approach harnesses the productivity of language into experiment design and allows us to reconstruct priors without having participants engage in challenging numerical estimation tasks. 
-<!-- harnesses the productivity of language into experiment design and allows us to specify priors without having participants estimate quantities. -->
 
 # Computational model
 
 Adjectives like *warm* and *cold* are vague descriptions of an underlying quantitative scale (e.g., temperature).
 The vagueness and context-sensitivity of these adjectival utterances can be modeled using threshold semantics ($[\![u]\!] = x > \theta$, for utterance $u$, scalar degree $x$, and threshold $\theta$), where the threshold is probabilistically set with respect to a comparison class $c$
-<!-- comes from an uninformed prior distribution and is inferred in context  -->
 via pragmatic reasoning [@Lassiter2013; see also @Qing2014a]:
 \vspace{-1.0cm}
 \begin{align}
@@ -1324,9 +1321,7 @@ Even for these fine-grained differences, the model does a good job at explaining
 
 # Discussion
 
-<!-- Language users are often vague, saying things like "It's warm outside". -->
 The words we say are often too vague to have a single, precise meaning and only make sense in context.
-<!-- This poses a challenge to listeners, who have to use context to uncover a more precise meaning from what they've heard. -->
 Context, however, can also be underspecified, as there are many possible dimensions or categories that a speaker might be implicitly referring to or comparing against.
 Here, we investigate the flexibility in the class against which an entity can be implicitly compared.
 
