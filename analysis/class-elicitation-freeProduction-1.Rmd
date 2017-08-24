@@ -14,9 +14,10 @@ knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.p
 ```{r libraries}
 library(langcog)
 library(tidyverse)
-library(data.table)
 library(tidytext)
 library(knitr)
+#setDict("/Users/mht/Documents/research/tools/WordNet-3.0/dict")
+library(wordnet)
 ```
 
 
@@ -88,9 +89,12 @@ d.tidy.phrase <- d.tidy %>%
 #### How well do we do cleaning the phrases?
 
 ```{r}
-left_join(d.tidy.phrase, d %>% select(workerid, trial_num, response)) %>% 
-  select(phrase, response) %>% 
-  rename(cleanedPhrase = phrase, originalResponse = response) %>% 
+d.tidy.phrase.w.original <- left_join(d.tidy.phrase, 
+                           d %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response)
+
+d.tidy.phrase.w.original %>% 
+    select(originalResponse, cleanedPhrase) %>% 
   head(40) %>% kable()
 ```
 
@@ -108,5 +112,118 @@ d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category
 
 
 
+### Can we track "specificity" by word count?
+
+```{r}
+d.wordCountFromCleanedPhrase <- left_join(
+  left_join(
+    d.tidy %>%
+      group_by(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, strength) %>%
+      summarize(nWords = n()) %>% 
+      ungroup(),
+    d %>% select(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, response)
+  ),
+  d.tidy.phrase %>%
+    select(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, phrase)
+) %>% 
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  summarize(nWordsPerResponse = sum(nWords) / n()) 
+
+str()
+
+ggplot(d.wordCountFromCleanedPhrase, 
+       aes( x = strength, y = nWordsPerResponse, fill = form))+
+  geom_col(position = position_dodge())+
+  facet_wrap(~degree)
+```
+
+Not clear that number of words is going to be correlated with specificity.
+
+
+### look for sub_category keyterms (to mark as specific in a binary sense)
+
+
+```{r}
+subcat_keyterms <- list(
+  apple = "apple",
+  "basketball player" = "basketball", # also "players"? (implicit domain restriction)
+  "bottle opener"  = "opener",
+  # "day in Fall" = c("fall", "season"),
+  # "day in Summer" = c("summer", "season"),
+  # "day in Winter" = c("winter", "season"),
+  # dishwasher  = c("dishwasher", "dishwashing machine"),
+  
+  "day in Fall" = "fall",
+  "day in Summer" = "summer",
+  "day in Winter" = "winter",
+  dishwasher  = "dishwasher",
+  grape = "grape",
+  
+  gymnast = "gymnast",
+  movie = "movie",
+  #movie = c("movie", "film"),
+  "music video" = "music",
+  "soccer player" = "soccer",
+  "toaster" = "toaster",
+  "video of the cute animal" = "animal",
+  watermelon = "watermelon"
+)
+
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
+
+d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", cleanedPhrase, "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    subcatKeyterm = subcat_keyterms[[as.character(sub_category)]],
+    specific = containsString(
+      as.character(cleanedPhrase), 
+      subcat_keyterms[[as.character(sub_category)]]
+    )
+  )
+```
+
+
+
+```{r}
+d.tidy.phrase.specificMarking %>% 
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  summarize(propSpecific = sum(specific) / n()) %>%
+ggplot(., 
+       aes( x = strength, y = propSpecific, fill = form))+
+  geom_col(position = position_dodge())+
+  facet_wrap(~degree)
+```
+
+
+Notes:
+- height
+  - "players" for baskebtall players?
+  - "players" for soccer players?
+- temperature
+  - "days this week", "recent days", "days during the season" (cleaned to "_season days") as specific
+- spelling errors:
+  -"diswasher", "soccor"
+
+### Word net putzing
+
+```{r}
+initDict(pathData = "/Users/mht/Documents/research/tools/WordNet-3.0/dict")
+getFilterTypes()
+
+term_filter <- getTermFilter("StartsWithFilter", "basketball player", ignoreCase = T)
+terms <- getIndexTerms("NOUN", 10, term_filter)
+
+sapply(terms, getLemma)
+
+sapply(getSynsets(terms[[1]]), getWord)
+?```
 
 
