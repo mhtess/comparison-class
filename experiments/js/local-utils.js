@@ -7,16 +7,15 @@ function getTrials(examples) {
         trials.push({
           target: examples[i].target[Object.keys(examples[i].target)[j]],
   				context: examples[i].context[k],
-          contextWithSuper: examples[i].contextWithSuper[k],
+          // contextWithSuper: examples[i].contextWithSuper[k],
           action: examples[i].action[k],
-          prompt: examples[i].prompt[k],
           degree: examples[i].degree,
           unit: examples[i].unit,
   				form: Object.keys(examples[i].target)[j],
           subunit: examples[i].subunit,
   				sub_singular: examples[i].sub.singular[k],
   				sub_plural: examples[i].sub.plural[k],
-          super: examples[i].super[k],
+          super: examples[i].super,
   				strength: examples[i].strength[k]
 			 });
 		  }
@@ -35,12 +34,11 @@ function getUniqueTrials(examples) {
         target: examples[i].target[form],
         form: form,
         context: examples[i].context[j],
-        contextWithSuper: examples[i].contextWithSuper[j],
+        // contextWithSuper: examples[i].contextWithSuper[j],
         action: examples[i].action[j],
-        prompt: examples[i].prompt[j],
         sub_singular: examples[i].sub.singular[j],
         sub_plural: examples[i].sub.plural[j],
-        super: examples[i].super[j],
+        super: examples[i].super,
         strength: examples[i].strength[j],
         degree: examples[i].degree,
         unit: examples[i].unit,
@@ -108,8 +106,8 @@ var getPronoun3 = function(name){
 
 // sample a condition, where a condition is the use of the "for a" or "relative to"
 var sampleCondition = function() {
-  return _.sample(["context", "contextWithSuper"]);
-	// return "contextWithSuper";
+  // return _.sample(["context", "contextWithSuper"]);
+	return "context";
 }
 
 // isAlpha function implemented using regex
@@ -257,14 +255,30 @@ function embedCE2AFCSlides(trials) {
       "<p class=\"display_context\"></p>" +
       "<p class=\"display_target\"></p>" +
       "<p class=\"display_question\"></p>" +
-      "<div class=\"radioLeft\">" +
-      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label></div><br>" +
-      "<div align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br></div>" +
+      "<div class=\"radioLeft\"><form>" +
+      "<div id=\"radioOne_"+i+"\" align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label></div><br>" +
+      "<div id=\"radioTwo_"+i+"\"  align=\"left\"><input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label></div><br></form></div>" +
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please select an option before continuing.</p>" +
       "</div>";
-    $(".trial_slides").html(slides);
-  }
+	}
+
+
+  $(".trial_slides").html(slides);
+
+	for (var i = 1; i <= trials; i++) {
+		document.getElementById("radioOne_"+i).onclick = function() {
+			clickRadio("0")
+		}
+		document.getElementById("radioTwo_"+i).onclick = function() {
+			clickRadio("1");
+		}
+	}
+
+}
+
+function clickRadio(val){
+	$('input[name="paraphrase"][value=\"'+val+ '\"]').prop('checked',true)
 }
 
 // embeds the trial slides for class-elicitation-paraphrase
