@@ -56,4 +56,21 @@ Participants are asked if the adjective with an explicit superordinate compariso
 
 1. `class-elicitation-paraphrase` (n = 18; June 1, 2017)
 
-Same items as main cogsci experiments but with a free production paraphrase.
+- Same items as main cogsci experiments but with a free production paraphrase.
+- Cost = $0.75 x 18 + 20% = 16.2
+
+2. `class-elicitation-2afc-2`
+
+- Improved set of items based on wordnet
+
+3. `class-elicitation-free-2` (n = 27; Sept 29, 2017)
+
+- Cost = $1 x 27 + 20% = 32.4
+- Improved set of items based on wordnet. Free production.
+
+
+### Preregistered
+
+2. `class-elicitation-paraphrase` (n = 150...)
+
+- Cost = $0.75 x 150 + 20% = 135
