@@ -133,7 +133,7 @@ d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category
 
 ### Can we track "specificity" by word count?
 
-```{r specificityAsWordCount}
+```{r specificityAsWordCount, fig.width=6}
 d.wordCountFromCleanedPhrase <- left_join(
   left_join(
     d.tidy %>%
@@ -283,7 +283,7 @@ d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>%
 
 
 
-```{r figSubCatCode, fig.height=4, fig.width=7, fig.height = 6}
+```{r figSubCatCode, fig.height=4, fig.width=9, fig.height = 6}
 d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
   mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
   group_by(strength, degree, adjective, super_category,

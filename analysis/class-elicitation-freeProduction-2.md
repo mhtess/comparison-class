@@ -16,38 +16,38 @@ There was an error in recording *subject information* for the first 9 subjects a
 Preview of raw data
 
     ##                                        super_category
-    ## 637                                         furniture
-    ## 147                                             bikes
-    ## 431 ways of getting from Los Angeles to San Francisco
-    ## 349                                         beverages
-    ## 907                                            people
-    ## 159                                              cars
-    ## 18                                               cars
-    ## 257                                            people
-    ## 864                                            people
-    ## 310                                  days of the year
-    ##                                     sub_category adjective
-    ## 637                                 reading lamp     light
-    ## 147                                    kids bike     cheap
-    ## 431 bike route from Los Angeles to San Francisco      long
-    ## 349                                cup of coffee      cold
-    ## 907                            basketball player     short
-    ## 159                                 electric car     quiet
-    ## 18                                  electric car     quiet
-    ## 257                                      gymnast     short
-    ## 864                                      gymnast      tall
-    ## 310                                day in Summer      warm
+    ## 575                                             rooms
+    ## 857                                             rooms
+    ## 811                                             bikes
+    ## 812                                           animals
+    ## 932                                  days of the year
+    ## 360 ways of getting from Los Angeles to San Francisco
+    ## 212 ways of getting from Los Angeles to San Francisco
+    ## 663                                             bikes
+    ## 897                                             fruit
+    ## 102                                  days of the year
+    ##                                        sub_category adjective
+    ## 575                                        basement      dark
+    ## 857                                     living room      dark
+    ## 811                                   electric bike     cheap
+    ## 812                                      chimpanzee       big
+    ## 932                                     day in Fall      cold
+    ## 360        flight from Los Angeles to San Francisco      long
+    ## 212 driving route from Los Angeles to San Francisco      long
+    ## 663                                   electric bike     cheap
+    ## 897                                           apple     light
+    ## 102                                   day in Summer      cold
     ##               response
-    ## 637              lamps
-    ## 147              bikes
-    ## 431          distances
-    ## 349             coffee
-    ## 907 basketball players
-    ## 159               cars
-    ## 18                cars
-    ## 257                men
-    ## 864             people
-    ## 310              days
+    ## 575              rooms
+    ## 857 rooms of the house
+    ## 811    electric bikes 
+    ## 812       chimpanzees 
+    ## 932               days
+    ## 360            flights
+    ## 212             drives
+    ## 663              bikes
+    ## 897              fruit
+    ## 102             states
 
 #### Grouping based on raw data
 
@@ -709,48 +709,48 @@ After removing stop words, I reconstruct the phrases...
 
 #### How well do we do cleaning the phrases?
 
-| sub\_category                                   | adjective | originalResponse | cleanedPhrase  |
-|:------------------------------------------------|:----------|:-----------------|:---------------|
-| electric bike                                   | cheap     | electric bikes   | electric bikes |
-| sedan                                           | small     | cars             | cars           |
-| cup of coffee                                   | cold      | coffee           | coffee         |
-| chimpanzee                                      | big       | chimps           | chimps         |
-| cup of iced tea                                 | cold      | drinks           | drinks         |
-| day in Summer                                   | warm      | seasons          | seasons        |
-| cup of water                                    | cold      | beverages        | beverages      |
-| sports car                                      | small     | cars             | cars           |
-| apple                                           | heavy     | fruits           | fruits         |
-| electric bike                                   | expensive | bikes            | bikes          |
-| glass flower vase                               | cheap     | vases            | vases          |
-| cup of iced tea                                 | warm      | tea              | tea            |
-| cup of water                                    | warm      | cups of water    | cups water     |
-| crystal flower vase                             | cheap     | vases            | vases          |
-| cup of iced tea                                 | cold      | drinks           | drinks         |
-| electric bike                                   | cheap     | bikes            | bikes          |
-| cup of iced tea                                 | cold      | drinks           | drinks         |
-| elephant                                        | big       | animals          | animals        |
-| elephant                                        | big       | animals          | animals        |
-| muscle car                                      | loud      | muscle cars      | muscle cars    |
-| coffee table                                    | heavy     | coffee tables    | coffee tables  |
-| watermelon                                      | light     | watermelons      | watermelons    |
-| day in Summer                                   | warm      | times of year    | times          |
-| cup of water                                    | cold      | drinks           | drinks         |
-| city bike                                       | expensive | city bikes       | city bikes     |
-| wardrobe                                        | light     | wardrobes        | wardrobes      |
-| driving route from Los Angeles to San Francisco | long      | flights          | flights        |
-| gymnast                                         | tall      | gymnasts         | gymnasts       |
-| crystal flower vase                             | expensive | vases            | vases          |
-| coffee table                                    | light     | tables           | tables         |
-| sports car                                      | big       | sports cars      | sports cars    |
-| flight from Los Angeles to San Francisco        | short     | flights          | flights        |
-| gymnast                                         | short     | people           | people         |
-| flight from Los Angeles to San Francisco        | long      | short flights    | short flights  |
-| apple                                           | heavy     | apples           | apples         |
-| reading lamp                                    | heavy     | lamps            | lamps          |
-| driving route from Los Angeles to San Francisco | short     | driving routes   | driving routes |
-| city bike                                       | cheap     | bikes            | bikes          |
-| cup of iced tea                                 | warm      | beverages        | beverages      |
-| cup of coffee                                   | cold      | cups of coffee   | cups coffee    |
+| sub\_category                                   | adjective | originalResponse   | cleanedPhrase      |
+|:------------------------------------------------|:----------|:-------------------|:-------------------|
+| kids bike                                       | cheap     | bikes              | bikes              |
+| elephant                                        | big       | animals            | animals            |
+| coffee table                                    | heavy     | furniture          | furniture          |
+| glass flower vase                               | expensive | vases              | vases              |
+| cup of water                                    | cold      | drinks             | drinks             |
+| cup of iced tea                                 | warm      | cups of tea        | cups tea           |
+| elephant                                        | big       | animals            | animals            |
+| cup of iced tea                                 | cold      | tea                | tea                |
+| porcupine                                       | big       | porcupines         | porcupines         |
+| basketball player                               | short     | basketball players | basketball players |
+| basketball player                               | tall      | people             | people             |
+| porcupine                                       | big       | porcupines         | porcupines         |
+| flight from Los Angeles to San Francisco        | long      | flights            | flights            |
+| sports car                                      | small     | sports cars        | sports cars        |
+| chimpanzee                                      | big       | monkeys            | monkeys            |
+| crystal flower vase                             | expensive | vases              | vases              |
+| sports car                                      | big       | sports cars        | sports cars        |
+| city bike                                       | cheap     | other bikes        | bikes              |
+| cup of coffee                                   | cold      | cups of coffee     | cups coffee        |
+| watermelon                                      | heavy     | watermelon         | watermelon         |
+| basketball player                               | tall      | humans             | humans             |
+| family car                                      | loud      | cars               | cars               |
+| apple                                           | light     | apples             | apples             |
+| bike route from Los Angeles to San Francisco    | short     | bike routes        | bike routes        |
+| muscle car                                      | loud      | cars               | cars               |
+| reading lamp                                    | light     | lamps              | lamps              |
+| sports car                                      | big       | sports cars        | sports cars        |
+| driving route from Los Angeles to San Francisco | long      | routes             | routes             |
+| electric bike                                   | cheap     | bikes              | bikes              |
+| muscle car                                      | quiet     | muscle cars        | muscle cars        |
+| runner                                          | short     | runners            | runners            |
+| muscle car                                      | quiet     | engines            | engines            |
+| SUV                                             | small     | SUVs               | suvs               |
+| runner                                          | short     | runners            | runners            |
+| SUV                                             | big       | cars               | cars               |
+| gymnast                                         | tall      | gymnasts           | gymnasts           |
+| cup of coffee                                   | cold      | warm coffee        | warm coffee        |
+| watermelon                                      | light     | watermelons        | watermelons        |
+| driving route from Los Angeles to San Francisco | short     | routes             | routes             |
+| flight from Los Angeles to San Francisco        | short     | flights            | flights            |
 
 ### Results
 
