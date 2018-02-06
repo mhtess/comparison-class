@@ -32,6 +32,8 @@ function getUniqueTrials(examples) {
       form = _.sample(["positive", "negative"]);
       trials.push({
         target: examples[i].target[form],
+				positive: examples[i].target.positive,
+				negative: examples[i].target.negative,
         form: form,
         context: examples[i].context[j],
         // contextWithSuper: examples[i].contextWithSuper[j],
@@ -295,6 +297,25 @@ function embedCEPSlides(trials) {
       "<button onclick=\"_s.button()\">Continue</button>" +
       "<p class=\"err\">Please enter a text response before continuing.</p>" +
       "<p class=\"inputErr\">Please use only alphabetic characters in your response.</p>" +
+      "</div>";
+    $(".trial_slides").html(slides);
+  }
+}
+
+
+
+// embeds the trial slides for class-elicitation-paraphrase
+function embedElicitationSlides(trials) {
+  var slides = "";
+  for (var i = 1; i <= trials; i++) {
+    slides = slides +
+    "<div class=\"slide\" id=\"trial" + i + "\">" +
+      "<p class=\"display_context\"></p>" +
+      "<p class=\"display_target\"></p>" +
+      "<p class=\"display_question\"></p>" +
+      "<span class=\"display_paraphrase\"></span>" +
+			"<div id=\"entityTable" + i + "\"> </div>"+
+      "<p class=\"err\">Please enter a text response before continuing.</p>" +
       "</div>";
     $(".trial_slides").html(slides);
   }
