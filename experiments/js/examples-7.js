@@ -266,7 +266,7 @@ var examples = [{
 	},
 	super: "animals",
 	strength: [1,2,3],
-	degree: "height",
+	degree: "size",
 	unit: ["feet", "meters"],
 	subunit: ["inches", "centimeters"]
 },
@@ -304,7 +304,7 @@ var examples = [{
 	},
 	super: "cars",
 	strength: [1,2,3],
-	degree: "height",
+	degree: "size",
 	unit: ["feet", "meters"],
 	subunit: ["inches", "centimeters"]
 },
@@ -454,5 +454,5 @@ var examples = [{
 	},
 	super: "rooms",
 	strength: [1,2,3],
-	degree: "light"
+	degree: "darkness"
 }];
