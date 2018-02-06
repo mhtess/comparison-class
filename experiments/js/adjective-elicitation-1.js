@@ -35,7 +35,7 @@ function makeSlides(f) {
     $(".err").hide();
     $(".inputErr").hide();
 
-    $(".display_context").html("List three examples of specific kinds of things that can be" + exp.examples[i].positive + "or " +exp.examples[i].negative + ".");
+    $(".display_context").html("List three examples of specific kinds of things that can be " + exp.examples[i].positive + " or " +exp.examples[i].negative + ".");
     this.startTime = Date.now();
 
     this.counter = 1;
@@ -270,7 +270,7 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0"];
-  exp.structure = [];
+  // exp.structure = [];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
