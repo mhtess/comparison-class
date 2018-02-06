@@ -15,17 +15,39 @@ There was an error in recording *subject information* for the first 9 subjects a
 
 Preview of raw data
 
-    ##     super_category        sub_category adjective           response
-    ## 738           cars                 SUV       big                suv
-    ## 12    flower vases crystal flower vase expensive              gifts
-    ## 864         people             gymnast      tall             people
-    ## 651         people   basketball player     short basketball players
-    ## 935      beverages       cup of coffee      cold     cups of coffee
-    ## 729   flower vases crystal flower vase     cheap              vases
-    ## 213        animals           porcupine     small            animals
-    ## 723           cars               sedan     small               cars
-    ## 865         people   basketball player      tall                men
-    ## 189           cars          muscle car     quiet        muscle cars
+    ##                                        super_category
+    ## 637                                         furniture
+    ## 147                                             bikes
+    ## 431 ways of getting from Los Angeles to San Francisco
+    ## 349                                         beverages
+    ## 907                                            people
+    ## 159                                              cars
+    ## 18                                               cars
+    ## 257                                            people
+    ## 864                                            people
+    ## 310                                  days of the year
+    ##                                     sub_category adjective
+    ## 637                                 reading lamp     light
+    ## 147                                    kids bike     cheap
+    ## 431 bike route from Los Angeles to San Francisco      long
+    ## 349                                cup of coffee      cold
+    ## 907                            basketball player     short
+    ## 159                                 electric car     quiet
+    ## 18                                  electric car     quiet
+    ## 257                                      gymnast     short
+    ## 864                                      gymnast      tall
+    ## 310                                day in Summer      warm
+    ##               response
+    ## 637              lamps
+    ## 147              bikes
+    ## 431          distances
+    ## 349             coffee
+    ## 907 basketball players
+    ## 159               cars
+    ## 18                cars
+    ## 257                men
+    ## 864             people
+    ## 310              days
 
 #### Grouping based on raw data
 
@@ -687,48 +709,48 @@ After removing stop words, I reconstruct the phrases...
 
 #### How well do we do cleaning the phrases?
 
-| sub\_category                                   | adjective | originalResponse   | cleanedPhrase      |
-|:------------------------------------------------|:----------|:-------------------|:-------------------|
-| basement                                        | dark      | basements          | basements          |
-| city bike                                       | expensive | city bikes         | city bikes         |
-| reading lamp                                    | light     | lamps              | lamps              |
-| coffee table                                    | light     | furniture          | furniture          |
-| apple                                           | light     | apples             | apples             |
-| kids bike                                       | expensive | bikes              | bikes              |
-| gymnast                                         | short     | gymnast            | gymnast            |
-| elephant                                        | big       | animals            | animals            |
-| day in Summer                                   | cold      | days               | days               |
-| watermelon                                      | light     | watermelons        | watermelons        |
-| driving route from Los Angeles to San Francisco | short     | driving routes     | driving routes     |
-| chimpanzee                                      | big       | chimps             | chimps             |
-| watermelon                                      | heavy     | watermelons        | watermelons        |
-| muscle car                                      | loud      | cars               | cars               |
-| muscle car                                      | loud      | cars               | cars               |
-| flight from Los Angeles to San Francisco        | short     | flights            | flights            |
-| sedan                                           | small     | sedans             | sedans             |
-| muscle car                                      | loud      | cars               | cars               |
-| SUV                                             | big       | SUVs               | suvs               |
-| glass flower vase                               | cheap     | glass pieces       | glass pieces       |
-| driving route from Los Angeles to San Francisco | short     | drives             | drives             |
-| SUV                                             | small     | SUVs               | suvs               |
-| sedan                                           | big       | cars               | cars               |
-| watermelon                                      | light     | watermelons        | watermelons        |
-| basketball player                               | short     | basketball players | basketball players |
-| driving route from Los Angeles to San Francisco | long      | driving routes     | driving routes     |
-| electric car                                    | loud      | electric cars      | electric cars      |
-| driving route from Los Angeles to San Francisco | long      | routes             | routes             |
-| gymnast                                         | short     | people             | people             |
-| apple                                           | heavy     | apples             | apples             |
-| apple                                           | heavy     | fruits             | fruits             |
-| plastic flower vase                             | cheap     | vases              | vases              |
-| reading lamp                                    | light     | objects            | objects            |
-| sports car                                      | big       | sports cars        | sports cars        |
-| sedan                                           | big       | cars               | cars               |
-| family car                                      | loud      | cars               | cars               |
-| apple                                           | light     | apples             | apples             |
-| electric bike                                   | cheap     | electric bikes     | electric bikes     |
-| cup of coffee                                   | warm      | cups of coffee     | cups coffee        |
-| reading lamp                                    | light     | lamps              | lamps              |
+| sub\_category                                   | adjective | originalResponse | cleanedPhrase  |
+|:------------------------------------------------|:----------|:-----------------|:---------------|
+| electric bike                                   | cheap     | electric bikes   | electric bikes |
+| sedan                                           | small     | cars             | cars           |
+| cup of coffee                                   | cold      | coffee           | coffee         |
+| chimpanzee                                      | big       | chimps           | chimps         |
+| cup of iced tea                                 | cold      | drinks           | drinks         |
+| day in Summer                                   | warm      | seasons          | seasons        |
+| cup of water                                    | cold      | beverages        | beverages      |
+| sports car                                      | small     | cars             | cars           |
+| apple                                           | heavy     | fruits           | fruits         |
+| electric bike                                   | expensive | bikes            | bikes          |
+| glass flower vase                               | cheap     | vases            | vases          |
+| cup of iced tea                                 | warm      | tea              | tea            |
+| cup of water                                    | warm      | cups of water    | cups water     |
+| crystal flower vase                             | cheap     | vases            | vases          |
+| cup of iced tea                                 | cold      | drinks           | drinks         |
+| electric bike                                   | cheap     | bikes            | bikes          |
+| cup of iced tea                                 | cold      | drinks           | drinks         |
+| elephant                                        | big       | animals          | animals        |
+| elephant                                        | big       | animals          | animals        |
+| muscle car                                      | loud      | muscle cars      | muscle cars    |
+| coffee table                                    | heavy     | coffee tables    | coffee tables  |
+| watermelon                                      | light     | watermelons      | watermelons    |
+| day in Summer                                   | warm      | times of year    | times          |
+| cup of water                                    | cold      | drinks           | drinks         |
+| city bike                                       | expensive | city bikes       | city bikes     |
+| wardrobe                                        | light     | wardrobes        | wardrobes      |
+| driving route from Los Angeles to San Francisco | long      | flights          | flights        |
+| gymnast                                         | tall      | gymnasts         | gymnasts       |
+| crystal flower vase                             | expensive | vases            | vases          |
+| coffee table                                    | light     | tables           | tables         |
+| sports car                                      | big       | sports cars      | sports cars    |
+| flight from Los Angeles to San Francisco        | short     | flights          | flights        |
+| gymnast                                         | short     | people           | people         |
+| flight from Los Angeles to San Francisco        | long      | short flights    | short flights  |
+| apple                                           | heavy     | apples           | apples         |
+| reading lamp                                    | heavy     | lamps            | lamps          |
+| driving route from Los Angeles to San Francisco | short     | driving routes   | driving routes |
+| city bike                                       | cheap     | bikes            | bikes          |
+| cup of iced tea                                 | warm      | beverages        | beverages      |
+| cup of coffee                                   | cold      | cups of coffee   | cups coffee    |
 
 ### Results
 
@@ -1025,13 +1047,13 @@ After removing stop words, I reconstruct the phrases...
 
 ### Can we track "specificity" by word count?
 
-![](figs/unnamed-chunk-7-1.png)
+![](figs/specificityAsWordCount-1.png)
 
 Not clear that number of words is going to be correlated with specificity.
 
 ### look for sub\_category keyterms (to mark as specific in a binary sense)
 
-![](figs/unnamed-chunk-9-1.png)
+![](figs/figSubCatCode-1.png)
 
 -   "basketball player" gets a lot of "players" responses, which is ambiguous but probably means "basketball players"
 -   many responses outside of the category
@@ -1039,4 +1061,4 @@ Not clear that number of words is going to be correlated with specificity.
 -   "reading lamps" ... "lamps" vs. "reading lamps"
 -   people just say "days" for warm for winter
 
-![](figs/unnamed-chunk-10-1.png)
+![](figs/figCollapseItems-1.png)

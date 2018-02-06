@@ -47,7 +47,7 @@ sample_n(d, 10) %>%
 
 #### Grouping based on raw data
 
-```{r}
+```{r groupRaw}
 d.counts <- d %>%
   group_by(degree, super_category, sub_category, target) %>%
   count(response)
@@ -58,7 +58,7 @@ d.counts[with(d.counts, order(super_category, sub_category, target, -n)),] %>%
 
 
 
-```{r}
+```{r removeStopWords}
 my_stop_words <-# bind_rows(
   stop_words %>%
     filter(!(word %in% c("rooms", "year")))#,
@@ -82,7 +82,7 @@ d.tidy <- d %>%
 
 ## Analysis by words
 
-```{r}
+```{r groupWord}
 d.tidy.wordCounts <- d.tidy %>%
   group_by(degree, super_category, sub_category, target) %>%
   count(word)
@@ -96,7 +96,7 @@ d.tidy.wordCounts[with(d.tidy.wordCounts, order(super_category, sub_category, ta
 
 After removing stop words, I reconstruct the phrases...
 
-```{r}
+```{r cleanPhrases}
 d.tidy.phrase <- d.tidy %>%
   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
@@ -107,7 +107,7 @@ d.tidy.phrase <- d.tidy %>%
 
 #### How well do we do cleaning the phrases?
 
-```{r}
+```{r checkCleanPhrase}
 d.tidy.phrase.w.original <- left_join(d.tidy.phrase, 
                            d %>% select(workerid, trial_num, response)) %>% 
   rename(cleanedPhrase = phrase, originalResponse = response)
@@ -120,7 +120,7 @@ d.tidy.phrase.w.original %>%
 
 ### Results
 
-```{r}
+```{r phraseResults}
 d.tidy.phraseCounts <- d.tidy.phrase %>%
   group_by(degree, super_category, sub_category, target) %>%
   count(phrase)
@@ -133,7 +133,7 @@ d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category
 
 ### Can we track "specificity" by word count?
 
-```{r}
+```{r specificityAsWordCount}
 d.wordCountFromCleanedPhrase <- left_join(
   left_join(
     d.tidy %>%
@@ -164,7 +164,7 @@ Not clear that number of words is going to be correlated with specificity.
 ### look for sub_category keyterms (to mark as specific in a binary sense)
 
 
-```{r}
+```{r codeForSubCatTerms}
 subcat_keyterms <- list(
   apple = "apple",
    grape = "grape",
@@ -283,7 +283,7 @@ d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>%
 
 
 
-```{r fig.height=4, fig.width=7, fig.height = 6}
+```{r figSubCatCode, fig.height=4, fig.width=7, fig.height = 6}
 d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
   mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
   group_by(strength, degree, adjective, super_category,
@@ -318,7 +318,7 @@ ggplot(d.tidy.phrase.specificMarking.summarized,
 - people just say "days" for warm for winter
 
 
-```{r}
+```{r figCollapseItems}
  d.tidy.phrase.specificMarking %>% 
   mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
   group_by(strength, 
