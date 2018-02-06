@@ -18,7 +18,7 @@ library(tidytext)
 library(knitr)
 library(tidyboot)
 #setDict("/Users/mht/Documents/research/tools/WordNet-3.0/dict")
-library(wordnet)
+#library(wordnet)
 ```
 
 
@@ -137,27 +137,25 @@ d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category
 d.wordCountFromCleanedPhrase <- left_join(
   left_join(
     d.tidy %>%
-      group_by(workerid, target, degree, contextWithSuper, adjective, super_category,
+      group_by(workerid, target, degree, adjective, super_category,
                form, condition, sub_category, strength) %>%
       summarize(nWords = n()) %>% 
       ungroup(),
-    d %>% select(workerid, target, degree, contextWithSuper, adjective, super_category,
+    d %>% select(workerid, target, degree, adjective, super_category,
                form, condition, sub_category, response)
   ),
   d.tidy.phrase %>%
-    select(workerid, target, degree, contextWithSuper, adjective, super_category,
+    select(workerid, target, degree, adjective, super_category,
                form, condition, sub_category, phrase)
 ) %>% 
   group_by(strength, degree, adjective, super_category,
                form, sub_category) %>%
   summarize(nWordsPerResponse = sum(nWords) / n()) 
 
-str()
-
 ggplot(d.wordCountFromCleanedPhrase, 
        aes( x = strength, y = nWordsPerResponse, fill = form))+
   geom_col(position = position_dodge())+
-  facet_wrap(~degree)
+  facet_wrap(~super_category)
 ```
 
 Not clear that number of words is going to be correlated with specificity.
@@ -285,7 +283,7 @@ d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>%
 
 
 
-```{r fig.height=4, fig.width=5}
+```{r fig.height=4, fig.width=7, fig.height = 6}
 d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
   mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
   group_by(strength, degree, adjective, super_category,
@@ -294,7 +292,7 @@ d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>%
   #summarize(propSpecific = sum(specific) / n())
 
 ggplot(d.tidy.phrase.specificMarking.summarized, 
-       aes( x = sub_category, y = empirical_mean, 
+       aes( x = sub_category, y = mean, 
             ymin = ci_lower, ymax = ci_upper, fill = form))+
   geom_col(position = position_dodge(), color = 'black')+
   geom_errorbar(position = position_dodge())+
@@ -308,7 +306,7 @@ ggplot(d.tidy.phrase.specificMarking.summarized,
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   ylab("Proportion Specific paraphrase   ")
 
-ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton-binarzed-results.pdf", width = 12, height = 8)
+#ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton-binarzed-results.pdf", width = 12, height = 8)
 ```
 
 
@@ -339,12 +337,4 @@ ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton
   ylab("Proportion Specific paraphrase   ")
 ```
 
-```{r}
-b2 <- data_frame(value = rbinom(n = 20, size = 1, prob = 0.5), condition = 1)
-b1 <- data_frame(value = rbinom(n = 20, size = 1, prob = 0.7), condition = 2)
-df.boot <- bind_rows(b1, b2) %>%
-  group_by(condition) %>%
-  tidyboot_mean(column = value)
-df.boot
-```
 
