@@ -1,0 +1,350 @@
+---
+title: "Class Elicitation Free Production"
+author: "mht"
+date: "7/12/2017"
+output: github_document
+---
+
+```{r global_options, include=FALSE}
+project.path <- "/Users/mht/Documents/research/comparison-class/"
+data.path <- paste(project.path, "data/pilot-classElicitation-free-2/", sep = "")
+knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+```
+
+```{r libraries}
+library(langcog)
+library(tidyverse)
+library(tidytext)
+library(knitr)
+library(tidyboot)
+#setDict("/Users/mht/Documents/research/tools/WordNet-3.0/dict")
+library(wordnet)
+```
+
+
+### Pilot data (n = 27)
+
+#### Subject enjoyment (0 - 2 scale)
+
+There was an error in recording *subject information* for the first 9 subjects and those were not parsed properly. Kind of hard to recover (and it's only the survey infor).
+
+
+```{r subjinfo}
+d.subject <- read.csv(paste(data.path, "class-elicitation-free-2-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+
+Preview of raw data 
+
+```{r loadData}
+d <- read.csv(paste(data.path, 
+                    "class-elicitation-free-2-trials.csv", sep = ""))
+
+sample_n(d, 10) %>%
+  select(super_category, sub_category, adjective, response)
+```
+
+#### Grouping based on raw data
+
+```{r}
+d.counts <- d %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(response)
+
+d.counts[with(d.counts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+
+```{r}
+my_stop_words <-# bind_rows(
+  stop_words %>%
+    filter(!(word %in% c("rooms", "year")))#,
+  # data.frame(
+  #   word = c("relative", "compare"),
+  #   lexicon = 'mh'
+  # )
+#)
+
+
+d.tidy <- d %>%
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "", response),
+         response = gsub("biking", "bike", response),
+         response = gsub("car ride", "drive", response)
+         ) %>%
+  unnest_tokens(word, response)  %>% 
+  anti_join(stop_words)  # remove stop words
+  #anti_join(my_stop_words)  # remove stop words
+```
+
+## Analysis by words
+
+```{r}
+d.tidy.wordCounts <- d.tidy %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(word)
+
+d.tidy.wordCounts[with(d.tidy.wordCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+## Analysis by phrases
+
+After removing stop words, I reconstruct the phrases...
+
+```{r}
+d.tidy.phrase <- d.tidy %>%
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase))
+```
+
+#### How well do we do cleaning the phrases?
+
+```{r}
+d.tidy.phrase.w.original <- left_join(d.tidy.phrase, 
+                           d %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response)
+
+d.tidy.phrase.w.original %>% 
+  ungroup() %>%
+  select(sub_category, adjective, originalResponse, cleanedPhrase) %>% 
+  sample_n(40) %>% kable()
+```
+
+### Results
+
+```{r}
+d.tidy.phraseCounts <- d.tidy.phrase %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(phrase)
+
+d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+
+### Can we track "specificity" by word count?
+
+```{r}
+d.wordCountFromCleanedPhrase <- left_join(
+  left_join(
+    d.tidy %>%
+      group_by(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, strength) %>%
+      summarize(nWords = n()) %>% 
+      ungroup(),
+    d %>% select(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, response)
+  ),
+  d.tidy.phrase %>%
+    select(workerid, target, degree, contextWithSuper, adjective, super_category,
+               form, condition, sub_category, phrase)
+) %>% 
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  summarize(nWordsPerResponse = sum(nWords) / n()) 
+
+str()
+
+ggplot(d.wordCountFromCleanedPhrase, 
+       aes( x = strength, y = nWordsPerResponse, fill = form))+
+  geom_col(position = position_dodge())+
+  facet_wrap(~degree)
+```
+
+Not clear that number of words is going to be correlated with specificity.
+
+
+### look for sub_category keyterms (to mark as specific in a binary sense)
+
+
+```{r}
+subcat_keyterms <- list(
+  apple = "apple",
+   grape = "grape",
+  watermelon = "watermelon",
+
+  "day in Fall" = "fall",
+  "day in Summer" = "summer",
+  "day in Winter" = "winter",
+  
+  "basketball player" = "basketball", # also "players"? (implicit domain restriction)
+  gymnast = "gymnast",
+  "runner"= "runner",
+  "soccer player" = "soccer",
+  
+  basement = "basement",
+  "living room" = "living",
+  "sunroom" = "sunroom",
+  
+  "bike route from Los Angeles to San Francisco" = "bike",
+  "flight from Los Angeles to San Francisco" = "flight",
+  "driving route from Los Angeles to San Francisco" = "driv",#,c("driving", "drive", "car"),
+  
+  "chimpanzee" = "chimp",
+  "elephant" = "elephant",
+  "porcupine" = "porcupine",
+  
+  "city bike" = "city bike",
+  "electric bike" = "electric bike",
+  "kids bike" = "kid",
+  
+  "coffee table" = "coffee table",
+  "reading lamp" = "lamp",
+  "wardrobe"= "wardrobe",
+  
+  "crystal flower vase" = "crystal",
+  "plastic flower vase" = "plastic",
+  "glass flower vase" = "glass",
+  
+  "cup of coffee" = "coffee",
+  "cup of iced tea" = "ice",
+  "cup of water" = "water",
+  
+  "electric car"  = "electric car",
+  "muscle car" = "muscle car",
+  "sedan"   =  "sedan",
+  "SUV" = "suv",
+  "sports car" = "sports car",
+  "family car" = "family car" 
+)
+
+levelsOfSubCategory = c(
+  "grape",
+  "apple",
+  "watermelon",
+
+  "day in Winter",
+  "day in Fall",
+  "day in Summer",
+  
+  "gymnast",
+  "runner",
+  "basketball player",
+  
+  "basement",
+  "living room",
+  "sunroom",
+  
+  "bike route from Los Angeles to San Francisco",
+  "driving route from Los Angeles to San Francisco",
+  "flight from Los Angeles to San Francisco",
+  
+  "porcupine",
+  "chimpanzee",
+  "elephant",
+  
+  "kids bike",
+  "city bike",
+  "electric bike",
+  
+  "reading lamp",
+  "coffee table",
+  "wardrobe",
+  
+  "plastic flower vase",
+  "glass flower vase",
+  "crystal flower vase",
+  
+  "cup of iced tea",
+  "cup of water",
+  "cup of coffee",
+  
+  "electric car",
+  "family car",
+  "muscle car",
+ 
+  "sports car",
+  "sedan" ,
+  "SUV"
+)
+
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
+
+d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", cleanedPhrase, "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    subcatKeyterm = subcat_keyterms[[as.character(sub_category)]],
+    specific = containsString(
+      as.character(cleanedPhrase), 
+      subcat_keyterms[[as.character(sub_category)]]
+    )
+  )
+```
+
+
+
+```{r fig.height=4, fig.width=5}
+d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
+  mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  tidyboot_mean(column = specific)
+  #summarize(propSpecific = sum(specific) / n())
+
+ggplot(d.tidy.phrase.specificMarking.summarized, 
+       aes( x = sub_category, y = empirical_mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = form))+
+  geom_col(position = position_dodge(), color = 'black')+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~degree + super_category, scales = 'free', nrow = 2)+
+  scale_fill_solarized()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Specific paraphrase   ")
+
+ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton-binarzed-results.pdf", width = 12, height = 8)
+```
+
+
+- "basketball player" gets a lot of "players" responses, which is ambiguous but probably means "basketball players"
+- many responses outside of the category
+  - 
+  - other "times of day"
+- "reading lamps" ... "lamps" vs. "reading lamps"
+- people just say "days" for warm for winter
+
+
+```{r}
+ d.tidy.phrase.specificMarking %>% 
+  mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
+  group_by(strength, 
+               form) %>%
+  summarize(propSpecific = sum(specific) / n()) %>% 
+  ggplot(., 
+       aes( x = strength, y = propSpecific, fill = form))+  
+  geom_col(position = position_dodge(), color = 'black')+
+  scale_fill_solarized()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Specific paraphrase   ")
+```
+
+```{r}
+b2 <- data_frame(value = rbinom(n = 20, size = 1, prob = 0.5), condition = 1)
+b1 <- data_frame(value = rbinom(n = 20, size = 1, prob = 0.7), condition = 2)
+df.boot <- bind_rows(b1, b2) %>%
+  group_by(condition) %>%
+  tidyboot_mean(column = value)
+df.boot
+```
+
