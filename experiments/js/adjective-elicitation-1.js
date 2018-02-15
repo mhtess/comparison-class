@@ -165,7 +165,7 @@ function makeSlides(f) {
 
       for (j = 0; j<3; j++){
         exp.data_trials.push({
-          "condition": exp.condition,
+          "condition": "adjective_elicitation",
           "trial_num": i + 1,
           "degree": exp.examples[i].degree,
           "adjective_form": j == 2 ? "neither_nor" : this.adjOrder[j],
@@ -230,7 +230,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20180206-elicitation";
+      var ut_id = "mht-adjectives-20180215-elicitation";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
@@ -245,7 +245,7 @@ function init() {
   }), function(item, key, a) {
     return item.positive + item.negative;
   })
-  console.log(exp.examples)
+
   exp.n_entities = 1;
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
