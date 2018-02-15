@@ -68,6 +68,12 @@ Participants are asked if the adjective with an explicit superordinate compariso
 - Cost = $1 x 27 + 20% = 32.4
 - Improved set of items based on wordnet. Free production.
 
+4. `adjective-elicitation-1` (n = 18; Feb 15, 2018)
+
+- Cost = $0.50 x 18 + 20% = 10.8
+- elicit nouns for adjectives (for stimuli generation)
+
+
 
 ### Preregistered
 
