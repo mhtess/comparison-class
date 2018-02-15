@@ -35,23 +35,36 @@ function makeSlides(f) {
     $(".err").hide();
     $(".inputErr").hide();
 
-    $(".display_context").html("List three examples of specific kinds of things that can be " + exp.examples[i].positive + " or " +exp.examples[i].negative + ".");
+    // $(".display_context").html("We are interested in simple objects or situations people describe as <em>" + exp.examples[i].positive + "</em> or <em>" +exp.examples[i].negative + "</em>. Write examples below and hit the Return Key (3 in total). Try to pick examples that are all the same kind of thing (for example: )");
     this.startTime = Date.now();
 
-    this.counter = 1;
+    // this.counter = 1;
+
+    // this.counterDictionary = ["positive", "negative", "neither_nor"]
+
+    // this.boxLabel = (this.counter == 3) ?
+    // "neither " + exp.examples[i].negative + " nor " + exp.examples[i].positive:  exp.examples[i][this.counterDictionary[this.counter-1]]
+
+    this.adjOrder = _.shuffle(["positive", "negative"])
 
     $("#entityTable"+  '_' + (i + 1)).empty();
     var newTextBoxDiv = $(document.createElement('div'))
-         .attr("id", 'TextBoxDiv' + this.counter +  '_' + (i + 1));
-    newTextBoxDiv.after().html('<label>Example #'+ this.counter + ' : </label>' +
-          '<input type="text" name="textbox' + this.counter +
-          '" id="textbox' + this.counter +  '_' + (i + 1) + '" value="" size="50">');
-    console.log(newTextBoxDiv)
-    newTextBoxDiv.appendTo("#entityTable" + (i + 1));
-    $("#textbox"+ this.counter+  '_' + (i + 1)).focus()
+         .attr("id", 'TextBoxDiv_' + (i + 1));
 
-    this.counter++;
-    $(document).one("keydown", _s.keyPressHandler);
+    // newTextBoxDiv.after().html('<label><strong>'+this.boxLabel+ '</strong>: </label>' + '<input type="text" name="textbox' + this.counter + '" id="textbox' + this.counter +  '_' + (i + 1) + '" value="" size="50">');
+    var newText = '<br><br><input type="text" name="textbox1" id="textbox1_' + (i + 1) + '" value="" size="30">' + '<label> are generally <strong>'+exp.examples[i][this.adjOrder[0]] + '</strong></label> while ' + '<input type="text" name="textbox2" id="textbox2_' + (i + 1) + '" value="" size="30">' + '<label> are generally <strong>'+ exp.examples[i][this.adjOrder[1]] +
+    '</strong></label>.<br><br>' + '<input type="text" name="textbox3" id="textbox3_' + (i + 1) +
+    '" value="" size="30">' + '<label> are generally neither <strong>'+
+    exp.examples[i][this.adjOrder[0]] +
+    '</strong> nor <strong>'+
+    exp.examples[i][this.adjOrder[1]] + '</strong></label>'
+    newTextBoxDiv.after().html(newText);
+    // console.log(newTextBoxDiv)
+    newTextBoxDiv.appendTo("#entityTable" + (i + 1));
+    // $("#textbox"+ this.counter+  '_' + (i + 1)).focus()
+
+    // this.counter++;
+    // $(document).one("keydown", _s.keyPressHandler);
 
   }
 
@@ -67,21 +80,26 @@ function makeSlides(f) {
         // If a valid key is pressed (code 80 is p, 81 is q),
           // _s.rt = Date.now() - _s.startTime;
           // _s.log_responses(keyCode);
-          var response = $('#textbox' + (_s.counter - 1) +  '_' + (i + 1)).val();
+          var responses = [
+            $('#textbox1_' + (i + 1)).val(),
+            $('#textbox2_' + (i + 1)).val(),
+            $('#textbox3_' + (i + 1)).val()
+          ]
 
-          if (response == "") {
+          if (responses.indexOf("") > -1) {
             $(".err").show();
-            $(document).one("keydown", _s.keyPressHandler);
+            // $(document).one("keydown", _s.keyPressHandler);
           } else {
             $(".err").hide();
             _s.rt = Date.now() - _s.startTime;
+            // var adj = (_s.counter-1 == 3) ?
+            // "neither " + exp.examples[i].negative + " nor " + exp.examples[i].positive:  exp.examples[i][_s.counterDictionary[_s.counter-1]]
 
             exp.data_trials.push({
               "condition": exp.condition,
               "trial_num": i + 1,
-              "target": exp.examples[i].target,
               "degree": exp.examples[i].degree,
-              "form": exp.examples[i].form,
+              "adjective": _s.boxLabel,
               "response": $('#textbox' + (_s.counter - 1)+  '_' + (i + 1)).val(),
               "rt":_s.rt
             });
@@ -98,12 +116,15 @@ function makeSlides(f) {
                 exp.go()
               }, 250);
             } else {
-              console.log('new box')
-              console.log(_s.counter +  '_' + (i + 1))
+              // console.log('new box')
+              // console.log(_s.counter +  '_' + (i + 1))
               var newTextBoxDiv = $(document.createElement('div'))
                    .attr("id", 'TextBoxDiv' + _s.counter +  '_' + (i + 1));
 
-              newTextBoxDiv.after().html('<label>Example #'+ _s.counter + ' : </label>' +
+              _s.boxLabel = (_s.counter == 3) ?
+                   "neither " + exp.examples[i].negative + " nor " + exp.examples[i].positive :  exp.examples[i][_s.counterDictionary[_s.counter-1]]
+
+              newTextBoxDiv.after().html('<label><strong>'+ _s.boxLabel + '</strong>: </label>' +
                     '<input type="text" name="textbox' + _s.counter +
                     '" id="textbox' + _s.counter +  '_' + (i + 1) + '" value="" size="50">');
               newTextBoxDiv.appendTo("#entityTable" + (i + 1));
@@ -119,40 +140,40 @@ function makeSlides(f) {
   // runs when the "Continue" button is hit on a slide
   function button() {
     // response = $('input[name="paraphrase"]:checked').val();
-    response = $("#text_response" + (i+1)).val();
+    var responses = [
+      $('#textbox1_' + (i + 1)).val(),
+      $('#textbox2_' + (i + 1)).val(),
+      $('#textbox3_' + (i + 1)).val()
+    ]
 
     // stores the adjective used in this experiment; same as the target
-    adjective = exp.examples[i].target.split(" ").pop();
-
-    // displays an error if no response has been entered
-    if (response.length == 0) {
+    // displays an error if all responses have not been entered
+    if (responses.indexOf("") > -1) {
       $(".inputErr").hide();
       $(".err").show();
     }
 
     // displays an error if a number is used in the response
-    else if (/\d/.test(response)) {
-      $(".err").hide();
-      $(".inputErr").show();
-    }
+    // else if (/\d/.test(response)) {
+    //   $(".err").hide();
+    //   $(".inputErr").show();
+    // }
 
     // if (!response) { $(".err").show(); }
     else {
-      exp.data_trials.push({
-        "condition": exp.condition,
-        "trial_num": i + 1,
-        "context": exp.examples[i].context,
-        "target": exp.examples[i].target,
-        "degree": exp.examples[i].degree,
-        "form": exp.examples[i].form,
-        "adjective": adjective,
-        "strength": exp.examples[i].strength,
-        "names": exp.names[i],
-        "gender": getGender(exp.names[i]),
-        "sub_category": exp.examples[i].sub_singular,
-        "super_category": exp.examples[i].super,
-        "response": response
-      });
+      _s.rt = Date.now() - _s.startTime;
+
+      for (j = 0; j<3; j++){
+        exp.data_trials.push({
+          "condition": exp.condition,
+          "trial_num": i + 1,
+          "degree": exp.examples[i].degree,
+          "adjective_form": j == 2 ? "neither_nor" : this.adjOrder[j],
+          "adjective": j == 2 ? "neither " +exp.examples[i][this.adjOrder[0]] + " nor " + exp.examples[i][this.adjOrder[1]]: exp.examples[i][this.adjOrder[j]],
+          "response": $('#textbox' + (j + 1)+  '_' + (i + 1)).val(),
+          "rt":_s.rt
+        });
+      }
       i++;
       exp.go();
     }
@@ -225,7 +246,7 @@ function init() {
     return item.positive + item.negative;
   })
   console.log(exp.examples)
-  exp.n_entities = 3;
+  exp.n_entities = 1;
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
@@ -269,7 +290,7 @@ function init() {
   };
 
   // the blocks of the experiment
-  exp.structure = ["i0"];
+  exp.structure = ["i0","instructions"];
   // exp.structure = [];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);

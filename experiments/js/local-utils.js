@@ -315,8 +315,9 @@ function embedElicitationSlides(trials) {
       "<p class=\"display_question\"></p>" +
       "<span class=\"display_paraphrase\"></span>" +
 			"<div id=\"entityTable" + i + "\"> </div>"+
-      "<p class=\"err\">Please enter a text response before continuing.</p>" +
-      "</div>";
+      "<p class=\"err\">Please fill in all text boxes before continuing.</p>" +
+			"<br><br><button onclick=\"_s.button()\">Continue</button>" +
+      "</div>"
     $(".trial_slides").html(slides);
   }
 }
