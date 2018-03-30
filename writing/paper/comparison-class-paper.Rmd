@@ -1209,7 +1209,7 @@ Figure \ref{fig:expt1results} (top) shows the proportion of participants choosin
 The predicted effects are visually apparent within each scale (compare with Figure \ref{fig:modelSchematics} right).
 
 Our qualitative predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs. negative) and the *a priori* judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables.
-In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and iteraction between form and strength^[This was the maximal mixed-effects structure that converged.].
+In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and interaction between form and strength^[This was the maximal mixed-effects structure that converged.].
 Confirming our two qualitative model predictions, there was an interaction between form and strength 
 ($\beta = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Estimate"],2)`$;
 $SE = `r round(rs.glmm.summary[["coefficients"]]["c.form:c.strength","Std. Error"],2)`;$
@@ -1337,7 +1337,7 @@ $\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
 We use priors consistent with the previous literature: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
 
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL [@dippl].
-To learn about the credible values of the parameters, we collecting 2 chains of 50k iterations (after 25k burn-in) using an incrementalized version of MCMC [@Ritchie2016].
+To learn about the credible values of the parameters, we collected 2 chains of 50k iterations (after 25k burn-in) using an incrementalized version of MCMC [@Ritchie2016].
 
 ### Results
 
