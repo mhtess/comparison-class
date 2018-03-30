@@ -1,8 +1,8 @@
+// time ~/webppl-fork/webppl fbt-for-subCatpriors-L1-ccEmpirical-explAlt-imh.wppl --require utils 1
 
 var index = utils.wpParseFloat(last(process.argv)) // load index as last command line index
 
-// requires webppl packages: webppl-csv and webppl-mht custom packages
-// time webppl fbt-for-subCatpriors.wppl --require ~/Documents/research/tools/webppl-csv/ --require mht
+
 
 var utterances = {
   positive: ["positive_Adjective",
@@ -55,20 +55,17 @@ var KL = function(p, q, supp) {
 // this model could be run independently for each item
 
 // var dataPath = "/Users/mht/Documents/research/comparison-class/data/";
-var dataPath = "/home/mtessler/projects/comparison-class/data/"
+var dataPath = "/home/users/mtessler/projects/comparison-class/data/"
 
 var ccDataFile = "classElicitation-1/class-elicitation-full-trials.csv";
 var vsDataFile = "vagueSpeaker-1/vague-prior-elicitation-1-trials.csv";
 
-var ccData = dataFrame(utils.readCSV(dataPath + ccDataFile))
-var vsData = dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"])
+var ccData = removeExtraRow(dataFrame(utils.readCSV(dataPath + ccDataFile)))
+var vsData = removeExtraRow(dataFrame(utils.readCSV(dataPath + vsDataFile), ["response"]))
 
 
-var subCategories0 = _.uniq(_.pluck(vsData, "sub_category"));
-var subCategories = subCategories0.slice(0, subCategories0.length - 1);
-
-var degrees0 = _.uniq(_.pluck(vsData, "degree"));
-var degrees = degrees0.slice(0, degrees0.length - 1);
+var subCategories = levels(vsData, "sub_category");
+var degrees = levels(vsData, "degree");
 
 var model = function(){
 
@@ -112,8 +109,8 @@ var model = function(){
   // });
 
   foreach(degrees, function(degree){
-    var degreeData = _.where(ccData, {degree:degree});
-    var subCats = _.uniq(_.pluck(degreeData, "sub_category"));
+    var degreeData = _.filter(ccData, {degree:degree});
+    var subCats = levels(degreeData, "sub_category");
     var superCat = degreeData[0]["super_category"];
     // var superClassPrior = uniformDrift({a:0, b:1, width: 0.2});
     //
@@ -272,11 +269,11 @@ var model = function(){
 
       foreach(["positive","negative"], function(form){
 
-        var d_subcat_superSpeaker = _.pluck(
-          _.where(vsData, {sub_category: subCat, form:form}),
+        var d_subcat_superSpeaker = _.map(
+          _.filter(vsData, {sub_category: subCat, form:form}),
         "response");
-        var d_subcat_ccInference = _.pluck(
-            _.where(ccData, {sub_category: subCat, form:form}),
+        var d_subcat_ccInference = _.map(
+            _.filter(ccData, {sub_category: subCat, form:form}),
         "paraphrase");
 
         var superSpeakerProbs = speaker2_super(form);
@@ -300,7 +297,6 @@ var model = function(){
 
       query.add([subCat, "mu", "NA"], mu);
       query.add([subCat, "sigma", "NA"], sigma);
-      query.add([subCat, "prior", "NA"], gaussian(mu, sigma));
 
       // query.add([subCat, "subCatPrior", "NA"], subClassPrior);
 
@@ -326,17 +322,21 @@ var model = function(){
 }
 
 var mhiter = 50000;
-
 var burn = mhiter / 2;
+var outfile = 'results/fbt-L1-explAltnoSilence-hierarchicalPriors-empiricalCC-noLength-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
+
 var posterior = Infer({
   model: model,
   method: "incrementalMH",
   samples: mhiter, burn: burn,
   verbose: T,
-  verboseLag: mhiter / 20
+  verboseLag: mhiter / 20,
+  stream: {
+    path: outfile,
+    header: ["cat", "param", "form", "val"]
+  }
 })
 
-var outfile = 'results/fbt-L1-explAltnoSilence-hierarchicalPriors-empiricalCC-noLength-disc3-mcmc'+ mhiter+'_burn'+burn+'_chain'+index+'.csv'
 
-utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
-display("file written to = " + outfile)
+// utils.writeQueryERP(posterior, outfile, ["cat", "param", "form", "val"])
+"file written to = " + outfile
