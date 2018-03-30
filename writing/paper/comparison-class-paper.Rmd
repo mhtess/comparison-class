@@ -8,6 +8,8 @@ author:
     corresponding : yes    # Define only one corresponding author
     address       : "450 Serra Mall, Bldg. 420, Rm. 316, Stanford, CA 94305"
     email         : "mtessler@stanford.edu"
+  - name          : "Michael Lopez-Brau"
+    affiliation   : "1"
   - name          : "Noah D. Goodman"
     affiliation   : "1"
 
@@ -31,10 +33,10 @@ author_note: >
   Enter author note here.
 
 abstract: >
-  Understanding language requires knowledge of the context.
-  Yet, relevant context is often only implicit in everyday conversation.
+  The meaning of an utterance can change depending on the context.
+  Yet, what counts as the relevant context is often only implicit in everyday conversation.
   The utterance \"it's warm outside\" could signal it's warm relative to other days of the year or just relative to the current season (e.g., it's warm for winter).
-  *Warm* vaguely conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon such a standard of comparison. 
+  *Warm* conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon the appropriate comparison class.
   Here, we formalize how world knowledge and pragmatic reasoning can drive the resolution of a comparison class.
   We introduce a Rational Speech Act model and derive two novel predictions from it.
   We validate these predictions using both a free production and a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
@@ -127,32 +129,34 @@ Comparison classes are necessary for understanding adjectives and, in fact, any 
 A key challenge for listeners is that the comparison class often goes unsaid (e.g., in "It's warm outside.").
 
 The existence of comparison classes for understanding vague language is uncontroversial [@Solt2009; @Bale2011].
-Adult judgments of the felicity for adjectives like "dark" or "tall" depend upon fine-grained details of the statistics of the comparison class: When everyone is short, what counts as "tall" might be still not be very tall [@Schmidt2009; @Solt2012; @Qing2014].
-How do you decide what goes into the comparison class?
+Adult judgments of the felicity for adjectives like "dark" or "tall" depend upon fine-grained details of the statistics of the comparison class: When things in the comparison class are all very short, what counts as "tall" might not be very tall [@Schmidt2009; @Solt2012; @Qing2014].
+These studies have examined context-specific interpretations, when the comparison class is explicitly provided to listeners.
+In everyday conversation, however, the comparison class often goes unsaid (e.g., "It's warm outside"). 
 
-A first guess at what the comparison class should be might be *other things of the same kind*.
-Indeed, four-year-olds can use their knowledge of kinds to differentiate between what goes into the comparison class and what does not:  Novel creatures (*pimwits*) are selected as either "tall" or "short" depending on the distribution of heights of *pimwits* and not the heights of creatures that are not called *pimwits* [@Barner2008].
-Any particular object of discourse, however, can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes. 
-A day in January is also a day of the year; if it's warm, it could be *warm for the week*, *warm for winter*, or *warm for the year*.
-In addition, comparison classes need not be conceptual: Two- to four-year-olds recognize that a mitten which is "big for a mitten" can still be "small" in the current perceptual context [@Ebeling1988].
-Even more striking, a normatively "small hat" can be perceptually small yet still "big" for a doll (a la "too big"), a *functional* comparison [@Ebeling1994].
+How do listeners decide on the appropriate comparison class?
+A natural first hypothesis is *other things of the same kind*.
+Indeed, four-year-olds use their knowledge of kinds to differentiate between what goes into the comparison class and what does not:  Novel creatures (*pimwits*) are selected as either "tall" or "short" depending on the distribution of heights of *pimwits* and not the heights of other creatures like *daxes* [@Barner2008].
+The problem is still underdetermiend, however, as any particular object of discourse, can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes (e.g., a pimwit is also a creature). 
+A day in January is also a day of the year; if a listener hear "It's warm", it could be *warm for the week*, *warm for winter*, or *warm for the year*.^[
+  It could also be *warm for Boston*, *warm for the northeast USA*, *warm for a place with currently six inches of snow on the ground*, among many more possibilities. 
+]
+In addition, comparison classes need not be about kinds: Two- to four-year-olds recognize that a "big mitten" can still be "small" in the current perceptual context [@Ebeling1988].
+Even more striking, a both conceptually and perceptually "small hat" can still *big for a doll* (a la "too big"), a *functional* comparison [@Ebeling1994].
 
-Here, we investigate the first aspect of this problem, deciding among multiple plausible, conceptual comparison classes.
+In this paper, we investigate the first aspect of this problem, deciding among multiple plausible, conceptual comparison classes.
 Theoretical work in semantics has focused on how information from the comparison class gets integrated with a compositional semantics and what representations might be preferred [@Solt2009; @Bale2011].
-The question of how listeners or speakers decide upon a comparison class has, to our knowledge, been addressed neither formally nor empirically.
-In particular, we investigate how listeners decide upon a comparison class in undersupported contexts (e.g., just hearing "It's warm outside").
+The question of how listeners reconstruct a comparison class in undersupported contexts (e.g., just hearing "It's warm outside") has been addressed neither formally nor empirically.
 
-
-We propose that listeners can actively combine category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
-We extend a Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013; @Lassiter2015] to allow it to flexibly reason about the implicit comparison class.
-From this model, we derive two novel **qualitative predictions**.
-Saying "it's warm" in winter should signal it's warm *for winter* (as opposed to *for the year*) more so than saying "it's cold". 
+We propose that listeners combine statistical, category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
+This proposal leads to the following prediction: When it is winter, saying "it's warm" signals that it is *warm for winter*, while saying "it's cold" signals *cold for the year*. 
 The opposite relationship should hold in summer, where "it's cold" should signal it's cold *for summer* more so than "it's warm".
-This prediction is driven by the *a priori* probability that the adjective could apply to the class (e.g., the probability that a given day in winter is warm; Prediction 1).
-In addition, regardless of the season and the adjective form (e.g., "warm" or "cold"), listeners who expect speakers to be informative will prefer classes that are relatively specific (e.g., relative to *the current season* as opposed to *the whole year*), as they carry more information content (Prediction 2).
+This prediction is a result of the *a priori* probability of different temperatures in different seasons: In winter, temperatures are relatively low, and thus it is unlikely to actually be *warm for the year*.
+In addition, regardless of the season and the adjective (e.g., "warm" or "cold"), listeners prefer comparison classes that are relatively specific (e.g., relative to *the current season* as opposed to *the whole year*); more specific comparison classes have lower variance, and a vague adjectives like *warm* carries more information when it is interpreted with respet to a lower variance comparison class. 
+These predictions fall out of a Rational Speech Act (RSA) model for gradable adjectives [@Lassiter2013; @Lassiter2015], extended to flexibly reason about the implicit comparison class.
 We test these predictions in two experiments by eliciting the comparison class using a forced-choice paraphrase dependent measure (Expt. 1) and a free-production dependent measure using an expanded stimulus set (Expt. 2).
 
-The model's **quantitative predictions** can be generated by explicitly specifying the interlocutors' relevant prior knowledge (e.g., beliefs about temperatures).
+\mht{move to end of first expt}
+The model's quantitative predictions can be generated by explicitly specifying the interlocutors' relevant prior knowledge (e.g., beliefs about temperatures).
 The current methodological standard is to measure beliefs by having participants estimate quantities or give likelihood judgments [@FrankeEtAl2016].
 We pursue a different methodology.
 The RSA model captures a productive fragment of natural language; thus, it makes predictions about a related natural language task (Expt. 2).
