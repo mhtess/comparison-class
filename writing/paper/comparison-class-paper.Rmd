@@ -48,7 +48,7 @@ wordcount         : "X"
 
 bibliography      : ["comparison-class.bib", "library.bib"]
 
-figsintext        : no
+figsintext        : yes
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -64,6 +64,8 @@ output            : papaja::apa6_pdf
 \definecolor{Blue}{RGB}{10,100,200}
 \definecolor{Orange}{RGB}{255,153,0}
 
+\newcommand{\denote}[1]{\mbox{ $[\![ #1 ]\!]$}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
 \newcommand{\red}[1]{\textcolor{Red}{#1}}  
 \newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
 \newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
@@ -109,7 +111,7 @@ HPDlo<- function(s){
 ```
 
 ```{r, theme}
-theme_set(theme_minimal(9))
+theme_set(theme_few(9))
 ```
 
 <!-- 
@@ -174,18 +176,24 @@ S_{1}(u \mid x, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \thet
 L_{0}(x \mid u, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P_{c}(x)} \label{eq:L0}
 \end{align}
 
-This is a Rational Speech Act (RSA) model, a recursive Bayesian model where speaker $S$ and listener $L$ coordinate on an intended meaning [for a review, see @Goodman2016].
-In this framework, a pragmatic listener $L_1$ tries to resolve the state of the world $x$ (e.g., the temperature) from the utterance she heard $u$ (e.g., "it's warm").
-She imagines the utterance came from an approximately rational Bayesian speaker $S_1$ trying to inform a naive listener $L_0$, who in turn updates her prior beliefs $P_c(x)$ via an utterance's literal meaning $[\![u]\!](x)$.
+Eq. \ref{eq:L1} - \ref{eq:L0} comprise a Rational Speech Act (RSA) model, a recursive Bayesian model where speaker $S$ and listener $L$ coordinate on an intended meaning of an utterance $u$ [for a review, see @Goodman2016].
+In this model, a pragmatic listener $L_1$ tries to resolve the state of the world $x$ (e.g., the temperature) from the utterance she heard $u$ (e.g., "it's warm").
+He imagines the utterance came from an approximately rational Bayesian speaker $S_1$ trying to inform a naive listener $L_0$, who in turn updates his prior beliefs $P_c(x)$ via an utterance's literal meaning $[\![u]\!](x, \theta)$.^[
+  We use the male pronoun "he" to refer to listeners and the female pronoun "she" to refer to speakers.
+]
+Formally, the literal meaning is represented by the Kronecker delta function  $\delta_{\denote{u}(x, \theta)}$ that returns probabilities proportional to $1$ when the utterance is true (i.e., when $x > \theta$) and $0$ otherwise.
 
 The key innovation used for modeling context-sensitive literal meanings (as in the case of gradable adjectives) is to have uncertainty over the semantic variable---the threshold $\theta$ (Eq. \ref{eq:L1}).
-In @Lassiter2013's model, $\theta$ comes from an uninformed prior distribution and is resolved by the listener reasoning about the different thresholds a speaker might be using $S_{1}(u \mid x, \theta)$ as well as the probabilities of different states of the world $P_{c}(x)$ (e.g., different temperatures).
-It's been shown that by assuming that the adjective adds some cost to the speaker's utterance (Eq. \ref{eq:S1}), the meaning of positive-form adjectives (e.g., "tall") gets inferred to mean something like "significantly taller than one might expect *a priori*" [@Lassiter2015]. 
-Critically, what "one might expect *a priori*" --- the prior distribution over world-states $P_{c}(x)$ --- is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}) but where does the comparison class come from?
+In @Lassiter2013's model, $\theta$ comes from an uninform prior distribution over possible thresholds and is resolved by the listener reasoning about the different thresholds a speaker might be using $S_{1}(u \mid x, \theta)$ as well as the probabilities of different states of the world $P_{c}(x)$ (e.g., different temperatures).
+Assuming the adjective adds some cost to the speaker's utterance (Eq. \ref{eq:S1}), the meaning of a gradale adjectives (e.g., "tall") is resolved by the pragmatic listener to mean something like "significantly taller than one might expect" [@Lassiter2015]. 
+Critically, what "one might expect"---the prior distribution over world-states $P_{c}(x)$---is always relative to some comparison class $c$ (Eqs. \ref{eq:L1} \& \ref{eq:L0}).
+Where does this comparison class come from?
 
-When a listener hears only that "it's warm outside" without an explicit comparison class (e.g., "...for the season"), we posit the listener infers the comparison class using her world knowledge of what worlds are plausible given different comparison classes $P(x \mid c)$ and what comparison classes are likely to be talked about $P(c)$, in addition to the already formalized process of how a rational speaker would behave in a given world and comparison class $S_{1}(u \mid x, c, \theta)$ (Eq. \ref{eq:L1a}).
+We hypothesize that listeners maintain uncertainty about the comparison class and resolve likely comparison classes jointly while resolving the meaning of the utterance.
+At a minimum, listeners use their world knowledge of what worlds are plausible under different comparison classes $P(x \mid c)$, what comparison classes are likely to be talked about *a priori* $P(c)$, and how a rational speaker would behave in a given world and comparison class $S_{1}(u \mid x, c, \theta)$ (Eq. \ref{eq:L1a}).
 To explore this model, we consider an idealized case where the comparison class can be either a relatively specific (subordinate) or relatively general (superordinate) categorization (e.g., warm relative to *days in winter* or relative to *days of the year*).
-We assume the listener is aware that the referent is a member of both classes and draws likely values of the degree (e.g., temperature) from the specific class prior $P(x \mid c = c_{specific})$. 
+As in previous models, we assume the listener is aware that the referent is a member of the subordinate class (and by extension, the superordinate as well).
+We additionally assume the listener uses the more specific class to sample likely values of the degree (e.g., the listener's prior over temperatures is given by the distribution of temperatures for the specific class like *winter* $P(x \mid c = c_{specific})$). 
 With these assumptions, the model becomes:
 
 \begin{align}
@@ -195,8 +203,8 @@ L_{0}(x \mid u, c_{literal}, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cd
 \end{align}
 
 We are interested in the behavior of the model with the underspecified utterance $u_{implicit}$ (e.g., "It's warm").
-In addition to the underspecified utterance, we assume the speaker has two alternative utterances in which the comparison class is explicit $u_{specific}$ and $u_{general}$ (e.g., "It's warm relative to other days in winter." and "It's warm relative to other days of the year.").
-These utterances have the effect of forcing the literal listener into a comparison class (potentially over-riding the value of $c$ that the pragmatic listener draws from her prior).
+In addition to the underspecified utterance, we assume the speaker has two alternative utterances corresponding to the usage of the adjective with an explicit comparison class $u_{specific}$ and $u_{general}$ (e.g., "It's warm relative to other days in winter." and "It's warm relative to other days of the year.").
+The literal meanings of these alternatives are the same as the underspecified utterance, but have the additionally feature of forcing the literal listener into a particular comparison class (potentially over-riding the value of $c$ that the pragmatic listener draws from her prior).
 That is:
 
 \begin{eqnarray}
@@ -207,10 +215,29 @@ c_{explicit} & \text{if } u \in \{u_{specific}, u_{general}\} \\
 \end{cases}
 \end{eqnarray}
 
+```{r fig.width=6, fig.cap='Speaker model behavior assuming different comparison classes. The underspecified utterance ("warm") takes on the same meaning of the explicit utterance whose comparison class is the same as the implicit class (e.g., if the speaker is using the (for winter) comparison class, "warm" means the same thing as "warm for winter"). When the speaker is assuming winter is the comparison class, when the temperture is low, she will say "warm" or "warm for winter", but if the temperature is relatively high, she will only say "warm for the year". When the speaker is assuming the year is the comparison class, and the temperature is relatively low, she will say "warm for winter". The listener believes temperature is relatively low (believes it is winter), and inverts this model of speaker to conclude that the implicit comparison class was winter. The specific class in this example (winter) is a Normal distribution centered at -1, and the general class (the year) is a Normal centered at 0.', fig.asp = 0.4}
+load("cached_results/S1_marginalizeOutTheta.RData") # rs.marginal
+rs.marginal %>%
+  ungroup() %>%
+  mutate(c = factor(c, levels = c("sub", "super"),
+                    labels = c("(for winter)", "(for the year)")),
+         utterance = factor(utt, levels = c("ambiguous", "subUtt", "superUtt"),
+                      labels = c('"warm"', '"warm for winter"', '"warm for the year"'))) %>%
+ggplot(., aes( x = s, y = marginalProb, color = utterance, lty = utterance))+
+  geom_line(position = position_dodge(0.3), size = 1.5)+
+  scale_color_manual(values = c("#404040",
+                                "#2c7bb6","#d7191c"))+
+  facet_wrap(~c)+
+  scale_y_continuous( limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  scale_x_continuous( limits = c(-1.8, 1.8), breaks = c(-1.5, 0, 1.5))+
+  xlab("Temperature (normalized units)")+
+  ylab("Speaker production probability")
+```
 
-To understand this model, we can consider two different speakers, corresponding to the two different implicit comparison classes: $S_{1}(u \mid x, \theta, c = c_{specific})$ and  $S_{1}(u \mid x, \theta, c = c_{general})$.
-Even conditioned on a particular value for $c_{implicit}$, a speaker can over-ride this comparison class by producing one of the utterances with an explicit comparison class. 
-Thus, the utterance with the implicit comparison class will end up having the same meaning as the utterance with an explicit comparison class when $c_{implicit} = c_{explicit}$, where $c_{explicit}$ is derived from the utterance $u$.
+
+To understand this model, we can consider two different speakers, which assume the two different comparison classes: $S_{1}(u \mid x, \theta, c = c_{specific})$ and  $S_{1}(u \mid x, \theta, c = c_{general})$.
+(Note that even conditioned on a particular value for $c_{implicit}$, a speaker may over-ride this comparison class by producing one of the utterances with an explicit comparison class.) 
+The underspecified utterance (implicit comparison class) takes on the same meaning as the explicit utterance $c_{implicit} = c_{explicit}$, where $c_{explicit}$ is derived from the utterance $u_{explicit}$.
 The pragmatic listener's reasoning about implicit comparison class thus corresponds to reasoning about the intended   
 
 Then, we can consider only the difference in speaker production probability between $u_{specific}$ and $u_{general}$.
@@ -705,7 +732,6 @@ df.bayes <- d %>%
          mean = a / (a + b))
 
 ```
-
 
 ```{r loadExpt2Data, cache = T}
 project.name <- "vague-prior-elicitation-1"
