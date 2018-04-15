@@ -42,4 +42,5 @@ supercategories = c("time of day", "people", "food", "animals", "public places",
                     "things you watch", "office supplies")
 data %>% 
   group_by(degree, supercategory) %>%
+  filter(supercategory %in% supercategories)
 ```
