@@ -1,0 +1,45 @@
+```{r}
+# Load libraries.
+library(knitr)
+library(ggplot2)
+```
+
+```{r}
+# Print data from adjective-elicitation-1 (with supercategories).
+path_to_repository = "D:/Research/comparison-class"
+data = read.csv(paste(path_to_repository, 
+                      "/analysis/adjective-elicitation-1-supercategories.csv",
+                      sep=""))
+kable(data)
+```
+
+```{r fig.height=36, fig.width=20}
+# Print distributions of supercategories for each degree.
+ggplot(data, aes(x=supercategory, fill=adjective_form)) + geom_bar() + 
+  facet_wrap(~degree, scales="free", nrow=4) + 
+  theme(text=element_text(size=24), axis.text.x=element_text(angle=45, hjust=1.0, vjust=1.0))
+```
+
+# Supercategory Selection
+
+The max supercategory in each degree tends to be the max by a large margin, so I usually chose those supercategories. I deviated from picking the max in the "weight" degree to avoid having "animals" as the supercategory for two degrees. For the "sound" degree, "public places" might need a different name. It's an extremely popular category but I couldn't think of a more apt name.
+
+| Degree      | Supercategory    |
+|-------------|------------------|
+| Darkness    | time of day      | 
+| Height      | people           |
+| Price       | food             |
+| Size        | animals          |
+| Sound       | public places    |
+| Temperature | seasons          |
+| Time        | things you watch |
+| Weight      | office supplies  |
+
+# Subcategory Selection
+
+```{r}
+supercategories = c("time of day", "people", "food", "animals", "public places", "season", 
+                    "things you watch", "office supplies")
+data %>% 
+  group_by(degree, supercategory) %>%
+```
