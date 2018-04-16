@@ -1,4 +1,4 @@
-```{r}
+```{r echo=F}
 # Load libraries.
 library(knitr)
 library(ggplot2)
@@ -26,14 +26,14 @@ The max supercategory in each degree tends to be the max by a large margin, so I
 
 | Degree      | Supercategory    |
 |-------------|------------------|
-| Darkness    | time of day      | 
-| Height      | people           |
-| Price       | food             |
-| Size        | animals          |
-| Sound       | public places    |
-| Temperature | seasons          |
-| Time        | things you watch |
-| Weight      | office supplies  |
+| darkness    | time of day      | 
+| height      | people           |
+| price       | food             |
+| size        | animals          |
+| sound       | public places    |
+| temperature | seasons          |
+| time        | things you watch |
+| weight      | office supplies  |
 
 # Subcategory Selection
 
