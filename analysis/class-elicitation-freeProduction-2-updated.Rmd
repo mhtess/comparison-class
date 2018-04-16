@@ -35,7 +35,7 @@ In addition to the points brought up at the bottom of class-elicitation-freeProd
 
 ## Unique Responses
 
-Number of unique responses (y-axis) by subcategory (x-axis) plotted for each item in "target".
+Plotted the number of unique responses (y-axis) by subcategory (x-axis) plotted for each item in "target".
 
 ```{r echo=FALSE, fig.height=16, fig.width=10}
 data %>%

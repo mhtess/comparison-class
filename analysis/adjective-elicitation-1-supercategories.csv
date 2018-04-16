@@ -1,433 +1,433 @@
-"","workerid","rt","adjective_form","trial_num","degree","adjective","response","supercategory","condition"
-"1",0,23748,"negative",1,"price","cheap","socks","clothing","adjective_elicitation"
-"2",0,23748,"positive",1,"price","expensive","shoes","clothing","adjective_elicitation"
-"3",0,23748,"neither_nor",1,"price","neither cheap nor expensive","shirts","clothing","adjective_elicitation"
-"4",0,11950,"negative",2,"size","small","fish","animals","adjective_elicitation"
-"5",0,11950,"positive",2,"size","big","whales","animals","adjective_elicitation"
-"6",0,11950,"neither_nor",2,"size","neither small nor big","sharks","animals","adjective_elicitation"
-"7",0,20165,"negative",3,"temperature","cold","freezers","kitchen structures","adjective_elicitation"
-"8",0,20165,"positive",3,"temperature","warm","ovens","kitchen structures","adjective_elicitation"
-"9",0,20165,"neither_nor",3,"temperature","neither cold nor warm","cabinets","kitchen structures","adjective_elicitation"
-"10",0,14471,"negative",4,"weight","light","rocks","rocks","adjective_elicitation"
-"11",0,14471,"positive",4,"weight","heavy","boulders","rocks","adjective_elicitation"
-"12",0,14471,"neither_nor",4,"weight","neither light nor heavy","stones","rocks","adjective_elicitation"
-"13",0,18582,"negative",5,"darkness","dark","nights","times of day","adjective_elicitation"
-"14",0,18582,"positive",5,"darkness","light","days","times of day","adjective_elicitation"
-"15",0,18582,"neither_nor",5,"darkness","neither dark nor light","mornings","times of day","adjective_elicitation"
-"16",0,42564,"negative",6,"sound","quiet","libraries","public places","adjective_elicitation"
-"17",0,42564,"positive",6,"sound","loud","concerts","public places","adjective_elicitation"
-"18",0,42564,"neither_nor",6,"sound","neither quiet nor loud","offices","public places","adjective_elicitation"
-"19",0,35580,"negative",7,"time","short","dart matches","sports","adjective_elicitation"
-"20",0,35580,"positive",7,"time","long","cricket matches","sports","adjective_elicitation"
-"21",0,35580,"neither_nor",7,"time","neither short nor long","basketball games","sports","adjective_elicitation"
-"22",0,32726,"negative",8,"height","short","rabbits","animals","adjective_elicitation"
-"23",0,32726,"positive",8,"height","tall","bears","animals","adjective_elicitation"
-"24",0,32726,"neither_nor",8,"height","neither short nor tall","dogs","animals","adjective_elicitation"
-"25",1,19084,"positive",1,"sound","loud","trumpets","instruments","adjective_elicitation"
-"26",1,19084,"negative",1,"sound","quiet","babies","people","adjective_elicitation"
-"27",1,19084,"neither_nor",1,"sound","neither loud nor quiet","tv shows","things you watch","adjective_elicitation"
-"28",1,7614,"positive",2,"weight","heavy","boulders","rocks","adjective_elicitation"
-"29",1,7614,"negative",2,"weight","light","pebbles","rocks","adjective_elicitation"
-"30",1,7614,"neither_nor",2,"weight","neither heavy nor light","rocks","rocks","adjective_elicitation"
-"31",1,12110,"negative",3,"price","cheap","pencils","office supplies","adjective_elicitation"
-"32",1,12110,"positive",3,"price","expensive","helicopters","vehicles","adjective_elicitation"
-"33",1,12110,"neither_nor",3,"price","neither cheap nor expensive","soft drinks","beverages","adjective_elicitation"
-"34",1,6498,"positive",4,"size","big","whales","animals","adjective_elicitation"
-"35",1,6498,"negative",4,"size","small","birds","animals","adjective_elicitation"
-"36",1,6498,"neither_nor",4,"size","neither big nor small","elk","animals","adjective_elicitation"
-"37",1,9977,"positive",5,"height","tall","buildings","buildings","adjective_elicitation"
-"38",1,9977,"negative",5,"height","short","pencils","office supplies","adjective_elicitation"
-"39",1,9977,"neither_nor",5,"height","neither tall nor short","people","people","adjective_elicitation"
-"40",1,6450,"positive",6,"temperature","warm","summer","seasons","adjective_elicitation"
-"41",1,6450,"negative",6,"temperature","cold","winter","seasons","adjective_elicitation"
-"42",1,6450,"neither_nor",6,"temperature","neither warm nor cold","spring","seasons","adjective_elicitation"
-"43",1,19697,"negative",7,"time","short","rulers","office supplies","adjective_elicitation"
-"44",1,19697,"positive",7,"time","long","measuring tapes","office supplies","adjective_elicitation"
-"45",1,19697,"neither_nor",7,"time","neither short nor long","metersticks","office supplies","adjective_elicitation"
-"46",1,8196,"negative",8,"darkness","dark","nights","times of day","adjective_elicitation"
-"47",1,8196,"positive",8,"darkness","light","days","times of day","adjective_elicitation"
-"48",1,8196,"neither_nor",8,"darkness","neither dark nor light","dawn","times of day","adjective_elicitation"
-"49",2,45439,"negative",1,"sound","quiet","libraries","public places","adjective_elicitation"
-"50",2,45439,"positive",1,"sound","loud","concerts","public places","adjective_elicitation"
-"51",2,45439,"neither_nor",1,"sound","neither quiet nor loud","stores","public places","adjective_elicitation"
-"52",2,22336,"positive",2,"height","tall","basketball players","athletes","adjective_elicitation"
-"53",2,22336,"negative",2,"height","short","jockeys","athletes","adjective_elicitation"
-"54",2,22336,"neither_nor",2,"height","neither tall nor short","professors","people","adjective_elicitation"
-"55",2,9290,"positive",3,"size","big","whales","animals","adjective_elicitation"
-"56",2,9290,"negative",3,"size","small","fish","animals","adjective_elicitation"
-"57",2,9290,"neither_nor",3,"size","neither big nor small","sharks","animals","adjective_elicitation"
-"58",2,15863,"positive",4,"weight","heavy","anvils","tools","adjective_elicitation"
-"59",2,15863,"negative",4,"weight","light","paperweights","office supplies","adjective_elicitation"
-"60",2,15863,"neither_nor",4,"weight","neither heavy nor light","doorstops","office supplies","adjective_elicitation"
-"61",2,18535,"positive",5,"price","expensive","cars","vehicles","adjective_elicitation"
-"62",2,18535,"negative",5,"price","cheap","toy cars","toys","adjective_elicitation"
-"63",2,18535,"neither_nor",5,"price","neither expensive nor cheap","bicycles","vehicles","adjective_elicitation"
-"64",2,11031,"negative",6,"temperature","cold","winters","seasons","adjective_elicitation"
-"65",2,11031,"positive",6,"temperature","warm","summers","seasons","adjective_elicitation"
-"66",2,11031,"neither_nor",6,"temperature","neither cold nor warm","falls","seasons","adjective_elicitation"
-"67",2,87948,"negative",7,"time","short","doctors visits","medical appointments","adjective_elicitation"
-"68",2,87948,"positive",7,"time","long","surgeries","medical appointments","adjective_elicitation"
-"69",2,87948,"neither_nor",7,"time","neither short nor long","xrays","medical appointments","adjective_elicitation"
-"70",2,17595,"positive",8,"darkness","light","beaches","natural environments","adjective_elicitation"
-"71",2,17595,"negative",8,"darkness","dark","caves","natural environments","adjective_elicitation"
-"72",2,17595,"neither_nor",8,"darkness","neither light nor dark","woods","natural environments","adjective_elicitation"
-"73",3,36586,"positive",1,"size","big","Elephants","animals","adjective_elicitation"
-"74",3,36586,"negative",1,"size","small","mices","animals","adjective_elicitation"
-"75",3,36586,"neither_nor",1,"size","neither big nor small","Dogs","animals","adjective_elicitation"
-"76",3,23432,"positive",2,"weight","heavy","Mountains","natural environments","adjective_elicitation"
-"77",3,23432,"negative",2,"weight","light","feathers","animals","adjective_elicitation"
-"78",3,23432,"neither_nor",2,"weight","neither heavy nor light","Basketballs","sports","adjective_elicitation"
-"79",3,54053,"negative",3,"time","short","Music videos","things you watch","adjective_elicitation"
-"80",3,54053,"positive",3,"time","long","Tv series","things you watch","adjective_elicitation"
-"81",3,54053,"neither_nor",3,"time","neither short nor long","Movies","things you watch","adjective_elicitation"
-"82",3,27609,"positive",4,"price","expensive","Jewelrys",NA,"adjective_elicitation"
-"83",3,27609,"negative",4,"price","cheap","foods",NA,"adjective_elicitation"
-"84",3,27609,"neither_nor",4,"price","neither expensive nor cheap","Vacations",NA,"adjective_elicitation"
-"85",3,10776,"negative",5,"temperature","cold","Winter","seasons","adjective_elicitation"
-"86",3,10776,"positive",5,"temperature","warm","Summer","seasons","adjective_elicitation"
-"87",3,10776,"neither_nor",5,"temperature","neither cold nor warm","Autumn","seasons","adjective_elicitation"
-"88",3,20434,"negative",6,"darkness","dark","Blacks","people","adjective_elicitation"
-"89",3,20434,"positive",6,"darkness","light","Whites","people","adjective_elicitation"
-"90",3,20434,"neither_nor",6,"darkness","neither dark nor light","Asians","people","adjective_elicitation"
-"91",3,13872,"positive",7,"height","tall","Whites","people","adjective_elicitation"
-"92",3,13872,"negative",7,"height","short","Asians","people","adjective_elicitation"
-"93",3,13872,"neither_nor",7,"height","neither tall nor short","Arabs","people","adjective_elicitation"
-"94",3,10776,"positive",8,"sound","loud","Speakers","listening devices","adjective_elicitation"
-"95",3,10776,"negative",8,"sound","quiet","Earbuds","listening devices","adjective_elicitation"
-"96",3,10776,"neither_nor",8,"sound","neither loud nor quiet","Headphones","listening devices","adjective_elicitation"
-"97",4,35230,"negative",1,"darkness","dark","hours at night","times of day","adjective_elicitation"
-"98",4,35230,"positive",1,"darkness","light","hours at day","times of day","adjective_elicitation"
-"99",4,35230,"neither_nor",1,"darkness","neither dark nor light","hours at dusk","times of day","adjective_elicitation"
-"100",4,63999,"positive",2,"height","tall","basketball atheletes","athletes","adjective_elicitation"
-"101",4,63999,"negative",2,"height","short","gymnast athletes ","athletes","adjective_elicitation"
-"102",4,63999,"neither_nor",2,"height","neither tall nor short","triathlon atheletes","athletes","adjective_elicitation"
-"103",4,44999,"positive",3,"temperature","warm","deserts","natural environments","adjective_elicitation"
-"104",4,44999,"negative",3,"temperature","cold","tundra","natural environments","adjective_elicitation"
-"105",4,44999,"neither_nor",3,"temperature","neither warm nor cold","temperate forests","natural environments","adjective_elicitation"
-"106",4,12455,"positive",4,"size","big","whales","animals","adjective_elicitation"
-"107",4,12455,"negative",4,"size","small","anchovies","animals","adjective_elicitation"
-"108",4,12455,"neither_nor",4,"size","neither big nor small","tuna","animals","adjective_elicitation"
-"109",4,24557,"negative",5,"sound","quiet","classical music","music","adjective_elicitation"
-"110",4,24557,"positive",5,"sound","loud","heavy metal music","music","adjective_elicitation"
-"111",4,24557,"neither_nor",5,"sound","neither quiet nor loud","country music","music","adjective_elicitation"
-"112",4,60650,"positive",6,"weight","heavy","Iron boxes","boxes","adjective_elicitation"
-"113",4,60650,"negative",6,"weight","light","plastic boxes","boxes","adjective_elicitation"
-"114",4,60650,"neither_nor",6,"weight","neither heavy nor light","wooden boxes","boxes","adjective_elicitation"
-"115",4,34136,"positive",7,"price","expensive","gold jewelry ","jewelry","adjective_elicitation"
-"116",4,34136,"negative",7,"price","cheap","pewter jewlery","jewelry","adjective_elicitation"
-"117",4,34136,"neither_nor",7,"price","neither expensive nor cheap","copper jewlery","jewelry","adjective_elicitation"
-"118",4,54061,"negative",8,"time","short","Poems","art","adjective_elicitation"
-"119",4,54061,"positive",8,"time","long","Novels","art","adjective_elicitation"
-"120",4,54061,"neither_nor",8,"time","neither short nor long","Novellas","art","adjective_elicitation"
-"121",5,30431,"positive",1,"price","expensive","Lobsters","food","adjective_elicitation"
-"122",5,30431,"negative",1,"price","cheap","hot dogs","food","adjective_elicitation"
-"123",5,30431,"neither_nor",1,"price","neither expensive nor cheap","Pork chops","food","adjective_elicitation"
-"124",5,62289,"positive",2,"size","big","Whales","animals","adjective_elicitation"
-"125",5,62289,"negative",2,"size","small","birds","animals","adjective_elicitation"
-"126",5,62289,"neither_nor",2,"size","neither big nor small","Pigs","animals","adjective_elicitation"
-"127",5,25146,"positive",3,"time","long","Novels","art","adjective_elicitation"
-"128",5,25146,"negative",3,"time","short","fairy tales","art","adjective_elicitation"
-"129",5,25146,"neither_nor",3,"time","neither long nor short","Short stories","art","adjective_elicitation"
-"130",5,41615,"positive",4,"weight","heavy","Metals","building materials","adjective_elicitation"
-"131",5,41615,"negative",4,"weight","light","plastics","building materials","adjective_elicitation"
-"132",5,41615,"neither_nor",4,"weight","neither heavy nor light","Woods","natural environments","adjective_elicitation"
-"133",5,18072,"negative",5,"darkness","dark","Skies","extraterrestrial objects","adjective_elicitation"
-"134",5,18072,"positive",5,"darkness","light","stars","extraterrestrial objects","adjective_elicitation"
-"135",5,18072,"neither_nor",5,"darkness","neither dark nor light","Moons","vehicles","adjective_elicitation"
-"136",5,60251,"negative",6,"height","short","Minis","vehicles","adjective_elicitation"
-"137",5,60251,"positive",6,"height","tall","Pickups","vehicles","adjective_elicitation"
-"138",5,60251,"neither_nor",6,"height","neither short nor tall","Sedans","medical supplies","adjective_elicitation"
-"139",5,18040,"negative",7,"temperature","cold","Ice packs","medical supplies","adjective_elicitation"
-"140",5,18040,"positive",7,"temperature","warm","Heat packs","medical supplies","adjective_elicitation"
-"141",5,18040,"neither_nor",7,"temperature","neither cold nor warm","Bandages","social events","adjective_elicitation"
-"142",5,27013,"positive",8,"sound","loud","Parties","social events","adjective_elicitation"
-"143",5,27013,"negative",8,"sound","quiet","funerals","social events","adjective_elicitation"
-"144",5,27013,"neither_nor",8,"sound","neither loud nor quiet","Meet-and-greets","food","adjective_elicitation"
-"145",6,28523,"positive",1,"temperature","warm","Soups","food","adjective_elicitation"
-"146",6,28523,"negative",1,"temperature","cold","Ice Cream","food","adjective_elicitation"
-"147",6,28523,"neither_nor",1,"temperature","neither warm nor cold","Breads","aquatic vehicles","adjective_elicitation"
-"148",6,63403,"positive",2,"price","expensive","Motor Boats","aquatic vehicles","adjective_elicitation"
-"149",6,63403,"negative",2,"price","cheap","Life rafts","aquatic vehicles","adjective_elicitation"
-"150",6,63403,"neither_nor",2,"price","neither expensive nor cheap","Small Sail Boats","sports equipment","adjective_elicitation"
-"151",6,37957,"positive",3,"size","big","Basketballs","sports equipment","adjective_elicitation"
-"152",6,37957,"negative",3,"size","small","Baseballs","sports equipment","adjective_elicitation"
-"153",6,37957,"neither_nor",3,"size","neither big nor small","Softballs","things you watch","adjective_elicitation"
-"154",6,42247,"positive",4,"time","long","Movies","things you watch","adjective_elicitation"
-"155",6,42247,"negative",4,"time","short","Music Videos","things you watch","adjective_elicitation"
-"156",6,42247,"neither_nor",4,"time","neither long nor short","TV Shows","sports equipment","adjective_elicitation"
-"157",6,23424,"positive",5,"weight","heavy","Bowling Balls","sports equipment","adjective_elicitation"
-"158",6,23424,"negative",5,"weight","light","Ping Pong Balls","sports equipment","adjective_elicitation"
-"159",6,23424,"neither_nor",5,"weight","neither heavy nor light","Basketballs","people","adjective_elicitation"
-"160",6,53205,"negative",6,"height","short","Children","people","adjective_elicitation"
-"161",6,53205,"positive",6,"height","tall","Men","people","adjective_elicitation"
-"162",6,53205,"neither_nor",6,"height","neither short nor tall","Women","religion","adjective_elicitation"
-"163",6,40278,"positive",7,"darkness","light","Divinity","food","adjective_elicitation"
-"164",6,40278,"negative",7,"darkness","dark","Chocolate","food","adjective_elicitation"
-"165",6,40278,"neither_nor",7,"darkness","neither light nor dark","Syrup","public places","adjective_elicitation"
-"166",6,24900,"negative",8,"sound","quiet","School",NA,"adjective_elicitation"
-"167",6,24900,"positive",8,"sound","loud","Home","public places","adjective_elicitation"
-"168",6,24900,"neither_nor",8,"sound","neither quiet nor loud","Workplace","types of bathing","adjective_elicitation"
-"169",7,21992,"positive",1,"temperature","warm","baths","types of bathing","adjective_elicitation"
-"170",7,21992,"negative",1,"temperature","cold","rain showers",NA,"adjective_elicitation"
-"171",7,21992,"neither_nor",1,"temperature","neither warm nor cold","lukewarm","animals","adjective_elicitation"
-"172",7,15510,"positive",2,"height","tall","giraffes","animals","adjective_elicitation"
-"173",7,15510,"negative",2,"height","short","ants","animals","adjective_elicitation"
-"174",7,15510,"neither_nor",2,"height","neither tall nor short","horses",NA,"adjective_elicitation"
-"175",7,22666,"negative",3,"weight","light","a feather","instruments","adjective_elicitation"
-"176",7,22666,"positive",3,"weight","heavy","pianos","people","adjective_elicitation"
-"177",7,22666,"neither_nor",3,"weight","neither light nor heavy","babies","food","adjective_elicitation"
-"178",7,19611,"negative",4,"price","cheap","sandwiches","vehicles","adjective_elicitation"
-"179",7,19611,"positive",4,"price","expensive","cars","furniture","adjective_elicitation"
-"180",7,19611,"neither_nor",4,"price","neither cheap nor expensive","furniture","people","adjective_elicitation"
-"181",7,17540,"positive",5,"size","big","fat people","people","adjective_elicitation"
-"182",7,17540,"negative",5,"size","small","skinny people","people","adjective_elicitation"
-"183",7,17540,"neither_nor",5,"size","neither big nor small","muscular people","extraterretrial objects","adjective_elicitation"
-"184",7,17097,"positive",6,"darkness","light","the sun","times of day","adjective_elicitation"
-"185",7,17097,"negative",6,"darkness","dark","night sky","times of day","adjective_elicitation"
-"186",7,17097,"neither_nor",6,"darkness","neither light nor dark","dusk","people","adjective_elicitation"
-"187",7,15555,"negative",7,"sound","quiet","sleeping children","people","adjective_elicitation"
-"188",7,15555,"positive",7,"sound","loud","teenagers","people","adjective_elicitation"
-"189",7,15555,"neither_nor",7,"sound","neither quiet nor loud","toddlers","vacations","adjective_elicitation"
-"190",7,23411,"positive",8,"time","long","road trips","errands","adjective_elicitation"
-"191",7,23411,"negative",8,"time","short","errands","errands","adjective_elicitation"
-"192",7,23411,"neither_nor",8,"time","neither long nor short","store truos","times of day","adjective_elicitation"
-"193",8,28473,"negative",1,"darkness","dark","Nights","times of day","adjective_elicitation"
-"194",8,28473,"positive",1,"darkness","light","mornings","times of day","adjective_elicitation"
-"195",8,28473,"neither_nor",1,"darkness","neither dark nor light","evenings","animals","adjective_elicitation"
-"196",8,22395,"negative",2,"size","small","Mice","animals","adjective_elicitation"
-"197",8,22395,"positive",2,"size","big","elephants","animals","adjective_elicitation"
-"198",8,22395,"neither_nor",2,"size","neither small nor big","Horses","water","adjective_elicitation"
-"199",8,43382,"negative",3,"temperature","cold","Ice cubes","water","adjective_elicitation"
-"200",8,43382,"positive",3,"temperature","warm","hot springs","water","adjective_elicitation"
-"201",8,43382,"neither_nor",3,"temperature","neither cold nor warm","Rain showers","furniture","adjective_elicitation"
-"202",8,23347,"positive",4,"weight","heavy","Couches","kitchenware","adjective_elicitation"
-"203",8,23347,"negative",4,"weight","light","cups","furniture","adjective_elicitation"
-"204",8,23347,"neither_nor",4,"weight","neither heavy nor light","Lamps","office supplies","adjective_elicitation"
-"205",8,20534,"negative",5,"price","cheap","Pencils","entertainment","adjective_elicitation"
-"206",8,20534,"positive",5,"price","expensive","TVs","clothing","adjective_elicitation"
-"207",8,20534,"neither_nor",5,"price","neither cheap nor expensive","T-shirts","animals","adjective_elicitation"
-"208",8,26552,"negative",6,"sound","quiet","Rabbits","animals","adjective_elicitation"
-"209",8,26552,"positive",6,"sound","loud","dogs","animals","adjective_elicitation"
-"210",8,26552,"neither_nor",6,"sound","neither quiet nor loud","Cats","animal features","adjective_elicitation"
-"211",8,92576,"negative",7,"time","short","Cat tails","animal features","adjective_elicitation"
-"212",8,92576,"positive",7,"time","long","horse tails","animal features","adjective_elicitation"
-"213",8,92576,"neither_nor",7,"time","neither short nor long","Dog tails","plants","adjective_elicitation"
-"214",8,21284,"negative",8,"height","short","Blades of grass","plants","adjective_elicitation"
-"215",8,21284,"positive",8,"height","tall","trees","plants","adjective_elicitation"
-"216",8,21284,"neither_nor",8,"height","neither short nor tall","Bushes","timeframes","adjective_elicitation"
-"217",9,29062,"positive",1,"time","long","years","timeframes","adjective_elicitation"
-"218",9,29062,"negative",1,"time","short","days","timeframes","adjective_elicitation"
-"219",9,29062,"neither_nor",1,"time","neither long nor short","months","kitchen appliances","adjective_elicitation"
-"220",9,20151,"positive",2,"temperature","warm","ovens","kitchen appliances","adjective_elicitation"
-"221",9,20151,"negative",2,"temperature","cold","refrigerators","furniture","adjective_elicitation"
-"222",9,20151,"neither_nor",2,"temperature","neither warm nor cold","tables","people","adjective_elicitation"
-"223",9,6879,"negative",3,"height","short","kids","people","adjective_elicitation"
-"224",9,6879,"positive",3,"height","tall","adults","people","adjective_elicitation"
-"225",9,6879,"neither_nor",3,"height","neither short nor tall","adolescents","animals","adjective_elicitation"
-"226",9,25560,"negative",4,"weight","light","hamsters","animals","adjective_elicitation"
-"227",9,25560,"positive",4,"weight","heavy","dogs","animals","adjective_elicitation"
-"228",9,25560,"neither_nor",4,"weight","neither light nor heavy","cats","public places","adjective_elicitation"
-"229",9,12940,"negative",5,"sound","quiet","libraries","public places","adjective_elicitation"
-"230",9,12940,"positive",5,"sound","loud","concert halls","public places","adjective_elicitation"
-"231",9,12940,"neither_nor",5,"sound","neither quiet nor loud","commons","rocks","adjective_elicitation"
-"232",9,6528,"positive",6,"size","big","boulders","rocks","adjective_elicitation"
-"233",9,6528,"negative",6,"size","small","pebbles","rocks","adjective_elicitation"
-"234",9,6528,"neither_nor",6,"size","neither big nor small","stones","cars","adjective_elicitation"
-"235",9,20240,"negative",7,"price","cheap","kias","cars","adjective_elicitation"
-"236",9,20240,"positive",7,"price","expensive","ferraris","cars","adjective_elicitation"
-"237",9,20240,"neither_nor",7,"price","neither cheap nor expensive","hondas","times of day","adjective_elicitation"
-"238",9,8416,"positive",8,"darkness","light","days","times of day","adjective_elicitation"
-"239",9,8416,"negative",8,"darkness","dark","nights","times of day","adjective_elicitation"
-"240",9,8416,"neither_nor",8,"darkness","neither light nor dark","dusk","places","adjective_elicitation"
-"241",10,24405,"negative",1,"darkness","dark","Indoor areas","places","adjective_elicitation"
-"242",10,24405,"positive",1,"darkness","light","Outdoor areas","places","adjective_elicitation"
-"243",10,24405,"neither_nor",1,"darkness","neither dark nor light","Shaded areas","brands","adjective_elicitation"
-"244",10,17381,"positive",2,"price","expensive","Name brands","brands","adjective_elicitation"
-"245",10,17381,"negative",2,"price","cheap","off-brands","brands","adjective_elicitation"
-"246",10,17381,"neither_nor",2,"price","neither expensive nor cheap","Knock-offs","animals","adjective_elicitation"
-"247",10,12631,"positive",3,"size","big","Whales","animals","adjective_elicitation"
-"248",10,12631,"negative",3,"size","small","minnows","animals","adjective_elicitation"
-"249",10,12631,"neither_nor",3,"size","neither big nor small","Baby whales","animal features","adjective_elicitation"
-"250",10,17834,"negative",4,"weight","light","Feathers","animals","adjective_elicitation"
-"251",10,17834,"positive",4,"weight","heavy","birds","animals","adjective_elicitation"
-"252",10,17834,"neither_nor",4,"weight","neither light nor heavy","Small birds",NA,"adjective_elicitation"
-"253",10,21334,"positive",5,"temperature","warm","Fires","water","adjective_elicitation"
-"254",10,21334,"negative",5,"temperature","cold","ice",NA,"adjective_elicitation"
-"255",10,21334,"neither_nor",5,"temperature","neither warm nor cold","Frozen fire","clothing","adjective_elicitation"
-"256",10,19976,"negative",6,"time","short","Kids pants","clothing","adjective_elicitation"
-"257",10,19976,"positive",6,"time","long","adult pants","clothing","adjective_elicitation"
-"258",10,19976,"neither_nor",6,"time","neither short nor long","capris","actions","adjective_elicitation"
-"259",10,13473,"negative",7,"sound","quiet","Whispers","public places","adjective_elicitation"
-"260",10,13473,"positive",7,"sound","loud","Rock shows","people","adjective_elicitation"
-"261",10,13473,"neither_nor",7,"sound","neither quiet nor loud","People","people","adjective_elicitation"
-"262",10,17414,"negative",8,"height","short","Kids","people","adjective_elicitation"
-"263",10,17414,"positive",8,"height","tall","adults","people","adjective_elicitation"
-"264",10,17414,"neither_nor",8,"height","neither short nor tall","Pre-teens","places","adjective_elicitation"
-"265",11,47254,"positive",1,"temperature","warm","Homes","places","adjective_elicitation"
-"266",11,47254,"negative",1,"temperature","cold","outside","plants","adjective_elicitation"
-"267",11,47254,"neither_nor",1,"temperature","neither warm nor cold","grass","plants","adjective_elicitation"
-"268",11,20634,"negative",2,"height","short","mushrooms","people","adjective_elicitation"
-"269",11,20634,"positive",2,"height","tall","humans","animals","adjective_elicitation"
-"270",11,20634,"neither_nor",2,"height","neither short nor tall","dogs","food","adjective_elicitation"
-"271",11,32666,"negative",3,"price","cheap","vegetables","food","adjective_elicitation"
-"272",11,32666,"positive",3,"price","expensive","steak","cleaning product","adjective_elicitation"
-"273",11,32666,"neither_nor",3,"price","neither cheap nor expensive","shampoo","public places","adjective_elicitation"
-"274",11,10391,"positive",4,"sound","loud","Concerts","public places","adjective_elicitation"
-"275",11,10391,"negative",4,"sound","quiet","library","public places","adjective_elicitation"
-"276",11,10391,"neither_nor",4,"sound","neither loud nor quiet","stores","sports equipment","adjective_elicitation"
-"277",11,15175,"positive",5,"weight","heavy","Weights","office supplies","adjective_elicitation"
-"278",11,15175,"negative",5,"weight","light","paper","office supplies","adjective_elicitation"
-"279",11,15175,"neither_nor",5,"weight","neither heavy nor light","binder","times of day","adjective_elicitation"
-"280",11,21228,"positive",6,"darkness","light","mornings","times of day","adjective_elicitation"
-"281",11,21228,"negative",6,"darkness","dark","evenings",NA,"adjective_elicitation"
-"282",11,21228,"neither_nor",6,"darkness","neither light nor dark","nightlights","vehicles","adjective_elicitation"
-"283",11,10867,"positive",7,"size","big","planes","animals","adjective_elicitation"
-"284",11,10867,"negative",7,"size","small","ants","people","adjective_elicitation"
-"285",11,10867,"neither_nor",7,"size","neither big nor small","humans","animals","adjective_elicitation"
-"286",11,17661,"positive",8,"time","long","giraffes","animals","adjective_elicitation"
-"287",11,17661,"negative",8,"time","short","rats","people","adjective_elicitation"
-"288",11,17661,"neither_nor",8,"time","neither long nor short","humans","people","adjective_elicitation"
-"289",12,22077,"negative",1,"darkness","dark","black people","people","adjective_elicitation"
-"290",12,22077,"positive",1,"darkness","light","white people","people","adjective_elicitation"
-"291",12,22077,"neither_nor",1,"darkness","neither dark nor light","asians","people","adjective_elicitation"
-"292",12,13896,"positive",2,"weight","heavy","americans","people","adjective_elicitation"
-"293",12,13896,"negative",2,"weight","light","asians","people","adjective_elicitation"
-"294",12,13896,"neither_nor",2,"weight","neither heavy nor light","europeans","food","adjective_elicitation"
-"295",12,15182,"negative",3,"price","cheap","gummy bears","vehicles","adjective_elicitation"
-"296",12,15182,"positive",3,"price","expensive","cars","food","adjective_elicitation"
-"297",12,15182,"neither_nor",3,"price","neither cheap nor expensive","beef","people","adjective_elicitation"
-"298",12,19955,"negative",4,"temperature","cold","terrorists","people","adjective_elicitation"
-"299",12,19955,"positive",4,"temperature","warm","normal people","people","adjective_elicitation"
-"300",12,19955,"neither_nor",4,"temperature","neither cold nor warm","cops","people","adjective_elicitation"
-"301",12,11344,"negative",5,"height","short","midgets","people","adjective_elicitation"
-"302",12,11344,"positive",5,"height","tall","giants","people","adjective_elicitation"
-"303",12,11344,"neither_nor",5,"height","neither short nor tall","normal people","people","adjective_elicitation"
-"304",12,13936,"negative",6,"sound","quiet","introverts","people","adjective_elicitation"
-"305",12,13936,"positive",6,"sound","loud","extroverts","animals","adjective_elicitation"
-"306",12,13936,"neither_nor",6,"sound","neither quiet nor loud","cats","people","adjective_elicitation"
-"307",12,12306,"positive",7,"size","big","europeans","people","adjective_elicitation"
-"308",12,12306,"negative",7,"size","small","asians","people","adjective_elicitation"
-"309",12,12306,"neither_nor",7,"size","neither big nor small","mexicans","things you watch","adjective_elicitation"
-"310",12,17107,"positive",8,"time","long","movies","things you watch","adjective_elicitation"
-"311",12,17107,"negative",8,"time","short","tv shows","things you watch","adjective_elicitation"
-"312",12,17107,"neither_nor",8,"time","neither long nor short","plays","people","adjective_elicitation"
-"313",13,18254,"negative",1,"sound","quiet","Elderly people","people","adjective_elicitation"
-"314",13,18254,"positive",1,"sound","loud","children","people","adjective_elicitation"
-"315",13,18254,"neither_nor",1,"sound","neither quiet nor loud","Adults","seasons","adjective_elicitation"
-"316",13,8579,"positive",2,"temperature","warm","Summers","seasons","adjective_elicitation"
-"317",13,8579,"negative",2,"temperature","cold","Winters","seasons","adjective_elicitation"
-"318",13,8579,"neither_nor",2,"temperature","neither warm nor cold","Springs","animals","adjective_elicitation"
-"319",13,17248,"negative",3,"weight","light","Birds","animals","adjective_elicitation"
-"320",13,17248,"positive",3,"weight","heavy","mammals","animals","adjective_elicitation"
-"321",13,17248,"neither_nor",3,"weight","neither light nor heavy","fish","animals","adjective_elicitation"
-"322",13,23480,"positive",4,"size","big","whales","animals","adjective_elicitation"
-"323",13,23480,"negative",4,"size","small","tadpoles","animals","adjective_elicitation"
-"324",13,23480,"neither_nor",4,"size","neither big nor small","seals","cars","adjective_elicitation"
-"325",13,28854,"positive",5,"price","expensive","Porsches","cars","adjective_elicitation"
-"326",13,28854,"negative",5,"price","cheap","Kias","cars","adjective_elicitation"
-"327",13,28854,"neither_nor",5,"price","neither expensive nor cheap","Chevrolets","people","adjective_elicitation"
-"328",13,12966,"negative",6,"darkness","dark","Africans","people","adjective_elicitation"
-"329",13,12966,"positive",6,"darkness","light","Europeans","people","adjective_elicitation"
-"330",13,12966,"neither_nor",6,"darkness","neither dark nor light","Middle Easterners","buildings","adjective_elicitation"
-"331",13,23288,"positive",7,"height","tall","Skyscrapers","buildings","adjective_elicitation"
-"332",13,23288,"negative",7,"height","short","Houses","buildings","adjective_elicitation"
-"333",13,23288,"neither_nor",7,"height","neither tall nor short","Businesses","sports","adjective_elicitation"
-"334",13,27964,"positive",8,"time","long","Marathons","sports","adjective_elicitation"
-"335",13,27964,"negative",8,"time","short","Sprints","sports","adjective_elicitation"
-"336",13,27964,"neither_nor",8,"time","neither long nor short","Fun runs","housing","adjective_elicitation"
-"337",14,63727,"positive",1,"price","expensive","Hotel stays","housing","adjective_elicitation"
-"338",14,63727,"negative",1,"price","cheap","Camping","housing","adjective_elicitation"
-"339",14,63727,"neither_nor",1,"price","neither expensive nor cheap","Hostel stays","sports equipment","adjective_elicitation"
-"340",14,141936,"positive",2,"weight","heavy","Hiking boots","clothing","adjective_elicitation"
-"341",14,141936,"negative",2,"weight","light","Slippers","sports equipment","adjective_elicitation"
-"342",14,141936,"neither_nor",2,"weight","neither heavy nor light","Running shoes","people","adjective_elicitation"
-"343",14,40679,"negative",3,"size","small","Children","people","adjective_elicitation"
-"344",14,40679,"positive",3,"size","big","Adults","people","adjective_elicitation"
-"345",14,40679,"neither_nor",3,"size","neither small nor big","Teenagers","rooms","adjective_elicitation"
-"346",14,150842,"negative",4,"darkness","dark","Basements","rooms","adjective_elicitation"
-"347",14,150842,"positive",4,"darkness","light","solariums","rooms","adjective_elicitation"
-"348",14,150842,"neither_nor",4,"darkness","neither dark nor light","Living rooms","food","adjective_elicitation"
-"349",14,66233,"negative",5,"temperature","cold","Ice cream cones","food","adjective_elicitation"
-"350",14,66233,"positive",5,"temperature","warm","Pasta dishes","food","adjective_elicitation"
-"351",14,66233,"neither_nor",5,"temperature","neither cold nor warm","Sandwiches","sounds","adjective_elicitation"
-"352",14,127434,"positive",6,"sound","loud","Alarms","sounds","adjective_elicitation"
-"353",14,127434,"negative",6,"sound","quiet","Wind chimes","music","adjective_elicitation"
-"354",14,127434,"neither_nor",6,"sound","neither loud nor quiet","Music","animals","adjective_elicitation"
-"355",14,75637,"positive",7,"height","tall","Jiraffes","animals","adjective_elicitation"
-"356",14,75637,"negative",7,"height","short","Turtles","animals","adjective_elicitation"
-"357",14,75637,"neither_nor",7,"height","neither tall nor short","Lions","clothing","adjective_elicitation"
-"358",14,65000,"negative",8,"time","short","bracelets","clothing","adjective_elicitation"
-"359",14,65000,"positive",8,"time","long","belts","clothing","adjective_elicitation"
-"360",14,65000,"neither_nor",8,"time","neither short nor long","ties","animals","adjective_elicitation"
-"361",15,139062,"positive",1,"weight","heavy","whales","animals","adjective_elicitation"
-"362",15,139062,"negative",1,"weight","light","seals","animals","adjective_elicitation"
-"363",15,139062,"neither_nor",1,"weight","neither heavy nor light","penguins","seasons","adjective_elicitation"
-"364",15,16016,"negative",2,"temperature","cold","winter days","seasons","adjective_elicitation"
-"365",15,16016,"positive",2,"temperature","warm","summer days","seasons","adjective_elicitation"
-"366",15,16016,"neither_nor",2,"temperature","neither cold nor warm","spring","vehicles","adjective_elicitation"
-"367",15,12701,"positive",3,"size","big","cars","vehicles","adjective_elicitation"
-"368",15,12701,"negative",3,"size","small","bikes","vehicles","adjective_elicitation"
-"369",15,12701,"neither_nor",3,"size","neither big nor small","motorcycles","food","adjective_elicitation"
-"370",15,10662,"negative",4,"price","cheap","soups","food","adjective_elicitation"
-"371",15,10662,"positive",4,"price","expensive","burritos","food","adjective_elicitation"
-"372",15,10662,"neither_nor",4,"price","neither cheap nor expensive","tacos","people","adjective_elicitation"
-"373",15,12963,"positive",5,"height","tall","humans","people","adjective_elicitation"
-"374",15,12963,"negative",5,"height","short","elves","animals","adjective_elicitation"
-"375",15,12963,"neither_nor",5,"height","neither tall nor short","lions","animal features","adjective_elicitation"
-"376",15,62960,"positive",6,"time","long","feet","animal features","adjective_elicitation"
-"377",15,62960,"negative",6,"time","short","hands","animal features","adjective_elicitation"
-"378",15,62960,"neither_nor",6,"time","neither long nor short","forearms","people","adjective_elicitation"
-"379",15,11243,"negative",7,"sound","quiet","women","people","adjective_elicitation"
-"380",15,11243,"positive",7,"sound","loud","men","people","adjective_elicitation"
-"381",15,11243,"neither_nor",7,"sound","neither quiet nor loud","children","animals","adjective_elicitation"
-"382",15,22696,"negative",8,"darkness","dark","penguins","animals","adjective_elicitation"
-"383",15,22696,"positive",8,"darkness","light","whales","animals","adjective_elicitation"
-"384",15,22696,"neither_nor",8,"darkness","neither dark nor light","fish","people","adjective_elicitation"
-"385",16,51017,"negative",1,"height","short","women","people","adjective_elicitation"
-"386",16,51017,"positive",1,"height","tall","men","people","adjective_elicitation"
-"387",16,51017,"neither_nor",1,"height","neither short nor tall","babies","fruit","adjective_elicitation"
-"388",16,21998,"positive",2,"size","big","watermelons","fruit","adjective_elicitation"
-"389",16,21998,"negative",2,"size","small","grapes","fruit","adjective_elicitation"
-"390",16,21998,"neither_nor",2,"size","neither big nor small","oranges","things you watch","adjective_elicitation"
-"391",16,34066,"positive",3,"time","long","movies","things you watch","adjective_elicitation"
-"392",16,34066,"negative",3,"time","short","trailers","things you watch","adjective_elicitation"
-"393",16,34066,"neither_nor",3,"time","neither long nor short","documentaries","kitchen appliances","adjective_elicitation"
-"394",16,76785,"negative",4,"weight","light","toasters","kitchen appliances","adjective_elicitation"
-"395",16,76785,"positive",4,"weight","heavy","food processors","kitchen appliances","adjective_elicitation"
-"396",16,76785,"neither_nor",4,"weight","neither light nor heavy","blenders","seasons","adjective_elicitation"
-"397",16,45754,"positive",5,"temperature","warm","summers","seasons","adjective_elicitation"
-"398",16,45754,"negative",5,"temperature","cold","winters","seasons","adjective_elicitation"
-"399",16,45754,"neither_nor",5,"temperature","neither warm nor cold","springs","jewelry","adjective_elicitation"
-"400",16,133540,"negative",6,"price","cheap","cubic zirconia jewels","jewelry","adjective_elicitation"
-"401",16,133540,"positive",6,"price","expensive","diamond jewels","jewelry","adjective_elicitation"
-"402",16,133540,"neither_nor",6,"price","neither cheap nor expensive","garnet jewelry","people","adjective_elicitation"
-"403",16,201093,"negative",7,"sound","quiet","losing baseball fans","people","adjective_elicitation"
-"404",16,201093,"positive",7,"sound","loud","winning baseball fans","people","adjective_elicitation"
-"405",16,201093,"neither_nor",7,"sound","neither quiet nor loud","fans before a game","times of day","adjective_elicitation"
-"406",16,18426,"negative",8,"darkness","dark","nights","times of day","adjective_elicitation"
-"407",16,18426,"positive",8,"darkness","light","days","times of day","adjective_elicitation"
-"408",16,18426,"neither_nor",8,"darkness","neither dark nor light","dusk","beverages","adjective_elicitation"
-"409",17,16487,"positive",1,"price","expensive","Wines","beverages","adjective_elicitation"
-"410",17,16487,"negative",1,"price","cheap","sodas","beverages","adjective_elicitation"
-"411",17,16487,"neither_nor",1,"price","neither expensive nor cheap","Juices","animals","adjective_elicitation"
-"412",17,35066,"negative",2,"size","small","Fish","animals","adjective_elicitation"
-"413",17,35066,"positive",2,"size","big","whales","animals","adjective_elicitation"
-"414",17,35066,"neither_nor",2,"size","neither small nor big","Dolphins","people","adjective_elicitation"
-"415",17,16231,"negative",3,"height","short","Children","people","adjective_elicitation"
-"416",17,16231,"positive",3,"height","tall","adults","people","adjective_elicitation"
-"417",17,16231,"neither_nor",3,"height","neither short nor tall","teenagers ",NA,"adjective_elicitation"
-"418",17,25259,"positive",4,"temperature","warm","Fires","water","adjective_elicitation"
-"419",17,25259,"negative",4,"temperature","cold","ice cbubes","office supplies","adjective_elicitation"
-"420",17,25259,"neither_nor",4,"temperature","neither warm nor cold","books","animal features","adjective_elicitation"
-"421",17,15776,"negative",5,"weight","light","Feathers","building materials","adjective_elicitation"
-"422",17,15776,"positive",5,"weight","heavy","bricks","building materials","adjective_elicitation"
-"423",17,15776,"neither_nor",5,"weight","neither light nor heavy","Sticks","building materials","adjective_elicitation"
-"424",17,20109,"positive",6,"sound","loud","concerts","public places","adjective_elicitation"
-"425",17,20109,"negative",6,"sound","quiet","libraries","public places","adjective_elicitation"
-"426",17,20109,"neither_nor",6,"sound","neither loud nor quiet","grocery stores","public places","adjective_elicitation"
-"427",17,49762,"positive",7,"time","long","Lectures","things you watch","adjective_elicitation"
-"428",17,49762,"negative",7,"time","short","jokes","things you watch","adjective_elicitation"
-"429",17,49762,"neither_nor",7,"time","neither long nor short","sitcoms","things you watch","adjective_elicitation"
-"430",17,36685,"positive",8,"darkness","light","doughnuts","food","adjective_elicitation"
-"431",17,36685,"negative",8,"darkness","dark","brownies","food","adjective_elicitation"
-"432",17,36685,"neither_nor",8,"darkness","neither light nor dark","wheat breads","food","adjective_elicitation"
+,workerid,rt,adjective_form,trial_num,degree,adjective,response,supercategory
+1,0,23748,negative,1,price,cheap,socks,clothing
+2,0,23748,positive,1,price,expensive,shoes,clothing
+3,0,23748,neither_nor,1,price,neither cheap nor expensive,shirts,clothing
+4,0,11950,negative,2,size,small,fish,animals
+5,0,11950,positive,2,size,big,whales,animals
+6,0,11950,neither_nor,2,size,neither small nor big,sharks,animals
+7,0,20165,negative,3,temperature,cold,freezers,kitchen structures
+8,0,20165,positive,3,temperature,warm,ovens,kitchen structures
+9,0,20165,neither_nor,3,temperature,neither cold nor warm,cabinets,kitchen structures
+10,0,14471,negative,4,weight,light,rocks,rocks
+11,0,14471,positive,4,weight,heavy,boulders,rocks
+12,0,14471,neither_nor,4,weight,neither light nor heavy,stones,rocks
+13,0,18582,negative,5,darkness,dark,nights,times of day
+14,0,18582,positive,5,darkness,light,days,times of day
+15,0,18582,neither_nor,5,darkness,neither dark nor light,mornings,times of day
+16,0,42564,negative,6,sound,quiet,libraries,public places
+17,0,42564,positive,6,sound,loud,concerts,public places
+18,0,42564,neither_nor,6,sound,neither quiet nor loud,offices,public places
+19,0,35580,negative,7,time,short,dart matches,sports
+20,0,35580,positive,7,time,long,cricket matches,sports
+21,0,35580,neither_nor,7,time,neither short nor long,basketball games,sports
+22,0,32726,negative,8,height,short,rabbits,animals
+23,0,32726,positive,8,height,tall,bears,animals
+24,0,32726,neither_nor,8,height,neither short nor tall,dogs,animals
+25,1,19084,positive,1,sound,loud,trumpets,instruments
+26,1,19084,negative,1,sound,quiet,babies,people
+27,1,19084,neither_nor,1,sound,neither loud nor quiet,tv shows,things you watch
+28,1,7614,positive,2,weight,heavy,boulders,rocks
+29,1,7614,negative,2,weight,light,pebbles,rocks
+30,1,7614,neither_nor,2,weight,neither heavy nor light,rocks,rocks
+31,1,12110,negative,3,price,cheap,pencils,office supplies
+32,1,12110,positive,3,price,expensive,helicopters,vehicles
+33,1,12110,neither_nor,3,price,neither cheap nor expensive,soft drinks,beverages
+34,1,6498,positive,4,size,big,whales,animals
+35,1,6498,negative,4,size,small,birds,animals
+36,1,6498,neither_nor,4,size,neither big nor small,elk,animals
+37,1,9977,positive,5,height,tall,buildings,buildings
+38,1,9977,negative,5,height,short,pencils,office supplies
+39,1,9977,neither_nor,5,height,neither tall nor short,people,people
+40,1,6450,positive,6,temperature,warm,summer,seasons
+41,1,6450,negative,6,temperature,cold,winter,seasons
+42,1,6450,neither_nor,6,temperature,neither warm nor cold,spring,seasons
+43,1,19697,negative,7,time,short,rulers,office supplies
+44,1,19697,positive,7,time,long,measuring tapes,office supplies
+45,1,19697,neither_nor,7,time,neither short nor long,metersticks,office supplies
+46,1,8196,negative,8,darkness,dark,nights,times of day
+47,1,8196,positive,8,darkness,light,days,times of day
+48,1,8196,neither_nor,8,darkness,neither dark nor light,dawn,times of day
+49,2,45439,negative,1,sound,quiet,libraries,public places
+50,2,45439,positive,1,sound,loud,concerts,public places
+51,2,45439,neither_nor,1,sound,neither quiet nor loud,stores,public places
+52,2,22336,positive,2,height,tall,basketball players,athletes
+53,2,22336,negative,2,height,short,jockeys,athletes
+54,2,22336,neither_nor,2,height,neither tall nor short,professors,people
+55,2,9290,positive,3,size,big,whales,animals
+56,2,9290,negative,3,size,small,fish,animals
+57,2,9290,neither_nor,3,size,neither big nor small,sharks,animals
+58,2,15863,positive,4,weight,heavy,anvils,tools
+59,2,15863,negative,4,weight,light,paperweights,office supplies
+60,2,15863,neither_nor,4,weight,neither heavy nor light,doorstops,office supplies
+61,2,18535,positive,5,price,expensive,cars,vehicles
+62,2,18535,negative,5,price,cheap,toy cars,toys
+63,2,18535,neither_nor,5,price,neither expensive nor cheap,bicycles,vehicles
+64,2,11031,negative,6,temperature,cold,winters,seasons
+65,2,11031,positive,6,temperature,warm,summers,seasons
+66,2,11031,neither_nor,6,temperature,neither cold nor warm,falls,seasons
+67,2,87948,negative,7,time,short,doctors visits,medical appointments
+68,2,87948,positive,7,time,long,surgeries,medical appointments
+69,2,87948,neither_nor,7,time,neither short nor long,xrays,medical appointments
+70,2,17595,positive,8,darkness,light,beaches,natural environments
+71,2,17595,negative,8,darkness,dark,caves,natural environments
+72,2,17595,neither_nor,8,darkness,neither light nor dark,woods,natural environments
+73,3,36586,positive,1,size,big,Elephants,animals
+74,3,36586,negative,1,size,small,mices,animals
+75,3,36586,neither_nor,1,size,neither big nor small,Dogs,animals
+76,3,23432,positive,2,weight,heavy,Mountains,natural environments
+77,3,23432,negative,2,weight,light,feathers,animal features
+78,3,23432,neither_nor,2,weight,neither heavy nor light,Basketballs,sports
+79,3,54053,negative,3,time,short,Music videos,things you watch
+80,3,54053,positive,3,time,long,Tv series,things you watch
+81,3,54053,neither_nor,3,time,neither short nor long,Movies,things you watch
+82,3,27609,positive,4,price,expensive,Jewelrys,jewelry
+83,3,27609,negative,4,price,cheap,foods,NA
+84,3,27609,neither_nor,4,price,neither expensive nor cheap,Vacations,NA
+85,3,10776,negative,5,temperature,cold,Winter,seasons
+86,3,10776,positive,5,temperature,warm,Summer,seasons
+87,3,10776,neither_nor,5,temperature,neither cold nor warm,Autumn,seasons
+88,3,20434,negative,6,darkness,dark,Blacks,people
+89,3,20434,positive,6,darkness,light,Whites,people
+90,3,20434,neither_nor,6,darkness,neither dark nor light,Asians,people
+91,3,13872,positive,7,height,tall,Whites,people
+92,3,13872,negative,7,height,short,Asians,people
+93,3,13872,neither_nor,7,height,neither tall nor short,Arabs,people
+94,3,10776,positive,8,sound,loud,Speakers,listening devices
+95,3,10776,negative,8,sound,quiet,Earbuds,listening devices
+96,3,10776,neither_nor,8,sound,neither loud nor quiet,Headphones,listening devices
+97,4,35230,negative,1,darkness,dark,hours at night,times of day
+98,4,35230,positive,1,darkness,light,hours at day,times of day
+99,4,35230,neither_nor,1,darkness,neither dark nor light,hours at dusk,times of day
+100,4,63999,positive,2,height,tall,basketball atheletes,athletes
+101,4,63999,negative,2,height,short,gymnast athletes ,athletes
+102,4,63999,neither_nor,2,height,neither tall nor short,triathlon atheletes,athletes
+103,4,44999,positive,3,temperature,warm,deserts,natural environments
+104,4,44999,negative,3,temperature,cold,tundra,natural environments
+105,4,44999,neither_nor,3,temperature,neither warm nor cold,temperate forests,natural environments
+106,4,12455,positive,4,size,big,whales,animals
+107,4,12455,negative,4,size,small,anchovies,animals
+108,4,12455,neither_nor,4,size,neither big nor small,tuna,animals
+109,4,24557,negative,5,sound,quiet,classical music,music
+110,4,24557,positive,5,sound,loud,heavy metal music,music
+111,4,24557,neither_nor,5,sound,neither quiet nor loud,country music,music
+112,4,60650,positive,6,weight,heavy,Iron boxes,boxes
+113,4,60650,negative,6,weight,light,plastic boxes,boxes
+114,4,60650,neither_nor,6,weight,neither heavy nor light,wooden boxes,boxes
+115,4,34136,positive,7,price,expensive,gold jewelry ,jewelry
+116,4,34136,negative,7,price,cheap,pewter jewlery,jewelry
+117,4,34136,neither_nor,7,price,neither expensive nor cheap,copper jewlery,jewelry
+118,4,54061,negative,8,time,short,Poems,art
+119,4,54061,positive,8,time,long,Novels,art
+120,4,54061,neither_nor,8,time,neither short nor long,Novellas,art
+121,5,30431,positive,1,price,expensive,Lobsters,food
+122,5,30431,negative,1,price,cheap,hot dogs,food
+123,5,30431,neither_nor,1,price,neither expensive nor cheap,Pork chops,food
+124,5,62289,positive,2,size,big,Whales,animals
+125,5,62289,negative,2,size,small,birds,animals
+126,5,62289,neither_nor,2,size,neither big nor small,Pigs,animals
+127,5,25146,positive,3,time,long,Novels,art
+128,5,25146,negative,3,time,short,fairy tales,art
+129,5,25146,neither_nor,3,time,neither long nor short,Short stories,art
+130,5,41615,positive,4,weight,heavy,Metals,building materials
+131,5,41615,negative,4,weight,light,plastics,building materials
+132,5,41615,neither_nor,4,weight,neither heavy nor light,Woods,building materials
+133,5,18072,negative,5,darkness,dark,Skies,natural environments
+134,5,18072,positive,5,darkness,light,stars,extraterrestrial objects
+135,5,18072,neither_nor,5,darkness,neither dark nor light,Moons,extraterrestrial objects
+136,5,60251,negative,6,height,short,Minis,vehicles
+137,5,60251,positive,6,height,tall,Pickups,vehicles
+138,5,60251,neither_nor,6,height,neither short nor tall,Sedans,vehicles
+139,5,18040,negative,7,temperature,cold,Ice packs,medical supplies
+140,5,18040,positive,7,temperature,warm,Heat packs,medical supplies
+141,5,18040,neither_nor,7,temperature,neither cold nor warm,Bandages,medical supplies
+142,5,27013,positive,8,sound,loud,Parties,social events
+143,5,27013,negative,8,sound,quiet,funerals,social events
+144,5,27013,neither_nor,8,sound,neither loud nor quiet,Meet-and-greets,social events
+145,6,28523,positive,1,temperature,warm,Soups,food
+146,6,28523,negative,1,temperature,cold,Ice Cream,food
+147,6,28523,neither_nor,1,temperature,neither warm nor cold,Breads,food
+148,6,63403,positive,2,price,expensive,Motor Boats,aquatic vehicles
+149,6,63403,negative,2,price,cheap,Life rafts,aquatic vehicles
+150,6,63403,neither_nor,2,price,neither expensive nor cheap,Small Sail Boats,aquatic vehicles
+151,6,37957,positive,3,size,big,Basketballs,sports equipment
+152,6,37957,negative,3,size,small,Baseballs,sports equipment
+153,6,37957,neither_nor,3,size,neither big nor small,Softballs,sports equipment
+154,6,42247,positive,4,time,long,Movies,things you watch
+155,6,42247,negative,4,time,short,Music Videos,things you watch
+156,6,42247,neither_nor,4,time,neither long nor short,TV Shows,things you watch
+157,6,23424,positive,5,weight,heavy,Bowling Balls,sports equipment
+158,6,23424,negative,5,weight,light,Ping Pong Balls,sports equipment
+159,6,23424,neither_nor,5,weight,neither heavy nor light,Basketballs,sports equipment
+160,6,53205,negative,6,height,short,Children,people
+161,6,53205,positive,6,height,tall,Men,people
+162,6,53205,neither_nor,6,height,neither short nor tall,Women,people
+163,6,40278,positive,7,darkness,light,Divinity,religion
+164,6,40278,negative,7,darkness,dark,Chocolate,food
+165,6,40278,neither_nor,7,darkness,neither light nor dark,Syrup,food
+166,6,24900,negative,8,sound,quiet,School,public places
+167,6,24900,positive,8,sound,loud,Home,NA
+168,6,24900,neither_nor,8,sound,neither quiet nor loud,Workplace,public places
+169,7,21992,positive,1,temperature,warm,baths,types of bathing
+170,7,21992,negative,1,temperature,cold,rain showers,types of bathing
+171,7,21992,neither_nor,1,temperature,neither warm nor cold,lukewarm,NA
+172,7,15510,positive,2,height,tall,giraffes,animals
+173,7,15510,negative,2,height,short,ants,animals
+174,7,15510,neither_nor,2,height,neither tall nor short,horses,animals
+175,7,22666,negative,3,weight,light,a feather,NA
+176,7,22666,positive,3,weight,heavy,pianos,instruments
+177,7,22666,neither_nor,3,weight,neither light nor heavy,babies,people
+178,7,19611,negative,4,price,cheap,sandwiches,food
+179,7,19611,positive,4,price,expensive,cars,vehicles
+180,7,19611,neither_nor,4,price,neither cheap nor expensive,furniture,furniture
+181,7,17540,positive,5,size,big,fat people,people
+182,7,17540,negative,5,size,small,skinny people,people
+183,7,17540,neither_nor,5,size,neither big nor small,muscular people,people
+184,7,17097,positive,6,darkness,light,the sun,extraterretrial objects
+185,7,17097,negative,6,darkness,dark,night sky,times of day
+186,7,17097,neither_nor,6,darkness,neither light nor dark,dusk,times of day
+187,7,15555,negative,7,sound,quiet,sleeping children,people
+188,7,15555,positive,7,sound,loud,teenagers,people
+189,7,15555,neither_nor,7,sound,neither quiet nor loud,toddlers,people
+190,7,23411,positive,8,time,long,road trips,vacations
+191,7,23411,negative,8,time,short,errands,errands
+192,7,23411,neither_nor,8,time,neither long nor short,store truos,errands
+193,8,28473,negative,1,darkness,dark,Nights,times of day
+194,8,28473,positive,1,darkness,light,mornings,times of day
+195,8,28473,neither_nor,1,darkness,neither dark nor light,evenings,times of day
+196,8,22395,negative,2,size,small,Mice,animals
+197,8,22395,positive,2,size,big,elephants,animals
+198,8,22395,neither_nor,2,size,neither small nor big,Horses,animals
+199,8,43382,negative,3,temperature,cold,Ice cubes,water
+200,8,43382,positive,3,temperature,warm,hot springs,water
+201,8,43382,neither_nor,3,temperature,neither cold nor warm,Rain showers,water
+202,8,23347,positive,4,weight,heavy,Couches,furniture
+203,8,23347,negative,4,weight,light,cups,kitchenware
+204,8,23347,neither_nor,4,weight,neither heavy nor light,Lamps,furniture
+205,8,20534,negative,5,price,cheap,Pencils,office supplies
+206,8,20534,positive,5,price,expensive,TVs,entertainment
+207,8,20534,neither_nor,5,price,neither cheap nor expensive,T-shirts,clothing
+208,8,26552,negative,6,sound,quiet,Rabbits,animals
+209,8,26552,positive,6,sound,loud,dogs,animals
+210,8,26552,neither_nor,6,sound,neither quiet nor loud,Cats,animals
+211,8,92576,negative,7,time,short,Cat tails,animal features
+212,8,92576,positive,7,time,long,horse tails,animal features
+213,8,92576,neither_nor,7,time,neither short nor long,Dog tails,animal features
+214,8,21284,negative,8,height,short,Blades of grass,plants
+215,8,21284,positive,8,height,tall,trees,plants
+216,8,21284,neither_nor,8,height,neither short nor tall,Bushes,plants
+217,9,29062,positive,1,time,long,years,timeframes
+218,9,29062,negative,1,time,short,days,timeframes
+219,9,29062,neither_nor,1,time,neither long nor short,months,timeframes
+220,9,20151,positive,2,temperature,warm,ovens,kitchen appliances
+221,9,20151,negative,2,temperature,cold,refrigerators,kitchen appliances
+222,9,20151,neither_nor,2,temperature,neither warm nor cold,tables,furniture
+223,9,6879,negative,3,height,short,kids,people
+224,9,6879,positive,3,height,tall,adults,people
+225,9,6879,neither_nor,3,height,neither short nor tall,adolescents,people
+226,9,25560,negative,4,weight,light,hamsters,animals
+227,9,25560,positive,4,weight,heavy,dogs,animals
+228,9,25560,neither_nor,4,weight,neither light nor heavy,cats,animals
+229,9,12940,negative,5,sound,quiet,libraries,public places
+230,9,12940,positive,5,sound,loud,concert halls,public places
+231,9,12940,neither_nor,5,sound,neither quiet nor loud,commons,public places
+232,9,6528,positive,6,size,big,boulders,rocks
+233,9,6528,negative,6,size,small,pebbles,rocks
+234,9,6528,neither_nor,6,size,neither big nor small,stones,rocks
+235,9,20240,negative,7,price,cheap,kias,cars
+236,9,20240,positive,7,price,expensive,ferraris,cars
+237,9,20240,neither_nor,7,price,neither cheap nor expensive,hondas,cars
+238,9,8416,positive,8,darkness,light,days,times of day
+239,9,8416,negative,8,darkness,dark,nights,times of day
+240,9,8416,neither_nor,8,darkness,neither light nor dark,dusk,times of day
+241,10,24405,negative,1,darkness,dark,Indoor areas,places
+242,10,24405,positive,1,darkness,light,Outdoor areas,places
+243,10,24405,neither_nor,1,darkness,neither dark nor light,Shaded areas,places
+244,10,17381,positive,2,price,expensive,Name brands,brands
+245,10,17381,negative,2,price,cheap,off-brands,brands
+246,10,17381,neither_nor,2,price,neither expensive nor cheap,Knock-offs,brands
+247,10,12631,positive,3,size,big,Whales,animals
+248,10,12631,negative,3,size,small,minnows,animals
+249,10,12631,neither_nor,3,size,neither big nor small,Baby whales,animals
+250,10,17834,negative,4,weight,light,Feathers,animal features
+251,10,17834,positive,4,weight,heavy,birds,animals
+252,10,17834,neither_nor,4,weight,neither light nor heavy,Small birds,animals
+253,10,21334,positive,5,temperature,warm,Fires,NA
+254,10,21334,negative,5,temperature,cold,ice,water
+255,10,21334,neither_nor,5,temperature,neither warm nor cold,Frozen fire,NA
+256,10,19976,negative,6,time,short,Kids pants,clothing
+257,10,19976,positive,6,time,long,adult pants,clothing
+258,10,19976,neither_nor,6,time,neither short nor long,capris,clothing
+259,10,13473,negative,7,sound,quiet,Whispers,actions
+260,10,13473,positive,7,sound,loud,Rock shows,public places
+261,10,13473,neither_nor,7,sound,neither quiet nor loud,People,people
+262,10,17414,negative,8,height,short,Kids,people
+263,10,17414,positive,8,height,tall,adults,people
+264,10,17414,neither_nor,8,height,neither short nor tall,Pre-teens,people
+265,11,47254,positive,1,temperature,warm,Homes,places
+266,11,47254,negative,1,temperature,cold,outside,places
+267,11,47254,neither_nor,1,temperature,neither warm nor cold,grass,plants
+268,11,20634,negative,2,height,short,mushrooms,plants
+269,11,20634,positive,2,height,tall,humans,people
+270,11,20634,neither_nor,2,height,neither short nor tall,dogs,animals
+271,11,32666,negative,3,price,cheap,vegetables,food
+272,11,32666,positive,3,price,expensive,steak,food
+273,11,32666,neither_nor,3,price,neither cheap nor expensive,shampoo,cleaning product
+274,11,10391,positive,4,sound,loud,Concerts,public places
+275,11,10391,negative,4,sound,quiet,library,public places
+276,11,10391,neither_nor,4,sound,neither loud nor quiet,stores,public places
+277,11,15175,positive,5,weight,heavy,Weights,sports equipment
+278,11,15175,negative,5,weight,light,paper,office supplies
+279,11,15175,neither_nor,5,weight,neither heavy nor light,binder,office supplies
+280,11,21228,positive,6,darkness,light,mornings,times of day
+281,11,21228,negative,6,darkness,dark,evenings,times of day
+282,11,21228,neither_nor,6,darkness,neither light nor dark,nightlights,NA
+283,11,10867,positive,7,size,big,planes,vehicles
+284,11,10867,negative,7,size,small,ants,animals
+285,11,10867,neither_nor,7,size,neither big nor small,humans,people
+286,11,17661,positive,8,time,long,giraffes,animals
+287,11,17661,negative,8,time,short,rats,animals
+288,11,17661,neither_nor,8,time,neither long nor short,humans,people
+289,12,22077,negative,1,darkness,dark,black people,people
+290,12,22077,positive,1,darkness,light,white people,people
+291,12,22077,neither_nor,1,darkness,neither dark nor light,asians,people
+292,12,13896,positive,2,weight,heavy,americans,people
+293,12,13896,negative,2,weight,light,asians,people
+294,12,13896,neither_nor,2,weight,neither heavy nor light,europeans,people
+295,12,15182,negative,3,price,cheap,gummy bears,food
+296,12,15182,positive,3,price,expensive,cars,vehicles
+297,12,15182,neither_nor,3,price,neither cheap nor expensive,beef,food
+298,12,19955,negative,4,temperature,cold,terrorists,people
+299,12,19955,positive,4,temperature,warm,normal people,people
+300,12,19955,neither_nor,4,temperature,neither cold nor warm,cops,people
+301,12,11344,negative,5,height,short,midgets,people
+302,12,11344,positive,5,height,tall,giants,people
+303,12,11344,neither_nor,5,height,neither short nor tall,normal people,people
+304,12,13936,negative,6,sound,quiet,introverts,people
+305,12,13936,positive,6,sound,loud,extroverts,people
+306,12,13936,neither_nor,6,sound,neither quiet nor loud,cats,animals
+307,12,12306,positive,7,size,big,europeans,people
+308,12,12306,negative,7,size,small,asians,people
+309,12,12306,neither_nor,7,size,neither big nor small,mexicans,people
+310,12,17107,positive,8,time,long,movies,things you watch
+311,12,17107,negative,8,time,short,tv shows,things you watch
+312,12,17107,neither_nor,8,time,neither long nor short,plays,things you watch
+313,13,18254,negative,1,sound,quiet,Elderly people,people
+314,13,18254,positive,1,sound,loud,children,people
+315,13,18254,neither_nor,1,sound,neither quiet nor loud,Adults,people
+316,13,8579,positive,2,temperature,warm,Summers,seasons
+317,13,8579,negative,2,temperature,cold,Winters,seasons
+318,13,8579,neither_nor,2,temperature,neither warm nor cold,Springs,seasons
+319,13,17248,negative,3,weight,light,Birds,animals
+320,13,17248,positive,3,weight,heavy,mammals,animals
+321,13,17248,neither_nor,3,weight,neither light nor heavy,fish,animals
+322,13,23480,positive,4,size,big,whales,animals
+323,13,23480,negative,4,size,small,tadpoles,animals
+324,13,23480,neither_nor,4,size,neither big nor small,seals,animals
+325,13,28854,positive,5,price,expensive,Porsches,cars
+326,13,28854,negative,5,price,cheap,Kias,cars
+327,13,28854,neither_nor,5,price,neither expensive nor cheap,Chevrolets,cars
+328,13,12966,negative,6,darkness,dark,Africans,people
+329,13,12966,positive,6,darkness,light,Europeans,people
+330,13,12966,neither_nor,6,darkness,neither dark nor light,Middle Easterners,people
+331,13,23288,positive,7,height,tall,Skyscrapers,buildings
+332,13,23288,negative,7,height,short,Houses,buildings
+333,13,23288,neither_nor,7,height,neither tall nor short,Businesses,buildings
+334,13,27964,positive,8,time,long,Marathons,sports
+335,13,27964,negative,8,time,short,Sprints,sports
+336,13,27964,neither_nor,8,time,neither long nor short,Fun runs,sports
+337,14,63727,positive,1,price,expensive,Hotel stays,housing
+338,14,63727,negative,1,price,cheap,Camping,housing
+339,14,63727,neither_nor,1,price,neither expensive nor cheap,Hostel stays,housing
+340,14,141936,positive,2,weight,heavy,Hiking boots,sports equipment
+341,14,141936,negative,2,weight,light,Slippers,clothing
+342,14,141936,neither_nor,2,weight,neither heavy nor light,Running shoes,sports equipment
+343,14,40679,negative,3,size,small,Children,people
+344,14,40679,positive,3,size,big,Adults,people
+345,14,40679,neither_nor,3,size,neither small nor big,Teenagers,people
+346,14,150842,negative,4,darkness,dark,Basements,rooms
+347,14,150842,positive,4,darkness,light,solariums,rooms
+348,14,150842,neither_nor,4,darkness,neither dark nor light,Living rooms,rooms
+349,14,66233,negative,5,temperature,cold,Ice cream cones,food
+350,14,66233,positive,5,temperature,warm,Pasta dishes,food
+351,14,66233,neither_nor,5,temperature,neither cold nor warm,Sandwiches,food
+352,14,127434,positive,6,sound,loud,Alarms,sounds
+353,14,127434,negative,6,sound,quiet,Wind chimes,sounds
+354,14,127434,neither_nor,6,sound,neither loud nor quiet,Music,music
+355,14,75637,positive,7,height,tall,Jiraffes,animals
+356,14,75637,negative,7,height,short,Turtles,animals
+357,14,75637,neither_nor,7,height,neither tall nor short,Lions,animals
+358,14,65000,negative,8,time,short,bracelets,clothing
+359,14,65000,positive,8,time,long,belts,clothing
+360,14,65000,neither_nor,8,time,neither short nor long,ties,clothing
+361,15,139062,positive,1,weight,heavy,whales,animals
+362,15,139062,negative,1,weight,light,seals,animals
+363,15,139062,neither_nor,1,weight,neither heavy nor light,penguins,animals
+364,15,16016,negative,2,temperature,cold,winter days,seasons
+365,15,16016,positive,2,temperature,warm,summer days,seasons
+366,15,16016,neither_nor,2,temperature,neither cold nor warm,spring,seasons
+367,15,12701,positive,3,size,big,cars,vehicles
+368,15,12701,negative,3,size,small,bikes,vehicles
+369,15,12701,neither_nor,3,size,neither big nor small,motorcycles,vehicles
+370,15,10662,negative,4,price,cheap,soups,food
+371,15,10662,positive,4,price,expensive,burritos,food
+372,15,10662,neither_nor,4,price,neither cheap nor expensive,tacos,food
+373,15,12963,positive,5,height,tall,humans,people
+374,15,12963,negative,5,height,short,elves,people
+375,15,12963,neither_nor,5,height,neither tall nor short,lions,animals
+376,15,62960,positive,6,time,long,feet,animal features
+377,15,62960,negative,6,time,short,hands,animal features
+378,15,62960,neither_nor,6,time,neither long nor short,forearms,animal features
+379,15,11243,negative,7,sound,quiet,women,people
+380,15,11243,positive,7,sound,loud,men,people
+381,15,11243,neither_nor,7,sound,neither quiet nor loud,children,people
+382,15,22696,negative,8,darkness,dark,penguins,animals
+383,15,22696,positive,8,darkness,light,whales,animals
+384,15,22696,neither_nor,8,darkness,neither dark nor light,fish,animals
+385,16,51017,negative,1,height,short,women,people
+386,16,51017,positive,1,height,tall,men,people
+387,16,51017,neither_nor,1,height,neither short nor tall,babies,people
+388,16,21998,positive,2,size,big,watermelons,fruit
+389,16,21998,negative,2,size,small,grapes,fruit
+390,16,21998,neither_nor,2,size,neither big nor small,oranges,fruit
+391,16,34066,positive,3,time,long,movies,things you watch
+392,16,34066,negative,3,time,short,trailers,things you watch
+393,16,34066,neither_nor,3,time,neither long nor short,documentaries,things you watch
+394,16,76785,negative,4,weight,light,toasters,kitchen appliances
+395,16,76785,positive,4,weight,heavy,food processors,kitchen appliances
+396,16,76785,neither_nor,4,weight,neither light nor heavy,blenders,kitchen appliances
+397,16,45754,positive,5,temperature,warm,summers,seasons
+398,16,45754,negative,5,temperature,cold,winters,seasons
+399,16,45754,neither_nor,5,temperature,neither warm nor cold,springs,seasons
+400,16,133540,negative,6,price,cheap,cubic zirconia jewels,jewelry
+401,16,133540,positive,6,price,expensive,diamond jewels,jewelry
+402,16,133540,neither_nor,6,price,neither cheap nor expensive,garnet jewelry,jewelry
+403,16,201093,negative,7,sound,quiet,losing baseball fans,people
+404,16,201093,positive,7,sound,loud,winning baseball fans,people
+405,16,201093,neither_nor,7,sound,neither quiet nor loud,fans before a game,people
+406,16,18426,negative,8,darkness,dark,nights,times of day
+407,16,18426,positive,8,darkness,light,days,times of day
+408,16,18426,neither_nor,8,darkness,neither dark nor light,dusk,times of day
+409,17,16487,positive,1,price,expensive,Wines,beverages
+410,17,16487,negative,1,price,cheap,sodas,beverages
+411,17,16487,neither_nor,1,price,neither expensive nor cheap,Juices,beverages
+412,17,35066,negative,2,size,small,Fish,animals
+413,17,35066,positive,2,size,big,whales,animals
+414,17,35066,neither_nor,2,size,neither small nor big,Dolphins,animals
+415,17,16231,negative,3,height,short,Children,people
+416,17,16231,positive,3,height,tall,adults,people
+417,17,16231,neither_nor,3,height,neither short nor tall,teenagers ,people
+418,17,25259,positive,4,temperature,warm,Fires,NA
+419,17,25259,negative,4,temperature,cold,ice cbubes,water
+420,17,25259,neither_nor,4,temperature,neither warm nor cold,books,office supplies
+421,17,15776,negative,5,weight,light,Feathers,animal features
+422,17,15776,positive,5,weight,heavy,bricks,building materials
+423,17,15776,neither_nor,5,weight,neither light nor heavy,Sticks,building materials
+424,17,20109,positive,6,sound,loud,concerts,public places
+425,17,20109,negative,6,sound,quiet,libraries,public places
+426,17,20109,neither_nor,6,sound,neither loud nor quiet,grocery stores,public places
+427,17,49762,positive,7,time,long,Lectures,things you watch
+428,17,49762,negative,7,time,short,jokes,things you watch
+429,17,49762,neither_nor,7,time,neither long nor short,sitcoms,things you watch
+430,17,36685,positive,8,darkness,light,doughnuts,food
+431,17,36685,negative,8,darkness,dark,brownies,food
+432,17,36685,neither_nor,8,darkness,neither light nor dark,wheat breads,food

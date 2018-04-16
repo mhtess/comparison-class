@@ -1,11 +1,20 @@
-```{r echo=F}
+---
+title: "Adjective Elicitation"
+author: "Michael Lopez-Brau"
+date: "April 16, 2018"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load libraries.
 library(knitr)
-library(ggplot2)
+library(tidyverse)
 ```
 
-```{r}
-# Print data from adjective-elicitation-1 (with supercategories).
+## Updated Results
+
+Manually categorized participant responses into supercategories.
+
+```{r echo=FALSE}
 path_to_repository = "D:/Research/comparison-class"
 data = read.csv(paste(path_to_repository, 
                       "/analysis/adjective-elicitation-1-supercategories.csv",
@@ -13,8 +22,11 @@ data = read.csv(paste(path_to_repository,
 kable(data)
 ```
 
-```{r fig.height=36, fig.width=20}
-# Print distributions of supercategories for each degree.
+## Plots
+
+Plotted the distribution of supercategories for each degree.
+
+```{r echo=FALSE, fig.height=36, fig.width=20}
 ggplot(data, aes(x=supercategory, fill=adjective_form)) + geom_bar() + 
   facet_wrap(~degree, scales="free", nrow=4) + 
   theme(text=element_text(size=24), axis.text.x=element_text(angle=45, hjust=1.0, vjust=1.0))
@@ -26,21 +38,36 @@ The max supercategory in each degree tends to be the max by a large margin, so I
 
 | Degree      | Supercategory    |
 |-------------|------------------|
-| darkness    | time of day      | 
+| darkness    | times of day     | 
 | height      | people           |
 | price       | food             |
 | size        | animals          |
 | sound       | public places    |
 | temperature | seasons          |
 | time        | things you watch |
-| weight      | office supplies  |
+| weight      | sports equipment |
 
 # Subcategory Selection
 
-```{r}
-supercategories = c("time of day", "people", "food", "animals", "public places", "season", 
-                    "things you watch", "office supplies")
+List all of the responses (with some minor filtering). Below are the subcategories I chose: three per degree (one per adjective form) for a total of 24 subcategories.
+
+```{r echo=FALSE, eval=FALSE}
+supercategories = c("times of day", "people", "food", "animals", "public places", "seasons", 
+                    "things you watch", "sports equipment")
 data %>% 
   group_by(degree, supercategory) %>%
-  filter(supercategory %in% supercategories)
+  filter(supercategory %in% supercategories) %>%
+  arrange(degree, adjective, supercategory) %>%
+  kable()
 ```
+
+| Degree      | Subcategory (negative) | Subcategory (positive) | Subcategory (neutral) |
+|-------------|------------------------|------------------------|-----------------------|
+| darkness    | nights                 | days                   | evenings              |
+| height      | kids                   | adults                 | teenagers             |
+| price       | hot dogs               | steak                  | pork chops            |
+| size        | ants                   | whales                 | dogs                  |
+| sound       | libraries              | concerts               | offices               |
+| temperature | Winter days            | Summer days            | Spring days           |
+| time        | music videos           | movies                 | TV shows              |
+| weight      | ping pong ball         | bowling ball           | basketball            |
