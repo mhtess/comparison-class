@@ -1,4 +1,4 @@
-,original_X,degree,super_category,sub_category,target,phrase,n,mean_frequency,max_frequency,type
+,original_X,degree,supercategory,subcategory,target,phrase,n,mean_frequency,max_frequency,type
 1,1,height,animals,chimpanzee,big,chimpanzees,9,315199,378379,subcategory
 2,3,height,animals,chimpanzee,big,monkeys,3,4144229,4144229,in between
 3,4,height,animals,chimpanzee,big,animals,2,58179731,58179731,supercategory

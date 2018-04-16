@@ -4,10 +4,10 @@ author: "Michael Lopez-Brau"
 date: "April 16, 2018"
 ---
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load libraries.
 library(knitr)
-library(ggplot2)
+library(tidyverse)
 ```
 
 ## Updated Results
@@ -33,13 +33,17 @@ In addition to the points brought up at the bottom of class-elicitation-freeProd
 - Some participants interpreted "wardrobe" to mean clothing.
 - Routes is tricky because of the colloquial usage of "drives" and "trips"; do we collapse "drives" with "trips" or with "driving routes"?
 
-## Plots of Unique Responses
+## Unique Responses
+
+Number of unique responses (y-axis) by subcategory (x-axis) plotted for each item in "target".
 
 ```{r echo=FALSE, fig.height=16, fig.width=10}
-ggplot(data, aes(x=phrase)) + geom_bar() + 
-  facet_wrap(~target+sub_category, scales="free") + 
-  theme(text=element_text(size=12), axis.text.x=element_text(angle=45, hjust=1.0, vjust=1.0))
-
+data %>%
+  group_by(target, subcategory) %>%
+  summarize(num_responses=n()) %>%
+  ggplot(aes(x=subcategory, y=num_responses)) + geom_bar(stat="identity") + 
+    facet_wrap(~target, scales="free") + 
+    theme(text=element_text(size=12), axis.text.x=element_text(angle=45, hjust=1.0, vjust=1.0))
 ```
 
 ## Change Log
