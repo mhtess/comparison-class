@@ -15,7 +15,9 @@ library(tidyverse)
 Manually categorized participant responses and computed their empirical frequencies.
 
 ```{r echo=FALSE}
-path_to_repository = "D:/Research/comparison-class"
+#path_to_repository = "D:/Research/comparison-class"
+path_to_repository <- "~/Documents/research/comparison-class/"
+
 data = read.csv(paste(path_to_repository, 
                       "/analysis/class-elicitation-freeProduction-2-types-frequencies.csv",
                       sep=""))
@@ -45,6 +47,42 @@ data %>%
     facet_wrap(~target, scales="free") + 
     theme(text=element_text(size=12), axis.text.x=element_text(angle=45, hjust=1.0, vjust=1.0))
 ```
+
+### Number of unique responses
+
+```{r echo=FALSE, fig.width=6}
+df.n_unique <- data %>%
+  group_by(target, subcategory) %>%
+  summarize(num_responses=n())
+
+ggplot(df.n_unique, aes(x=num_responses)) + 
+  geom_bar(position = position_dodge())+
+  scale_x_continuous(
+    limits = c(0, 9),
+    breaks = c(1,2,3,4,5,6,7,8,9)
+    )
+```
+
+#### Number of unique responses that are produced by more than 1 person
+
+```{r echo=FALSE, fig.width=5}
+df.n_unique.gtOne <- data %>%
+  filter( n > 1 ) %>%
+  group_by(target, subcategory) %>%
+  summarize(num_responses=n())
+
+
+ggplot(df.n_unique.gtOne, aes(x=num_responses)) + 
+  geom_bar(position = position_dodge())+
+  scale_x_continuous(
+    limits = c(0, 9),
+    breaks = c(1,2,3,4,5,6,7,8,9)
+    )
+```
+
+To add: 
+- Code adjectives as either positive or negative.
+- Code sub_categories as either low, medium, or high (can be taken directly from the adjective-elicitation task, ...)
 
 ## Change Log
 
