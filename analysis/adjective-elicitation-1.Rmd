@@ -34,24 +34,24 @@ ggplot(data, aes(x=supercategory, fill=adjective_form)) + geom_bar() +
 
 # Supercategory Selection
 
-The max supercategory in each degree tends to be the max by a large margin, so I usually chose those supercategories. I deviated from picking the max in the "weight" degree to avoid having "animals" as the supercategory for two degrees. For the "sound" degree, "public places" might need a different name. It's an extremely popular category but I couldn't think of a more apt name.
+I usually chose the top three supercategories per degree. For the "sound" degree, "public places" might need a different name. It's an extremely popular category but I couldn't think of a more apt name.
 
-| Degree      | Supercategory    |
-|-------------|------------------|
-| darkness    | times of day     | 
-| height      | people           |
-| price       | food             |
-| size        | animals          |
-| sound       | public places    |
-| temperature | seasons          |
-| time        | things you watch |
-| weight      | sports equipment |
+| Degree      | Supercategory                                         |
+|-------------|-------------------------------------------------------|
+| darkness    | times of day, food, rooms                             | 
+| height      | people, animals, buildings                            |
+| price       | food, jewelry, cars                                   |
+| size        | animals, people, fruit                                |
+| sound       | public places, animals, people                        |
+| temperature | seasons, food, natural environments                   |
+| time        | things you watch, things you read, school assignments |
+| weight      | animals, sports equipment, building materials         |
 
 # Subcategory Selection
 
 List all of the responses (with some minor filtering). Below are the subcategories I chose: three per degree (one per adjective form) for a total of 24 subcategories.
 
-```{r echo=FALSE, eval=FALSE}
+```{r echo=FALSE}
 supercategories = c("times of day", "people", "food", "animals", "public places", "seasons", 
                     "things you watch", "sports equipment")
 data %>% 
@@ -64,10 +64,26 @@ data %>%
 | Degree      | Subcategory (negative) | Subcategory (positive) | Subcategory (neutral) |
 |-------------|------------------------|------------------------|-----------------------|
 | darkness    | nights                 | days                   | evenings              |
+| darkness    | chocolate              | doughnuts              | ice cream             |
+| darkness    | basements              | sunrooms               | living rooms          |
 | height      | kids                   | adults                 | teenagers             |
+| height      | priarie dogs           | giraffes               | chimpanzee            |
+| height      | houses                 | skyscrapers            | supermarkets          |
 | price       | hot dogs               | steak                  | pork chops            |
+| price       | cubic zirconia         | diamonds               | rubies                |
+| price       | Kias                   | Porsches               | Toyota                |
 | size        | ants                   | whales                 | dogs                  |
+| size        | kids                   | adults                 | teenagers             |
+| size        | grapes                 | watermelons            | oranges               |
 | sound       | libraries              | concerts               | offices               |
+| sound       | rabbits                | dogs                   | cats                  |
+| sound       | kids                   | elderly                | adults                |
 | temperature | Winter days            | Summer days            | Spring days           |
+| temperature | ice cream              | soup                   | bread                 |
+| temperature | tundras                | deserts                | forests               |
 | time        | music videos           | movies                 | TV shows              |
+| time        | poems                  | textbooks              | novels                |
+| time        | quizzes                | exams                  | homework              |
+| weight      | birds                  | whales                 | dogs                  |
 | weight      | ping pong balls        | bowling balls          | basketballs           |
+| weight      | plastic                | metal                  | wood                  |
