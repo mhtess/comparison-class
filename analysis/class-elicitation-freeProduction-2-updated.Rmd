@@ -15,8 +15,8 @@ library(tidyverse)
 Manually categorized participant responses and computed their empirical frequencies.
 
 ```{r echo=FALSE}
-path_to_repository = "D:/Research/comparison-class"
-#path_to_repository <- "~/Documents/research/comparison-class/"
+#path_to_repository = "D:/Research/comparison-class"
+path_to_repository <- "~/Documents/research/comparison-class/"
 
 data = read.csv(paste(path_to_repository, 
                       "/analysis/class-elicitation-freeProduction-2-updated.csv",
@@ -63,12 +63,29 @@ ggplot(df.n_unique, aes(x=num_responses)) +
     )
 ```
 
+
+
+
+```{r echo=FALSE, fig.width=6}
+df.n_unique <- data %>%
+  group_by(target, subcategory, valence) %>%
+  summarize(num_responses=n())
+
+ggplot(df.n_unique, aes(x=num_responses)) + 
+  geom_bar(position = position_dodge())+
+  scale_x_continuous(
+    limits = c(0, 9),
+    breaks = c(1,2,3,4,5,6,7,8,9)
+    )+
+  facet_wrap(~valence)
+```
+
 #### Number of unique responses that are produced by more than 1 person
 
 ```{r echo=FALSE, fig.width=5}
 df.n_unique.gtOne <- data %>%
   filter( n > 1 ) %>%
-  group_by(target, subcategory) %>%
+  group_by(target, subcategory,valence) %>%
   summarize(num_responses=n())
 
 
@@ -77,8 +94,12 @@ ggplot(df.n_unique.gtOne, aes(x=num_responses)) +
   scale_x_continuous(
     limits = c(0, 9),
     breaks = c(1,2,3,4,5,6,7,8,9)
-    )
+    )+
+  facet_wrap(~valence)
 ```
+
+Looks like medium items might get more classes? Maybe pre-register as an exploratory analysis...In more open-ended contexts, there is more ambiguity about what th comparison class is. What our manipulations are doing is providing information (world knowledge + adjective used) to narrow in on particular classes.
+
 
 To add: 
 - Code adjectives as either positive or negative.
