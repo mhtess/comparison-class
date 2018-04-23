@@ -42,8 +42,8 @@ I usually chose the top three supercategories per degree. For the "sound" degree
 | height      | people, animals, buildings                            |
 | price       | food, jewelry, cars                                   |
 | size        | animals, people, fruit                                |
-| sound       | public places, animals, people                        |
-| temperature | seasons, food, natural environments                   |
+| sound       | public places, pets, people                           |
+| temperature | seasons, food, natural environments  (places)         |
 | time        | things you watch, things you read, school assignments |
 | weight      | animals, sports equipment, building materials         |
 
@@ -54,22 +54,22 @@ Below are the subcategories I chose: three per supercategory (one per adjective 
 | Degree      | Subcategory (negative) | Subcategory (positive) | Subcategory (neutral) |
 |-------------|------------------------|------------------------|-----------------------|
 | darkness    | nights                 | days                   | evenings              |
-| darkness    | chocolate              | doughnuts              | ice cream             |
+| darkness    | chocolate              | doughnuts              | ice cream             | X
 | darkness    | basements              | sunrooms               | living rooms          |
 | height      | kids                   | adults                 | teenagers             |
-| height      | priarie dogs           | giraffes               | chimpanzee            |
-| height      | houses                 | skyscrapers            | supermarkets          |
-| price       | hot dogs               | steak                  | pork chops            |
-| price       | cubic zirconia         | diamonds               | rubies                |
+| height      | penguins               | giraffes               | chimpanzee            | 
+| height      | houses                 | skyscrapers            | supermarkets          | (city context)
+| price       | hot dogs               | steak                  | chicken               | 
+| price       | cubic zirconia         | diamonds               | rubies                | ?
 | price       | Kias                   | Porsches               | Toyota                |
 | size        | ants                   | whales                 | dogs                  |
 | size        | kids                   | adults                 | teenagers             |
 | size        | grapes                 | watermelons            | oranges               |
 | sound       | libraries              | concerts               | offices               |
 | sound       | rabbits                | dogs                   | cats                  |
-| sound       | kids                   | elderly                | adults                |
+| sound       | elderly                | kids                   | adults                |
 | temperature | Winter days            | Summer days            | Spring days           |
-| temperature | ice cream              | soup                   | bread                 |
+| temperature | ice cream              | chocolate fondue       | cake                  | (note that "fondue" will be coded as)
 | temperature | tundras                | deserts                | forests               |
 | time        | music videos           | movies                 | TV shows              |
 | time        | poems                  | textbooks              | novels                |
