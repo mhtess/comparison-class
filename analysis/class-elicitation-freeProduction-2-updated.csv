@@ -1,0 +1,253 @@
+original_row,degree,supercategory,subcategory,valence,target,adjective_form,phrase,n,mean_frequency,max_frequency,type
+1,height,animals,chimpanzee,medium,big,positive,chimpanzees,9,315199,378379,subcategory
+3,height,animals,chimpanzee,medium,big,positive,monkeys,3,4144229,4144229,in between
+4,height,animals,chimpanzee,medium,big,positive,animals,2,58179731,58179731,supercategory
+5,height,animals,chimpanzee,medium,small,negative,chimpanzees,7,317455,378379,subcategory
+6,height,animals,chimpanzee,medium,small,negative,animals,3,58179731,58179731,supercategory
+8,height,animals,chimpanzee,medium,small,negative,monkeys,2,4144229,4144229,in between
+9,height,animals,chimpanzee,medium,small,negative,primates,1,1013017,1013017,in between
+10,height,animals,elephant,high,big,positive,animals,13,58179731,58179731,supercategory
+11,height,animals,elephant,high,big,positive,elephants,3,2082778,2082778,subcategory
+12,height,animals,elephant,high,big,positive,vegetables,1,9067552,9067552,not relevant
+13,height,animals,elephant,high,small,negative,elephants,9,2531023,6116985,subcategory
+15,height,animals,elephant,high,small,negative,giraffes,1,260416,260416,different subcategory
+16,height,animals,porcupine,low,big,positive,porcupines,9,86556,86556,subcategory
+17,height,animals,porcupine,low,big,positive,animals,5,58179731,58179731,supercategory
+18,height,animals,porcupine,low,big,positive,critters,1,1055985,1055985,in between
+19,height,animals,porcupine,low,small,negative,porcupines,7,86556,86556,subcategory
+20,height,animals,porcupine,low,small,negative,animals,5,58179731,58179731,supercategory
+21,temperature,beverages,cup of coffee,high,cold,negative,coffee,6,14112760,42090859,subcategory
+22,temperature,beverages,cup of coffee,high,cold,negative,drinks,3,11137329,11137329,supercategory synonym
+24,temperature,beverages,cup of coffee,high,cold,negative,hot beverages,1,45128,45128,in between
+25,temperature,beverages,cup of coffee,high,cold,negative,warm coffee,1,4745,4745,in between
+26,temperature,beverages,cup of coffee,high,cold,negative,warm drinks,1,8480,8480,in between
+27,temperature,beverages,cup of coffee,high,warm,positive,drinks,7,11137329,11137329,supercategory synonym
+28,temperature,beverages,cup of coffee,high,warm,positive,coffee,5,8517141,42090859,subcategory
+29,temperature,beverages,cup of coffee,high,warm,positive,beverages,3,123711,123711,supercategory
+31,temperature,beverages,cup of iced tea,low,cold,negative,drinks,6,11137329,11137329,supercategory synonym
+32,temperature,beverages,cup of iced tea,low,cold,negative,tea,3,18293438,27413229,in between
+33,temperature,beverages,cup of iced tea,low,cold,negative,iced tea,3,139086,393524,subcategory
+37,temperature,beverages,cup of iced tea,low,warm,positive,beverages,3,6337606,6337606,supercategory
+38,temperature,beverages,cup of iced tea,low,warm,positive,tea,3,9173468,27413229,in between
+39,temperature,beverages,cup of iced tea,low,warm,positive,drinks,2,11137329,11137329,supercategory synonym
+40,temperature,beverages,cup of iced tea,low,warm,positive,cold drinks,1,109573,109573,in between
+41,temperature,beverages,cup of iced tea,low,warm,positive,iced tea,4,105540,393524,subcategory
+42,temperature,beverages,cup of iced tea,low,warm,positive,days,1,305158140,305158140,not relevant
+44,temperature,beverages,cup of iced tea,low,warm,positive,iced beverages,1,1635,1635,in between
+48,temperature,beverages,cup of water,medium,cold,negative,drinks,8,11137329,11137329,supercategory synonym
+49,temperature,beverages,cup of water,medium,cold,negative,beverages,2,6337606,6337606,supercategory
+50,temperature,beverages,cup of water,medium,cold,negative,water,3,143479073,215184660,subcategory
+51,temperature,beverages,cup of water,medium,cold,negative,cities,1,59810742,59810742,not relevant
+53,temperature,beverages,cup of water,medium,warm,positive,water,10,143524339,215184660,subcategory
+55,temperature,beverages,cup of water,medium,warm,positive,beverages,1,6337606,6337606,supercategory
+56,temperature,beverages,cup of water,medium,warm,positive,cups,1,8939639,8939639,different supercategory
+57,temperature,beverages,cup of water,medium,warm,positive,drinks,1,11137329,11137329,supercategory synonym
+58,price,bikes,city bike,medium,cheap,negative,bikes,12,10741844,10741844,supercategory
+59,price,bikes,city bike,medium,cheap,negative,city bikes,2,21075,21075,subcategory
+60,price,bikes,city bike,medium,cheap,negative,bike prices,1,17598,17598,degree reference
+61,price,bikes,city bike,medium,cheap,negative,transportation,1,53123660,53123660,functional reference
+62,price,bikes,city bike,medium,expensive,positive,bikes,9,10741844,10741844,supercategory
+63,price,bikes,city bike,medium,expensive,positive,city bikes,1,21075,21075,subcategory
+64,price,bikes,electric bike,high,cheap,negative,electric bikes,12,86137,86137,subcategory
+65,price,bikes,electric bike,high,cheap,negative,bikes,6,10741844,10741844,supercategory
+66,price,bikes,electric bike,high,expensive,positive,bikes,5,10741844,10741844,supercategory
+67,price,bikes,electric bike,high,expensive,positive,electric bikes,4,86137,86137,subcategory
+68,price,bikes,kids bike,low,cheap,negative,bikes,10,10741844,10741844,supercategory
+69,price,bikes,kids bike,low,cheap,negative,bike costs,1,1089,1089,degree reference
+70,price,bikes,kids bike,low,cheap,negative,kids bikes,1,64076,64076,subcategory
+71,price,bikes,kids bike,low,expensive,positive,kids bikes,9,57089,64076,subcategory
+72,price,bikes,kids bike,low,expensive,positive,bikes,6,10741844,10741844,supercategory
+74,sound,cars,electric car,low,loud,positive,electric cars,8,171936,171936,subcategory
+75,sound,cars,electric car,low,loud,positive,cars,5,109722086,109722086,supercategory
+76,sound,cars,electric car,low,loud,positive,car engines,1,95314,95314,below subcategory
+77,sound,cars,electric car,low,loud,positive,vehicles,1,37254742,37254742,supercategory synonym
+78,sound,cars,electric car,low,quiet,negative,cars,7,109722086,109722086,supercategory
+79,sound,cars,electric car,low,quiet,negative,automobiles,1,5100249,5100249,supercategory synonym
+80,sound,cars,electric car,low,quiet,negative,electric cars,1,171936,171936,subcategory
+81,sound,cars,electric car,low,quiet,negative,gas powered cars,1,2264,2264,different subcategory
+82,sound,cars,electric car,low,quiet,negative,vehicles,1,37254742,37254742,supercategory synonym
+83,sound,cars,family car,medium,loud,positive,cars,8,109722086,109722086,supercategory
+84,sound,cars,family car,medium,loud,positive,car engines,1,95314,95314,below subcategory
+85,sound,cars,family car,medium,loud,positive,engines,1,25167534,25167534,below subcategory
+86,sound,cars,family car,medium,loud,positive,family cars,1,36497,36497,subcategory
+87,sound,cars,family car,medium,quiet,negative,cars,14,109722086,109722086,supercategory
+88,sound,cars,family car,medium,quiet,negative,family cars,1,36497,36497,subcategory
+89,sound,cars,family car,medium,quiet,negative,loud,1,8655110,8655110,target reference
+90,sound,cars,muscle car,high,loud,positive,cars,10,109722086,109722086,supercategory
+91,sound,cars,muscle car,high,loud,positive,muscle cars,1,326735,326735,subcategory
+92,sound,cars,muscle car,high,quiet,negative,muscle cars,9,291117,326735,subcategory
+93,sound,cars,muscle car,high,quiet,negative,cars,6,109722086,109722086,supercategory
+94,sound,cars,muscle car,high,quiet,negative,engines,1,25167534,25167534,below subcategory
+96,height,cars,sedan,medium,big,positive,sedans,7,665446,665446,subcategory
+97,height,cars,sedan,medium,big,positive,cars,5,109722086,109722086,supercategory
+98,height,cars,sedan,medium,small,negative,sedans,7,665446,665446,subcategory
+99,height,cars,sedan,medium,small,negative,cars,6,109722086,109722086,supercategory
+100,height,cars,sedan,medium,small,negative,vehicles,1,37254742,37254742,supercategory synonym
+101,height,cars,sports car,low,big,positive,sports cars,10,593791,593791,subcategory
+102,height,cars,sports car,low,big,positive,cars,6,109722086,109722086,supercategory
+103,height,cars,sports car,low,small,negative,cars,7,109722086,109722086,supercategory
+104,height,cars,sports car,low,small,negative,sports cars,4,6716234,25083562,subcategory
+106,height,cars,SUV,high,big,positive,cars,7,109722086,109722086,supercategory
+107,height,cars,SUV,high,big,positive,SUVs,6,2438065,4643157,subcategory
+108,height,cars,SUV,high,big,positive,vehicles,2,37254742,37254742,supercategory synonym
+110,height,cars,SUV,high,small,negative,SUVs,11,1997046,1997046,subcategory
+111,height,cars,SUV,high,small,negative,cars,1,109722086,109722086,supercategory
+113,temperature,days of the year,day in Fall,medium,cold,negative,days,4,305158140,305158140,above supercategory
+114,temperature,days of the year,day in Fall,medium,cold,negative,seasons,3,12035578,12035578,in between
+115,temperature,days of the year,day in Fall,medium,cold,negative,days in Fall,2,8590,12564,subcategory
+117,temperature,days of the year,day in Fall,medium,cold,negative,days in Fall in Maryland,1,0,0,subcategory specific
+118,temperature,days of the year,day in Fall,medium,cold,negative,Falls,1,33214285,33214285,subcategory
+119,temperature,days of the year,day in Fall,medium,cold,negative,seasons in Maryland,1,0,0,in between specific
+120,temperature,days of the year,day in Fall,medium,warm,positive,days,3,305158140,305158140,above supercategory
+121,temperature,days of the year,day in Fall,medium,warm,positive,days in Fall,4,8590,4616,subcategory
+123,temperature,days of the year,day in Fall,medium,warm,positive,cities,1,59810742,59810742,different category
+124,temperature,days of the year,day in Fall,medium,warm,positive,Falls,1,33214285,33214285,subcategory
+125,temperature,days of the year,day in Summer,high,cold,negative,days,2,305158140,305158140,above supercategory
+126,temperature,days of the year,day in Summer,high,cold,negative,days in Summer,3,154142,229054,subcategory
+128,temperature,days of the year,day in Summer,high,cold,negative,days in Summer in Maryland,1,0,0,subcategory specific
+129,temperature,days of the year,day in Summer,high,cold,negative,Summers,1,3081433,3081433,different category
+130,temperature,days of the year,day in Summer,high,warm,positive,days,6,305158140,305158140,above supercategory
+131,temperature,days of the year,day in Summer,high,warm,positive,seasons,2,12035578,12035578,in between
+132,temperature,days of the year,day in Summer,high,warm,positive,cities,1,59810742,59810742,different category
+133,temperature,days of the year,day in Summer,high,warm,positive,months,1,111192841,111192841,different category
+134,temperature,days of the year,day in Summer,high,warm,positive,days in Summer,1,229054,229054,subcategory
+135,temperature,days of the year,day in Summer,high,warm,positive,temperatures,1,8913207,8913207,degree reference
+136,temperature,days of the year,day in Summer,high,warm,positive,times,1,202958907,202958907,different degree reference
+137,temperature,days of the year,day in Winter,low,cold,negative,days,6,305158140,305158140,above supercategory
+138,temperature,days of the year,day in Winter,low,cold,negative,Winter,2,51485978,51485978,subcategory
+139,temperature,days of the year,day in Winter,low,cold,negative,cities,1,59810742,59810742,different category
+140,temperature,days of the year,day in Winter,low,cold,negative,seasons,1,12035578,12035578,in between
+141,temperature,days of the year,day in Winter,low,cold,negative,times,1,202958907,202958907,different category
+142,temperature,days of the year,day in Winter,low,cold,negative,weather,1,103332440,103332440,target reference
+143,temperature,days of the year,day in Winter,low,cold,negative,days in Winter in Maryland,1,0,0,subcategory specific
+144,temperature,days of the year,day in Winter,low,cold,negative,Winters,1,2260863,2260863,subcategory
+145,temperature,days of the year,day in Winter,low,warm,positive,days,4,305158140,305158140,above supercategory
+146,temperature,days of the year,day in Winter,low,warm,positive,days in Winter,4,62179,80466,subcategory
+148,temperature,days of the year,day in Winter,low,warm,positive,seasons,1,12035578,12035578,in between
+149,price,flower vases,crystal flower vase,high,cheap,negative,vases,7,1657182,1657182,supercategory
+150,price,flower vases,crystal flower vase,high,cheap,negative,crystal vases,2,23806,23806,subcategory
+151,price,flower vases,crystal flower vase,high,cheap,negative,materials,1,83903351,83903351,different category
+152,price,flower vases,crystal flower vase,high,expensive,positive,vases,12,1657182,1657182,supercategory
+153,price,flower vases,crystal flower vase,high,expensive,positive,crystal,2,29348418,29348418,different category
+154,price,flower vases,crystal flower vase,high,expensive,positive,flower vases,1,47609,47609,supercategory
+155,price,flower vases,crystal flower vase,high,expensive,positive,gifts,1,95426729,95426729,different category
+156,price,flower vases,crystal flower vase,high,expensive,positive,items,1,330511239,330511239,above supercategory
+158,price,flower vases,glass flower vase,medium,cheap,negative,vases,10,1657182,1657182,supercategory
+159,price,flower vases,glass flower vase,medium,cheap,negative,glass vases,2,73650,73650,subcategory
+160,price,flower vases,glass flower vase,medium,cheap,negative,glass items,1,79234,79234,different category
+161,price,flower vases,glass flower vase,medium,cheap,negative,glass pieces,1,35106,35106,different category
+162,price,flower vases,glass flower vase,medium,expensive,positive,vases,11,1657182,1657182,supercategory
+163,price,flower vases,glass flower vase,medium,expensive,positive,flower vases,1,47609,47609,supercategory
+164,price,flower vases,glass flower vase,medium,expensive,positive,glass vases,1,73650,73650,subcategory
+165,price,flower vases,plastic flower vase,low,cheap,negative,vases,8,1657182,1657182,supercategory
+166,price,flower vases,plastic flower vase,low,cheap,negative,flower vases,1,47609,47609,supercategory
+167,price,flower vases,plastic flower vase,low,cheap,negative,items,1,330511239,330511239,above supercategory
+168,price,flower vases,plastic flower vase,low,cheap,negative,objects,1,33848628,33848628,above supercategory
+169,price,flower vases,plastic flower vase,low,cheap,negative,plastic vases,1,1326,1326,subcategory
+170,price,flower vases,plastic flower vase,low,expensive,positive,vases,7,1657182,1657182,supercategory
+171,price,flower vases,plastic flower vase,low,expensive,positive,plastic vases,6,1326,1326,subcategory
+172,price,flower vases,plastic flower vase,low,expensive,positive,flower vases,2,47609,47609,supercategory
+174,weight,fruit,apple,medium,heavy,positive,apples,8,4030073,4030073,subcategory
+175,weight,fruit,apple,medium,heavy,positive,fruits,2,7957960,7957960,supercategory
+176,weight,fruit,apple,medium,light,negative,apples,13,7609463,50562141,subcategory
+177,weight,fruit,apple,medium,light,negative,fruit,4,22768964,22768964,supercategory
+179,weight,fruit,grape,low,heavy,positive,grapes,11,2644502,2644502,subcategory
+180,weight,fruit,grape,low,heavy,positive,fruits,2,12363462,22768964,supercategory
+182,weight,fruit,grape,low,heavy,positive,objects,1,33848628,33848628,above supercategory
+183,weight,fruit,grape,low,light,negative,grapes,7,2644502,2644502,subcategory
+184,weight,fruit,grape,low,light,negative,fruits,5,19806763,22768964,supercategory
+186,weight,fruit,grape,low,light,negative,objects,1,33848628,33848628,above supercategory
+187,weight,fruit,watermelon,high,heavy,positive,watermelons,5,329483,884072,subcategory
+188,weight,fruit,watermelon,high,heavy,positive,fruit,2,22768964,22768964,supercategory
+190,weight,fruit,watermelon,high,light,negative,watermelons,17,231615,884072,subcategory
+191,weight,fruit,watermelon,high,light,negative,fruit,2,12363462,22768964,supercategory
+193,weight,fruit,watermelon,high,light,negative,melons,1,1015937,1015937,in between
+196,weight,furniture,coffee table,medium,heavy,positive,furniture,4,67400151,67400151,supercategory
+197,weight,furniture,coffee table,medium,heavy,positive,coffee tables,3,513131,513131,subcategory
+198,weight,furniture,coffee table,medium,heavy,positive,tables,3,36093031,36093031,in between
+199,weight,furniture,coffee table,medium,light,negative,coffee tables,6,513131,513131,subcategory
+200,weight,furniture,coffee table,medium,light,negative,tables,5,36093031,36093031,in between
+201,weight,furniture,coffee table,medium,light,negative,furniture,4,67400151,67400151,supercategory
+202,weight,furniture,coffee table,medium,light,negative,tables size,1,1030,1030,degree reference
+203,weight,furniture,reading lamp,low,heavy,positive,lamps,9,11003870,11003870,subcategory
+204,weight,furniture,reading lamp,low,heavy,positive,reading lamps,3,31851,31851,subcategory
+205,weight,furniture,reading lamp,low,heavy,positive,size,1,214853921,214853921,degree reference
+206,weight,furniture,reading lamp,low,light,negative,lamps,10,11003870,11003870,subcategory
+207,weight,furniture,reading lamp,low,light,negative,reading lamps,2,31851,31851,subcategory
+208,weight,furniture,reading lamp,low,light,negative,lights,1,25305991,25305991,in between
+209,weight,furniture,reading lamp,low,light,negative,objects,1,33848628,33848628,above supercategory
+210,weight,furniture,wardrobe,high,heavy,positive,wardrobes,7,438891,438891,subcategory
+211,weight,furniture,wardrobe,high,heavy,positive,furniture,2,67400151,67400151,supercategory
+212,weight,furniture,wardrobe,high,heavy,positive,clothes,1,27039649,27039649,different category
+213,weight,furniture,wardrobe,high,heavy,positive,dressers,1,674582,674582,in between
+214,weight,furniture,wardrobe,high,heavy,positive,furniture size,1,2441,2441,degree reference
+215,weight,furniture,wardrobe,high,heavy,positive,items,1,330511239,330511239,above supercategory
+216,weight,furniture,wardrobe,high,heavy,positive,luggage,1,9723336,9723336,different category
+217,weight,furniture,wardrobe,high,heavy,positive,outfits,1,1886046,1886046,different category
+218,weight,furniture,wardrobe,high,heavy,positive,pieces furniture,1,69139,69139,supercategory
+219,weight,furniture,wardrobe,high,light,negative,wardrobes,8,438891,438891,subcategory
+220,weight,furniture,wardrobe,high,light,negative,bedroom furniture,1,2132628,2132628,in between
+221,weight,furniture,wardrobe,high,light,negative,dressers,1,674582,674582,in between
+222,weight,furniture,wardrobe,high,light,negative,furniture,1,67400151,67400151,supercategory
+223,height,people,basketball player,high,short,negative,basketball players,6,174833,174833,subcategory
+224,height,people,basketball player,high,short,negative,players,2,78298121,78298121,in between
+225,height,people,basketball player,high,short,negative,people,1,480323270,480323270,supercategory
+226,height,people,basketball player,high,tall,positive,basketball players,6,174833,174833,subcategory
+227,height,people,basketball player,high,tall,positive,people,7,413524570,480323270,supercategory
+228,height,people,basketball player,high,tall,positive,players,3,78298121,78298121,in between
+230,height,people,gymnast,low,short,negative,people,5,480323270,480323270,supercategory
+231,height,people,gymnast,low,short,negative,gymnasts,5,281148,396135,subcategory
+232,height,people,gymnast,low,short,negative,athletes,1,7268360,7268360,in between
+234,height,people,gymnast,low,short,negative,male gymnasts,1,2145,2145,subcategory specific
+235,height,people,gymnast,low,tall,positive,gymnasts,5,252401,252401,subcategory
+236,height,people,gymnast,low,tall,positive,people,3,480323270,480323270,supercategory
+237,height,people,gymnast,low,tall,positive,guys,1,37617509,37617509,in between
+238,height,people,runner,medium,short,negative,runners,4,3917217,3917217,subcategory
+239,height,people,runner,medium,short,negative,people,3,480323270,480323270,supercategory
+240,height,people,runner,medium,tall,positive,runners,8,3917217,3917217,subcategory
+241,height,people,runner,medium,tall,positive,people,4,480323270,480323270,supercategory
+242,height,people,runner,medium,tall,positive,male runners,1,11910,11910,subcategory specific
+243,light,rooms,basement,low,dark,negative,basements,2,367276,367276,subcategory
+244,light,rooms,basement,low,dark,negative,days,1,305158140,305158140,degree reference
+245,light,rooms,basement,low,dark,negative,houses,1,231328347,231328347,above supercategory
+246,light,rooms,basement,low,light,positive,basements,6,367276,367276,subcategory
+247,light,rooms,basement,low,light,positive,days,1,305158140,305158140,degree reference
+248,light,rooms,basement,low,light,positive,times day,1,99907,99907,degree reference
+249,light,rooms,living room,medium,dark,negative,living rooms,2,6586603,6586603,subcategory
+250,light,rooms,living room,medium,dark,negative,days,1,305158140,305158140,degree reference
+251,light,rooms,living room,medium,dark,negative,daytimes,1,14133,14133,degree reference
+252,light,rooms,living room,medium,dark,negative,houses,1,231328347,231328347,above supercategory
+253,light,rooms,living room,medium,dark,negative,times,1,202958907,202958907,degree reference
+254,light,rooms,living room,medium,dark,negative,times day,1,99907,99907,degree reference
+255,light,rooms,living room,medium,light,positive,houses,2,231328347,231328347,above supercategory
+256,light,rooms,living room,medium,light,positive,living rooms,2,6586603,6586603,subcategory
+257,light,rooms,living room,medium,light,positive,middays,1,109619,109619,degree reference
+258,light,rooms,sunroom,high,dark,negative,sunrooms,3,156258,156258,subcategory
+259,light,rooms,sunroom,high,dark,negative,times of day,1,99907,99907,degree reference
+260,light,rooms,sunroom,high,light,positive,sunrooms,2,156258,156258,subcategory
+261,light,rooms,sunroom,high,light,positive,times of day,1,99907,99907,degree reference
+262,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,long,positive,bike routes,6,35875,35875,subcategory
+263,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,long,positive,routes,6,9616739,9616739,subcategory
+264,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,long,positive,distances,1,5296572,5296572,degree reference
+265,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,long,positive,workouts,1,1459725,1459725,different category
+266,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,short,negative,routes,5,9616739,9616739,in between
+267,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,short,negative,bike routes,6,35782,35875,subcategory
+269,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,short,negative,bike trips,1,22429,22429,different category
+270,time,ways of getting from Los Angeles to San Francisco,bike route from Los Angeles to San Francisco,high,short,negative,flights,1,31928263,31928263,in between
+271,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,routes,6,9616739,9616739,in between
+272,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,drives,3,27445031,27445031,subcategory
+273,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,driving routes,2,14602,14602,subcategory
+274,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,flights,1,31928263,31928263,in between
+275,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,routes locations,1,0,0,in between
+276,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,long,positive,trips,1,17273017,17273017,different category
+277,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,routes,5,9616739,9616739,subcategory
+278,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,driving routes,4,14602,14602,subcategory
+279,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,car trips,1,53917,53917,different category
+280,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,distances,1,5296572,5296572,different degree reference
+281,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,drives,1,27445031,27445031,different category
+282,time,ways of getting from Los Angeles to San Francisco,driving route from Los Angeles to San Francisco,medium,short,negative,routes los angeles san francisco,1,0,0,subcategory
+283,time,ways of getting from Los Angeles to San Francisco,flight from Los Angeles to San Francisco,low,long,positive,flights,7,31928263,31928263,in between
+284,time,ways of getting from Los Angeles to San Francisco,flight from Los Angeles to San Francisco,low,long,positive,flights la sf,1,0,0,in between
+285,time,ways of getting from Los Angeles to San Francisco,flight from Los Angeles to San Francisco,low,long,positive,short flights,1,10941,10941,in between
+286,time,ways of getting from Los Angeles to San Francisco,flight from Los Angeles to San Francisco,low,short,negative,flights,17,31928263,31928263,in between
+288,time,ways of getting from Los Angeles to San Francisco,flight from Los Angeles to San Francisco,low,short,negative,travels,1,5625413,5625413,different category

@@ -49,17 +49,7 @@ I usually chose the top three supercategories per degree. For the "sound" degree
 
 # Subcategory Selection
 
-List all of the responses (with some minor filtering). Below are the subcategories I chose: three per degree (one per adjective form) for a total of 24 subcategories.
-
-```{r echo=FALSE}
-supercategories = c("times of day", "people", "food", "animals", "public places", "seasons", 
-                    "things you watch", "sports equipment")
-data %>% 
-  group_by(degree, supercategory) %>%
-  filter(supercategory %in% supercategories) %>%
-  arrange(degree, adjective, supercategory) %>%
-  kable()
-```
+Below are the subcategories I chose: three per supercategory (one per adjective form) for a total of 72 subcategories.
 
 | Degree      | Subcategory (negative) | Subcategory (positive) | Subcategory (neutral) |
 |-------------|------------------------|------------------------|-----------------------|
