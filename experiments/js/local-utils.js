@@ -240,7 +240,8 @@ function embedVPE2AFCSlides(trials) {
   		"<p class=\"display_question\"></p>" +
 			"<div class=\"radioLeft\">" +
       "<input type=\"radio\" name=\"paraphrase\" value=\"0\"/><label for=\"0\"></label>" +
-			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label><br><br></div>" +
+			"<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"1\"></label>" +
+      "<input type=\"radio\" name=\"paraphrase\" value=\"1\"/><label for=\"2\"></label><br><br></div>" +
   		"<button onclick=\"_s.button()\">Continue</button>" +
 			"<p class=\"err\">Please select an option before continuing.</p>" +
   		"</div>";

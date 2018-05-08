@@ -18,7 +18,9 @@ function makeSlides(f) {
     },
     button: function() {
       var response = $('input[name="catch"]:checked').val();
-      if (response === undefined) { $(".errCatch").show(); }
+      if (response === undefined) { 
+        $(".errCatch").show(); 
+      }
       else {
         exp.catch_trials.push({
           object: "basketball",
@@ -30,41 +32,46 @@ function makeSlides(f) {
     }
   });
 
-  // runs when a slide is first loaded
+  // Runs at the start of a trial slide.
   function start() {
     $(".err").hide();
     $('input[name="paraphrase"]').attr('checked', false);
 
-    // display the context sentence
-    exp.pronoun = 0;
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
-      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+    // Display the context sentence.
+    // exp.pronoun = 0;
+    // if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+    //   exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
 
-      // if "They" is used, we randomly select a pronoun for the other person and record it
-      if (exp.examples[i][exp.condition].search("They") != -1) {
-        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-        $(".display_context").html(exp.names[i] + exp.pronoun);
-      }
-      else {
-        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
-      }
-    }
-    else {
-      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
-    }
+    //   // if "They" is used, we randomly select a pronoun for the other person and record it
+    //   if (exp.examples[i][exp.condition].search("They") != -1) {
+    //     exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+    //     $(".display_context").html(exp.names[i] + exp.pronoun);
+    //   }
+    //   else {
+    //     $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+    //   }
+    // }
+    // else {
+    //   $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
+    // }
 
-    // display the question
-    $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be <strong>" + exp.examples[i].target +
-     " relative to other " + exp.examples[i].super + "</strong>?");
+    // Display the question.
+    // $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be <strong>" + exp.examples[i].target +
+    //                             " relative to other " + exp.examples[i].super + "</strong>?");
+    unique_response = _.sample()
+    target = _.sample(exp.target)
+    supercategory = _.sample(exp.supercategory)
+    $(".display_question").html("Do you think the " + exp.unique_response + " is/are <b>" + exp.target + " relative to " + 
+                                exp.supercategory + "</b>?");
 
-    // display the radio buttons
+    // Display the radio buttons.
     $('label[for=0]').html(exp.responseOrder[0]);
     $('label[for=1]').html(exp.responseOrder[1]);
+    $('label[for=2]').html(exp.responseOrder[2]);
   }
 
-  // runs when the "Continue" button is hit on a slide
+  // Runs when the "Continue" button is hit on a trial slide.
   function button() {
-
     response = exp.responseOrder[$('input[name="paraphrase"]:checked').val()];
     adjective = exp.examples[i].target.split(" ").pop();
 
@@ -85,8 +92,9 @@ function makeSlides(f) {
         "sub_category": exp.examples[i].sub_singular,
         "super_category": exp.examples[i].super,
         "response": response == "Yes" ? 1 : 0,
-        "leftResponse": exp.responseOrder[0],
-        "rightResponse": exp.responseOrder[1]
+        "first_response": exp.responseOrder[0],
+        "second_response": exp.responseOrder[1],
+        "third_response": exp.responseOrder[2]
       });
       i++;
       exp.go();
@@ -149,9 +157,11 @@ function init() {
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
-        alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+        alert("You have already completed the maximum number of HITs allowed by this requester. " +
+              "Please click 'Return HIT' to avoid any impact on your approval rating.");
       }
   })();
+
   // generate all possible target-context pair combinations
   exp.examples = getUniqueTrials(examples);
 
@@ -164,10 +174,17 @@ function init() {
   exp.condition = "context";
 
   // sets the other of the radio buttons
-  exp.responseOrder = _.shuffle(["Yes", "No"]);
+  exp.responseOrder = _.shuffle(["Yes", "No", "Doesn't make sense"]);
 
   // set the number of sliders to use
   // exp.nSentences = 1;
+
+  exp.degree = _.shuffle(["size", "luminance", "weight", "temperature", "price", "sound", "height", "time"])
+  exp.target = {
+    positive: ["big", "light", "heavy", "warm", "expensive", "loud", "tall", "long"]
+    negative: ["small", "dark", "light", "cold", "cheap", "quiet", "short", "short"]
+  }
+  exp.supercategory = ["animals", "beverages", ]
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {

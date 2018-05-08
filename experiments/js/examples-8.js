@@ -1,121 +1,214 @@
-// examples stores the target sentences and an array of their corresponding context sentences
 var examples = [{
-	// warm and cold are not super context sensitive because of perception
-	// the best example is of people from different places
 	target: {
-		positive: "warm",
-		negative: "cold"
+		positive: "light",
+		negative: "dark"
 	},
 	context: [
-		" lives in Maryland and steps outside in Winter.",
-		" lives in Maryland and steps outside in Fall.",
-		" lives in Maryland and steps outside in Summer."
-	],
-	contextWithSuper: [
-		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Winter.",
-		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Fall.",
-		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Summer."
-	],
-	action: [
-		" Imagine you live in Maryland and go outside on a day in Winter.",
-		" Imagine you live in Maryland and go outside on a day in Fall.",
-		" Imagine you live in Maryland and go outside on a day in Summer."
+		// " walks into a basement in the middle of the day.",
+		// " walks into a living room in the middle of the day.",
+		// " walks into a sunroom in the middle of the day."
 	],
 	sub: {
 		singular: [
-			"day in Winter",
-			"day in Fall",
-			"day in Summer"
+			"night",
+			"day",
+			"evening"
 		],
 		plural: [
-			"days in Winter",
-			"days in Fall",
-			"days in Summer"
+			"nights",
+			"days",
+			"evenings"
 		]
 	},
-	super: "days of the year",
-	strength: [1,2,3], // how high on the scale the sub-cat is expected to be
-	degree: "temperature",
-	unit: ["degrees Fahrenheit", "degrees Celsius"],
-	subunit: ["none"]
-},
-{
+	super: "times of day",
+	strength: [1, 2, 3],
+	degree: "luminance"
+},{
 	target: {
-		positive: "warm",
-		negative: "cold"
+		positive: "light",
+		negative: "dark"
 	},
 	context: [
-		" takes their first sip from a cup of iced tea.",
-		" takes their first sip from a cup of water.",
-		" takes their first sip from a cup of coffee."
-	],
-	// contextWithSuper: [
-	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of iced tea.",
-	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of water.",
-	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of coffee."
-	// ],
-	action: [
-		" Imagine taking a sip from a cup of iced tea.",
-		" Imagine taking a sip from a cup of water.",
-		" Imagine taking a sip from a cup of coffee.",
+		// " walks into a basement in the middle of the day.",
+		// " walks into a living room in the middle of the day.",
+		// " walks into a sunroom in the middle of the day."
 	],
 	sub: {
 		singular: [
-			"cup of iced tea",
-			"cup of water",
-			"cup of coffee"
+			"chocolate",
+			"ice cream",
+			"doughnuts"
 		],
 		plural: [
-			"cups of iced tea",
-			"cups of water",
-			"cups of coffee"
+			"chocolate",
+			"ice cream",
+			"doughnuts"
 		]
 	},
-	super: "beverages",
-	strength: [1,2,3], // how high on the scale the sub-cat is expected to be
-	degree: "temperature",
-	unit: ["degrees Fahrenheit", "degrees Celsius"],
-	subunit: ["none"]
-},
-{
+	super: "food",
+	strength: [1, 2, 3],
+	degree: "luminance"
+},{
+	target: {
+		positive: "light",
+		negative: "dark"
+	},
+	context: [
+		// " walks into a basement in the middle of the day.",
+		// " walks into a living room in the middle of the day.",
+		// " walks into a sunroom in the middle of the day."
+	],
+	sub: {
+		singular: [
+			"basement",
+			"living room",
+			"sunroom"
+		],
+		plural: [
+			"basements",
+			"living rooms",
+			"sunrooms"
+		]
+	},
+	super: "rooms",
+	strength: [1, 2, 3],
+	degree: "luminance"
+},{
+	target: {
+		positive: "tall",
+		negative: "short"
+	},
+	context: [
+		// " sees a gymnast.",
+		// " sees a runner.",
+		// " sees a basketball player."
+	],
+	sub: {
+		singular: [
+			"kid",
+			"teenager",
+			"adult"
+		],
+		plural: [
+			"kids",
+			"teenagers",
+			"adults"
+		]
+	},
+	super: "people",
+	strength: [1, 2, 3],
+	degree: "height"
+},{
+	target: {
+		positive: "tall",
+		negative: "short"
+	},
+	context: [
+		// " sees a gymnast.",
+		// " sees a runner.",
+		// " sees a basketball player."
+	],
+	sub: {
+		singular: [
+			"prairie dog",
+			"chimpanzee",
+			"giraffe"
+		],
+		plural: [
+			"prairie dogs",
+			"chimpanzees",
+			"giraffes"
+		]
+	},
+	super: "animals",
+	strength: [1, 2, 3],
+	degree: "height"
+},{
+	target: {
+		positive: "tall",
+		negative: "short"
+	},
+	context: [
+		// " sees a gymnast.",
+		// " sees a runner.",
+		// " sees a basketball player."
+	],
+	sub: {
+		singular: [
+			"house",
+			"supermarket",
+			"skyscraper"
+		],
+		plural: [
+			"houses",
+			"supermarkets",
+			"skyscrapers"
+		]
+	},
+	super: "buildings",
+	strength: [1, 2, 3],
+	degree: "height"
+},{
 	target: {
 		positive: "expensive",
 		negative: "cheap"
 	},
 	context: [
-		" looks at the price of a kids bike.",
-		" looks at the price of a city bike.",
-		" looks at the price of an electric bike."
-	],
-	// contextWithSuper: [
-	// 	" is buying kitchen appliances for their new apartment. They find a coffee maker and looks at the price.",
-	// 	" is buying kitchen appliances for their new apartment. They find a food processor and looks at the price.",
-	// 	" is buying kitchen appliances for their new apartment. They find a stove and looks at the price."
-	// ],
-	action: [
-		"Imagine you are buying a kids bike.",
-		"Imagine you are buying a city bike.",
-		"Imagine you are buying an electric bike."
+		// " looks at the price of a flower vase made of plastic.",
+		// " looks at the price of a flower vase made of glass.",
+		// " looks at the price of a flower vase made of crystal."
 	],
 	sub: {
 		singular: [
-			"kids bike",
-			"city bike",
-			"electric bike"
+			"hot dog",
+			"pork chop",
+			"steak",
 		],
 		plural: [
-			"kids bikes",
-			"city bikes",
-			"electric bikes"
+			"hot dogs",
+			"pork chops",
+			"steak",
 		]
 	},
-	super: "bikes",
-	strength: [1,2,3],
-	degree: "price",
-	unit: ["dollars"],
-	subunit: ["none"]
-},
-{ // This is cheap
+	super: "food",
+	strength: [1, 2, 3],
+	degree: "price"
+},{
+	target: {
+		positive: " expensive",
+		negative: " cheap"
+	},
+	context: [
+		// " looks at the price of a flower vase made of plastic.",
+		// " looks at the price of a flower vase made of glass.",
+		// " looks at the price of a flower vase made of crystal."
+	],
+	contextWithSuper: [
+		// " is looking to buy a flower vase. They finds one made of plastic.",
+		// " is looking to buy a flower vase. They finds one made of glass.",
+		// " is looking to buy a flower vase. They finds one made of crystal.",
+	],
+	action: [
+		// "Imagine you are buying a flower vase made of plastic.",
+		// "Imagine you are buying a flower vase made of glass.",
+		// "Imagine you are buying a flower vase made of crystal."
+	],
+	sub: {
+		singular: [
+			"cubic zirconia",
+			"diamond",
+			"ruby",
+		],
+		plural: [
+			"cubic zirconia",
+			"diamonds",
+			"rubies",
+		]
+	},
+	super: "jewelry",
+	strength: [1, 2, 3],
+	degree: "price"
+},{
 	target: {
 		positive: " expensive",
 		negative: " cheap"
@@ -152,8 +245,121 @@ var examples = [{
 	degree: "price",
 	unit: ["dollars"],
 	subunit: ["none"]
-},
-{
+}
+
+
+{	
+	target: {
+		positive: "warm",
+		negative: "cold"
+	},
+	context: [
+		" lives in Maryland and steps outside in Winter.",
+		" lives in Maryland and steps outside in Fall.",
+		" lives in Maryland and steps outside in Summer."
+	],
+	contextWithSuper: [
+		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Winter.",
+		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Fall.",
+		" lives in Maryland and checks the weather everyday. They looks at the weather report for today, a day in Summer."
+	],
+	action: [
+		" Imagine you live in Maryland and go outside on a day in Winter.",
+		" Imagine you live in Maryland and go outside on a day in Fall.",
+		" Imagine you live in Maryland and go outside on a day in Summer."
+	],
+	sub: {
+		singular: [
+			"day in Winter",
+			"day in Fall",
+			"day in Summer"
+		],
+		plural: [
+			"days in Winter",
+			"days in Fall",
+			"days in Summer"
+		]
+	},
+	super: "days of the year",
+	strength: [1,2,3], // how high on the scale the sub-cat is expected to be
+	degree: "temperature",
+	unit: ["degrees Fahrenheit", "degrees Celsius"],
+	subunit: ["none"]
+},{
+	target: {
+		positive: "warm",
+		negative: "cold"
+	},
+	context: [
+		" takes their first sip from a cup of iced tea.",
+		" takes their first sip from a cup of water.",
+		" takes their first sip from a cup of coffee."
+	],
+	// contextWithSuper: [
+	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of iced tea.",
+	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of water.",
+	// 	" drinks different beverages on different days. At the present moment, they takes a sip from a cup of coffee."
+	// ],
+	action: [
+		" Imagine taking a sip from a cup of iced tea.",
+		" Imagine taking a sip from a cup of water.",
+		" Imagine taking a sip from a cup of coffee.",
+	],
+	sub: {
+		singular: [
+			"cup of iced tea",
+			"cup of water",
+			"cup of coffee"
+		],
+		plural: [
+			"cups of iced tea",
+			"cups of water",
+			"cups of coffee"
+		]
+	},
+	super: "beverages",
+	strength: [1,2,3], // how high on the scale the sub-cat is expected to be
+	degree: "temperature",
+	unit: ["degrees Fahrenheit", "degrees Celsius"],
+	subunit: ["none"]
+},{
+	target: {
+		positive: "expensive",
+		negative: "cheap"
+	},
+	context: [
+		" looks at the price of a kids bike.",
+		" looks at the price of a city bike.",
+		" looks at the price of an electric bike."
+	],
+	// contextWithSuper: [
+	// 	" is buying kitchen appliances for their new apartment. They find a coffee maker and looks at the price.",
+	// 	" is buying kitchen appliances for their new apartment. They find a food processor and looks at the price.",
+	// 	" is buying kitchen appliances for their new apartment. They find a stove and looks at the price."
+	// ],
+	action: [
+		"Imagine you are buying a kids bike.",
+		"Imagine you are buying a city bike.",
+		"Imagine you are buying an electric bike."
+	],
+	sub: {
+		singular: [
+			"kids bike",
+			"city bike",
+			"electric bike"
+		],
+		plural: [
+			"kids bikes",
+			"city bikes",
+			"electric bikes"
+		]
+	},
+	super: "bikes",
+	strength: [1,2,3],
+	degree: "price",
+	unit: ["dollars"],
+	subunit: ["none"]
+},{
 	target: {
 		positive: "long",
 		negative: "short"
@@ -190,46 +396,8 @@ var examples = [{
 	degree: "time",
 	unit: ["seconds", "minutes", "hours", "days"],
 	subunit: ["seconds", "minutes", "hours"]
-},
-{
-	target: {
-		positive: " tall",
-		negative: " short"
-	},
-	context: [
-		" sees a gymnast.",
-		" sees a runner.",
-		" sees a basketball player."
-	],
-	contextWithSuper: [
-		" is sitting at a cafe watching people go by and sees a gymnast.",
-		" is sitting at a cafe watching people go by and sees a runner.",
-		" is sitting at a cafe watching people go by and sees a basketball player."
-	],
-	action: [
-		"Imagine you see a gymnast.",
-		"Imagine you see a runner.",
-		"Imagine you see a basketball player."
-	],
-	sub: {
-		singular: [
-			"gymnast",
-			"runner",
-			"basketball player"
-		],
-		plural: [
-			"gymnasts",
-			"runners",
-			"basketball players"
-		]
-	},
-	super: "people",
-	strength: [1,2,3],
-	degree: "height",
-	unit: ["feet", "meters"],
-	subunit: ["inches", "centimeters"]
-},
-{
+}
+},{
 	target: {
 		positive: "big",
 		negative: "small"
@@ -266,8 +434,7 @@ var examples = [{
 	degree: "size",
 	unit: ["feet", "meters"],
 	subunit: ["inches", "centimeters"]
-},
-{
+},{
 	target: {
 		positive: "big",
 		negative: "small"
@@ -304,8 +471,7 @@ var examples = [{
 	degree: "size",
 	unit: ["feet", "meters"],
 	subunit: ["inches", "centimeters"]
-},
-{
+},{
 	target: {
 		positive: "heavy",
 		negative: "light"
@@ -342,8 +508,7 @@ var examples = [{
 	degree: "weight",
 	unit: ["pounds", "kilograms"],
 	subunit: ["ounces", "grams"]
-},
-{ // This is
+},{
 	target: {
 		positive: " heavy",
 		negative: " light"
@@ -380,8 +545,7 @@ var examples = [{
 	degree: "weight",
 	unit: ["pounds", "kilograms"],
 	subunit: ["ounces", "grams"]
-},
-{
+},{
 	target: {
 		positive: "loud",
 		negative: "quiet"
@@ -416,40 +580,9 @@ var examples = [{
 	super: "cars",
 	strength: [1,2,3],
 	degree: "sound"
-},
-{
-	target: {
-		positive: "light",
-		negative: "dark"
-	},
-	context : [
-		" walks into a basement in the middle of the day.",
-		" walks into a living room in the middle of the day.",
-		" walks into a sunroom in the middle of the day."
-	],
-	contextWithSuper: [
-		" is walking around the rooms of a house and walks into a basement.",
-		" is walking around the rooms of a house and walks into a living room.",
-		" is walking around the rooms of a house and walks into a sunroom.",
-	],
-	action: [
-		"Imagine walking into a basement.",
-		"Imagine walking into a living room.",
-		"Imagine walking into a sunroom.",
-	],
-	sub: {
-		singular: [
-			"basement",
-			"living room",
-			"sunroom"
-		],
-		plural: [
-			"basements",
-			"living rooms",
-			"sunrooms"
-		]
-	},
-	super: "rooms",
-	strength: [1,2,3],
-	degree: "darkness"
-}];
+}
+];
+
+function get_things() {
+
+}
