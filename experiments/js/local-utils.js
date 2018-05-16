@@ -63,6 +63,42 @@ function getUniqueTrials(examples) {
   }
 }
 
+// creates a randomized sequence of trials with unique subcategories
+function VPE2AFCTrials(examples) {
+  var trials = [];
+  var degree_target = {
+    "size_pos": "big",
+    "size_neg": "small",
+    "light_pos": "light",
+    "light_neg": "dark",
+    "weight_pos": "heavy", 
+    "weight_neg": "light",
+    "temperature_pos": "warm", 
+    "temperature_neg": "cold",
+    "price_pos": "expensive", 
+    "price_neg": "cheap",
+    "sound_pos": "loud",
+    "sound_neg": "quiet",
+    "height_pos": "tall", 
+    "height_neg": "short",
+    "time_pos": "long",
+    "time_neg": "short"
+  };
+
+  var temp = [];
+  for (var i = 0; i < Object.keys(degree_target).length; i++) {
+    temp.push(i);
+  }
+  temp = _.shuffle(temp);
+
+  for (var i = 0; i < Object.keys(degree_target).length; i++) {
+    var degrees = _.where(examples, {degree: Object.keys(degree_target)[temp[i]].slice(0, -4)});
+    var targets = _.where(degrees, {target: Object.values(degree_target)[temp[i]]});
+    trials.push(_.sample(targets))
+  }
+
+  return trials;
+}
 
 // samples without replacement from a list of names for all of our trial slides
 // NOTE: 30 NAMES MAX

@@ -15,8 +15,8 @@ library(tidyverse)
 Manually categorized participant responses and computed their empirical frequencies.
 
 ```{r echo=FALSE}
-#path_to_repository = "D:/Research/comparison-class"
-path_to_repository <- "~/Documents/research/comparison-class/"
+path_to_repository = "D:/Research/comparison-class"
+#path_to_repository <- "~/Documents/research/comparison-class/"
 
 data = read.csv(paste(path_to_repository, 
                       "/analysis/class-elicitation-freeProduction-2-updated.csv",

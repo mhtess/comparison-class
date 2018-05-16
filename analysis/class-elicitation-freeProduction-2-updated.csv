@@ -1,21 +1,21 @@
 original_row,degree,supercategory,subcategory,valence,target,adjective_form,phrase,n,mean_frequency,max_frequency,type
-1,height,animals,chimpanzee,medium,big,positive,chimpanzees,9,315199,378379,subcategory
-3,height,animals,chimpanzee,medium,big,positive,monkeys,3,4144229,4144229,in between
-4,height,animals,chimpanzee,medium,big,positive,animals,2,58179731,58179731,supercategory
-5,height,animals,chimpanzee,medium,small,negative,chimpanzees,7,317455,378379,subcategory
-6,height,animals,chimpanzee,medium,small,negative,animals,3,58179731,58179731,supercategory
-8,height,animals,chimpanzee,medium,small,negative,monkeys,2,4144229,4144229,in between
-9,height,animals,chimpanzee,medium,small,negative,primates,1,1013017,1013017,in between
-10,height,animals,elephant,high,big,positive,animals,13,58179731,58179731,supercategory
-11,height,animals,elephant,high,big,positive,elephants,3,2082778,2082778,subcategory
-12,height,animals,elephant,high,big,positive,vegetables,1,9067552,9067552,not relevant
-13,height,animals,elephant,high,small,negative,elephants,9,2531023,6116985,subcategory
-15,height,animals,elephant,high,small,negative,giraffes,1,260416,260416,different subcategory
-16,height,animals,porcupine,low,big,positive,porcupines,9,86556,86556,subcategory
-17,height,animals,porcupine,low,big,positive,animals,5,58179731,58179731,supercategory
-18,height,animals,porcupine,low,big,positive,critters,1,1055985,1055985,in between
-19,height,animals,porcupine,low,small,negative,porcupines,7,86556,86556,subcategory
-20,height,animals,porcupine,low,small,negative,animals,5,58179731,58179731,supercategory
+1,size,animals,chimpanzee,medium,big,positive,chimpanzees,9,315199,378379,subcategory
+3,size,animals,chimpanzee,medium,big,positive,monkeys,3,4144229,4144229,in between
+4,size,animals,chimpanzee,medium,big,positive,animals,2,58179731,58179731,supercategory
+5,size,animals,chimpanzee,medium,small,negative,chimpanzees,7,317455,378379,subcategory
+6,size,animals,chimpanzee,medium,small,negative,animals,3,58179731,58179731,supercategory
+8,size,animals,chimpanzee,medium,small,negative,monkeys,2,4144229,4144229,in between
+9,size,animals,chimpanzee,medium,small,negative,primates,1,1013017,1013017,in between
+10,size,animals,elephant,high,big,positive,animals,13,58179731,58179731,supercategory
+11,size,animals,elephant,high,big,positive,elephants,3,2082778,2082778,subcategory
+12,size,animals,elephant,high,big,positive,vegetables,1,9067552,9067552,not relevant
+13,size,animals,elephant,high,small,negative,elephants,9,2531023,6116985,subcategory
+15,size,animals,elephant,high,small,negative,giraffes,1,260416,260416,different subcategory
+16,size,animals,porcupine,low,big,positive,porcupines,9,86556,86556,subcategory
+17,size,animals,porcupine,low,big,positive,animals,5,58179731,58179731,supercategory
+18,size,animals,porcupine,low,big,positive,critters,1,1055985,1055985,in between
+19,size,animals,porcupine,low,small,negative,porcupines,7,86556,86556,subcategory
+20,size,animals,porcupine,low,small,negative,animals,5,58179731,58179731,supercategory
 21,temperature,beverages,cup of coffee,high,cold,negative,coffee,6,14112760,42090859,subcategory
 22,temperature,beverages,cup of coffee,high,cold,negative,drinks,3,11137329,11137329,supercategory synonym
 24,temperature,beverages,cup of coffee,high,cold,negative,hot beverages,1,45128,45128,in between
@@ -78,20 +78,20 @@ original_row,degree,supercategory,subcategory,valence,target,adjective_form,phra
 92,sound,cars,muscle car,high,quiet,negative,muscle cars,9,291117,326735,subcategory
 93,sound,cars,muscle car,high,quiet,negative,cars,6,109722086,109722086,supercategory
 94,sound,cars,muscle car,high,quiet,negative,engines,1,25167534,25167534,below subcategory
-96,height,cars,sedan,medium,big,positive,sedans,7,665446,665446,subcategory
-97,height,cars,sedan,medium,big,positive,cars,5,109722086,109722086,supercategory
-98,height,cars,sedan,medium,small,negative,sedans,7,665446,665446,subcategory
-99,height,cars,sedan,medium,small,negative,cars,6,109722086,109722086,supercategory
-100,height,cars,sedan,medium,small,negative,vehicles,1,37254742,37254742,supercategory synonym
-101,height,cars,sports car,low,big,positive,sports cars,10,593791,593791,subcategory
-102,height,cars,sports car,low,big,positive,cars,6,109722086,109722086,supercategory
-103,height,cars,sports car,low,small,negative,cars,7,109722086,109722086,supercategory
-104,height,cars,sports car,low,small,negative,sports cars,4,6716234,25083562,subcategory
-106,height,cars,SUV,high,big,positive,cars,7,109722086,109722086,supercategory
-107,height,cars,SUV,high,big,positive,SUVs,6,2438065,4643157,subcategory
-108,height,cars,SUV,high,big,positive,vehicles,2,37254742,37254742,supercategory synonym
-110,height,cars,SUV,high,small,negative,SUVs,11,1997046,1997046,subcategory
-111,height,cars,SUV,high,small,negative,cars,1,109722086,109722086,supercategory
+96,size,cars,sedan,medium,big,positive,sedans,7,665446,665446,subcategory
+97,size,cars,sedan,medium,big,positive,cars,5,109722086,109722086,supercategory
+98,size,cars,sedan,medium,small,negative,sedans,7,665446,665446,subcategory
+99,size,cars,sedan,medium,small,negative,cars,6,109722086,109722086,supercategory
+100,size,cars,sedan,medium,small,negative,vehicles,1,37254742,37254742,supercategory synonym
+101,size,cars,sports car,low,big,positive,sports cars,10,593791,593791,subcategory
+102,size,cars,sports car,low,big,positive,cars,6,109722086,109722086,supercategory
+103,size,cars,sports car,low,small,negative,cars,7,109722086,109722086,supercategory
+104,size,cars,sports car,low,small,negative,sports cars,4,6716234,25083562,subcategory
+106,size,cars,SUV,high,big,positive,cars,7,109722086,109722086,supercategory
+107,size,cars,SUV,high,big,positive,SUVs,6,2438065,4643157,subcategory
+108,size,cars,SUV,high,big,positive,vehicles,2,37254742,37254742,supercategory synonym
+110,size,cars,SUV,high,small,negative,SUVs,11,1997046,1997046,subcategory
+111,size,cars,SUV,high,small,negative,cars,1,109722086,109722086,supercategory
 113,temperature,days of the year,day in Fall,medium,cold,negative,days,4,305158140,305158140,above supercategory
 114,temperature,days of the year,day in Fall,medium,cold,negative,seasons,3,12035578,12035578,in between
 115,temperature,days of the year,day in Fall,medium,cold,negative,days in Fall,2,8590,12564,subcategory

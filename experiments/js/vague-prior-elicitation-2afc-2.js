@@ -38,31 +38,26 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // Display the context sentence.
-    // exp.pronoun = 0;
-    // if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
-    //   exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+    exp.pronoun = 0;
+    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
 
-    //   // if "They" is used, we randomly select a pronoun for the other person and record it
-    //   if (exp.examples[i][exp.condition].search("They") != -1) {
-    //     exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-    //     $(".display_context").html(exp.names[i] + exp.pronoun);
-    //   }
-    //   else {
-    //     $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
-    //   }
-    // }
-    // else {
-    //   $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
-    // }
+      // if "They" is used, we randomly select a pronoun for the other person and record it
+      if (exp.examples[i][exp.condition].search("They") != -1) {
+        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+        $(".display_context").html(exp.names[i] + exp.pronoun);
+      }
+      else {
+        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+      }
+    }
+    else {
+      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
+    }
 
     // Display the question.
-    // $(".display_question").html("Do you think the " + exp.examples[i].sub_singular + " would be <strong>" + exp.examples[i].target +
-    //                             " relative to other " + exp.examples[i].super + "</strong>?");
-    unique_response = _.sample()
-    target = _.sample(exp.target)
-    supercategory = _.sample(exp.supercategory)
-    $(".display_question").html("Do you think the " + exp.unique_response + " is/are <b>" + exp.target + " relative to " + 
-                                exp.supercategory + "</b>?");
+    $(".display_question").html("Do you think the " + exp.examples[i].phrase + " is/are <b>" + exp.examples[i].target + 
+                                " relative to other " + exp.examples[i].supercategory + "</b>?");
 
     // Display the radio buttons.
     $('label[for=0]').html(exp.responseOrder[0]);
@@ -163,11 +158,32 @@ function init() {
   })();
 
   // generate all possible target-context pair combinations
-  exp.examples = getUniqueTrials(examples);
+  // exp.examples = getUniqueTrials(examples);
+  exp.examples = VPE2AFCTrials(examples);
 
   // one trial for each unique target-context pair
   exp.trials = exp.examples.length;
   $(".display_trials").html(exp.trials);
+
+  // Contexts.
+  var contexts = {
+    "size_pos": " sees a ",
+    "size_neg": " sees a ",
+    "light_pos": " walks into a REPLACE in the middle of the day.",
+    "light_neg": " walks into a REPLACE in the middle of the day.",
+    "weight_pos": "heavy", 
+    "weight_neg": "light",
+    "temperature_pos": " lives in Maryland and steps outside in ", 
+    "temperature_neg": "cold",
+    "price_pos": "expensive", 
+    "price_neg": "cheap",
+    "sound_pos": "loud",
+    "sound_neg": "quiet",
+    "height_pos": "tall", 
+    "height_neg": "short",
+    "time_pos": "long",
+    "time_neg": "short"
+  };
 
   // sample a phrase for this particular instance
   // exp.condition = sampleCondition();
@@ -178,13 +194,6 @@ function init() {
 
   // set the number of sliders to use
   // exp.nSentences = 1;
-
-  exp.degree = _.shuffle(["size", "luminance", "weight", "temperature", "price", "sound", "height", "time"])
-  exp.target = {
-    positive: ["big", "light", "heavy", "warm", "expensive", "loud", "tall", "long"]
-    negative: ["small", "dark", "light", "cold", "cheap", "quiet", "short", "short"]
-  }
-  exp.supercategory = ["animals", "beverages", ]
 
   // if we have more trials than we do unique names, some names will be reused
   if (exp.trials > characters.length) {

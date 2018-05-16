@@ -396,7 +396,6 @@ var examples = [{
 	degree: "time",
 	unit: ["seconds", "minutes", "hours", "days"],
 	subunit: ["seconds", "minutes", "hours"]
-}
 },{
 	target: {
 		positive: "big",
@@ -580,9 +579,4 @@ var examples = [{
 	super: "cars",
 	strength: [1,2,3],
 	degree: "sound"
-}
-];
-
-function get_things() {
-
-}
+}];
