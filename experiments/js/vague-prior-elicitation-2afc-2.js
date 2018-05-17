@@ -38,22 +38,32 @@ function makeSlides(f) {
     $('input[name="paraphrase"]').attr('checked', false);
 
     // Display the context sentence.
-    exp.pronoun = 0;
-    if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
-      exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
+    // exp.pronoun = 0;
+    // if((exp.examples[i].context.search("their") != -1) || (exp.examples[i].context.search("they") != -1) ||
+    //   exp.examples[i][exp.condition].search("them") != -1 || exp.examples[i][exp.condition].search("They") != -1) {
 
-      // if "They" is used, we randomly select a pronoun for the other person and record it
-      if (exp.examples[i][exp.condition].search("They") != -1) {
-        exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
-        $(".display_context").html(exp.names[i] + exp.pronoun);
-      }
-      else {
-        $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
-      }
+    //   // if "They" is used, we randomly select a pronoun for the other person and record it
+    //   if (exp.examples[i][exp.condition].search("They") != -1) {
+    //     exp.pronoun = getPronoun(exp.examples[i][exp.condition], exp.names[i]);
+    //     $(".display_context").html(exp.names[i] + exp.pronoun);
+    //   }
+    //   else {
+    //     $(".display_context").html(exp.names[i] + getPronoun(exp.examples[i][exp.condition], exp.names[i]));
+    //   }
+    // }
+    // else {
+    //   $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
+    // }
+
+    exp.supercategory = exp.examples[i].supercategory;
+    if ((exp.examples[i].supercategory == "cars") && (exp.examples[i].degree == "size")) {
+      exp.supercategory = "cars1";
     }
-    else {
-      $(".display_context").html(exp.names[i] + exp.examples[i][exp.condition]);
+    else if ((exp.examples[i].supercategory == "cars") && (exp.examples[i].degree == "sound")) {
+      exp.supercategory = "cars2";
     }
+
+    $(".display_context").html(exp.contexts[exp.supercategory].replace("PERSON", exp.names[i]).replace("SUBCAT", exp.examples[i].phrase));
 
     // Display the question.
     $(".display_question").html("Do you think the " + exp.examples[i].phrase + " is/are <b>" + exp.examples[i].target + 
@@ -84,8 +94,8 @@ function makeSlides(f) {
         "adjective": adjective,
         "strength": exp.examples[i].strength,
         "names": exp.names[i],
-        "sub_category": exp.examples[i].sub_singular,
-        "super_category": exp.examples[i].super,
+        "subcategory": exp.examples[i].subcategory,
+        "supercategory": exp.examples[i].supercategory,
         "response": response == "Yes" ? 1 : 0,
         "first_response": exp.responseOrder[0],
         "second_response": exp.responseOrder[1],
@@ -166,23 +176,19 @@ function init() {
   $(".display_trials").html(exp.trials);
 
   // Contexts.
-  var contexts = {
-    "size_pos": " sees a ",
-    "size_neg": " sees a ",
-    "light_pos": " walks into a REPLACE in the middle of the day.",
-    "light_neg": " walks into a REPLACE in the middle of the day.",
-    "weight_pos": "heavy", 
-    "weight_neg": "light",
-    "temperature_pos": " lives in Maryland and steps outside in ", 
-    "temperature_neg": "cold",
-    "price_pos": "expensive", 
-    "price_neg": "cheap",
-    "sound_pos": "loud",
-    "sound_neg": "quiet",
-    "height_pos": "tall", 
-    "height_neg": "short",
-    "time_pos": "long",
-    "time_neg": "short"
+  exp.contexts = {
+    "days of the year": "PERSON lives in Maryland and takes a step outside during SUBCAT.",
+    "beverages": "PERSON takes their first sip from a/an SUBCAT.",
+    "bikes": "PERSON looks at the price of a/an SUBCAT.",
+    "flower vases": "PERSON looks at the price of a/an SUBCAT.",
+    "ways of getting from Los Angeles to San Francisco": "PERSON is shown a/an SUBCAT from Los Angeles to San Francisco.",
+    "people": "PERSON sees a/an SUBCAT.",
+    "animals": "PERSON sees a/an SUBCAT.",
+    "cars1": "PERSON gets into a/an SUBCAT.",
+    "fruit": "PERSON picks up a/an SUBCAT.",
+    "furniture": "PERSON lifts up a/an SUBCAT.",
+    "cars2": "PERSON takes a/an SUBCAT for a test-drive.",
+    "rooms": "PERSON walks into a/an SUBCAT in the middle of the day."
   };
 
   // sample a phrase for this particular instance
