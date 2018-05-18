@@ -63,7 +63,7 @@ function makeSlides(f) {
       exp.supercategory = "cars2";
     }
 
-    $(".display_context").html(exp.contexts[exp.supercategory].replace("PERSON", exp.names[i]).replace("SUBCAT", exp.examples[i].phrase));
+    $(".display_context").html(exp.contexts[exp.supercategory].replace("PERSON", exp.names[i]).replace("PHRASE", exp.examples[i].phrase));
 
     // Display the question.
     $(".display_question").html("Do you think the " + exp.examples[i].phrase + " is/are <b>" + exp.examples[i].target + 
@@ -85,14 +85,12 @@ function makeSlides(f) {
       exp.data_trials.push({
         "condition": exp.condition,
         "trial_num": i + 1,
+        "degree": exp.examples[i].degree,
         "target": exp.examples[i].target,
         "context": exp.examples[i].context,
-        "contextWithSuper": exp.pronoun ? exp.pronoun : exp.examples[i].contextWithSuper,
-        "contextWithSuperPronoun": exp.pronoun ? (exp.pronoun.search("He") != -1 ? "He" : "She") : "",
-        "degree": exp.examples[i].degree,
-        "form": exp.examples[i].form,
-        "adjective": adjective,
-        "strength": exp.examples[i].strength,
+        "adjective_form": exp.examples[i].adjective_form,
+        "phrase": exp.examples[i].phrase,
+        // "strength": exp.examples[i].strength,
         "names": exp.names[i],
         "subcategory": exp.examples[i].subcategory,
         "supercategory": exp.examples[i].supercategory,
@@ -177,18 +175,18 @@ function init() {
 
   // Contexts.
   exp.contexts = {
-    "days of the year": "PERSON lives in Maryland and takes a step outside during SUBCAT.",
-    "beverages": "PERSON takes their first sip from a/an SUBCAT.",
-    "bikes": "PERSON looks at the price of a/an SUBCAT.",
-    "flower vases": "PERSON looks at the price of a/an SUBCAT.",
-    "ways of getting from Los Angeles to San Francisco": "PERSON is shown a/an SUBCAT from Los Angeles to San Francisco.",
-    "people": "PERSON sees a/an SUBCAT.",
-    "animals": "PERSON sees a/an SUBCAT.",
-    "cars1": "PERSON gets into a/an SUBCAT.",
-    "fruit": "PERSON picks up a/an SUBCAT.",
-    "furniture": "PERSON lifts up a/an SUBCAT.",
-    "cars2": "PERSON takes a/an SUBCAT for a test-drive.",
-    "rooms": "PERSON walks into a/an SUBCAT in the middle of the day."
+    "days of the year": "PERSON lives in Maryland and takes a step outside during PHRASE.",
+    "beverages": "PERSON takes their first sip from a/an/some PHRASE.",
+    "bikes": "PERSON looks at the price of a/an/some PHRASE.",
+    "flower vases": "PERSON looks at the price of a/an/some PHRASE.",
+    "ways of getting from Los Angeles to San Francisco": "PERSON is shown a/an PHRASE from Los Angeles to San Francisco.",
+    "people": "PERSON sees a/an/some PHRASE.",
+    "animals": "PERSON sees a/an/some PHRASE.",
+    "cars1": "PERSON gets into a/an/some PHRASE.",
+    "fruit": "PERSON picks up a/an/some PHRASE.",
+    "furniture": "PERSON lifts up a/an/some PHRASE.",
+    "cars2": "PERSON takes a/an/some PHRASE for a test-drive.",
+    "rooms": "PERSON walks into a/an/some PHRASE in the middle of the day."
   };
 
   // sample a phrase for this particular instance
