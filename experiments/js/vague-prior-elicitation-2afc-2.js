@@ -63,7 +63,23 @@ function makeSlides(f) {
       exp.supercategory = "cars2";
     }
 
-    $(".display_context").html(exp.contexts[exp.supercategory].replace("PERSON", exp.names[i]).replace("PHRASE", exp.examples[i].phrase));
+    if (exp.examples[i].phrase.slice(-1) == "s") {
+      exp.examples[i].phrase = exp.examples[i].phrase.slice(0, -1);
+    }
+
+    first_letter = exp.examples[i].phrase.slice(0, 1);
+    if (first_letter == "a" || first_letter == "e" || first_letter == "i" || first_letter == "o" || first_letter == "u") {
+      $(".display_context").html(exp.contexts[exp.supercategory].replace(
+                                 "PERSON", exp.names[i]).replace(
+                                 "PHRASE", exp.examples[i].phrase).replace(
+                                 "PRE", "an"));
+    }
+    else {
+      $(".display_context").html(exp.contexts[exp.supercategory].replace(
+                                 "PERSON", exp.names[i]).replace(
+                                 "PHRASE", exp.examples[i].phrase).replace(
+                                 "PRE", "a"));
+    }
 
     // Display the question.
     $(".display_question").html("Do you think the " + exp.examples[i].phrase + " is/are <b>" + exp.examples[i].target + 
@@ -176,17 +192,17 @@ function init() {
   // Contexts.
   exp.contexts = {
     "days of the year": "PERSON lives in Maryland and takes a step outside during PHRASE.",
-    "beverages": "PERSON takes their first sip from a/an/some PHRASE.",
-    "bikes": "PERSON looks at the price of a/an/some PHRASE.",
-    "flower vases": "PERSON looks at the price of a/an/some PHRASE.",
-    "ways of getting from Los Angeles to San Francisco": "PERSON is shown a/an PHRASE from Los Angeles to San Francisco.",
-    "people": "PERSON sees a/an/some PHRASE.",
-    "animals": "PERSON sees a/an/some PHRASE.",
-    "cars1": "PERSON gets into a/an/some PHRASE.",
-    "fruit": "PERSON picks up a/an/some PHRASE.",
-    "furniture": "PERSON lifts up a/an/some PHRASE.",
-    "cars2": "PERSON takes a/an/some PHRASE for a test-drive.",
-    "rooms": "PERSON walks into a/an/some PHRASE in the middle of the day."
+    "beverages": "PERSON takes their first sip from PRE PHRASE.",
+    "bikes": "PERSON looks at the price of PRE PHRASE.",
+    "flower vases": "PERSON looks at the price of PRE PHRASE.",
+    "ways of getting from Los Angeles to San Francisco": "PERSON is shown PRE PHRASE from Los Angeles to San Francisco.",
+    "people": "PERSON sees PRE PHRASE.",
+    "animals": "PERSON sees PRE PHRASE.",
+    "cars1": "PERSON gets into PRE PHRASE.",
+    "fruit": "PERSON picks up PRE PHRASE.",
+    "furniture": "PERSON lifts up PRE PHRASE.",
+    "cars2": "PERSON takes PRE PHRASE for a test-drive.",
+    "rooms": "PERSON walks into PRE PHRASE in the middle of the day."
   };
 
   // sample a phrase for this particular instance
