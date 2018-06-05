@@ -88,7 +88,6 @@ function makeSlides(f) {
     // Display the radio buttons.
     $('label[for=0]').html(exp.responseOrder[0]);
     $('label[for=1]').html(exp.responseOrder[1]);
-    $('label[for=2]').html(exp.responseOrder[2]);
   }
 
   // Runs when the "Continue" button is hit on a trial slide.
@@ -112,8 +111,7 @@ function makeSlides(f) {
         "supercategory": exp.examples[i].supercategory,
         "response": response == "Yes" ? 1 : 0,
         "first_response": exp.responseOrder[0],
-        "second_response": exp.responseOrder[1],
-        "third_response": exp.responseOrder[2]
+        "second_response": exp.responseOrder[1]
       });
       i++;
       exp.go();
@@ -210,7 +208,7 @@ function init() {
   exp.condition = "context";
 
   // sets the other of the radio buttons
-  exp.responseOrder = _.shuffle(["Yes", "No", "Doesn't make sense"]);
+  exp.responseOrder = _.shuffle(["Yes", "No"]);
 
   // set the number of sliders to use
   // exp.nSentences = 1;
