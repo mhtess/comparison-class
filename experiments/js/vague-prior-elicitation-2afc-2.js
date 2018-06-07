@@ -86,8 +86,12 @@ function makeSlides(f) {
                                 " relative to other " + exp.examples[i].supercategory + "</b>?");
 
     // Display the radio buttons.
-    $('label[for=0]').html(exp.responseOrder[0]);
-    $('label[for=1]').html(exp.responseOrder[1]);
+    $(".display_buttons").html("<div>" +
+                               "<label><input type=\"radio\" name=\"paraphrase\" value=\"0\"/>" + exp.responseOrder[0] + "</label>" +
+                               "<label><input type=\"radio\" name=\"paraphrase\" value=\"1\"/>" + exp.responseOrder[1] + "</label>" +
+                               "<br><br></div>");
+    // $('label[for=0]').html(exp.responseOrder[0]);
+    // $('label[for=1]').html(exp.responseOrder[1]);
   }
 
   // Runs when the "Continue" button is hit on a trial slide.
