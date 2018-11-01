@@ -1,13 +1,13 @@
 ---
-title             : "Warm (for winter): Comparison class inference in vague language"
-shorttitle        : "Comparison classes in vague language"
+title             : "Warm (for Winter): Comparison class inference for vague language"
+shorttitle        : "Comparison class inference"
 
 author: 
   - name          : "Michael Henry Tessler"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "450 Serra Mall, Bldg. 420, Rm. 316, Stanford, CA 94305"
-    email         : "mtessler@stanford.edu"
+    email         : "tessler@mit.edu"
   - name          : "Michael Lopez-Brau"
     affiliation   : "1"
   - name          : "Noah D. Goodman"
@@ -36,10 +36,10 @@ abstract: >
   The meaning of an utterance can change depending on the context.
   Yet, what counts as the relevant context is often only implicit in everyday conversation.
   The utterance \"it's warm outside\" could signal it's warm relative to other days of the year or just relative to the current season (e.g., it's warm for winter).
-  *Warm* conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon the appropriate comparison class.
-  Here, we formalize how world knowledge and pragmatic reasoning can drive the resolution of a comparison class.
-  We introduce a Rational Speech Act model and derive two novel predictions from it.
-  We validate these predictions using both a free production and a paraphrase experiment to measure listeners' beliefs about the likely comparison class used by a speaker.
+  *Warm* conveys that the temperature is high relative to some contextual *comparison class*, but little is known about how a listener decides upon the appropriate class for comparison.
+  Here, we formalize how world knowledge and pragmatic reasoning can drive the resolution of a comparison class when it is not explicited stated.
+  We show in a free production and targeted forced-choice experiment that, as predicted by the model, listeners balance the *a priori* likelihood that the utterance could be true with respect to class with the informativity of the class.
+  
   
   
 keywords          : "comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis"
@@ -128,28 +128,30 @@ A 75 \degree F (24 \degree C) day is warm.
 A 60 \degree F (16 \degree C) day is not, unless it's January; it could be warm for January.
 *Warm* is relative, and its felicity depends upon what the speaker uses as a basis of comparison---the *comparison class* (e.g., other days of the year or other days in January).
 Comparison classes are necessary for understanding adjectives and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers [e.g., "He ate a lot of burgers."; @SchollerFranke2015] and generic language [e.g., "Dogs are friendly"; @Tessler2016].
-A key challenge for listeners is that the comparison class often goes unsaid (e.g., in "It's warm outside.").
+Deciding on the relevant comparison class is a case study in the larger question of inferring the appropriate aspects of context for interpreting an utterance.
+Comparison classes, as with relevant aspects of context more generally, often go unsaid (e.g., in "It's warm outside.").
 
 The existence of comparison classes for understanding vague language is uncontroversial [@Solt2009; @Bale2011].
-Adult judgments of the felicity for adjectives like "dark" or "tall" depend upon fine-grained details of the statistics of the comparison class: When things in the comparison class are all very short, what counts as "tall" might not be very tall [@Schmidt2009; @Solt2012; @Qing2014].
-These studies have examined context-specific interpretations, when the comparison class is explicitly provided to listeners.
-In everyday conversation, however, the comparison class often goes unsaid (e.g., "It's warm outside"). 
+Adult judgments of the felicity for adjectives like "dark" or "tall" depend upon fine-grained details of the statistics of the comparison class: When objects in the comparison class are all rather short, what counts as "tall" might not be very tall [@Schmidt2009; @Solt2012; @Qing2014]
+Four-year-olds use their knowledge of kinds to differentiate between what goes into the comparison class and what does not:  What counts as a "tall pimwit" depends on the distribution of heights of *pimwits* and not the heights of other creatures like *daxes* [@Barner2008].
+Even children as young as 2-and-a-half understand that "big" is relative [@Sera1987] and that the comparison class can change [e.g., a "small mitten" can be big for the current physical context; @Ebeling1988; @Ebeling1994].
+<!-- These studies have examined context-specific interpretations, when the comparison class is explicitly provided to listeners. -->
+<!-- In everyday conversation, however, the comparison class often goes unsaid (e.g., "It's warm outside").  -->
 
 How do listeners decide on the appropriate comparison class?
-A natural first hypothesis is *other things of the same kind*.
-Indeed, four-year-olds use their knowledge of kinds to differentiate between what goes into the comparison class and what does not:  Novel creatures (*pimwits*) are selected as either "tall" or "short" depending on the distribution of heights of *pimwits* and not the heights of other creatures like *daxes* [@Barner2008].
-The problem is still underdetermiend, however, as any particular object of discourse, can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes (e.g., a pimwit is also a creature). 
+Any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes (e.g., a pimwit is also an animal which is also an entity). 
+<!-- A natural first hypothesis is *other things of the same kind*. -->
 A day in January is also a day of the year; if a listener hear "It's warm", it could be *warm for the week*, *warm for winter*, or *warm for the year*.^[
   It could also be *warm for Boston*, *warm for the northeast USA*, *warm for a place with currently six inches of snow on the ground*, among many more possibilities. 
 ]
-In addition, comparison classes need not be about kinds: Two- to four-year-olds recognize that a "big mitten" can still be "small" in the current perceptual context [@Ebeling1988].
-Even more striking, a both conceptually and perceptually "small hat" can still *big for a doll* (a la "too big"), a *functional* comparison [@Ebeling1994].
-
 In this paper, we investigate the first aspect of this problem, deciding among multiple plausible, conceptual comparison classes.
 Theoretical work in semantics has focused on how information from the comparison class gets integrated with a compositional semantics and what representations might be preferred [@Solt2009; @Bale2011].
 The question of how listeners reconstruct a comparison class in undersupported contexts (e.g., just hearing "It's warm outside") has been addressed neither formally nor empirically.
 
-We propose that listeners combine statistical, category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
+<!-- In addition, comparison classes need not be about kinds: Two- to four-year-olds recognize that a "big mitten" can still be "small" in the current perceptual context [@Ebeling1988]. -->
+<!-- Even more striking, a both conceptually and perceptually "small hat" can still *big for a doll* (a la "too big"), a *functional* comparison [@Ebeling1994]. -->
+
+We propose that listeners combine probabilistic, category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
 This proposal leads to the following prediction: When it is winter, saying "it's warm" signals that it is *warm for winter*, while saying "it's cold" signals *cold for the year*. 
 The opposite relationship should hold in summer, where "it's cold" should signal it's cold *for summer* more so than "it's warm".
 This prediction is a result of the *a priori* probability of different temperatures in different seasons: In winter, temperatures are relatively low, and thus it is unlikely to actually be *warm for the year*.
