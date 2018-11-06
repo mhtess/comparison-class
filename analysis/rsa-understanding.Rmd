@@ -1,0 +1,383 @@
+---
+title: "RSA Model understanding"
+output: html_notebook
+---
+
+```{r}
+library(rwebppl)
+library(jsonlite)
+library(ggthemes)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_few())
+```
+
+```{r utils}
+utils <- 'var round = function(x){
+  return Math.round(x*10)/10
+}
+
+var distProbs = function(dist, supp) {
+  return map(function(s) {
+    return Math.exp(dist.score(s))
+  }, supp)
+}
+
+var KL = function(p, q, supp) {
+  var P = distProbs(p, supp), Q = distProbs(q, supp);
+  var diverge = function(xp,xq) {
+    return xp == 0 ? 0 : (xp * Math.log(xp / xq) );
+  };
+  return sum(map2(diverge,P,Q));
+};
+'
+```
+
+
+```{r language}
+language <- '
+
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+
+// var utterances = {
+//  positive: ["positive_Adjective", "positive_sub", "positive_super"],
+//  negative: ["negative_Adjective", "negative_sub", "negative_super"]
+// };
+
+var allUtts = ["positive_Adjective",
+             "positive_sub",
+             "positive_super",
+             "negative_Adjective",
+             "negative_sub",
+             "negative_super"//,
+             //"silence_silence"
+             ]
+
+var utterances = {
+  positive: allUtts,
+  negative: allUtts
+};
+
+
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: repeat(utterances[form].length, function(){ 1 })
+      })
+    }
+  })
+});
+
+// var meaning = function(utterance, state, threshold) {
+//  state > threshold ? flip(1-Number.EPSILON) : flip(Number.EPSILON)
+// }
+
+
+var meaning = function(utterance, state, threshold) {
+   utterance == "positive" ? state > threshold ? flip(0.9999) : flip(0.0001) :
+   utterance == "negative" ? state < threshold ? flip(0.9999) : flip(0.0001) :
+   true
+}
+
+// var meaning = function(utterance, state, threshold) {
+//   utterance == "positive" ? state > threshold :
+//   utterance == "negative" ? state < threshold :
+//   true
+// }
+'
+```
+
+
+```{r prior}
+prior <- '
+var binParam = 5;
+
+// var stateParams = {
+//   sub: paramsFromR.priorParams.sub[0],
+//   super: paramsFromR.priorParams.super[0]
+// };
+var stateParams = {
+    sub: {mu: 1, sigma: 1},
+    super: {mu: 0, sigma: 1}
+}
+
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 3 * stateParams.super.sigma,
+          stateParams.super.mu + 3 * stateParams.super.sigma,
+          stateParams.super.sigma/binParam)
+);
+
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s))+
+    Number.EPSILON
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s))+
+    Number.EPSILON
+  }, stateVals)
+};
+
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){ return categorical({ vs: stateVals, ps: stateProbs.super}) }
+  })
+};
+'
+```
+
+
+```{r}
+rsa <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, threshold, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?  comparisonClass :
+              u.split("_")[1] == "silence" ?  comparisonClass :
+              u.split("_")[1]
+    var utterance = u.split("_")[0]
+    var state = sample(statePrior[cc]);
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+
+var speaker1 = cache(function(state, threshold, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, threshold, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = cache(function(form, utterance) {
+  Infer({model: function(){
+    // var utterance = form + "_Adjective";
+
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var threshold = sample(thresholdPrior(form));
+
+    var S1 = speaker1(state, threshold, comparisonClass, form);
+    observe(S1, utterance);
+    return state
+  }})
+})
+
+var speaker2 = function(state, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L1 = pragmaticListener(form, utterance)
+    factor( alphas.s2 * L1.score(state) )
+    return utterance
+  }})
+}
+'
+
+s2calls <-'
+_.flatten(
+    map(function(s){
+        var speakProbs = speaker2(s, "positive")
+       return { 
+          s:s, 
+          "subUtt": Math.exp(speakProbs.score("positive_sub")),
+          "superUtt": Math.exp(speakProbs.score("positive_super")),
+          "ambiguous": Math.exp(speakProbs.score("positive_Adjective"))
+        }
+    }, stateVals))
+'
+
+s1calls <-
+'// pragmaticListener("positive")
+
+// expectation(statePrior["sub"])
+// var s = 0
+// display("state = " + s)
+// var t = thresholdBins.positive[5]
+// display("threshold = " + t)
+// var c = "super"
+
+
+_.flatten(_.flatten(
+map(function(c){
+  map(function(t){
+    map(function(s){
+        var speakProbs = speaker1(s,t, c, "positive")
+       return {  "c": c,
+          s:s, 
+          t:t, 
+          "positive_sub": Math.exp(speakProbs.score("positive_sub")),
+          "positive_super": Math.exp(speakProbs.score("positive_super")),
+          "positive_imp": Math.exp(speakProbs.score("positive_Adjective")),
+          "negative_sub": Math.exp(speakProbs.score("negative_sub")),
+          "negative_super": Math.exp(speakProbs.score("negative_super")),
+          "negative_imp": Math.exp(speakProbs.score("negative_Adjective"))//,
+          // "silence_imp": Math.exp(speakProbs.score("silence_silence"))
+        }
+    }, stateVals)
+  }, thresholdBins.positive)
+}, ["super","sub"])
+))
+'
+```
+
+```{r}
+rs.wp <- webppl(paste(utils, prior, language, rsa, s1calls, sep = '\n'))
+
+
+rs.tidy <- rs.wp %>%
+  gather(utt, prob, -c, -s, -t) %>%
+  separate(utt, into = c("form", "explClass"))
+```
+
+```{r fig.width = 16, fig.height = 3.5}
+ggplot(rs.tidy, aes( x = s, y = prob, color = utt))+
+  geom_line()+
+  scale_color_solarized()+
+  facet_grid(c~t)
+```
+
+
+
+```{r}
+ggplot(rs.tidy %>% filter(c == "super", utt == "subUtt"), 
+       aes( x = s, y = prob, color = t, group = t ))+
+  ylab("Sub utterance probability")+
+  geom_line()
+```
+
+###  N(-1,1) and super N(0, 1)
+
+Explaining speaker production probabilities for sub: N(-1,1) and super N(0, 1) [same variance, sub has lower mean]. Let's call these LOW and HIGH
+
+- *Comparison class fixed to "HIGH"*
+  - When threshold is very low, and the state is low, you say the *LOW* (because it is more likely to be true of the subclass, because it has lower mean)
+    - As the state increases, more likely to say *HIGH* or *ambiguous* (since class = "super", *HIGH* and *ambiguous* have the same effect)
+  - As the threshold increases, speaker more likely to say *LOW* for higher states than before. 
+    - This is because the utterance becomes more informative for the LOW distribution. This trades off with the prior probability of the state under the LOW distribution and the rising informativity under the HIGH distribution.
+
+Pragmatic listener inferences
+  - Prefers subordinate (because it would be more informative)
+    - an L0 model with the same priors and points of uncertainty (cc, threshold, state), arrives at the opposite conclusion (because it's more likely that the taller thing is above a threshold)
+    
+#### S1: Marginalize out theta
+
+Note that "ambiguous" serves the same function as whatever comparison class you're in. 
+So given the super comparison class, if you heard the ambiguous utterance, you would end up thinking the meaning was the same as "super utterance". 
+
+```{r}
+rs.marginal <- rs.tidy %>%
+  group_by(c, s, form, explClass) %>%
+  summarize(marginalProb = mean(prob))
+
+#save(rs.marginal, file = "../writing/paper/cached_results/S1_marginalizeOutTheta.RData")
+
+
+ggplot(rs.marginal, aes( x = s, y = marginalProb, color = form, lty = explClass))+
+  #stat_function(fun = dnorm, n = 101, args = list(mean = 1, sd = 0.5), inherit.aes = F,
+#                linetype = 4) +
+  geom_area(stat = "function", fun = dnorm, args = list(mean = 1, sd = 0.5),
+            fill = "black", xlim = c(-3, 3), alpha = 0.3, inherit.aes = F) +
+  geom_line(position = position_dodge(0.3))+
+  scale_color_solarized()+
+  scale_linetype_manual(values = c(1,5, 3))+
+  facet_wrap(~c)#+
+  #xlim(-1.8, 1)
+```
+
+If the cc was *SUPER* (or *HIGH*, in this case), the meaning is the same as saying "super", which is only likely to be prduced near the high end of the scale (because of the logic spelled out above). But, our prior tells us that we are in the subordinate class. which in this case puts us near the low-end of the scale. If that were the case, the speaker would have said "subUtt", but he didn't. So if instead, we are in the subo class, "ambiguous" means the same thing as "subUtt", which is likely to be produecd in the region we know to be the case (the low end of the scale). 
+    
+    
+Note: The following assumes a uniform prior on the state. Really you want to marginalize out the state variable according to its prior (which should favor the sub)
+```{r}
+rs.marginal2 <- rs.tidy %>%
+  group_by(c, utt) %>%
+  summarize(marginalProb = mean(prob)) %>%
+  ungroup() %>%
+  rename(cc = c)
+
+
+ggplot(rs.marginal2, aes( x = cc, y = marginalProb, fill = utt, group = utt))+
+    geom_bar(stat = 'identity', position = position_dodge())+
+    scale_fill_solarized()+ ylim(0,1)
+```
+
+
+###  N(0,0.5) and super N(0, 1)
+   
+   
+Speaker 1 model
+
+- *Comparison class fixed to "SUPER"*
+  - When threshold is very low, and the state is low, you say the *LOW* (because it is more likely to be true of the subclass, because it has lower mean)
+    - As the state increases, more likely to say *HIGH* or *ambiguous* (since class = "super", *HIGH* and *ambiguous* have the same effect)
+  - As the threshold increases, speaker more likely to say *LOW* for higher states than before. 
+    - This is because the utterance becomes more informative for the LOW distribution. This trades off with the prior probability of the state under the LOW distribution and the rising informativity under the HIGH distribution.
+
+
+Notes from Skype meeting with MLB
+
+- Marginal distribution on utterances, marginalizing out listener's prior ("sub") could be illustrative
+- Is there a speaker task to run? 
+  - Good manipulation might be people who both grew up in different states (temperatures)
+  
+
+```{r}
+speaker.subUttThreshold <- rs.wp %>%
+  filter(subUtt <0.25) %>%
+  group_by(t) %>%
+  summarize(uttThreshold = max(s))
+
+ggplot(speaker.subUttThreshold, aes( x = t, y = uttThreshold))+
+  geom_point()
+```
+
+
+
+## Speaker 2 simulations
+
+
+
+```{r}
+rs2.wp <- webppl(paste(utils, prior, language, rsa, s2calls, sep = '\n'))
+
+rs2.tidy <- rs2.wp %>%
+  gather(utt, prob, superUtt, subUtt, ambiguous)
+
+ggplot(rs2.tidy, aes( x = s, y = prob, color = utt, lty = utt))+
+  geom_line(position = position_dodge(0.3))+
+  scale_color_solarized()+
+  xlim(-2, 3)
+```
+
+utility fn in continuous space: partial credit

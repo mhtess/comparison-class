@@ -222,21 +222,27 @@ Thus, the speaker conditioning on a particular value for $c_{i}$ only has implic
 Should the speaker instead choose an utterance that explicitly articulates the comparison class (e.g., "It's warm for winter"), the literal listener will use the explicit class to set his prior expectations $P(x \mid c)$ via the $\text{parseClass}$ operator.
 
 
-```{r speakerSimulations, fig.width=6, fig.cap='Speaker model behavior assuming different comparison classes. The underspecified utterance ("warm") takes on the same meaning of the explicit utterance whose comparison class is the same as the implicit class (e.g., if the speaker is using the (for winter) comparison class, "warm" means the same thing as "warm for winter"). When the speaker is assuming winter is the comparison class, when the temperture is low, she will say "warm" or "warm for winter", but if the temperature is relatively high, she will only say "warm for the year". When the speaker is assuming the year is the comparison class, and the temperature is relatively low, she will say "warm for winter". The listener believes temperature is relatively low (believes it is winter), and inverts this model of speaker to conclude that the implicit comparison class was winter. The specific class in this example (winter) is a Normal distribution centered at -1, and the general class (the year) is a Normal centered at 0.', fig.asp = 0.4}
+```{r speakerSimulations, fig.width=7, fig.cap='Speaker model behavior assuming different comparison classes. The underspecified utterance ("warm") takes on the same meaning of the explicit utterance whose comparison class is the same as the implicit class (e.g., if the speaker is using the (for winter) comparison class, "warm" means the same thing as "warm for winter"). When the speaker is assuming winter is the comparison class, when the temperture is low, she will say "warm" or "warm for winter", but if the temperature is relatively high, she will only say "warm for the year". When the speaker is assuming the year is the comparison class, and the temperature is relatively low, she will say "warm for winter". The listener believes temperature is relatively low (believes it is winter), and inverts this model of speaker to conclude that the implicit comparison class was winter. The specific class in this example (winter) is a Normal distribution centered at -1, and the general class (the year) is a Normal centered at 0.', fig.asp = 0.4}
 load("cached_results/S1_marginalizeOutTheta.RData") # rs.marginal
+
 rs.marginal %>%
   ungroup() %>%
   mutate(c = factor(c, levels = c("sub", "super"),
                     labels = c("(for winter)", "(for the year)")),
-         utterance = factor(utt, levels = c("ambiguous", "subUtt", "superUtt"),
-                      labels = c('"warm"', '"warm for winter"', '"warm for the year"'))) %>%
-ggplot(., aes( x = s, y = marginalProb, color = utterance, lty = utterance))+
-  geom_line(position = position_dodge(0.3), size = 1.5)+
-  scale_color_manual(values = c("#404040",
-                                "#2c7bb6","#d7191c"))+
+         uttered_class = factor(explClass, levels = c("imp", "sub", "super"),
+                      labels = c('[implicit]', '"...for winter"', '"...for the year"')),
+         adjective = factor(form, levels = c("positive", "negative"),
+                            labels = c("warm", "cold"))) %>%
+ggplot(., aes( x = s, y = marginalProb, color = adjective, lty = uttered_class))+
+  geom_line(position = position_dodge(0.3), size = 1)+
+  scale_color_manual(values = c(#"#404040",
+    "#d7191c","#2c7bb6"))+
   facet_wrap(~c)+
+  geom_area(stat = "function", fun = dnorm, args = list(mean = -1, sd = 1),
+            fill = "black", xlim = c(-3, 3), alpha = 0.3, inherit.aes = F) +
   scale_y_continuous( limits = c(0, 1), breaks = c(0, 0.5, 1))+
-  scale_x_continuous( limits = c(-1.8, 1.8), breaks = c(-1.5, 0, 1.5))+
+  #scale_x_continuous( limits = c(-1.8, 1.8), breaks = c(-1.5, 0, 1.5))+
+  scale_linetype_manual(values = c(1,5, 3))+
   xlab("Temperature (normalized units)")+
   ylab("Speaker production probability")
 ```
