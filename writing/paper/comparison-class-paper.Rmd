@@ -222,18 +222,6 @@ c_{super} & \text{if } u = u_{super}\\
 Thus, the speaker conditioning on a particular value for $c_{i}$ only has implications for the literal listener if the speaker chooses to produce the implicit utterance (e.g., "It's warm").
 Should the speaker instead choose an utterance that explicitly articulates the comparison class (e.g., "It's warm for winter"), the literal listener will use the explicit class to set his prior expectations $P(x \mid c)$ via the $\text{parseClass}$ operator.
 
-To understand the model behavior, consider the speaker model $S_1$ under different assumptions about the implicit comparison class: $S_{1}(u \mid x, \theta, c_i = c_{sub})$ and  $S_{1}(u \mid x, \theta, c_i = c_{super})$.
-For illustrative purposes, the speaker model can produce sutterancs with adjectives of both the positive and negative forms (e.g., *warm* and *cold*).^[
-  Following standard treatment of antonyms, the semantics of cold are a threshold function on a distinct threshold variable: $[\![u_{cold}]\!] = x < \theta_{cold}$), which is also inferred via the pragmatic listener (i.e., the listener infers a threshold for both *warm* and *cold*).
-  The pragmatic inferences concerning the comparison class we describe in this paper are invariant to whether or not the antonym is included in the alternative set. 
-  The comparison class inference is also invariant to whether or not the antonym gets assigned its own unique threshold ($\theta_{cold}$), as well as whether or not the utterances with explicit comparison classes get assigned their own thresholds.
-]
-Figure\ \@(fig:speakerSimulations) shows the speaker production probabilities of the six possible utterances for each value along the degree scale (e.g., each temperature), and assuming the two different possible implicit classes.
-The utterance with an implicit class takes on the same meaning as the utterance with the corresponding explicit class (i.e., if $c_{i} = c_{sub}$, then $u_i$ has the same informational content as $u_{sub}$).
-Thus, reasoning about the likely comparison class reduces to reasoning about which explicit utterance the speaker would have been more likely to say.
-For temperatures that are relatively low (e.g., temperatures in winter; roughly $x < -0.5$), the speaker will want to say the utterance with the subordinate class (e.g, "warm for winter") or the implicit utterance (e.g., "warm") if the implicit class is the subordinate class.
-
-
 
 ```{r speakerSimulations, fig.width=7, fig.cap='Speaker model behavior assuming different comparison classes. The underspecified utterance ("warm") takes on the same meaning of the explicit utterance whose comparison class is the same as the implicit class (e.g., if the speaker is using the (for winter) comparison class, "warm" means the same thing as "warm for winter"). When the speaker is assuming winter is the comparison class, when the temperture is low, she will say "warm" or "warm for winter", but if the temperature is relatively high, she will only say "warm for the year". When the speaker is assuming the year is the comparison class, and the temperature is relatively low, she will say "warm for winter". The listener believes temperature is relatively low (believes it is winter), and inverts this model of speaker to conclude that the implicit comparison class was winter. The specific class in this example (winter) is a Normal distribution centered at -1, and the general class (the year) is a Normal centered at 0.', fig.asp = 0.4}
 load("cached_results/S1_marginalizeOutTheta.RData") # rs.marginal
@@ -260,33 +248,85 @@ ggplot(., aes( x = s, y = marginalProb, color = adjective, lty = uttered_class))
   ylab("Speaker production probability")
 ```
 
+### Qualitative model predictions
+
+To understand the model behavior, consider the speaker model $S_1$ under different assumptions (by the listener) about the implicit comparison class: $S_{1}(u \mid x, \theta, c_i = c_{sub})$ and  $S_{1}(u \mid x, \theta, c_i = c_{super})$.
+For illustrative purposes, we will assume the speaker model can produce utterances with adjectives of both the positive and negative forms (e.g., *warm* and *cold*).^[
+  Following standard treatment of antonyms, the semantics of "cold" are a threshold function on a distinct threshold variable: $[\![u_{cold}]\!] = x < \theta_{cold}$), which is also inferred via the pragmatic listener (i.e., the listener infers a threshold for both "warm" and "cold").
+  The pragmatic inferences about the comparison class that are the focus of this paper are invariant to whether or not the antonym is included in the alternative set. 
+  The comparison class inferences are also invariant to whether or not the antonym gets assigned its own unique threshold ($\theta_{cold}$), as well as whether or not the utterances with explicit comparison classes get assigned their own thresholds (e.g., a $\theta_{warm}^{sub}$ and $\theta_{warm}^{super}$).
+]
+Figure \ref{fig:speakerSimulations} shows the speaker production probabilities of the six possible utterances for each value along the degree scale (e.g., each temperature) for the two different implicit classes.
+The utterance which does not reference a class (e.g., "It's warm") inherits the same meaning as the utterance with the explicit class that matches the assumed implicit class (i.e., if $c_{i} = c_{sub}$, then $u_i$ has the same meaning as $u_{sub}$).
+Therefore, reasoning about the likely comparison class reduces to reasoning about which explicit utterance the speaker would have been more likely to say.
+If the subordinate class in question is "winter", the speaker will want to produce utterances with the subordinate class when the temperatures are typical winter temperaturess (e.g., roughly $x < -0.5$).
+Since the implicit utterance given a particular implicit class takes on the same meaning as an explicit utterance, the speaker will be likely to produce implicit utterances when the implicit class is the subordinate.
+Thus, there is an overall preference for speakers to have meant something about the subordinate class.
+
+A listener who hears either "it's warm outside" or "it's cold outside", however, will draw different inferences about the comparison class.
+Since the listener knows it's winter, the temperature is likely to be relatively low; "it's warm outside" is much more likely to be true if it's "warm for winter" than if it's actually "warm for the year".
+The utterance "it's cold outside" is predicted to be far more ambiguous, because a cold day in winter is also very likely to be cold for the year. 
+In general, hearing a positive-form adjective ("warm") when the mean of the subordinate class is low (e.g., temperatures in winter) will signal the subordinate class  (warm *for winter*) more so than hearing the negative-form ("it's cold"; Prediction 1).
+All else being equal, however, listeners will prefer lower variance (e.g., subordinate) comparison classes because they are more informative (Prediction 2).
+Figure \ref{fig:modelSchematics} (right) shows that subordinate class interpretations are above baseline regardless of the adjective polarity (positive or negative) or the mean of the subordinate prior (low, medium, high).
+
+In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the subordinate category.
+We test these two predictions in our first experiment.
 
 
-
-The pragmatic listener's reasoning about implicit comparison class thus corresponds to reasoning about the intended   
-
-Then, we can consider only the difference in speaker production probability between $u_{specific}$ and $u_{general}$.
-
-A speaker's choice of what to say will depend upon the value of the degree $x$ and the threshold $\theta$ he is using, as well as the prior distributions over the degree $P(x \mid c)$ for each class $c_{sub}$ and $c_{super}$.
-Consider the relative temperatures for the year ($c_{sub}$) and for winter ($c_{super}$) in a part of the world that exhibits seasons (e.g., Virginia, USA). 
-Let's say in this case that $P(x \mid c_{general} = \mathcal{N}(0, 1)$ and $P(x \mid c_{specific} = \mathcal{N}(-1, 0.5)$,
-
-The comparison class (either the implicit or explicitly defined) does a lot of work here: It changes the literal listener's prior distribution on the degrees.
-
-Because the meaning of the implicit utterance takes on the same meaning as the explicit utterance with the appropriate comparison class, 
-
-The pragmatic listener's reasoning about the alternative utterances 
-
-who hears the implicit positive adjective (e.g., "warm") reasons about both why the speaker didn't say the explicit
+Second, the amount of information conveyed by a vague utterance depends upon the variability in the comparison class.
+Comparison classes that have higher variance will result in relatively less information gain by the listener.
 
 
-when the specific class falls below the general class (e.g., in winter) will infer the speaker was using the specific comparison class (i.e., the speaker meant "warm for winter").
+<!-- The listener who hears "it's warm"  -->
+<!-- Now, if the listener knows it is winter, then the temperature is probably in the low end of the scale, in which case the speaker would have been likely to have said  -->
 
-For temperatures that are relatively high (e.g., temperatures in summer; roughly $x > 0.5$), the speaker will want to say the utterance with the general comparison class (e.g, "warm for the year").
-The pragmatic listener who hears the implicit positive adjective (e.g., "warm") when the specific class falls below the general class (e.g., in winter) will infer the speaker was using the specific comparison class (i.e., the speaker meant "warm for winter").
+<!-- \mht{re-run speaker model with different thresolds (does it even make sense, given that this is an S1?)} -->
+
+<!-- \mht{speaker model will be Part A. listener model given "warm" or "cold" in winter will be B. Currently Figure 2 will be part C.} -->
+
+<!-- <!-- For purposes of illustration, assume that each class is equally likely *a priori*: $P(c_{sub}) = 0.5$. --> -->
+<!-- Figure \ref{fig:modelSchematics} (left) shows schematic superordinate and subordinate priors; e.g., temperatures over the whole year (super), in winter (low), fall (medium), and summer (high). -->
+<!-- The subordinate distributions have lower variance than the superordinate, and the "low" and "high" distributions have different means (e.g., temperatures in winter are expected to be lower and have lower variance than temperatures over the whole year). -->
+
+<!-- Two intuitions explain the inferences of the pragmatic listener model (shown in Figure \ref{fig:modelSchematics} right).  -->
+<!-- First, certain classes are more or less likely to have an adjective felicitously apply. -->
+<!-- For example, any given day in winter is *less* likely to be warm than cold. -->
 
 
-The predictions of this model depend on the details of the listener's knowledge of the subordinate and superordinate categories: $P(x \mid c_{sub})$ and $P(x \mid c_{super})$, as well as the prior distribution on comparison classes $P(c)$ in Eq. \ref{eq:L1a}.
+<!-- For example, regardless of the season, a listener should prefer "warm" or "cold" to be *relative to the current season* (a relatively specific class) as it is more informative than warm *relative to the whole year* (a relatively general class; Prediction 2). -->
+<!-- Consistent with the intuitive pragmatic logic in the introduction, Figure \ref{fig:modelSchematics} (right) shows that during Winter, the pragmatic listener upon hearing "it's warm" (positive adjective) thinks it's more likely that it's warm relative to days in Winter than when she hears "it's cold"  -->
+<!-- The pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class because it is more informative (Prediction 2). -->
+
+<!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
+<!--A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.-->
+
+
+<!-- The pragmatic listener's reasoning about implicit comparison class thus corresponds to reasoning about the intended    -->
+
+<!-- Then, we can consider only the difference in speaker production probability between $u_{specific}$ and $u_{general}$. -->
+
+<!-- A speaker's choice of what to say will depend upon the value of the degree $x$ and the threshold $\theta$ he is using, as well as the prior distributions over the degree $P(x \mid c)$ for each class $c_{sub}$ and $c_{super}$. -->
+<!-- Consider the relative temperatures for the year ($c_{sub}$) and for winter ($c_{super}$) in a part of the world that exhibits seasons (e.g., Virginia, USA).  -->
+<!-- Let's say in this case that $P(x \mid c_{general} = \mathcal{N}(0, 1)$ and $P(x \mid c_{specific} = \mathcal{N}(-1, 0.5)$, -->
+
+<!-- The comparison class (either the implicit or explicitly defined) does a lot of work here: It changes the literal listener's prior distribution on the degrees. -->
+
+<!-- Because the meaning of the implicit utterance takes on the same meaning as the explicit utterance with the appropriate comparison class,  -->
+
+<!-- The pragmatic listener's reasoning about the alternative utterances  -->
+
+<!-- who hears the implicit positive adjective (e.g., "warm") reasons about both why the speaker didn't say the explicit -->
+
+
+<!-- when the specific class falls below the general class (e.g., in winter) will infer the speaker was using the specific comparison class (i.e., the speaker meant "warm for winter"). -->
+
+<!-- For temperatures that are relatively high (e.g., temperatures in summer; roughly $x > 0.5$), the speaker will want to say the utterance with the general comparison class (e.g, "warm for the year"). -->
+<!-- The pragmatic listener who hears the implicit positive adjective (e.g., "warm") when the specific class falls below the general class (e.g., in winter) will infer the speaker was using the specific comparison class (i.e., the speaker meant "warm for winter"). -->
+
+
+<!-- The predictions of this model depend on the details of the listener's knowledge of the subordinate and superordinate categories: $P(x \mid c_{sub})$ and $P(x \mid c_{super})$, as well as the prior distribution on comparison classes $P(c)$ in Eq. \ref{eq:L1a}. -->
+
 
 
 ### Comparison class prior
@@ -303,6 +343,29 @@ Due to potential polysemy and idiosyncracies of our experimental materials (Tabl
 Only the relative values for $P(x \mid c_{sub})$ and $P(x \mid c_{super})$ affect model predictions.
 Hence we fix each superordinate distribution to be a standard normal distribution $P(x \mid c_{super}) = \mathcal{N}(0, 1)$ and the subordinate priors to also be Gaussian distributions $P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})$; the subordinate priors thus have standardized units. 
 We will eventually infer the parameters of the subordinate priors from experimental data.
+
+
+### Overview of data analytic approach
+
+As described above, specifying the relevant prior knowledge yields two free parameters per subordinate class.
+We will put priors over these parameters and infer their likely values using Bayesian data analysis.
+The data from the comparison class experiment (Expt. 1) would be insufficient, however, to reliably estimate all of the parameters of this data analytic model. 
+To alleviate this, we use the same RSA model to predict additional data about related language use in the same domains (Expt. 2).
+Specifically, we gather judgments about adjectives when the comparison class is explicit: whether or not an adjective would apply to a subordinate member explicitly relative to the superordinate category (e.g., Is a day in winter warm relative to other days of the year?).
+
+To model Expt. 2 data, we remove comparison class uncertainty by setting $P(c_{super}) = 1$, since the sentences provide an explicit comparison to the superordinate class.
+We model sentence endorsement using a pragmatic speaker [following @Qing2014a; @Tessler2016; @Tessler2016cogsci]:
+\vspace{-0.5cm}
+\begin{align}
+S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{c_{sub}}} \ln{L_1(x \mid u)})} \label{eq:S2}
+\end{align}
+\noindent Note that $L_1(x \mid u)$ is defined from Eq. \ref{eq:L1a} by marginalization.
+
+Eqs. \ref{eq:L1a} and \ref{eq:S2} define models for the data we will gather from Expts. 1 and 2, and depend on the same background knowledge $P(x\mid c)$.
+We can thus use data from both experiments to jointly reconstruct the shared prior knowledge and generate predictions for the two data sets.
+Experimental paradigms, computational models, preregistration report, and data for this paper can be found at \url{https://mhtess.github.io}.
+
+
 
 ```{r wpplHelpers}
 webpplHelpers <- '
@@ -781,7 +844,6 @@ vs.bayes <- left_join(d, d.catch %>% select(workerid, pass)) %>%
 
 ```
 
-### Qualitative model predictions
 
 ```{r stim_table, results="asis"}
 height_sub = c("(professional) gymnast, soccer player, basketball player")
@@ -816,49 +878,8 @@ print(xtable(table.1,
       comment = F)
 ```
 
-<!-- For purposes of illustration, assume that each class is equally likely *a priori*: $P(c_{sub}) = 0.5$. -->
-Figure \ref{fig:modelSchematics} (left) shows schematic superordinate and subordinate priors; e.g., temperatures over the whole year (super), in winter (low), fall (medium), and summer (high).
-The subordinate distributions have lower variance than the superordinate, and the "low" and "high" distributions have different means (e.g., temperatures in winter are expected to be lower and have lower variance than temperatures over the whole year).
 
-Two intuitions explain the inferences of the pragmatic listener model (shown in Figure \ref{fig:modelSchematics} right). 
-First, certain classes are more or less likely to have an adjective felicitously apply.
-For example, any given day in winter is *less* likely to be warm than cold.
-Thus, hearing "it's warm" (a positive-form adjective) in winter (low prior) will signal it's warm *for winter* (the subordinate class) more so than hearing "it's cold" (negative-form), because it's more likely to be true (Prediction 1).
 
-Second, the amount of information conveyed by a vague utterance depends upon the variability in the comparison class.
-Comparison classes that have higher variance will result in relatively less information gain by the listener.
-All else being equal, listeners will prefer lower variance (e.g., subordinate) comparison classes because they are more informative (Prediction 2).
-Figure \ref{fig:modelSchematics} (right) shows that subordinate class interpretations are above baseline regardless of the adjective polarity (positive or negative) or the mean of the subordinate prior (low, medium, high).
-
-In sum, we see two predictions: The pragmatic listener overall prefers subordinate comparison classes, though the extent of this preference is modulated by the *a priori* probability that the adjective is true of the subordinate category.
-We test these two predictions in our first experiment.
-
-<!-- For example, regardless of the season, a listener should prefer "warm" or "cold" to be *relative to the current season* (a relatively specific class) as it is more informative than warm *relative to the whole year* (a relatively general class; Prediction 2). -->
-<!-- Consistent with the intuitive pragmatic logic in the introduction, Figure \ref{fig:modelSchematics} (right) shows that during Winter, the pragmatic listener upon hearing "it's warm" (positive adjective) thinks it's more likely that it's warm relative to days in Winter than when she hears "it's cold"  -->
-<!-- The pragmatic listener (Eq. \ref{eq:L1a}) prefers the more specific comparison class because it is more informative (Prediction 2). -->
-
-<!--This comes from the vagueness of adjectives: The meaning of the adjective in context depends upon the prior; a prior with less variance will result in a relatively more precise meaning.-->
-<!--A warm day in Summer could be warm for Summer, or warm for the year, while a cold day in Summer is much more likely to be cold for Summer.-->
-
-### Overview of data analytic approach
-
-As described above, specifying the relevant prior knowledge yields two free parameters per subordinate class.
-We will put priors over these parameters and infer their likely values using Bayesian data analysis.
-The data from the comparison class experiment (Expt. 1) would be insufficient, however, to reliably estimate all of the parameters of this data analytic model. 
-To alleviate this, we use the same RSA model to predict additional data about related language use in the same domains (Expt. 2).
-Specifically, we gather judgments about adjectives when the comparison class is explicit: whether or not an adjective would apply to a subordinate member explicitly relative to the superordinate category (e.g., Is a day in winter warm relative to other days of the year?).
-
-To model Expt. 2 data, we remove comparison class uncertainty by setting $P(c_{super}) = 1$, since the sentences provide an explicit comparison to the superordinate class.
-We model sentence endorsement using a pragmatic speaker [following @Qing2014a; @Tessler2016; @Tessler2016cogsci]:
-\vspace{-0.5cm}
-\begin{align}
-S_{2}(u \mid c_{sub}) &\propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{c_{sub}}} \ln{L_1(x \mid u)})} \label{eq:S2}
-\end{align}
-\noindent Note that $L_1(x \mid u)$ is defined from Eq. \ref{eq:L1a} by marginalization.
-
-Eqs. \ref{eq:L1a} and \ref{eq:S2} define models for the data we will gather from Expts. 1 and 2, and depend on the same background knowledge $P(x\mid c)$.
-We can thus use data from both experiments to jointly reconstruct the shared prior knowledge and generate predictions for the two data sets.
-Experimental paradigms, computational models, preregistration report, and data for this paper can be found at \url{https://mhtess.github.io}.
 
 ```{r load_model_results, cache = T}
 load(paste(
