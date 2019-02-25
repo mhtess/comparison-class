@@ -294,7 +294,7 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0","instructions"];
-  exp.structure = [];
+  // exp.structure = [];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
