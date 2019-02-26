@@ -26,3 +26,6 @@ models/sherlock/node_modules/utils/node_modules/
 models/sherlock/results/trash/
 models/sherlock/results/
 *.synctex.gz
+*.ttt
+*.fff
+writing/paper/comparison-class-paper.pdf
