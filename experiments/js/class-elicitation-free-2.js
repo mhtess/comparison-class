@@ -133,6 +133,97 @@ function makeSlides(f) {
     });
   }
 
+
+    slides.memory_check = slide({
+      name : "memory_check",
+      start: function() {
+      $(".err").hide()
+      console.log(exp.memory_properties)
+
+       this.tested_properties = _.map(exp.memory_properties, function(x){
+         return x.target + " " + x.sub_singular
+       })
+       console.log(this.tested_properties)
+
+
+       this.catch_properties = [
+         "huge umbrella",
+         "boisterous teenager",
+         "flowing fields",
+         "ostentatious bike",
+         "miniscule bug"
+       ]
+
+       this.check_properties = _.shuffle(_.flatten([this.tested_properties, this.catch_properties]))
+
+       // clear the former content of a given <div id="memory_checkboxes"></div>
+       document.getElementById('memory_checkboxes').innerHTML = '';
+
+  	for (i=0;i<this.check_properties.length;i++){
+         // create the necessary elements
+         var label= document.createElement("label");
+         var description = document.createTextNode(this.check_properties[i]);
+         var checkbox = document.createElement("input");
+
+         checkbox.type = "checkbox";    // make the element a checkbox
+         checkbox.name = "slct1";      // give it a name we can check on the server side
+         checkbox.value = this.check_properties[i];         // make its value "pair"
+
+         label.appendChild(checkbox);   // add the box to the element
+         label.appendChild(description);// add the description to the element
+
+         // add the label element to your div
+         document.getElementById('memory_checkboxes').appendChild(label);
+         document.getElementById('memory_checkboxes').appendChild(document.createElement("br"));
+
+       }
+     },
+      button : function() {
+        if ($("#explanation").val() == "") {
+          $(".err").show()
+        } else {
+          var checked_options = new Array();
+          var unchecked_options = new Array();
+
+          $.each($("input[name='slct1']:checked"), function() {
+            checked_options.push($(this).val());
+          });
+
+          $.each($("input[name='slct1']:not(:checked)"), function() {
+            unchecked_options.push($(this).val());
+          });
+
+          for (i=0;i<this.check_properties.length;i++){
+            var p = this.check_properties[i];
+            var tested_on = this.tested_properties.indexOf(p) > -1 ? 1 : 0;
+            var response = checked_options.indexOf(p) > -1 ? 1 : 0;
+            exp.catch_trials.push({
+              condition: "memory_check",
+              check_index: i,
+              property: p,
+              tested_on: tested_on,
+              response: response,
+              correct: (tested_on == response) ? 1 : 0
+            })
+          }
+
+          exp.catch_trials.push({
+            condition: "explanation",
+            check_index: -1,
+            property: $("#explanation").val(),
+            tested_on: -1,
+            response: -1,
+            correct: -1
+          })
+
+          exp.go(); //use exp.go() if and only if there is no "present" data.
+        }
+
+      }
+    });
+
+
+
   slides.subj_info =  slide({
     name : "subj_info",
     submit : function(e) {
@@ -185,7 +276,7 @@ function init() {
   exp.examples = getUniqueTrials(examples);
 
   // one trial for each unique target-context pair
-  exp.trials = exp.examples.length;
+  exp.trials = 12//exp.examples.length;
   $(".display_trials").html(exp.trials);
 
   // sample a phrase for this particular instance
@@ -231,6 +322,7 @@ function init() {
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
+  exp.structure.push("memory_check")
   exp.structure.push("subj_info");
   exp.structure.push("thanks");
 
@@ -243,6 +335,9 @@ function init() {
   // embed the slides
   // embedCE2AFCSlides(exp.trials);
   embedCEPSlides(exp.trials);
+
+
+  exp.memory_properties = _.shuffle(exp.examples).slice(0, 5)
 
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
