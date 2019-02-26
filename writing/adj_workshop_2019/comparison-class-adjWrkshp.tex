@@ -1,0 +1,175 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage[]{graphicx}
+\usepackage[]{color} % use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                     % ... or a4paper or a5paper or ... 
+\usepackage[notocbib]{apacite}
+%\usepackage{subfigure}
+%\usepackage{alltt}
+%\usepackage{etex}     
+%\usepackage{amsfonts, amsmath, amssymb, latexsym, mathrsfs, fancyhdr,theorem,  pifont, setspace, verbatim,  qtree, lscape, tipa, linguex, hyperref, wasysym, stmaryrd, natbib,soul, minibox, lipsum, setspace, amssymb, color, multirow, multicol, soul,geometry,graphicx, wrapfig,gb4e,booktabs}
+%\usepackage[T1]{fontenc}
+%\usepackage{times}
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+\geometry{hmargin={1in,1in},vmargin={1in,1in}}
+\definecolor{Red}{RGB}{255,0,0}
+\graphicspath{{../paper/figs/}}
+\usepackage{amssymb,amsmath}
+\usepackage{gensymb}
+\usepackage{csquotes}
+\newcommand{\denote}[1]{\mbox{ $[\![ #1 ]\!]$}}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{caption}
+\usepackage{wrapfig}
+\usepackage{pslatex}
+\usepackage{apacite}
+\usepackage{amsmath}
+\usepackage{float} % Roger Levy added this and changed figure/table
+                   % placement to [H] for conformity to Word template,
+                   % though floating tables and figures to top is
+                   % still generally recommended!
+
+%\title{Brief Article}
+%\author{Authors}
+%\date{ % Activate to display a given date or no date
+
+
+\begin{document}
+\begin{center}
+\textbf{Comparison class inference}
+\end{center}
+
+
+
+
+
+
+A 75 \degree F (24 \degree C) day is warm.
+A 60 \degree F (16 \degree C) day is not, unless it's January; it could be warm for January.
+\emph{Warm} is relative, and its felicity depends upon what the speaker uses as a basis of comparison---the \emph{comparison class} (e.g., other days of the year or other days in January).
+Comparison classes are necessary for understanding adjectives and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers \cite<e.g., ``He ate a lot of burgers''; >{Scholler2017} and generic language \cite<e.g., ``Dogs are friendly''; >{Tessler2019psychrev}.
+%Deciding on the relevant comparison class is a case study in the larger question of inferring the appropriate aspects of context for interpreting an utterance.
+Comparison classes, as with relevant aspects of context more generally, often go unsaid (e.g., in ``It's warm outside'').
+
+How do listeners decide on the appropriate comparison class? 
+Any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes: 
+A day in January is also a day of the year; if a listener hear \enquote{It's warm}, it could be \emph{warm for the week}, \emph{warm for winter}, or \emph{warm for the year}.\footnote{It could also be \emph{warm for Boston}, \emph{warm for the northeast USA}, \emph{warm for a place with currently six inches of snow on the ground}, among many more possibilities.} 
+In this project, we investigate the first aspect of this problem: deciding among multiple plausible, conceptual comparison classes. 
+Theoretical work in semantics has focused on how information from the comparison class gets integrated with a compositional semantics and what representations might be preferred \cite{Bale2011, Solt2009}. 
+To our knowledge, the question of how listeners reconstruct a comparison class in under-supported contexts (e.g., just hearing \enquote{It's warm outside}) has been addressed neither formally nor empirically.
+
+\begin{wrapfigure}{r}{0.75\textwidth}
+%\vspace{-1cm}
+  \begin{center}
+    \includegraphics[width=0.75\textwidth]{speakerSimulations-1}
+  \end{center}
+%  \vspace{-0.45cm}
+  \caption{\small 
+%  Speaker model behavior assuming
+%different comparison classes. The underspecified utterance
+%(\enquote{warm}) takes on the same meaning of the explicit utterance
+%whose comparison class is the same as the implicit class (e.g., if the
+%speaker is using the (for winter) comparison class, \enquote{warm} means
+%the same thing as \enquote{warm for winter}). When the speaker is
+%assuming winter is the comparison class, when the temperture is low, she
+%will say \enquote{warm} or \enquote{warm for winter}, but if the
+%temperature is relatively high, she will only say \enquote{warm for the
+%year}. When the speaker is assuming the year is the comparison class,
+%and the temperature is relatively low, she will say \enquote{warm for
+%winter}. The listener believes temperature is relatively low (believes
+%it is winter), and inverts this model of speaker to conclude that the
+%implicit comparison class was winter. The specific class in this example
+%(winter) is a Normal distribution centered at -1, and the general class
+%(the year) is a Normal centered at 0.
+A: Given plausible temperatures in winter (grey distribution), a speaker who assumed the comparison class was \emph{the year} (right facet) would say ``warm for winter'' for typical \emph{warm for winter} temperatures. B: A pragmatic listener who hears on ``it's warm'' during winter reasons that the speaker's comparison class was \emph{winter}.
+  }
+  \label{fig:incremental}
+\end{wrapfigure}
+
+
+We propose that listeners combine probabilistic, category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker. 
+This proposal leads to the following prediction: When it is winter, saying \enquote{it's warm} signals that it is \emph{warm for winter}, while saying \enquote{it's cold} signals \emph{cold for the year}. 
+The opposite relationship should hold in summer, where \enquote{it's cold} should signal it's cold \emph{for summer} more so than \enquote{it's warm}. 
+This prediction is a result of the \emph{a priori} probability of different temperatures in different seasons: In winter, temperatures are relatively low, and thus it is unlikely to actually be \emph{warm for the year}. 
+In addition, regardless of the season and the adjective (e.g., \enquote{warm} or \enquote{cold}), listeners prefer comparison classes that are relatively specific (e.g., relative to \emph{the current season} as opposed to \emph{the whole year}); more specific comparison classes have lower variance, and a vague adjectives like \emph{warm} carries more information when it is interpreted with respect to a lower variance comparison class. 
+These predictions fall out of a Rational Speech Act (RSA) model for gradable adjectives \cite{Lassiter2015}, extended to flexibly reason about the implicit comparison class. 
+We test these predictions in two experiments by eliciting the comparison class using a forced-choice paraphrase dependent measure (Expt. 1) and a free-production dependent measure using an expanded stimulus set (Expt. 2).
+
+
+
+
+%When processing a conjunctive phrase, listeners may form expectations about the complete utterance even before the sentence is over. 
+%For example, when a speaker reaches the word \emph{and} in ``Elephants live in Africa \emph{and}'', she has two syntactically distinct options available to her when completing the sentence: She could continue with a noun phrase (e.g., ``and Asia'') or a verb phrase (e.g., ``and eat bugs'').
+%Each of these continuations would imply different inferences about the prevalence of elephants in Africa.\footnote{
+%	Of course, it is possible to continue with a verb phrase about a mutually exclusive property such as ``\ldots live in Africa and live in Asia'' as well as continue with a noun phrase about a non-mutually exclusive property (e.g., ``\ldots eat figs and nuts''). Our focus is on the fact that a speaker can continue the conjunction with a mutually exclusive or non-mutually exclusive property, which in the cases we consider, are highly correlated with NP~vs.~VP coordination.
+%}
+%If listeners parse and interpret utterances incrementally at the level of individual words, then we would expect their 
+
+\begin{figure}[t]
+%\vspace{-1cm}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{posteriorPredictiveScatters-1}
+  \end{center}
+  \vspace{-0.55cm}
+  \caption{\small Human endorsement of subordinate comparison class paraphrases (middle; Expt. 1) and adjective sentences (left; Expt. 2) as a function of listener model $L_1$ and speaker model $S_2$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\% Bayesian credible intervals.}
+  \label{fig:results}
+%    \vspace{-0.55cm}
+\end{figure}
+
+
+%\begin{wrapfigure}{r}{0.5\textwidth}
+%\vspace{-1cm}
+%  \begin{center}
+%    \includegraphics[width=0.48\textwidth]{expt2_summary}
+%  \end{center}
+%  \vspace{-1cm}
+%  \caption{\small Experiment 1 results.  Participants rate prevalence for mentioned property (\% live in Africa) and ``Property 2'', either the mutually exclusive property (left two bars) or non-mutually exclusive property (right two bars). ``\_\_'' indicates the question appears mid-sentence. Error-bars denote bootstrapped 95\% confidence intervals.}
+%  \label{fig:expt1}
+%\end{wrapfigure}
+
+
+
+%\begin{wrapfigure}{l}{0.5\textwidth}
+%\vspace{-1cm}
+%  \begin{center}
+%    \includegraphics[width=0.48\textwidth]{expt3_summary}
+%  \end{center}
+%  \caption{\small Experiment 2 results. Participants are interrupted at various stages of the sentence (either after \emph{Africa}, \emph{and}, or \emph{Asia}) to be asked about the prevalence of \emph{living in Africa} and \emph{living in some other place}, or asked at the end of the sentence (right-most bars). When participants are interrupted before the second conjunct (\emph{Asia}), the sentence continues with a non-mutually exclusive property. Error-bars denote bootstrapped 95\% confidence intervals.
+%}
+%\vspace{-1cm}
+%\label{fig:expt2}
+%\end{wrapfigure}
+
+
+
+%We tested the incremental prediction of the model that when participants only hear ``Elephants live in Africa and'', they will begin to anticipate a mutually-exclusive conjunct, and that this would manifest in their implied prevalence ratings being substantially less than when they only hear ``Elephants live in Africa''.
+
+
+
+
+
+\vspace{-0.1cm}
+
+\begingroup
+\renewcommand{\section}[2]{}
+\bibliographystyle{apacite}
+
+\setlength{\bibleftmargin}{.125in}
+\setlength{\bibindent}{-\bibleftmargin}
+
+\bibliography{../paper/comparison-class}
+\renewcommand\bibname{}
+\scriptsize
+%Extending an analysis of generics to handle complex-predicates poses unique challenges.
+%A sentence of the form ``Ks F and G'' introduces an ambiguity:
+%
+%\begin{enumerate}
+%\tightlist
+%\item $\denote{gen}(K) [F \land G]$
+%\item $\denote{gen}(K) [F] \land \denote{gen}(K) [G]$
+%\end{enumerate}
+\endgroup
+
+\end{document}
