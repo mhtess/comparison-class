@@ -174,7 +174,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-20170929-fp";
+      var ut_id = "mht-cc-201902-fp";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
