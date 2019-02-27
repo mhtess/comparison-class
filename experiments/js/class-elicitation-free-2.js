@@ -272,11 +272,12 @@ function init() {
         alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
       }
   })();
-  // generate all possible target-context pair combinations
-  exp.examples = getUniqueTrials(examples);
-
-  // one trial for each unique target-context pair
   exp.trials = 12//exp.examples.length;
+
+  // generate all possible target-context pair combinations
+  exp.examples = _.shuffle(getUniqueTrials(examples)).slice(0, exp.trials);
+  // console.log(exp.examples)
+  // one trial for each unique target-context pair
   $(".display_trials").html(exp.trials);
 
   // sample a phrase for this particular instance
@@ -338,7 +339,8 @@ function init() {
 
 
   exp.memory_properties = _.shuffle(exp.examples).slice(0, 5)
-
+  // console.log(exp.examples)
+  // console.log(exp.memory_properties)
   // this does not work if there are stacks of stims (but does work for an experiment with this structure)
   // relies on structure and slides being defined
   exp.nQs = utils.get_exp_length();
