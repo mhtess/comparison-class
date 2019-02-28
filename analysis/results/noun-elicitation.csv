@@ -1,0 +1,150 @@
+workerid,degree,positive,negative,neither_nor,superordinate,context
+0,darkness,the day,the night,dusk,times of day,PERSON steps outside during PHRASE
+0,height,adult,child,teenager,people,PERSON sees PRE PHRASE
+0,price,steak,pork,chicken,meat,PERSON is at the butchershop and looks at the price of a piece of PHRASE
+0,size,dog,hamster,cat,pets,PERSON looks at their friend’s pet PHRASE
+0,sound,drums,violin,piano,instruments,PERSON hears somebody playing the PHRASE
+0,time,class,break,lecture,school events,PERSON is going to attend a PHRASE
+0,weight,box,envelope,package,mail,The mailman drops off PRE PHRASE for PERSON. PERSON picks it up
+1,darkness,khakis,jeans,dress slacks,pants,PERSON tries on a pair of PHRASE
+1,height,basketball player,jockey,baseball player,athletes,PERSON sees PRE PHRASE
+1,price,bottle of top-shelf liquor,box of wine,bottle of wine,alcoholic drinks,PERSON looks at the price of PRE PHRASE.
+1,size,wedding party,birthday party,office party,parties,PERSON attends PRE PHRASE
+1,sound,gymnasium,library,classroom,places in schools,PERSON is sitting in PRE PHRASE
+1,temperature,coffee,water,tea,drinks,PERSON takes their first sip from a cup of PHRASE.
+1,time,yacht,rubber dingy,sailboat,boats,PERSON looks at their friend’s PHRASE
+1,weight,piece of furniture,piece of clothing,box,things you carry when moving,PERSON is helping their friend move. They pick up PRE PHRASE
+2,height,bamboo tree,banana tree,alpine tree,Trees,PERSON looks at a PRE PHRASE.
+2,price,Apple phone,Nokia phone,Samsung phone,Cellphones,PERSON is a cell phone and looks at the price of PRE PHRASE
+2,size,villa,apartment,townhouse,Houses,PERSON is looking for a place to live and checks out PRE PHRASE
+2,weight,truck,motorcycle,car,Vehicles,PERSON is learning about at the weights of different vehicles and looks up the weight a particular PHRASE
+3,price,rose,daisy,orchid,Flowers,PERSON is shopping for flowers and looks at the price of a particular PHRASE
+3,size,tree,bush,hedge,landscaping,PERSON is thinking about doing some landscaping and looks at the size of a particular
+3,time,movie,TV show,documentary,Entertainment,PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE
+3,weight,couch,dining chair,arm chair,Furniture,PERSON is helping their friend move. They pick up PRE PHRASE
+4,sound,restaurant,library,store,stores,PERSON is having a meeting in PRE PHRASE.
+4,temperature,soup,ice cream,piece of fruit,food,PERSON sits down to eat their
+4,weight,adult,baby,kid,human,"PERSON picks up Pat, PRE PHRASE"
+5,price,steak house,diner,buffet,restaurants,PERSON is considering different places for dinner and looks at the menu of PRE PHRASE
+5,sound,concert,library,sporting event,places to go,PERSON goes to PRE PHRASE on a Saturday night. 
+5,weight,brick,feather,rock,objects,PERSON picks up PRE PHRASE
+7,darkness,day,night,dusk,times of the day,
+7,height,palm tree,apple tree,fir tree,trees,
+7,price,gold,plastic,silver,jewlery,
+7,size,dogs,dogs,dogs,animals,
+7,sound,roosters,hummingbird,parrot,birds,
+7,temperature,summer,winter,fall,seasons,
+7,time,snake,worm,millipeed,insects,
+7,weight,watermelon,apple,canteloupe,fruit,
+8,darkness,homes,buildings,restaurants ,brightness ,
+8,height,plant,trees,trees,height,
+8,price,gift,product,gift,cost,
+8,size,pigs,dogs,dear ,size,
+8,sound,they,we,we,volume ,
+8,temperature,summer,winter,spring,seasons ,
+8,time,we,they,we,height,
+8,weight,notes,books,books,weight,
+9,darkness,days,nights,evenings,times of the day,
+9,height,giraffes,frogs,monkeys,animals,
+9,price,cars,bikes,motorcycles,vehicles,
+9,size,humans,mice,dogs,mammals,
+9,sound,dogs,turtles,cats,animals,
+9,temperature,Summers,Winters,Falls,Seasons,
+9,time,houses,shacks,apartments,real estate,
+9,weight,steel,styrofoam,plastic,materials,
+10,darkness,days,nights,times of days,times of day,
+10,height,giraffees,birds,monkeys,animals,
+10,price,bath towels,wash cloths,towels,towels,
+10,size,dogs,mice,cats,animals,
+10,sound,drums,viorlin,tuba,instruments,
+10,temperature,burgers,ice creams,fruits,foods,
+10,time,snakes,slug,eels,animals,
+10,weight,couches,chairs,tables,furniture,
+12,darkness,Jewlery,Jackeys,Clothes,Fasion,
+12,height,Girafs,Dogs,Humans,Species,
+12,price,Real jewlery,Fashion jewlery,Earings,Jewlery,
+12,size,People,Big,Animals,Life,
+12,sound,Humans,Adults,Babies,Humans,
+12,temperature,Fires,Ice cubes,Water,Elements,
+12,time,Twizzler,Starburst,Taffy,Candy,
+12,weight,Weights,Ropes,Weights,Work out stuff,
+14,darkness,Days,Nights,Twilights,spectacular phenomena,
+14,height,Trees,Flowers,Shrubs,plants,
+14,price,Steaks,Chickens,Seafood,food,
+14,size,Teenagers,Children,Youths,people,
+14,sound,Donkeys,Cats,Dogs,animals,
+14,temperature,Some seasons,Some seasons,Some seasons,seasons,
+14,time,Sunrises,Sunsets,The Northern Lights,atmospheric phenomena,
+14,weight,Storms,Rains,Tornadoes,weather,
+16,darkness,Europeans,Africans,Middle-easterners,ethnicity ,
+16,height,adults,children,adolescents,human development,
+16,price,steaks,candies,vegetables,food,
+16,size,offices,homes,stores,buildings,
+16,sound,birds,bees,humans,animals,
+16,temperature,exothermic,endothermic,decomposition,reactions,
+16,time,trunks,twigs,sticks,tree matter,
+16,weight,beds,chairs,tables,furniture,
+17,darkness,Days,Nights,Afternoons,time of day,
+17,height,Trees,Plants,Bushes,Nature,
+17,price,Treasures,Costumes,Jewelery,jewwels,
+17,size,Motorcycles,bicycles,dirt bikes,two wheeled objects,
+17,sound,Tigers,Mice,Dogs,animals,
+17,temperature,Bath,Ice Cubes,Showers,forms of water,
+17,time,yards,inches,feet,measurements,
+17,weight,bricks,feathers,bags,weights,
+18,darkness,days,nights,evenings,times of day,
+18,height,giraffes,mice,horses,animals,
+18,price,fridges,microwaves,dishwashers,appliances,
+18,size,elephants,ants,birds,animals,
+18,sound,trumpets,flutes,pianos,musical instruments,
+18,temperature,summers,winters,springs,seasons,
+18,time,legs,toes,fingers,body parts,
+18,weight,trees,flowers,shrubs,plants,
+19,darkness,Days,Nights,Dusks,times,
+19,height,Basketball players,Jockeys,Golfers,athletes,
+19,price,Resorts,Motels,Hotels,vacation rentals,
+19,size,SUVs,Subcompacts,Sedans,cars.,
+19,sound,Concerts,Libraries,Restaurants,public meeting spaces.,
+19,temperature,Soups,Smoothies,Salads,foods,
+19,time,Movies,Youtube videos,TV shoes,video entertainment,
+19,weight,Couches,Stools,Chairs,furniture,
+20,darkness,Libraries,Theaters,Bedrooms,Rooms,
+20,height,Basketball Players,Horse Jockeys,Baseball players,Athletes,
+20,price,Teslas,Kias,Toyotas,Cars,
+20,size,Rottweilers,Chihuahuas,Greyhounds,Dogs,
+20,sound,Concerts,Funerals,Parties,Events,
+20,temperature,Cocoas,Smoothies,Teas,Drinks,
+20,time,Novels,Magazines,Articles,Reading materials,
+20,weight,Bowling balls,Tennis Balls,Medicine balls,Balls,
+22,darkness,Living rooms,Basements,Bedrooms,rooms,
+22,height,Giraffes,Rats,Dogs,animals,
+22,price,Suits,Tshirts,Dresses,clothes,
+22,size,Adults,Toddlers,Teenagers,people,
+22,sound,Stadiums,Libraries,Parks,places,
+22,temperature,Summers,Winters,Springs,seasons,
+22,time,Arms,Thumbs,Hair,body parts,
+22,weight,Adults,Babies,Teenagers,people,
+23,darkness,Living rooms,Attics,bedrooms,rooms,
+23,height,Gaints,Hobbits,Elves,Mystical creatures,
+23,price,Wines,Sodas,Beers,Drinks,
+23,size,Skyscrapers,Doghouses,Houses,buildings,
+23,sound,speakers,ear buds,headphones,audio equipment,
+23,temperature,Ovens,Freezers,Faucets,Kitchen fixtures,
+23,time,Documentries,Childrens,Actions,Movies,
+23,weight,paperweights,pens,file folders,office supplies,
+25,darkness,Parakeets,Crows,Finches,birds.,
+25,height,Trees,Flowers,Grass,outdoor plants.,
+25,price,Meats,Snack foods,Fruits,food in the grocery store.,
+25,size,horse,hamster,cats,animals,
+25,sound,Dogs,Mice,Cats,pets.,
+25,temperature,steam,ice,water,water,
+25,time,DMV lines,Self-Checkout lines,Walmart lines,waiting in lines.,
+25,weight,tree,seedling,houseplant,plants,
+26,darkness,White,Black,Asian,race,
+26,height,closets,coffee tables,stools,furniture,
+26,price,leather shoes,flip-flops,sneakers,footwear,
+26,size,german shepherds,chihuahuas,poodles,dogs,
+26,sound,metal,lullaby,classical,music,
+26,temperature,hot chocolate,soda,coffee,beverage,
+26,time,novels,sticky notes,poems,text,
+26,weight,ovens,toasters,microwave ovens,kitchen appliances,
