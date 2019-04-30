@@ -63,6 +63,35 @@ function getUniqueTrials(examples) {
   }
 }
 
+function getNounElicitationTrials(examples) {
+  var trials = []//, form;
+  for (var i = 0; i < examples.length; i++) {
+    form = _.sample(["positive", "negative", "neither_nor"]);
+    trials.push({
+      // What was 'target'? How is it different from degree?
+      positive: examples[i].positive,
+      negative: examples[i].negative,
+      neither_nor: examples[i].neither_nor,
+      form: form,
+      context: examples[i].context,
+      degree: examples[i].degree,
+    });
+  }
+
+  // loops until a suitable trials array is found
+  while(1) {
+    for (var i = 0; i < trials.length-1; i++) {
+      if (trials[i]["degree"] == trials[i+1]["degree"]) {
+        trials = _.shuffle(trials);
+        break;
+      }
+
+      // return once we have reached the end of the trials array without finding adjacent degrees
+      if (i == trials.length-2) { return trials; }
+    }
+  }
+}
+
 // creates a randomized sequence of trials with unique subcategories
 function VPE2AFCTrials(examples) {
   var trials = [];
