@@ -78,7 +78,7 @@ function getNounElicitationTrials(examples) {
     });
   }
 
-  // loops until a suitable trials array is found
+  // loops until a suitable trials array is foundp
   while(1) {
     for (var i = 0; i < trials.length-1; i++) {
       if (trials[i]["degree"] == trials[i+1]["degree"]) {
