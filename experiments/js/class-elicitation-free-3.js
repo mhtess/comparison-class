@@ -91,7 +91,7 @@ function make_slides(f) {
         if (stim.positivity == "positive") {
           this.context_mod = this.context_mod.replace(re_pre, stim.pre_positive)
         } else if (stim.positivity == "negative") {
-          this.context_mod = this.context_mod.replace(re_pre, stim.pre_negative)        
+          this.context_mod = this.context_mod.replace(re_pre, stim.pre_negative)
         } else {
           this.context_mod = this.context_mod.replace(re_pre, stim.pre_neutral)
         }
@@ -111,7 +111,7 @@ function make_slides(f) {
       $("#obj_current").html(this.phrase);
       $("#adj_current").html(this.adj);
       // TODO: need help w/ erasing the current text box value
-      $("#relativity_response").html(""); //erase current text box value
+      $("#relativity_response").val(''); //erase current text box value
     },
 
     button : function() {
@@ -217,11 +217,11 @@ function make_slides(f) {
 function init() {
 
   // Prereq: should be a multiple of 3 (for even distribution of positive, negative, neither-nor questions)
-  exp.nQs = 3
+  exp.n_trials = 3
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
-  for (var k = 0; k < Math.floor(exp.nQs/3); k++) {
+  for (var k = 0; k < Math.floor(exp.n_trials/3); k++) {
     exp.positivities.push("positive")
     exp.positivities.push("negative")
     exp.positivities.push("neither-nor")
@@ -229,15 +229,15 @@ function init() {
   exp.positivities = _.shuffle(exp.positivities)
 
   // Also randomize provided example scenarios and names
-  exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.nQs)
-  exp.names = sampleNames(characters).slice(0, exp.nQs)
-  for (var k = 0; k < exp.nQs; k++) {
+  exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.n_trials)
+  exp.names = sampleNames(characters).slice(0, exp.n_trials)
+  for (var k = 0; k < exp.n_trials; k++) {
     exp.examples[k].name = exp.names[k];
     exp.examples[k].positivity = exp.positivities[k];
   }
   console.log(exp.examples)
 
-  exp.trials = exp.nQs;
+  exp.trials = exp.n_trials;
   exp.catch_trials = [];
   //exp.condition = sampleCondition(); //can randomize between subject conditions here
   exp.system = {
@@ -249,11 +249,14 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_textbox", "subj_info", "thanks"] 
+  exp.structure=["i0", "instructions", "one_textbox", "subj_info", "thanks"]
 
   exp.data_trials = [];
   //make corresponding slides:
   exp.slides = make_slides(exp);
+
+  exp.nQs = utils.get_exp_length(); //this does not work if there are stacks of stims (but does work for an experiment with this structure)
+                    //relies on structure and slides being defined
 
   $('.slide').hide(); //hide everything
 

@@ -21,7 +21,8 @@ var examples = [{
     "superordinate": "people",
     "adj_positive": "tall",
     "adj_negative": "short",
-    "context": "PERSON sees PRE PHRASE."
+    "context": "PERSON sees PRE PHRASE named Pat."
+    // "context": "PERSON sees PRE PHRASE."
   },
   {
     "workerid": 0,
@@ -43,7 +44,7 @@ var examples = [{
     "superordinate": "pets",
     "adj_positive": "large",
     "adj_negative": "small",
-    "context": "PERSON looks at their friend’s pet PHRASE."
+    "context": "PERSON looks at their friend's pet PHRASE."
   },
   {
     "workerid": 0,
@@ -301,9 +302,9 @@ var examples = [{
     "pre_negative": "a",
     "pre_neutral": "a",
     "superordinate": "human",
-    "adj_positive": "tall",
-    "adj_negative": "short",
-    "context": "PERSON picks up Pat, PRE PHRASE."
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "PERSON lifts up PRE PHRASE named Pat."
   },
   {
     "workerid": 5,
