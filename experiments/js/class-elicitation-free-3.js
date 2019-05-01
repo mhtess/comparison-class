@@ -61,11 +61,58 @@ function make_slides(f) {
       $(".err").hide();
 
       this.stim = stim; //I like to store this information in the slide so I can record it later.
+      console.log(stim)
 
-      context_mod = this.create_context();
+      // Building the appropriate context information
+      this.context_mod = stim.context
 
-      $(".prompt").html(context_mod);
-      //this.$("#relativity_response") = null; //erase current text box value
+      // Insert name info
+      re_name = new RegExp("PERSON", "g")
+      this.context_mod = this.context_mod.replace(re_name, stim.name)
+
+      // Insert phrase info
+      re_phrase = new RegExp("PHRASE", "g")
+
+      if (stim.positivity == "positive") {
+        this.phrase = stim.positive
+        this.adj = stim.adj_positive
+      } else if (stim.positivity == "negative") {
+        this.phrase = stim.negative
+        this.adj = stim.adj_negative
+      } else {
+        this.phrase = stim.neither_nor
+        this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
+      }
+
+      this.context_mod = this.context_mod.replace(re_phrase, this.phrase)
+
+      re_pre = new RegExp("PRE", "g")
+      if (re_pre.test(this.context_mod)) {
+        if (stim.positivity == "positive") {
+          this.context_mod = this.context_mod.replace(re_pre, stim.pre_positive)
+        } else if (stim.positivity == "negative") {
+          this.context_mod = this.context_mod.replace(re_pre, stim.pre_negative)        
+        } else {
+          this.context_mod = this.context_mod.replace(re_pre, stim.pre_neutral)
+        }
+      }
+
+      this.statement = stim.name + " says: This " + this.phrase + " is " + this.adj + "."
+
+      this.question = "What do you think " + stim.name + " meant?"
+
+      console.log(this.context_mod)
+      console.log(this.statement)
+
+      $(".prompt").html(this.context_mod);
+      $("#subj_statement").html(this.statement);
+      $("#subj_question").html(this.question);
+      $("#subj_question").html(this.question);
+      $("#obj_current").html(this.phrase);
+      $("#adj_current").html(this.adj);
+      // TODO: need help w/ this
+      // also need help w/ formatting :(
+      $("#relativity_response").value = ""; //erase current text box value
     },
 
     button : function() {
@@ -82,13 +129,6 @@ function make_slides(f) {
         _stream.apply(this);
       }
     },
-
-    create_context: function() {
-      context_mod = this.stim.context
-      re = new RegExp("PERSON", "g")
-      context_mod.replace(re, stim.name)
-      return context_mod
-    }
 
   });
 
@@ -177,16 +217,28 @@ function make_slides(f) {
 /// init ///
 function init() {
 
-  // How to decide on number of trials/distribution of trial types?
-  exp.nQs = 4
+  // Prereq: should be a multiple of 3 (for even distribution of positive, negative, neither-nor questions)
+  exp.nQs = 3
 
-  exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, 4)
-  exp.names = sampleNames(characters).slice(0, 4)
+  // Randomize ordering of positive, negative, and neither-nor trials
+  exp.positivities = [];
+  for (var k = 0; k < Math.floor(exp.nQs/3); k++) {
+    exp.positivities.push("positive")
+    exp.positivities.push("negative")
+    exp.positivities.push("neither-nor")
+  }
+  exp.positivities = _.shuffle(exp.positivities)
+
+  // Also randomize provided example scenarios and names
+  exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.nQs)
+  exp.names = sampleNames(characters).slice(0, exp.nQs)
   for (var k = 0; k < exp.nQs; k++) {
     exp.examples[k].name = exp.names[k];
+    exp.examples[k].positivity = exp.positivities[k];
   }
+  console.log(exp.examples)
 
-  exp.trials = 4;
+  exp.trials = exp.nQs;
   exp.catch_trials = [];
   //exp.condition = sampleCondition(); //can randomize between subject conditions here
   exp.system = {

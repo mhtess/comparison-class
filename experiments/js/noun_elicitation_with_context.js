@@ -5,7 +5,9 @@ var examples = [{
     "negative": "the night",
     "neither_nor": "dusk",
     "superordinate": "times of day",
-    "context": "PERSON steps outside during PHRASE"
+    "adj_positive": "dark",
+    "adj_negative": "light",
+    "context": "PERSON steps outside during PHRASE."
   },
   {
     "workerid": 0,
@@ -13,8 +15,13 @@ var examples = [{
     "positive": "adult",
     "negative": "child",
     "neither_nor": "teenager",
+    "pre_positive": "an",
+    "pre_negative": "a",
+    "pre_neutral": "a",
     "superordinate": "people",
-    "context": "PERSON sees PRE PHRASE"
+    "adj_positive": "tall",
+    "adj_negative": "short",
+    "context": "PERSON sees PRE PHRASE."
   },
   {
     "workerid": 0,
@@ -23,7 +30,9 @@ var examples = [{
     "negative": "pork",
     "neither_nor": "chicken",
     "superordinate": "meat",
-    "context": "PERSON is at the butchershop and looks at the price of a piece of PHRASE"
+    "adj_positive": "expensive",
+    "adj_negative": "cheap",
+    "context": "PERSON is at the butchershop and looks at the price of a piece of PHRASE."
   },
   {
     "workerid": 0,
@@ -32,7 +41,9 @@ var examples = [{
     "negative": "hamster",
     "neither_nor": "cat",
     "superordinate": "pets",
-    "context": "PERSON looks at their friend’s pet PHRASE"
+    "adj_positive": "large",
+    "adj_negative": "small",
+    "context": "PERSON looks at their friend’s pet PHRASE."
   },
   {
     "workerid": 0,
@@ -41,7 +52,9 @@ var examples = [{
     "negative": "violin",
     "neither_nor": "piano",
     "superordinate": "instruments",
-    "context": "PERSON hears somebody playing the PHRASE"
+    "adj_positive": "loud",
+    "adj_negative": "quiet",
+    "context": "PERSON hears somebody playing the PHRASE."
   },
   {
     "workerid": 0,
@@ -50,7 +63,9 @@ var examples = [{
     "negative": "break",
     "neither_nor": "lecture",
     "superordinate": "school events",
-    "context": "PERSON is going to attend a PHRASE"
+    "adj_positive": "long",
+    "adj_negative": "short",
+    "context": "PERSON is going to attend a PHRASE."
   },
   {
     "workerid": 0,
@@ -58,8 +73,13 @@ var examples = [{
     "positive": "box",
     "negative": "envelope",
     "neither_nor": "package",
+    "pre_positive": "a",
+    "pre_negative": "an",
+    "pre_neutral": "a",
     "superordinate": "mail",
-    "context": "The mailman drops off PRE PHRASE for PERSON. PERSON picks it up"
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "The mailman drops off PRE PHRASE for PERSON. PERSON picks it up."
   },
   {
     "workerid": 1,
@@ -68,7 +88,9 @@ var examples = [{
     "negative": "jeans",
     "neither_nor": "dress slacks",
     "superordinate": "pants",
-    "context": "PERSON tries on a pair of PHRASE"
+    "adj_positive": "light",
+    "adj_negative": "dark",
+    "context": "PERSON tries on a pair of PHRASE."
   },
   {
     "workerid": 1,
@@ -77,7 +99,9 @@ var examples = [{
     "negative": "jockey",
     "neither_nor": "baseball player",
     "superordinate": "athletes",
-    "context": "PERSON sees PRE PHRASE"
+    "adj_positive": "tall",
+    "adj_negative": "short",
+    "context": "PERSON sees a PHRASE."
   },
   {
     "workerid": 1,
@@ -86,7 +110,9 @@ var examples = [{
     "negative": "box of wine",
     "neither_nor": "bottle of wine",
     "superordinate": "alcoholic drinks",
-    "context": "PERSON looks at the price of PRE PHRASE."
+    "adj_positive": "expensive",
+    "adj_negative": "cheap",
+    "context": "PERSON looks at the price of a PHRASE."
   },
   {
     "workerid": 1,
@@ -94,8 +120,13 @@ var examples = [{
     "positive": "wedding party",
     "negative": "birthday party",
     "neither_nor": "office party",
+    "pre_positive": "a",
+    "pre_negative": "a",
+    "pre_neutral": "an",
     "superordinate": "parties",
-    "context": "PERSON attends PRE PHRASE"
+    "adj_positive": "large",
+    "adj_negative": "small",
+    "context": "PERSON attends PRE PHRASE."
   },
   {
     "workerid": 1,
@@ -104,7 +135,9 @@ var examples = [{
     "negative": "library",
     "neither_nor": "classroom",
     "superordinate": "places in schools",
-    "context": "PERSON is sitting in PRE PHRASE"
+    "adj_positive": "loud",
+    "adj_negative": "quiet",
+    "context": "PERSON is sitting in a PHRASE."
   },
   {
     "workerid": 1,
@@ -113,16 +146,20 @@ var examples = [{
     "negative": "water",
     "neither_nor": "tea",
     "superordinate": "drinks",
+    "adj_positive": "hot",
+    "adj_negative": "cold",
     "context": "PERSON takes their first sip from a cup of PHRASE."
   },
   {
     "workerid": 1,
-    "degree": "time",
+    "degree": "length",
     "positive": "yacht",
     "negative": "rubber dingy",
     "neither_nor": "sailboat",
     "superordinate": "boats",
-    "context": "PERSON looks at their friend’s PHRASE"
+    "adj_positive": "long",
+    "adj_negative": "short",
+    "context": "PERSON looks at their friend’s PHRASE."
   },
   {
     "workerid": 1,
@@ -131,7 +168,9 @@ var examples = [{
     "negative": "piece of clothing",
     "neither_nor": "box",
     "superordinate": "things you carry when moving",
-    "context": "PERSON is helping their friend move. They pick up PRE PHRASE"
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "PERSON is helping their friend move. They pick up a PHRASE."
   },
   {
     "workerid": 2,
@@ -139,8 +178,10 @@ var examples = [{
     "positive": "bamboo tree",
     "negative": "banana tree",
     "neither_nor": "alpine tree",
-    "superordinate": "Trees",
-    "context": "PERSON looks at a PRE PHRASE."
+    "superordinate": "trees",
+    "adj_positive": "tall",
+    "adj_negative": "short",
+    "context": "PERSON looks at a PHRASE."
   },
   {
     "workerid": 2,
@@ -148,8 +189,13 @@ var examples = [{
     "positive": "Apple phone",
     "negative": "Nokia phone",
     "neither_nor": "Samsung phone",
-    "superordinate": "Cellphones",
-    "context": "PERSON is a cell phone and looks at the price of PRE PHRASE"
+    "pre_positive": "an",
+    "pre_negative": "a",
+    "pre_neutral": "a",
+    "superordinate": "cell phones",
+    "adj_positive": "expensive",
+    "adj_negative": "cheap",
+    "context": "PERSON is shopping and looks at the price of PRE PHRASE."
   },
   {
     "workerid": 2,
@@ -157,8 +203,13 @@ var examples = [{
     "positive": "villa",
     "negative": "apartment",
     "neither_nor": "townhouse",
-    "superordinate": "Houses",
-    "context": "PERSON is looking for a place to live and checks out PRE PHRASE"
+    "pre_positive": "a",
+    "pre_negative": "an",
+    "pre_neutral": "a",
+    "superordinate": "houses",
+    "adj_positive": "large",
+    "adj_negative": "small",
+    "context": "PERSON is looking for a place to live and checks out PRE PHRASE."
   },
   {
     "workerid": 2,
@@ -166,8 +217,10 @@ var examples = [{
     "positive": "truck",
     "negative": "motorcycle",
     "neither_nor": "car",
-    "superordinate": "Vehicles",
-    "context": "PERSON is learning about at the weights of different vehicles and looks up the weight a particular PHRASE"
+    "superordinate": "vehicles",
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "PERSON is learning about at the weights of different vehicles and looks up the weight of a particular PHRASE."
   },
   {
     "workerid": 3,
@@ -175,8 +228,10 @@ var examples = [{
     "positive": "rose",
     "negative": "daisy",
     "neither_nor": "orchid",
-    "superordinate": "Flowers",
-    "context": "PERSON is shopping for flowers and looks at the price of a particular PHRASE"
+    "superordinate": "flowers",
+    "adj_positive": "expensive",
+    "adj_negative": "cheap",
+    "context": "PERSON is shopping for flowers and looks at the price of a particular PHRASE."
   },
   {
     "workerid": 3,
@@ -184,8 +239,10 @@ var examples = [{
     "positive": "tree",
     "negative": "bush",
     "neither_nor": "hedge",
-    "superordinate": "landscaping",
-    "context": "PERSON is thinking about doing some landscaping and looks at the size of a particular"
+    "superordinate": "lawn plants",
+    "adj_positive": "large",
+    "adj_negative": "small",
+    "context": "PERSON is thinking about doing some landscaping and looks at the size of a particular PHRASE."
   },
   {
     "workerid": 3,
@@ -193,8 +250,10 @@ var examples = [{
     "positive": "movie",
     "negative": "TV show",
     "neither_nor": "documentary",
-    "superordinate": "Entertainment",
-    "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE"
+    "superordinate": "entertainment",
+    "adj_positive": "tall",
+    "adj_negative": "short",
+    "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE."
   },
   {
     "workerid": 3,
@@ -202,8 +261,13 @@ var examples = [{
     "positive": "couch",
     "negative": "dining chair",
     "neither_nor": "arm chair",
-    "superordinate": "Furniture",
-    "context": "PERSON is helping their friend move. They pick up PRE PHRASE"
+    "pre_positive": "a",
+    "pre_negative": "a",
+    "pre_neutral": "an",
+    "superordinate": "furniture",
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "PERSON is helping their friend move. They pick up PRE PHRASE."
   },
   {
     "workerid": 4,
@@ -211,8 +275,10 @@ var examples = [{
     "positive": "restaurant",
     "negative": "library",
     "neither_nor": "store",
-    "superordinate": "stores",
-    "context": "PERSON is having a meeting in PRE PHRASE."
+    "superordinate": "venues",
+    "adj_positive": "loud",
+    "adj_negative": "quiet",
+    "context": "PERSON is having a meeting in a PHRASE."
   },
   {
     "workerid": 4,
@@ -221,7 +287,9 @@ var examples = [{
     "negative": "ice cream",
     "neither_nor": "piece of fruit",
     "superordinate": "food",
-    "context": "PERSON sits down to eat their"
+    "adj_positive": "hot",
+    "adj_negative": "cold",
+    "context": "PERSON sits down to eat their PHRASE."
   },
   {
     "workerid": 4,
@@ -229,8 +297,13 @@ var examples = [{
     "positive": "adult",
     "negative": "baby",
     "neither_nor": "kid",
+    "pre_positive": "an",
+    "pre_negative": "a",
+    "pre_neutral": "a",
     "superordinate": "human",
-    "context": "PERSON picks up Pat, PRE PHRASE"
+    "adj_positive": "tall",
+    "adj_negative": "short",
+    "context": "PERSON picks up Pat, PRE PHRASE."
   },
   {
     "workerid": 5,
@@ -239,7 +312,9 @@ var examples = [{
     "negative": "diner",
     "neither_nor": "buffet",
     "superordinate": "restaurants",
-    "context": "PERSON is considering different places for dinner and looks at the menu of PRE PHRASE"
+    "adj_positive": "expensive",
+    "adj_negative": "cheap",
+    "context": "PERSON is considering different places for dinner and looks at the menu of a PHRASE."
   },
   {
     "workerid": 5,
@@ -248,7 +323,9 @@ var examples = [{
     "negative": "library",
     "neither_nor": "sporting event",
     "superordinate": "places to go",
-    "context": "PERSON goes to PRE PHRASE on a Saturday night. "
+    "adj_positive": "loud",
+    "adj_negative": "quiet",
+    "context": "PERSON goes to a PHRASE on a Saturday night."
   },
   {
     "workerid": 5,
@@ -257,5 +334,7 @@ var examples = [{
     "negative": "feather",
     "neither_nor": "rock",
     "superordinate": "objects",
-    "context": "PERSON picks up PRE PHRASE"
+    "adj_positive": "heavy",
+    "adj_negative": "light",
+    "context": "PERSON picks up a PHRASE."
   }];

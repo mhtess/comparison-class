@@ -33,6 +33,8 @@
 
     <!-- experiment file -->
     <script src="js/class-elicitation-free-3.js"></script>
+
+    <!-- experiment-specific examples and other source materials -->
     <script src="js/examples.js"></script>
     <script src="js/names.js"></script>
     <script src="js/noun_elicitation_with_context.js"></script>
@@ -76,8 +78,10 @@
   </div>
 
   <div class="slide" id="one_textbox">
-    <p class="prompt" id="display_context"></p>
-    <input type="text" id="relativity_response"></input>
+    <p class="prompt"></p>
+    <p id="subj_statement"></p>
+    <p id="subj_question"></p>
+    <p>"The <div id="obj_current"></div> is <div id="adj_current"></div> relative to other <input type="text" id="relativity_response"></input>.</p>
     <button onclick="_s.button()">Continue</button>
     <p class="err">Please write something.</p>
   </div>  
@@ -149,7 +153,7 @@
   </div>
 
   <div id="thanks" class="slide js" >
-    <p  class="big">Thanks for your Time!</p>
+    <p  class="big">Thanks for your time!</p>
   </div>
 
   <div class="progress">

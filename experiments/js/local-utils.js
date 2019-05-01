@@ -68,13 +68,17 @@ function getNounElicitationTrials(examples) {
   for (var i = 0; i < examples.length; i++) {
     form = _.sample(["positive", "negative", "neither_nor"]);
     trials.push({
-      // What was 'target'? How is it different from degree?
       positive: examples[i].positive,
       negative: examples[i].negative,
       neither_nor: examples[i].neither_nor,
       form: form,
       context: examples[i].context,
       degree: examples[i].degree,
+      adj_positive: examples[i].adj_positive,
+      adj_negative: examples[i].adj_negative,
+      pre_positive: examples[i].pre_positive,
+      pre_negative: examples[i].pre_negative,
+      pre_neutral: examples[i].pre_neutral
     });
   }
 
