@@ -160,7 +160,7 @@ var examples = [{
     "superordinate": "boats",
     "adj_positive": "long",
     "adj_negative": "short",
-    "context": "PERSON looks at their friend’s PHRASE."
+    "context": "PERSON looks at their friend's PHRASE."
   },
   {
     "workerid": 1,
