@@ -110,9 +110,8 @@ function make_slides(f) {
       $("#subj_question").html(this.question);
       $("#obj_current").html(this.phrase);
       $("#adj_current").html(this.adj);
-      // TODO: need help w/ this
-      // also need help w/ formatting :(
-      $("#relativity_response").value = ""; //erase current text box value
+      // TODO: need help w/ erasing the current text box value
+      $("#relativity_response").html(""); //erase current text box value
     },
 
     button : function() {
