@@ -7,6 +7,7 @@ var examples = [{
     "superordinate": "times of day",
     "adj_positive": "dark",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON steps outside during PHRASE."
   },
   {
@@ -21,8 +22,8 @@ var examples = [{
     "superordinate": "people",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "He",    
     "context": "PERSON sees PRE PHRASE named Pat."
-    // "context": "PERSON sees PRE PHRASE."
   },
   {
     "workerid": 0,
@@ -33,6 +34,7 @@ var examples = [{
     "superordinate": "meat",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is at the butchershop and looks at the price of a piece of PHRASE."
   },
   {
@@ -44,6 +46,7 @@ var examples = [{
     "superordinate": "pets",
     "adj_positive": "large",
     "adj_negative": "small",
+    "pronoun": "It",
     "context": "PERSON looks at their friend's pet PHRASE."
   },
   {
@@ -55,6 +58,7 @@ var examples = [{
     "superordinate": "instruments",
     "adj_positive": "loud",
     "adj_negative": "quiet",
+    "pronoun": "It",  
     "context": "PERSON hears somebody playing the PHRASE."
   },
   {
@@ -66,6 +70,7 @@ var examples = [{
     "superordinate": "school events",
     "adj_positive": "long",
     "adj_negative": "short",
+    "pronoun": "It",  
     "context": "PERSON is going to attend a PHRASE."
   },
   {
@@ -80,6 +85,7 @@ var examples = [{
     "superordinate": "mail",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "The mailman drops off PRE PHRASE for PERSON. PERSON picks it up."
   },
   {
@@ -91,6 +97,7 @@ var examples = [{
     "superordinate": "pants",
     "adj_positive": "light",
     "adj_negative": "dark",
+    "pronoun": "They",
     "context": "PERSON tries on a pair of PHRASE."
   },
   {
@@ -102,6 +109,7 @@ var examples = [{
     "superordinate": "athletes",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "He",
     "context": "PERSON sees a PHRASE."
   },
   {
@@ -113,6 +121,7 @@ var examples = [{
     "superordinate": "alcoholic drinks",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON looks at the price of a PHRASE."
   },
   {
@@ -127,6 +136,7 @@ var examples = [{
     "superordinate": "parties",
     "adj_positive": "large",
     "adj_negative": "small",
+    "pronoun": "It",
     "context": "PERSON attends PRE PHRASE."
   },
   {
@@ -138,6 +148,7 @@ var examples = [{
     "superordinate": "places in schools",
     "adj_positive": "loud",
     "adj_negative": "quiet",
+    "pronoun": "It",
     "context": "PERSON is sitting in a PHRASE."
   },
   {
@@ -149,6 +160,7 @@ var examples = [{
     "superordinate": "drinks",
     "adj_positive": "hot",
     "adj_negative": "cold",
+    "pronoun": "It",
     "context": "PERSON takes their first sip from a cup of PHRASE."
   },
   {
@@ -160,6 +172,7 @@ var examples = [{
     "superordinate": "boats",
     "adj_positive": "long",
     "adj_negative": "short",
+    "pronoun": "It",
     "context": "PERSON looks at their friend's PHRASE."
   },
   {
@@ -171,6 +184,7 @@ var examples = [{
     "superordinate": "things you carry when moving",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is helping their friend move. They pick up a PHRASE."
   },
   {
@@ -182,6 +196,7 @@ var examples = [{
     "superordinate": "trees",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "It",
     "context": "PERSON looks at a PHRASE."
   },
   {
@@ -196,6 +211,7 @@ var examples = [{
     "superordinate": "cell phones",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is shopping and looks at the price of PRE PHRASE."
   },
   {
@@ -210,6 +226,7 @@ var examples = [{
     "superordinate": "houses",
     "adj_positive": "large",
     "adj_negative": "small",
+    "pronoun": "It",
     "context": "PERSON is looking for a place to live and checks out PRE PHRASE."
   },
   {
@@ -221,6 +238,7 @@ var examples = [{
     "superordinate": "vehicles",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is learning about at the weights of different vehicles and looks up the weight of a particular PHRASE."
   },
   {
@@ -232,6 +250,7 @@ var examples = [{
     "superordinate": "flowers",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is shopping for flowers and looks at the price of a particular PHRASE."
   },
   {
@@ -243,6 +262,7 @@ var examples = [{
     "superordinate": "lawn plants",
     "adj_positive": "large",
     "adj_negative": "small",
+    "pronoun": "It",
     "context": "PERSON is thinking about doing some landscaping and looks at the size of a particular PHRASE."
   },
   {
@@ -254,6 +274,7 @@ var examples = [{
     "superordinate": "entertainment",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "It",
     "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE."
   },
   {
@@ -268,6 +289,7 @@ var examples = [{
     "superordinate": "furniture",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is helping their friend move. They pick up PRE PHRASE."
   },
   {
@@ -279,6 +301,7 @@ var examples = [{
     "superordinate": "venues",
     "adj_positive": "loud",
     "adj_negative": "quiet",
+    "pronoun": "It",
     "context": "PERSON is having a meeting in a PHRASE."
   },
   {
@@ -290,6 +313,7 @@ var examples = [{
     "superordinate": "food",
     "adj_positive": "hot",
     "adj_negative": "cold",
+    "pronoun": "It",
     "context": "PERSON sits down to eat their PHRASE."
   },
   {
@@ -304,6 +328,7 @@ var examples = [{
     "superordinate": "human",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "He",
     "context": "PERSON lifts up PRE PHRASE named Pat."
   },
   {
@@ -315,6 +340,7 @@ var examples = [{
     "superordinate": "restaurants",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is considering different places for dinner and looks at the menu of a PHRASE."
   },
   {
@@ -326,6 +352,7 @@ var examples = [{
     "superordinate": "places to go",
     "adj_positive": "loud",
     "adj_negative": "quiet",
+    "pronoun": "It",
     "context": "PERSON goes to a PHRASE on a Saturday night."
   },
   {
@@ -337,6 +364,7 @@ var examples = [{
     "superordinate": "objects",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON picks up a PHRASE."
   },
   {
@@ -348,6 +376,7 @@ var examples = [{
     "superordinate": "times of the day",
     "adj_positive": "dark",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON goes outside at PHRASE."
   },
   {
@@ -359,6 +388,7 @@ var examples = [{
     "superordinate": "trees",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "It",
     "context": "PERSON is walking outside and sees a PHRASE."
   },
   {
@@ -370,6 +400,7 @@ var examples = [{
     "superordinate": "jewlery",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is at the jewlery store and looks at at a ring made of PHRASE."
   },
   {
@@ -381,6 +412,7 @@ var examples = [{
     "superordinate": "birds",
     "adj_positive": "loud",
     "adj_negative": "quiet",
+    "pronoun": "It",
     "context": "PERSON is walking outside and hears the cry of a PHRASE."
   },
   {
@@ -392,6 +424,7 @@ var examples = [{
     "superordinate": "seasons",
     "adj_positive": "warm",
     "adj_negative": "cold",
+    "pronoun": "It",
     "context": "PERSON steps outside on a day in PHRASE."
   },
   {
@@ -403,6 +436,7 @@ var examples = [{
     "superordinate": "fruit",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is at the grocery store and picks up a PHRASE."
   },
   {
@@ -414,6 +448,7 @@ var examples = [{
     "superordinate": "brightness ",
     "adj_positive": "dark",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is at a PHRASE discussing interior decorating with their friend. They notice the current lighting."
   },
   {
@@ -425,6 +460,7 @@ var examples = [{
     "superordinate": "animals",
     "adj_positive": "tall",
     "adj_negative": "short",
+    "pronoun": "It",
     "context": "PERSON sees a PHRASE at the zoo."
   },
   {
@@ -436,6 +472,7 @@ var examples = [{
     "superordinate": "vehicles",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is shopping for a PHRASE to ride on their commute."
   },
   {
@@ -447,6 +484,7 @@ var examples = [{
     "superordinate": "materials",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is working in the machine shop and picks up a piece of PHRASE."
   },
   {
@@ -458,6 +496,7 @@ var examples = [{
     "superordinate": "towels",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
+    "pronoun": "It",
     "context": "PERSON is at the store and looks at the price of a PHRASE."
   },
   {
@@ -469,6 +508,7 @@ var examples = [{
     "superordinate": "animals",
     "adj_positive": "large",
     "adj_negative": "small",
+    "pronoun": "It",
     "context": "PERSON is visiting a friend and sees their pet PHRASE."
   },
   {
@@ -480,6 +520,7 @@ var examples = [{
     "superordinate": "foods",
     "adj_positive": "hot",
     "adj_negative": "cold",
+    "pronoun": "It",
     "context": "The waitress brings PERSON their food at the diner. PERSON takes the first bite of their PHRASE."
   },
   {
@@ -491,6 +532,7 @@ var examples = [{
     "superordinate": "animals",
     "adj_positive": "fast",
     "adj_negative": "slow",
+    "pronoun": "It",
     "context": "PERSON is at the zoo watching a PHRASE travel."
   },
   {
@@ -502,6 +544,7 @@ var examples = [{
     "superordinate": "furniture",
     "adj_positive": "heavy",
     "adj_negative": "light",
+    "pronoun": "It",
     "context": "PERSON is trying to move some furniture. They start with the PHRASE."
   },
   {
@@ -513,5 +556,6 @@ var examples = [{
     "superordinate": "Elements",
     "adj_positive": "hot",
     "adj_negative": "cold",
+    "pronoun": "It",
     "context: PERSON feels some PHRASE."
   }];

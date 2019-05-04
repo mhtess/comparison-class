@@ -97,7 +97,7 @@ function make_slides(f) {
         }
       }
 
-      this.statement = stim.name + " says: This " + this.phrase + " is " + this.adj + "."
+      this.statement = stim.name + " says: " this.pronoun + " is " + this.adj + "."
 
       this.question = "What do you think " + stim.name + " meant?"
 
