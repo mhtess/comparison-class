@@ -557,5 +557,5 @@ var examples = [{
     "adj_positive": "hot",
     "adj_negative": "cold",
     "pronoun": "It",
-    "context: PERSON feels some PHRASE."
+    "context": "PERSON feels some PHRASE."
   }];

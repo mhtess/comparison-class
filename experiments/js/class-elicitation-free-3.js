@@ -75,14 +75,13 @@ function make_slides(f) {
 
       if (stim.positivity == "positive") {
         this.phrase = stim.positive
-        this.adj = stim.adj_positive
       } else if (stim.positivity == "negative") {
         this.phrase = stim.negative
-        this.adj = stim.adj_negative
       } else {
         this.phrase = stim.neither_nor
-        this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
       }
+
+      this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
 
       this.context_mod = this.context_mod.replace(re_phrase, this.phrase)
 
@@ -97,7 +96,7 @@ function make_slides(f) {
         }
       }
 
-      this.statement = stim.name + " says: " this.pronoun + " is " + this.adj + "."
+      this.statement = stim.name + " says: " + stim.pronoun + " is " + this.adj + "."
 
       this.question = "What do you think " + stim.name + " meant?"
 
