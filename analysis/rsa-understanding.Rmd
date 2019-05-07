@@ -114,7 +114,7 @@ var binParam = 5;
 //   super: paramsFromR.priorParams.super[0]
 // };
 var stateParams = {
-    sub: {mu: 1, sigma: 1},
+    sub: {mu: -1, sigma: 1},
     super: {mu: 0, sigma: 1}
 }
 
@@ -260,8 +260,12 @@ rs.tidy <- rs.wp %>%
   separate(utt, into = c("form", "explClass"))
 ```
 
+### S( u | c, \theta, x) = Speaker utterances gives an implicit comparison class and threshold
+
 ```{r fig.width = 16, fig.height = 3.5}
-ggplot(rs.tidy, aes( x = s, y = prob, color = utt))+
+rs.tidy %>%
+  mutate(utt = paste(form, explClass, sep = "_")) %>%
+  ggplot(., aes( x = s, y = prob, color = utt))+
   geom_line()+
   scale_color_solarized()+
   facet_grid(c~t)
@@ -269,12 +273,6 @@ ggplot(rs.tidy, aes( x = s, y = prob, color = utt))+
 
 
 
-```{r}
-ggplot(rs.tidy %>% filter(c == "super", utt == "subUtt"), 
-       aes( x = s, y = prob, color = t, group = t ))+
-  ylab("Sub utterance probability")+
-  geom_line()
-```
 
 ###  N(-1,1) and super N(0, 1)
 
@@ -306,7 +304,7 @@ rs.marginal <- rs.tidy %>%
 ggplot(rs.marginal, aes( x = s, y = marginalProb, color = form, lty = explClass))+
   #stat_function(fun = dnorm, n = 101, args = list(mean = 1, sd = 0.5), inherit.aes = F,
 #                linetype = 4) +
-  geom_area(stat = "function", fun = dnorm, args = list(mean = 1, sd = 0.5),
+  geom_area(stat = "function", fun = dnorm, args = list(mean = -1, sd = 1),
             fill = "black", xlim = c(-3, 3), alpha = 0.3, inherit.aes = F) +
   geom_line(position = position_dodge(0.3))+
   scale_color_solarized()+
@@ -317,21 +315,6 @@ ggplot(rs.marginal, aes( x = s, y = marginalProb, color = form, lty = explClass)
 
 If the cc was *SUPER* (or *HIGH*, in this case), the meaning is the same as saying "super", which is only likely to be prduced near the high end of the scale (because of the logic spelled out above). But, our prior tells us that we are in the subordinate class. which in this case puts us near the low-end of the scale. If that were the case, the speaker would have said "subUtt", but he didn't. So if instead, we are in the subo class, "ambiguous" means the same thing as "subUtt", which is likely to be produecd in the region we know to be the case (the low end of the scale). 
     
-    
-Note: The following assumes a uniform prior on the state. Really you want to marginalize out the state variable according to its prior (which should favor the sub)
-```{r}
-rs.marginal2 <- rs.tidy %>%
-  group_by(c, utt) %>%
-  summarize(marginalProb = mean(prob)) %>%
-  ungroup() %>%
-  rename(cc = c)
-
-
-ggplot(rs.marginal2, aes( x = cc, y = marginalProb, fill = utt, group = utt))+
-    geom_bar(stat = 'identity', position = position_dodge())+
-    scale_fill_solarized()+ ylim(0,1)
-```
-
 
 ###  N(0,0.5) and super N(0, 1)
    
@@ -352,17 +335,6 @@ Notes from Skype meeting with MLB
   - Good manipulation might be people who both grew up in different states (temperatures)
   
 
-```{r}
-speaker.subUttThreshold <- rs.wp %>%
-  filter(subUtt <0.25) %>%
-  group_by(t) %>%
-  summarize(uttThreshold = max(s))
-
-ggplot(speaker.subUttThreshold, aes( x = t, y = uttThreshold))+
-  geom_point()
-```
-
-
 
 ## Speaker 2 simulations
 
@@ -381,3 +353,456 @@ ggplot(rs2.tidy, aes( x = s, y = prob, color = utt, lty = utt))+
 ```
 
 utility fn in continuous space: partial credit
+
+# Pragmatic listener inferences
+
+```{r rsaPrior}
+priorForRSA <- '
+var binParam = 4;
+
+var stateParams = {
+  sub: paramsFromR.priorParams.sub[0],
+  super: paramsFromR.priorParams.super[0]
+};
+
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 2 * stateParams.super.sigma,
+          stateParams.super.mu + 2 * stateParams.super.sigma + stateParams.super.sigma/binParam,
+          stateParams.super.sigma/binParam)
+);
+
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s))+
+    Number.EPSILON
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s))+
+    Number.EPSILON
+  }, stateVals)
+};
+
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){ return categorical({ vs: stateVals, ps: stateProbs.super}) }
+  })
+};
+'
+```
+
+```{r rsaLanguage}
+languageForRSA <- '
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+var utterances = {
+  positive: ["positive_Adjective",
+             "positive_sub",
+             "positive_super"],
+  negative: ["negative_Adjective",
+             "negative_sub",
+             "negative_super"]
+};
+
+var utteranceProbs = [1, 1, 1];
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: utteranceProbs
+      })
+    }
+  })
+});
+
+var meaning = function(utterance, state, thresholds) {
+  utterance == "positive" ? state > thresholds.positive ? flip(0.9999) : flip(0.0001) :
+  utterance == "negative" ? state < thresholds.negative ? flip(0.9999) : flip(0.0001) :
+  true
+}
+
+'
+```
+
+```{r ccRSA}
+ccrsa <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var utterance = u.split("_")[0]
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+
+pragmaticListener(paramsFromR.utt[0])
+'
+```
+
+```{r runModel, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, ccrsa, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both)
+  }
+  #print(p$mu)
+}
+
+```
+
+```{r priorsModel, cache = T}
+all.priors <- bind_rows(
+  data.frame(
+    val = rnorm(10000, mean = 0, sd = 1),
+    cat = "super"
+    ),
+  data.frame(
+    val = rnorm(10000, mean = -1, sd = 0.5),
+    cat = "low"
+    ),
+  data.frame(
+    val = rnorm(10000, mean = 0, sd = 0.5),
+    cat = "medium"
+  ),
+  data.frame(
+    val = rnorm(10000, mean = 1, sd = 0.5),
+    cat = "high"
+  )
+) %>% mutate(cat = factor(cat, levels = c("super", "low", "medium", "high")))
+ 
+```
+
+```{r modelSchematics, fig.env = "figure", fig.pos = "htb", fig.width = 3.4, fig.height = 2.4, num.cols.cap = 1, fig.cap = "Left: Three hypothetical subordinate class prior distributions over a degree (fixing the superordinate class to be a unit-normal distribution, in grey). Right: Predicted listener inferences for an intended subordinate class interpretation given positive and negative form adjectives with different subordinate degree priors."}
+#save(all.priors, mp.both, file = "../writing/paper/cached_results/L1_schematic_wPriors.RData")
+
+subplt1 <- ggplot(all.priors, aes(x = val,fill = cat, 
+                              lty = cat, group= cat, alpha=cat))+
+  geom_density(adjust = 1.3)+
+  xlab("Degree")+
+  ylab("Probability density")+
+  scale_fill_manual(values = c("#636363","#ffeda0","#feb24c","#f03b20"),
+                    breaks = c("low", "medium", "high")) +
+  scale_alpha_manual(values = c(1,0.6,0.6,0.6),
+                    breaks = c("low", "medium", "high"))+
+  scale_linetype_manual(values = c(1,3,2,1),
+                    breaks = c("low", "medium", "high"))+
+  scale_x_continuous(limits = c(-3, 3), breaks = c(-2, 0, 2))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()
+        )
+
+
+subplt2 <- ggplot(mp.both %>%
+                    mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+  
+
+
+#grid.arrange(arrangeGrob(subplt1, subplt2, nrow = 1), figDy, nrow = 2)
+cowplot::plot_grid(subplt1, subplt2, nrow = 1)
+```
+
+## L1 "wonky worlds" setup
+
+Main feature is that pragmatic listener doesn't sample values of degree from subcat, but rather whatever the comparison class is. 
+
+Could further assume that prior on subcat is high. 
+```{r ccRSA_wwAlt}
+ccrsa_alt_ww <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Categorical({ vs: ["sub", "super"], ps: [1, 1] });
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var utterance = u.split("_")[0]
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[comparisonClass]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+
+pragmaticListener(paramsFromR.utt[0])
+'
+```
+
+```{r runModel alt_ww, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both.ww <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, ccrsa_alt_ww, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both.ww <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both.ww)
+  }
+  #print(p$mu)
+}
+
+```
+
+```{r L1 alternativemodel predictions plot}
+ggplot(mp.both.ww %>%
+         mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+  
+```
+## L0 alternative model predictions
+
+```{r l0_alternativemodel}
+cc_l0 <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var literal_alternative = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[comparisonClass]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var m = meaning(form, state, thresholds);
+    condition(m);
+    
+    return comparisonClass
+  }})
+}
+
+literal_alternative(paramsFromR.utt[0])
+'
+```
+
+
+
+```{r runModelL0, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both.l0 <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, cc_l0, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both.l0 <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both.l0)
+  }
+  #print(p$mu)
+}
+
+```
+
+```{r L0  model predictions plot}
+ggplot(mp.both.l0 %>%
+         mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+  
+```
+
