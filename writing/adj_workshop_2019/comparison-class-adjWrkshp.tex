@@ -38,19 +38,22 @@
 
 \begin{document}
 \begin{center}
-\textbf{Comparison class inference for gradable adjectives}
+\textbf{Comparison class inference for gradable adjectives} \\
+Michael Henry Tessler$^{1,2}$, Roger Levy$^1$, and Noah Goodman$^2$ \\
+$^1$Department of Brain \& Cognitive Sciences, Massachusetts Institute of Technology \\
+$^2$Department of Psychology, Stanford University
 \end{center}
 
-A 24 \degree C  (75 \degree F) day is warm, while a 16 \degree C  (60 \degree F) day is not. Unless it's January. 16 \degree C  could be warm for January.
-\emph{Warm} is a relative adjective, and its felicity depends upon what the speaker uses as a basis of comparison---the \emph{comparison class} (e.g., other days of the year~vs,~January).
+A 24 \degree C  (75 \degree F) day is warm, while a 16 \degree C  (60 \degree F) day is not. Unless it's January: 16 \degree C  could be warm for January.
+\emph{Warm} is a relative adjective, and its felicity depends upon what the speaker uses as a basis of comparison---the \emph{comparison class} (e.g., other days of the year~vs.~January).
 Comparison classes are necessary for understanding gradable adjectives, but as with relevant aspects of context more generally, comparison classes often go unsaid (e.g., in ``It's warm'').
 
 % and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers \cite<e.g., ``He ate a lot of burgers''; >{Scholler2017} and generic language \cite<e.g., ``Dogs are friendly''; >{Tessler2019psychrev}.
 %%Deciding on the relevant comparison class is a case study in the larger question of inferring the appropriate aspects of context for interpreting an utterance.
 %The trouble is:
 
+Any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes.
 How do listeners decide on the appropriate comparison class? 
-Any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes: 
 %A day in January is also a day of the year; if a listener hear \enquote{It's warm}, it could be \emph{warm for the week}, \emph{warm for winter}, or \emph{warm for the year}, among many other possibilities.
 In this project, we investigate the first aspect of this open-ended inference problem: deciding between a relatively specific comparison class (e.g., \emph{warm for winter}) and a relatively general class (e.g., \emph{warm for the year}).
 Theoretical work in semantics has focused on how information from the comparison class gets integrated with a compositional semantics and what representations might be preferred \cite{Bale2011, Solt2009}. 
@@ -89,16 +92,16 @@ Listener inferences about the comparison class  upon  hearing either a positive-
 We develop a Rational Speech Act model wherein a listener combines hierarchical, category knowledge with pragmatic reasoning to infer the comparison class implicitly used by the speaker.
 The model combines a previously proposed method for inferring common ground \cite{Degen2015} with an uncertain threshold mechanism for deriving context-sensitive interpretations for gradable adjectives \cite{Lassiter2015}.
 %We model a situation in which a listener hears just an adjective (``it's warm'') and tries to reconstruct the comparison class. 
-In this model, the speaker could have produced an adjective with an explicit comparison class (``warm for winter''), which has the effect of changing the common ground (or, the listener's prior distribution over the degree e.g., temperature).
+In this model, the speaker could produce an adjective with an explicit comparison class (``warm for winter''), which has the effect of changing the common ground (or, the listener's prior distribution over the degree e.g., plausible temperatures in a season).
 In this way, reasoning about the comparison class is cashed out in terms of reasoning about alternative utterances (in this case, alternative utterances using different comparison classes).
 The model predicts that hearing \enquote{it's warm} (in Winter) signals that the speaker meant \emph{warm for winter}, while hearing \enquote{it's cold} is more likely to signal \emph{cold for the year}. 
 The opposite relationship is predicted to hold in summer, where \enquote{it's cold} should signal cold \emph{for summer} more so than \enquote{it's warm} (Fig.~\ref{fig:predictions}). 
 
 We test these qualitative predictions in a free-production paraphrase experiment.
+On each trial, participants were given a sentence introducing the subordinate category (e.g., \emph{Tanya lives in Maryland and steps outside in Winter}), followed by a sentence which described an object or situation with an adjective (e.g., \emph{Tanya says to her friend, ``It’s warm.''}). 
+Participants were asked ``What do you think Tanya meant?''; they were provided with a sentence frame (``It's warm relative to the other \_\_\_\_'') and asked to fill in the blank.
 We used positive- and negative-form gradable adjectives describing eight scales (height, weight, size, duration, temperature, price, darkness, loudness). 
 Each scale was paired with a superordinate category and three subordinate categories that were intuitively situated near the high-, low-, and intermediate parts of the degree scale (e.g., winter, spring, and summer for temperature). 
-On each trial, participants were given a sentence introducing the subordinate category (e.g., \emph{Tanya lives in Maryland and steps outside in Winter}), followed by a sentence which described an object or situation with an adjective (e.g., Tanya says to her friend, ``It’s warm.''). 
-Participants were asked ``What do you think Tanya meant?''; they were provided with a sentence frame (``It's warm relative to the other \_\_\_\_'') and asked to fill in the blank.
 %Participants were free to type whatever they wished.
 We recruited 63 US IP-addresssed participants from Amazon's MTurk with a 95\% work approval rating and self-reported native language of English.
 
@@ -123,9 +126,9 @@ As a simple test of our main hypothesis (Fig.~\ref{fig:predictions}), we coded e
 The qualitative predictions of the model (described above) were borne out (Fig.~\ref{fig:results}A).
 % The relevant comparison class for items from specific categories that are expected to fall low the degree scale (``low'' strength of prior e.g., a day in Winter) is expected to be the specific category (\emph{winter}) when a positive adjective (\emph{warm}) but not a negative adjective is used (\emph{cold}); the reverse effect is observed for items that are expected to fall high on the degree scale (``high'' strength of prior).
 
-To test the quantitative predictions of the model, we designed a two-alternative forced choice version of the experiment ($n=264$). The model's predictions depend on both the relative prior distributions over the degree scale (e.g., temperatures of days in Winter vs. over the year) and the prior distribution over comparison classes. 
+To test the quantitative predictions of the model, we designed a two-alternative forced choice version of the experiment ($n=264$). The quantitative predictions depend on both the relative prior distributions over the degree scale (e.g., temperatures of days in Winter vs. over the year) and the prior distribution over comparison classes. 
 As an extremely rough approximation for the prior over comparison classes, we take the corpus frequency of the noun phrase. 
-To infer the priors over the degrees, we ran an additional adjective endorsement task ($n=100$) where participants are asked to judge if an adjective applied to a typical member of the subordinate category (e.g., a typical day in Winter) explicitly relative to the more general category (e.g., cold relative to a typical day of the year). 
+To infer the priors over the degrees, we ran an additional adjective endorsement task ($n=100$) where participants are asked to judge if an adjective applied to a typical member of the subordinate category (e.g., a typical day in Winter) relative to the more general category (e.g., cold relative to a typical day of the year). 
 We then used a Bayesian data analytic model together with an RSA model for adjective endorsement to triangulate the priors over the degrees that would accommodate both data sets.
 The model provides a strong quantitative fit to the comparison class inference data (Fig.~\ref{fig:results}B), demonstrating that these inferences can be investigated with quantitative methods.
 
@@ -166,20 +169,20 @@ The model provides a strong quantitative fit to the comparison class inference d
 %We tested the incremental prediction of the model that when participants only hear ``Elephants live in Africa and'', they will begin to anticipate a mutually-exclusive conjunct, and that this would manifest in their implied prevalence ratings being substantially less than when they only hear ``Elephants live in Africa''.
 
 
-
+\newpage
 
 
 \vspace{-0.3cm}
 
 \begingroup
-\renewcommand{\section}[2]{}
+%\renewcommand{\section}[2]{}
 \bibliographystyle{apacite}
 
 \setlength{\bibleftmargin}{.125in}
 \setlength{\bibindent}{-\bibleftmargin}
 
 \bibliography{../paper/comparison-class}
-\renewcommand\bibname{}
+%\renewcommand\bibname{}
 \scriptsize
 %Extending an analysis of generics to handle complex-predicates poses unique challenges.
 %A sentence of the form ``Ks F and G'' introduces an ambiguity:
