@@ -75,14 +75,13 @@ function make_slides(f) {
 
       if (stim.positivity == "positive") {
         this.phrase = stim.positive
-        this.adj = stim.adj_positive
       } else if (stim.positivity == "negative") {
         this.phrase = stim.negative
-        this.adj = stim.adj_negative
       } else {
         this.phrase = stim.neither_nor
-        this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
       }
+
+      this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
 
       this.context_mod = this.context_mod.replace(re_phrase, this.phrase)
 
@@ -97,7 +96,7 @@ function make_slides(f) {
         }
       }
 
-      this.statement = stim.name + " says: This " + this.phrase + " is " + this.adj + "."
+      this.statement = stim.name + " says: " + stim.pronoun + " is " + this.adj + "."
 
       this.question = "What do you think " + stim.name + " meant?"
 
@@ -180,6 +179,15 @@ function make_slides(f) {
     name : "memory_check",
     start: function() {
     $(".err").hide()
+
+    exp.memory_properties = [
+       "lorches have long legs and breathe underwater",
+       "taifles have gold spots that are sticky",
+       "dorbs have infected, yellow scales ",
+       "cranoor is the king of all beings",
+       "no kweps eat plants"
+    ]
+
     console.log(exp.memory_properties)
 
      this.catch_properties = [
@@ -190,7 +198,7 @@ function make_slides(f) {
        "no kweps eat plants"
      ]
 
-     this.check_properties = _.shuffle(_.flatten([this.tested_properties, this.catch_properties]))
+     this.check_properties = _.shuffle(_.flatten([exp.memory_properties, this.catch_properties]))
 
      // clear the former content of a given <div id="memory_checkboxes"></div>
      document.getElementById('memory_checkboxes').innerHTML = '';
@@ -229,7 +237,7 @@ function make_slides(f) {
 
     for (i=0;i<this.check_properties.length;i++){
       var p = this.check_properties[i];
-      var tested_on = this.tested_properties.indexOf(p) > -1 ? 1 : 0;
+      var tested_on = exp.memory_properties.indexOf(p) > -1 ? 1 : 0;
       var response = checked_options.indexOf(p) > -1 ? 1 : 0;
       exp.catch_trials.push({
         condition: "memory_check",
@@ -239,11 +247,10 @@ function make_slides(f) {
         response: response,
         correct: (tested_on == response) ? 1 : 0
       })
-
-
-        exp.go(); //use exp.go() if and only if there is no "present" data.
-      }
-
+    }
+    
+    exp.go(); //use exp.go() if and only if there is no "present" data.
+    
     }
   });
 
@@ -321,7 +328,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_textbox", "subj_info", "thanks"]
+  exp.structure=["i0", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
 
   exp.data_trials = [];
   //make corresponding slides:
