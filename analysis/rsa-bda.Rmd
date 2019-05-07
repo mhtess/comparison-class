@@ -17,8 +17,8 @@ library(data.table)
 library(coda)
 library(knitr)
 
-project.path <- "/Users/mht/Documents/research/comparison-class/"
-
+project.path <- "~/projects/comparison-class/"
+options(digits = 7)
 estimate_mode <- function(s) {
   d <- density(s)
   return(d$x[which.max(d$y)])
@@ -198,7 +198,8 @@ file.prefix <- "fbt-L0-empiricalCC-disc3-mcmc"
 for (i in seq(1, n_chains)){
   m <- as.data.frame(fread(paste(project.path,
                                  "models/sherlock/results/",
-                                 file.prefix, n_samples, "_burn", 
+                                 file.prefix, 
+                                 sprintf("%6.f", n_samples), "_burn", 
                                  burn, "_chain", 
                                  i, ".csv", sep="")))
   m.samp <- bind_rows(m.samp, m)
@@ -324,7 +325,7 @@ md.pp.long <- bind_rows(
 md.pp.long %>%
   ungroup() %>%
   filter(expt == 'Experiment 1 \n (Comparison class inference)') %>%
-  mutate(cat = factor(cat, levels = cat[order(strength)])) %>%
+  mutate(cat = factor(cat, levels = unique(cat[order(strength)]))) %>%
   ggplot(., 
          aes( x = cat, 
               y = MAP, ymin = cred_lower, ymax = cred_upper, 
