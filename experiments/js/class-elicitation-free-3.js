@@ -55,11 +55,12 @@ function make_slides(f) {
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
     present : exp.examples,
+    trial_num : 1,
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
       $(".err").hide();
-
+      this.startTime = Date.now();
       this.stim = stim; //I like to store this information in the slide so I can record it later.
       console.log(stim)
 
@@ -145,8 +146,11 @@ function make_slides(f) {
       if (response.length == 0) {
         $(".err").show();
       } else {
+        this.rt = Date.now() - this.startTime;
         exp.data_trials.push(_.extend({
-          "trial_type" : "one_textbox",
+          "trial_type" : "free_class_elicitation",
+          "trial_num": this.trial_num,
+          "rt": this.rt,
           "context" : this.context_mod,
           "np" : this.phrase,
           "np_positiveness" : this.np_positiveness,
@@ -154,6 +158,7 @@ function make_slides(f) {
           "adj_positiveness" : this.adj_positiveness,
           "response" : response
         }));
+        this.trial_num++;
         _stream.apply(this);
       }
     },
@@ -272,9 +277,9 @@ function make_slides(f) {
         correct: (tested_on == response) ? 1 : 0
       })
     }
-    
+
     exp.go(); //use exp.go() if and only if there is no "present" data.
-    
+
     }
   });
 
@@ -338,7 +343,7 @@ function init() {
   exp.names = sampleNames(characters).slice(0, exp.n_trials)
   exp.memorycheck_examples = []
   console.log(exp.names)
-  
+
   for (var k = 0; k < exp.n_trials; k++) {
 
     exp.examples[k].name = exp.names[k];
