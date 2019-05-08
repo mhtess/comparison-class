@@ -47,7 +47,7 @@ var examples = [{
     "adj_positive": "large",
     "adj_negative": "small",
     "pronoun": "It",
-    "context": "PERSON looks at their friend's pet PHRASE."
+    "context": "PERSON looks at PRO friend's pet PHRASE."
   },
   {
     "workerid": 0,
@@ -161,7 +161,7 @@ var examples = [{
     "adj_positive": "hot",
     "adj_negative": "cold",
     "pronoun": "It",
-    "context": "PERSON takes their first sip from a cup of PHRASE."
+    "context": "PERSON takes a first sip from a cup of PHRASE."
   },
   {
     "workerid": 1,
@@ -173,7 +173,7 @@ var examples = [{
     "adj_positive": "long",
     "adj_negative": "short",
     "pronoun": "It",
-    "context": "PERSON looks at their friend's PHRASE."
+    "context": "PERSON looks at a friend's PHRASE."
   },
   {
     "workerid": 1,
@@ -185,7 +185,7 @@ var examples = [{
     "adj_positive": "heavy",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON is helping their friend move. They pick up a PHRASE."
+    "context": "PERSON is helping a friend move and picks up a PHRASE."
   },
   {
     "workerid": 2,
@@ -272,7 +272,7 @@ var examples = [{
     "negative": "TV show",
     "neither_nor": "documentary",
     "superordinate": "entertainment",
-    "adj_positive": "tall",
+    "adj_positive": "long",
     "adj_negative": "short",
     "pronoun": "It",
     "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE."
@@ -290,7 +290,7 @@ var examples = [{
     "adj_positive": "heavy",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON is helping their friend move. They pick up PRE PHRASE."
+    "context": "PERSON is helping a friend move and picks up PRE PHRASE."
   },
   {
     "workerid": 4,
@@ -314,7 +314,7 @@ var examples = [{
     "adj_positive": "hot",
     "adj_negative": "cold",
     "pronoun": "It",
-    "context": "PERSON sits down to eat their PHRASE."
+    "context": "PERSON sits down to eat PRO PHRASE."
   },
   {
     "workerid": 4,
@@ -449,7 +449,7 @@ var examples = [{
     "adj_positive": "dark",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON is at a PHRASE discussing interior decorating with their friend. They notice the current lighting."
+    "context": "PERSON is at a PHRASE discussing interior decorating with a friend. They notice the current lighting."
   },
   {
     "workerid": 9,
@@ -473,7 +473,7 @@ var examples = [{
     "adj_positive": "expensive",
     "adj_negative": "cheap",
     "pronoun": "It",
-    "context": "PERSON is shopping for a PHRASE to ride on their commute."
+    "context": "PERSON is shopping for a PHRASE to ride on PRO commute."
   },
   {
     "workerid": 9,
@@ -502,9 +502,9 @@ var examples = [{
   {
     "workerid": 10,
     "degree": "size",
-    "positive": "dogs",
-    "negative": "mice",
-    "neither_nor": "cats",
+    "positive": "dog",
+    "negative": "mouse",
+    "neither_nor": "cat",
     "superordinate": "animals",
     "adj_positive": "large",
     "adj_negative": "small",
@@ -521,7 +521,7 @@ var examples = [{
     "adj_positive": "hot",
     "adj_negative": "cold",
     "pronoun": "It",
-    "context": "The waitress brings PERSON their food at the diner. PERSON takes the first bite of their PHRASE."
+    "context": "The waitress brings PERSON PRO food at the diner. PERSON takes the first bite of PRO PHRASE."
   },
   {
     "workerid": 10,
@@ -545,7 +545,7 @@ var examples = [{
     "adj_positive": "heavy",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON is trying to move some furniture. They start with the PHRASE."
+    "context": "PERSON is trying to move some furniture, starting with the PHRASE."
   },
   {
     "workerid": 12,

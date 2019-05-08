@@ -73,30 +73,59 @@ function make_slides(f) {
       // Insert phrase info
       re_phrase = new RegExp("PHRASE", "g")
 
-      if (stim.positivity == "positive") {
+      this.np_positiveness = stim.np_positiveness
+      this.adj_positiveness = stim.adj_positiveness
+
+      if (stim.np_positiveness == "positive") {
         this.phrase = stim.positive
-      } else if (stim.positivity == "negative") {
+      } else if (stim.np_positiveness == "negative") {
         this.phrase = stim.negative
       } else {
         this.phrase = stim.neither_nor
       }
 
-      this.adj = _.shuffle([stim.adj_positive, stim.adj_negative])[0]
+      // Insert descriptive info
+      if (stim.adj_positiveness == "positive") {
+        this.adj = stim.adj_positive
+      } else {
+        this.adj = stim.adj_negative
+      }
 
       this.context_mod = this.context_mod.replace(re_phrase, this.phrase)
 
       re_pre = new RegExp("PRE", "g")
       if (re_pre.test(this.context_mod)) {
-        if (stim.positivity == "positive") {
+        if (stim.np_positiveness == "positive") {
           this.context_mod = this.context_mod.replace(re_pre, stim.pre_positive)
-        } else if (stim.positivity == "negative") {
+        } else if (stim.np_positiveness == "negative") {
           this.context_mod = this.context_mod.replace(re_pre, stim.pre_negative)
         } else {
           this.context_mod = this.context_mod.replace(re_pre, stim.pre_neutral)
         }
       }
 
-      this.statement = stim.name + " says: " + stim.pronoun + " is " + this.adj + "."
+      this.gender = getGender(stim.name)
+      if (this.gender == "male") {
+        this.speaker_pronoun = "his"
+      } else {
+        this.speaker_pronoun = "her"
+      }
+
+      // fill in pronoun info
+      re_pronoun = new RegExp("PRO", "g")
+      this.context_mod = this.context_mod.replace(re_pronoun, this.speaker_pronoun)
+
+      if (stim.pronoun == "They") {
+        this.np_pronoun = "They're"
+      }
+      else {
+        this.np_pronoun = stim.pronoun + "\'s"
+      }
+
+      this.intro = stim.name + " says to " + this.speaker_pronoun + " friend: "
+      this.quote = "\"" + this.np_pronoun + " " + this.adj
+
+      this.statement = this.intro + this.quote + ".\""
 
       this.question = "What do you think " + stim.name + " meant?"
 
@@ -106,10 +135,7 @@ function make_slides(f) {
       $(".prompt").html(this.context_mod);
       $("#subj_statement").html(this.statement);
       $("#subj_question").html(this.question);
-      $("#subj_question").html(this.question);
-      $("#obj_current").html(this.phrase);
-      $("#adj_current").html(this.adj);
-      // TODO: need help w/ erasing the current text box value
+      $("#relativity_quote").html(this.quote);
       $("#relativity_response").val(''); //erase current text box value
     },
 
@@ -119,11 +145,15 @@ function make_slides(f) {
       if (response.length == 0) {
         $(".err").show();
       } else {
-        exp.data_trials.push({
+        exp.data_trials.push(_.extend({
           "trial_type" : "one_textbox",
-          "stim" : this.stim,
+          "context" : this.context_mod,
+          "np" : this.phrase,
+          "np_positiveness" : this.np_positiveness,
+          "adj" : this.adj,
+          "adj_positiveness" : this.adj_positiveness,
           "response" : response
-        });
+        }));
         _stream.apply(this);
       }
     },
@@ -180,22 +210,16 @@ function make_slides(f) {
     start: function() {
     $(".err").hide()
 
-    exp.memory_properties = [
-       "lorches have long legs and breathe underwater",
-       "taifles have gold spots that are sticky",
-       "dorbs have infected, yellow scales ",
-       "cranoor is the king of all beings",
-       "no kweps eat plants"
-    ]
+    num_props = 5
 
-    console.log(exp.memory_properties)
+    exp.memory_properties = _.shuffle(exp.memorycheck_examples).slice(0, num_props)
 
      this.catch_properties = [
-       "lorches have long legs and breathe underwater",
-       "taifles have gold spots that are sticky",
-       "dorbs have infected, yellow scales ",
-       "cranoor is the king of all beings",
-       "no kweps eat plants"
+       "beautiful watch",
+       "green shirt",
+       "shiny necklace",
+       "purple guitar",
+       "wild dog"
      ]
 
      this.check_properties = _.shuffle(_.flatten([exp.memory_properties, this.catch_properties]))
@@ -254,7 +278,6 @@ function make_slides(f) {
     }
   });
 
-
   slides.subj_info =  slide({
     name : "subj_info",
     submit : function(e){
@@ -295,26 +318,51 @@ function make_slides(f) {
 /// init ///
 function init() {
 
-  // Prereq: should be a multiple of 3 (for even distribution of positive, negative, neither-nor questions)
-  exp.n_trials = 3
+  // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
+  exp.n_trials = 6
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
   for (var k = 0; k < Math.floor(exp.n_trials/3); k++) {
-    exp.positivities.push("positive")
-    exp.positivities.push("negative")
-    exp.positivities.push("neither-nor")
+    exp.positivities.push(["positive", "positive"])
+    exp.positivities.push(["positive", "negative"])
+    exp.positivities.push(["negative", "positive"])
+    exp.positivities.push(["negative", "negative"])
+    exp.positivities.push(["neither-nor", "positive"])
+    exp.positivities.push(["neither-nor", "negative"])
   }
   exp.positivities = _.shuffle(exp.positivities)
 
   // Also randomize provided example scenarios and names
   exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.n_trials)
   exp.names = sampleNames(characters).slice(0, exp.n_trials)
+  exp.memorycheck_examples = []
+  console.log(exp.names)
+  
   for (var k = 0; k < exp.n_trials; k++) {
+
     exp.examples[k].name = exp.names[k];
-    exp.examples[k].positivity = exp.positivities[k];
+    exp.examples[k].np_positiveness = exp.positivities[k][0]
+    exp.examples[k].adj_positiveness = exp.positivities[k][1]
+
+    if (exp.examples[k].np_positiveness == "positive") {
+      phrase = exp.examples[k].positive
+    } else if (exp.examples[k].np_positiveness == "negative") {
+      phrase = exp.examples[k].negative
+    } else {
+      phrase = exp.examples[k].neither_nor
+    }
+
+    // Insert descriptive info
+    if (exp.examples[k].adj_positiveness == "positive") {
+      adj = exp.examples[k].adj_positive
+    } else {
+      adj = exp.examples[k].adj_negative
+    }
+
+    exp.memorycheck_examples.push(adj + " " + phrase)
+
   }
-  console.log(exp.examples)
 
   exp.trials = exp.n_trials;
   exp.catch_trials = [];
