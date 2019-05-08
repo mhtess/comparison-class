@@ -28,4 +28,8 @@ models/sherlock/results/
 *.synctex.gz
 *.ttt
 *.fff
+*.bbl
+*.blg
+comparison-class-paper_cache/
 writing/paper/comparison-class-paper.pdf
+writing/adj_workshop_2019/figs/
