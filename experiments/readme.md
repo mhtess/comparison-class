@@ -75,7 +75,7 @@ Participants are asked if the adjective with an explicit superordinate compariso
 
 5. `class-elicitation-free-3` (n = 120; May 13, 2019)
 
-- Cost = $1 x 120 + 20% = $144
+- Cost = $1 x 100 + 20% = $120
 (20 itemsets X 6 formats = 120 unique stimuli; we want 15 responses on average per item so we need 100 participants)
 - 18 trials per participant: randomly select 18 of the 20 possible itemsets, and generate 3 of each of the 6 stimulus formats (NP: low/med/high X ADJ: pos/neg). Elicit free production of comparison class given stimulus.
 
