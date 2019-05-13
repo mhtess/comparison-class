@@ -62,7 +62,6 @@ function make_slides(f) {
       $(".err").hide();
       this.startTime = Date.now();
       this.stim = stim; //I like to store this information in the slide so I can record it later.
-      console.log(stim)
 
       // Building the appropriate context information
       this.context_mod = stim.context
@@ -136,9 +135,6 @@ function make_slides(f) {
 
       this.question = "What do you think " + stim.name + " meant?"
 
-      console.log(this.context_mod)
-      console.log(this.statement)
-
       $(".prompt").html(this.context_mod);
       $("#subj_statement").html(this.statement);
       $("#subj_question").html(this.question);
@@ -148,7 +144,6 @@ function make_slides(f) {
 
     button : function() {
       response = $("#relativity_response").val();
-      console.log(response)
       if (response.length == 0) {
         $(".err").show();
       } else {
@@ -344,7 +339,7 @@ function init() {
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
-  for (var k = 0; k < Math.floor(exp.n_trials/3); k++) {
+  for (var k = 0; k < Math.floor(exp.n_trials/6); k++) {
     exp.positivities.push(["positive", "positive"])
     exp.positivities.push(["positive", "negative"])
     exp.positivities.push(["negative", "positive"])
@@ -358,7 +353,6 @@ function init() {
   exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.n_trials)
   exp.names = sampleNames(characters).slice(0, exp.n_trials)
   exp.memorycheck_examples = []
-  console.log(exp.names)
 
   for (var k = 0; k < exp.n_trials; k++) {
 

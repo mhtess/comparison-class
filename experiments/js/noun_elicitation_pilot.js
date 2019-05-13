@@ -228,8 +228,11 @@ var examples = [{
     "negative": "slug",
     "neither_nor": "eel",
     "superordinate": "animals",
+    "pre_positive": "a",
+    "pre_negative": "a",
+    "pre_neutral": "an",
     "adj_positive": "fast",
     "adj_negative": "slow",
     "pronoun": "It",
-    "context": "PERSON is at the zoo watching a PHRASE travel."
+    "context": "PERSON is at the zoo watching PRE PHRASE travel."
   }];
