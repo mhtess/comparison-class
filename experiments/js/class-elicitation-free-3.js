@@ -330,7 +330,7 @@ function make_slides(f) {
 function init() {
 
   // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
-  exp.n_trials = 6
+  exp.n_trials = 18
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
