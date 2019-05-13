@@ -1,7 +1,7 @@
 var examples = [{
     "degree": "darkness",
-    "positive": "the day",
-    "negative": "the night",
+    "positive": "the morning",
+    "negative": "the evening",
     "neither_nor": "dusk",
     "superordinate": "times of day",
     "adj_positive": "dark",

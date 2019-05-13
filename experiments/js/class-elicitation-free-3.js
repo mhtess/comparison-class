@@ -368,6 +368,10 @@ function init() {
       phrase = exp.examples[k].neither_nor
     }
 
+    if (phrase.slice(0, 4) == "the ") {
+      phrase = phrase.slice(4)
+    }
+
     // Insert descriptive info
     if (exp.examples[k].adj_positiveness == "positive") {
       adj = exp.examples[k].adj_positive
