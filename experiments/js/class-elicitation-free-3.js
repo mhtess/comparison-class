@@ -129,7 +129,7 @@ function make_slides(f) {
         this.environment_mod = ""
       }
       else {
-        this.environment_mod = stim.environment_mod
+        this.environment_mod = " " + stim.environment_mod
       }
 
       this.statement = this.intro + this.quote + this.environment_mod + ".\""

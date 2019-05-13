@@ -8,7 +8,8 @@ var examples = [{
     "adj_positive": "dark",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON steps outside during PHRASE."
+    "context": "PERSON steps outside during PHRASE.",
+    "environment_mod": "out here"
   },
   {
     "workerid": 0,
@@ -149,7 +150,8 @@ var examples = [{
     "adj_positive": "loud",
     "adj_negative": "quiet",
     "pronoun": "It",
-    "context": "PERSON is sitting in a PHRASE."
+    "context": "PERSON is sitting in a PHRASE.",
+    "environment_mod": "in here"
   },
   {
     "workerid": 1,
@@ -305,6 +307,7 @@ var examples = [{
     "adj_positive": "loud",
     "adj_negative": "quiet",
     "pronoun": "It",
+    "environment_mod": "in here",
     "context": "PERSON is having a meeting in a PHRASE."
   },
   {
@@ -356,6 +359,7 @@ var examples = [{
     "adj_positive": "loud",
     "adj_negative": "quiet",
     "pronoun": "It",
+    "environment_mod": "in here",
     "context": "PERSON is at a PHRASE on a Saturday night."
   },
   {
@@ -380,6 +384,7 @@ var examples = [{
     "adj_positive": "dark",
     "adj_negative": "light",
     "pronoun": "It",
+    "environment_mod": "out here",
     "context": "PERSON goes outside at PHRASE."
   },
   {
@@ -430,7 +435,6 @@ var examples = [{
     "pronoun": "It",
     "environment_mod": "out here",
     "context": "PERSON steps outside on a day in PHRASE."
-    // change to "It's warm out here."
   },
   {
     "workerid": 7,
@@ -454,9 +458,8 @@ var examples = [{
     "adj_positive": "dark",
     "adj_negative": "bright",
     "pronoun": "It",
-    "context": "PERSON is at a PHRASE with a friend.",
-    "environment_mod": " in here"
-    // change to "It's bright in here."
+    "environment_mod": "in here",
+    "context": "PERSON is at a PHRASE with a friend."
   },
   {
     "workerid": 9,
