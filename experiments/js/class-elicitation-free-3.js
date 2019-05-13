@@ -125,8 +125,14 @@ function make_slides(f) {
 
       this.intro = stim.name + " says to " + this.speaker_pronoun + " friend: "
       this.quote = "\"" + this.np_pronoun + " " + this.adj
+      if (!stim.environment_mod) {
+        this.environment_mod = ""
+      }
+      else {
+        this.environment_mod = stim.environment_mod
+      }
 
-      this.statement = this.intro + this.quote + ".\""
+      this.statement = this.intro + this.quote + this.environment_mod + ".\""
 
       this.question = "What do you think " + stim.name + " meant?"
 

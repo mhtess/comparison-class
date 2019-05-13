@@ -79,7 +79,8 @@ function getNounElicitationTrials(examples) {
       pre_positive: examples[i].pre_positive,
       pre_negative: examples[i].pre_negative,
       pre_neutral: examples[i].pre_neutral,
-      pronoun: examples[i].pronoun
+      pronoun: examples[i].pronoun,
+      environment_mod: examples[i].environment_mod
     });
   }
 

@@ -239,7 +239,7 @@ var examples = [{
     "adj_positive": "heavy",
     "adj_negative": "light",
     "pronoun": "It",
-    "context": "PERSON is learning about at the weights of different vehicles and looks up the weight of a particular PHRASE."
+    "context": "PERSON is learning about at the weights of different vehicles and looks up the weight of a PHRASE."
   },
   {
     "workerid": 3,
@@ -247,11 +247,14 @@ var examples = [{
     "positive": "rose",
     "negative": "daisy",
     "neither_nor": "orchid",
+    "pre_positive": "a",
+    "pre_negative": "a",
+    "pre_neutral": "an",
     "superordinate": "flowers",
     "adj_positive": "expensive",
     "adj_negative": "cheap",
     "pronoun": "It",
-    "context": "PERSON is shopping for flowers and looks at the price of a particular PHRASE."
+    "context": "PERSON is shopping for flowers and looks at the price of PRE PHRASE."
   },
   {
     "workerid": 3,
@@ -263,7 +266,7 @@ var examples = [{
     "adj_positive": "large",
     "adj_negative": "small",
     "pronoun": "It",
-    "context": "PERSON is thinking about doing some landscaping and looks at the size of a particular PHRASE."
+    "context": "PERSON is thinking about doing some landscaping and looks at the size of a PHRASE."
   },
   {
     "workerid": 3,
@@ -275,7 +278,7 @@ var examples = [{
     "adj_positive": "long",
     "adj_negative": "short",
     "pronoun": "It",
-    "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a particular PHRASE."
+    "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a PHRASE."
   },
   {
     "workerid": 3,
@@ -353,7 +356,7 @@ var examples = [{
     "adj_positive": "loud",
     "adj_negative": "quiet",
     "pronoun": "It",
-    "context": "PERSON goes to a PHRASE on a Saturday night."
+    "context": "PERSON is at a PHRASE on a Saturday night."
   },
   {
     "workerid": 5,
@@ -418,14 +421,16 @@ var examples = [{
   {
     "workerid": 7,
     "degree": "temperature",
-    "positive": "summer",
-    "negative": "winter",
-    "neither_nor": "fall",
+    "positive": "Summer",
+    "negative": "Winter",
+    "neither_nor": "Fall",
     "superordinate": "seasons",
     "adj_positive": "warm",
     "adj_negative": "cold",
     "pronoun": "It",
+    "environment_mod": "out here",
     "context": "PERSON steps outside on a day in PHRASE."
+    // change to "It's warm out here."
   },
   {
     "workerid": 7,
@@ -442,14 +447,16 @@ var examples = [{
   {
     "workerid": 8,
     "degree": "darkness",
-    "positive": "home",
+    "positive": "restaurant",
     "negative": "office building",
-    "neither_nor": "restaurant",
+    "neither_nor": "home",
     "superordinate": "brightness ",
     "adj_positive": "dark",
-    "adj_negative": "light",
+    "adj_negative": "bright",
     "pronoun": "It",
-    "context": "PERSON is at a PHRASE discussing interior decorating with a friend. They notice the current lighting."
+    "context": "PERSON is at a PHRASE with a friend.",
+    "environment_mod": " in here"
+    // change to "It's bright in here."
   },
   {
     "workerid": 9,
