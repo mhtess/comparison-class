@@ -181,7 +181,7 @@ var examples = [{
   {
     "degree": "height",
     "positive": "giraffe",
-    "negative": "frog",
+    "negative": "penguin",
     "neither_nor": "monkey",
     "superordinate": "animals",
     "adj_positive": "tall",
@@ -217,7 +217,7 @@ var examples = [{
     "negative": "ice cream",
     "neither_nor": "fruit",
     "superordinate": "foods",
-    "adj_positive": "hot",
+    "adj_positive": "warm",
     "adj_negative": "cold",
     "pronoun": "It",
     "context": "The waitress brings PERSON PRO food at the diner. PERSON takes the first bite of PRO PHRASE."
