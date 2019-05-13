@@ -4,8 +4,8 @@ var examples = [{
     "negative": "the evening",
     "neither_nor": "dusk",
     "superordinate": "times of day",
-    "adj_positive": "dark",
-    "adj_negative": "light",
+    "adj_positive": "light",
+    "adj_negative": "dark",
     "pronoun": "It",
     "context": "PERSON steps outside during PHRASE.",
     "environment_mod": "out here"
