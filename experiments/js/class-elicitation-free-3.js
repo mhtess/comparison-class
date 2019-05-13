@@ -329,6 +329,16 @@ function make_slides(f) {
 /// init ///
 function init() {
 
+  repeatWorker = false;
+  (function(){
+      var ut_id = "mht-cc-20190513-fp";
+      if (UTWorkerLimitReached(ut_id)) {
+        $('.slide').empty();
+        repeatWorker = true;
+        alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+      }
+  })();
+
   // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
   exp.n_trials = 18
 
