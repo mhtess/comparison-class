@@ -1,0 +1,19 @@
+{
+  "responses": [
+    {
+      "stim_id": 0,
+      "high": {
+        "positive": ["times of day", "days", "rooms they&quotecharve just been in", "days outside", "times", "mornings", "mornings", "places", "mornings", "times of day", "times of day", "places", "places", "mornings", "lights???", "hours", "times of day", "mornings", "mornings"],
+        "negative": ["mornings", "mornings", "times of day", "mornings", "mornings", "times of day", "mornings", "times of day"]
+      },
+      "med": {
+        "positive": ["dark days", "times of day", "times", "days", "times" , "nights", "times of day", "dusks"],
+        "negative": ["days", "times Eric has stepped outside during dusk", "times of day", "times of day", "times of day", "evenings", "times of day"]
+      },
+      "low": {
+        "positive": ["evenings", "days in evening", "places in house", "nights", "nights", "nights", "evenings", "days", "evenings", "evenings", "evenings", "evenings", "times of day", "nights"],
+        "negative": ["nights", "evenings", "times of day", "times of day", "nights", "times of day", "evenings", "times of day", "evenings", "evenings", "places Lee was earlier", "places"]
+      }
+    }
+  ]
+}

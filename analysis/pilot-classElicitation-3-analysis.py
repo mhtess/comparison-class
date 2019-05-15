@@ -1,6 +1,9 @@
 from nltk.corpus import wordnet as wn
+from nltk.stem import WordNetLemmatizer
 import csv
 import json
+from string import punctuation
+from collections import Counter
 
 # np = "pork"
 # class_elicited_1 = "meats"
@@ -21,6 +24,7 @@ NUM_WORKERS = 81
 NUM_MEMCHECK_TRIALS = 10
 MEMCHECK_TOLERANCE = 2
 NUM_DATA_TRIALS = 18
+NUM_STIMULI = 20
 
 # Identify workers who failed the memory check
 
@@ -42,15 +46,13 @@ for worker_id in range(NUM_WORKERS):
     if num_wrong > MEMCHECK_TOLERANCE:
         failed_memcheck.append(worker_id)
 
-print(str(len(failed_memcheck)) + " workers failed the memory check.")
-
+print(str(len(failed_memcheck)) + " WORKERS FAILED THE MEMORY CHECK: " + str(failed_memcheck) + ".\n")
 
 # Read in and sort all trial data, ignoring workers who failed the memory check
 
 trial_data = csv.reader(open("../data/pilot-classElicitation-free-3/class-elicitation-free-3-trials.csv"))
 i = iter(trial_data)
 trial_data_headers = i.__next__()
-print(trial_data_headers)
 worker_index = trial_data_headers.index('workerid')
 np_index = trial_data_headers.index('np')
 adj_index = trial_data_headers.index('adj')
@@ -85,7 +87,7 @@ for row in i:
         np_positiveness = row[np_positiveness_index].strip('\"')
         adj_positiveness = row[adj_positiveness_index].strip('\"')
         response = row[response_index].strip('\"')
-        context = row[response_index].strip('\"')
+        context = row[context_index].strip('\"')
 
         # Need to do some extra processing to identitfy stim set, because I forgot to log
         # stim IDs. Can remove this in future iterations.
@@ -150,6 +152,101 @@ for row in i:
         if np_positiveness == "negative":
             np_positiveness = "low"
 
-        all_results[stim_id][np_positiveness][adj_positiveness].append(response)
+        all_results[stim_id][np_positiveness][adj_positiveness].append(str(response))
 
-print(all_results[17]["high"]["negative"])
+lemmatizer = WordNetLemmatizer()
+
+def process_response_group(responses, np_option, adj_option, stim_id, lemmatizer):
+
+    responses_lemmatized = []
+    for r in responses:
+        # remove leading/trailing spaces
+        r = r.strip()
+        # remove trailing punctuation
+        r = r.rstrip(punctuation)
+        responses_lemmatized.append(lemmatizer.lemmatize(r))
+    response_freqs = Counter(responses_lemmatized).most_common()
+    return response_freqs
+
+stim_json = open("../experiments/js/noun_elicitation_pilot.json")
+stimuli = json.load(stim_json)["examples"]
+clean_response_json = open("../data/pilot-classElicitation-free-3/results_cleaned.json")
+responses_cleaned = json.load(clean_response_json)["responses"]
+
+# change to range NUM_STIMULI
+for i in range(1):
+    stim = stimuli[i]
+    for np_option in ['high', 'med', 'low']:
+        for adj_option in ['positive', 'negative']:
+
+            # Retrieve lemmatized responses (pre-processed by a human)
+            clean_response = responses_cleaned[i][np_option][adj_option]
+
+            response_freqs = process_response_group(clean_response, np_option, adj_option, stim, lemmatizer)
+
+            if np_option == 'high':
+                syn = stim['positive']
+            elif np_option == 'med':
+                syn = stim['neither_nor']
+            else:
+                syn = stim['negative']
+
+            if syn[:3] == "the":
+                syn = syn[4:]
+
+            superordinate = stim['superordinate']
+
+            print(response_freqs)
+
+            syn_count = 0
+            synonyms = []
+            hypernym_count = 0
+            hypernyms = []
+            unused_count = 0
+            unused = []
+            throwaway_count = 0
+            throwaways = []
+
+            for word, count in response_freqs:
+
+                # dont use words or phrases that only one person suggested
+                if count < 2:
+                    continue
+
+                used = False
+
+                np_synset = wn.synsets(lemmatizer.lemmatize(syn))[0]
+
+                if word in np_synset.lemma_names():
+                    syn_count += count
+                    synonyms.append(word)
+                    used = True
+
+                else:
+                    if word == superordinate:
+                        hypernyms.append(word)
+                        hypernym_count += count
+                        used = True
+                    else:
+                        np_hypernyms = set([i for i in np_synset.closure(lambda s:s.hypernyms())])
+                        np_hypernyms_names = set()
+                        for h in np_hypernyms:
+                            for n in h.lemma_names():
+                                np_hypernyms_names.add(n)
+                        if word in np_hypernyms_names:
+                            hypernyms.append(word)
+                            hypernym_count += count
+                            used = True
+
+                if not used:
+                    unused.append(word)
+                    unused_count += count
+
+            print("Synonyms: " + str(syn_count))
+            print(synonyms)
+            print("Hypernyms: " + str(hypernym_count))
+            print(hypernyms)
+            print("Other: " + str(unused_count))
+            print(unused)
+            print("Throwaway: " + str(throwaway_count))
+            print(throwaways)
