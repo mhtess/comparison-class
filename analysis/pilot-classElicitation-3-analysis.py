@@ -51,28 +51,105 @@ trial_data = csv.reader(open("../data/pilot-classElicitation-free-3/class-elicit
 i = iter(trial_data)
 trial_data_headers = i.__next__()
 print(trial_data_headers)
-worker_id = trial_data_headers.index('workerid')
+worker_index = trial_data_headers.index('workerid')
 np_index = trial_data_headers.index('np')
 adj_index = trial_data_headers.index('adj')
 np_positiveness_index = trial_data_headers.index('np_positiveness')
 adj_positiveness_index = trial_data_headers.index('adj_positiveness')
 response_index = trial_data_headers.index('response')
+context_index = trial_data_headers.index('context')
 
-# Build structure to hold trial data together for each of the 20 variations
+# Build multi-level dictionary structure to hold trial data together for each of the 120 stim variations
+# Forgot to include a stim ID field so we need to do a bit of extra processing to sort the trials
 
-all_trial_data = dict()
+all_results = dict()
 
 with open("../experiments/js/noun_elicitation_pilot.json") as json_file:
     stimuli = iter(json.load(json_file)["examples"])
     for stim in stimuli:
-        for np_option in ['positive', 'neither_nor', 'negative']:
-            for adj_option in ['adj_positive', 'adj_negative']:
-                pass
+        id = stim['stim_id']
+        all_results[id] = dict()
+        for np_option in ['high', 'med', 'low']:
+            all_results[id][np_option] = dict()
+            for adj_option in ['positive', 'negative']:
+                all_results[id][np_option][adj_option] = []
+
+# Log results in appropriate dictionary position
 
 for row in i:
-    if not int(row[worker_id]) in failed_memcheck:
-        np = row[np_index]
-        adj = row[adj_index]
-        np_positiveness = row[np_positiveness_index]
-        adj_positiveness = row[adj_positiveness_index]
-        response = row['response']
+
+    if not int(row[worker_index]) in failed_memcheck:
+
+        np = row[np_index].strip('\"')
+        adj = row[adj_index].strip('\"')
+        np_positiveness = row[np_positiveness_index].strip('\"')
+        adj_positiveness = row[adj_positiveness_index].strip('\"')
+        response = row[response_index].strip('\"')
+        context = row[response_index].strip('\"')
+
+        # Need to do some extra processing to identitfy stim set, because I forgot to log
+        # stim IDs. Can remove this in future iterations.
+        stim_id = -1
+        if (np == "the morning" or np == "the evening" or np == "dusk"):
+            stim_id = 0
+        elif (np == "adult"):
+            if (context[-4:] == "Pat."):
+                stim_id = 1
+            else:
+                stim_id = 12
+        elif (np == "child" or np == "teenager"):
+            stim_id = 1
+        elif (np == "steak" or np == "pork" or np == "chicken"):
+            stim_id = 2
+        elif (np == "drums" or np == "violin" or np == "piano"):
+            stim_id = 3
+        elif (np == "box"):
+            if (np_positiveness == "positive"):
+                stim_id = 4
+            else:
+                stim_id = 9
+        elif (np == "envelope" or np == "package"):
+            stim_id = 4
+        elif (np == "basketball player" or np == "jockey" or np == "baseball player"):
+            stim_id = 5
+        elif (np == "bottle of top-shelf liquor" or np == "box of wine" or np == "bottle of wine"):
+            stim_id = 6
+        elif (np == "gymnasium" or np == "library" or np == "classroom"):
+            stim_id = 7
+        elif (np == "coffee" or np == "water" or np == "tea"):
+            stim_id = 8
+        elif (np == "piece of furniture" or np == "piece of clothing"):
+            stim_id = 9
+        elif (np == "villa" or np == "apartment" or np == "townhouse"):
+            stim_id = 10
+        elif (np == "movie" or np == "TV show" or np == "documentary"):
+            stim_id = 11
+        elif (np == "baby" or np == "kid"):
+            stim_id = 12
+        elif (np == "rooster" or np == "hummingbird" or np == "parrot"):
+            stim_id = 13
+        elif (np == "Summer" or np == "Winter" or np == "Fall"):
+            stim_id = 14
+        elif (np == "giraffe" or np == "penguin" or np == "monkey"):
+            stim_id = 15
+        elif (np == "styrofoam" or np == "steel" or np == "plastic"):
+            stim_id = 16
+        elif (np == "dog" or np == "mouse" or np == "cat"):
+            stim_id = 17
+        elif (np == "burger" or np == "ice cream" or np == "fruit"):
+            stim_id = 18
+        elif (np == "snake" or np == "slug" or np == "eel"):
+            stim_id = 19
+        else:
+            print("ERROR")
+
+        if np_positiveness == "positive":
+            np_positiveness = "high"
+        if np_positiveness == "neither-nor":
+            np_positiveness = "med"
+        if np_positiveness == "negative":
+            np_positiveness = "low"
+
+        all_results[stim_id][np_positiveness][adj_positiveness].append(response)
+
+print(all_results[17]["high"]["negative"])
