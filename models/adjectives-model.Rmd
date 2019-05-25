@@ -1,0 +1,381 @@
+---
+title: "Basic Adjectives (Lassiter) model"
+output: html_notebook
+---
+
+```{r libraries}
+library(rwebppl)
+library(jsonlite)
+library(ggthemes)
+library(tidyverse)
+library(knitr)
+library(viridis)
+library(gganimate)
+theme_set(theme_few())
+```
+
+## RSA model definition (string)
+
+```{r utils}
+utils <- '
+var round = function(x){
+  return Math.round(x*100)/100
+}
+
+var isNegation = function(utt){
+  return (utt.split("_")[0] == "not")
+};
+
+var avoidEnds = function(x){
+  return x >= 1 ? 0.99 : x == 0 ? 0.01 : x
+}
+
+var lb = -6, ub = 6, diff = 0.2;
+var bins = _.range(lb, ub + diff, diff)
+
+var DiscreteGaussian = function(distParams){
+  Infer({model: function(){
+    categorical({
+      vs:bins,
+      ps:map(function(x){Math.exp(Gaussian(distParams).score(x))}, bins)
+    })
+  }})
+}
+
+var DiscreteBeta = function(a, b){
+  Infer({model: function(){
+    categorical({
+      vs:bins,
+      ps:map(function(x){
+        Math.exp(Beta({a, b}).score(avoidEnds(x)))
+      }, bins)
+    })
+  }})
+}
+
+'
+```
+
+```{r language}
+language <- '
+var utterances = [
+  "tall",
+  "short",
+  "null"
+];
+
+var cost_adj = 3;
+
+var uttCosts = map(function(u) {
+  return Math.exp(u == "null" ? 0 : -cost_adj)
+}, utterances)
+
+var utterancePrior = Infer({model: function(){
+  return utterances[discrete(uttCosts)]
+}});
+
+var meaning = function(words, state, thresholds){
+  return words == "tall" ? state > thresholds.tall :
+  words == "short" ? state < thresholds.short :
+  true
+};
+'
+```
+
+```{r rsa}
+rsa <- '
+var speakerOptimality = 10;
+var speakerOptimality2 = 1;
+
+var listener0 = cache(function(utterance, thresholds, priorParams) {
+  Infer({model: function(){
+    // var state = sample(DiscreteBeta(1, 1));
+   // display(priorParams)
+    var state = sample(DiscreteGaussian(priorParams));
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  },  method: "enumerate"})
+}, 10000);
+
+var speaker1 = cache(function(state, thresholds, priorParams) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior);
+    var L0 = listener0(utterance, thresholds, priorParams);
+    factor(speakerOptimality*L0.score(state));
+    return utterance;
+  },  method: "enumerate"})
+}, 10000);
+
+var greaterThanThresholdBins = _.range(lb, ub, diff)
+var lessThanThresholdBins = _.range(lb+diff, ub+diff, diff)
+
+var listener1 = cache(function(utterance, priorParams) {
+  Infer({model: function(){
+    var thresholds = {
+      tall: uniformDraw(greaterThanThresholdBins),
+      short: uniformDraw(lessThanThresholdBins)
+    }
+
+   // display(priorParams)
+   // var state = sample(DiscreteBeta(1, 1));
+    var state = sample(DiscreteGaussian(priorParams));
+    // display(state)
+    var S1 = speaker1(state, thresholds, priorParams)
+    observe(S1, utterance)
+    return state
+  }, method: "enumerate"})
+}, 10000);
+'
+
+listenerCall <- '
+mapObject(function(key, val){
+  var priorParams = data[key][0]
+  return [key, _.fromPairs(map(function(u){
+    var post = listener1(u, priorParams)
+    return [u, post]
+  }, utterances))]
+}, data)
+'
+
+speakerCall <- '
+_.flatten(_.flatten(
+map(function(tH){
+    map(function(s){
+      var speakProbs = speaker1(s, {happy: tH})
+       return {  
+          state: s,
+          happy_theta:tH, 
+          "happy": Math.exp(speakProbs.score("happy")),
+          "null": Math.exp(speakProbs.score("null"))
+        }
+    }, bins)
+}, greaterThanThresholdBins)
+))
+'
+
+literalListenerCall <- '
+_.flatten(_.flatten(
+map(function(tH){
+    var l0posterior = listener0("happy", {happy: tH})
+    map(function(s){
+       return {  
+          state: s,
+          happy_theta:tH, 
+          literalPosterior: Math.exp(l0posterior.score(s))
+        }
+    }, bins)
+}, greaterThanThresholdBins)
+))
+'
+```
+
+## Run L1  w/ 3 priors
+
+```{r run model}
+priorParams = list(
+  low = data.frame(mu = -1, sigma = 0.5),
+  med = data.frame(mu = 0, sigma = 1),
+  high = data.frame(mu = 1, sigma = 0.5)
+)
+
+rs.listener.wp <- webppl(paste(utils, language, rsa, listenerCall,  sep = '\n'),
+                         data = priorParams)
+
+rs.listener.wp.tidy <- bind_rows(
+  data.frame(rs.listener.wp$low[[2]]$tall) %>% 
+    mutate(utterance = "tall",
+           comparisonclass = 'low'),
+  data.frame(rs.listener.wp$low[[2]]$short) %>% 
+    mutate(utterance = "short",
+           comparisonclass = 'low'),
+  data.frame(rs.listener.wp$low[[2]]$null) %>% 
+    mutate(utterance = "null",
+           comparisonclass = 'low'),
+  data.frame(rs.listener.wp$med[[2]]$tall) %>% 
+    mutate(utterance = "tall",
+           comparisonclass = 'med'),
+  data.frame(rs.listener.wp$med[[2]]$short) %>% 
+    mutate(utterance = "short",
+           comparisonclass = 'med'),
+  data.frame(rs.listener.wp$med[[2]]$null) %>% 
+    mutate(utterance = "null",
+           comparisonclass = 'med'),
+  data.frame(rs.listener.wp$high[[2]]$tall) %>% 
+    mutate(utterance = "tall",
+           comparisonclass = 'high'),
+  data.frame(rs.listener.wp$high[[2]]$short) %>% 
+    mutate(utterance = "short",
+           comparisonclass = 'high'),
+  data.frame(rs.listener.wp$high[[2]]$null) %>% 
+    mutate(utterance = "null",
+           comparisonclass = 'high')
+)
+
+rs.listener.wp.tidy.samples <- get_samples(
+  rs.listener.wp.tidy %>% rename(prob = probs), 10000) %>%
+  mutate(utterance = factor(utterance,
+                            levels = c("tall", "short", "null"),
+                            labels = c("tall", "short", "prior")),
+         comparisonclass = factor(comparisonclass,
+                                  levels = c("low", "med", "high"),
+                                  labels = c("gymnast", "person", "basketball player")))
+
+
+ggplot(rs.listener.wp.tidy.samples,# %>%
+         #filter(utterance != "short", comparisonclass != "gymnast"), 
+       aes( x = support,linetype = utterance, color = utterance))+
+  geom_vline(xintercept = 0, linetype = 3, color ='white', alpha = 0.6)+
+  # geom_density ( data = 
+  #                  rs.listener.wp.tidy.samples %>%
+  #                  filter(utterance == "prior", 
+  #                         comparisonclass == "basketball player") %>%
+  #                  select(-utterance, -comparisonclass), inherit.aes = F,
+  #                aes( x = support), color = 'grey', adjust = 3)+
+  geom_density(alpha = 0.4, adjust = 3)+
+  #scale_fill_solarized()+
+  #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  #scale_color_manual(values = c("#ef8a62", "#f7f7f7"))+
+  #scale_color_manual(values = c("#ef8a62", "#f7f7f7"))+
+  xlab("Height (normalized scale)")+
+  #scale_linetype_manual(values = c(1, 2))+
+  scale_linetype_manual(values = c(1, 1, 2))+
+  ylab("probability density")+
+  scale_x_continuous(breaks =c(-2, 2), limits = c(-3.5, 3.5))+
+  theme_black()+
+  facet_wrap(~comparisonclass)
+  #scale_y_continuous(breaks = c(0, 2))#+
+  #guides(fill = F, color = F)
+
+ggsave("figs/adjectives_2ccs_tall_mucost3_s10_wSubCatPrior_widerXdomain.pdf", width = 6, height = 2.5)
+```
+
+## Just priors
+
+```{r just priors}
+bind_rows(
+  data.frame(
+    super = rnorm(n = 5000, mean = 0, sd = 1),
+    sub = rnorm(n = 5000, mean = -1, sd = 0.5),
+    sub_class = "gymnast"
+  ),
+  data.frame(
+    super = rnorm(n = 5000, mean = 0, sd = 1),
+    sub = rnorm(n = 5000, mean = 0, sd = 0.5),
+    sub_class = "soccer player"
+  ),
+  data.frame(
+    super = rnorm(n = 5000, mean = 0, sd = 1),
+    sub = rnorm(n = 5000, mean = 1, sd = 0.5),
+    sub_class = "basketball player"
+  )
+) %>%
+  gather(key, val, -sub_class) %>%
+  mutate(sub_class = factor(sub_class, levels = c("gymnast", "soccer player", 
+                                                  "basketball player")),
+         key = factor(key, levels = c( "sub", "super"),
+                      labels = c( "subordinate", "superordinate"))) %>%
+  rename("comparison class" = key) %>%
+  ggplot( ., 
+       aes( x = val, linetype = `comparison class`))+
+  #geom_vline(xintercept = 0, linetype = 3, color ='white', alpha = 0.6)+
+  geom_density(adjust = 1.5, color = 'white')+
+  #scale_fill_solarized()+
+  #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  xlab("Height (normalized scale)")+
+  scale_linetype_manual(values = c(1, 2))+
+  facet_wrap(~sub_class)+
+  ylab("probability density")+
+  scale_x_continuous(breaks =c(-2, 2))+
+  theme_black()
+
+ggsave("figs/adjectives_priors.pdf", width = 7, height = 3)
+
+```
+
+# Old code (depracated)
+
+## Run L0 
+
+```{r run L0}
+rs.wp.l0 <- webppl(paste(utils, language, rsa, literalListenerCall,  sep = '\n'))
+
+
+fig.l0.thresholds <- ggplot(rs.wp.l0, aes( x = state, 
+                                           y = literalPosterior, 
+                                       group = happy_theta))+
+  geom_line(aes(frame = happy_theta),
+            size = 2)+
+  geom_vline(aes(frame = happy_theta, xintercept = happy_theta), 
+             color = 'darkred', size = 2, linetype = 2)+
+  #scale_color_solarized()+
+  scale_x_continuous(breaks = c(0, 0.5, 1))+
+  scale_y_continuous(breaks = c(0, 0.5, 1))+
+  #scale_color_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  ggtitle("truth-functional threshold = ")+
+  ylab("Literal listener posterior probability")+
+  xlab("Degree of happiness")+
+  theme(text = element_text(size = 16))
+#+
+ # guides(color = guide_colourbar(title = "Threshold",
+#                                 ticks = F))
+
+# gganimate(fig.l0.thresholds,
+#           "figs/lassiterL0_flatPrior.gif")
+
+```
+
+## Run S1
+
+```{r run S1}
+rs.wp <- webppl(paste(utils, language, rsa, speakerCall,  sep = '\n'))
+
+rs.tidy <- data.frame(rs.wp) %>%
+  gather(utt, prob, -state, -happy_theta)
+```
+
+
+#### Faceting by thresholds
+
+```{r facet theta, fig.width = 16, fig.height = 3.5}
+fig.thresholds <- ggplot(rs.tidy %>%
+                           mutate(utt = factor(utt,
+                                               levels=c("null","happy"))), 
+                         aes( x = state, y = prob, fill = utt))+
+  geom_col(position = position_dodge(), aes(frame = happy_theta),
+           color = 'black')+
+  #facet_wrap(~happy_theta)+
+  scale_x_continuous(breaks = c(0, 0.5, 1))+
+  scale_y_continuous(breaks = c(0, 0.5, 1))+
+  ggtitle("truth-functional threshold = ")+
+  ylab("Speaker probability of saying 'happy'")+
+  xlab("Degree of happiness")+
+  theme(text = element_text(size = 16))+
+  scale_fill_solarized()
+
+
+ gganimate(fig.thresholds, "figs/lassiterS1_uttXstateXtheta_wCost.gif")
+#ggsave(fig.thresholds, 
+ #      file = "figs/lassiterS1_uttXstateXtheta_wCost.pdf", width = 7, height = 7)
+```
+
+
+#### Marginalizing out thresholds
+
+```{r marginalize theta}
+rs.marginal <- rs.tidy %>%
+  group_by(state, utt) %>%
+  summarize(marginalProb = mean(prob))
+
+
+ggplot(rs.marginal, aes( x = state, y = marginalProb, color = utt))+
+  geom_line(size = 1.2)+
+  scale_color_solarized()+
+  xlab("Degree of happiness")+
+  ylab("Speaker utterance production probability")+
+  scale_x_continuous(breaks =c(0, 1))+
+  scale_y_continuous(breaks = c(0, 1), limits = c(0, 1))
+
+#ggsave("figs/lassiterS1_uttMarginals_wCost1.5_alpha1.png", width = 6, height = 3.7)
+```
