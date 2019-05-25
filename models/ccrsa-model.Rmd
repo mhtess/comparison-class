@@ -1,0 +1,1060 @@
+---
+title: "Comparison class inference RSA Model"
+output: html_notebook
+---
+
+```{r}
+library(rwebppl)
+library(jsonlite)
+library(ggthemes)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+theme_set(theme_few())
+```
+
+## RSA modeldefinition (string)
+
+```{r utils}
+utils <- 'var round = function(x){
+  return Math.round(x*10)/10
+}
+
+var distProbs = function(dist, supp) {
+  return map(function(s) {
+    return Math.exp(dist.score(s))
+  }, supp)
+}
+
+var KL = function(p, q, supp) {
+  var P = distProbs(p, supp), Q = distProbs(q, supp);
+  var diverge = function(xp,xq) {
+    return xp == 0 ? 0 : (xp * Math.log(xp / xq) );
+  };
+  return sum(map2(diverge,P,Q));
+};
+'
+```
+
+```{r language}
+language <- '
+
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+
+// var utterances = {
+//  positive: ["positive_Adjective", "positive_sub", "positive_super"],
+//  negative: ["negative_Adjective", "negative_sub", "negative_super"]
+// };
+
+var allUtts = ["positive_Adjective",
+             "positive_sub",
+             "positive_super",
+             "negative_Adjective",
+             "negative_sub",
+             "negative_super",
+             "silence_silence"
+             ]
+
+var utterances = {
+  positive: ["positive_Adjective", "silence_silence", "negative_Adjective"],
+  negative: ["positive_Adjective", "silence_silence", "negative_Adjective"],
+};
+
+// var utterances = {
+//  positive: allUtts,
+//  negative: allUtts
+// };
+
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: repeat(utterances[form].length, function(){ 1 })
+      })
+    }
+  })
+});
+
+// var meaning = function(utterance, state, threshold) {
+//  state > threshold ? flip(1-Number.EPSILON) : flip(Number.EPSILON)
+// }
+
+
+var meaning = function(utterance, state, thresholds) {
+   utterance == "positive" ? state > thresholds.pos ? flip(0.9999) : flip(0.0001) :
+   utterance == "negative" ? state < thresholds.neg ? flip(0.9999) : flip(0.0001) :
+   true
+}
+
+// var meaning = function(utterance, state, threshold) {
+//   utterance == "positive" ? state > threshold :
+//   utterance == "negative" ? state < threshold :
+//   true
+// }
+'
+```
+
+```{r prior}
+prior <- '
+var binParam = 5;
+
+// var stateParams = {
+//   sub: paramsFromR.priorParams.sub[0],
+//   super: paramsFromR.priorParams.super[0]
+// };
+var stateParams = {
+    sub: {mu: -1, sigma: 1},
+    super: {mu: 0, sigma: 1}
+}
+
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 3 * stateParams.super.sigma,
+          stateParams.super.mu + 3 * stateParams.super.sigma,
+          stateParams.super.sigma/binParam)
+);
+
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s))+
+    Number.EPSILON
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s))+
+    Number.EPSILON
+  }, stateVals)
+};
+
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){ return categorical({ vs: stateVals, ps: stateProbs.super}) }
+  })
+};
+'
+```
+
+```{r cc inference RSA}
+rsa <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?  comparisonClass :
+              u.split("_")[1] == "silence" ?  comparisonClass :
+              u.split("_")[1]
+    var utterance = u.split("_")[0]
+    var state = sample(statePrior[cc]);
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = cache(function(form, utterance, modelType) {
+  Infer({model: function(){
+    // var utterance = form + "_Adjective";
+
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[ modelType == "sample_sub" ? "sub" : comparisonClass]) 
+    var thresholds = {pos: sample(thresholdPrior(form)), neg: sample(thresholdPrior(form))}
+
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, utterance);
+    return state
+  }})
+})
+
+var speaker2 = function(state, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L1 = pragmaticListener(form, utterance)
+    factor( alphas.s2 * L1.score(state) )
+    return utterance
+  }})
+}
+'
+```
+
+```{r model calls}
+s2calls <-'
+_.flatten(
+    map(function(s){
+        var speakProbs = speaker2(s, "positive")
+        var uttProbs = _.fromPairs(map(function(u){ return [u, Math.exp(speakProbs.score(u))]}, allUtts))
+        return extend(uttProbs, { s:s }
+    }, stateVals))
+'
+
+s1calls <-'
+_.flattenDeep(
+map(function(c){
+  map(function(t_pos){
+    map(function(t_neg){
+      map(function(s){
+        var speakProbs = speaker1(s,{pos: t_pos, neg: t_neg}, c, "positive")
+        var uttProbs = _.fromPairs(map(function(u){ return [u, Math.exp(speakProbs.score(u))]}, allUtts))
+        return extend(uttProbs, { s, c, t_pos, t_neg})
+      }, stateVals)
+    }, thresholdBins.negative)
+  }, thresholdBins.positive)
+}, ["super","sub"])
+)
+'
+```
+
+# Pragmatic listener inferences
+
+```{r rsaPrior}
+priorForRSA <- '
+var binParam = 4;
+
+var stateParams = {
+  sub: paramsFromR.priorParams.sub[0],
+  super: paramsFromR.priorParams.super[0]
+};
+
+var stateVals = map(
+  round,
+  _.range(stateParams.super.mu - 2 * stateParams.super.sigma,
+          stateParams.super.mu + 2 * stateParams.super.sigma + stateParams.super.sigma/binParam,
+          stateParams.super.sigma/binParam)
+);
+
+var stateProbs = {
+  sub: map(function(s){
+    Math.exp(Gaussian(stateParams.sub).score(s))+
+    Number.EPSILON
+  }, stateVals),
+  super: map(function(s){
+    Math.exp(Gaussian(stateParams.super).score(s))+
+    Number.EPSILON
+  }, stateVals)
+};
+
+var statePrior = {
+  sub: Infer({
+    model: function(){ return categorical({vs: stateVals, ps: stateProbs.sub}) }
+  }),
+  super: Infer({
+    model: function(){ return categorical({ vs: stateVals, ps: stateProbs.super}) }
+  })
+};
+'
+```
+
+```{r rsaLanguage}
+languageForRSA <- '
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+var utterances = { positive: ["positive_Adjective", "positive_sub", "positive_super"], negative: ["negative_Adjective", "negative_sub", "negative_super"] };
+
+// var utterances = { positive: ["positive_Adjective","negative_Adjective","silence_silence"], negative: ["positive_Adjective","negative_Adjective", "silence_silence"] };
+
+var utteranceProbs = [1, 1, 1];
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: utteranceProbs
+      })
+    }
+  })
+});
+
+var meaning = function(utterance, state, thresholds) {
+  utterance == "positive" ? state > thresholds.positive ? flip(0.9999) : flip(0.0001) :
+  utterance == "negative" ? state < thresholds.negative ? flip(0.9999) : flip(0.0001) :
+  true
+}
+
+'
+```
+
+```{r ccRSA}
+ccrsa <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var utterance = u.split("_")[0]
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+
+pragmaticListener(paramsFromR.utt[0])
+'
+```
+
+
+## Run L1 modoel
+
+```{r runModel, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, ccrsa, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both)
+  }
+  print(p$mu)
+}
+
+```
+
+Plot L1 predictions
+
+```{r plot L1 results}
+ggplot(mp.both %>%
+                    mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+```
+
+
+## L1 "wonky worlds" setup
+
+Main feature is that pragmatic listener doesn't sample values of degree from subcat, but rather whatever the comparison class is. 
+
+Could further assume that prior on subcat is high. 
+
+```{r ccRSA_wwAlt}
+ccrsa_alt_ww <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Categorical({ vs: ["sub", "super"], ps: [1, 1] });
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var utterance = u.split("_")[0]
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var pragmaticListener = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[comparisonClass]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+
+pragmaticListener(paramsFromR.utt[0])
+'
+```
+
+```{r runModel alt_ww, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both.ww <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, ccrsa_alt_ww, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both.ww <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both.ww)
+  }
+  print(p$mu)
+}
+
+```
+
+```{r L1 alternativemodel predictions plot}
+ggplot(mp.both.ww %>%
+         mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+  
+```
+
+
+## L2 setup
+
+```{r rsaLanguage_l2}
+languageForRSA_l2 <- '
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+// var utterances = { positive: ["positive_Adjective", "positive_sub", "positive_super"], negative: ["negative_Adjective", "negative_sub", "negative_super"] };
+
+var utterances = { positive: ["positive_Adjective","negative_Adjective","silence_silence"], negative: ["positive_Adjective","negative_Adjective", "silence_silence"] };
+
+var utteranceProbs = [1, 1, 1];
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: utteranceProbs
+      })
+    }
+  })
+});
+
+var meaning = function(utterance, state, thresholds) {
+  utterance == "positive" ? state > thresholds.positive ? flip(0.9999) : flip(0.0001) :
+  utterance == "negative" ? state < thresholds.negative ? flip(0.9999) : flip(0.0001) :
+  true
+}
+
+'
+```
+
+```{r ccRSA_l2}
+ccrsa_l2 <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, thresholds, comparisonClass) {
+  Infer({model: function(){
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var utterance = u.split("_")[0]
+    var m = meaning(utterance, state, thresholds);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, thresholds, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, thresholds, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var listener1 = function(u, comparisonClass, form) {
+  Infer({model: function(){
+    // var utterance = form + "_Adjective";
+    // var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[comparisonClass]);
+     // display(comparisonClass)
+    var thresholds = {
+      positive: sample(thresholdPrior("positive")),
+      negative: sample(thresholdPrior("negative"))
+    }
+    var S1 = speaker1(state, thresholds, comparisonClass, form);
+    observe(S1, u);
+    return state
+  }})
+}
+
+var speaker2 = cache(function(state, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L1 = listener1(utterance, comparisonClass, form)
+    factor(alphas.s2 * L1.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var listener2 = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    // display(comparisonClass)
+//    var state = sample(statePrior[comparisonClass]);
+    var state = sample(statePrior["sub"]);
+    var S2 = speaker2(state, comparisonClass, form);
+    observe(S2, utterance);
+    return comparisonClass
+  }})
+}
+'
+```
+
+```{r S2 calls}
+s2calls_L1 <-'
+var speakerUtts = ["positive_Adjective",
+"negative_Adjective","silence_silence"]
+
+_.flattenDeep(map(function(comparisonclass){
+  map(function(s){
+    var speakProbs = speaker2(s, comparisonclass, "positive")
+    var uttProbs = _.fromPairs(map(function(u){ 
+      return [u, Math.exp(speakProbs.score(u))]
+    }, speakerUtts))
+    return extend(uttProbs, { s:s, c: comparisonclass })
+    }, stateVals)
+}, ["sub","super"]))
+'
+```
+
+## Run L2 / S2 models
+
+```{r runModel_L2, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both <- data.frame()
+mp.s2 <- data.frame()
+fullModel <- paste(utils, priorForRSA, languageForRSA_l2, ccrsa_l2, 
+                   "listener2(paramsFromR.utt[0])", sep = "\n")
+
+fullModel_s2 = paste(utils, priorForRSA, languageForRSA_l2, ccrsa_l2, 
+                     s2calls_L1, sep = "\n")
+
+for (p in sub.prior.params){
+  
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both)
+  }
+  
+  mp.s2 <- webppl(
+      program_code = fullModel_s2,
+      data = list(priorParams = prior.params),
+      data_var = "paramsFromR"
+  ) %>%
+    mutate(sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]) %>%
+    bind_rows(mp.s2)
+  
+  print(p$mu)
+}
+
+```
+
+#### Plot L2
+
+```{r}
+mp.both %>%
+  mutate(Adjective = factor(u,
+                            levels = c("negative", "positive"),
+                            labels = c("short", 
+                                       "tall")),
+         sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player",
+                                    "basketball player")),
+                           subInterpretation = 1- prob) %>%
+ggplot(., aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'white', 
+           alpha = 0.8, width = 0.75)+
+  theme_black()+
+  #scale_fill_brewer(palette = "Set3")+
+    #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
+  geom_hline(yintercept = 0.5, lty = 2, color = 'white')+
+  xlab("Subordinate Category")+
+  ylab("Subordinate comparison class")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+
+ggsave("figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3)
+```
+
+#### Plot: S2
+
+```{r plot s2}
+make_density_line <- function(mu, sigma){
+  bind_rows(lapply(seq(-2, 2, 0.1), function(b){
+    return(data.frame(s = b, p = dnorm(b, mean = mu, sd = sigma)))
+  }))
+}
+
+sub_cat_priors <- bind_rows(
+  make_density_line(-1, 0.5) %>% mutate(sub_mu = "low"),
+  make_density_line(0, 0.5) %>% mutate(sub_mu = "medium"),
+  make_density_line(1, 0.5) %>% mutate(sub_mu = "high")
+) %>% 
+  mutate(sub_mu = factor(sub_mu, levels = c("low", "medium","high"),
+                         labels =  c("jockey", "soccer player","basketball player")))
+
+mp.s2 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c("negative_Adjective", "positive_Adjective",
+                                 "silence_silence"),
+                      labels = c("short", "tall", "silence"))) %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = utt))+
+  geom_line(inherit.aes = F, data = sub_cat_priors, aes(x = s, y = p), 
+            color = 'grey', linetype = 2)+
+  geom_line()+
+  #geom_line(position = position_dodge(width = 0.3))+
+  theme_black()+
+  scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_alpha_manual(values  = c(1, 1, 0.4))+
+  facet_grid(sub_mu~c)+
+  xlab("Height (normalized scale)")+
+  ylab("Speaker Production Probability")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+ggsave("figs/cc_inference_S2_subPrior_altsNoExpl.pdf", width = 6, height = 5)
+
+```
+
+Only basketball player
+
+```{r}
+mp.s2 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c("negative_Adjective", "positive_Adjective",
+                                 "silence_silence"),
+                      labels = c("short", "tall", "silence")),
+         c = factor(c, levels = c("sub", "super"),
+                    labels = c("for a basketball player",
+                               "for a person"))) %>%
+  filter(sub_mu == "basketball player") %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = utt))+
+  geom_line(inherit.aes = F, data = sub_cat_priors %>%
+                filter(sub_mu == "basketball player"), 
+            aes(x = s, y = p), 
+            color = 'grey', linetype = 2)+
+  geom_line()+
+  #geom_line(position = position_dodge(width = 0.3))+
+  theme_black()+
+  scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_alpha_manual(values  = c(1, 1, 0.4))+
+  facet_grid(.~c)+
+  xlab("Height (normalized scale)")+
+  ylab("Speaker Production Probability")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+ggsave("figs/cc_inference_S2_subPrior_altsNoExpl_bbaler.pdf", width = 6, height = 3)
+
+```
+
+## L0 model predictions
+
+```{r l0_alternativemodel}
+cc_l0 <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var literal_alternative = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior[comparisonClass]);
+    var thresholds = form == "positive" ? {
+      positive: sample(thresholdPrior("positive"))
+    } : {
+      negative: sample(thresholdPrior("negative"))
+    }
+    var m = meaning(form, state, thresholds);
+    condition(m);
+    
+    return comparisonClass
+  }})
+}
+
+literal_alternative(paramsFromR.utt[0])
+'
+```
+
+## Run L0
+
+```{r runModelL0, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both.l0 <- data.frame()
+
+fullModel <- paste(utils, priorForRSA, languageForRSA, cc_l0, sep = "\n")
+
+for (p in sub.prior.params){
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both.l0 <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both.l0)
+  }
+  #print(p$mu)
+}
+
+```
+
+Plot L0
+
+```{r L0  model predictions plot}
+ggplot(mp.both.l0 %>%
+         mutate(Adjective = factor(u,
+                                      levels = c("negative", "positive")),
+                           sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
+                                           labels = c("low", "medium",
+                                                      "high")),
+                           subInterpretation = 1- prob),
+                  aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_hline(yintercept = 0.5, lty = 2)+
+  xlab("Subordinate prior mean")+
+  ylab("Subordinate interpretation")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  theme(legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+  
+```
+
+
+
+
+# Run S1 models
+
+##  N(-1,1) and super N(0, 1)
+
+### S( u | c, \theta, x) = Speaker utterances gives an implicit comparison class and threshold
+
+```{r fig.width = 7}
+
+rs.wp <- webppl(paste(utils, prior, language, rsa, s1calls, sep = '\n'))
+
+rs.tidy <- rs.wp %>%
+  gather(utt, prob, -c, -s, -t_pos, -t_neg) %>%
+  separate(utt, into = c("form", "explClass"))
+
+subset.thetas.pos <- sort(unique(rs.wp$t_pos))[seq(1, 30, 7)]
+subset.thetas.neg <- sort(unique(rs.wp$t_neg))[seq(1, 30, 7)]
+
+rs.tidy %>%
+  filter( t_pos %in% subset.thetas.pos, t_neg %in% subset.thetas.neg) %>%
+  mutate(utt = paste(form, explClass, sep = "_")) %>%
+  ggplot(., aes( x = s, y = prob, color = utt))+
+  geom_line()+
+  scale_color_solarized()+
+  facet_grid(t_neg~t_pos + c)
+```
+
+
+Explaining speaker production probabilities for sub: N(-1,1) and super N(0, 1) [same variance, sub has lower mean]. Let's call these LOW and HIGH
+
+- *Comparison class fixed to "HIGH"*
+  - When threshold is very low, and the state is low, you say the *LOW* (because it is more likely to be true of the subclass, because it has lower mean)
+    - As the state increases, more likely to say *HIGH* or *ambiguous* (since class = "super", *HIGH* and *ambiguous* have the same effect)
+  - As the threshold increases, speaker more likely to say *LOW* for higher states than before. 
+    - This is because the utterance becomes more informative for the LOW distribution. This trades off with the prior probability of the state under the LOW distribution and the rising informativity under the HIGH distribution.
+
+Pragmatic listener inferences
+  - Prefers subordinate (because it would be more informative)
+    - an L0 model with the same priors and points of uncertainty (cc, threshold, state), arrives at the opposite conclusion (because it's more likely that the taller thing is above a threshold)
+    
+#### S1: Marginalize out theta
+
+Note that "ambiguous" serves the same function as whatever comparison class you're in. 
+So given the super comparison class, if you heard the ambiguous utterance, you would end up thinking the meaning was the same as "super utterance". 
+
+```{r}
+rs.marginal <- rs.tidy %>%
+  group_by(c, s, form, explClass) %>%
+  summarize(marginalProb = mean(prob))
+
+#save(rs.marginal, file = "../writing/paper/cached_results/S1_marginalizeOutTheta.RData")
+
+
+ggplot(rs.marginal, aes( x = s, y = marginalProb, color = form, lty = explClass))+
+  #stat_function(fun = dnorm, n = 101, args = list(mean = 1, sd = 0.5), inherit.aes = F,
+#                linetype = 4) +
+  geom_area(stat = "function", fun = dnorm, args = list(mean = -1, sd = 1),
+            fill = "black", xlim = c(-3, 3), alpha = 0.3, inherit.aes = F) +
+  geom_line(position = position_dodge(0.3))+
+  scale_color_solarized()+
+  scale_linetype_manual(values = c(1,5, 3))+
+  facet_wrap(~c)#+
+  #xlim(-1.8, 1)
+```
+
+If the cc was *SUPER* (or *HIGH*, in this case), the meaning is the same as saying "super", which is only likely to be prduced near the high end of the scale (because of the logic spelled out above). But, our prior tells us that we are in the subordinate class. which in this case puts us near the low-end of the scale. If that were the case, the speaker would have said "subUtt", but he didn't. So if instead, we are in the subo class, "ambiguous" means the same thing as "subUtt", which is likely to be produecd in the region we know to be the case (the low end of the scale). 
+    
+
+###  N(0,0.5) and super N(0, 1)
+   
+Speaker 1 model
+
+- *Comparison class fixed to "SUPER"*
+  - When threshold is very low, and the state is low, you say the *LOW* (because it is more likely to be true of the subclass, because it has lower mean)
+    - As the state increases, more likely to say *HIGH* or *ambiguous* (since class = "super", *HIGH* and *ambiguous* have the same effect)
+  - As the threshold increases, speaker more likely to say *LOW* for higher states than before. 
+    - This is because the utterance becomes more informative for the LOW distribution. This trades off with the prior probability of the state under the LOW distribution and the rising informativity under the HIGH distribution.
+
+
+Notes from Skype meeting with MLB
+
+- Marginal distribution on utterances, marginalizing out listener's prior ("sub") could be illustrative
+- Is there a speaker task to run? 
+  - Good manipulation might be people who both grew up in different states (temperatures)
+  
+
+
+## Speaker 2 simulations
+
+```{r}
+rs2.wp <- webppl(paste(utils, prior, language, rsa, s2calls, sep = '\n'))
+
+rs2.tidy <- rs2.wp %>%
+  gather(utt, prob, superUtt, subUtt, ambiguous)
+
+ggplot(rs2.tidy, aes( x = s, y = prob, color = utt, lty = utt))+
+  geom_line(position = position_dodge(0.3))+
+  scale_color_solarized()+
+  xlim(-2, 3)
+```
+
+utility fn in continuous space: partial credit
+
