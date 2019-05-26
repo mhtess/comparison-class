@@ -154,9 +154,15 @@ for row in i:
 
         all_results[stim_id][np_positiveness][adj_positiveness].append(str(response))
 
+for i in range(NUM_STIMULI):
+    for np_option in ['high', 'med', 'low']:
+        for adj_option in ['positive', 'negative']:
+            print(all_results[i][np_option][adj_option])
+    print('\n')
+
 lemmatizer = WordNetLemmatizer()
 
-def process_response_group(responses, np_option, adj_option, stim_id, lemmatizer):
+def process_response_group(responses, lemmatizer):
 
     responses_lemmatized = []
     for r in responses:
@@ -182,7 +188,7 @@ for i in range(1):
             # Retrieve lemmatized responses (pre-processed by a human)
             clean_response = responses_cleaned[i][np_option][adj_option]
 
-            response_freqs = process_response_group(clean_response, np_option, adj_option, stim, lemmatizer)
+            response_freqs = process_response_group(clean_response, lemmatizer)
 
             if np_option == 'high':
                 syn = stim['positive']

@@ -65,6 +65,8 @@ function make_slides(f) {
 
       // Building the appropriate context information
       this.context_mod = stim.context
+      this.degree = stim.degree
+      this.stim_id = stim.stim_id
 
       // Insert name info
       re_name = new RegExp("PERSON", "g")
@@ -152,10 +154,12 @@ function make_slides(f) {
           "trial_type" : "free_class_elicitation",
           "trial_num": this.trial_num,
           "rt": this.rt,
+          "stim_id": this.stim_id,
           "context" : this.context_mod,
           "np" : this.phrase,
           "np_positiveness" : this.np_positiveness,
           "adj" : this.adj,
+          "degree" : this.degree,
           "adj_positiveness" : this.adj_positiveness,
           "response" : response
         }));
