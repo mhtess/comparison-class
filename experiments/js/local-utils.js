@@ -68,6 +68,7 @@ function getNounElicitationTrials(examples) {
   for (var i = 0; i < examples.length; i++) {
     form = _.sample(["positive", "negative", "neither_nor"]);
     trials.push({
+      stim_id: examples[i].stim_id,
       positive: examples[i].positive,
       negative: examples[i].negative,
       neither_nor: examples[i].neither_nor,

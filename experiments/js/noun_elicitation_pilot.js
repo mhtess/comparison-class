@@ -1,4 +1,5 @@
 var examples = [{
+    "stim_id": 0,
     "degree": "darkness",
     "positive": "the morning",
     "negative": "the evening",
@@ -11,6 +12,7 @@ var examples = [{
     "environment_mod": "out here"
   },
   {
+    "stim_id": 1,    
     "degree": "height",
     "positive": "adult",
     "negative": "child",
@@ -25,6 +27,7 @@ var examples = [{
     "context": "PERSON sees PRE PHRASE named Pat."
   },
   {
+    "stim_id": 2,
     "degree": "price",
     "positive": "steak",
     "negative": "pork",
@@ -36,6 +39,7 @@ var examples = [{
     "context": "PERSON is at the butchershop and looks at the price of a piece of PHRASE."
   },
   {
+    "stim_id": 3,
     "degree": "sound",
     "positive": "drums",
     "negative": "violin",
@@ -47,6 +51,7 @@ var examples = [{
     "context": "PERSON hears somebody playing the PHRASE."
   },
   {
+    "stim_id": 4,
     "degree": "weight",
     "positive": "box",
     "negative": "envelope",
@@ -61,6 +66,7 @@ var examples = [{
     "context": "The mailman drops off PRE PHRASE for PERSON. PERSON picks it up."
   },
   {
+    "stim_id": 5,
     "degree": "height",
     "positive": "basketball player",
     "negative": "jockey",
@@ -72,6 +78,7 @@ var examples = [{
     "context": "PERSON sees a PHRASE."
   },
   {
+    "stim_id": 6,
     "degree": "price",
     "positive": "bottle of top-shelf liquor",
     "negative": "box of wine",
@@ -83,6 +90,7 @@ var examples = [{
     "context": "PERSON looks at the price of a PHRASE."
   },
   {
+    "stim_id": 7,
     "degree": "sound",
     "positive": "gymnasium",
     "negative": "library",
@@ -95,6 +103,7 @@ var examples = [{
     "environment_mod": "in here"
   },
   {
+    "stim_id": 8,
     "degree": "temperature",
     "positive": "coffee",
     "negative": "water",
@@ -106,6 +115,7 @@ var examples = [{
     "context": "PERSON takes a first sip from a cup of PHRASE."
   },
   {
+    "stim_id": 9,
     "degree": "weight",
     "positive": "piece of furniture",
     "negative": "piece of clothing",
@@ -117,6 +127,7 @@ var examples = [{
     "context": "PERSON is helping a friend move and picks up a PHRASE."
   },
   {
+    "stim_id": 10,
     "degree": "size",
     "positive": "villa",
     "negative": "apartment",
@@ -131,6 +142,7 @@ var examples = [{
     "context": "PERSON is looking for a place to live and checks out PRE PHRASE."
   },
   {
+    "stim_id": 11,
     "degree": "time",
     "positive": "movie",
     "negative": "TV show",
@@ -142,6 +154,7 @@ var examples = [{
     "context": "PERSON is thinking about watching something on Netflix and looks at the duration of a PHRASE."
   },
   {
+    "stim_id": 12,
     "degree": "weight",
     "positive": "adult",
     "negative": "baby",
@@ -156,6 +169,7 @@ var examples = [{
     "context": "PERSON lifts up PRE PHRASE named Allen."
   },
   {
+    "stim_id": 13,
     "degree": "sound",
     "positive": "rooster",
     "negative": "hummingbird",
@@ -167,6 +181,7 @@ var examples = [{
     "context": "PERSON is walking outside and hears the cry of a PHRASE."
   },
   {
+    "stim_id": 14,
     "degree": "temperature",
     "positive": "Summer",
     "negative": "Winter",
@@ -179,6 +194,7 @@ var examples = [{
     "context": "PERSON steps outside on a day in PHRASE."
   },
   {
+    "stim_id": 15,
     "degree": "height",
     "positive": "giraffe",
     "negative": "penguin",
@@ -190,6 +206,7 @@ var examples = [{
     "context": "PERSON sees a PHRASE at the zoo."
   },
   {
+    "stim_id": 16,
     "degree": "weight",
     "positive": "steel",
     "negative": "styrofoam",
@@ -201,6 +218,7 @@ var examples = [{
     "context": "PERSON is working in the machine shop and picks up a piece of PHRASE."
   },
   {
+    "stim_id": 17,
     "degree": "size",
     "positive": "dog",
     "negative": "mouse",
@@ -212,6 +230,7 @@ var examples = [{
     "context": "PERSON is visiting a friend and sees their pet PHRASE."
   },
   {
+    "stim_id": 18,
     "degree": "temperature",
     "positive": "burger",
     "negative": "ice cream",
@@ -223,6 +242,7 @@ var examples = [{
     "context": "The waitress brings PERSON PRO food at the diner. PERSON takes the first bite of PRO PHRASE."
   },
   {
+    "stim_id": 19,
     "degree": "time",
     "positive": "snake",
     "negative": "slug",
