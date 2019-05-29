@@ -160,13 +160,107 @@ challenging numerical estimation tasks.
 
 \section{Computational Model}
 
-In the context we consider, a listener hears the temperature of a day in winter described as ``warm''. 
+We explicate our model continuing with the running example of hearing the temperature of a day in winter described as ``warm''. 
+In this context, the listener is faced with a joint inference problem concerned with determining the temperature outside $x$ and the comparison class assumed by the speaker $c$ in producing their adjectival utterance $u$ (e.g., ``it's warm'').
+%For both of these random variables, the listener can employ knowledge to constrain the inference problem. 
+%Specifically, 
+The listener should use the totality of relevant beliefs, both the beliefs shared with the speaker $f$ and the listener's private beliefs $g$, to guide their predictions about the likely temperature of the day. 
+For example, if the listener that the day is a day in Winter, they should sample likely values of the temperature from a probability distribution conditional on it being a winter day.
+This belief may or may not be shared with the speaker, though in the contexts we consider, it can be assumed to be a shared belief.
+
+The hypothesis space of comparison classes are the possible ways that the speaker is conceptualizing the referent, including potentially ad-hoc categorizations.
+To inform this parameter, the listener should use their beliefs about the referent that are shared with the speaker; the listener's private beliefs not shared with the speaker should not be used to construct a probability distribution over possible comparison classes \emph{assumed by the speaker}.
+Minimally, a space of comparison classes can be constructed out of taxonomic knowledge of the subordinate category to which the referent belongs (e.g., a day this week is a day in January is a day in winter is a day of the year).
+
+Finally, the listener $L_2$ updates their beliefs about the day's temperature $x$ and the likely comparison class $c$ by assumed that a speaker $S_2$ intentionally produced an adjectival utterance $u$ in order to communicate about the temperature.
+Formally, this inference can be captured in a Bayesian formulation:
+
+\begin{align}
+L_2(x, c \mid u) &\propto S_2(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c \mid f) \label{eq:L2} 
+\end{align}
+
+The speaker $S_2$ in this model is a soft-max rational agent who produces utterances in order to convey information to a listener $L_{1}$ who knows the comparison class, while also taking into account the cost of the utterance $u$\footnote{For all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterance. Hence, our model reduces to simply: $S_2(u \mid x, c) \propto L_{1}(x \mid u, c)^{ \alpha_{2}}$}: 
+
+\begin{align}
+S_2(u \mid x, c) &\propto \exp{(\alpha_{2} \cdot (\ln L_{1}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S2} 
+\end{align}
+%exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} )}
+
+The listener who updates their beliefs about the temperature given a vague adjectival utterance and with a fixed comparison class $L_{1}(x \mid u, c)$ can be any function that maps an adjective to a probability distribution over temperatures, in a way that is comparison class sensitive (e.g., warm for winter vs. warm for summer). 
+This problem has been recently treated by at least two different computational models that make contact with standard accounts of the formal semantics of adjectives (Lassiter \& Goodman, 2013; Qing \& Franke, 2014a).
+Presently, we adopt the model of Lassiter \& Goodman (2013), though the formulation of the problem above who generalize to other models of adjective interpretation. 
+
+%Gradable adjectives like \emph{warm} and \emph{cold} are vague
+%descriptions of an underlying quantitative scale (e.g., temperature).
+Classic semantic theories posit the meaning of gradable adjectives to simply be that the scalar degree $x$ (e.g., temperature) is greater than or less than a contextually-supplied standard of comparison  \(\theta_c\): \([\![u_{pos}]\!] = x > \theta_c\), for positive-form adjectival utterance \(u_{pos}\) (e.g., warm) and \([\![u_{neg}]\!] = x < \theta_c\), for negative-form adjectival utterance \(u_{neg}\) (e.g., cold).
+ Lassiter \& Goodman (2013) model the context-sensitivity of these adjectival utterances using threshold semantics, where
+the threshold is probabilistically set with respect to a comparison class \(c\) via pragmatic reasoning :
+
+\begin{align}
+L_{1}(x, \theta \mid u, c) &\propto S_{1}(u \mid x, \theta) \cdot P(x \mid c) \cdot P(\theta) \label{eq:L1} \\
+S_{1}(u \mid x, \theta, c) &\propto \exp{(\alpha_1 \cdot (\ln {L_{0}(x \mid u, \theta, c)} - \text{cost}(u)))} \label{eq:S1}\\
+L_{0}(x \mid u, \theta, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \label{eq:L0}
+\end{align}
+
+Eqs. \ref{eq:L1} - \ref{eq:L0} are the Rational Speech Act mode  Lassiter \& Goodman (2013). 
+In this model, a pragmatic listener \(L_1\)
+tries to resolve the degree \(x\) (e.g., the temperature)
+from the adjectival utterance she heard \(u\) (e.g., ``it's warm''), by assuming the utterance came from an approximately rational Bayesian
+speaker \(S_1\) trying to inform a naive listener \(L_0\), who in turn
+updates their prior beliefs \(P_c(x)\) via an utterance's literal meaning
+\([\![u]\!](x, \theta)\).
+Formally, the literal meaning is represented by the
+Kronecker delta function \(\delta_{\mbox{ $[\![ u ]\!]$}(x, \theta)}\)
+that returns probabilities proportional to \(1\) when the utterance is
+true (i.e., when \(x > \theta\)) and \(0\) otherwise.
+The key innovation used for modeling gradable adjectives is to have uncertainty over the
+semantic variable---the threshold \(\theta\) (Eq. \ref{eq:L1}). In
+Lassiter and Goodman (2013)'s model, \(\theta\) comes from an improper uniform
+prior distribution over possible thresholds and is resolved by the
+listener reasoning about the different thresholds a speaker might be
+using \(S_{1}(u \mid x, \theta)\) as well as the probabilities of
+different states of the world \(P(x \mid c)\) (e.g., different
+temperatures). Assuming the adjective adds some cost to the speaker's
+utterance (Eq. \ref{eq:S1}), the meaning of a gradable adjectives (e.g.,
+``warm'') is resolved by the pragmatic listener to mean something
+like ``significantly greater temperature than one might expect''
+(Lassiter \& Goodman, 2015). Critically, what ``one might
+expect''---the prior distribution over temperatures \(P(x \mid c)\)---is
+always with respect to some comparison class \(c\) (Eqs. \ref{eq:L1} \&
+\ref{eq:L0})
+
+
+
+
+
+
+Several computational models have recently been proposed to account for the context-sensitivity of gradable adjectives ; .
+We adopt the  as our starting point, but our formulation 
+
+
+Finally, to perform this joint inference problem, we 
+
+Thus, the listener's beliefs about the temperature is a probability distribution conditional on the speaker and listener shared beliefs as well as the listener's private beliefs: $P(x \mid f, g)$.
+In the contexts we consider, the listener has no private beliefs and the totality of relevant shared beliefs boils down to the most specific categorization that the listener believes to be true of the referent (i.e., the day is a day in winter).
+
+%On the other hand, on the shared beliefs $g$ can be used to guide 
+
+
+
+
+
+Rationally, 
+Formally, this would 
+
+
+'s private beliefs (which we denote $f$) and the beliefs shared between speaker and listener (which we denote $g$) are important in constraining both the hypothesis space of comparison classes and the knowledge the listener uses to resolve the meaning of the utterance.
+
 Inferring the comparison class is necessarily a problem of inferring the intentions of another person.
 The relevant question is not \emph{is today a day in winter?} (an inference about the world), but rather \emph{did the speaker mean to draw a comparison to days to winter?} (an inference about intentions).
+Thus, a model for comparison class inference necessarily involves social reasoning about the speaker's intentions.
 
-The listener's private beliefs (which we denote $f$) and the beliefs shared between speaker and listener (which we denote $g$) are important in constraining both the hypothesis space of comparison classes and the knowledge the listener uses to resolve the meaning of the utterance.
+
 Both sets of beliefs can constrain the listener's belief distribution over the relevant degree as applied to the referent: If the listener knows that the day is a day in winter, they should use that information to guide their knowledge about the likely value of the degree $P(x \mid f, g)$.
-On the other hand, on the shared beliefs $g$ can be used to guide the hypothesis space of comparison classes because the comparison class is assumed to be the class intended by the speaker: $P(c \mid g)$.
 
 
 We model the scenario where a listener hears a gradable adjective describing a referent (e.g., that the temperature outside is warm) but does not know the comparison class assumed by the speaker. 
@@ -178,56 +272,7 @@ We formalize a simple theory where the
 
 Ideally, a theory of comparison class inference should blend seamlessly with theories of adjective interpretation more generally. 
 Thus, we begin with a model for gradable adjective interpretation and build a mechanism for comparison class inference on top of this model. 
-
-Gradable adjectives like \emph{warm} and \emph{cold} are vague
-descriptions of an underlying quantitative scale (e.g., temperature).
-Classic semantic theories posit the meaning of such gradable adjectives to simply be that the scalar degree $x$ (e.g., temperature) is greater than or less than a contextually-supplied standard of comparison  \(\theta_c\): \([\![u_{pos}]\!] = x > \theta_c\), for positive-form adjectival utterance \(u_{pos}\) (e.g., warm) and \([\![u_{neg}]\!] = x < \theta_c\), for negative-form adjectival utterance \(u_{neg}\) (e.g., cold).
-Several computational models have recently been proposed to account for the context-sensitivity of gradable adjectives (e.g., warm for winter vs. warm for summer; Lassiter \& Goodman, 2013;
-Qing \& Franke, 2014a).
-We adopt the  Lassiter \& Goodman (2013) as our starting point, but our formulation 
-The context-sensitivity of these adjectival utterances can
-be modeled using threshold semantics , where
-the threshold is probabilistically set with respect to a comparison
-class \(c\) via pragmatic reasoning :
-
-\begin{align}
-L_{1}(x, \theta \mid u) &\propto S_{1}(u \mid x, \theta) \cdot P_{c}(x) \cdot P(\theta) \label{eq:L1} \\
-S_{1}(u \mid x, \theta) &\propto \exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} - \text{cost}(u))} \label{eq:S1}\\
-L_{0}(x \mid u, \theta) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P_{c}(x)} \label{eq:L0}
-\end{align}
-
-Eqs. \ref{eq:L1} - \ref{eq:L0} are a Rational Speech Act (RSA) model, a
-recursive Bayesian model where speaker \(S\) and listener \(L\)
-coordinate on an intended meaning of an utterance \(u\) (for a review,
-see Goodman \& Frank, 2016). In this model, a pragmatic listener \(L_1\)
-tries to resolve the state of the world \(x\) (e.g., the temperature)
-from the utterance she heard \(u\) (e.g., ``it's warm''). He
-imagines the utterance came from an approximately rational Bayesian
-speaker \(S_1\) trying to inform a naive listener \(L_0\), who in turn
-updates his prior beliefs \(P_c(x)\) via an utterance's literal meaning
-\([\![u]\!](x, \theta)\).\footnote{We use the male pronoun ``he''
-  to refer to listeners and the female pronoun ``she'' to refer to
-  speakers.} Formally, the literal meaning is represented by the
-Kronecker delta function \(\delta_{\mbox{ $[\![ u ]\!]$}(x, \theta)}\)
-that returns probabilities proportional to \(1\) when the utterance is
-true (i.e., when \(x > \theta\)) and \(0\) otherwise.
-
-The key innovation used for modeling context-sensitive literal meanings
-(as in the case of gradable adjectives) is to have uncertainty over the
-semantic variable---the threshold \(\theta\) (Eq. \ref{eq:L1}). In
-Lassiter and Goodman (2013)'s model, \(\theta\) comes from an uniform
-prior distribution over possible thresholds and is resolved by the
-listener reasoning about the different thresholds a speaker might be
-using \(S_{1}(u \mid x, \theta)\) as well as the probabilities of
-different states of the world \(P_{c}(x)\) (e.g., different
-temperatures). Assuming the adjective adds some cost to the speaker's
-utterance (Eq. \ref{eq:S1}), the meaning of a gradable adjectives (e.g.,
-``warm'') is resolved by the pragmatic listener to mean something
-like ``significantly greater temperature than one might expect''
-(Lassiter \& Goodman, 2015). Critically, what ``one might
-expect''---the prior distribution over temperatures \(P_{c}(x)\)---is
-always with respect to some comparison class \(c\) (Eqs. \ref{eq:L1} \&
-\ref{eq:L0}). Where does this comparison class come from?
+. Where does this comparison class come from?
 
 We hypothesize that listeners maintain uncertainty about multiple
 possible comparison classes, but can reduce their uncertainty by
