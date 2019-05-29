@@ -43,14 +43,14 @@ E-mail:}
 \abstract{
 The meaning of an utterance can change depending on the context. Yet,
 what counts as the relevant context is often only implicit in everyday
-conversation. The utterance ``it's warm outside'' could signal many things: It's warm
-relative to other days of the year, it's warm for the season, it's warm for the week, etc.. 
-\emph{Warm} conveys that the
-temperature is high relative to some contextual \emph{comparison class},
-but little is known about how a listener decides upon the appropriate
-class for comparison. Here, we incorporate a mechanism for inferring the comparison class into a probabilistic model of adjective interpretation, which makes predictions about the relative generality of the comparison class that a listener should prefer.
-We test the qualitative predictions of the model in a free production experiment and use a forced-choice version of the task to test the finer-grained, quantitative predictions. 
-The resolution of a comparison class requires not only reasoning about what is likely to be the case but also what would be informative to talk about, thus incorporating comparison class inference into the larger study of pragmatic reasoning.
+conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}:  warm
+relative to other days of the year, warm for the season, warm for the week, etc.. 
+Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener reasons through this open-ended inference problem.
+We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
+The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we into a probabilistic model of adjective interpretation, thus furthering the reach of computational models of language understanding. 
+The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
+%We test the qualitative predictions of the model in a free production experiment and use a forced-choice version of the task to test the finer-grained, quantitative predictions. 
+%The resolution of a comparison class requires not only reasoning about what is likely to be the case but also what would be informative to talk about, thus incorporating comparison class inference into the larger study of pragmatic reasoning.
 }
 
 
@@ -73,8 +73,8 @@ The resolution of a comparison class requires not only reasoning about what is l
 \section{Introduction}
 
 A 75 \degree F (24 \degree C) day is warm. A 60 \degree F (16 \degree C)
-day is not, unless it's January; it could be warm for January.
-\emph{Warm} is relative, and its felicity depends upon what the speaker
+day is not. That is, unless it's January; 60 \degree F could be warm for January.
+\emph{Warm} is a relative adjective, and its felicity depends upon what the speaker
 uses as a basis of comparison---the \emph{comparison class} (e.g., other
 days of the year or other days in January). Comparison classes are
 necessary for understanding adjectives and, in fact, any part of
@@ -97,11 +97,10 @@ what goes into the comparison class and what does not: What counts as a
 \emph{pimwits} and not the heights of other creatures like \emph{daxes}
 \cite{Barner2008}. Even children as young as 2-and-a-half
 understand that ``big'' is relative ({\textbf{???}}) and that the
-comparison class can change \cite<e.g., a ``small mitten'' can be big for the
-current physical context;>{Ebeling1988, Ebeling1994}.
+comparison class can change \cite<e.g., a ``small mitten'' can be big relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
 
-How do listeners decide on the appropriate comparison class? Any
-particular referent of discourse can be conceptualized or categorized in
+%How do listeners decide on the appropriate comparison class? 
+Any particular referent of discourse can be conceptualized or categorized in
 multiple ways, giving rise to multiple possible comparison classes. A day in
 January is also a day of the year; if a listener hear ``It's
 warm'', it could be \emph{warm for the week}, \emph{warm for winter}, or
@@ -109,7 +108,7 @@ warm'', it could be \emph{warm for the week}, \emph{warm for winter}, or
   Boston}, \emph{warm for the northeast USA}, \emph{warm for a place
   with currently six inches of snow on the ground}, among many more
   possibilities. } In this paper, we investigate the first aspect of
-this problem, deciding among multiple plausible, conceptual comparison
+this open-ended inference problem, deciding among multiple conceptual comparison
 classes. Theoretical work in semantics has focused on how information
 from the comparison class gets integrated with a compositional semantics
 and what representations might be preferred \cite{Bale2011, Solt2009}.
@@ -117,29 +116,31 @@ The question of how listeners reconstruct a comparison class in
 undersupported contexts (e.g., just hearing ``It's warm outside'')
 has been addressed neither formally nor empirically.
 
-We propose that listeners combine probabilistic, category knowledge with
-pragmatic reasoning to infer the comparison class implicitly used by the
-speaker. This proposal leads to the following prediction: When it is
-winter, saying ``it's warm'' signals that it is \emph{warm for
-winter}, while saying ``it's cold'' signals \emph{cold for the
+We propose a null hypothesis that listeners perform Bayesian inference over the likely comparison class intended by the speaker, by balancing the \emph{a priori} probability of a comparison class with the likelihood that a speaker would use the adjective given the comparison class and given what the listener knows about the referent. 
+This proposal leads to the following prediction: When it is
+winter, hearing ``it's warm'' should signal \emph{warm for
+winter}, while ``it's cold'' signals \emph{cold for the
 year}. The opposite relationship should hold in summer, where
 ``it's cold'' should signal it's cold \emph{for summer} more so
-than ``it's warm''. This prediction is a result of the \emph{a
-priori} probability of different temperatures in different seasons: In
-winter, temperatures are relatively low, and thus it is unlikely to
-actually be \emph{warm for the year}. In addition, regardless of the
-season and the adjective (e.g., ``warm'' or ``cold''),
-listeners prefer comparison classes that are relatively specific (e.g.,
-relative to \emph{the current season} as opposed to \emph{the whole
-year}); more specific comparison classes have lower variance, and a
-vague adjectives like \emph{warm} carries more information when it is
-interpreted with respect to a lower variance comparison class. These
-predictions fall out of a Rational Speech Act (RSA) model for gradable
+than ``it's warm''. This prediction can be stated more generally that when an adjective signals a degree that is \emph{a priori} consistent with  the listener's knowledge of the referent (e.g., as a member of a category that generally has a high or low degree), the comparison class is likely to be a relatively general or superordinate category, whereas when the adjective signals a degree inconsistent with the listener's prior beliefs about the referent, the comparison class is likely to be a more specific or subordinate category. 
+These predictions fall out of a Rational Speech Act (RSA) model for gradable
 adjectives \cite{Lassiter2013, Lassiter2017}, extended to flexibly
 reason about the implicit comparison class. We test these predictions in
 two experiments by eliciting the comparison class using a forced-choice
 paraphrase dependent measure (Expt. 1) and a free-production dependent
 measure using an expanded stimulus set (Expt. 2).
+
+% a result of the \emph{a
+%priori} probability of different temperatures in different seasons: In
+%winter, temperatures are relatively low, and thus it is unlikely to
+%actually be \emph{warm for the year}. 
+%In addition, regardless of the
+%season and the adjective (e.g., ``warm'' or ``cold''),
+%listeners prefer comparison classes that are relatively specific (e.g.,
+%relative to \emph{the current season} as opposed to \emph{the whole
+%year}); more specific comparison classes have lower variance, and a
+%vague adjectives like \emph{warm} carries more information when it is
+%interpreted with respect to a lower variance comparison class. 
 
 \textcolor{Blue}{[mht: move to end of first expt]}
 
@@ -159,14 +160,35 @@ challenging numerical estimation tasks.
 
 \section{Computational Model}
 
+In the context we consider, a listener hears the temperature of a day in winter described as ``warm''. 
+Inferring the comparison class is necessarily a problem of inferring the intentions of another person.
+The relevant question is not \emph{is today a day in winter?} (an inference about the world), but rather \emph{did the speaker mean to draw a comparison to days to winter?} (an inference about intentions).
+
+The listener's private beliefs (which we denote $f$) and the beliefs shared between speaker and listener (which we denote $g$) are important in constraining both the hypothesis space of comparison classes and the knowledge the listener uses to resolve the meaning of the utterance.
+Both sets of beliefs can constrain the listener's belief distribution over the relevant degree as applied to the referent: If the listener knows that the day is a day in winter, they should use that information to guide their knowledge about the likely value of the degree $P(x \mid f, g)$.
+On the other hand, on the shared beliefs $g$ can be used to guide the hypothesis space of comparison classes because the comparison class is assumed to be the class intended by the speaker: $P(c \mid g)$.
+
+
+We model the scenario where a listener hears a gradable adjective describing a referent (e.g., that the temperature outside is warm) but does not know the comparison class assumed by the speaker. 
+To do this, a listener draws on their knowledge of the referent (e.g., that the day is a day in winter)
+
+When understanding vague language like a gradable adjective in context, a listener must integrate what they know about 
+
+We formalize a simple theory where the 
+
+Ideally, a theory of comparison class inference should blend seamlessly with theories of adjective interpretation more generally. 
+Thus, we begin with a model for gradable adjective interpretation and build a mechanism for comparison class inference on top of this model. 
+
 Gradable adjectives like \emph{warm} and \emph{cold} are vague
 descriptions of an underlying quantitative scale (e.g., temperature).
-The vagueness and context-sensitivity of these adjectival utterances can
-be modeled using threshold semantics (\([\![u]\!] = x > \theta\), for
-utterance \(u\), scalar degree \(x\), and threshold \(\theta\)), where
+Classic semantic theories posit the meaning of such gradable adjectives to simply be that the scalar degree $x$ (e.g., temperature) is greater than or less than a contextually-supplied standard of comparison  \(\theta_c\): \([\![u_{pos}]\!] = x > \theta_c\), for positive-form adjectival utterance \(u_{pos}\) (e.g., warm) and \([\![u_{neg}]\!] = x < \theta_c\), for negative-form adjectival utterance \(u_{neg}\) (e.g., cold).
+Several computational models have recently been proposed to account for the context-sensitivity of gradable adjectives (e.g., warm for winter vs. warm for summer; Lassiter \& Goodman, 2013;
+Qing \& Franke, 2014a).
+We adopt the  Lassiter \& Goodman (2013) as our starting point, but our formulation 
+The context-sensitivity of these adjectival utterances can
+be modeled using threshold semantics , where
 the threshold is probabilistically set with respect to a comparison
-class \(c\) via pragmatic reasoning (Lassiter \& Goodman, 2013; see also
-Qing \& Franke, 2014a):
+class \(c\) via pragmatic reasoning :
 
 \begin{align}
 L_{1}(x, \theta \mid u) &\propto S_{1}(u \mid x, \theta) \cdot P_{c}(x) \cdot P(\theta) \label{eq:L1} \\
