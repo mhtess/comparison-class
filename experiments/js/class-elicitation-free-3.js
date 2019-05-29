@@ -11,15 +11,14 @@ function make_slides(f) {
   slides.instructions = slide({
     name : "instructions",
     start: function() {
-      $(".err").hide();
     },
     button : function() {
-      response = $("#text_response").val();
-      if (response.length == 0) {
-        $(".err").show();
-      } else {
-        exp.go();
-      }
+      num_wrong = ! document.getElementById('valid1').checked + ! document.getElementById('valid2').checked + document.getElementById('invalid1').checked + document.getElementById('invalid2').checked
+      exp.catch_trials.push({
+        condition: "sanity_check",
+        incorrect: num_wrong
+      })
+      exp.go();
     },
   });
 

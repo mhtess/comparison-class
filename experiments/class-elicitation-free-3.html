@@ -81,12 +81,21 @@
     <center>
     <p>Speaker A: "The Empire State Building is tall."</p>
     <p><i>What do you think Speaker A meant?</i></p>
-    <p>"The Empire State Building is tall relative to other <input type="text" id="text_response"></input>."</p>
-    <p>Fill in the blank with the most sensible comparison. <b>Try to use your common sense!</b> There are 12 trials in total. Press "Continue" to begin.</p>
+
+    <p>Check the boxes next to all of the sentence completions that you think are reasonable:</p>
+
+    <p>The Empire State Building is tall relative to other <b>skyscrapers</b>. <input type="checkbox" id="valid1"></input>
+    <p>The Empire State Building is tall relative to other <b>birds</b>. <input type="checkbox" id="invalid1"></input>
+    <p>The Empire State Building is tall relative to other <b>men</b>. <input type="checkbox" id="invalid2"></input>
+    <p>The Empire State Building is tall relative to other <b>buildings</b>. <input type="checkbox" id="valid2"></input>
+
+
+</p>
+
+    <p>In each of the following trials, you will be asked to complete the given sentence in the way that you feel is most reasonable for the given situation. There are 18 trials in total. Press "Continue" to begin.</p>
     </center>
 
     <button onclick="_s.button()">Continue</button>
-    <p class="err">Please write something.</p>
   </div>
 
   <div class="slide" id="single_trial">
