@@ -1,0 +1,669 @@
+---
+title: "Class Elicitation Free Production"
+author: "mht"
+date: "7/12/2017"
+output: github_document
+---
+
+```{r global_options, include=FALSE}
+project.path <- "/Users/mht/projects/comparison-class/"
+data.path <- paste(project.path, 
+                   "data/pilot-classElicitation-free-3/", sep = "")
+knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+```
+
+```{r libraries}
+library(tidyverse)
+library(tidytext)
+library(knitr)
+library(tidyboot)
+library(ggthemes)
+theme_set(theme_few())
+#setDict("/Users/mht/Documents/research/tools/WordNet-3.0/dict")
+#library(wordnet)
+```
+
+
+### Pilot data (n = 81)
+
+#### Subject enjoyment (0 - 2 scale)
+
+There was an error in recording *subject information* for the first 9 subjects and those were not parsed properly. Kind of hard to recover (and it's only the survey infor).
+
+
+```{r subjinfo}
+d.subject <- read.csv(paste(data.path, "class-elicitation-free-3-subject_information.csv", sep = ""))
+#d.subject <- read.csv(paste(data.path, "first_pilot/class-elicitation-free-2-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+Catch triials
+
+```{r}
+d1.catch <- read.csv(paste(data.path, "class-elicitation-free-3-catch_trials.csv", sep = "")) 
+
+d1.catch.summary <- d1.catch %>% 
+  group_by(workerid) %>%
+  summarize(n_correct = sum(correct))
+
+with(d1.catch.summary, table(n_correct))
+
+workers.pass.memory <- d1.catch.summary %>%
+  filter(n_correct > 7) %>%
+  pull(workerid)
+```
+
+Preview of raw data 
+
+```{r loadData}
+d1 <- read.csv(paste(data.path, "class-elicitation-free-3-trials.csv", sep = "")) %>%
+  filter(workerid %in% workers.pass.memory)
+
+sample_n(d1, 15) %>%
+  select(np, adj, response) %>%
+  kable()
+```
+
+#### Grouping based on raw data
+
+```{r groupRaw}
+d.counts <- d1 %>%
+  group_by(np, adj, response) %>%
+  count(response)
+
+d.counts[with(d.counts, order(np, adj, response, -n)),] %>%
+  kable()
+```
+
+
+
+```{r removeStopWords}
+my_stop_words <-# bind_rows(
+  stop_words %>%
+    filter(!(word %in% c("rooms", "year")))#,
+  # data.frame(
+  #   word = c("relative", "compare"),
+  #   lexicon = 'mh'
+  # )
+#)
+
+
+d.tidy <- d1 %>%
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "", response),
+         response = gsub("biking", "bike", response),
+         response = gsub("car ride", "drive", response)
+         ) %>%
+  unnest_tokens(word, response)  %>% 
+  anti_join(stop_words)  # remove stop words
+  #anti_join(my_stop_words)  # remove stop words
+```
+
+## Analysis by words
+
+```{r groupWord}
+d.tidy.wordCounts <- d.tidy %>%
+  group_by(adj_positiveness, np_positiveness, adj, np) %>%
+  count(word)
+
+d.tidy.wordCounts[with(d.tidy.wordCounts, 
+                       order(adj, np_positiveness, np, -n)),] %>%
+  kable()
+```
+
+
+## Analysis by phrases
+
+After removing stop words, I reconstruct the phrases...
+
+```{r cleanPhrases}
+d.tidy.phrase <- d.tidy %>%
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase))
+```
+
+#### How well do we do cleaning the phrases?
+
+```{r checkCleanPhrase}
+d.tidy.phrase.w.original <- left_join(d.tidy.phrase, 
+                           d1 %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response)
+
+d.tidy.phrase.w.original %>% 
+  ungroup() %>%
+  select(np, adj, originalResponse, cleanedPhrase) %>% 
+  sample_n(40) %>% kable()
+```
+
+### Results
+
+```{r phraseResults}
+d.tidy.phraseCounts <- d.tidy.phrase %>%
+  group_by(adj_positiveness, np_positiveness, adj, np) %>%
+  count(phrase) %>%
+  filter(!is.na(phrase))
+
+d.tidy.phraseCounts[with(d.tidy.phraseCounts, 
+                         order(adj, np_positiveness, np, -n)),] %>%
+  kable()
+```
+
+
+
+### look for sub_category keyterms (to mark as specific in a binary sense)
+
+
+```{r codeForSubCatTerms}
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
+
+d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    np = as.character(np),
+    np = gsub('\"', "", np),
+    specific = containsString(
+      as.character(cleanedPhrase), 
+      as.character(np)
+    )
+  )
+```
+
+
+```{r}
+with(d.tidy.phrase.specificMarking, table(specific))
+```
+
+
+```{r figCollapseItems}
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.specificMarking %>% 
+  mutate() %>%
+  group_by(np_positiveness,  adj_positiveness) %>%
+  tidyboot_mean(column = specific)
+
+d.tidy.phrase.specificMarking.bs %>%
+  ungroup() %>%
+  mutate(np_positiveness = gsub('\"', "", np_positiveness),
+         adj_positiveness = gsub('\"', "", adj_positiveness),
+         np_positiveness = factor(np_positiveness,
+                               levels = c("negative", "neither-nor", "positive"),
+                               labels = c("low", "medium", "high")
+)) %>%
+  rename(adj_polarity = adj_positiveness) %>%
+  ggplot(., 
+       aes( x = np_positiveness, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'white')+
+  geom_linerange(position = position_dodge(0.8), color = 'white')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "white"))+
+  theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+# ggsave("../writing/adj_workshop_2019/figs/freeProd_bars_n81.pdf", 
+#        width = 5, height = 4)
+```
+
+
+### FUNCTIONAL CODE ENDS HERE
+
+
+```{r figSubCatCode, fig.height=4, fig.width=9, fig.height = 6}
+d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
+  mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  tidyboot_mean(column = specific)
+  #summarize(propSpecific = sum(specific) / n())
+
+ggplot(d.tidy.phrase.specificMarking.summarized, 
+       aes( x = sub_category, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = form))+
+  geom_col(position = position_dodge(), color = 'black')+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~degree + super_category, scales = 'free', nrow = 2)+
+  scale_fill_solarized()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Specific paraphrase   ")
+
+#ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton-binarzed-results.pdf", width = 12, height = 8)
+```
+
+
+- "basketball player" gets a lot of "players" responses, which is ambiguous but probably means "basketball players"
+- many responses outside of the category
+  - 
+  - other "times of day"
+- "reading lamps" ... "lamps" vs. "reading lamps"
+- people just say "days" for warm for winter
+
+
+
+
+
+# New pilot data (n = 36)
+
+```{r global_options2, include=FALSE}
+project.path <- "/Users/mht/projects/comparison-class/"
+data.path <- paste(project.path, 
+                   "data/pilot-classElicitation-free-2/", sep = "")
+```
+
+
+#### Subject enjoyment (0 - 2 scale)
+
+There was an error in recording *subject information* for the first 9 subjects and those were not parsed properly. Kind of hard to recover (and it's only the survey infor).
+
+
+```{r subjinfo2}
+d.subject <- read.csv(paste(data.path, "class-elicitation-free-2-subject_information.csv", sep = ""))
+table(d.subject$enjoyment)
+```
+
+
+Preview of raw data 
+
+```{r loadData2}
+d <- read.csv(paste(data.path, 
+                    "class-elicitation-free-2-trials.csv", sep = "")) %>%
+      mutate(sub_category = gsub("\"", "", sub_category),
+         degree = gsub("\"", "", degree),
+         gender = gsub("\"", "", gender),
+         super_category = gsub("\"", "", super_category),
+         adjective = gsub("\"", "", adjective),
+         form = gsub("\"", "", form),
+         names = gsub("\"", "", names),
+         response = gsub("\"", "", response),
+         target = gsub("\"", "", target),
+         condition = gsub("\"", "", condition))
+
+sample_n(d, 10) %>%
+  select(super_category, sub_category, adjective, response) %>% kable()
+```
+
+
+```{r}
+d.catch <- read.csv(paste(data.path, 
+                    "class-elicitation-free-2-catch_trials.csv", sep = "")) %>%
+      mutate(catch_response = gsub("\"", "", catch_response),
+         condition = gsub("\"", "", condition))
+
+df.mmry <- d.catch %>% 
+  filter(!(workerid %in% 0:8)) %>%
+  filter(condition == "memory_check") %>%
+  mutate(correct = as.numeric(correct)) %>%
+  group_by(workerid, tested_on) %>%
+  summarize(n_correct = sum(correct)) %>%
+  ungroup() %>%
+  spread(tested_on, n_correct) %>%
+  rename(correct_rejections = `0`, 
+         hits = `1`) %>%
+  mutate(n_correct = correct_rejections + hits) 
+
+workers.fail.memory <- df.mmry %>% filter(n_correct < 9) %>% pull(workerid)
+
+ggplot(df.mmry, aes( x = n_correct ))+
+  geom_bar()+
+  xlab("n correctly recognized (or correctly rejected)")+
+  scale_x_continuous(limits = c(0, 10.5), breaks = c(0, 4, 5, 6, 7, 8, 9, 10))+
+  ylab("n participants")
+```
+
+### Explanations of task
+
+```{r}
+df.expln <- d.catch %>%
+  filter(correct == -1) %>%
+  left_join(., df.mmry %>% select(workerid, n_correct) %>%
+              rename(n_memory_correct = n_correct))
+
+bad.expln <- c(10, 11, 25)
+df.expln %>%
+  select(workerid,  n_memory_correct, property) %>%
+  rename(explanation = property) %>%
+  kable(.)
+```
+
+```{r}
+d.filtered <- d %>%
+  filter(!(workerid %in% unique(c(workers.fail.memory, bad.expln))))
+
+length(unique(c(workers.fail.memory, bad.expln)))
+```
+
+
+#### Grouping based on raw data
+
+```{r groupRaw2}
+d.counts <- d.filtered %>% bind_rows(., d1) %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(response)
+
+d.counts[with(d.counts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+
+```{r removeStopWords}
+my_stop_words <-# bind_rows(
+  stop_words %>%
+    filter(!(word %in% c("rooms", "year")))#,
+  # data.frame(
+  #   word = c("relative", "compare"),
+  #   lexicon = 'mh'
+  # )
+#)
+
+
+d.tidy <- d.filtered %>%
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "", response),
+         response = gsub("biking", "bike", response),
+         response = gsub("car ride", "drive", response)
+         ) %>%
+  unnest_tokens(word, response)  %>% 
+  anti_join(stop_words)  # remove stop words
+  #anti_join(my_stop_words)  # remove stop words
+```
+
+## Analysis by words
+
+```{r groupWord}
+d.tidy.wordCounts <- d.tidy %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(word)
+
+d.tidy.wordCounts[with(d.tidy.wordCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+## Analysis by phrases
+
+After removing stop words, I reconstruct the phrases...
+
+```{r cleanPhrases}
+d.tidy.phrase <- d.tidy %>%
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase))
+```
+
+#### How well do we do cleaning the phrases?
+
+```{r checkCleanPhrase}
+d.tidy.phrase.w.original <- left_join(d.tidy.phrase, 
+                           d %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response)
+
+d.tidy.phrase.w.original %>% 
+  ungroup() %>%
+  select(sub_category, adjective, originalResponse, cleanedPhrase) %>% 
+  sample_n(40) %>% kable()
+```
+
+### Results
+
+```{r phraseResults}
+d.tidy.phraseCounts <- d.tidy.phrase %>%
+  group_by(degree, super_category, sub_category, target) %>%
+  count(phrase)
+
+d.tidy.phraseCounts[with(d.tidy.phraseCounts, order(super_category, sub_category, target, -n)),] %>%
+  kable()
+```
+
+
+
+### Can we track "specificity" by word count?
+
+```{r specificityAsWordCount, fig.width=6}
+d.wordCountFromCleanedPhrase <- left_join(
+  left_join(
+    d.tidy %>%
+      group_by(workerid, target, degree, adjective, super_category,
+               form, condition, sub_category, strength) %>%
+      summarize(nWords = n()) %>% 
+      ungroup(),
+    d %>% select(workerid, target, degree, adjective, super_category,
+               form, condition, sub_category, response)
+  ),
+  d.tidy.phrase %>%
+    select(workerid, target, degree, adjective, super_category,
+               form, condition, sub_category, phrase)
+) %>% 
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  summarize(nWordsPerResponse = sum(nWords) / n()) 
+
+ggplot(d.wordCountFromCleanedPhrase, 
+       aes( x = strength, y = nWordsPerResponse, fill = form))+
+  geom_col(position = position_dodge())+
+  facet_wrap(~super_category)
+```
+
+Not clear that number of words is going to be correlated with specificity.
+
+
+### look for sub_category keyterms (to mark as specific in a binary sense)
+
+
+```{r codeForSubCatTerms}
+subcat_keyterms <- list(
+  apple = "apple",
+   grape = "grape",
+  watermelon = "watermelon",
+
+  "day in Fall" = "fall",
+  "day in Summer" = "summer",
+  "day in Winter" = "winter",
+  
+  "basketball player" = "basketball", # also "players"? (implicit domain restriction)
+  gymnast = "gymnast",
+  "runner"= "runner",
+  "soccer player" = "soccer",
+  
+  basement = "basement",
+  "living room" = "living",
+  "sunroom" = "sunroom",
+  
+  "bike route from Los Angeles to San Francisco" = "bike",
+  "flight from Los Angeles to San Francisco" = "flight",
+  "driving route from Los Angeles to San Francisco" = "driv",#,c("driving", "drive", "car"),
+  
+  "chimpanzee" = "chimp",
+  "elephant" = "elephant",
+  "porcupine" = "porcupine",
+  
+  "city bike" = "city bike",
+  "electric bike" = "electric bike",
+  "kids bike" = "kid",
+  
+  "coffee table" = "coffee table",
+  "reading lamp" = "lamp",
+  "wardrobe"= "wardrobe",
+  
+  "crystal flower vase" = "crystal",
+  "plastic flower vase" = "plastic",
+  "glass flower vase" = "glass",
+  
+  "cup of coffee" = "coffee",
+  "cup of iced tea" = "ice",
+  "cup of water" = "water",
+  
+  "electric car"  = "electric car",
+  "muscle car" = "muscle car",
+  "sedan"   =  "sedan",
+  "SUV" = "suv",
+  "sports car" = "sports car",
+  "family car" = "family car" 
+)
+
+levelsOfSubCategory = c(
+  "grape",
+  "apple",
+  "watermelon",
+
+  "day in Winter",
+  "day in Fall",
+  "day in Summer",
+  
+  "gymnast",
+  "runner",
+  "basketball player",
+  
+  "basement",
+  "living room",
+  "sunroom",
+  
+  "bike route from Los Angeles to San Francisco",
+  "driving route from Los Angeles to San Francisco",
+  "flight from Los Angeles to San Francisco",
+  
+  "porcupine",
+  "chimpanzee",
+  "elephant",
+  
+  "kids bike",
+  "city bike",
+  "electric bike",
+  
+  "reading lamp",
+  "coffee table",
+  "wardrobe",
+  
+  "plastic flower vase",
+  "glass flower vase",
+  "crystal flower vase",
+  
+  "cup of iced tea",
+  "cup of water",
+  "cup of coffee",
+  
+  "electric car",
+  "family car",
+  "muscle car",
+ 
+  "sports car",
+  "sedan" ,
+  "SUV"
+)
+
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
+
+d.tidy.phrase.specificMarking.2 <- d.tidy.phrase.w.original %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", cleanedPhrase, "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    subcatKeyterm = subcat_keyterms[[as.character(sub_category)]],
+    specific = containsString(
+      as.character(cleanedPhrase), 
+      subcat_keyterms[[as.character(sub_category)]]
+    )
+  )
+```
+
+
+
+```{r figSubCatCode, fig.height=4, fig.width=9, fig.height = 6}
+d.tidy.phrase.specificMarking.summarized <- d.tidy.phrase.specificMarking %>% 
+  mutate(sub_category = factor(sub_category, levels = levelsOfSubCategory)) %>%
+  group_by(strength, degree, adjective, super_category,
+               form, sub_category) %>%
+  tidyboot_mean(column = specific)
+  #summarize(propSpecific = sum(specific) / n())
+
+ggplot(d.tidy.phrase.specificMarking.summarized, 
+       aes( x = sub_category, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = form))+
+  geom_col(position = position_dodge(), color = 'black')+
+  geom_errorbar(position = position_dodge())+
+  facet_wrap(~degree + super_category, scales = 'free', nrow = 2)+
+  scale_fill_solarized()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Specific paraphrase   ")
+
+#ggsave("~/Documents/research/talks/vagueness/roger-labmtg-2017-09/freeProduciton-binarzed-results.pdf", width = 12, height = 8)
+```
+
+
+- "basketball player" gets a lot of "players" responses, which is ambiguous but probably means "basketball players"
+- many responses outside of the category
+  - 
+  - other "times of day"
+- "reading lamps" ... "lamps" vs. "reading lamps"
+- people just say "days" for warm for winter
+
+
+```{r figCollapseItems}
+ d.tidy.phrase.specificMarking %>% 
+  mutate(sub_category = factor(sub_category, 
+                               levels = levelsOfSubCategory)) %>%
+  group_by(strength, 
+               form) %>%
+  summarize(propSpecific = sum(specific) / n()) %>% 
+  ggplot(., 
+       aes( x = strength, y = propSpecific, fill = form))+  
+  geom_col(position = position_dodge(), color = 'black')+
+  scale_fill_solarized()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Specific paraphrase   ")
+```
+
+
+
+```{r}
+d.tidy.phrase.specificBin.summarized <- bind_rows(d.tidy.phrase.specificMarking,
+          d.tidy.phrase.specificMarking.2) %>%
+  group_by(strength, form) %>%
+  tidyboot_mean(column = specific) %>%
+  ungroup() %>%
+  mutate(strength = factor(strength, levels = c(1,2,3),
+                           labels = c("low", "medium", "high")))
+
+ggplot(d.tidy.phrase.specificBin.summarized, 
+       aes( x = strength, y = mean,
+            ymin = ci_lower, ymax = ci_upper, fill = form))+
+  geom_hline(yintercept = 0.5, linetype = "dashed")+
+  geom_col(position = position_dodge(0.8), width = 0.8,
+           color = 'black', alpha = 0.8)+
+  scale_fill_brewer(palette = "Set3")+
+  geom_linerange(position = position_dodge(0.8))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  labs(y = "Proportion paraphrases that\ncontain specific category",
+       x = "Strength of prior")
+
+ggsave("../writing/adj_workshop_2019/figs/freeProd_bars.pdf", width = 5, height = 3.2)
+```
+
