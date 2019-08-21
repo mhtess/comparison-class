@@ -56,8 +56,9 @@ workers.pass.memory <- d1.catch.summary %>%
 Preview of raw data 
 
 ```{r loadData}
-d1 <- read.csv(paste(data.path, "class-elicitation-free-3-trials.csv", sep = "")) %>%
-  filter(workerid %in% workers.pass.memory)
+d1 <- read.csv( "./../data/pilot-classElicitation-free-3/class-elicitation-free-3-trials.csv") 
+#%>%
+ # filter(workerid %in% workers.pass.memory)
 
 sample_n(d1, 15) %>%
   select(np, adj, response) %>%
@@ -206,7 +207,7 @@ d.tidy.phrase.specificMarking.bs %>%
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "white"))+
-  theme_black()+
+ # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   ylab("Proportion paraphrases that contain NP")+
   xlab("Subordinate Category Prior Mean")
