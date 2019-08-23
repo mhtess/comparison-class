@@ -71,6 +71,7 @@ def get_stim_dimension(np, context, positiveness):
 # ----------------------------------------------------------------------------------------------------------------
 
 
+<<<<<<< HEAD
 import gensim.downloader as api
 import numpy as np
 
@@ -120,6 +121,57 @@ def compute_similarities_GENSIM(data, x, y, model_names, save = True):
 
 # No longer using gensim!
 # compute_similarities_GENSIM(df, 'np', 'response', model_names = ['glove-wiki-gigaword-100'], save = True)
+=======
+# import gensim.downloader as api
+# import numpy as np
+
+# def compute_sim_GENSIM(row, model, word1, word2):
+#     try:
+#         return model.similarity(row[word1], row[word2])
+#     except KeyError as e:
+#         return np.nan
+
+# def compute_similarities_GENSIM(data, x, y, model_names, save = True):
+#     ''' Given a pandas dataframe, compute the similarity between the words in two columns.
+#         A new data frame is returned that is a duplicate of the original but also contains
+#         columns for word similarity.
+
+#         Note: If either word in a given row does not exist in the word embedding, similarity cannot be computed
+#         and np.nan (not a number) is returned.
+
+#         Keyword arguments:
+#         data -- the pandas dataframe
+#         x -- the name of the first column of words
+#         y -- the name of the second column of words
+#         model_names -- a list of gensim model names that should be used to compute similarity,
+#                         each model will add a new column to the dataframe
+#                         * See https://github.com/RaRe-Technologies/gensim-data for more info on model names
+#         save -- Boolean representing if the dataframe should be saved to HDD as a csv file, Defaults to True
+#     '''
+#     import gensim.downloader as api
+
+#     for model_name in model_names:
+
+#         # load the model and give it a proper name in the data-frame
+#         model = api.load(model_name)
+#         name = 'sim_' + model_name.split('-')[0]
+
+#         # compute the similarity between stim and response
+#         data[name] = data.apply(lambda row: compute_sim_GENSIM(row, model, x, y), axis=1)
+
+#         print(name, 'has completed!')
+
+
+#     # models take a lot of time to compute, so save to csv each time
+#     if save:
+#         save_file = 'with-model:' + time.strftime("%m-%d-%H:%M") + '.csv'
+#         data.to_csv(save_file, encoding='utf-8', index=False)
+
+#     return data
+
+# # No longer using gensim!
+# # compute_similarities_GENSIM(df, 'np', 'response', model_names = ['glove-wiki-gigaword-100'], save = True)
+>>>>>>> 5cc8e7d2d26a208e004f4e7fd8455d327746ec71
 
 
 # ----------------------------------------------------------------------------------------------------------------

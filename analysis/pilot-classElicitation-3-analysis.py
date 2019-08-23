@@ -192,10 +192,13 @@ for i in range(1):
 
             if np_option == 'high':
                 syn = stim['positive']
+                print("AAA:", syn )
             elif np_option == 'med':
                 syn = stim['neither_nor']
+                print("AAA:", syn )
             else:
                 syn = stim['negative']
+                print("AAA:", syn )
 
             if syn[:3] == "the":
                 syn = syn[4:]
@@ -222,6 +225,7 @@ for i in range(1):
                 used = False
 
                 np_synset = wn.synsets(lemmatizer.lemmatize(syn))[0]
+                print("SYNSET", np_synset)
 
                 if word in np_synset.lemma_names():
                     syn_count += count

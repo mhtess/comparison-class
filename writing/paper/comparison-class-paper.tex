@@ -13,9 +13,8 @@
 %\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
 %\DeclareLanguageMapping{american}{american-apa}
 
-  \title{Warm (for Winter): Inferring comparison classes for relative adjectives}
-    \author{Michael Henry Tessler\textsuperscript{1}, Michael
-Lopez-Brau\textsuperscript{1}, \& Noah D. Goodman\textsuperscript{1}}
+  \title{Big \emph{for a what}? Inferring comparison classes for relative adjectives}
+    \author{Michael Henry Tessler\textsuperscript{1} and Noah D. Goodman\textsuperscript{1}}
     \date{}
   
 \shorttitle{ Inferring comparison classes}
@@ -50,7 +49,7 @@ conversation. The utterance ``it's warm outside'' signals that the temperature o
 relative to other days of the year, warm for the season, warm for the week, etc.. 
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener reasons through this open-ended inference problem.
 We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
-The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we into a probabilistic model of adjective interpretation, thus furthering the reach of computational models of language understanding. 
+The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding. 
 The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
 %We test the qualitative predictions of the model in a free production experiment and use a forced-choice version of the task to test the finer-grained, quantitative predictions. 
 %The resolution of a comparison class requires not only reasoning about what is likely to be the case but also what would be informative to talk about, thus incorporating comparison class inference into the larger study of pragmatic reasoning.
@@ -89,17 +88,17 @@ classes, as with relevant aspects of context more generally, often go
 unsaid (e.g., in ``It's warm outside'').
 
 The existence of comparison classes for understanding vague language is
-uncontroversial \cite{Bale2011, Solt2009} \red{more standard citations for this?}. 
+uncontroversial \cite{cresswell1976semantics, klein1980semantics, kennedy2005scale, bale2008universal, Bale2011, Solt2009}. %\red{more standard citations for this?}
 Adult judgments of the felicity for adjectives like ``dark'' or ``tall'' depend
 upon fine-grained details of the statistics of the comparison class:
 When objects in the comparison class are all rather short, what counts
-as ``tall'' might not be very tall \cite{Qing2014b, Schmidt2009, Solt2012}.
+as ``tall'' might not be very tall \cite{Qing2014, Schmidt2009, Solt2012}.
 Four-year-olds use their knowledge of kinds to differentiate between
 what goes into the comparison class and what does not: What counts as a
 ``tall pimwit'' depends on the distribution of heights of
 \emph{pimwits} and not the heights of other creatures like \emph{daxes}
 \cite{Barner2008}. Even children as young as 2-and-a-half
-understand that ``big'' is relative ({\textbf{???}}) and that the
+understand that ``big'' is relative \cite{Sera1987} and that the
 comparison class can change \cite<e.g., a ``small mitten'' can be big relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
 
 %How do listeners decide on the appropriate comparison class? 
@@ -116,14 +115,13 @@ classes. Theoretical work in semantics has focused on how information
 from the comparison class gets integrated with a compositional semantics
 and what representations might be preferred \cite{Bale2011, Solt2009}.
 The question of how listeners reconstruct a comparison class in
-undersupported contexts (e.g., just hearing ``It's warm outside'')
+minimal contexts (e.g., just hearing ``It's warm outside'')
 has been addressed neither formally nor empirically.
 
 We propose a null hypothesis that listeners perform Bayesian inference over the likely comparison class intended by the speaker, by balancing the \emph{a priori} probability of a comparison class with the likelihood that a speaker would use the adjective given the comparison class and given what the listener knows about the referent. 
-This proposal leads to the following prediction: When it is
-winter, hearing ``it's warm'' should signal \emph{warm for
-winter}, while ``it's cold'' signals \emph{cold for the
-year}. The opposite relationship should hold in summer, where
+This proposal leads to the following prediction: In Winter, hearing ``it's warm'' should signal \emph{warm for
+winter} (a more subordinate comparison class), while hearing ``it's cold'' signals \emph{cold for the
+year} (a more superordinate class). The opposite relationship should hold in summer, where
 ``it's cold'' should signal it's cold \emph{for summer} more so
 than ``it's warm''. This prediction can be stated more generally that when an adjective signals a degree that is \emph{a priori} consistent with  the listener's knowledge of the referent (e.g., as a member of a category that generally has a high or low degree), the comparison class is likely to be a relatively general or superordinate category, whereas when the adjective signals a degree inconsistent with the listener's prior beliefs about the referent, the comparison class is likely to be a more specific or subordinate category. 
 These predictions fall out of a Rational Speech Act (RSA) model for gradable
@@ -308,7 +306,7 @@ listener will use the explicit class to set his prior expectations
 
 \begin{figure}
 \centering
-\includegraphics{figs/speakerSimulations-1.pdf}
+\includegraphics{figs/adjectives_2ccs_tall_mucost3_s10_wSubCatPrior_widerXdomain.pdf}
 \caption{\label{fig:speakerSimulations}Speaker model behavior assuming
 different comparison classes. The underspecified utterance
 (``warm'') takes on the same meaning of the explicit utterance
@@ -430,8 +428,6 @@ We gathered human judgments of comparison classes in ambiguous contexts
 in a pre-registered test of our two predictions described in
 \textbf{Qualitative Model Predictions} (\url{osf.io/k8mnz/}).
 
-
-
 \subsubsection{Participants}
 
 We recruited 264 participants, 2 of whom were excluded for failing an
@@ -439,8 +435,6 @@ attention check. Participants were recruited from Amazon's Mechanical
 Turk and were restricted to those with U.S. IP addresses with at least a
 95\% work approval rating. Each experiment took about 5 minutes and
 participants were compensated \$0.50 for their work.
-
-
 
 \subsubsection{Materials}
 
@@ -491,188 +485,26 @@ making the superordinate paraphrase more salient.
 \caption{Human endorsement of subordinate comparison class paraphrases (middle; Expt. 1) and adjective sentences (left; Expt. 2) as a function of listener model $L_1$ and speaker model $S_2$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\% Bayesian credible intervals.}\label{fig:posteriorPredictiveScatters}
 \end{figure*}
 
-
-
 \subsubsection{Results}
 
-We observed no systematic differences between participants' responses
-when the superordinate category was previously mentioned in the context
-and those when it was not; thus, we collapse across these two conditions
-for all analyses. Figure \ref{fig:expt1results} shows the proportion of
-participants choosing the \emph{subordinate} paraphrase for each item,
-revealing considerable variability both \emph{within}- and
-\emph{across}- scales. The predicted effects are visually apparent
-within each scale (compare with Figure \ref{fig:modelSchematics} right).
+We observed no systematic differences between participants' responses when the superordinate category was previously mentioned in the context and those when it was not; thus, we collapse across these two conditions for all analyses. Figure \ref{fig:expt1results} shows the proportion of participants choosing the \emph{subordinate} paraphrase for each item, revealing considerable variability both \emph{within}- and \emph{across}- scales. The predicted effects are visually apparent within each scale (compare with Figure \ref{fig:modelSchematics} right).
 
-Our qualitative predictions are confirmed using a generalized linear
-mixed effects model with main effects of adjective form (positive
-vs.~negative) and the \emph{a priori} judgment by the first author of
-whether the sub-category was expected to be low or high on the degree
-scale, and of critical theoretical interest, the interaction between
-these two variables. In addition, we included by-participant random
-effects of intercept and by-subordinate category random effects of
-intercept and interaction between form and strength\footnote{This was
-  the maximal mixed-effects structure that converged.}. Confirming our
-two qualitative model predictions, there was an interaction between form
-and strength (\(\beta = -3.82\); \(SE = 0.57;\) \(z = -6.73\)) and there
-was an overall preference for subordinate category paraphrases
-(\(\beta = 1.23\); \(SE = 0.45;\) \(z = 2.70\)). The main effects of
-form and strength were not significant.
+Our qualitative predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs.~negative) and the \emph{a priori} judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables. In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and interaction between form and strength\footnote{This was the maximal mixed-effects structure that converged.}. Confirming our two qualitative model predictions, there was an interaction between form and strength (\(\beta = -3.82\); \(SE = 0.57;\) \(z = -6.73\)) and there was an overall preference for subordinate category paraphrases (\(\beta = 1.23\); \(SE = 0.45;\) \(z = 2.70\)). The main effects of form and strength were not significant.
 
-We then test the simple effects. For items low on the degree scale
-(e.g., temperatures in winter), positive form adjectives were
-significantly more likely to imply subordinate comparison classes
-(\(\beta = 1.41\); \(SE = 0.15;\) \(z = 9.43\)), while the opposite is
-true for items high on the scale (e.g., summer days; \(\beta = -2.50\);
-\(SE = 0.19;\) \(z = -13.15\)). Participants reason pragmatically to
-resolve the comparison class, combining world knowledge with
-informativity as predicted by our model.
+We then test the simple effects. For items low on the degree scale (e.g., temperatures in winter), positive form adjectives were significantly more likely to imply subordinate comparison classes (\(\beta = 1.41\); \(SE = 0.15;\) \(z = 9.43\)), while the opposite is true for items high on the scale (e.g., summer days; \(\beta = -2.50\); \(SE = 0.19;\) \(z = -13.15\)). Participants reason pragmatically to resolve the comparison class, combining world knowledge with informativity as predicted by our model.
+
+\subsection{Quantitative modeling}
+
+The behavioral experiment bore out our two qualitative predictions derived from the comparison class inference model. The model is a quantitative model, however, and can make quantitative predictions concerning the strength of comparison class inferences. Indeed, we observe substantial variability in the predicted inferences both within- and across- scales. Here we test whether the observed variability in inferences can be accounted for by the constructs posited in our model. 
 
 
-\section{Quantitative modeling}
+\(P(c)\) reflects listeners' expectations of what classes are likely to be discussed. As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, and scale it with a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$ (see Supplemental Information for more information).
 
-The behavioral experiment bore out our two qualitative predictions
-derived from the comparison class inference model. The model is a
-quantitative model, however, and can make quantitative predictions
-concerning the strength of comparison class inferences. Indeed, we
-observe substantial variability in the predicted inferences both within-
-and across- scales. Here we test whether the observed variability in
-inferences can be accounted for by the constructs posited in our model.
-We describe the two relevant constructs---the comparison class prior
-\(P(c)\) and the degree priors \(P(x \mid c)\)---before outlining our
-Bayesian data analytic strategy.
+Only the relative values for \(P(x \mid c_{sub})\) and \(P(x \mid c_{super})\) affect model predictions. Hence we fix each superordinate distribution to be a standard normal distribution \(P(x \mid c_{super}) = \mathcal{N}(0, 1)\) and the subordinate priors to also be Gaussian distributions \(P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
 
-\subsubsection{Comparison class prior}
+The full model's posterior over the RSA and data-analytic parameters were consistent with prior literature and intuition. The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) intervals for model parameters specific to the \(L_1\) model used for comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\), \(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\) model used for adjective endorsement: \(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\), \(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions corresponding to subordinate class priors were consistent with the \emph{a priori} ordering of these subordinate classes (low, medium, high) used in these tasks (Figure \ref{fig:modelParameters} top).
 
-\(P(c)\) reflects listeners' expectations of what classes are likely to
-be discussed. As a proxy for comparison class usage frequency, we use
-empirical frequency \(\hat{f}\) estimated from the Google WebGram
-corpus\footnote{Corpus accessed via
-\url{https://corpora.linguistik.uni-erlangen.de/cgi-bin/demos/Web1T5/Web1T5_freq.perl}. Due to potential polysemy and idiosyncracies of our experimental
-  materials (Table 1), we made the following substitutions when querying
-  the database for empirical frequency: produce $\rightarrow$
-  ``fruits and vegetables''; things you watch online
-  $\rightarrow$ ``online videos''; days in \{season\}
-  $\rightarrow$ ``\{season\} days''; dishwashers $\rightarrow$
-  ``dishwashing machines''; videos of cute animals $\rightarrow$
-  ``animal videos''.}, and scale it by a free parameter $\beta$
-such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
-
-
-\subsubsection{Degree priors (World
-knowledge)}
-
-Only the relative values for \(P(x \mid c_{sub})\) and
-\(P(x \mid c_{super})\) affect model predictions. Hence we fix each
-superordinate distribution to be a standard normal distribution
-\(P(x \mid c_{super}) = \mathcal{N}(0, 1)\) and the subordinate priors
-to also be Gaussian distributions
-\(P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the
-subordinate priors thus have standardized units.
-
-\subsubsection{Overview of data analytic
-approach}
-
-Specifying the relevant prior knowledge yields two free parameters per
-subordinate class. We put priors over these parameters and infer their
-likely values using Bayesian data analysis. The data from the comparison
-class inference experiment would be insufficient, however, to reliably
-estimate all of the parameters of this data analytic model. To alleviate
-this, we use the same RSA model to predict additional data about related
-language used in the same domains. Specifically, we gather judgments
-about adjectives when the comparison class is explicit (\(n = 100\)):
-whether or not an adjective would apply to a subordinate member
-explicitly relative to the superordinate category (e.g., Is a day in
-winter warm relative to other days of the year?).\footnote{The judgments
-  in this experiment were consistent with the \emph{a priori} ordering
-  of the subordinate categories on the degree scale (e.g., a day in
-  winter is likely to be cold for the year).}
-
-To model this adjective endorsement data, we remove comparison class
-uncertainty by setting \(P(c_{super}) = 1\), since the sentence being
-endorsed include an explicit comparison to the superordinate class. We
-model sentence endorsement using a pragmatic speaker (following Qing \&
-%Franke, 2014a; Tessler \& Goodman, 2016a, 2016b): \vspace{-0.5cm}
-\begin{equation}
-S_{2}(u \mid c_{sub}) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{c_{sub}}} \ln{L_1(x \mid u)})} \label{eq:S2a}
-\end{equation} 
-
-
-
-\noindent Note that $L_1(x \mid u)$ is defined from Eq.
-\ref{eq:L1a} by marginalization.
-
-Eqs. \ref{eq:L1a} and \ref{eq:S2} define models for the comparison class
-inference task and adjective endorsement task, respectively, and depend
-on the same background knowledge \(P(x\mid c)\). We can thus use data
-from both experiments to jointly reconstruct the shared prior knowledge
-and generate predictions for the two data sets.
-
-
-\section{Full model analysis and
-results}
-
-The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models
-make quantitative predictions about comparison class interpretation and
-adjective endorsement, respectively. We construct a single data-analytic
-model with each of these RSA components as sub-models in order to make
-quantitative predictions about the data from both of our experiments.
-
-The listener and speaker sub-models share their prior world knowledge
-\(P(x \mid c)\) (e.g., temperatures in winter), described in the
-\textbf{Degree Priors} section. We put the same priors over the
-parameters of each subordinate distribution:
-\(\mu \sim \text{Uniform}(-3, 3)\),
-\(\sigma \sim \text{Uniform}(0, 5)\), since they have standardized
-units. The comparison class prior \(P(c)\) in Eq. \ref{eq:L1a} scales
-the empirical frequency \(\hat{f}\) by a free parameter, which we give
-the following prior: \(\beta \sim \text{Uniform}(0, 3)\).
-
-The full model has three additional parameters not of direct theoretical
-interest: the speaker optimality parameters \(\alpha^\text{expt}_{i}\),
-which can vary across the two tasks. The pragmatic listener \(L_1\)
-model (Eq. \ref{eq:L1a}) has one speaker optimality:
-\(\alpha^\text{1}_{1}\). The pragmatic speaker \(S_2\) model (Eq.
-\ref{eq:S2}) has two speaker optimality parameters:
-\(\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}\). We use priors
-consistent with the previous literature:
-\(\alpha_1 \sim \text{Uniform}(0, 20)\),
-\(\alpha_2 \sim \text{Uniform}(0, 5)\)
-
-We implemented the RSA and Bayesian data analysis models in the
-probabilistic programming language WebPPL (Goodman \& Stuhlmuller,
-2014). To learn about the credible values of the parameters, we
-collected 2 chains of 50k iterations (after 25k burn-in) using an
-incrementalized version of MCMC (Ritchie, Stuhlmuller, \& Goodman,
-2016).
-
-\subsubsection{Results}
-
-The full model's posterior over the RSA and data-analytic parameters
-were consistent with prior literature and intuition. The maximum
-a-posteriori (MAP) estimate and 95\% highest probability density (HPD)
-intervals for model parameters specific to the \(L_1\) model used for
-comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\),
-\(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\)
-model used for adjective endorsement:
-\(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\),
-\(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions
-corresponding to subordinate class priors were consistent with the
-\emph{a priori} ordering of these subordinate classes (low, medium,
-high) used in these tasks (Figure \ref{fig:modelParameters} top).
-
-Finally, the full model's posterior predictive distribution does an
-excellent job at capturing the quantitative variability in comparison
-class inferences: \(r^2(30) = 0.96\), and adjective endorsements:
-\(r^2(30) = 0.98\) (Figure \ref{fig:posteriorPredictiveScatters}).
-Because of the overall preference for the subordinate comparison class,
-many of the data points are distributed above 0.5. Even for these
-fine-grained differences, the model does a good job at explaining the
-quantitative variability in participants' data (Figure
-\ref{fig:posteriorPredictiveScatters} right). Thus, the variability in
-comparison class inferences we observe in our behavioral data can be
-accounted for the constructs posited in our model (namely, the
-comparison class prior and degree priors).
+Finally, the full model's posterior predictive distribution does an excellent job at capturing the quantitative variability in comparison class inferences: \(r^2(30) = 0.96\), and adjective endorsements: \(r^2(30) = 0.98\) (Figure \ref{fig:posteriorPredictiveScatters}). Because of the overall preference for the subordinate comparison class, many of the data points are distributed above 0.5. Even for these fine-grained differences, the model does a good job at explaining the quantitative variability in participants' data (Figure \ref{fig:posteriorPredictiveScatters} right). Thus, the variability in comparison class inferences we observe in our behavioral data can be accounted for the constructs posited in our model (namely, the comparison class prior and degree priors).
 
 \section{Discussion}
 
