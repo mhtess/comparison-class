@@ -18,8 +18,8 @@ function makeSlides(f) {
     },
     button: function() {
       var response = $('input[name="catch"]:checked').val();
-      if (response === undefined) { 
-        $(".errCatch").show(); 
+      if (response === undefined) {
+        $(".errCatch").show();
       }
       else {
         exp.catch_trials.push({
@@ -82,13 +82,14 @@ function makeSlides(f) {
     }
 
     // Display the question.
-    $(".display_question").html("Do you think the " + exp.examples[i].phrase + " is/are <b>" + exp.examples[i].target + 
-                                " relative to other " + exp.examples[i].supercategory + "</b>?");
+    $(".display_question").html("Would you expect the " + exp.examples[i].phrase + " to be <b>" + exp.examples[i].target +
+                                " in comparison to other " + exp.examples[i].supercategory + "</b>?");
 
     // Display the radio buttons.
     $(".display_buttons").html("<div>" +
                                "<label><input type=\"radio\" name=\"paraphrase\" value=\"0\"/>" + exp.responseOrder[0] + "</label>" +
                                "<label><input type=\"radio\" name=\"paraphrase\" value=\"1\"/>" + exp.responseOrder[1] + "</label>" +
+                               "<label><input type=\"radio\" name=\"paraphrase\" value=\"1\"/>" + exp.responseOrder[2] + "</label>" +
                                "<br><br></div>");
     // $('label[for=0]').html(exp.responseOrder[0]);
     // $('label[for=1]').html(exp.responseOrder[1]);
@@ -115,7 +116,8 @@ function makeSlides(f) {
         "supercategory": exp.examples[i].supercategory,
         "response": response == "Yes" ? 1 : 0,
         "first_response": exp.responseOrder[0],
-        "second_response": exp.responseOrder[1]
+        "second_response": exp.responseOrder[1],
+        "third_response": exp.responseOrder[2]
       });
       i++;
       exp.go();
@@ -212,8 +214,8 @@ function init() {
   exp.condition = "context";
 
   // sets the other of the radio buttons
-  exp.responseOrder = _.shuffle(["Yes", "No"]);
-
+  exp.responseOrder = _.shuffle(["Yes", "No"])
+  exp.responseOrder.push("Doesn't make sense");
   // set the number of sliders to use
   // exp.nSentences = 1;
 
@@ -245,6 +247,7 @@ function init() {
 
   // the blocks of the experiment
   exp.structure = ["i0", "instructions"];
+  exp.structure = [];
   for (var k = 1; k <= exp.trials; k++) {
     exp.structure.push("trial" + k);
   }
