@@ -125,7 +125,7 @@ def get_stim_dimension(np, context, positiveness):
 # ----------------------------------------------------------------------------------------------------------------
 
 
-def get_word_vector(word, model, norm = False):
+def get_word_vector(word, model, sim_df, norm = False):
     try:
         vec = sim_df.at[word, model]
 
@@ -138,7 +138,7 @@ def get_word_vector(word, model, norm = False):
     return vec
 
 
-def append_similarity(data, x = 'np', y = 'response', add_raw_vectors = False):
+def append_similarity(data, sim_df, x = 'np', y = 'response', add_raw_vectors = False):
     ''' Given a pandas dataframe, compute the similarity between the words in two columns.
         A new data frame is returned that is a duplicate of the original but also contains
         columns for word similarity.
@@ -154,8 +154,8 @@ def append_similarity(data, x = 'np', y = 'response', add_raw_vectors = False):
     '''
 
      # Compute the normalized vector for each word
-    stim_vec = data[x].map(lambda x: get_word_vector(x, 'vec', norm = True))
-    response_vec = data[y].map(lambda x: get_word_vector(x, 'vec', norm = True))
+    stim_vec = data[x].map(lambda x: get_word_vector(x, 'vec', sim_df, norm = True))
+    response_vec = data[y].map(lambda x: get_word_vector(x, 'vec', sim_df, norm = True))
 
     embedding = pd.concat([stim_vec, response_vec], axis=1)
 
@@ -168,4 +168,8 @@ def append_similarity(data, x = 'np', y = 'response', add_raw_vectors = False):
     # Compute the cosine similarity
     data['similarity'] = embedding.apply(lambda row: np.dot(row[x], row[y]), axis = 1)
 
-    return data
+    is_scalar = data['similarity'].map(lambda x: np.isscalar(x))
+
+    data['similarity'] = data['similarity'][is_scalar]
+
+    return data.dropna()
