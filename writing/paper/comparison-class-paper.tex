@@ -154,12 +154,12 @@ To generate quantitative predictions, we model a convergent language task with a
 
 \section{Computational Model}
 
-We explicate our model continuing with the running example of hearing the temperature outside described as \emph{warm}. 
-In this context, a listener is faced with a joint inference problem of determining the temperature outside $x$ and the comparison class  $c$ assumed by the speaker when producing their adjectival utterance $u$ (e.g., \emph{it's warm}).
-The hypothesis space of comparison classes are constrained by the beliefs about the referent that are shared with the speaker (i.e., the listener would not assume the speaker used a comparison class about which the speaker had no knowledge). 
-We restrict our analysis our to a hypothesis space of comparison classes constructed out of taxonomic hierarchy of the subordinate category to which the referent belongs (e.g., a day this week is a day in January is a day in winter is a day of the year).
-In contrast to the space of comparison classes, the hypothesis space of degrees (e.g., temperatures) is informed by the totality of the listener's relevant beliefs (i.e., including both the shared beliefs with the speaker and the listener's private beliefs).
-For example, if the listener knows that the day is a day in Winter, they should expect temperatures conditioned on the belief that it is a winter day.
+We explicate our model with the example of hearing a person described as \emph{tall}. 
+In this context, a listener is faced with a joint inference problem of determining the height of the person $x$ and the comparison class  $c$ assumed by the speaker when producing their adjectival utterance $u$ (e.g., \emph{he's tall}).
+The hypothesis space of comparison classes are constrained by the beliefs about the referent that are shared with the speaker: In our example, it is in common ground that the referent is a basketball player.
+We restrict our analysis our to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A).
+In contrast to the space of comparison classes, the hypothesis space of degrees (e.g., heights) is informed by the totality of the listener's relevant beliefs (i.e., including both the shared beliefs with the speaker and the listener's private beliefs).
+We further restrict ourselves to a context in which the listener holds no private beliefs; in our example, the listener knows that the referent is a basketball player, and hence would expect a height of the referent consistent with their knowledge of basketball players.
 
 %For both of these random variables, the listener can employ knowledge to constrain the inference problem. 
 %Specifically, 
@@ -190,7 +190,7 @@ For example, if the listener knows that the day is a day in Winter, they should 
 %  \label{fig:bayesnet}
 %\end{figure}
 
-Finally, a listener $L_n$ updates their beliefs about the day's temperature $x$ and the comparison class $c$ by assuming that a speaker $S_n$ intentionally produced an adjectival utterance $u$ in order to communicate about the temperature.
+Finally, a listener $L_n$ updates their beliefs about the degree $x$ and the comparison class $c$ by assuming that a speaker $S_n$ intentionally produced an adjectival utterance $u$ in order to communicate about the degree (e.g., height).
 Formally, this inference can be captured in a Bayesian formulation:
 
 \begin{align}
@@ -201,36 +201,27 @@ L_n(x, c \mid u) &\propto S_n(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c \mid f
 Though we distinguish formally between the beliefs of the speaker and listener, in the contexts we consider, it can be assumed that all relevant beliefs are shared beliefs.
 Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information to a listener $L$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterance. Hence, our model reduces to simply: $S_n(u \mid x, c) \propto L_{n-1}(x \mid u, c)^{ \alpha}$}
 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
+\caption{\label{fig:modelCartoon}Model overview. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A specific comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{n-1}(x \mid u, c)$---is sensitive to the comparison class. C: Listener $L_n$ imagines what a speaker $S_n$ would say given different comparison classes (facets) and assuming different possible heights of the referent (x-axis); the intensity of the colors (alpha/opacity) is in proportion to the listener's expectation of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Distribution of speaker utterances for different comparison classes marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} is the comparison class is \emph{people}. E: Comparison class inference by the listener in terms of the probability of a subordinate class (e.g., basketball players) computed by inverting the speaker model. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}.
+% speaker production probability distributions are shown with the.
+}
+\end{figure}
+
+
 \begin{align}
 S_n(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{n-1}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S2} 
 \end{align}
 %exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} )}
 
+We assume the speaker has three utterances they can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action). 
 The listener who updates their beliefs about the temperature given a vague adjectival utterance and a fixed comparison class $L_{n-1}(x \mid u, c)$ is model of context-sensitive adjective interpretation, a problem which has garnered a lot of recent attention by formal models of language understanding \cite{Lassiter2013, Qing2014a, Lassiter2017}.
-Our model of comparison class inference blends seamlessly with these formal theories, and we can treat this model component $L_{n-1}(x \mid u, c)$ as a black-box function that produces a probability distribution over degrees (temperatures) in a manner that is sensitive to the comparison class (e.g., respecting the interpretative difference between warm for winter and warm for summer). 
-\red{Figure 1 shows the behavior of this model component.}
-We adopt the model of \citeA{Lassiter2013, Lassiter2017} which takes for granted  that the literal meaning of a gradable adjective is simply a threshold function on the degree (e.g., \([\![warm]\!] = x > \theta\)), where a pragmatic reasoning agent analogous to the speaker and listener models defined above reasons about the plausible threshold the speaker is using. A full presentation of this  part of the model is given in Appendix A.
+Our model of comparison class inference blends seamlessly with these formal theories, and we can treat this model component $L_{n-1}(x \mid u, c)$ as a black-box function that produces a probability distribution over degrees (e.g., heights) in a manner that is sensitive to the comparison class (e.g., respecting the interpretative difference between tall person and tall basketball player; Figure \ref{fig:modelCartoon}B). 
+%\red{Figure 1 shows the behavior of this model component.}
+We adopt the model of \citeA{Lassiter2013, Lassiter2017} which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![warm]\!] = x > \theta\)), where a pragmatic reasoning agent analogous to the speaker and listener models defined above reasons about the plausible threshold the speaker is using, given their knowledge of the comparison class. A full presentation of this  part of the model is given in Appendix A.
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
-\caption{\label{fig:speakerSimulations}Speaker model behavior assuming
-different comparison classes. The underspecified utterance
-(``warm'') takes on the same meaning of the explicit utterance
-whose comparison class is the same as the implicit class (e.g., if the
-speaker is using the (for winter) comparison class, ``warm'' means
-the same thing as ``warm for winter''). When the speaker is
-assuming winter is the comparison class, when the temperature is low, she
-will say ``warm'' or ``warm for winter'', but if the
-temperature is relatively high, she will only say ``warm for the
-year''. When the speaker is assuming the year is the comparison class,
-and the temperature is relatively low, she will say ``warm for
-winter''. The listener believes temperature is relatively low (believes
-it is winter), and inverts this model of speaker to conclude that the
-implicit comparison class was winter. The specific class in this example
-(winter) is a Normal distribution centered at -1, and the general class
-(the year) is a Normal centered at 0.}
-\end{figure}
 
 Inferring the comparison class is necessarily a problem of inferring the intentions of another person.
 The relevant question is not \emph{is today a day in winter?} (an inference about the world), but rather \emph{did the speaker mean to draw a comparison to days to winter?} (an inference about intentions).
@@ -328,7 +319,7 @@ comparison class: \(S_{1}(u \mid x, \theta, c_i = c_{sub})\) and
 we will assume the speaker model can produce utterances with adjectives
 of both the positive and negative forms (e.g., \emph{warm} and
 \emph{cold}).\footnote{Following standard treatment of antonyms, the
-  semantics of ``cold} are a threshold function on a distinct
+  semantics of ``cold'' are a threshold function on a distinct
   threshold variable: \([\![u_{cold}]\!] = x < \theta_{cold}\)), which
   is also inferred via the pragmatic listener (i.e., the listener infers
   a threshold for both ``warm'' and ``cold''). The pragmatic
@@ -338,7 +329,7 @@ of both the positive and negative forms (e.g., \emph{warm} and
   whether or not the antonym gets assigned its own unique threshold
   (\(\theta_{cold}\)), as well as whether or not the utterances with
   explicit comparison classes get assigned their own thresholds (e.g., a
-  \(\theta_{warm}^{sub}\) and \(\theta_{warm}^{super}\)). Figure
+  \(\theta_{warm}^{sub}\) and \(\theta_{warm}^{super}\)).} Figure
 \ref{fig:speakerSimulations} shows the speaker production probabilities
 of the six possible utterances for each value along the degree scale
 (e.g., each temperature) for the two different implicit classes. The
