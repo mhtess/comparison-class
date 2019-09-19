@@ -277,14 +277,29 @@ Thus, our model predicts that the comparison class can be flexibly adjusted and 
 \end{figure*}
 
 We test our hypothesis the comparison class can be flexibly adjusted based on world knowledge and pragmatic principles in a set of coordinated experiments (Figure \ref{fig:exptOverview}).
-We first empirically elicit test stimuli by having participants fill out schemata that aim to elicit sets of categories at the same level of hierarchy that tend to be on the extreme ends of a degree scale (e.g., categories that are generally big or generally small) as well as a control item (e.g., a category whose members are sometimes big and sometimes small; Step 1). 
+We first empirically elicit test stimuli by having participants fill out phrasal templates that aim to elicit sets of categories at the same level of hierarchy that tend to be on extreme ends of a degree scale (e.g., categories that are generally big or generally small) as well as a control item (e.g., a category whose members are sometimes big and sometimes small; Step 1). 
 We then validate these stimuli using a forced-choice paradigm where participants are asked to judge whether an adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate category relative to the basic or superordinate category (Step 2). 
 This adjective endorsement task also provides additional data to constrain the parameters of the comparison class inference model (described below).
-Finally, we test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E by having participants rephrase a speaker's statement in a way that makes the comparison class explicit. 
+Finally, we test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E by having participants rephrase a speaker's statement in a way that makes the comparison class explicit (Step 3).
 The quantitative predictions of the model are tested using a Bayesian data analytic strategy, where we explicitly model the data from both the Adjective Endorsement (Step 2) and Comparison Class Inference (Step 3) tasks jointly.
 This joint Bayesian data-analytic strategy allows us to infer, rather than stipulate, the world knowledge that guides the inference about the comparison class in the computational model. 
 
 \section{Data-analytic Strategy}
+
+Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear an adjective in isolation (e.g., \emph{he's tall}). 
+The model is a quantitative model, however, and can make quantitative predictions concerning the strength of comparison class inferences given model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
+Previous modeling papers in the RSA tradition empirically elicit world knowledge through prior elicitation tasks.
+These tasks often involve estimating numerical quantities or making probability judgments, for which complicated linking functions must be designed \cite{Franke2016}. 
+We take a different approach: We make small modifications to the same core RSA architecture to make predictions about a related task about language used to describe the same domains that we use in the Comparison Class Inference task. 
+We then construct a Bayesian data analytic model to infer the world knowledge shared between these two tasks, along with the few other free parameters of the model (Figure \ref{fig:bayesnet}). 
+This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding tasks allows us to model broader coverage data sets while still constraining model flexibility by forcing the models to predict more distinct data points. 
+
+Specifically, 
+Only the relative values for \(P(x \mid c_{sub})\) and \(P(x \mid c_{super})\) affect model predictions. Hence we fix each superordinate distribution to be a standard normal distribution \(P(x \mid c_{super}) = \mathcal{N}(0, 1)\) and the subordinate priors to also be Gaussian distributions \(P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+
+
+
+\(P(c)\) reflects listeners' expectations of what classes are likely to be discussed. As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, and scale it with a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$ (see Supplemental Information for more information).
 
 
 
@@ -307,7 +322,7 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
   
 %  \node[det, above right=1.2 of S2] (RSA) {RSA} ; % 
   
-  \node[det, above=of S2]  (x)   {$P(x)$}; %
+  \node[det, above=of S2]  (x)   {$P(x_k)$}; %
   \node[det, above=of L1] (c)   {$P(c)$}; %
 
   % C hyperpriors
@@ -334,7 +349,7 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 %\factor       {W'-f}   {Multi} {} {};  %
   % Connect w and x to the dot node
   \edge[-] {c,x} {L1} ;
-  \edge[-] {c,x} {S2} ;
+  \edge[-] {x} {S2} ;
 %  \edge[-] {L1} {RSA} ;
 %  \edge[-] {S2} {RSA} ;
   \edge[-] {a1} {L1} ;
@@ -343,14 +358,14 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 %  \edge[-] {aa2} {S2} ;
 
 \gate {RSAgate} {(L1)(S2)(x)(c)(x-f)(c-f)} {} ; %
-\node[draw] at (0.6,4) {RSA};
+\node[text width=1cm] at (-1.5,1.6) {$RSA$};
   % Plates
   \plate {P1} { %
   %  (d-c)(dc-f)(dc-f-caption) %
 %    (x)(x-f)(x-f-caption) %
     %(RSA)
      (S2) (L1) (RSAgate)%
-    (d-c)(d-a)(x-f)
+    (d-c)(d-a)%(x-f)
   } {$u \in \{tall, short\}$} ;
   \plate {yx} { %
   (P1)
@@ -388,7 +403,7 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 
     \end{tabular}
   \end{center}
-  \caption{Generative model of utterances in the mind of a listener. An utterance $u$ is a function of a comparison class $c$ and degree $x$, via the $S_2$ model (Equation \ref{eq:S2}). A listener's best guess about the degree is a function of both the shared beliefs about the referent $f$ and  the listener's private beliefs $g$. The comparison class $c$ is a function of only the shared beliefs between speaker and listener $f$.}
+  \caption{Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_2$ and the comparison class inference model $L_1$) directly predict the data from Experiments 1 \& 2 ($d^{adj}$ and $d^{cc}$), respectively. Each of these models relies upon world knowledge $P(x_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu_k$ and variance $\sigma_k$). The prior on comparison classes $P(c)$ is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with unknown scale parameter $\beta$. Each RSA model has its own set of speaker optimality parameters ($L_1$ has one parameter $\alpha_1$, while $S_2$ has two parameters $\boldsymbol{\alpha_2}$.}
   \label{fig:bayesnet}
 \end{figure}
 
@@ -594,12 +609,6 @@ We then test the simple effects. For items low on the degree scale (e.g., temper
 
 \subsection{Quantitative modeling}
 
-The behavioral experiment bore out our two qualitative predictions derived from the comparison class inference model. The model is a quantitative model, however, and can make quantitative predictions concerning the strength of comparison class inferences. Indeed, we observe substantial variability in the predicted inferences both within- and across- scales. Here we test whether the observed variability in inferences can be accounted for by the constructs posited in our model. 
-
-
-\(P(c)\) reflects listeners' expectations of what classes are likely to be discussed. As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, and scale it with a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$ (see Supplemental Information for more information).
-
-Only the relative values for \(P(x \mid c_{sub})\) and \(P(x \mid c_{super})\) affect model predictions. Hence we fix each superordinate distribution to be a standard normal distribution \(P(x \mid c_{super}) = \mathcal{N}(0, 1)\) and the subordinate priors to also be Gaussian distributions \(P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
 
 The full model's posterior over the RSA and data-analytic parameters were consistent with prior literature and intuition. The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) intervals for model parameters specific to the \(L_1\) model used for comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\), \(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\) model used for adjective endorsement: \(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\), \(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions corresponding to subordinate class priors were consistent with the \emph{a priori} ordering of these subordinate classes (low, medium, high) used in these tasks (Figure \ref{fig:modelParameters} top).
 
