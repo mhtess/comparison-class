@@ -79,6 +79,12 @@ Participants are asked if the adjective with an explicit superordinate compariso
 (20 itemsets X 6 formats = 120 unique stimuli; we want 15 responses on average per item so we need 100 participants)
 - 18 trials per participant: randomly select 18 of the 20 possible itemsets, and generate 3 of each of the 6 stimulus formats (NP: low/med/high X ADJ: pos/neg). Elicit free production of comparison class given stimulus.
 
+6. Adj-endorsement-exp directory (Sept 18, 2019)
+
+- babe two-alternative forced-choice experiment: forced-choice html code in `03_custom_view_templates.js`, items list in `04_trials.js`, trial views generation in `05_view.js`, experiment structure in `06_main,js`  
+- 9 dimensions (size, length, price, weight, sound (loudness), darkness, height, temperature, speed), app. 7 items each
+- each item comprises context + 3 examples (positive, negative or neutral with respect to property in question)
+
 ### Preregistered
 
 2. `class-elicitation-paraphrase` (n = 150...)
