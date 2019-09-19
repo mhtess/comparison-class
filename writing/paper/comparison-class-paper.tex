@@ -294,14 +294,27 @@ We take a different approach: We make small modifications to the same core RSA a
 We then construct a Bayesian data analytic model to infer the world knowledge shared between these two tasks, along with the few other free parameters of the model (Figure \ref{fig:bayesnet}). 
 This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding tasks allows us to model broader coverage data sets while still constraining model flexibility by forcing the models to predict more distinct data points. 
 
-Specifically, 
-Only the relative values for \(P(x \mid c_{sub})\) and \(P(x \mid c_{super})\) affect model predictions. Hence we fix each superordinate distribution to be a standard normal distribution \(P(x \mid c_{super}) = \mathcal{N}(0, 1)\) and the subordinate priors to also be Gaussian distributions \(P(x \mid c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
+Because we simplify the problem to only considering two comparison classes---a subordinate class (e.g., basketball players) and a basic or superordinate class (e.g., people)---only the relative values for the degrees affect model predictions. 
+Hence, we fix each basic/superordinate class to be a standard normal distribution---$P(x \mid c = c_{basic}) = \mathcal{N}(0, 1)$ and we assume the subordinate priors to also be Gaussian distributions \(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+We infer the plausible values of the parameters governing the subordinate priors from the data.
+The data from the comparison class experiment would be insufficient, however, to reliably estimate these parameters. 
+To alleviate this, we use the same RSA architecture to predict additional data about the related Adjective Endorsement language task. To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{2}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_1(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
 
+The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$. 
+As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
 
-
-\(P(c)\) reflects listeners' expectations of what classes are likely to be discussed. As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, and scale it with a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$ (see Supplemental Information for more information).
-
-
+%The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
+We construct a single data-analytic model with each of these RSA components as sub-models in order to make quantitative predictions about the data from both of our experiments.
+The listener and speaker sub-models share their prior world knowledge $P(x \mid c)$ (e.g., heights of basketball players).
+We put the same priors over the parameters of each subordinate distribution: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$, since they have standardized units.
+The comparison class prior $P(c)$ scales the empirical frequency $\hat{f}$ by a free parameter, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
+The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks.
+The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
+The adjective endorsement model has two speaker optimality parameters: 
+$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
+We use priors consistent with the previous literature: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl}.
 
 
 \begin{figure}[ht]
