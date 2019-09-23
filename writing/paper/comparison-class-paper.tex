@@ -286,20 +286,23 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 
 \section{Data-analytic Strategy}
 
-Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear an adjective in isolation (e.g., \emph{he's tall}). 
+Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear an adjective in isolation (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E). 
 The model is a quantitative model, however, and can make quantitative predictions concerning the strength of comparison class inferences given model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
 Previous modeling papers in the RSA tradition empirically elicit world knowledge through prior elicitation tasks.
 These tasks often involve estimating numerical quantities or making probability judgments, for which complicated linking functions must be designed \cite{Franke2016}. 
-We take a different approach: We make small modifications to the same core RSA architecture to make predictions about a related task about language used to describe the same domains that we use in the Comparison Class Inference task. 
+We take a different approach: We make small modifications to the same core RSA architecture to make predictions about a related language task concerning the same domains used in the Comparison Class Inference task. 
 We then construct a Bayesian data analytic model to infer the world knowledge shared between these two tasks, along with the few other free parameters of the model (Figure \ref{fig:bayesnet}). 
-This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding tasks allows us to model broader coverage data sets while still constraining model flexibility by forcing the models to predict more distinct data points. 
+This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to model broader coverage data sets while still constraining model flexibility by forcing the models to predict more distinct data points. 
 
 In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
 Because we simplify the problem to only considering two comparison classes---a subordinate class (e.g., basketball players) and a basic or superordinate class (e.g., people)---only the relative values for the degrees affect model predictions. 
-Hence, we fix each basic/superordinate class to be a standard normal distribution---$P(x \mid c = c_{basic}) = \mathcal{N}(0, 1)$ and we assume the subordinate priors to also be Gaussian distributions \(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+Hence, we fix each basic/superordinate class in each domain to be a standard normal distribution---$P(x \mid c = c_{basic}) = \mathcal{N}(0, 1)$---and we assume the subordinate priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
 We infer the plausible values of the parameters governing the subordinate priors from the data.
-The data from the comparison class experiment would be insufficient, however, to reliably estimate these parameters. 
-To alleviate this, we use the same RSA architecture to predict additional data about the related Adjective Endorsement language task. To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{2}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_1(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
+
+The data from the comparison class experiment would be insufficient, however, to reliably estimate the model parameters governing the world knowledge priors. 
+To alleviate this, we use the same RSA architecture to predict additional data about the related Adjective Endorsement task. 
+In the Adjective Endorsement task, participants are asked to judge whether a gradable adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate-level category relative to the basic- or superordinate level category (e.g., \emph{Do you think that the basketball player would be tall relative to other people?}).
+To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{2}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_1(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
 
 The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$. 
 As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
@@ -512,72 +515,87 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
 %\subsubsection{Qualitative model predictions}
 
-%\begin{table*}[ht]
-%\centering
-%\begingroup\fontsize{10pt}{11pt}\selectfont
-%\begin{tabularx}{\textwidth}{lll}
-%  \hline
-%Scale (adjectives) & Subordinate classes & Superordinate \\ 
-%  \hline
-%Height (tall, short) & gymnast, soccer player, basketball player & people \\ 
-%  Price (expensive, cheap) & bottle opener, toaster, dishwasher & kitchen appliances \\ 
-%  Temperature (warm, cold) & winter, fall, summer (day in Maryland) & days in the year \\ 
-%  Time (long, short) & cute animal video, music video, movie & things you watch online \\ 
-%  Weight (heavy, light) & grape, apple, watermelon & produce \\ 
-%   \hline
-%\end{tabularx}
-%\caption{Items used in Experiments 1 and 2. Subordinate categories were designed to fall near the low end, high end, and somewhere in the middle of the degree scale} 
-%\label{tab:1}
-%\endgroup
-%\end{table*}
 
-\begin{figure*}[htb]
+%\begin{figure*}[htb]
 
-{\centering \includegraphics[width=1\textwidth]{figs/expt1results-1} 
+%{\centering \includegraphics[width=1\textwidth]{figs/expt1results-1} 
+%
+%}
+%
+%\caption{Empirical comparison class judgments in terms of proportion in favor of subordinate comparison class.  Error bars correspond to 95\% Bayesian credible intervals.}\label{fig:expt1results}
+%\end{figure*}
+%
+%\begin{figure*}[htb]
+%
+%{\centering \includegraphics[width=1\textwidth]{figs/modelParameters-1} 
+%
+%}
 
-}
+%\caption{Reconstructed degree priors (top) and empirically derived comparison class priors (botton). Top: Inferred prior distributions of world knowledge used to model Experiment 1 and 2 data. Bottom: Inferred prior probability of the subordinate comparison classes based on Google WebGram frequencies. Error bars correspond to 95\% Bayesian credible intervals, derived from the posterior on the $\beta$ scale parameter.}\label{fig:modelParameters}
+%\end{figure*}
 
-\caption{Empirical comparison class judgments in terms of proportion in favor of subordinate comparison class.  Error bars correspond to 95\% Bayesian credible intervals.}\label{fig:expt1results}
-\end{figure*}
+\section{Behavioral experiments}
 
-\begin{figure*}[htb]
+We conduct three experiments to collect the data necessary to test the quantitative and quantitative predictions of our model, as outlined in Figure \ref{exptOverview}. 
 
-{\centering \includegraphics[width=1\textwidth]{figs/modelParameters-1} 
-
-}
-
-\caption{Reconstructed degree priors (top) and empirically derived comparison class priors (botton). Top: Inferred prior distributions of world knowledge used to model Experiment 1 and 2 data. Bottom: Inferred prior probability of the subordinate comparison classes based on Google WebGram frequencies. Error bars correspond to 95\% Bayesian credible intervals, derived from the posterior on the $\beta$ scale parameter.}\label{fig:modelParameters}
-\end{figure*}
-
-\section{Behavioral experiment}
-
-We gathered human judgments of comparison classes in ambiguous contexts
-in a pre-registered test of our two predictions described in
-\textbf{Qualitative Model Predictions} (\url{osf.io/k8mnz/}).
+\subsection{Step 1: Stimuli Generation}
 
 \subsubsection{Participants}
 
-We recruited 264 participants, 2 of whom were excluded for failing an
-attention check. Participants were recruited from Amazon's Mechanical
+We recruited 27 participants from Amazon's Mechanical
 Turk and were restricted to those with U.S. IP addresses with at least a
 95\% work approval rating. Each experiment took about 5 minutes and
-participants were compensated \$0.50 for their work.
+participants were compensated \$0.60 for their work.
+
+\subsubsection{Materials and procedure}
+
+We used 8 pairs of positive- and negative-form gradable adjectives (Table \ref{tab:1}).
+On each trial, participants were given a phrasal template, in which sentences that were missing subjects described the subjects as generally having the adjective apply (Figure \ref{fig:exptOverview}, Step 1). 
+For example, ``\_\_\_ are generally big. \_\_\_ are generally small. \_\_\_ are sometimes big and sometimes small.'' These sentences were followed with another that made reference to the subjects that the participants filled-in: ``These three are all kinds of \_\_\_''. This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category. 
+
+\begin{table*}[ht]
+\centering
+\begingroup\fontsize{10pt}{11pt}\selectfont
+\begin{tabularx}{\textwidth}{lll}
+  \hline
+Scale (adjectives) & Example subordinate classes (superordinate class) \\ 
+  \hline
+  \emph{big}, \emph{small} (size) & \\
+\emph{tall}, \emph{short} (height) & \\ 
+  \emph{expensive}, \emph{cheap} (price) & \\ 
+    \emph{warm}, \emph{cold} (temperature) &  \\ 
+  \emph{heavy}, \emph{light} (weight) &  \\ 
+  \emph{long}, \emph{short} (duration / length) &  \\ 
+  \emph{loud}, \emph{quiet} (loudness) &  \\ 
+  \emph{light}, \emph{dark} (luminance) &  \\
+   \hline
+\end{tabularx}
+\caption{Adjectives used in experiments.} 
+\label{tab:1}
+\endgroup
+\end{table*}
+
+\subsubsection{}
+
+
+\subsection{Step 2: Adjective endorsement}
+
+This experiment served to validate our experiment items generated in Step 1, as well as to provide further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
+
+\subsubsection{Procedure}
+
+On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., Alicia lives in Maryland and steps outside in winter.). 
+This was followed by a question asking if the participant would endorse an adjective explicitly relative to the superordinate category (e.g., Do you think the day in winter would be warm relative to other days of the year?).
+Participants could respond with either a \emph{yes} or \emph{no} judgment.
 
 \subsubsection{Materials}
 
-We used positive- and negative-form gradable adjectives describing five
-scales (Table \ref{tab:1}). Each scale was paired with a superordinate
-category, and for each superordinate category, we used three subordinate
-categories that aimed to be situated near the high-end, low-end, and
-intermediate part of the degree scale (as in Figure
-\ref{fig:modelSchematics} left). This resulted in 30 unique items (\{3
-subordinate categories\} x \{5 scales\} x \{2 adjective forms\}). Each
-participant saw 15 trials: one for each subordinate category paired with
-either the positive or negative form of its corresponding adjective.
-Participants never judged the same subordinate category for both
-adjective forms (e.g., cold and warm winter days) and back-to-back
-trials involved different scales to avoid fatigue.
+The experimental materials were a modified subset of those generated in Step 1. 
+In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered. 
 
+\subsubsection{Results}
+
+\subsection{Step 3: Comparison class inference}
 
 \subsubsection{Procedure}
 
@@ -588,20 +606,11 @@ which predicated either a positive- or negative-form gradable adjective
 over the item (e.g., ``Tanya says to her friend, ``It's
 warm.''). Participants were asked ``What do you think Tanya
 meant?'' and given a two-alternative forced-choice to rephrase the
-adjective sentence with either an explicit subordinate or superordinate
-comparison class:
+adjective sentence with a freely-produced comparison class:
 
 \begin{quote}
-\{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other
-\textsc{subordinates} (e.g., \emph{days in winter}) or
-\textsc{superordinates} (e.g., \emph{days of the year})
+\{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \_\_\_\_.
 \end{quote}
-
-In addition to all of the above design parameters, half of our
-participants completed trials where an additional sentence introduced
-the superordinate category at the beginning (e.g., \emph{Tanya lives in
-Maryland and checks the weather every day.}), with the intention of
-making the superordinate paraphrase more salient.
 
 \begin{figure*}[htb]
 
