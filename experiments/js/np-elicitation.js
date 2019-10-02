@@ -233,7 +233,7 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-adjectives-201802-elicitation";
+      var ut_id = "mht-20191002-np-elicitation";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
