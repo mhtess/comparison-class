@@ -1,0 +1,496 @@
+workerid,trial_num,degree,negative,neither_nor,positive,superordinate
+s1,1,size,Apartments,Houses,Hotels,Domiciles
+s1,2,speed,Sloths,Birds,Fish,Animals
+s1,3,hardness,Marshmallows,Eggs,Cucumbers,Food
+s1,4,temperature,Shirts,Flannels,Sweaters,Clothing
+s1,5,length_duration,TV Shows,Plays,Movies,Entertainment
+s1,6,width,Alleys,Lanes,Highways,Streets
+s1,7,price,Onions,Shallots,Avocados,food
+s1,8,weight,phones,laptops,televisions,electronics
+s1,9,speed,buses,cars,trains,transportation
+s1,10,loudness,libraries,restaurants,cafes,public areas
+s1,11,strength,rabbits,monkeys,gorillas,animals
+s1,12,temperature,milk,coffees,tea,drinks
+s1,13,darkness,nights,dawns,days,times of day
+s1,14,height,asians,caucasians,african americans,people
+s1,15,loudness,rabbits,cats,dogs,animals
+s10,1,temperature,Naengguk,Vichyssoise,Pho,Soups
+s10,2,weight,Fanny pack,Bookbag,Mountaineering backpack,Bags
+s10,3,darkness,Pencils,Pens,Chalk,Writing tools
+s10,4,speed,Turtles,Cats,Rabbits,Animals
+s10,5,hardness,Marshmallows,Fruit candy,Chocolate,Sugary snacks
+s10,6,length_duration,seconds,days,years,Units of measuring time
+s10,7,strength,Gold,Aluminum,Steel,Metals
+s10,8,loudness,Sheep,Dogs,Pigs,Domesticated animals
+s10,9,speed,Trolleys,Cars,Airplanes,Vehicles
+s10,10,size,mounds,hills,mountains,land formations
+s10,11,loudness,flutes,guitars,drums,instruments
+s10,12,width,cracks,crevices,Canyons,Land formations
+s10,13,price,Iron,Silver,Gold,Metals
+s10,14,temperature,Winters,Spring,Summers,Seasons
+s10,15,height,Babies,Children,Adults,People
+s11,1,height,21,4,5,tall
+s11,2,width,20,2,10,like
+s11,3,loudness,someat agree,like,agree,poitive
+s11,4,size,big,like,small,3
+s11,5,hardness,pillow,thin,work,like
+s11,6,speed,run,leave,slow,same
+s11,7,darkness,thin,different,thick,same
+s11,8,loudness,love,same,sound,differnet
+s11,9,weight,bright,positive,work,positive
+s11,10,temperature,warm,warm,cold,general
+s11,11,strength,strong,weight,weak,weight
+s11,12,temperature,cool,generally,heat,sometimes
+s11,13,speed,fast,generally,slow,rare
+s11,14,price,best,generally,like,sometimes
+s11,15,length_duration,long,positive,short,like
+s12,1,darkness,Balck,White&Black,White,Colors
+s12,2,width,Straight,Length & Srtaight,Length,Laocation
+s12,3,length_duration,Rat,Life,Train,Nature
+s12,4,hardness,Cotton,Cement,Stone,Things
+s12,5,speed,Tortoise,Frog,Rabbit,Animals
+s12,6,loudness,Microphone,TV,speaker,Materials
+s12,7,price,Apple,Both,I phone,Things
+s12,8,temperature,Juice,Both,Coffee,Drinks
+s12,9,height,House,both,Mountain,Nature and things
+s12,10,loudness,microphone,both,speaker,materials
+s12,11,temperature,Juice,both,Pizza,dishes
+s12,12,weight,pillow,both,bed,sleepeing Materials
+s12,13,size,rat,both,big,animals
+s12,14,strength,thread,both,steel,materials
+s12,15,speed,Tortoise,both,Rabbit,Animals
+s13,1,loudness,Women,Women,Men,Human
+s13,2,temperature,Cokes,Water,Coffee,Drinks
+s13,3,darkness,Grapes,Apples,Corns,Fruit
+s13,4,price,Cars,Motorcycles,Trucks,Vehicles
+s13,5,loudness,Adults,Teenagers ,Kids,People
+s13,6,weight,Sandwich,Meats,Wings,Food
+s13,7,speed,Bus,Cars,Airplanes,Vehicles
+s13,8,temperature,Ice cream,Cakes,Pizza,Desserts 
+s13,9,height,Mexicans,Americans,Europeans,Ethnicity
+s13,10,hardness,Pencil,Pen,Marker ,Writing objects
+s13,11,width,Boots,Sandals,Tennis shoes,Shoes
+s13,12,strength,Indians,Europeans,Americans,Countries
+s13,13,size,Moons,Planets,Suns,Object in the universe
+s13,14,length_duration,Mug,Cup,Glass,Containers for water
+s13,15,speed,Lizard,Horse,Cheetah ,Animals
+s14,1,loudness,Cats,Dogs,Birds,animals
+s14,2,loudness,Adults,Teenagers,Babies,people
+s14,3,length_duration,Sprints,Relays,Marathons,races
+s14,4,strength,Babies,Children,Adults,people
+s14,5,darkness,Nights,Evenings,Mornings,times of day
+s14,6,height,Pansies,Tulips,Sunflowers,flowers
+s14,7,size,Apples,Strawberries,Watermelon,fruit
+s14,8,temperature,Sodas,Teas,Coffees,drinks
+s14,9,speed,Buses,Cars,Planes,transportation
+s14,10,temperature,Salads,Sandwiches,Soups,food
+s14,11,speed,Turtles,Dogs,Birds,animals
+s14,12,weight,Tablets,Laptops,Desktops,computers
+s14,13,hardness,Peaches,Bananas,Plums,fruit
+s14,14,price,Socks,Underwear,Bras,clothing
+s14,15,width,Bikes,Cars,Trucks,vehicles
+s15,1,temperature,ice,water,water,methods
+s15,2,speed,tortise,man,rabbit,snake
+s15,3,darkness,red,light white,white,green
+s15,4,length_duration,earthworm,dog,snake,metabolism
+s15,5,price,covering,bronze,platinum,measurements
+s15,6,hardness,tissue,bone,teeth,body
+s15,7,loudness,teacher in class,students,teacher without class,inside classroom
+s15,8,temperature,icecream,water,tea ,water
+s15,9,size,ant,man,elephant,living organism
+s15,10,speed,rabbit,man,horse,types
+s15,11,strength,pencil,gold,rock,solid substances
+s15,12,height,cock,man,graffe,height and small
+s15,13,width,narrow,narrow and wide,wide,way
+s15,14,weight,dust,rock,stone,light and heavy
+s15,15,loudness,silence,road,sound,traffic
+s16,1,temperature,Milkshakes,Teas,Cocoas,beverages
+s16,2,speed,Turtles,Lizards,Snakes,reptiles
+s16,3,length_duration,Cars,Trucks,Trains,vehicles
+s16,4,width,Lanes,Streets,Avenues,roadways
+s16,5,loudness,Rabbits,Dogs,Monkeys,mammals
+s16,6,strength,Babies,Teenagers,Men,people
+s16,7,temperature,Winters,Springs,Summers,seasons
+s16,8,height,Capris,Jeans,Bell bottoms,pants
+s16,9,price,Chromebooks,Laptops,Desktops,computers
+s16,10,hardness,Pillows,Mattresses,Boxsprings,bedding
+s16,11,loudness,Electric cars,Hybrids,Diesel engines,cars
+s16,12,weight,Jump ropes,Kettle balls,Weights,exercise equipment
+s16,13,size,Hamsters,Rats,Beavers,rodents
+s16,14,speed,Priuses,Taxi cabs,Race cars,cars
+s16,15,darkness,Chocolate cakes,Fruit pies,Sugar Cookies,desserts
+s17,1,height,Children,Women,Men,people
+s17,2,hardness,Blueberries,Bananas,Apples,fruits
+s17,3,length_duration,Shorts,Skirts,Pants,clothing
+s17,4,temperature,Sodas,Coffees,Teas,drinks
+s17,5,loudness,Cats,Dogs,Parrots,animals
+s17,6,darkness,African Americans,Hispanics,Caucasians,races/ethnicities
+s17,7,temperature,Winters,Springs,Summers,seasons
+s17,8,weight,bikes,motorcycles,Cars,vehicles
+s17,9,size,grapes,Apples,watermelons,fruits
+s17,10,strength,Babies,Women,Men,people
+s17,11,loudness,Cats,Dogs,Donkeys,animals
+s17,12,speed,turtles,Elephants,Cheetahs,animals
+s17,13,width,Bikes,Motorcycles,Cars,vehicles
+s17,14,speed,Elderly people,Children,Adults,people
+s17,15,price,Bananas,strawberries,raspberries,fruits
+s18,1,length_duration,Chihuahuas,Bassett Hounds,Dachshunds,dogs
+s18,2,price,Salt,Garlic Heads,Saffron,Spices
+s18,3,loudness,Triangle,Guitar,Drums,Instruments
+s18,4,hardness,Oranges,Bananas,Coconut,fruit
+s18,5,height,Herbs,Shrubs,Tree,Plants
+s18,6,speed,Turtle,Coyote,Hare,animals
+s18,7,width,Wooden Frame,Barn,Sliding Glass ,doors
+s18,8,temperature,Milk,Tea,Coffee,drinks
+s18,9,darkness,Dahlias,Roses,Daisies,Flowers
+s18,10,weight,Apples,Watermelon,Cantaloupe,Fruit
+s18,11,temperature,Gazpachos,Vichyssoise,Beef Stews,soup
+s18,12,size,Chihuahuas,Poodles,Great Danes,Dogs
+s18,13,speed,Walks,Bikes,Cars,transportation
+s18,14,strength,Paper,Wood,Brick,Building Materials
+s18,15,loudness,Churches,Schools,Playgrounds,environments
+s19,1,temperature,B's,C's,A's,temperatures
+s19,2,size,ants,cats,elephants,animals
+s19,3,darkness,panthers,tigers,jaguars,cats
+s19,4,speed,housecats,lions,cheetahs,cats
+s19,5,loudness,adults,teens,children,people
+s19,6,length_duration,short stories,books,novels,reading utensils
+s19,7,speed,restaraunts,take out,fast food,food options
+s19,8,temperature,ice,water,boiling water,liquid
+s19,9,loudness,smart cars,ambulances,semi trucks,vehicles
+s19,10,height,dogs,horses,giraffes,animals
+s19,11,weight,headphones,computer speakers,PA speakers,noise devices
+s19,12,hardness,taffy,now and laters,skittles,candy
+s19,13,width,sidewalks,streets,freeways,public access
+s19,14,strength,children,adult women,adult men,people
+s19,15,price,scooters,cars,buildings,property
+s2,1,weight,Fabrics,Textiles,Metals,materials.
+s2,2,speed,Sloths,Bears,Cheetahs,animals.
+s2,3,height,Grasses,Vines,Trees,plants.
+s2,4,size,Moons,Planets,Stars,celestial bodies.
+s2,5,loudness,Cats,Birds,Dogs,pets.
+s2,6,width,Creeks,Streams,Rivers,waterways.
+s2,7,hardness,Pillows,Candies,Rocks,objects.
+s2,8,strength,Twigs,Branches,Limbs,tree parts.
+s2,9,temperature,Ice creams,Soups,Steaks,food.
+s2,10,loudness,Ants,Cows,Children,animals.
+s2,11,darkness,Storms,Clouds,Clear skies,weather.
+s2,12,price,Reebok,Nikes,Gucci,shoes.
+s2,13,speed,Trolleys,Cars,Planes,transportation.
+s2,14,temperature,Shorts,Pants,Jackets,clothes.
+s2,15,length_duration,Gerbils,Hamsters,Ferrets,animals.
+s20,1,size,yellow,no,green,yes
+s20,2,width,yes,yes,yes,correct
+s20,3,strength,yes,yes,yes,yes
+s20,4,speed,yes,yes,yes,yes
+s20,5,weight,yes,yes,yes,yes
+s20,6,loudness,yes,yes,yes,yes
+s20,7,speed,yes,yes,yes,yes
+s20,8,temperature,yes,yes,yes,yes
+s20,9,price,yes,yes,yes,yes
+s20,10,temperature,yes,yes,yes,yes
+s20,11,height,yes,yes,yes,yes
+s20,12,length_duration,yes,yes,yes,yes
+s20,13,hardness,yes,yes,yes,yes
+s20,14,darkness,yes,yes,yes,yes
+s20,15,loudness,yes,yes,yes,yes
+s21,1,loudness,we,we,we,nouns
+s21,2,temperature,they,they,they,they
+s21,3,width,they,they,they,they
+s21,4,darkness,they,they,they,they
+s21,5,strength,they,they,they,they
+s21,6,height,they,they,they,they
+s21,7,size,they,they,they,they
+s21,8,temperature,they,they,theythey,they
+s21,9,hardness,they,they,they,they
+s21,10,loudness,they,they,they,they
+s21,11,speed,they,they,they,they
+s21,12,length_duration,they,they,they,they
+s21,13,price,they,they,theythey,they
+s21,14,speed,bike,none,rrun,they
+s21,15,weight,they,they,they,they
+s22,1,width,one-way streets,two lane roads,highways,Roads
+s22,2,height,shrubs,vines,Trees,plants
+s22,3,size,smart cars,sedans,trucks,cars
+s22,4,length_duration,pistols,submachine guns,rifles,firearms
+s22,5,loudness,electric cars,diesel cars,conventional cars,automobiles
+s22,6,price,Sony headphones,JBL headphones,Sennheiser headphones,headphones
+s22,7,speed,wheelbarrows,bicycles,cars,wheeled vehicles
+s22,8,loudness,mosquitos,birds,airplanes,flying things
+s22,9,speed,dial up connections,cable connections,fiber optic connections,internet connections
+s22,10,hardness,ice cream,bread,apples,food
+s22,11,temperature,beer,coffee,hot cocoa,beverages
+s22,12,weight,pillows,mattresses,bed frames,things you sleep on
+s22,13,strength,children,adults,body builders,people
+s22,14,darkness,African-Americans,Asians,Caucasians,human races
+s22,15,temperature,Refrigerators,Washing machines,Stoves,appliances
+s23,1,temperature,Salads,Dessert,Soups,foods
+s23,2,width,Alleyways,Roads,Freeways,Roads
+s23,3,hardness,Carpet,Tiles,Wood,Floors
+s23,4,price,Cubic Zirconia,Gems,Diamond,Stones
+s23,5,darkness,Black,Grey,White,Colors
+s23,6,size,Mice,Dogs,Elephants,Animals
+s23,7,weight,Babies,Kids,Adult men,Humans
+s23,8,speed,Turtle,Deers,Cheetah,Animals
+s23,9,loudness,Libraries,Offices,Clubs,Rooms
+s23,10,loudness,Museums,Parks,Rock concerts,Events/Places
+s23,11,length_duration,Toes,Penis,Legs,Body parts
+s23,12,temperature,Juneau,San Francisco,Los Angeles,cities
+s23,13,strength,Water,Tea,Coffee,drinks
+s23,14,height,Bunnies,Bears,Giraffe,animals
+s23,15,speed,Wagons,Cars,Planes,Vehicles
+s24,1,temperature,WINTER,SPRING,SUMMER,SEASON
+s24,2,loudness,LIABARAY,CLASS ROOM,SHOPPING MARKET,HAPPENS
+s24,3,length_duration,HOME,BOTH,OFFICE,DISTANCE
+s24,4,loudness,ROBERT,HUMAN,HUMAN BEING,CHARACTER
+s24,5,weight,SPOUNCH,BEDS,BUNDLES,WEIGHT
+s24,6,size,BI-CYCLE,CAR,BUS,LENGTH AND BRETH
+s24,7,temperature,JUICE,COFFEE,COFFEE,HOT OR COLD
+s24,8,strength,BASEMENT,BUILDING,BUILDING,STROUNGNESS
+s24,9,speed,CYCLE,CAR,ROCKET,SPEED
+s24,10,speed,CYCLE,CAR,AEROPLANE,SPEED
+s24,11,hardness,PILLOW,RUBBER,STONE,SKILLNESS
+s24,12,price,COFFEE,GOLD,DIAMOND,RATENESS
+s24,13,darkness,BLACK,BOTH,PINK,COLOUR
+s24,14,width,SPACE,BOTH,LINE,NARROW
+s24,15,height,SIZE,BOTH,STICK,LENGTH
+s25,1,weight,paper,plastic ,plywoods,product 
+s25,2,loudness,snake,men,speaker,product and animals
+s25,3,strength,health,health,health,human parts
+s25,4,height,survey,survey,survey ,survey
+s25,5,hardness,screen,note,table,product and human parts
+s25,6,width,human,human,human,human
+s25,7,temperature,men ,human,match,human and sports
+s25,8,darkness,color,color,color,colors
+s25,9,temperature,sex,sex,sex,sex
+s25,10,speed,speed,speed,speed,speed
+s25,11,price,money,money,money,money
+s25,12,size,human,human,human,human
+s25,13,speed,bike,bike,bike,bike
+s25,14,length_duration,bike,vehicle,car,vehicle
+s25,15,loudness,silent,sound,sound,sound
+s26,1,temperature,WInters,Falls,Summers,Seasons
+s26,2,strength,Marathon Runners,Mid-Distance Runners,Sprinters,Athletes
+s26,3,temperature,Juices,Chocolates,Teas,Drinks
+s26,4,speed,Tata,BMW,Mercedes,Cars
+s26,5,hardness,Cotton,Meat,Iron,Surfaces
+s26,6,price,Books,Hobbies,Holidays,Leisure Activities
+s26,7,speed,Turtles,Dogs,Rabbits,Animals
+s26,8,darkness,Nights,Evenings,Mornings,Times of a day
+s26,9,width,Apartments,Houses,Palaces,places to stay
+s26,10,height,Asians,Americans,Europeans,Ethnicity of People
+s26,11,loudness,Boys,Matures,GIrls,Ages
+s26,12,weight,Cotton,Iron,Silver,material
+s26,13,size,Fingers,Palms,Hands,Body parts
+s26,14,length_duration,Toes,Fingers,Legs,Body parts
+s26,15,loudness,Villages,Towns,Cities,places to live
+s27,1,size,poems,Stories,Novels,written word
+s27,2,darkness,pitbulls,spaniels,poodles,dogs
+s27,3,strength,children,women,men,humans
+s27,4,hardness,taffy,chocolate,lollipops,candy
+s27,5,loudness,whispers,talking,yells,communication
+s27,6,height,puppies,monkeys,giraffes,animals
+s27,7,width,streets,avenues,highways,roads
+s27,8,speed,turtles,birds,cheetahs,animals
+s27,9,temperature,icecubes,soup,boiled water,liquids
+s27,10,price,skateboards,bicycles,cars,transportation
+s27,11,loudness,symphonic music,rock music,metal music,music
+s27,12,speed,sloths,hyenas,roadrunners,animals
+s27,13,weight,bills,plastic,coins,currency
+s27,14,temperature,winters,autumn,summers,seasons
+s27,15,length_duration,poems,stories,novels,written word
+s28,1,length_duration,streets,routes,highways,roads
+s28,2,size,herring,tuna,sharks,fish
+s28,3,strength,raiin,thunderstorms,tornadoes,storms
+s28,4,speed,turtles,dogs,cheetahs,animals
+s28,5,temperature,winters,springs,summers,seasons
+s28,6,darkness,closets,bathrooms,sunrooms,rooms
+s28,7,width,creeks,streams,rivers,waterways
+s28,8,price,chevys,lexus,bmw's,cars
+s28,9,height,onions,bushs,trees,plants
+s28,10,weight,pumice,gravel,boulders,rocks
+s28,11,temperature,moons,meteors,stars,celestial objects
+s28,12,speed,rowboats,sailboats,speedboats,boats
+s28,13,hardness,pillows,chairs,tables,furniture
+s28,14,loudness,hummingbirds,crows,roosters,birds
+s28,15,loudness,hummingbirds,crows,roosters,birds
+s29,1,speed,Trucks,Cars,Motorcycles,Vehicles
+s29,2,height,Women,Kids,Men,People
+s29,3,speed,Crockpots,Pots and pans,Instant pots,different ways to cook dinner.
+s29,4,size,Bugs,snakes,Spiders,reptiles
+s29,5,temperature,Snow,Rain,Sun,weather
+s29,6,darkness,TVS,Phones,Computer screens,technology
+s29,7,price,store brands,walmart,name brands,clothing
+s29,8,loudness,adults,teens,kids,generations
+s29,9,hardness,pillows,couches,bricks,things you find in a house
+s29,10,width,skinny peole,kids,fat people,people
+s29,11,temperature,girls,teens,boys,people
+s29,12,strength,women,kids,men,people
+s29,13,loudness,chess games,cheerleADERS,football games,things at school to play
+s29,14,weight,tvs,toys,furniture,things to move in a house
+s29,15,length_duration,guys hair lengths,kids hair lengths,womens hair lengths,lengths of hair in people
+s3,1,loudness,Finches,Crows,Parrots,birds
+s3,2,height,children,women,Men,people
+s3,3,temperature,Milkshakes,Teas,Coffees,drinks
+s3,4,size,Ferns,Cacti,Trees,plants
+s3,5,price,Bikes,boats,cars,transportation
+s3,6,speed,turtles,cats,rabbits,pets
+s3,7,strength,gold,aluminum,iron,metals
+s3,8,hardness,sneakers,boots,cleats,shoes
+s3,9,width,alleys,roads,highways,streets
+s3,10,darkness,sunglasses,transition lenses,eyeglasses,glasses
+s3,11,weight,ducks,pigs,horses,farm animals
+s3,12,loudness,silent films,movies,rock concerts,entertainment
+s3,13,speed,weight lifters,skiiers,runners,athletes
+s3,14,length_duration,shorts,skirts,pants,clothing
+s3,15,temperature,oceans,pools,hot tubs,water
+s30,1,length_duration,cars,busses,trains,vehicles
+s30,2,speed,turtles,humans,cheetas,animals
+s30,3,loudness,humming birds,elephants,parrots,animals
+s30,4,darkness,black peopl,mexicans,white people,races
+s30,5,strength,women,women,men,genders
+s30,6,temperature,ice,tea,hot cocoa,beverages
+s30,7,price,plastic jewelery,metal jewelry,gold jewelry,jewelry
+s30,8,weight,bark,dirt,bricks,pavers
+s30,9,size,birds,turtles,elephants,animals
+s30,10,height,midgets,"""normal"" people",giants,humans
+s30,11,loudness,giraffes,elephants,birds,animals
+s30,12,width,skinny people,normal people,fat people,humans
+s30,13,temperature,milk,tea,coffee,beverages
+s30,14,hardness,blankets,pillows,bedboards,sleep stuff
+s30,15,speed,turtles,people,ostriches,animals
+s31,1,strength,flowers,bushes,trees,plants
+s31,2,loudness,adults,teenagers,children,human
+s31,3,hardness,bananas,mangoes,apples,fruit
+s31,4,size,motorbikes,trucks,cars,vehicle
+s31,5,speed,sloths,dogs,cheetahs,mammals
+s31,6,height,buns,loaves,baguettes,bread
+s31,7,loudness,row boats,paddle boats,powerboats,boat
+s31,8,temperature,milkshakes,teas,coffees,drink
+s31,9,temperature,tank tops,shirts,jackets,clothing
+s31,10,darkness,hair,skin,eyes,body part
+s31,11,speed,walkers,joggers,runners,athlete
+s31,12,length_duration,shorts,capris,trousers,clothing
+s31,13,price,apartments,condos,houses,home
+s31,14,weight,pebbles,stones,rocks,Geologitic items
+s31,15,width,shoulders,stomachs,hips,body parts
+s32,1,strength,Women,Teenagers,Men,People
+s32,2,width,Paths,Rivers,Roads,Geography
+s32,3,darkness,Pants,Clothes,Shirts,Clothing
+s32,4,height,Dwarves,Humans,Elves,Races 
+s32,5,speed,Turtles,Humans,Rabbits,speeds
+s32,6,length_duration,Branches,Pens,Snakes,items that vary in length
+s32,7,price,Earphones,Computers,Headphones,technology
+s32,8,size,Mice,rats,Elephants,animals
+s32,9,weight,Stones,Rocks,Boulders,rocks.
+s32,10,speed,Turtles,Humans,Cheetahs,speed of species. 
+s32,11,temperature,Winter,Spring,Summers,seasons. 
+s32,12,loudness,Libraries,Noises,Babies,things that make noise. 
+s32,13,hardness,Pillows,Blankets,Tables,bedding/furniture
+s32,14,temperature,Milk,Tea,Coffee,drinks
+s32,15,loudness,Computers,Phones,Cars,technology
+s33,1,speed,Turtles,Cats,Rabbits,animals
+s33,2,loudness,Toasters,Fans,Vacuums ,appliances
+s33,3,speed,Offensive Linemen,Quarterbacks,Running Backs,football players
+s33,4,height,Females,Americans,Males,people.
+s33,5,loudness,Scooters,Cars,Motorcycles,vehicles
+s33,6,temperature,Winters,Springs,Summers,Seasons
+s33,7,hardness,Sofas,Beds,Chairs,furniture 
+s33,8,width,Noses,Eyes,Mouths,facial features
+s33,9,weight,Lunches,Breakfasts,Dinners,meals
+s33,10,length_duration,TV shows,Plays,Movies,entertainment
+s33,11,price,Ties,Watches,Suits,apparel
+s33,12,strength,Shacks,hotels,Mansions,homes
+s33,13,size,Insects,Reptiles,Mammals,animals
+s33,14,darkness,Nights,Weekends,Days,times of day
+s33,15,temperature,Drinks,Subs,Soups,Food
+s4,1,weight,Phones,Tablets,Laptops,Electronic devices 
+s4,2,hardness,Flowers,Bushes,Trees,Plants
+s4,3,strength,Children,Women,Men,People
+s4,4,speed,Turtles,Rabbits,Cheetas,Animals
+s4,5,length_duration,Dogs,Horses,Giraffes,Animals
+s4,6,darkness,Plums,Apples,Oranges,Fruit
+s4,7,height,Houses,Apartment buildings,Skyscrapers,Buildings
+s4,8,width,Bikes,Cars,Trucks,Vehicles
+s4,9,loudness,Mice,Gerbals,Rats,Rodents
+s4,10,loudness,Ukeleles,Electric Guitars,Bass guitars,Instruments
+s4,11,size,Zucchini,Squash,Pumpkins,Gourds
+s4,12,speed,Bikes,Electric Scooters,Motorcycles,Vehicles
+s4,13,temperature,Chocolate Milk,Coffee,Hot chocolate,Drinks
+s4,14,temperature,Ice cream,Pasta,Grilled cheese,Food
+s4,15,price,Table salt,Sea Salt,Himalayan Pink Salt,Salts
+s5,1,temperature,Winter days,Fall days,Summer days,seasons
+s5,2,width,Side roads,Downtown streets,Highways,roadways
+s5,3,hardness,Slimes,Putties,Clays,crafting material
+s5,4,strength,Frail people,Average people,Muscular people,people
+s5,5,price,Silver,Copper,Gold,metals
+s5,6,weight,Clouds,Snow,Rain,precipitation
+s5,7,loudness,Fish,Cats,Dogs,pets
+s5,8,darkness,Nights,Evenings,Mornings,times of the day
+s5,9,speed,Turtles,Raccoons,Rabbits,animals
+s5,10,temperature,Ice,Water,Gas,elements
+s5,11,loudness,Shy people,Average people,Flamboyant people,people
+s5,12,speed,Sloths,Elephants,Cheetahs,animals
+s5,13,size,Ants,Spiders,Roaches,insects
+s5,14,length_duration,Sitcoms,Movies,Series,entertainment
+s5,15,height,Little people,White collar workers,Basketball players,people
+s6,1,loudness,Cats,Birds,Dogs,Animals
+s6,2,speed,Carriages,Bikes,Cars,Vehicles 
+s6,3,temperature,Ice cream,Eggs,Soup,Food
+s6,4,darkness,Moons,Planets,Stars,Space objects
+s6,5,width,Paths,Doors,Entrances,Entrances
+s6,6,weight,Grapes,Squash,Watermelons,Vegetables
+s6,7,length_duration,Smartcars,Limos,Buses,Vehicles 
+s6,8,strength,Straws,Clay,Bricks,Building material
+s6,9,hardness,Bananas,Peaches,Apples,Fruit
+s6,10,size,Ants,Moths ,Spiders,Insects 
+s6,11,temperature,Water,Tea,Coffee,Beverages
+s6,12,loudness,Cars,Buses,Bikes,Vehicles 
+s6,13,speed,Turtles,Cats,Rabbits,Animals
+s6,14,height,Babies,Kids,Adults,Humans
+s6,15,price,Floss,Toothbrush ,Dentists,Dental Care
+s7,1,length_duration,hamster,turtle,snakes,animals
+s7,2,speed,turtle,dog,cheetah,animals
+s7,3,loudness,mice,cats,dogs,animals
+s7,4,height,cats,humans,giraffee,mammals
+s7,5,darkness,moon,paint,sun,objects
+s7,6,temperature,winter,fall,summer,seasons
+s7,7,width,sidewalks,roads,hallway,objects
+s7,8,price,apartment,condo,house,places to live
+s7,9,hardness,blanket,pillow,rocks,objects
+s7,10,strength,mice,dog,lions,animals
+s7,11,weight,pillow,weights,couch,objects
+s7,12,size,minnows,fish,whale,animals
+s7,13,speed,turtle,bear,cheetah,animals
+s7,14,temperature,soda pop,coffee,tea,drinks
+s7,15,loudness,library,school,venue,places to hear
+s8,1,strength,kids,older people,grown men,humans
+s8,2,darkness,back roads,main roads,highways,roads
+s8,3,height,shrubs,plants,trees,greenery
+s8,4,size,mice,dogs,elephants,animals
+s8,5,length_duration,article,stories,novels,writings
+s8,6,width,bike paths,walking paths,atv paths,paths
+s8,7,loudness,libraries,resturants,concerts,places to go
+s8,8,hardness,banana,peach,apple,fruits
+s8,9,temperature,ocean water,swimming pools,jacuzzi,areas of water
+s8,10,temperature,ice water,tea,coffe,beverages
+s8,11,speed,bycicle,bus,cars,methods of travel
+s8,12,weight,coffee table,chair,couch,furniture
+s8,13,loudness,study hall,classroom,audtorium,school rooms
+s8,14,speed,longhorn,5 guys,mcdonalds,restaurant
+s8,15,price,sandals,sneakers,boots,shoes
+s9,1,loudness,flutes,violins,drums,instruments
+s9,2,width,golf carts,cars,trucks,vehicles
+s9,3,strength,Elderly people,Middle age people,Young people,age groups
+s9,4,weight,fish,dogs,elephants,animals
+s9,5,size,flowers,bushes,trees,plants
+s9,6,temperature,winters,falls,summers,seasons
+s9,7,hardness,marshmallows,toffees,chocolates,candy
+s9,8,price,kias,hondas,mercedes,cars
+s9,9,speed,snails,spiders,flies,insects
+s9,10,speed,house cats,tigers,cheetahs,cats
+s9,11,loudness,libraries,classrooms,gymnasiums,place in a school
+s9,12,temperature,freezers,pantry,stoves,things in a kitchen
+s9,13,length_duration,shorts,skirts,pants,clothing
+s9,14,darkness,nights,evenings,mornings,time of day
+s9,15,height,bushes,bamboo,trees,plants
