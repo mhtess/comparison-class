@@ -1,0 +1,80 @@
+---
+title: "Adjective Elicitation"
+author: "Michael Lopez-Brau"
+date: "April 16, 2018"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load libraries.
+library(knitr)
+library(tidyverse)
+```
+
+## Updated Results
+
+Manually categorized participant responses into supercategories.
+
+```{r}
+library(tidyverse)
+library(jsonlite)
+library(tidyboot)
+```
+
+
+```{r load.data}
+data.path <- "../mturk/np-elicitation/production-results/"
+result.files <- list.files(data.path, pattern="json")
+
+df.subject <- data.frame()
+df.trials <- data.frame()
+df.attention <- data.frame()
+for (result_file in result.files) {
+  result_json = fromJSON(paste(data.path, result_file, sep ="/"))
+  worker.id = result_json$WorkerId
+  condition = result_json$answers$condition
+  
+  df.attention = bind_rows(
+    df.attention, 
+    data.frame(result_json$answers$catch_trials) %>%
+      mutate(workerid = worker.id)
+  )
+    
+  df.subject = bind_rows(
+    df.subject, 
+    data.frame(result_json$answers$subject_information) %>% 
+      mutate(
+        workerid = worker.id,
+        language = gsub("\"", "", language),
+        enjoyment = gsub("\"", "", enjoyment),
+        age = gsub("\"", "", age),
+        gender = gsub("\"", "", gender),
+        problems = gsub("\"", "", problems),
+        comments = gsub("\"", "", comments)
+      ) 
+  )
+    
+  df.trials = bind_rows(
+    df.trials, 
+    data.frame(result_json$answers$trials) %>%
+      mutate(workerid = worker.id)
+  )
+}
+```
+
+
+```{r}
+glimpse(df.trials)
+
+df.trials.i <- df.trials %>%
+  mutate(workerid = paste("s", as.numeric(factor(workerid)), sep = ""))
+
+df.noun.elicit.wide <- df.trials.i %>% 
+  select(workerid, trial_num, degree, adjective_form, response) %>%
+  spread(adjective_form, response)
+
+
+write_csv(df.noun.elicit.wide, 
+          path = paste("../data/np-elicitation/",
+                "np-elicitation-wide-n33.csv", sep = ""))
+```
+
