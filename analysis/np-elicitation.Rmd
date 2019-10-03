@@ -66,11 +66,24 @@ for (result_file in result.files) {
 glimpse(df.trials)
 
 df.trials.i <- df.trials %>%
-  mutate(workerid = paste("s", as.numeric(factor(workerid)), sep = ""))
+  mutate(workerid = paste("s", as.numeric(factor(workerid)), sep = "")) %>%
+  rowwise() %>%
+  mutate()
 
 df.noun.elicit.wide <- df.trials.i %>% 
-  select(workerid, trial_num, degree, adjective_form, response) %>%
-  spread(adjective_form, response)
+  mutate(adj_response = paste(adjective, response, sep = "_")) %>%
+  select(workerid, trial_num, degree, adjective_form, adj_response) %>%
+  spread(adjective_form, adj_response) %>%
+  rowwise() %>%
+  mutate(
+    pos_adj = strsplit(positive, "_")[[1]][1],
+    neg_adj = strsplit(negative, "_")[[1]][1],
+    positive = strsplit(positive, "_")[[1]][2],
+    negative = strsplit(negative, "_")[[1]][2],
+    neither_nor = strsplit(neither_nor, "_")[[1]][2],
+    superordinate = strsplit(superordinate, "_")[[1]][2]
+    ) %>%
+  select(workerid, trial_num, degree, pos_adj, neg_adj, superordinate, positive, neither_nor, negative)
 
 
 write_csv(df.noun.elicit.wide, 
