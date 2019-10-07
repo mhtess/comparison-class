@@ -81,9 +81,14 @@ Participants are asked if the adjective with an explicit superordinate compariso
 
 6. Adj-endorsement-exp directory (Sept 18, 2019)
 
-- babe two-alternative forced-choice experiment: forced-choice html code in `03_custom_view_templates.js`, items list in `04_trials.js`, trial views generation in `05_view.js`, experiment structure in `06_main,js`  
+- babe two-alternative forced-choice experiment: forced-choice html code in `03_custom_view_templates.js`, hand-crafted items list in `04_trials.js`, items built from NP elicitation experiment in `04_trials_n50.js`, trial views generation in `05_view.js`, experiment structure in `06_main,js`  
 - 9 dimensions (size, length, price, weight, sound (loudness), darkness, height, temperature, speed), app. 7 items each
 - each item comprises context + 3 examples (positive, negative or neutral with respect to property in question)
+
+7. `class-elicitation-free-n50-20191007`
+
+- comparison class free production experiment using results from NP elicitation n50
+- processed trial information stored in `np-elicitation-n50-results`
 
 ### Preregistered
 
