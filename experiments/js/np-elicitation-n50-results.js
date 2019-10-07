@@ -14,7 +14,7 @@ var examples = [
         neither_nor: "parrot",
         negative: "crow",
         pronoun: "It",
-        context: "PERSON walks in the park and sees a PHRASE.",
+        context: "PERSON is going for a walk and notices the color of a PHRASE.",
 
     },
     {
@@ -23,12 +23,12 @@ var examples = [
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
-        superordinate: "art supplies",
-        positive: "paint",
-        neither_nor: "crayons",
-        negative: "charcoal",
+        superordinate: "paint",
+        positive: "white paint",
+        neither_nor: "blue paint",
+        negative: "black paint",
         pronoun: "It",
-        context: "PERSON buys PHRASE in an art supplies store."
+        context: "PERSON is brought a can of PHRASE and is testing it for the first time."
     },
     {
         worker_id: "s23",
@@ -41,7 +41,7 @@ var examples = [
         neither_nor: "fruit pie",
         negative: "chocolate cake",
         pronoun: "It",
-        context: "PERSON is at a bakery and looks at a PHRASE."
+        context: "PERSON is at a bakery and looks at the color of a PHRASE."
     },
     {
         worker_id: "s7",
