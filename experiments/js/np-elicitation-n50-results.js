@@ -30,7 +30,7 @@ var examples = [
         neither_nor: "blue paint",
         negative: "black paint",
         pronoun: "It",
-        context: "PERSON has bought a can of PHRASE and is testing it for the first time."
+        context: "PERSON bought a can of PHRASE and is testing it for the first time."
     },
     {
         worker_id: "3",
@@ -59,7 +59,7 @@ var examples = [
         pre_negative: "a",
         pre_neutral: "an",
         pronoun: "It",
-        context: "PERSON is at a grocery store and picks up PRE PHRASE."
+        context: "PERSON is at a grocery store and looks at the color of PRE PHRASE."
     },
     {
         worker_id: "5",
@@ -82,7 +82,7 @@ var examples = [
         adj_positive: "light",
         adj_negative: "dark",
         superordinate: "writing tools",
-        positive: "chalk",
+        positive: "piece of chalk",
         neither_nor: "pen",
         negative: "pencil",
         pronoun: "It",
@@ -176,7 +176,7 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "food",
+        superordinate: "foods",
         positive: "apple",
         neither_nor: "bread",
         negative: "ice cream",
@@ -192,12 +192,12 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "desserts",
-        positive: "chocolate",
-        neither_nor: "fruit candy",
+        superordinate: "sweets",
+        positive: "jolly rancher",
+        neither_nor: "chocolate",
         negative: "marshmallow",
         pronoun: "It",
-        context: "PERSON is eating a piece of PHRASE."
+        context: "PERSON is eating a PHRASE."
     },
     {
         worker_id: "15",
@@ -205,7 +205,7 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "materials",
+        superordinate: "materials for floors",
         positive: "tile",
         neither_nor: "wood",
         negative: "carpet",
@@ -316,14 +316,14 @@ var examples = [
         superordinate: "buildings",
         positive: "skyscraper",
         neither_nor: "apartment building",
-        negative: "condo",
+        negative: "strip mall",
         pre_positive: "a",
         pre_negative: "a",
         pre_neutral:"an",
         pronoun: "It",
         context: "PERSON looks at PRE PHRASE in a city."
     },
-    {
+    { // MH: make sure this works
         worker_id: "24",
         stim_id: "15",
         degree: "height",
@@ -336,8 +336,8 @@ var examples = [
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative:"a",
-        pronoun: "She",
-        context: "PERSON meets PRE PHRASE called Mary."
+        pronoun: "They",
+        context: "PERSON sees a PRE PHRASE outside."
     },
     {
         worker_id: "25",
