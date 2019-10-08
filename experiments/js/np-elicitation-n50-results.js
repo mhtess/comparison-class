@@ -376,7 +376,7 @@ var examples = [
         neither_nor: "golfer",
         negative: "jockey",
         pronoun: "He",
-        context: "PERSON sees a PHRASE called Jack."
+        context: "PERSON sees a PHRASE."
     },
     {
       worjer_id: "28",
@@ -409,7 +409,7 @@ var examples = [
     },
 
 
-// ----------- DURATION / LENGTH : LONG - SHORT (11)----------
+// ----------- DURATION / LENGTH : LONG - SHORT (10)----------
 
     {
         worker_id: "30",
@@ -434,7 +434,7 @@ var examples = [
         positive: "train",
         neither_nor: "bus",
         negative: "car",
-        prnoun: "It",
+        pronoun: "It",
         context: "PERSON lives in a city and watches a PHRASE pass by."
     },
     {
@@ -463,26 +463,26 @@ var examples = [
         pronoun: "It",
         context: "PERSON is at a friend's house and notices their pet PHRASE."
     },
-    {
-        worker_id: "34",
-        stim_id: "12",
-        degree: "length_duration",
-        adj_positive: "long",
-        adj_negative: "short",
-        superordinate: "moving items",
-        positive: "yardstick",
-        neither_nor: "tape measure",
-        negative: "ruler",
-        pronoun: "It",
-        context: "PERSON rearranges PRO apartment and buys a PHRASE."
-    },
+    // {
+    //     worker_id: "34",
+    //     stim_id: "12",
+    //     degree: "length_duration",
+    //     adj_positive: "long",
+    //     adj_negative: "short",
+    //     superordinate: "moving items",
+    //     positive: "yardstick",
+    //     neither_nor: "tape measure",
+    //     negative: "ruler",
+    //     pronoun: "It",
+    //     context: "PERSON rearranges PRO apartment and buys a PHRASE."
+    // },
     {
         worker_id: "35",
         stim_id: "15",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
-        superordinate: "reading",
+        superordinate: "readings",
         positive: "novel",
         neither_nor: "story",
         negative: "poem",
@@ -497,7 +497,7 @@ var examples = [
         adj_negative: "short",
         superordinate: "vehicles",
         positive: "limo",
-        neither_nor: "pick up",
+        neither_nor: "pick-up truck",
         negative: "smartcar",
         pronoun:"It",
         context: "PERSON sees a friend driving a PHRASE around the corner."
@@ -549,7 +549,7 @@ var examples = [
       stim_id: "custom",
       degree: "length_duration",
       positive: "opera",
-      negative: "lullaby",
+      negative: "song",
       neither_nor: "podcast",
       superordinate: "audios",
       pre_positive: "an",
