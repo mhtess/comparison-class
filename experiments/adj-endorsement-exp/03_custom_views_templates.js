@@ -22,25 +22,31 @@ const custom_forced_choice = function(config) {
         <label><input type="radio" name="main" value="Yes"/>Yes</label>
       </section>
 
-      <button id='next' class='magpie-view-button magpie-nodisplay'>next</button>
+      <button id='next' class='magpie-view-button'>next</button>
+
+        <p id='catch' class="magpie-view-question" >Please select an option before continuing.</p>
+
       </div>`)
 
 
-      $("input[name=main]").on("change", function() {
-        $("#next").removeClass("magpie-nodisplay");
-        $("#next").on("click", function() {
-    // const RT = Date.now() - startingTime;
+      $("#catch").hide();
+      $("#next").on("click", function() {
+        var response = $("input[name=main]:checked").val();
+        if (response === undefined) {
+          $("#catch").show()
+        } else {
           let trial_data = {
-              trial_name: config.name,
-              trial_number: CT + 1,
-              response: $("input[name=main]:checked").val(),
-              // RT: RT
-          };
+            trial_name: config.name,
+            trial_number: CT + 1,
+            response: response
+          }
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
           magpie.trial_data.push(trial_data);
           magpie.findNextView();
-        })
-      });
+        }
+      })
+
+    
 
     }
   }

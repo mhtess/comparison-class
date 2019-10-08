@@ -6,21 +6,22 @@ const trials = function(domain) {
   for( var x = 0; x < domain.length; x++) {
     trial_list[x] = x
   }
-// take 5 trials of each domain
+// take 6 trials of each domain
 // ------ ADJUST FOR MORE ITEMS ---------
   var num_trials = 5
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
+// these functions can be used for trials with randomly sampled adjective and noun phrase conditions
 // sample an example for the item
-const item = function() {
-  return _.sample(["positive", "negative", "neutral"])
-}
+// const item = function() {
+//   return _.sample(["positive", "negative", "neutral"])
+// }
 
 // sample a positive or negative adjective
-const adj = function() {
-  return "adj_" + String(_.sample(["positive", "negative"]))
-}
+// const adj = function() {
+//   return "adj_" + String(_.sample(["positive", "negative"]))
+// }
 
 // create the context sentence for chosen item (positive, neutral or negative example on the relevant scale)
 // insert the correct article if needed
@@ -42,15 +43,24 @@ const create_view = function(domain) {
   const sequence = trials(domain)
   var i;
   const domain_views = []
+  const np_seq = _.shuffle(["positive", "negative", "neutral", "positive", "negative", "neutral"])
+  const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
 
   for (i=0; i < sequence.length ; i++) {
+    // in each domain, there are 6 Trials
+    // 3 positive adj, 3 negative adj trials
+    // 2 trials with each positive, negative and neutral NP
+
+
     // sample a positive, neutral or negative item
-    const current_item = item()
+    // const current_item = item()
+    const current_item = np_seq[i]
     var x = sequence[i]
     // return the one current domain item of the five
     const single_item = domain[x]
     // sample an adjective (positive or negative)
-    const adjective = adj()
+    // const adjective = adj()
+    const adjective = adj_seq[i]
     // return the view data
     const view = {
       context: context_sent(current_item, single_item),
@@ -58,8 +68,9 @@ const create_view = function(domain) {
       item_cond: current_item,
       item: domain[x][current_item],
       adjective_cond: adjective,
-      id: domain[x].id,
-      degree: domain[x].degree
+      id: domain[x].worker_id,
+      degree: domain[x].degree,
+      adjective: domain[x][adjective]
     }
 // add view data to list of views for the chosen domain
     domain_views.push(view)
@@ -263,8 +274,8 @@ const items = {
         adj_positive: "hard",
         adj_negative: "soft",
         superordinate: "desserts",
-        positive: "chocolate",
-        neutral: "fruit candy",
+        positive: "jolly rancher",
+        neutral: "chocolate",
         negative: "marshmallow",
         pronoun: "it",
         context: "You are eating a piece of PHRASE."
@@ -275,7 +286,7 @@ const items = {
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "materials",
+        superordinate: "materials for floors",
         positive: "tile",
         neutral: "wood",
         negative: "carpet",
@@ -386,7 +397,7 @@ const items = {
         superordinate: "buildings",
         positive: "skyscraper",
         neutral: "apartment building",
-        negative: "condo",
+        negative: "srip mall",
         pre_positive: "a",
         pre_negative: "a",
         pre_neutral:"an",
@@ -400,14 +411,14 @@ const items = {
         adj_positive: "tall",
         adj_negative: "short",
         superordinate: "people",
-        positive: "adult",
-        neutral: "child",
-        negative: "baby",
+        positive: "adults",
+        neutral: "teenagers",
+        negative: "children",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative:"a",
-        pronoun: "she",
-        context: "You meet PRE PHRASE called Mary."
+        pronoun: "they",
+        context: "You see PHRASE outside."
     },
     {
         worker_id: "25",
@@ -462,7 +473,7 @@ const items = {
       adj_positive: "tall",
       adj_negative: "short",
       pronoun: "it",
-      context: "You are walking and see PRE PHRASE."
+      context: "You are walking in a forest and see PRE PHRASE."
     },
     {
       worker_id: "29",
@@ -492,7 +503,7 @@ const items = {
         positive: "dress pants",
         neutral: "capris",
         negative: "shorts",
-        pronoun: "it",
+        pronoun: "they",
         context: "You are shopping and look at a pair of PHRASE."
     },
     {
@@ -647,7 +658,7 @@ const items = {
         neutral: "dog",
         negative: "cat",
         pronoun: "it",
-        context: "You walk by a courtyard and hear a PHRASE cry."
+        context: "You walk by a courtyard and hear a PHRASE."
     },
     {
         worker_id: "42",
@@ -736,14 +747,14 @@ const items = {
         adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "people",
-        positive: "baby",
-        neutral: "teenager",
-        negative: "adult",
+        positive: "babies",
+        neutral: "teenagers",
+        negative: "adults",
         pre_positive: "a",
         pre_neutral: "a",
         pre_negative: "an",
-        pronoun: "he",
-        context: "You are in a room with PRE PHRASE called John."
+        pronoun: "they",
+        context: "You are in a room with PHRASE."
     },
     {
         worker_id: "49",
@@ -960,7 +971,7 @@ const items = {
         positive: "boots",
         neutral: "sneakers",
         negative: "sandals",
-        pronoun: "it",
+        pronoun: "they",
         context: "You are shopping for a pair of PHRASE."
     },
     {
@@ -1348,14 +1359,14 @@ const items = {
         adj_positive: "quick",
         adj_negative: "slow",
         superordinate: "people",
-        positive: "adult",
-        neutral: "child",
-        negative: "elderly person",
+        positive: "adults",
+        neutral: "children",
+        negative: "elderly people",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
-        pronoun: "she",
-        context: "You are taking a walk with PRE PHRASE called Susan."
+        pronoun: "they",
+        context: "You are taking a walk with PHRASE."
     },
     {
         worker_id: "92",
@@ -1383,14 +1394,14 @@ const items = {
         adj_positive: "strong",
         adj_negative: "weak",
         superordinate: "people",
-        positive: "adult",
-        neutral: "teenager",
-        negative: "child",
+        positive: "adults",
+        neutral: "teenagers",
+        negative: "children",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
-        pronoun: "she",
-        context: "You watch PRE PHRASE called Jennifer lift a box."
+        pronoun: "they",
+        context: "You watch two PHRASE lift up boxes."
     },
     {
         worker_id: "94",
@@ -1426,7 +1437,7 @@ const items = {
         adj_negative: "weak",
         superordinate: "athletes",
         positive: "wrestler",
-        neutral: "cyclaret",
+        neutral: "cyclist",
         negative: "golf player",
         pronoun: "he",
         context: "You watch a PHRASE called Jeff lift up weights."
@@ -1804,6 +1815,7 @@ const items = {
       positive: "gate",
       neutral: "patio door",
       negative: "back door",
+      pronoun: "it",
       context: "You are moving and consider carrying your furniture through the PHRASE."
     }]
 }
