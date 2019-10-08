@@ -728,7 +728,7 @@ var examples = [
         neither_nor: "violin",
         negative: "flute",
         pronoun: "It",
-        context: "PERSON hears a PHRASE playing in an orchester."
+        context: "PERSON hears a friend play a PHRASE."
     },
     {
         worker_id: "53",
@@ -998,7 +998,7 @@ var examples = [
         neither_nor: "bush",
         negative: "flower",
         pronoun: "It",
-        context: "PERSON wants to do some landsaping and looks at a PHRASE."
+        context: "PERSON wants to do some landscaping and looks at a PHRASE."
     },
     {
         worker_id: "72",
@@ -1026,7 +1026,7 @@ var examples = [
         pre_positive: "a",
         pre_neutral: "a",
         pre_negative: "an",
-        prnoun: "It",
+        pronoun: "It",
         context: "PERSON is at the zoo and sees PRE PHRASE in a terrarium."
     },
     {
@@ -1335,7 +1335,7 @@ var examples = [
         neither_nor: "thunderstorm",
         negative: "rain",
         pronoun: "It",
-        context: "PERSON learns about a PHRASE that happend in another city."
+        context: "PERSON learns about a PHRASE that happened in another city."
     },
     {
         worker_id: "96",
@@ -1497,7 +1497,7 @@ var examples = [
         adj_positive: "hot",
         adj_negative: "cold",
         pronoun: "It",
-        context: "PERSON is at arestaurant and tries a PHRASE after finishing PRO dinner. "
+        context: "PERSON is at a restaurant and tries a PHRASE after finishing PRO dinner. "
     },
 
 
