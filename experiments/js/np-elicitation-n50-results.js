@@ -1335,7 +1335,7 @@ var examples = [
         neither_nor: "thunderstorm",
         negative: "rain",
         pronoun: "It",
-        context: "PERSON learns about a PHRASE that happened in another city."
+        context: "PERSON learns about a PHRASE in another city."
     },
     {
         worker_id: "96",

@@ -669,7 +669,7 @@ const items = {
         superordinate: "entertainment",
         positive: "rap concert",
         neutral: "rock concert",
-        negative: "Baroque clasical concert",
+        negative: "Baroque classical concert",
         pronoun: "it",
         context: "You are at a PHRASE."
     },
@@ -1239,8 +1239,8 @@ const items = {
         positive: "runner",
         neutral: "jogger",
         negative: "walker",
-        pronoun: "she",
-        context: "You are in the park and see a PHRASE called Anne."
+        pronoun: "they",
+        context: "You are in the park and see a PHRASE."
     },
     {
         worker_id: "83",
@@ -1349,8 +1349,8 @@ const items = {
         positive: "runner",
         neutral: "skiier",
         negative: "weight lifter",
-        pronoun: "he",
-        context: "You watch a PHRASE called Matt jog."
+        pronoun: "they",
+        context: "You watch a PHRASE jog."
     },
     {
         worker_id: "91",
@@ -1427,7 +1427,7 @@ const items = {
         neutral: "thunderstorm",
         negative: "rain",
         pronoun: "it",
-        context: "You learn about a PHRASE that happened in another city."
+        context: "You learn about a PHRASE in another city."
     },
     {
         worker_id: "96",

@@ -61,13 +61,13 @@ const instructions = magpieViews.view_generator("instructions", {
   trials: 1,
   name: 'instructions',
   title: 'Instructions',
-  text: `On each trial, you will read a short scene and be asked whether or not something in the scene is likely to have a certain property.
+  text: `On each trial, you will read a short description of a scene and be asked whether or not something in the scene is likely to have a certain property.
         <br />
         <br />
         You will complete a total of 60 trials.
         <br />
         <br />
-        Press 'Got to trials' to start the experiment.`,
+        Press 'Go to trials' to start the experiment.`,
   buttonText: 'go to trials'
 });
 
