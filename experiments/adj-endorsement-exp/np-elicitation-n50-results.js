@@ -411,14 +411,14 @@ const items = {
         adj_positive: "tall",
         adj_negative: "short",
         superordinate: "people",
-        positive: "adults",
-        neutral: "teenagers",
-        negative: "children",
+        positive: "adult",
+        neutral: "teenager",
+        negative: "child",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative:"a",
         pronoun: "they",
-        context: "You see PHRASE outside."
+        context: "You see PRE PHRASE outside."
     },
     {
         worker_id: "25",
@@ -747,14 +747,14 @@ const items = {
         adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "people",
-        positive: "babies",
-        neutral: "teenagers",
-        negative: "adults",
+        positive: "baby",
+        neutral: "teenager",
+        negative: "adult",
         pre_positive: "a",
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "they",
-        context: "You are in a room with PHRASE."
+        context: "You are in a room with PRE PHRASE."
     },
     {
         worker_id: "49",
@@ -1359,14 +1359,14 @@ const items = {
         adj_positive: "quick",
         adj_negative: "slow",
         superordinate: "people",
-        positive: "adults",
-        neutral: "children",
-        negative: "elderly people",
+        positive: "adult",
+        neutral: "child",
+        negative: "elderly person",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "they",
-        context: "You are taking a walk with PHRASE."
+        context: "You are taking a walk with PRE PHRASE."
     },
     {
         worker_id: "92",
@@ -1394,14 +1394,14 @@ const items = {
         adj_positive: "strong",
         adj_negative: "weak",
         superordinate: "people",
-        positive: "adults",
-        neutral: "teenagers",
-        negative: "children",
+        positive: "adult",
+        neutral: "teenager",
+        negative: "child",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "they",
-        context: "You watch two PHRASE lift up boxes."
+        context: "You watch PRE PHRASE lift up a box."
     },
     {
         worker_id: "94",
@@ -1625,8 +1625,8 @@ const items = {
         pre_positive: "an",
         pre_negative: "a",
         pre_neutral: "a",
-        pronoun: "she",
-        context: "You lift up PRE PHRASE called Pat."
+        pronoun: "they",
+        context: "You lift up PRE PHRASE."
     },
     {
         worker_id: "110",

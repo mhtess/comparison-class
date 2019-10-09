@@ -15,10 +15,12 @@ $("document").ready(function() {
     window.magpie_monitor = magpieInit({
         // You have to specify all views you want to use in this experiment and the order of them
         views_seq: [
-            // intro,
+            custom_intro,
+            botcaptcha,
+            instructions,
             // instructions,
             main,
-            post_test,
+            custom_postTest,
             thanks,
         ],
         // Here, you can specify all information for the deployment

@@ -330,14 +330,14 @@ var examples = [
         adj_positive: "tall",
         adj_negative: "short",
         superordinate: "people",
-        positive: "adults",
-        neither_nor: "teenagers",
-        negative: "children",
+        positive: "adult",
+        neither_nor: "teenager",
+        negative: "child",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative:"a",
         pronoun: "They",
-        context: "PERSON sees PHRASE outside."
+        context: "PERSON sees PRE PHRASE outside."
     },
     {
         worker_id: "25",
@@ -664,14 +664,14 @@ var examples = [
         adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "people",
-        positive: "babies",
-        neither_nor: "teenagers",
-        negative: "adults",
+        positive: "baby",
+        neither_nor: "teenager",
+        negative: "adult",
         pre_positive: "a",
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "They",
-        context: "PERSON is in a room with PHRASE."
+        context: "PERSON is in a room with PRE PHRASE."
     },
     {
         worker_id: "49",
@@ -1268,14 +1268,14 @@ var examples = [
         adj_positive: "quick",
         adj_negative: "slow",
         superordinate: "people",
-        positive: "adults",
-        neither_nor: "children",
-        negative: "elderly people",
+        positive: "adult",
+        neither_nor: "child",
+        negative: "elderly person",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "They",
-        context: "PERSON is taking a walk with PHRASE."
+        context: "PERSON is taking a walk with PRE PHRASE."
     },
     {
         worker_id: "92",
@@ -1302,14 +1302,14 @@ var examples = [
         adj_positive: "strong",
         adj_negative: "weak",
         superordinate: "people",
-        positive: "adults",
-        neither_nor: "teenagers",
-        negative: "children",
+        positive: "adult",
+        neither_nor: "teenager",
+        negative: "child",
         pre_positive: "an",
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "They",
-        context: "PERSON watches two PHRASE lift up boxes."
+        context: "PERSON watches PRE PHRASE lift up a box."
     },
     {
         worker_id: "94",
@@ -1528,8 +1528,8 @@ var examples = [
         pre_positive: "an",
         pre_negative: "a",
         pre_neutral: "a",
-        pronoun: "She",
-        context: "PERSON lifts up PRE PHRASE called Pat."
+        pronoun: "They",
+        context: "PERSON lifts up PRE PHRASE."
     },
     {
         worker_id: "110",
