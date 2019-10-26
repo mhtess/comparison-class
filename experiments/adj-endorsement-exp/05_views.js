@@ -24,30 +24,50 @@ const main = custom_forced_choice({
   data: _.shuffle(trial_info.main)
 })
 // Every experiment should start with an intro view. Here you can welcome your participants and tell them what the experiment is about
-const intro = magpieViews.view_generator("intro", {
+const custom_intro = custom_intro_view({
+  name: 'Intro',
+  title: 'Welcome!',
+  picture1: 'cpl.png',
+  trials: 1
+
+}
+);
+
+const custom_postTest = custom_post_test_view({
+  name: 'post_test',
+  title: 'Additional information',
+  text: `Please enter your native languages.
+  <br />
+    Answering the other questions is optional, but your answers will help us analyze our results.`,
+  trials: 1
+});
+
+
+var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
+var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
+
+const botcaptcha = custom_botcaptcha({
+  name: 'botcaptcha',
   trials: 1,
-  name: 'intro',
-  // If you use JavaScripts Template String `I am a Template String`, you can use HTML <></> and javascript ${} inside
-  text: `This is a sample introduction view.
-            <br />
-            <br />
-            The introduction view welcomes the participant and gives general information
-            about the experiment. You are in the <strong>${coin}</strong> group.
-            <br />
-            <br />
-            This is a minimal experiment with one forced choice view. It can serve as a starting point for programming your own experiment.`,
-  buttonText: 'begin the experiment'
+  story: speaker + ' says to ' + listener + ': "It\'s a beautiful day, isn\'t it?"',
+  question: "Who is " + speaker + " talking to?",
+  speaker: speaker,
+  listener: listener
+
 });
 
 // For most tasks, you need instructions views
 const instructions = magpieViews.view_generator("instructions", {
   trials: 1,
   name: 'instructions',
-  title: 'General Instructions',
-  text: `This is a sample instructions view.
-            <br />
-            <br />
-            Tell your participants what they are to do here.`,
+  title: 'Instructions',
+  text: `On each trial, you will read a short description of a scene and be asked whether or not something in the scene is likely to have a certain property.
+        <br />
+        <br />
+        You will complete a total of 60 trials.
+        <br />
+        <br />
+        Press 'Go to trials' to start the experiment.`,
   buttonText: 'go to trials'
 });
 
