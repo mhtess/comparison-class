@@ -329,16 +329,16 @@ function init() {
 
   repeatWorker = false;
   (function(){
-      var ut_id = "mht-cc-20190513-fp";
+      var ut_id = "mht-cc-20191028-fp";
       if (UTWorkerLimitReached(ut_id)) {
         $('.slide').empty();
         repeatWorker = true;
         alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
       }
   })();
-
+  console.log(examples.length)
   // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
-  exp.n_trials = 18
+  exp.n_trials = 24
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
