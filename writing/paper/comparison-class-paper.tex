@@ -8,6 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{url}
 \usepackage{tikz}
+\usepackage{enumitem}
 \usepackage{subfigure}
 \usetikzlibrary{bayesnet}
 \usepackage{bm}
@@ -554,45 +555,73 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
 \section{Behavioral experiments}
 
-We conduct three experiments to collect the data necessary to test the quantitative and quantitative predictions of our model, as outlined in Figure \ref{exptOverview}. 
+We conduct three experiments to collect the data necessary to test the quantitative and quantitative predictions of our model, as outlined in Figure \ref{fig:exptOverview}. 
 
-\subsection{Step 1: Stimuli Generation}
+\subsection{Experiment 1: Stimuli Generation}
 
 \subsubsection{Participants}
 
-We recruited 27 participants from Amazon's Mechanical
-Turk and were restricted to those with U.S. IP addresses with at least a
+We recruited 50 participants from Amazon's Mechanical
+Turk, restricted to those with U.S. IP addresses with at least a
 95\% work approval rating. Each experiment took about 5 minutes and
 participants were compensated \$0.60 for their work.
 
-\subsubsection{Materials and procedure}
+\subsubsection{Materials}
 
-We used 8 pairs of positive- and negative-form gradable adjectives (Table \ref{tab:1}).
-On each trial, participants were given a phrasal template, in which sentences that were missing subjects described the subjects as generally having the adjective apply (Figure \ref{fig:exptOverview}, Step 1). 
-For example, ``\_\_\_ are generally big. \_\_\_ are generally small. \_\_\_ are sometimes big and sometimes small.'' These sentences were followed with another that made reference to the subjects that the participants filled-in: ``These three are all kinds of \_\_\_''. This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category. 
+We used 15 pairs of positive- and negative-form gradable adjectives that describe physical dimensions (Table \ref{tab:1}).
+Some of the adjective pairs described the same dimension and/or had an adjective in common with another pair (e.g., \emph{fast}--\emph{slow} and \emph{quick}--\emph{slow}); these were included because we believed they would bring to mind different kinds of categories.
+
+\subsubsection{Procedure}
+
+On each trial, participants were given a phrasal template, for which they were asked to fill-in missing parts.
+Three sentences in the template were missing subjects that were described as generally having the adjective apply to them (Figure \ref{fig:exptOverview}, Step 1). 
+These sentences were followed with another that read that the three kinds of subjects from the previous sentences were ``all kinds of \_\_\_''.
+This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category. 
+
+A template for ``big'' and ``small'' would look like: 
+\begin{description}[noitemsep]
+%\tightlist
+\item \_\_\_\_\_ are generally big.
+\item  \_\_\_\_\_ are generally small.
+\item \_\_\_\_\_ are sometimes big and sometimes small.
+\item These three are all kinds of \_\_\_\_\_.
+\end{description}
+
+Participants filled out one template for each of the 15 pairs of adjectives. 
 
 \begin{table*}[ht]
 \centering
 \begingroup\fontsize{10pt}{11pt}\selectfont
 \begin{tabularx}{\textwidth}{lll}
   \hline
-Scale (adjectives) & Example subordinate classes (superordinate class) \\ 
+Adjectives (scale) & Example subordinate classes (superordinate class) \\ 
   \hline
-  \emph{big}, \emph{small} (size) & \\
+  \emph{big}, \emph{small} (size) & \emph{great dane}, \emph{poodle}, \emph{chihuahua} (dogs) \\ 
+ & \emph{elephant}, \emph{monkey}, \emph{mouse} (animals) \\ 
 \emph{tall}, \emph{short} (height) & \\ 
-  \emph{expensive}, \emph{cheap} (price) & \\ 
-    \emph{warm}, \emph{cold} (temperature) &  \\ 
-    \emph{hot}, \emph{cold} (temperature) &  \\ 
-  \emph{heavy}, \emph{light} (weight) &  \\ 
+  \emph{expensive}, \emph{cheap} (price) & \emph{boots}, \emph{sneakers}, \emph{sandals} (footwear) \\ 
+   & \emph{steakhouse}, \emph{buffet}, \emph{diner} (restaurants) \\ 
+    \emph{warm}, \emph{cold} (temperature) & \emph{summer}, \emph{fall}, \emph{winter} (seasons) \\ 
+& \emph{soup}, \emph{salad}, \emph{ice cream} (food) \\ 
+    \emph{hot}, \emph{cold} (temperature) & \emph{coffee}, \emph{juice}, \emph{milkshake} (drinks) \\ 
+& \emph{sauna}, \emph{shopping mall}, \emph{ice rink} (places) \\ 
+  \emph{heavy}, \emph{light} (weight) &  \emph{wool}, \emph{cotton}, \emph{silk} (materials) \\ 
+  &  \emph{rock}, \emph{stick}, \emph{feather} (objects) \\ 
   \emph{long}, \emph{short} (duration / length) &  \\ 
-  \emph{loud}, \emph{quiet} (loudness) &  \\ 
-  \emph{noisy}, \emph{quiet} (loudness) &  \\ 
+  \emph{loud}, \emph{quiet} (loudness) &   \emph{baby}, \emph{teenager}, \emph{adult} (people) \\ 
+  &  \emph{auditorium}, \emph{classroom},   \emph{study hall} (rooms) \\ 
+ \emph{noisy}, \emph{quiet} (loudness) &  \emph{horn}, \emph{guitar}, \emph{harp} (instruments) \\  
+ &  \emph{powerboat}, \emph{sailboat}, \emph{row boat}  (boats) \\  
   \emph{light}, \emph{dark} (luminance) &  \\
-  \emph{fast}, \emph{slow} (speed) &  \\
-  \emph{quick}, \emph{slow} (speed) &  \\
-  \emph{strong}, \emph{weak} (strength) &  \\
+  \emph{fast}, \emph{slow} (speed)   &  \emph{runner}, \emph{skier}, \emph{weight lifter} (athletes) \\
+  &  \emph{glider}, \emph{helicopter}, \emph{plane} (aircraft) \\
+  \emph{quick}, \emph{slow} (speed) &  \emph{rabbit}, \emph{cat}, \emph{turtle} (pets) \\
+  &  \emph{instant pot}, \emph{frying pan}, \emph{crockpot} (cookware) \\
+  \emph{strong}, \emph{weak} (strength) &  \emph{hurricane}, \emph{thunderstorm}, \emph{rain} (storms)\\
+  &  \emph{lion}, \emph{dog}, \emph{mouse} (animals)\\
   \emph{hard}, \emph{soft} (hardness) &  \\
-  \emph{wide}, \emph{narrow} (...) &  \\
+  \emph{wide}, \emph{narrow} (width) & \emph{boulevard}, \emph{street}, \emph{country lane} (roads) \\
+  & \emph{truck}, \emph{car}, \emph{golf cart} (vehicles) \\
    \hline
 \end{tabularx}
 \caption{Adjectives used in experiments.} 
@@ -600,10 +629,11 @@ Scale (adjectives) & Example subordinate classes (superordinate class) \\
 \endgroup
 \end{table*}
 
-\subsubsection{}
+\subsubsection{Results}
+From the 750 sets of responses, we selected a subset of 123 sets of subordinate categories to serve as the stimuli for our next two experiments. Two examples from each adjective pair are shown in Table \ref{tab:1}. 
 
 
-\subsection{Step 2: Adjective endorsement}
+\subsection{Experiment 2: Adjective endorsement}
 
 This experiment served to validate our experiment items generated in Step 1, as well as to provide further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
 
@@ -620,7 +650,7 @@ In addition to the sets of noun phrases forming the subordinate categories, a co
 
 \subsubsection{Results}
 
-\subsection{Step 3: Comparison class inference}
+\subsection{Experiment 3: Comparison class inference}
 
 \subsubsection{Procedure}
 
@@ -672,7 +702,7 @@ the class against which an entity can be implicitly compared, a very
 basic form of context. We introduced a minimal extension to an adjective
 interpretation Rational Speech Act model to allow it to flexibly reason
 about the comparison class. This model made the novel prediction that
-listeners should try to accomodate a vague utterance by choosing the
+listeners should try to accommodate a vague utterance by choosing the
 comparison class most likely to make the utterance true while
 prioritizing more specific (lower variance) classes because they are
 more informative. It also made quantitative predictions about how
