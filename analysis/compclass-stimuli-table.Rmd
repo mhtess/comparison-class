@@ -18,6 +18,7 @@ library(kableExtra)
 library(rjson)
 library(knitr)
 library(dplyr)
+library(stringr)
 ```
 
 
@@ -25,8 +26,10 @@ library(dplyr)
 ```{r pressure, echo=FALSE}
 data <- fromJSON(file = "np-elicitation-n50-results-processed.json")
 df <- bind_rows(data)
+names <- c("John", "Mary", "Anna", "Peter", "Joe", "Kathy")
 df.subset <- df %>% select(worker_id, degree, adj_positive, adj_negative, positive, neither_nor, negative, 
                            superordinate, context) %>%
+  rowwise() %>%
   mutate(ID = worker_id,
          Scale = degree,
          Positive = adj_positive,
@@ -35,7 +38,8 @@ df.subset <- df %>% select(worker_id, degree, adj_positive, adj_negative, positi
          Medium = neither_nor,
          Low = negative,
          Superordinate = superordinate,
-         Context = context ) %>% select(ID, Scale, Positive, Negative, High, Medium, Low, Superordinate, Context)
+         Context = str_replace(context, "PERSON", sample(names, size =1)) ) %>%
+  select(ID, Scale, Positive, Negative, High, Medium, Low, Superordinate, Context) 
 ```
 
 ``` {r}
