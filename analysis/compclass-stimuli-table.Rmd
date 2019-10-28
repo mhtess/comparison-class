@@ -1,0 +1,45 @@
+---
+title: "Latex stimuli overview table"
+author: "Polina Tsvilodub"
+date: "28 10 2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+
+```{r }
+library(jsonlite)
+library(kableExtra)
+library(rjson)
+library(knitr)
+library(dplyr)
+```
+
+
+
+```{r pressure, echo=FALSE}
+data <- fromJSON(file = "np-elicitation-n50-results-processed.json")
+df <- bind_rows(data)
+df.subset <- df %>% select(worker_id, degree, adj_positive, adj_negative, positive, neither_nor, negative, 
+                           superordinate, context) %>%
+  mutate(ID = worker_id,
+         Scale = degree,
+         Positive = adj_positive,
+         Negative = adj_negative,
+         High = positive,
+         Medium = neither_nor,
+         Low = negative,
+         Superordinate = superordinate,
+         Context = context ) %>% select(ID, Scale, Positive, Negative, High, Medium, Low, Superordinate, Context)
+```
+
+``` {r}
+# turn df into latex table 
+kable(df.subset, "latex", caption = "Stimuli set", longtable = T,  booktabs = T) %>% column_spec( 8, width = "1.5in") %>% column_spec(9, width = "3in") %>% kable_styling(latex_options = c("striped", "repeat_header"), position = "center") %>%
+  add_header_above(c(" ", " ","Adjectives" = 2, "Subordinates" = 3, " ", " "))
+```
