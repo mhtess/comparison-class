@@ -91,7 +91,7 @@ df.trials.filtered <- df.trials %>%
   left_join(., df.attention.summary) %>%
   filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
   rowwise() %>%
-  mutate( 
+  mutate(
     np = gsub("bottle of top-shelf liquor", "liquor", np),
     np = gsub("piece of chocolate", "chocolate", np),
     np = gsub("six-pack of beer", "beer", np),
@@ -103,31 +103,33 @@ df.trials.filtered %>% group_by(np) %>%
 
 
 
-```{r}
+```{r codeForSubCatTerms}
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
 
 my_stop_words <-# bind_rows(
   stop_words %>%
-    filter(!(word %in% c("rooms", "year")))#,
+    filter(!(word %in% c("rooms", "year", "side")))#,
   # data.frame(
   #   word = c("relative", "compare"),
   #   lexicon = 'mh'
   # )
 #)
 
-
-d.tidy <- df.trials.filtered %>%
+d.tidy.phrase.w.original <- df.trials.filtered %>%
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
          response = gsub("car ride", "drive", response),
          response = gsub("babies", "baby", response),
+         response = gsub("stories", "story", response),
         response = gsub("6 packs", "beer", response),
+        response = gsub("basset", "bassett", response),
          ) %>%
   unnest_tokens(word, response)  %>% 
-  anti_join(stop_words)  # remove stop words
-  #anti_join(my_stop_words)  # remove stop words
-
-d.tidy.phrase.w.original <- d.tidy %>%
+  #anti_join(stop_words)  %>% # remove stop words
+  anti_join(my_stop_words) %>%  # remove stop words
   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
   spread(wordNumber, word) %>%
@@ -135,34 +137,27 @@ d.tidy.phrase.w.original <- d.tidy %>%
   mutate(phrase = gsub(" NA", "", phrase)) %>%
   left_join(
      df.trials.filtered %>% select(workerid, trial_num, response)) %>% 
-  rename(cleanedPhrase = phrase, originalResponse = response)
-
-```
-
-
-```{r codeForSubCatTerms}
-containsString <- function(strng, substrng){
-  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
-}
-
-d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response) %>% 
   rowwise() %>%
   mutate(
     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
     np = as.character(np),
     np = gsub('\"', "", np),
-    specific = containsString(
-      as.character(cleanedPhrase), 
-      as.character(np)
-    )
-  )
+    specific = containsString(as.character(cleanedPhrase), as.character(np))
+  ) %>%
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific)
+
+```
+
+
+```{r}
 ```
 
 
 # Viz: First prass
 
 ```{r figCollapseItems}
-d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.specificMarking %>% 
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>% 
   mutate() %>%
   group_by(np_positiveness,  adj_positiveness) %>%
   tidyboot_mean(column = specific)
@@ -200,7 +195,7 @@ d.tidy.phrase.specificMarking.bs %>%
 # by item
 
 ```{r figCollapseItems}
-d.tidy.phrase.specificMarking.bs.item <- d.tidy.phrase.specificMarking %>% 
+d.tidy.phrase.specificMarking.bs.item <- d.tidy.phrase.w.original %>% 
   mutate() %>%
   group_by(np_positiveness,  np, degree, adj_positiveness) %>%
   tidyboot_mean(column = specific)
