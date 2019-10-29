@@ -1,0 +1,197 @@
+---
+title: "Comparison class elicitation (final) pilot"
+author: "MH Tessler"
+date: "October 29, 2019"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load libraries.
+library(knitr)
+library(tidyverse)
+library(jsonlite)
+library(tidyboot)
+library(tidytext)
+```
+
+## Results
+
+
+```{r load data from json, eval = F}
+data.path <- "../mturk/class-elicitation-free-4-pilot/production-results/"
+result.files <- list.files(data.path, pattern="json")
+
+df.subject <- data.frame()
+df.trials <- data.frame()
+df.attention <- data.frame()
+for (result_file in result.files) {
+  result_json = fromJSON(paste(data.path, result_file, sep ="/"))
+  worker.id = result_json$WorkerId
+  condition = result_json$answers$condition
+  
+  df.attention = bind_rows(
+    df.attention, 
+    data.frame(result_json$answers$catch_trials) %>%
+      mutate(workerid = worker.id)
+  )
+    
+  df.subject = bind_rows(
+    df.subject, 
+    data.frame(result_json$answers$subject_information) %>% 
+      mutate(
+        workerid = worker.id,
+        language = gsub("\"", "", language),
+        enjoyment = gsub("\"", "", enjoyment),
+        age = gsub("\"", "", age),
+        gender = gsub("\"", "", gender),
+        problems = gsub("\"", "", problems),
+        comments = gsub("\"", "", comments)
+      ) 
+  )
+    
+  df.trials = bind_rows(
+    df.trials, 
+    data.frame(result_json$answers$trials) %>%
+      mutate(workerid = worker.id)
+  )
+}
+
+# write_csv(df.trials, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
+# write_csv(df.subject, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+# write_csv(df.attention, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+```
+
+
+```{r load data from csv}
+df.trials <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
+df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+```
+
+
+### Catch trials
+
+```{r}
+df.attention %>%
+  group_by(incorrect) %>%
+  count()
+```
+```{r summarize catch trials}
+df.attention.summary <- df.attention %>%
+  group_by(workerid) %>%
+  summarize(n_memory_correct = sum(correct,na.rm = T),
+            n_check_incorrect = sum(incorrect, na.rm = T))
+
+df.attention.summary %>%
+  group_by(n_memory_correct) %>%
+  count()
+```
+
+```{r filtered main trails}
+df.trials.filtered <- df.trials %>%
+  left_join(., df.attention.summary) %>%
+  filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
+  rowwise() %>%
+  mutate( 
+    np = gsub("bottle of top-shelf liquor", "liquor", np),
+    np = gsub("piece of chocolate", "chocolate", np),
+    np = gsub("six-pack of beer", "beer", np),
+    np = gsub("bottle of wine", "wine", np))
+
+df.trials.filtered %>% group_by(np) %>%
+  count()
+```
+
+
+
+```{r}
+
+my_stop_words <-# bind_rows(
+  stop_words %>%
+    filter(!(word %in% c("rooms", "year")))#,
+  # data.frame(
+  #   word = c("relative", "compare"),
+  #   lexicon = 'mh'
+  # )
+#)
+
+
+d.tidy <- df.trials.filtered %>%
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "", response),
+         response = gsub("biking", "bike", response),
+         response = gsub("car ride", "drive", response),
+         response = gsub("babies", "baby", response),
+        response = gsub("6 packs", "beer", response),
+         ) %>%
+  unnest_tokens(word, response)  %>% 
+  anti_join(stop_words)  # remove stop words
+  #anti_join(my_stop_words)  # remove stop words
+
+d.tidy.phrase.w.original <- d.tidy %>%
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase)) %>%
+  left_join(
+     df.trials.filtered %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response)
+
+```
+
+
+```{r codeForSubCatTerms}
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+}
+
+d.tidy.phrase.specificMarking <- d.tidy.phrase.w.original %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    np = as.character(np),
+    np = gsub('\"', "", np),
+    specific = containsString(
+      as.character(cleanedPhrase), 
+      as.character(np)
+    )
+  )
+```
+
+
+
+```{r figCollapseItems}
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.specificMarking %>% 
+  mutate() %>%
+  group_by(np_positiveness,  adj_positiveness) %>%
+  tidyboot_mean(column = specific)
+
+d.tidy.phrase.specificMarking.bs %>%
+  ungroup() %>%
+  mutate(np_positiveness = gsub('\"', "", np_positiveness),
+         adj_positiveness = gsub('\"', "", adj_positiveness),
+         np_positiveness = factor(np_positiveness,
+                               levels = c("negative", "neither-nor", "positive"),
+                               labels = c("low", "medium", "high")
+)) %>%
+  rename(adj_polarity = adj_positiveness) %>%
+  ggplot(., 
+       aes( x = np_positiveness, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+# ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
+#        width = 5, height = 3.6)
+```
+

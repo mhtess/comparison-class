@@ -1,0 +1,892 @@
+condition,incorrect,check_index,property,tested_on,response,correct,workerid
+sanity_check,0,NA,NA,NA,NA,NA,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,0,narrow downtown street,1,1,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,1,warm ice cream,1,1,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,2,green shirt,0,0,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,3,wild dog,0,0,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,4,small mouse,1,1,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,5,beautiful watch,0,0,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,6,shiny necklace,0,0,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,7,light elephant,1,1,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,8,purple guitar,0,0,1,cd19c7155f8801c3c7d1c90c276594a3
+memory_check,NA,9,big flower,1,1,1,cd19c7155f8801c3c7d1c90c276594a3
+sanity_check,1,NA,NA,NA,NA,NA,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,0,wide side road,1,1,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,1,quick walker,1,1,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,2,shiny necklace,0,0,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,3,expensive bottle of top-shelf liquor,1,1,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,4,green shirt,0,0,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,5,big bush,1,1,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,6,beautiful watch,0,0,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,7,purple guitar,0,0,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,8,wild dog,0,0,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+memory_check,NA,9,quiet study hall,1,1,1,8c9dfdd0f0b931d9ce63ddec0e73127a
+sanity_check,0,NA,NA,NA,NA,NA,302532228db0913a580210d922c36531
+memory_check,NA,0,shiny necklace,0,0,1,302532228db0913a580210d922c36531
+memory_check,NA,1,wild dog,0,0,1,302532228db0913a580210d922c36531
+memory_check,NA,2,slow cheetah,1,0,0,302532228db0913a580210d922c36531
+memory_check,NA,3,small elephant,1,0,0,302532228db0913a580210d922c36531
+memory_check,NA,4,purple guitar,0,0,1,302532228db0913a580210d922c36531
+memory_check,NA,5,cold winter,1,1,1,302532228db0913a580210d922c36531
+memory_check,NA,6,short poem,1,1,1,302532228db0913a580210d922c36531
+memory_check,NA,7,long dachshund,1,1,1,302532228db0913a580210d922c36531
+memory_check,NA,8,green shirt,0,0,1,302532228db0913a580210d922c36531
+memory_check,NA,9,beautiful watch,0,0,1,302532228db0913a580210d922c36531
+sanity_check,0,NA,NA,NA,NA,NA,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,0,heavy fish,1,1,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,1,purple guitar,0,0,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,2,beautiful watch,0,0,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,3,green shirt,0,0,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,4,short giraffe,1,1,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,5,quick elephant,1,1,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,6,shiny necklace,0,0,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,7,wild dog,0,0,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,8,cold ice cream,1,1,1,80eabd8d2b329ef481629d9ada20e415
+memory_check,NA,9,wide side road,1,1,1,80eabd8d2b329ef481629d9ada20e415
+sanity_check,2,NA,NA,NA,NA,NA,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,0,soft carpet,1,0,0,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,1,wild dog,0,0,1,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,2,beautiful watch,0,0,1,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,3,quiet study hall,1,0,0,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,4,big mouse,1,0,0,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,5,green shirt,0,0,1,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,6,strong hurricane,1,0,0,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,7,shiny necklace,0,0,1,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,8,purple guitar,0,0,1,5484588b7bb52509c75b7c0e0707669e
+memory_check,NA,9,expensive bronze,1,0,0,5484588b7bb52509c75b7c0e0707669e
+sanity_check,0,NA,NA,NA,NA,NA,b8141494a705a35005a7e05587f1b616
+memory_check,NA,0,wild dog,0,0,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,1,big bush,1,1,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,2,soft piece of chocolate,1,1,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,3,green shirt,0,0,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,4,wide cavern,1,1,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,5,hard wood,1,1,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,6,beautiful watch,0,0,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,7,narrow highway,1,1,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,8,shiny necklace,0,0,1,b8141494a705a35005a7e05587f1b616
+memory_check,NA,9,purple guitar,0,0,1,b8141494a705a35005a7e05587f1b616
+sanity_check,1,NA,NA,NA,NA,NA,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,0,big monkey,1,1,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,1,cold salad,1,1,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,2,wild dog,0,0,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,3,green shirt,0,0,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,4,shiny necklace,0,0,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,5,beautiful watch,0,0,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,6,light day,1,1,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,7,short jockey,1,1,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,8,narrow fox hole,1,1,1,1d32575eebdbc8e606a04a2f909a08a5
+memory_check,NA,9,purple guitar,0,0,1,1d32575eebdbc8e606a04a2f909a08a5
+sanity_check,1,NA,NA,NA,NA,NA,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,0,heavy kid,1,1,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,1,beautiful watch,0,0,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,2,cheap bottle of wine,1,1,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,3,wild dog,0,0,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,4,quick cheetah,1,1,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,5,shiny necklace,0,0,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,6,green shirt,0,0,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,7,small flower,1,1,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,8,purple guitar,0,0,1,aab34adfbf5a03212376be01f97bfd32
+memory_check,NA,9,strong teenager,1,1,1,aab34adfbf5a03212376be01f97bfd32
+sanity_check,0,NA,NA,NA,NA,NA,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,0,beautiful watch,0,0,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,1,big bush,1,1,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,2,heavy kid,1,1,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,3,hard piece of chocolate,1,1,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,4,long chihuahua,1,1,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,5,purple guitar,0,0,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,6,weak hurricane,1,1,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,7,green shirt,0,0,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,8,shiny necklace,0,0,1,e5927e80fc20543641b7d15f5da5a2a3
+memory_check,NA,9,wild dog,0,0,1,e5927e80fc20543641b7d15f5da5a2a3
+sanity_check,1,NA,NA,NA,NA,NA,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,0,quiet study hall,1,1,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,1,shiny necklace,0,0,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,2,green shirt,0,0,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,3,beautiful watch,0,0,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,4,long story,1,1,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,5,light adult,1,1,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,6,small monkey,1,1,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,7,hard carpet,1,1,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,8,wild dog,0,0,1,6271248deff56192a6c60cbf11fcb399
+memory_check,NA,9,purple guitar,0,0,1,6271248deff56192a6c60cbf11fcb399
+sanity_check,1,NA,NA,NA,NA,NA,3949a9872c687a8e8967131c062f6515
+memory_check,NA,0,light elephant,1,1,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,1,slow cheetah,1,1,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,2,beautiful watch,0,0,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,3,wild dog,0,0,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,4,strong adult,1,1,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,5,narrow highway,1,1,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,6,purple guitar,0,0,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,7,green shirt,0,0,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,8,shiny necklace,0,0,1,3949a9872c687a8e8967131c062f6515
+memory_check,NA,9,light night,1,1,1,3949a9872c687a8e8967131c062f6515
+sanity_check,0,NA,NA,NA,NA,NA,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,0,green shirt,0,0,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,1,wild dog,0,0,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,2,short story,1,1,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,3,beautiful watch,0,0,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,4,purple guitar,0,0,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,5,light night,1,1,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,6,shiny necklace,0,0,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,7,small bush,1,1,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,8,heavy adult,1,1,1,ddc47dbddce56062e4d441fc07c6749a
+memory_check,NA,9,light parrot,1,1,1,ddc47dbddce56062e4d441fc07c6749a
+sanity_check,0,NA,NA,NA,NA,NA,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,0,beautiful watch,0,0,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,1,warm salad,1,1,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,2,weak hurricane,1,1,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,3,green shirt,0,0,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,4,light day,1,1,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,5,narrow cave,1,1,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,6,purple guitar,0,0,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,7,shiny necklace,0,0,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,8,narrow downtown street,1,1,1,6f3423dc38aad583b36cdf1b0882b31a
+memory_check,NA,9,wild dog,0,0,1,6f3423dc38aad583b36cdf1b0882b31a
+sanity_check,2,NA,NA,NA,NA,NA,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,0,shiny necklace,0,0,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,1,soft jolly rancher,1,1,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,2,cold winter,1,1,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,3,loud dog,1,1,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,4,wild dog,0,0,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,5,beautiful watch,0,0,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,6,purple guitar,0,0,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,7,green shirt,0,0,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,8,long chihuahua,1,1,1,03d4f12d4fff5b377cc050e5fb518ba8
+memory_check,NA,9,tall monkey,1,1,1,03d4f12d4fff5b377cc050e5fb518ba8
+sanity_check,0,NA,NA,NA,NA,NA,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,0,green shirt,0,0,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,1,cheap platinum,1,1,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,2,shiny necklace,0,0,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,3,beautiful watch,0,0,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,4,purple guitar,0,0,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,5,quick runner,1,1,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,6,wild dog,0,0,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,7,big elephant,1,1,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,8,strong teenager,1,1,1,be8aed1b830340dbf264cc447bbba8c9
+memory_check,NA,9,narrow cave,1,1,1,be8aed1b830340dbf264cc447bbba8c9
+sanity_check,0,NA,NA,NA,NA,NA,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,0,strong rain,1,1,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,1,strong teenager,1,0,0,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,2,purple guitar,0,0,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,3,wild dog,0,0,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,4,shiny necklace,0,0,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,5,warm winter,1,1,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,6,heavy adult,1,1,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,7,narrow fox hole,1,1,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,8,beautiful watch,0,0,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+memory_check,NA,9,green shirt,0,0,1,a06d14d2d44d9f03e90fe5ae1b0ab118
+sanity_check,1,NA,NA,NA,NA,NA,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,0,slow jogger,1,1,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,1,shiny necklace,0,0,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,2,light parrot,1,1,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,3,beautiful watch,0,0,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,4,green shirt,0,0,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,5,wild dog,0,0,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,6,warm salad,1,1,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,7,small elephant,1,1,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,8,strong adult,1,1,1,c21ed66956eb4bf5099ddcb21218c202
+memory_check,NA,9,purple guitar,0,0,1,c21ed66956eb4bf5099ddcb21218c202
+sanity_check,1,NA,NA,NA,NA,NA,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,0,purple guitar,0,0,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,1,light dog,1,1,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,2,shiny necklace,0,0,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,3,beautiful watch,0,0,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,4,dark dusk,1,1,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,5,light parrot,1,1,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,6,wild dog,0,0,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,7,expensive bronze,1,1,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,8,soft carpet,1,1,1,33b9680d6d234eb4a0563b1f519fafdc
+memory_check,NA,9,green shirt,0,0,1,33b9680d6d234eb4a0563b1f519fafdc
+sanity_check,0,NA,NA,NA,NA,NA,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,0,long chihuahua,1,1,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,1,wild dog,0,0,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,2,beautiful watch,0,1,0,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,3,light fish,1,1,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,4,green shirt,0,0,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,5,shiny necklace,0,0,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,6,loud donkey,1,1,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,7,purple guitar,0,0,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,8,cheap bottle of top-shelf liquor,1,1,1,81e34888cac909bc27cfc98f3be433b4
+memory_check,NA,9,big flower,1,0,0,81e34888cac909bc27cfc98f3be433b4
+sanity_check,0,NA,NA,NA,NA,NA,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,0,beautiful watch,0,0,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,1,shiny necklace,0,0,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,2,quiet dog,1,1,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,3,wild dog,0,0,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,4,short dachshund,1,1,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,5,purple guitar,0,0,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,6,green shirt,0,0,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,7,wide fox hole,1,1,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,8,expensive bottle of top-shelf liquor,1,1,1,8c6589e45f2e1280823a3f3bde594f18
+memory_check,NA,9,short poem,1,1,1,8c6589e45f2e1280823a3f3bde594f18
+sanity_check,1,NA,NA,NA,NA,NA,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,0,green shirt,0,0,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,1,light day,1,1,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,2,slow elephant,1,1,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,3,light elephant,1,1,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,4,shiny necklace,0,0,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,5,big bush,1,1,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,6,loud dog,1,0,0,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,7,beautiful watch,0,0,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,8,purple guitar,0,0,1,b2f85997c64ac460d0aba3932d73255f
+memory_check,NA,9,wild dog,0,0,1,b2f85997c64ac460d0aba3932d73255f
+sanity_check,1,NA,NA,NA,NA,NA,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,0,tall golfer,1,1,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,1,loud classroom,1,1,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,2,dark dusk,1,1,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,3,wild dog,0,0,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,4,purple guitar,0,0,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,5,shiny necklace,0,0,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,6,green shirt,0,0,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,7,long chihuahua,1,1,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,8,heavy kid,1,1,1,58c2c7af04ada266329e8b02b8257f6a
+memory_check,NA,9,beautiful watch,0,0,1,58c2c7af04ada266329e8b02b8257f6a
+sanity_check,1,NA,NA,NA,NA,NA,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,0,purple guitar,0,0,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,1,green shirt,0,0,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,2,wild dog,0,0,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,3,soft tile,1,1,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,4,slow runner,1,1,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,5,weak teenager,1,1,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,6,beautiful watch,0,0,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,7,big monkey,1,1,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,8,warm soup,1,1,1,c528990cd02b9d4c5de969d2e808187c
+memory_check,NA,9,shiny necklace,0,0,1,c528990cd02b9d4c5de969d2e808187c
+sanity_check,0,NA,NA,NA,NA,NA,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,0,wild dog,0,0,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,1,short bird,1,1,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,2,green shirt,0,0,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,3,slow walker,1,1,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,4,beautiful watch,0,0,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,5,purple guitar,0,0,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,6,quick cheetah,1,1,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,7,shiny necklace,0,0,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,8,cheap bottle of wine,1,1,1,5468d6418c1fcfcac187f21881243f98
+memory_check,NA,9,light baby,1,1,1,5468d6418c1fcfcac187f21881243f98
+sanity_check,0,NA,NA,NA,NA,NA,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,0,purple guitar,0,0,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,1,wild dog,0,0,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,2,long chihuahua,1,1,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,3,beautiful watch,0,0,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,4,cheap bronze,1,1,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,5,soft marshmallow,1,1,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,6,green shirt,0,0,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,7,shiny necklace,0,0,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,8,strong thunderstorm,1,1,1,10de00addaa50fdb63468d1fb702bfbf
+memory_check,NA,9,light adult,1,1,1,10de00addaa50fdb63468d1fb702bfbf
+sanity_check,2,NA,NA,NA,NA,NA,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,0,purple guitar,0,0,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,1,green shirt,0,0,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,2,cold winter,1,1,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,3,shiny necklace,0,0,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,4,light night,1,1,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,5,wild dog,0,0,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,6,beautiful watch,0,0,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,7,dark seagull,1,1,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,8,expensive plastic,1,1,1,237fd5bbd3a50ebdc977849671d19ac1
+memory_check,NA,9,short novel,1,1,1,237fd5bbd3a50ebdc977849671d19ac1
+sanity_check,0,NA,NA,NA,NA,NA,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,0,purple guitar,0,0,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,1,soft piece of chocolate,1,1,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,2,shiny necklace,0,0,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,3,short basketball player,1,1,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,4,dark seagull,1,1,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,5,long chihuahua,1,1,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,6,beautiful watch,0,0,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,7,short poem,1,1,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,8,wild dog,0,0,1,527479df7ef0926d66b5b846400d51e6
+memory_check,NA,9,green shirt,0,0,1,527479df7ef0926d66b5b846400d51e6
+sanity_check,2,NA,NA,NA,NA,NA,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,0,short basketball player,1,1,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,1,slow sloth,1,1,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,2,purple guitar,0,0,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,3,shiny necklace,0,0,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,4,light dusk,1,1,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,5,green shirt,0,0,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,6,soft jolly rancher,1,1,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,7,wild dog,0,0,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,8,slow jogger,1,1,1,e45f2649d03d6e4a7195b267085dd281
+memory_check,NA,9,beautiful watch,0,0,1,e45f2649d03d6e4a7195b267085dd281
+sanity_check,1,NA,NA,NA,NA,NA,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,0,slow walker,1,0,0,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,1,green shirt,0,0,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,2,shiny necklace,0,0,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,3,purple guitar,0,0,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,4,warm soup,1,1,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,5,warm fall,1,0,0,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,6,wild dog,0,0,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,7,expensive six-pack of beer,1,1,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,8,wide side road,1,1,1,d92338887b821cefbb66c1559d634e6b
+memory_check,NA,9,beautiful watch,0,0,1,d92338887b821cefbb66c1559d634e6b
+sanity_check,0,NA,NA,NA,NA,NA,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,0,wild dog,0,0,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,1,shiny necklace,0,0,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,2,green shirt,0,0,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,3,expensive bronze,1,1,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,4,quick runner,1,1,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,5,quiet dog,1,1,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,6,tall jockey,1,1,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,7,purple guitar,0,0,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,8,small flower,1,1,1,074dfdcc487cf659ec07543946e46e62
+memory_check,NA,9,beautiful watch,0,0,1,074dfdcc487cf659ec07543946e46e62
+sanity_check,1,NA,NA,NA,NA,NA,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,0,cheap bronze,1,1,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,1,wild dog,0,0,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,2,beautiful watch,0,0,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,3,cheap bottle of wine,1,1,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,4,big elephant,1,1,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,5,green shirt,0,0,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,6,shiny necklace,0,0,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,7,purple guitar,0,0,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,8,tall giraffe,1,1,1,dad40a969bfe80397747ad18f78e6c29
+memory_check,NA,9,short novel,1,1,1,dad40a969bfe80397747ad18f78e6c29
+sanity_check,0,NA,NA,NA,NA,NA,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,0,green shirt,0,0,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,1,wild dog,0,0,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,2,cold winter,1,1,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,3,beautiful watch,0,0,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,4,shiny necklace,0,0,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,5,loud dog,1,1,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,6,long poem,1,1,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,7,weak teenager,1,1,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,8,heavy kid,1,1,1,ea1165292c86af46ff87e74ebdd41955
+memory_check,NA,9,purple guitar,0,0,1,ea1165292c86af46ff87e74ebdd41955
+sanity_check,0,NA,NA,NA,NA,NA,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,0,slow sloth,1,1,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,1,wild dog,0,0,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,2,green shirt,0,0,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,3,short golfer,1,1,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,4,shiny necklace,0,0,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,5,quick jogger,1,1,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,6,beautiful watch,0,0,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,7,purple guitar,0,0,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,8,long story,1,1,1,c7974a52353001a3e91dd1ee5adedae3
+memory_check,NA,9,short bird,1,1,1,c7974a52353001a3e91dd1ee5adedae3
+sanity_check,0,NA,NA,NA,NA,NA,d765f98093cab28b5469925c88433b9c
+memory_check,NA,0,short golfer,1,1,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,1,loud donkey,1,1,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,2,green shirt,0,0,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,3,hard tile,1,1,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,4,purple guitar,0,0,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,5,dark crow,1,1,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,6,beautiful watch,0,0,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,7,wild dog,0,0,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,8,cheap bottle of top-shelf liquor,1,1,1,d765f98093cab28b5469925c88433b9c
+memory_check,NA,9,shiny necklace,0,0,1,d765f98093cab28b5469925c88433b9c
+sanity_check,0,NA,NA,NA,NA,NA,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,0,green shirt,0,0,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,1,big flower,1,1,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,2,shiny necklace,0,0,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,3,purple guitar,0,0,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,4,hard tile,1,1,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,5,wide downtown street,1,1,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,6,beautiful watch,0,0,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,7,wild dog,0,0,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,8,strong rain,1,1,1,910ad29b7ea10e30ccba89fdf385d6bd
+memory_check,NA,9,short story,1,1,1,910ad29b7ea10e30ccba89fdf385d6bd
+sanity_check,1,NA,NA,NA,NA,NA,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,0,wild dog,0,0,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,1,short bassett hound,1,1,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,2,shiny necklace,0,0,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,3,purple guitar,0,0,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,4,heavy dog,1,1,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,5,beautiful watch,0,0,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,6,green shirt,0,0,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,7,expensive platinum,1,1,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,8,short basketball player,1,1,1,afcbc739f0138a12b346a93040cff5ec
+memory_check,NA,9,light night,1,1,1,afcbc739f0138a12b346a93040cff5ec
+sanity_check,1,NA,NA,NA,NA,NA,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,0,small monkey,1,1,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,1,wide cave,1,1,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,2,green shirt,0,0,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,3,purple guitar,0,0,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,4,shiny necklace,0,0,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,5,beautiful watch,0,0,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,6,quick walker,1,0,0,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,7,heavy dog,1,1,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,8,weak hurricane,1,1,1,f532bf79f47e08efebe4cfd0e83da050
+memory_check,NA,9,wild dog,0,0,1,f532bf79f47e08efebe4cfd0e83da050
+sanity_check,0,NA,NA,NA,NA,NA,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,0,loud cat,1,1,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,1,wild dog,0,0,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,2,expensive platinum,1,1,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,3,wide fox hole,1,1,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,4,beautiful watch,0,0,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,5,light fish,1,0,0,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,6,shiny necklace,0,0,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,7,purple guitar,0,0,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,8,green shirt,0,0,1,45031f3423a8bec246f8b77dec30a96c
+memory_check,NA,9,small elephant,1,1,1,45031f3423a8bec246f8b77dec30a96c
+sanity_check,2,NA,NA,NA,NA,NA,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,0,cheap bottle of wine,1,1,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,1,slow walker,1,1,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,2,wild dog,0,0,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,3,light crow,1,1,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,4,shiny necklace,0,0,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,5,green shirt,0,0,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,6,strong rain,1,0,0,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,7,narrow cave,1,1,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,8,beautiful watch,0,0,1,dc04f24d77acd77f2739d84a5e80b511
+memory_check,NA,9,purple guitar,0,0,1,dc04f24d77acd77f2739d84a5e80b511
+sanity_check,0,NA,NA,NA,NA,NA,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,0,tall monkey,1,1,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,1,shiny necklace,0,0,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,2,cold summer,1,1,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,3,cheap six-pack of beer,1,1,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,4,small mouse,1,1,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,5,wild dog,0,0,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,6,long poem,1,1,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,7,beautiful watch,0,0,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,8,purple guitar,0,0,1,3cef732fd8b2d5f3036d510441c1c9f6
+memory_check,NA,9,green shirt,0,0,1,3cef732fd8b2d5f3036d510441c1c9f6
+sanity_check,1,NA,NA,NA,NA,NA,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,0,narrow highway,1,1,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,1,green shirt,0,0,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,2,cold salad,1,1,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,3,weak child,1,1,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,4,beautiful watch,0,0,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,5,soft jolly rancher,1,1,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,6,purple guitar,0,0,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,7,wild dog,0,0,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,8,light parrot,1,1,1,aebcb4bcfe145e177b548c818f3e8bf9
+memory_check,NA,9,shiny necklace,0,0,1,aebcb4bcfe145e177b548c818f3e8bf9
+sanity_check,0,NA,NA,NA,NA,NA,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,0,shiny necklace,0,0,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,1,wild dog,0,0,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,2,green shirt,0,0,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,3,tall bird,1,1,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,4,tall jockey,1,1,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,5,purple guitar,0,0,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,6,small elephant,1,1,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,7,beautiful watch,0,0,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,8,light dog,1,1,1,ba163ef33983efe55f371ecec2ba1b6f
+memory_check,NA,9,light kid,1,1,1,ba163ef33983efe55f371ecec2ba1b6f
+sanity_check,0,NA,NA,NA,NA,NA,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,0,hard piece of chocolate,1,1,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,1,dark seagull,1,1,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,2,small monkey,1,1,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,3,green shirt,0,0,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,4,beautiful watch,0,0,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,5,wild dog,0,0,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,6,shiny necklace,0,0,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,7,purple guitar,0,0,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,8,heavy kid,1,1,1,267fe0bc607c2e6c8d46ffdec67b7585
+memory_check,NA,9,short poem,1,1,1,267fe0bc607c2e6c8d46ffdec67b7585
+sanity_check,0,NA,NA,NA,NA,NA,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,0,green shirt,0,0,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,1,beautiful watch,0,0,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,2,cold winter,1,1,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,3,cold soup,1,1,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,4,short giraffe,1,1,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,5,wide cave,1,1,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,6,long bassett hound,1,1,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,7,shiny necklace,0,0,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,8,wild dog,0,0,1,278fcbf40885f0b2dc03a078bad75cba
+memory_check,NA,9,purple guitar,0,0,1,278fcbf40885f0b2dc03a078bad75cba
+sanity_check,0,NA,NA,NA,NA,NA,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,0,wild dog,0,0,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,1,hard piece of chocolate,1,1,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,2,beautiful watch,0,0,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,3,purple guitar,0,0,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,4,warm winter,1,1,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,5,strong adult,1,1,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,6,loud classroom,1,1,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,7,shiny necklace,0,0,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,8,slow cheetah,1,1,1,43abf1cd601a24457aaecb3e03cace2d
+memory_check,NA,9,green shirt,0,0,1,43abf1cd601a24457aaecb3e03cace2d
+sanity_check,1,NA,NA,NA,NA,NA,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,0,purple guitar,0,0,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,1,wild dog,0,0,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,2,soft jolly rancher,1,1,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,3,dark night,1,1,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,4,cheap plastic,1,1,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,5,hard wood,1,1,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,6,light fish,1,1,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,7,shiny necklace,0,0,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,8,beautiful watch,0,0,1,49ed7586603c268f4eaca6c1050722ea
+memory_check,NA,9,green shirt,0,0,1,49ed7586603c268f4eaca6c1050722ea
+sanity_check,1,NA,NA,NA,NA,NA,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,0,beautiful watch,0,0,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,1,shiny necklace,0,0,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,2,purple guitar,0,0,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,3,big mouse,1,1,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,4,dark parrot,1,1,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,5,quick elephant,1,1,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,6,warm salad,1,1,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,7,green shirt,0,0,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,8,small tree,1,1,1,1c304fa6940e84368866cd8049dd3928
+memory_check,NA,9,wild dog,0,0,1,1c304fa6940e84368866cd8049dd3928
+sanity_check,1,NA,NA,NA,NA,NA,a295ab159efed7118b938fa9d1173175
+memory_check,NA,0,dark seagull,1,1,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,1,cheap plastic,1,1,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,2,shiny necklace,0,0,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,3,green shirt,0,0,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,4,wild dog,0,0,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,5,purple guitar,0,0,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,6,quiet dog,1,1,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,7,long novel,1,1,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,8,beautiful watch,0,0,1,a295ab159efed7118b938fa9d1173175
+memory_check,NA,9,heavy fish,1,1,1,a295ab159efed7118b938fa9d1173175
+sanity_check,1,NA,NA,NA,NA,NA,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,0,loud dog,1,1,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,1,green shirt,0,0,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,2,short golfer,1,1,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,3,slow jogger,1,1,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,4,beautiful watch,0,0,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,5,shiny necklace,0,0,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,6,cheap plastic,1,1,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,7,wild dog,0,0,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,8,quiet auditorium,1,1,1,386d0e61aa25f914ea62f040744afe8e
+memory_check,NA,9,purple guitar,0,0,1,386d0e61aa25f914ea62f040744afe8e
+sanity_check,0,NA,NA,NA,NA,NA,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,0,wide cave,1,1,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,1,short poem,1,1,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,2,hard marshmallow,1,1,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,3,beautiful watch,0,0,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,4,shiny necklace,0,0,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,5,purple guitar,0,0,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,6,heavy elephant,1,1,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,7,wild dog,0,0,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,8,loud donkey,1,1,1,0d1fa6de19ba6d3a8867fb82df353042
+memory_check,NA,9,green shirt,0,0,1,0d1fa6de19ba6d3a8867fb82df353042
+sanity_check,1,NA,NA,NA,NA,NA,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,0,wild dog,0,0,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,1,shiny necklace,0,0,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,2,tall basketball player,1,1,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,3,cold fall,1,1,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,4,quiet classroom,1,1,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,5,purple guitar,0,0,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,6,green shirt,0,0,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,7,dark night,1,1,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,8,soft tile,1,1,1,2db770eecee3c9be87b06452f3ac2f35
+memory_check,NA,9,beautiful watch,0,0,1,2db770eecee3c9be87b06452f3ac2f35
+sanity_check,0,NA,NA,NA,NA,NA,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,0,purple guitar,0,0,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,1,narrow highway,1,1,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,2,hard carpet,1,1,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,3,heavy kid,1,0,0,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,4,wild dog,0,0,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,5,green shirt,0,0,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,6,beautiful watch,0,0,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,7,shiny necklace,0,0,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,8,light parrot,1,1,1,bbf8b9a7e176bd19230df6922e125b51
+memory_check,NA,9,heavy dog,1,1,1,bbf8b9a7e176bd19230df6922e125b51
+sanity_check,1,NA,NA,NA,NA,NA,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,0,big bush,1,0,0,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,1,green shirt,0,0,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,2,narrow cave,1,1,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,3,quick cheetah,1,1,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,4,wild dog,0,0,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,5,shiny necklace,0,0,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,6,beautiful watch,0,0,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,7,slow jogger,1,1,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,8,purple guitar,0,0,1,f1599d54f1d32c5661b424f3417711f0
+memory_check,NA,9,soft carpet,1,1,1,f1599d54f1d32c5661b424f3417711f0
+sanity_check,0,NA,NA,NA,NA,NA,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,0,short basketball player,1,1,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,1,wild dog,0,0,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,2,strong child,1,1,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,3,green shirt,0,0,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,4,quick cheetah,1,1,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,5,shiny necklace,0,0,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,6,purple guitar,0,0,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,7,dark parrot,1,1,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,8,weak rain,1,1,1,c52179251ac6ff186a32dd5d8786dceb
+memory_check,NA,9,beautiful watch,0,0,1,c52179251ac6ff186a32dd5d8786dceb
+sanity_check,0,NA,NA,NA,NA,NA,4c557b8928653f880aa69b280d292359
+memory_check,NA,0,cold ice cream,1,1,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,1,expensive six-pack of beer,1,1,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,2,wild dog,0,0,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,3,soft tile,1,1,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,4,small elephant,1,1,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,5,purple guitar,0,0,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,6,beautiful watch,0,0,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,7,green shirt,0,0,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,8,shiny necklace,0,0,1,4c557b8928653f880aa69b280d292359
+memory_check,NA,9,warm winter,1,1,1,4c557b8928653f880aa69b280d292359
+sanity_check,0,NA,NA,NA,NA,NA,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,0,quick elephant,1,1,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,1,strong adult,1,1,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,2,green shirt,0,0,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,3,wild dog,0,0,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,4,slow jogger,1,1,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,5,purple guitar,0,0,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,6,wide fox hole,1,1,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,7,beautiful watch,0,0,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,8,loud donkey,1,1,1,a871126ffe0e5a2e19cfc48b91d703ae
+memory_check,NA,9,shiny necklace,0,0,1,a871126ffe0e5a2e19cfc48b91d703ae
+sanity_check,2,NA,NA,NA,NA,NA,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,0,weak hurricane,1,1,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,1,long bassett hound,1,1,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,2,big tree,1,1,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,3,beautiful watch,0,0,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,4,wild dog,0,0,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,5,shiny necklace,0,0,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,6,purple guitar,0,0,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,7,green shirt,0,0,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,8,quiet donkey,1,1,1,3172da2468ad3dcf721a9a89a1e633f4
+memory_check,NA,9,cheap plastic,1,1,1,3172da2468ad3dcf721a9a89a1e633f4
+sanity_check,0,NA,NA,NA,NA,NA,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,0,shiny necklace,0,0,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,1,weak child,1,1,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,2,beautiful watch,0,0,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,3,expensive bronze,1,0,0,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,4,purple guitar,0,0,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,5,hard tile,1,1,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,6,wild dog,0,0,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,7,light day,1,1,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,8,green shirt,0,0,1,bb60f66d24fe142311f1d1bfdccd48b5
+memory_check,NA,9,big bush,1,1,1,bb60f66d24fe142311f1d1bfdccd48b5
+sanity_check,0,NA,NA,NA,NA,NA,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,0,quiet study hall,1,1,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,1,purple guitar,0,0,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,2,shiny necklace,0,0,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,3,weak hurricane,1,1,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,4,wild dog,0,0,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,5,soft wood,1,1,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,6,slow runner,1,1,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,7,beautiful watch,0,0,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,8,big flower,1,1,1,cbea5d5919b21484902aee96719c01b3
+memory_check,NA,9,green shirt,0,0,1,cbea5d5919b21484902aee96719c01b3
+sanity_check,0,NA,NA,NA,NA,NA,2597da10880a373374f0e8be8013087c
+memory_check,NA,0,wild dog,0,0,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,1,shiny necklace,0,0,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,2,weak teenager,1,1,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,3,green shirt,0,0,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,4,beautiful watch,0,0,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,5,tall bird,1,1,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,6,long poem,1,1,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,7,slow runner,1,1,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,8,purple guitar,0,0,1,2597da10880a373374f0e8be8013087c
+memory_check,NA,9,heavy dog,1,1,1,2597da10880a373374f0e8be8013087c
+sanity_check,0,NA,NA,NA,NA,NA,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,0,beautiful watch,0,0,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,1,narrow side road,1,1,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,2,shiny necklace,0,0,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,3,purple guitar,0,0,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,4,wild dog,0,0,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,5,quick jogger,1,1,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,6,light crow,1,1,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,7,quick cheetah,1,1,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,8,green shirt,0,0,1,d0b9dc004196cdf607342fe34f675931
+memory_check,NA,9,light kid,1,1,1,d0b9dc004196cdf607342fe34f675931
+sanity_check,0,NA,NA,NA,NA,NA,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,0,green shirt,0,0,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,1,shiny necklace,0,0,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,2,narrow fox hole,1,1,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,3,strong teenager,1,1,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,4,wild dog,0,0,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,5,beautiful watch,0,0,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,6,cheap bottle of top-shelf liquor,1,1,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,7,purple guitar,0,0,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,8,light parrot,1,1,1,9f56d0a211883f3036bc3f5eb6200153
+memory_check,NA,9,short golfer,1,1,1,9f56d0a211883f3036bc3f5eb6200153
+sanity_check,0,NA,NA,NA,NA,NA,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,0,wild dog,0,0,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,1,shiny necklace,0,0,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,2,quick cheetah,1,1,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,3,short golfer,1,1,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,4,loud study hall,1,1,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,5,beautiful watch,0,0,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,6,purple guitar,0,0,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,7,quiet dog,1,1,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,8,green shirt,0,0,1,abc5519f98d84df572763e6ae6f76546
+memory_check,NA,9,wide fox hole,1,1,1,abc5519f98d84df572763e6ae6f76546
+sanity_check,1,NA,NA,NA,NA,NA,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,0,green shirt,0,0,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,1,tall bird,1,1,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,2,cheap plastic,1,1,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,3,wild dog,0,0,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,4,beautiful watch,0,0,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,5,loud donkey,1,1,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,6,soft carpet,1,1,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,7,shiny necklace,0,0,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,8,purple guitar,0,0,1,76ad3362e5a33a9191950739777ccf6d
+memory_check,NA,9,expensive bottle of top-shelf liquor,1,1,1,76ad3362e5a33a9191950739777ccf6d
+sanity_check,1,NA,NA,NA,NA,NA,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,0,cold salad,1,1,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,1,shiny necklace,0,0,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,2,wild dog,0,0,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,3,expensive platinum,1,1,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,4,beautiful watch,0,0,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,5,loud auditorium,1,1,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,6,green shirt,0,0,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,7,purple guitar,0,0,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,8,tall golfer,1,1,1,82b7e6d07476c3048bf85c2517b3b3a2
+memory_check,NA,9,light kid,1,1,1,82b7e6d07476c3048bf85c2517b3b3a2
+sanity_check,1,NA,NA,NA,NA,NA,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,0,beautiful watch,0,0,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,1,purple guitar,0,0,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,2,shiny necklace,0,0,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,3,dark crow,1,1,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,4,short bassett hound,1,1,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,5,warm winter,1,1,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,6,hard piece of chocolate,1,1,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,7,wild dog,0,0,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,8,long story,1,1,1,f5f05f34c7f225fd12b74abebbdded0e
+memory_check,NA,9,green shirt,0,0,1,f5f05f34c7f225fd12b74abebbdded0e
+sanity_check,0,NA,NA,NA,NA,NA,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,0,cold winter,1,1,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,1,shiny necklace,0,0,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,2,purple guitar,0,0,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,3,beautiful watch,0,0,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,4,wild dog,0,0,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,5,loud study hall,1,1,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,6,green shirt,0,0,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,7,narrow fox hole,1,1,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,8,wide downtown street,1,1,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+memory_check,NA,9,soft tile,1,1,1,93bfcf0b29c17a8f6e0f03ec69d80ab2
+sanity_check,0,NA,NA,NA,NA,NA,ea75879df390562627d865e21627facb
+memory_check,NA,0,wild dog,0,0,1,ea75879df390562627d865e21627facb
+memory_check,NA,1,hard jolly rancher,1,1,1,ea75879df390562627d865e21627facb
+memory_check,NA,2,beautiful watch,0,0,1,ea75879df390562627d865e21627facb
+memory_check,NA,3,warm winter,1,1,1,ea75879df390562627d865e21627facb
+memory_check,NA,4,green shirt,0,0,1,ea75879df390562627d865e21627facb
+memory_check,NA,5,short monkey,1,1,1,ea75879df390562627d865e21627facb
+memory_check,NA,6,quiet auditorium,1,1,1,ea75879df390562627d865e21627facb
+memory_check,NA,7,shiny necklace,0,0,1,ea75879df390562627d865e21627facb
+memory_check,NA,8,short chihuahua,1,1,1,ea75879df390562627d865e21627facb
+memory_check,NA,9,purple guitar,0,0,1,ea75879df390562627d865e21627facb
+sanity_check,1,NA,NA,NA,NA,NA,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,0,heavy kid,1,1,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,1,wild dog,0,0,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,2,beautiful watch,0,0,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,3,shiny necklace,0,0,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,4,loud donkey,1,1,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,5,purple guitar,0,0,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,6,cold ice cream,1,1,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,7,soft piece of chocolate,1,1,1,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,8,slow elephant,1,0,0,b833b0109c6c55a14bdc791a13c50ba7
+memory_check,NA,9,green shirt,0,0,1,b833b0109c6c55a14bdc791a13c50ba7
+sanity_check,1,NA,NA,NA,NA,NA,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,0,quiet donkey,1,1,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,1,beautiful watch,0,0,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,2,hard wood,1,1,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,3,shiny necklace,0,0,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,4,loud study hall,1,1,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,5,purple guitar,0,0,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,6,cheap plastic,1,1,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,7,short dachshund,1,1,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,8,wild dog,0,0,1,e175a68d160d43145e56c6cfb9ae2f2b
+memory_check,NA,9,green shirt,0,0,1,e175a68d160d43145e56c6cfb9ae2f2b
+sanity_check,1,NA,NA,NA,NA,NA,783d70c594aac790465859223dd3966f
+memory_check,NA,0,shiny necklace,0,0,1,783d70c594aac790465859223dd3966f
+memory_check,NA,1,quick runner,1,1,1,783d70c594aac790465859223dd3966f
+memory_check,NA,2,quiet dog,1,1,1,783d70c594aac790465859223dd3966f
+memory_check,NA,3,small bush,1,1,1,783d70c594aac790465859223dd3966f
+memory_check,NA,4,hard piece of chocolate,1,1,1,783d70c594aac790465859223dd3966f
+memory_check,NA,5,purple guitar,0,0,1,783d70c594aac790465859223dd3966f
+memory_check,NA,6,green shirt,0,0,1,783d70c594aac790465859223dd3966f
+memory_check,NA,7,quick elephant,1,1,1,783d70c594aac790465859223dd3966f
+memory_check,NA,8,beautiful watch,0,0,1,783d70c594aac790465859223dd3966f
+memory_check,NA,9,wild dog,0,0,1,783d70c594aac790465859223dd3966f
+sanity_check,0,NA,NA,NA,NA,NA,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,0,tall bird,1,1,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,1,slow elephant,1,1,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,2,purple guitar,0,0,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,3,loud cat,1,1,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,4,hard wood,1,1,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,5,green shirt,0,0,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,6,strong rain,1,1,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,7,shiny necklace,0,0,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,8,wild dog,0,0,1,90d462079517e59834b029ccc3cc90e1
+memory_check,NA,9,beautiful watch,0,0,1,90d462079517e59834b029ccc3cc90e1
+sanity_check,0,NA,NA,NA,NA,NA,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,0,big tree,1,1,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,1,cold summer,1,1,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,2,weak child,1,1,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,3,green shirt,0,0,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,4,wild dog,0,0,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,5,tall monkey,1,1,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,6,beautiful watch,0,0,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,7,hard marshmallow,1,1,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,8,purple guitar,0,0,1,c0a2a5029d1a5fecaca9907a0249ca49
+memory_check,NA,9,shiny necklace,0,0,1,c0a2a5029d1a5fecaca9907a0249ca49
+sanity_check,0,NA,NA,NA,NA,NA,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,0,dark crow,1,1,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,1,weak adult,1,0,0,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,2,beautiful watch,0,0,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,3,purple guitar,0,0,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,4,wild dog,0,0,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,5,shiny necklace,0,0,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,6,expensive bottle of wine,1,1,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,7,small monkey,1,1,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,8,tall golfer,1,1,1,1fb75ca7804c955bf0ca8c8884d0b73d
+memory_check,NA,9,green shirt,0,0,1,1fb75ca7804c955bf0ca8c8884d0b73d
+sanity_check,0,NA,NA,NA,NA,NA,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,0,expensive platinum,1,1,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,1,quick runner,1,1,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,2,green shirt,0,0,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,3,small mouse,1,1,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,4,loud auditorium,1,1,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,5,wild dog,0,0,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,6,dark night,1,1,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,7,shiny necklace,0,0,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,8,beautiful watch,0,0,1,817d275bf8220a4e63e2892f0faf1d8c
+memory_check,NA,9,purple guitar,0,0,1,817d275bf8220a4e63e2892f0faf1d8c
+sanity_check,0,NA,NA,NA,NA,NA,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,0,short poem,1,1,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,1,wild dog,0,0,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,2,light fish,1,1,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,3,green shirt,0,0,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,4,shiny necklace,0,0,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,5,warm summer,1,1,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,6,beautiful watch,0,0,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,7,short basketball player,1,1,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,8,purple guitar,0,0,1,fc6a8c195743e4d3c80a1420271aabc1
+memory_check,NA,9,big elephant,1,1,1,fc6a8c195743e4d3c80a1420271aabc1
+sanity_check,1,NA,NA,NA,NA,NA,2f51838048fe1172a132c78077637bdb
+memory_check,NA,0,quick jogger,1,1,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,1,wide highway,1,1,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,2,cold soup,1,1,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,3,wild dog,0,0,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,4,green shirt,0,0,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,5,shiny necklace,0,0,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,6,purple guitar,0,0,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,7,soft tile,1,1,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,8,beautiful watch,0,0,1,2f51838048fe1172a132c78077637bdb
+memory_check,NA,9,hard marshmallow,1,1,1,2f51838048fe1172a132c78077637bdb
+sanity_check,0,NA,NA,NA,NA,NA,28bc5992145cdef69f959587378d1419
+memory_check,NA,0,wild dog,0,0,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,1,beautiful watch,0,0,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,2,wide cave,1,1,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,3,short story,1,1,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,4,quiet donkey,1,1,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,5,purple guitar,0,0,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,6,green shirt,0,0,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,7,shiny necklace,0,0,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,8,quiet study hall,1,1,1,28bc5992145cdef69f959587378d1419
+memory_check,NA,9,hard carpet,1,1,1,28bc5992145cdef69f959587378d1419
+sanity_check,0,NA,NA,NA,NA,NA,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,0,beautiful watch,0,0,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,1,purple guitar,0,0,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,2,heavy kid,1,1,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,3,light night,1,1,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,4,short giraffe,1,1,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,5,small mouse,1,1,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,6,wild dog,0,0,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,7,green shirt,0,0,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,8,short basketball player,1,1,1,666a6c58fae874f5e0dd26450e9e01e0
+memory_check,NA,9,shiny necklace,0,0,1,666a6c58fae874f5e0dd26450e9e01e0
+sanity_check,1,NA,NA,NA,NA,NA,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,0,green shirt,0,0,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,1,small bush,1,1,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,2,beautiful watch,0,0,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,3,shiny necklace,0,0,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,4,wild dog,0,0,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,5,cold soup,1,1,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,6,loud classroom,1,1,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,7,weak adult,1,1,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,8,short chihuahua,1,1,1,011fcd0d44189f5e54890984894c24ca
+memory_check,NA,9,purple guitar,0,0,1,011fcd0d44189f5e54890984894c24ca
+sanity_check,1,NA,NA,NA,NA,NA,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,0,light fish,1,0,0,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,1,purple guitar,0,0,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,2,loud dog,1,1,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,3,shiny necklace,0,0,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,4,light baby,1,1,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,5,beautiful watch,0,0,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,6,hard wood,1,1,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,7,green shirt,0,0,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,8,wild dog,0,0,1,4fed900e0c59a4b91f517fd79eac8829
+memory_check,NA,9,weak thunderstorm,1,1,1,4fed900e0c59a4b91f517fd79eac8829

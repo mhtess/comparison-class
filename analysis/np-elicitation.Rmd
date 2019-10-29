@@ -88,6 +88,6 @@ df.noun.elicit.wide <- df.trials.i %>%
 
 write_csv(df.noun.elicit.wide, 
           path = paste("../data/np-elicitation/",
-                "np-elicitation-wide-n33.csv", sep = ""))
+                "np-elicitation-wide-n50.csv", sep = ""))
 ```
 
