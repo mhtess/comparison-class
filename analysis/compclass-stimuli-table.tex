@@ -1,0 +1,375 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Latex stimuli overview table},
+            pdfauthor={Polina Tsvilodub},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Latex stimuli overview table}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Polina Tsvilodub}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{28 10 2019}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(jsonlite)}
+\KeywordTok{library}\NormalTok{(kableExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'kableExtra' was built under R version 3.5.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rjson)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rjson' was built under R version 3.5.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rjson'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:jsonlite':
+## 
+##     fromJSON, toJSON
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(knitr)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# turn df into latex table }
+\KeywordTok{kable}\NormalTok{(df.subset, }\StringTok{"latex"}\NormalTok{, }\DataTypeTok{caption =} \StringTok{"Stimuli set"}\NormalTok{, }\DataTypeTok{longtable =}\NormalTok{ T,  }\DataTypeTok{booktabs =}\NormalTok{ T) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{column_spec}\NormalTok{( }\DecValTok{8}\NormalTok{, }\DataTypeTok{width =} \StringTok{"1.5in"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{column_spec}\NormalTok{(}\DecValTok{9}\NormalTok{, }\DataTypeTok{width =} \StringTok{"3in"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"repeat_header"}\NormalTok{), }\DataTypeTok{position =} \StringTok{"center"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{add_header_above}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{" "}\NormalTok{, }\StringTok{" "}\NormalTok{,}\StringTok{"Adjectives"}\NormalTok{ =}\StringTok{ }\DecValTok{2}\NormalTok{, }\StringTok{"Subordinates"}\NormalTok{ =}\StringTok{ }\DecValTok{3}\NormalTok{, }\StringTok{" "}\NormalTok{, }\StringTok{" "}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[t]{lllllll>{\raggedright\arraybackslash}p{1.5in}>{\raggedright\arraybackslash}p{3in}}
+\caption{\label{tab:unnamed-chunk-2}Stimuli set}\\
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Adjectives} & \multicolumn{3}{c}{Subordinates} & \multicolumn{1}{c}{ } & \multicolumn{1}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){3-4} \cmidrule(l{3pt}r{3pt}){5-7}
+ID & Scale & Positive & Negative & High & Medium & Low & Superordinate & Context\\
+\midrule
+\endfirsthead
+\caption[]{Stimuli set \textit{(continued)}}\\
+\toprule
+ID & Scale & Positive & Negative & High & Medium & Low & Superordinate & Context\\
+\midrule
+\endhead
+\
+\endfoot
+\bottomrule
+\endlastfoot
+\rowcolor{gray!6}  1 & darkness & light & dark & seagull & parrot & crow & birds & PERSON is going for a walk and notices the color of a PHRASE.\\
+2 & darkness & light & dark & white paint & blue paint & black paint & paint & PERSON bought a can of PHRASE and is testing it for the first time.\\
+\rowcolor{gray!6}  3 & darkness & light & dark & sugar cookie & fruit pie & chocolate cake & desserts & PERSON is at a bakery and looks at the color of a PHRASE.\\
+4 & darkness & light & dark & orange & apple & plum & fruit & PERSON is at a grocery store and looks at the color of PRE PHRASE.\\
+\rowcolor{gray!6}  5 & darkness & light & dark & day & dusk & night & times of day & PERSON steps outside during the PHRASE.\\
+\addlinespace
+6 & darkness & light & dark & piece of chalk & pen & pencil & writing tools & PERSON is writing with a PHRASE and notices the color of the script.\\
+\rowcolor{gray!6}  7 & darkness & light & dark & highway & main road & back road & roads & PERSON is driving in the evening on a PHRASE.\\
+8 & darkness & light & dark & daisy & rose & dahlia & flowers & PERSON is creating a flower bouquet and picks out a PHRASE.\\
+\rowcolor{gray!6}  9 & darkness & light & dark & poodle & spaniel & pitbull & dogs & PERSON takes a walk and notices the color of a PHRASE.\\
+10 & darkness & light & dark & jaguar & tiger & panther & cats & PERSON is at a zoo and notices the fur color of a PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  11 & hardness & hard & soft & cucumber & tomato & mushroom & food & PERSON is at a grocery store and picks up a PHRASE.\\
+12 & hardness & hard & soft & watermelon & plum & grape & fruit & PERSON is at a farmer's market and picks up a PHRASE.\\
+\rowcolor{gray!6}  13 & hardness & hard & soft & apple & bread & ice cream & foods & PERSON takes a bite of PRE PHRASE.\\
+14 & hardness & hard & soft & jolly rancher & piece of chocolate & marshmallow & sweets & PERSON is eating a PHRASE.\\
+\rowcolor{gray!6}  15 & hardness & hard & soft & tile & wood & carpet & floor materials & PERSON steps into a room with a PHRASE floor.\\
+\addlinespace
+16 & hardness & hard & soft & chair & bed & sofa & furniture & PERSON sits down on a PHRASE.\\
+\rowcolor{gray!6}  17 & hardness & hard & soft & melon & mango & banana & fruit & PERSON picks up a PHRASE.\\
+18 & hardness & hard & soft & wood & plastic & cotton & materials & PERSON is at a hardware store and picks up a piece of PHRASE.\\
+\rowcolor{gray!6}  19 & hardness & hard & soft & bedboard & blanket & pillow & furniture & PERSON is in PRO bedroom and sits on a PHRASE.\\
+20 & hardness & hard & soft & granite & wood & fabric & materials & PERSON is examining building materials to renovate PRO place and touches some PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  21 & height & tall & short & giraffe & monkey & bird & animals & PERSON is at a zoo and looks at a PHRASE.\\
+22 & height & tall & short & tree & bush & flower & plants & PERSON takes a walk in a garden and sees a PHRASE.\\
+\rowcolor{gray!6}  23 & height & tall & short & skyscraper & apartment building & strip mall & buildings & PERSON is looking at PRE PHRASE.\\
+24 & height & tall & short & adult & teenager & child & people & PERSON sees PRE PHRASE.\\
+\rowcolor{gray!6}  25 & height & tall & short & sunflower & tulip & pansy & flowers & PERSON is looking at a PHRASE.\\
+\addlinespace
+26 & height & tall & short & pine tree & vine & shrub & plants & PERSON is in a park and sees a PHRASE.\\
+\rowcolor{gray!6}  27 & height & tall & short & basketball player & golfer & jockey & athletes & PERSON sees a PHRASE.\\
+28 & height & tall & short & redwood tree & alpine tree & bonsai tree & trees & PERSON is walking in a botanical garden and sees PRE PHRASE.\\
+\rowcolor{gray!6}  29 & height & tall & short & dinosaur skeleton & statue & doll & exhibits & PERSON is at a museum and sees a PHRASE.\\
+30 & length\_duration & long & short & dress pants & capris & shorts & clothes & PERSON is shopping and looks at a pair of PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  31 & length\_duration & long & short & train & bus & car & vehicles & PERSON lives in a city and sees a PHRASE pass by.\\
+32 & length\_duration & long & short & dachshund & bassett hound & chihuahua & dogs & PERSON is at a pet store and notices the length of a PHRASE.\\
+\rowcolor{gray!6}  33 & length\_duration & long & short & snake & hamster & mouse & animals & PERSON is at a friend's house and notices the size of PRO pet PHRASE.\\
+35 & length\_duration & long & short & novel & story & poem & readings & PERSON thinks about reading PRO favorite PHRASE.\\
+\rowcolor{gray!6}  36 & length\_duration & long & short & limo & pick-up truck & smartcar & vehicles & PERSON sees a friend driving a PHRASE.\\
+\addlinespace
+37 & length\_duration & long & short & movie & documentary & sitcom & entertainment & PERSON thinks about watching PRO favorite PHRASE.\\
+\rowcolor{gray!6}  38 & length\_duration & long & short & highway & street & alley & roads & PERSON is looking at PRE PHRASE on Google Maps.\\
+39 & length\_duration & long & short & triathlon & relay race & sprint & races & PERSON looks up information about an upcoming PHRASE.\\
+\rowcolor{gray!6}  40 & length\_duration & long & short & opera & podcast episode & song & audios & PERSON is considering listening to PRO favorite PHRASE.\\
+41 & loudness & loud & quiet & donkey & dog & cat & animals & PERSON walks by a courtyard and hears a PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  42 & loudness & loud & quiet & rock concert & rap concert & choral concert & entertainment & PERSON is listening to a PHRASE.\\
+43 & loudness\_n & noisy & quiet & party & meeting hall & church & venue & PERSON meets a friend at a PHRASE.\\
+\rowcolor{gray!6}  44 & loudness\_n & noisy & quiet & parrot & cat & fish & pets & PERSON is at a friend's place and notices PRO pet PHRASE.\\
+45 & loudness\_n & noisy & quiet & concert & restaurant & library & venues & PERSON is spending PRO Saturday night at a PHRASE.\\
+\rowcolor{gray!6}  46 & loudness\_n & noisy & quiet & rooster & crow & finch & birds & PERSON is taking a walk in a park and hears the cry of a PHRASE.\\
+\addlinespace
+47 & loudness\_n & noisy & quiet & horn & guitar & harp & instruments & PERSON is listening to a friend playing the PHRASE.\\
+\rowcolor{gray!6}  48 & loudness & loud & quiet & baby & teenager & adult & people & PERSON is in a room with PRE PHRASE.\\
+49 & loudness\_n & noisy & quiet & city & town & village & places & PERSON is planning to move and checks out a PHRASE.\\
+\rowcolor{gray!6}  50 & loudness & loud & quiet & auditorium & classroom & study hall & rooms & PERSON walks into a school PHRASE.\\
+51 & loudness & loud & quiet & elephant & flamingo & snake & animals & PERSON is at the zoo and walks by PRE PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  52 & loudness & loud & quiet & drum & violin & flute & instruments & PERSON hears a friend play the PHRASE.\\
+53 & loudness\_n & noisy & quiet & tractor & car & electric car & vehicles & PERSON is on the sidewalk and hears PRE PHRASE drive by.\\
+\rowcolor{gray!6}  54 & loudness\_n & noisy & quiet & vacuum cleaner & fan & toaster & appliances & PERSON is in PRO appartment and turns on a PHRASE.\\
+55 & loudness\_n & noisy & quiet & gymnasium & classroom & library & rooms & PERSON is sitting in a school PHRASE.\\
+\rowcolor{gray!6}  56 & loudness & loud & quiet & mockingbird & woodpecker & owl & birds & PERSON is in a forest and hears a PHRASE.\\
+\addlinespace
+57 & loudness\_n & noisy & quiet & powerboat & sailboat & row boat & boats & PERSON is at a lake and hears the sound of a PHRASE.\\
+\rowcolor{gray!6}  58 & loudness & loud & quiet & bass guitar & acoustic guitar & ukelele & guitars & PERSON wants to play music and tries out PRE PHRASE.\\
+59 & price & expensive & cheap & car & motorcycle & bicycle & vehicles & PERSON considers buying a PHRASE for PRO commute.\\
+\rowcolor{gray!6}  60 & price & expensive & cheap & platinum & bronze & plastic & statues & PERSON is at a decoration shop and looks at a statue made of PHRASE.\\
+61 & price & expensive & cheap & villa & condo & apartment & buildings & PERSON is looking for a new place and checks out PRE PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  62 & price & expensive & cheap & berries & nuts & candies & snacks & PERSON is shopping for a snack and checks out some PHRASE.\\
+63 & price & expensive & cheap & boots & sneakers & sandals & shoes & PERSON is shopping for a pair of PHRASE.\\
+\rowcolor{gray!6}  64 & price & expensive & cheap & saffron & garlic & salt & spices & PERSON is shopping for spices and looks at PHRASE.\\
+65 & price & expensive & cheap & gold & metal & plastic & jewelry & PERSON wants to buy jewelry and looks at one made of PHRASE.\\
+\rowcolor{gray!6}  66 & price & expensive & cheap & suit & coat & shirt & clothes & PERSON is shopping and looks at a PHRASE.\\
+\addlinespace
+67 & price & expensive & cheap & raspberries & strawberries & bananas & fruit & PERSON is at a grocery store and looks at the price of PHRASE.\\
+\rowcolor{gray!6}  68 & price & expensive & cheap & steak & chicken & pork & meat & PERSON is at the butchershop and looks at a piece of PHRASE.\\
+69 & price & expensive & cheap & bottle of top-shelf liquor & bottle of wine & six-pack of beer & alcoholic drinks & PERSON is at a liquor store and wants to buy a PHRASE.\\
+\rowcolor{gray!6}  70 & price & expensive & cheap & steak house & buffet & diner & restaurants & PERSON is considering different places for dinner and looks at the menu of a PHRASE.\\
+71 & size & big & small & tree & bush & flower & plants & PERSON is at a gardening store and looks at a PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  72 & size & big & small & elephant & monkey & mouse & animals & PERSON is at the zoo and sees PRE PHRASE.\\
+73 & size & big & small & spider & moth & ant & insects & PERSON is looking in a terrarium at the zoo and sees PRE PHRASE.\\
+\rowcolor{gray!6}  74 & size & big & small & skyscraper & townhouse & doghouse & buildings & PERSON is walking down the street and sees a PHRASE.\\
+75 & size & big & small & watermelon & peach & kumquat & fruit & PERSON is at a farmer's market and picks up a PHRASE.\\
+\rowcolor{gray!6}  76 & size & big & small & shark & tuna & herring & fish & PERSON is at an aquarium and sees a PHRASE.\\
+\addlinespace
+77 & size & big & small & truck & sedan & smartcar & vehicles & PERSON sees PRO friend's new PHRASE.\\
+\rowcolor{gray!6}  78 & size & big & small & refrigerator & oven & toaster & appliances & PERSON is shopping at an appliances store and looks at PRE PHRASE.\\
+79 & size & big & small & great dane & poodle & chihuahua & dogs & PERSON is taking a walk and sees a PHRASE.\\
+\rowcolor{gray!6}  80 & size & big & small & tree & cactus & fern & plants & PERSON is at a botanical garden and sees a PHRASE.\\
+81 & size & big & small & pumpkin & squash & zucchini & vegetables & PERSON is a grocery store and picks up a PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  82 & speed & quick & slow & runner & jogger & walker & athletes & PERSON is in the park and sees a PHRASE.\\
+83 & speed & quick & slow & cheetah & elephant & sloth & animals & PERSON is at the zoo and watches PRE PHRASE move.\\
+\rowcolor{gray!6}  84 & speed & quick & slow & instant pot & frying pan & crockpot & cookware & PERSON wants to cook dinner and considers using PRE PHRASE.\\
+85 & speed\_f & fast & slow & motorcycle & car & truck & vehicles & PERSON sees a PHRASE on the highway.\\
+\rowcolor{gray!6}  86 & speed\_f & fast & slow & speedboat & sailboat & rowboat & boats & PERSON is travelling on PRO friend's new PHRASE.\\
+\addlinespace
+87 & speed & quick & slow & rabbit & cat & turtle & pets & PERSON is at a friend's house and sees their pet PHRASE come towards them.\\
+\rowcolor{gray!6}  88 & speed\_f & fast & slow & snake & lizard & turtle & reptiles & PERSON is at the zoo, watching a PHRASE.\\
+89 & speed\_f & fast & slow & plane & car & bike & transportation & PERSON want to go on vacation and thinks about travelling by PHRASE.\\
+\rowcolor{gray!6}  90 & speed\_f & fast & slow & runner & skier & weight lifter & athletes & PERSON is watching a PHRASE jogging.\\
+91 & speed & quick & slow & adult & child & elderly person & people & PERSON is taking a walk with PRE PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  92 & speed\_f & fast & slow & plane & helicopter & glider & aircrafts & PERSON is at an airport and sees a PHRASE in the air.\\
+93 & strength & strong & weak & adult & teenager & child & people & PERSON watches PRE PHRASE lift up a box.\\
+\rowcolor{gray!6}  94 & strength & strong & weak & lion & dog & mouse & animals & PERSON is at the zoo and looks at a PHRASE.\\
+95 & strength & strong & weak & hurricane & thunderstorm & rain & storms & PERSON is hearing about the PHRASE that is heading towards them.\\
+\rowcolor{gray!6}  96 & strength & strong & weak & wrestler & cyclist & golfer & athletes & PERSON is watching a PHRASE lift up weights.\\
+\addlinespace
+97 & strength & strong & weak & trunk & branch & twig & tree parts & PERSON is in a forest and looks at a tree PHRASE.\\
+\rowcolor{gray!6}  98 & strength & strong & weak & oil paint & wall paint & watercolor & paints & PERSON is painting and tries a new PHRASE.\\
+99 & strength & strong & weak & mansion & condo & cabin & walls & PERSON is examining the walls of a friend's new PHRASE.\\
+\rowcolor{gray!6}  100 & temperature & warm & cold & soup & salad & ice cream & food & PERSON takes the first bite of PRO PHRASE.\\
+101 & temperature\_h & hot & cold & coffee & juice & milkshake & drinks & PERSON takes the first sip from a PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  102 & temperature & warm & cold & summer & fall & winter & seasons & PERSON steps outside on a day in PHRASE.\\
+103 & temperature & warm & cold & sweater & flannel & shirt & clothes & PERSON is shopping for winter clothing and tries on a PHRASE.\\
+\rowcolor{gray!6}  104 & temperature\_h & hot & cold & stove & pantry & freezer & appliances & PERSON is in PRO kitchen and touches the PHRASE.\\
+105 & temperature\_h & hot & cold & hot chocolate & tea & soda & drinks & PERSON takes the first sip of a PHRASE.\\
+\rowcolor{gray!6}  106 & temperature\_h & hot & cold & sauna & shopping mall & ice rink & places & PERSON is spending PRO Saturday at PRE PHRASE.\\
+\addlinespace
+107 & temperature\_h & hot & cold & chocolate fondue & muffin & smoothie & desserts & PERSON is at a restaurant and takes a taste of a PHRASE.\\
+\rowcolor{gray!6}  108 & weight & heavy & light & elephant & dog & fish & animals & PERSON is at the zoo and watches PRE PHRASE being lifted.\\
+109 & weight & heavy & light & adult & kid & baby & people & PERSON lifts up PRE PHRASE.\\
+\rowcolor{gray!6}  110 & weight & heavy & light & printer & laptop & cell phone & electronic devices & PERSON is at an electronics store and picks up a PHRASE.\\
+111 & weight & heavy & light & couch & chair & trash can & furniture & PERSON is helping a friend move and picks up their PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  112 & weight & heavy & light & rock & stick & feather & objects & PERSON is walking outside and picks up a PHRASE.\\
+113 & weight & heavy & light & wood & plastic & paper & materials & PERSON is at a hardware store and picks up a piece of PHRASE.\\
+\rowcolor{gray!6}  114 & weight & heavy & light & weight & kettle ball & jump rope & exercise equipment & PERSON is at the gym and picks up a PHRASE.\\
+115 & weight & heavy & light & wool & cotton & silk & materials & PERSON is at a craft shop and picks up a piece of PHRASE.\\
+\rowcolor{gray!6}  116 & weight & heavy & light & truck & motorcycle & bike & vehicles & PERSON learns about the weight of a friend's new PHRASE.\\
+\addlinespace
+117 & weight & heavy & light & watermelon & squash & plum & fruit & PERSON is at a grocery store and picks up a PHRASE.\\
+\rowcolor{gray!6}  118 & width & wide & narrow & cave & cavern & fox hole & holes & PERSON is in a forest and sees a PHRASE.\\
+119 & width & wide & narrow & highway & downtown street & side road & roads & PERSON is driving on a PHRASE.\\
+\rowcolor{gray!6}  120 & width & wide & narrow & river & stream & creek & waterways & PERSON is standing at the bank of a PHRASE.\\
+121 & width & wide & narrow & boulevard & street & country lane & roads & PERSON is walking on PRE PHRASE.\\
+\addlinespace
+\rowcolor{gray!6}  122 & width & wide & narrow & truck & car & golf cart & vehicles & PERSON sees a PHRASE on the road.\\
+123 & width & wide & narrow & front gate & patio door & back door & doorways & PERSON is attempting to move PRO furniture through the PHRASE of PRO house.\\*
+\end{longtable}
+
+
+\end{document}
