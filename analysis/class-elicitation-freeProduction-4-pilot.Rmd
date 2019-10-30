@@ -94,8 +94,21 @@ df.trials.filtered <- df.trials %>%
   mutate(
     np = gsub("bottle of top-shelf liquor", "liquor", np),
     np = gsub("piece of chocolate", "chocolate", np),
+    np = gsub("piece of chalk", "chalk", np),
+    np = gsub("strip mall", "mall", np),
     np = gsub("six-pack of beer", "beer", np),
-    np = gsub("bottle of wine", "wine", np))
+    np = gsub("bottle of wine", "wine", np),
+    np = gsub("pine tree", "pine", np),
+    np = gsub("redwood tree", "redwood", np),
+    np = gsub("alpine tree", "alpine", np),
+    np = gsub("bonsai tree", "bonsai", np),
+    np = gsub("bassett hound", "bassett", np),
+    np = gsub("pick-up truck", "pick-up", np),
+    np = gsub("relay race", "relay", np),
+    np = gsub("podcast episode", "podcast", np),
+    np = gsub("kettle ball", "ball", np),
+    np = gsub("basketball player", "basketball", np)
+    )
 
 df.trials.filtered %>% group_by(np) %>%
   count()
@@ -126,6 +139,18 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("stories", "story", response),
         response = gsub("6 packs", "beer", response),
         response = gsub("basset", "bassett", response),
+        response = gsub("basset", "bassett", response),
+        response = gsub("dasies", "daisy", response),
+        response = gsub("pansies", "pansy", response),
+        response = gsub("mice", "mouse", response),
+         response = gsub("documentaries", "documentary", response),
+         response = gsub("parties", "party", response),
+         response = gsub("libraries", "library", response),
+         response = gsub("cities", "city", response),
+         response = gsub("auditoria", "auditorium", response),
+         response = gsub("gymnasia", "gymnasium", response),
+         response = gsub("cacti", "cactus", response),
+         response = gsub("pantries", "pantry", response)
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words

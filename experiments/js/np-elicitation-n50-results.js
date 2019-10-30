@@ -88,20 +88,20 @@ var examples = [
         pronoun: "It",
         context: "PERSON is writing with a PHRASE and notices the color of the script."
     },
-    {
-        worker_id: "7",
-        stim_id: "2",
-        degree: "darkness",
-        adj_positive: "light",
-        adj_negative: "dark",
-        superordinate: "roads",
-        positive: "highway",
-        neither_nor: "main road",
-        negative: "back road",
-        pronoun: "It",
-        context: "PERSON is driving in the evening on a PHRASE.",
-        environment_mod: "out here"
-    },
+    // {
+    //     worker_id: "7",
+    //     stim_id: "2",
+    //     degree: "darkness",
+    //     adj_positive: "light",
+    //     adj_negative: "dark",
+    //     superordinate: "roads",
+    //     positive: "highway",
+    //     neither_nor: "main road",
+    //     negative: "back road",
+    //     pronoun: "It",
+    //     context: "PERSON is driving in the evening on a PHRASE.",
+    //     environment_mod: "out here"
+    // },
     {
         worker_id: "8",
         stim_id: "9",
@@ -786,7 +786,7 @@ var examples = [
         superordinate: "boats",
         positive: "powerboat",
         neither_nor: "sailboat",
-        negative: "row boat",
+        negative: "rowboat",
         pronoun: "It",
         context: "PERSON is at a lake and hears the sound of a PHRASE."
     },
@@ -820,7 +820,7 @@ var examples = [
         superordinate: "vehicles",
         positive: "car",
         neither_nor: "motorcycle",
-        negative: "bicycle",
+        negative: "bike",
         pronoun: "It",
         context: "PERSON considers buying a PHRASE for PRO commute."
     },
