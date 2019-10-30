@@ -18,27 +18,41 @@ const custom_forced_choice = function(config) {
       <section class="magpie-text-container">
         <p class="magpie-view-question">${config.data[CT].question}</p>
       <section class="magpie-view-answer-container">
-        <label><input type="radio" name="main" value="No"/>No</label>
-        <label><input type="radio" name="main" value="Yes"/>Yes</label>
+        <p class="magpie-view-question">${config.data[CT].text_pos}
+        <label><input type="radio" name="main1" value="Yes"/>Yes</label>
+        <label><input type="radio" name="main2" value="No"/>No</label>
+        </p>
+      </section>
+      <section class="magpie-view-answer-container">
+        <p class="magpie-view-question">${config.data[CT].text_neg}
+        <label><input type="radio" name="main3" value="Yes"/>Yes</label>
+        <label><input type="radio" name="main4" value="No"/>No</label>
+        </p>
       </section>
 
       <button id='next' class='magpie-view-button'>next</button>
-
-        <p id='catch' class="magpie-view-question" >Please select an option before continuing.</p>
+      <p class="magpie-view-text" id="catch">Please select a response before proceeding.</p>
 
       </div>`)
 
 
       $("#catch").hide();
       $("#next").on("click", function() {
-        var response = $("input[name=main]:checked").val();
-        if (response === undefined) {
+        var response1 = $("input[name=main1]:checked").val();
+        var response2 = $("input[name=main2]:checked").val();
+        var response3 = $("input[name=main3]:checked").val();
+        var response4 = $("input[name=main4]:checked").val();
+        // var responses = [response1, response2, response3, response4];
+        if ((response1 === undefined) && (response2 === undefined) && (response3 === undefined) && (response4 === undefined)) {
           $("#catch").show()
         } else {
           let trial_data = {
             trial_name: config.name,
             trial_number: CT + 1,
-            response: response
+            response1: response1,
+            response2: response2,
+            response3: response3,
+            response4: response4
           }
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
           magpie.trial_data.push(trial_data);

@@ -86,6 +86,7 @@ df.attention.summary %>%
   count()
 ```
 
+Those multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
 ```{r filtered main trails}
 df.trials.filtered <- df.trials %>%
   left_join(., df.attention.summary) %>%
@@ -114,7 +115,7 @@ df.trials.filtered %>% group_by(np) %>%
   count()
 ```
 
-
+Plurals of all irregular nouns in the stimuli set are converted to singulars to match the seed noun phrase. Common misspellings are also controlled for in this code.  
 
 ```{r codeForSubCatTerms}
 containsString <- function(strng, substrng){
@@ -134,11 +135,11 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
+         response = gsub("bicycle", "bike", response),
          response = gsub("car ride", "drive", response),
          response = gsub("babies", "baby", response),
          response = gsub("stories", "story", response),
         response = gsub("6 packs", "beer", response),
-        response = gsub("basset", "bassett", response),
         response = gsub("basset", "bassett", response),
         response = gsub("dasies", "daisy", response),
         response = gsub("pansies", "pansy", response),
@@ -150,7 +151,8 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("auditoria", "auditorium", response),
          response = gsub("gymnasia", "gymnasium", response),
          response = gsub("cacti", "cactus", response),
-         response = gsub("pantries", "pantry", response)
+         response = gsub("pantries", "pantry", response),
+        response = gsub("bonzai", "bonsai", response)
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words
