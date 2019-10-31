@@ -1508,19 +1508,7 @@ const items = {
         pronoun: "it",
         context: "You step outside on a day in PHRASE."
     },
-    {
-        worker_id: "103",
-        stim_id: "4",
-        degree: "temperature",
-        adj_positive: "warm",
-        adj_negative: "cold",
-        superordinate: "clothes",
-        positive: "sweater",
-        neutral: "flannel",
-        negative: "shirt",
-        pronoun: "it",
-        context: "You are shopping for winter clothing and try on a PHRASE."
-    },
+
     {
         worker_id: "104",
         stim_id: "12",
@@ -1594,6 +1582,19 @@ const items = {
         pre_negative: "a",
         pronoun: "it",
         context: "You are at the zoo and watch PRE PHRASE being lifted."
+    },
+    {
+        worker_id: "103",
+        stim_id: "4",
+        degree: "weight",
+        adj_positive: "heavy",
+        adj_negative: "light",
+        superordinate: "clothes",
+        positive: "sweater",
+        neutral: "flannel",
+        negative: "shirt",
+        pronoun: "it",
+        context: "You are shopping for winter clothing and try on a PHRASE."
     },
     {
         worker_id: "109",

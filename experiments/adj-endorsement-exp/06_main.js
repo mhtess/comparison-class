@@ -18,7 +18,7 @@ $("document").ready(function() {
             custom_intro,
             botcaptcha,
             instructions,
-            // instructions,
+            instructions,
             main,
             custom_postTest,
             thanks,

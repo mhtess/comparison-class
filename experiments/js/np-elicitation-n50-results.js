@@ -1425,19 +1425,7 @@ var examples = [
         pronoun: "It",
         context: "PERSON steps outside on a day in PHRASE."
     },
-    {
-        worker_id: "103",
-        stim_id: "4",
-        degree: "temperature",
-        adj_positive: "warm",
-        adj_negative: "cold",
-        superordinate: "clothes",
-        positive: "sweater",
-        neither_nor: "flannel",
-        negative: "shirt",
-        pronoun: "It",
-        context: "PERSON is shopping for winter clothing and tries on a PHRASE."
-    },
+
     {
         worker_id: "104",
         stim_id: "12",
@@ -1511,6 +1499,19 @@ var examples = [
         pre_negative: "a",
         pronoun: "It",
         context: "PERSON is at the zoo and watches PRE PHRASE being lifted."
+    },
+    {
+        worker_id: "103",
+        stim_id: "4",
+        degree: "weight",
+        adj_positive: "heavy",
+        adj_negative: "light",
+        superordinate: "clothes",
+        positive: "sweater",
+        neither_nor: "flannel",
+        negative: "shirt",
+        pronoun: "It",
+        context: "PERSON is shopping for winter clothing and tries on a PHRASE."
     },
     {
         worker_id: "109",
