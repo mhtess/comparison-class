@@ -11,48 +11,74 @@ const custom_forced_choice = function(config) {
     CT: 0,
     trials: config.trials ,
     render: function(CT, magpie, startingTime) {
-      $("main").html(`<div class='magpie-view'>
-      <section class ="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].context}<br><br></p>
+      $("main").html(
+
+      `<div class='magpie-view'>
+
+      <section class="magpie-text-container">
+        <p class="magpie-view-question" style="font-size:20px">${config.data[CT].context}</p>
       </section>
       <section class="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].question}</p>
-      <section class="magpie-view-answer-container">
-        <p class="magpie-view-question">${config.data[CT].text_pos}
-        <label><input type="radio" name="main1" value="Yes"/>Yes</label>
-        <label><input type="radio" name="main2" value="No"/>No</label>
-        </p>
-      </section>
-      <section class="magpie-view-answer-container">
-        <p class="magpie-view-question">${config.data[CT].text_neg}
-        <label><input type="radio" name="main3" value="Yes"/>Yes</label>
-        <label><input type="radio" name="main4" value="No"/>No</label>
-        </p>
+        <p class="magpie-view-question" style="font-size:20px">${config.data[CT].question}</p>
       </section>
 
-      <button id='next' class='magpie-view-button'>next</button>
-      <p class="magpie-view-text" id="catch">Please select a response before proceeding.</p>
+      <div style="width:100%;">
+          <div style="width:60%;height:100px;float:left;position:relative;align:center;">
+              <div style="position:absolute;bottom:0;right:20px;align:center;">
+                  <p class="magpie-view-question">${config.data[CT].text_pos}</p>
+              </div>
+          </div>
+              <div style="width:40%;height:100px;float:right;position:relative;align:center;">
+                  <span style="position:absolute;bpttom:0;left:20px;align:center">
+                      <div class='magpie-view-answer-container'>
+                        <label><input type="radio" name="main1" value="Yes"/>Yes</label>
+                        <label><input type="radio" name="main1" value="No"/>No</label>
+                      </div>
+                  </span>
+              </div>
+      </div>
+      <div style="width:100%;">
+          <div style="width:60%;height:100px;float:left;position:relative;align:center;">
+              <div style="position:absolute;bottom:0;right:20px;align:center;">
+                  <p class="magpie-view-question">${config.data[CT].text_neg}</p>
+              </div>
+          </div>
+              <div style="width:40%;height:100px;float:right;position:relative;align:center;">
+                  <span style="position:absolute;bpttom:0;left:20px;align:center">
+                      <div class='magpie-view-answer-container'>
+                        <label><input type="radio" name="main2" value="Yes"/>Yes</label>
+                        <label><input type="radio" name="main2" value="No"/>No</label>
+                      </div>
+                  </span>
+              </div>
+      </div>
 
-      </div>`)
+          <button id='next' class='magpie-view-button'>next</button>
+          <p class="text" align="center" id="catch">Please select a response before proceeding.</p>
+      </div>`
+
+
+    )
 
 
       $("#catch").hide();
       $("#next").on("click", function() {
         var response1 = $("input[name=main1]:checked").val();
         var response2 = $("input[name=main2]:checked").val();
-        var response3 = $("input[name=main3]:checked").val();
-        var response4 = $("input[name=main4]:checked").val();
+        // var response3 = $("input[name=main3]:checked").val();
+        // var response4 = $("input[name=main4]:checked").val();
         // var responses = [response1, response2, response3, response4];
-        if ((response1 === undefined) && (response2 === undefined) && (response3 === undefined) && (response4 === undefined)) {
+        if ((response1 === undefined) | (response2 === undefined) ) {
           $("#catch").show()
         } else {
+
           let trial_data = {
             trial_name: config.name,
             trial_number: CT + 1,
             response1: response1,
-            response2: response2,
-            response3: response3,
-            response4: response4
+            response2: response2
+            // response3: response3,
+            // response4: response4
           }
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
           magpie.trial_data.push(trial_data);
