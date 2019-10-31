@@ -17,7 +17,7 @@ $("document").ready(function() {
         views_seq: [
             custom_intro,
             botcaptcha,
-            instructions,
+            // instructions,
             instructions,
             main,
             custom_postTest,
