@@ -12,6 +12,7 @@ const trials = function(domain) {
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
+const fc_order = _.shuffle([0, 1])
 // these functions can be used for trials with randomly sampled adjective and noun phrase conditions
 // sample an example for the item
 // const item = function() {
@@ -55,6 +56,8 @@ const create_view = function(domain) {
     // sample a positive, neutral or negative item
     // const current_item = item()
     const current_item = np_seq[i]
+    // const questions = ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+    //                     "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"]
     var x = sequence[i]
     // return the one current domain item of the five
     const single_item = domain[x]
@@ -65,14 +68,16 @@ const create_view = function(domain) {
     const view = {
       context: context_sent(current_item, single_item),
       question: "Do you think " + domain[x].pronoun + " would be:" ,
-      text_pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
-      text_neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      text_1: ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"],
+      // text_2: questions.fc_order[1],
+      condition_order: fc_order,
       item_cond: current_item,
       item: domain[x][current_item],
-      adjective_cond: adjective,
-      id: domain[x].worker_id,
+      stim_id: domain[x].worker_id,
       degree: domain[x].degree,
-      adjective: domain[x][adjective]
+      adj_positive: domain[x].adj_positive,
+      adj_negative: domain[x].adj_negative,
+      superordinate: domain[x].superordinate
     }
 // add view data to list of views for the chosen domain
     domain_views.push(view)

@@ -25,14 +25,14 @@ const custom_forced_choice = function(config) {
       <div style="width:100%;">
           <div style="width:60%;height:100px;float:left;position:relative;align:center;">
               <div style="position:absolute;bottom:12px;right:20px;align:center;">
-                  <p class="magpie-view-question">${config.data[CT].text_pos}</p>
+                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[0]]}</p>
               </div>
           </div>
               <div style="width:40%;height:100px;float:right;position:relative;align:center;">
                   <span style="position:absolute;bottom:0px;left:20px;align:center">
                       <div class='magpie-view-answer-container'>
-                        <label><input type="radio" name="main1" value="Yes"/>Yes</label>
-                        <label><input type="radio" name="main1" value="No"/>No</label>
+                        <label><input type="radio" name="main1" value="1"/>Yes</label>
+                        <label><input type="radio" name="main1" value="0"/>No</label>
                       </div>
                   </span>
               </div>
@@ -40,14 +40,14 @@ const custom_forced_choice = function(config) {
       <div style="width:100%;">
           <div style="width:60%;height:70px;float:left;position:relative;align:center;">
               <div style="position:absolute;bottom:12px;right:20px;align:center;">
-                  <p class="magpie-view-question">${config.data[CT].text_neg}</p>
+                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[1]]}</p>
               </div>
           </div>
               <div style="width:40%;height:70px;float:right;position:relative;align:center;">
                   <span style="position:absolute;bottom:0px;left:20px;align:center">
                       <div class='magpie-view-answer-container'>
-                        <label><input type="radio" name="main2" value="Yes"/>Yes</label>
-                        <label><input type="radio" name="main2" value="No"/>No</label>
+                        <label><input type="radio" name="main2" value="1"/>Yes</label>
+                        <label><input type="radio" name="main2" value="0"/>No</label>
                       </div>
                   </span>
               </div>
