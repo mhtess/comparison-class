@@ -170,14 +170,17 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
     np = as.character(np),
     np = gsub('\"', "", np),
-    specific = containsString(as.character(cleanedPhrase), as.character(np))
+    specific = containsString(as.character(cleanedPhrase), as.character(np)),
+    specificRespNP = containsString(as.character(np), gsub("_", "", as.character(cleanedPhrase))),
+    diff = specific - specificRespNP
   ) %>%
-  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific)
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff)
 
 ```
 
 
 ```{r}
+
 ```
 
 

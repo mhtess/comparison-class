@@ -5,12 +5,14 @@
 
 // first a context sentence is shown, below follows the quetion
 
-const custom_forced_choice = function(config) {
+const custom_forced_choice = function(config, startTime) {
+
   const view = {
     name: config.name,
     CT: 0,
     trials: config.trials ,
-    render: function(CT, magpie, startingTime) {
+    render: function(CT, magpie, startTime) {
+      const startingTime = Date.now()
       $("main").html(
 
       `<div class='magpie-view'>
@@ -71,12 +73,13 @@ const custom_forced_choice = function(config) {
         if ((response1 === undefined) | (response2 === undefined) ) {
           $("#catch").show()
         } else {
-
+        const RT = Date.now() - startingTime;
           let trial_data = {
             trial_name: config.name,
             trial_number: CT + 1,
             response1: response1,
-            response2: response2
+            response2: response2,
+            RT: RT
             // response3: response3,
             // response4: response4
           }
