@@ -150,7 +150,7 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "food",
+        superordinate: "vegetables",
         positive: "cucumber",
         neither_nor: "tomato",
         negative: "mushroom",
