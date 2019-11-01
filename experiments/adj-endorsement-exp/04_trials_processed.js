@@ -12,7 +12,7 @@ const trials = function(domain) {
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
-const fc_order = _.shuffle([0, 1])
+const fc_order = _.shuffle(["pos", "neg"])
 // these functions can be used for trials with randomly sampled adjective and noun phrase conditions
 // sample an example for the item
 // const item = function() {
@@ -68,9 +68,10 @@ const create_view = function(domain) {
     const view = {
       context: context_sent(current_item, single_item),
       question: "Do you think " + domain[x].pronoun + " would be:" ,
-      text_1: ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"],
+      text_1: {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"},
       // text_2: questions.fc_order[1],
-      condition_order: fc_order,
+      first_sentence: fc_order[0],
+      second_order: fc_order[1],
       item_cond: current_item,
       item: domain[x][current_item],
       stim_id: domain[x].worker_id,
@@ -1805,6 +1806,7 @@ const items = {
       positive: "front gate",
       neutral: "patio door",
       negative: "back door",
+      pronoun: "it",
       context: "You are attempting to move your furniture through the PHRASE of your house."
     }]
 }

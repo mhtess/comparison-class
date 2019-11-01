@@ -18,9 +18,9 @@
 
 */
 // elicit the trial views
-const main = custom_forced_choice({
+const adj_endorsement_both = custom_forced_choice({
   trials: trial_info.main.length ,
-  name: 'main',
+  name: 'adj_endorsement_both',
   data: _.shuffle(trial_info.main)
 })
 // Every experiment should start with an intro view. Here you can welcome your participants and tell them what the experiment is about
