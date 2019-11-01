@@ -86,6 +86,7 @@ df.attention.summary %>%
   count()
 ```
 
+Those multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
 ```{r filtered main trails}
 df.trials.filtered <- df.trials %>%
   left_join(., df.attention.summary) %>%
@@ -94,14 +95,27 @@ df.trials.filtered <- df.trials %>%
   mutate(
     np = gsub("bottle of top-shelf liquor", "liquor", np),
     np = gsub("piece of chocolate", "chocolate", np),
+    np = gsub("piece of chalk", "chalk", np),
+    np = gsub("strip mall", "mall", np),
     np = gsub("six-pack of beer", "beer", np),
-    np = gsub("bottle of wine", "wine", np))
+    np = gsub("bottle of wine", "wine", np),
+    np = gsub("pine tree", "pine", np),
+    np = gsub("redwood tree", "redwood", np),
+    np = gsub("alpine tree", "alpine", np),
+    np = gsub("bonsai tree", "bonsai", np),
+    np = gsub("bassett hound", "bassett", np),
+    np = gsub("pick-up truck", "pick-up", np),
+    np = gsub("relay race", "relay", np),
+    np = gsub("podcast episode", "podcast", np),
+    np = gsub("kettle ball", "ball", np),
+    np = gsub("basketball player", "basketball", np)
+    )
 
 df.trials.filtered %>% group_by(np) %>%
   count()
 ```
 
-
+Plurals of all irregular nouns in the stimuli set are converted to singulars to match the seed noun phrase. Common misspellings are also controlled for in this code.  
 
 ```{r codeForSubCatTerms}
 containsString <- function(strng, substrng){
@@ -121,11 +135,24 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
+         response = gsub("bicycle", "bike", response),
          response = gsub("car ride", "drive", response),
          response = gsub("babies", "baby", response),
          response = gsub("stories", "story", response),
         response = gsub("6 packs", "beer", response),
         response = gsub("basset", "bassett", response),
+        response = gsub("dasies", "daisy", response),
+        response = gsub("pansies", "pansy", response),
+        response = gsub("mice", "mouse", response),
+         response = gsub("documentaries", "documentary", response),
+         response = gsub("parties", "party", response),
+         response = gsub("libraries", "library", response),
+         response = gsub("cities", "city", response),
+         response = gsub("auditoria", "auditorium", response),
+         response = gsub("gymnasia", "gymnasium", response),
+         response = gsub("cacti", "cactus", response),
+         response = gsub("pantries", "pantry", response),
+        response = gsub("bonzai", "bonsai", response)
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words
@@ -143,14 +170,17 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
     np = as.character(np),
     np = gsub('\"', "", np),
-    specific = containsString(as.character(cleanedPhrase), as.character(np))
+    specific = containsString(as.character(cleanedPhrase), as.character(np)),
+    specificRespNP = containsString(as.character(np), gsub("_", "", as.character(cleanedPhrase))),
+    diff = specific - specificRespNP
   ) %>%
-  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific)
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff)
 
 ```
 
 
 ```{r}
+
 ```
 
 

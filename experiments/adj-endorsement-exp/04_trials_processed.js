@@ -12,6 +12,7 @@ const trials = function(domain) {
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
+const fc_order = _.shuffle([0, 1])
 // these functions can be used for trials with randomly sampled adjective and noun phrase conditions
 // sample an example for the item
 // const item = function() {
@@ -55,6 +56,8 @@ const create_view = function(domain) {
     // sample a positive, neutral or negative item
     // const current_item = item()
     const current_item = np_seq[i]
+    // const questions = ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+    //                     "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"]
     var x = sequence[i]
     // return the one current domain item of the five
     const single_item = domain[x]
@@ -64,13 +67,17 @@ const create_view = function(domain) {
     // return the view data
     const view = {
       context: context_sent(current_item, single_item),
-      question: "Do you think " + domain[x].pronoun + " would be " + domain[x][adjective] + "?",
+      question: "Do you think " + domain[x].pronoun + " would be:" ,
+      text_1: ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"],
+      // text_2: questions.fc_order[1],
+      condition_order: fc_order,
       item_cond: current_item,
       item: domain[x][current_item],
-      adjective_cond: adjective,
-      id: domain[x].worker_id,
+      stim_id: domain[x].worker_id,
       degree: domain[x].degree,
-      adjective: domain[x][adjective]
+      adj_positive: domain[x].adj_positive,
+      adj_negative: domain[x].adj_negative,
+      superordinate: domain[x].superordinate
     }
 // add view data to list of views for the chosen domain
     domain_views.push(view)
@@ -84,8 +91,8 @@ const items = {
 
   // ---------  DARKNESS: DARK - LIGHT (10) -----------
 
-  darkness: [
-    {
+    darkness: [
+      {
         worker_id: "1",
         stim_id: "9",
         degree: "darkness",
@@ -110,7 +117,7 @@ const items = {
         neutral: "blue paint",
         negative: "black paint",
         pronoun: "it",
-        context: "You have bought a can of PHRASE and you are testing it for the first time."
+        context: "You bought a can of PHRASE and test it for the first time."
     },
     {
         worker_id: "3",
@@ -139,7 +146,7 @@ const items = {
         pre_negative: "a",
         pre_neutral: "an",
         pronoun: "it",
-        context: "You are at a grocery store and pick up PRE PHRASE."
+        context: "You are at a grocery store and look at the color of PRE PHRASE."
     },
     {
         worker_id: "5",
@@ -162,26 +169,26 @@ const items = {
         adj_positive: "light",
         adj_negative: "dark",
         superordinate: "writing tools",
-        positive: "chalk",
+        positive: "piece of chalk",
         neutral: "pen",
         negative: "pencil",
         pronoun: "it",
-        context: "You write a sentence with a PHRASE and notice the color of the script."
+        context: "You are writing with a PHRASE and notice the color of the script."
     },
-    {
-        worker_id: "7",
-        stim_id: "2",
-        degree: "darkness",
-        adj_positive: "light",
-        adj_negative: "dark",
-        superordinate: "roads",
-        positive: "highway",
-        neutral: "main road",
-        negative: "back road",
-        pronoun: "it",
-        context: "You are driving on a PHRASE in the evening.",
-        environment_mod: "out here"
-    },
+    // {
+    //     worker_id: "7",
+    //     stim_id: "2",
+    //     degree: "darkness",
+    //     adj_positive: "light",
+    //     adj_negative: "dark",
+    //     superordinate: "roads",
+    //     positive: "highway",
+    //     neutral: "main road",
+    //     negative: "back road",
+    //     pronoun: "it",
+    //     context: "You are driving in the evening on a PHRASE.",
+    //     environment_mod: "out here"
+    // },
     {
         worker_id: "8",
         stim_id: "9",
@@ -206,7 +213,7 @@ const items = {
         neutral: "spaniel",
         negative: "pitbull",
         pronoun: "it",
-        context: "You take a walk and notices the color of a PHRASE."
+        context: "You take a walk and notice the color of a PHRASE."
     },
     {
         worker_id: "10",
@@ -219,7 +226,7 @@ const items = {
         neutral: "tiger",
         negative: "panther",
         pronoun: "it",
-        context: "You notice the fur of a PHRASE at the zoo."
+        context: "You are at a zoo and notice the fur color of a PHRASE."
     }],
 
 // --------- HARDNESS : HARD -SOFT (10) -----------
@@ -236,7 +243,7 @@ const items = {
         neutral: "tomato",
         negative: "mushroom",
         pronoun: "it",
-        context: "You pick up a PHRASE at the grocery store."
+        context: "You are at a grocery store and pick up a PHRASE."
     },
     {
         worker_id: "12",
@@ -249,7 +256,7 @@ const items = {
         neutral: "plum",
         negative: "grape",
         pronoun: "it",
-        context: "You pick up a PHRASE at a farmers' market."
+        context: "You are at a farmer's market and pick up a PHRASE."
     },
     {
         worker_id: "13",
@@ -257,7 +264,7 @@ const items = {
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "food",
+        superordinate: "foods",
         positive: "apple",
         neutral: "bread",
         negative: "ice cream",
@@ -273,12 +280,12 @@ const items = {
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "desserts",
+        superordinate: "sweets",
         positive: "jolly rancher",
-        neutral: "chocolate",
+        neutral: "piece of chocolate",
         negative: "marshmallow",
         pronoun: "it",
-        context: "You are eating a piece of PHRASE."
+        context: "You are eating a PHRASE."
     },
     {
         worker_id: "15",
@@ -286,12 +293,12 @@ const items = {
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "materials for floors",
+        superordinate: "floor materials",
         positive: "tile",
         neutral: "wood",
         negative: "carpet",
         pronoun: "it",
-        context: "You step in a room with a PHRASE floor."
+        context: "You step into a room with a PHRASE floor."
     },
     {
         worker_id: "16",
@@ -313,7 +320,7 @@ const items = {
         adj_positive: "hard",
         adj_negative: "soft",
         superordinate: "fruit",
-        positive: "pear",
+        positive: "melon",
         neutral: "mango",
         negative: "banana",
         pronoun: "it",
@@ -330,7 +337,7 @@ const items = {
         neutral: "plastic",
         negative: "cotton",
         pronoun: "it",
-        context: "You pick up a piece of PHRASE at a hardware store."
+        context: "You are at a hardware store and pick up a piece of PHRASE."
     },
     {
         worker_id: "19",
@@ -340,10 +347,10 @@ const items = {
         adj_negative: "soft",
         superordinate: "furniture",
         positive: "bedboard",
-        neutral: "pillow",
-        negative: "blanket",
+        neutral: "blanket",
+        negative: "pillow",
         pronoun: "it",
-        context: "You sit down on a PHRASE in your bedroom."
+        context: "You are in your bedroom and sit on a PHRASE."
     },
     {
         worker_id: "20",
@@ -352,14 +359,15 @@ const items = {
         adj_positive: "hard",
         adj_negative: "soft",
         superordinate: "materials",
-        positive: "concrete",
+        positive: "granite",
         neutral: "wood",
         negative: "fabric",
         pronoun: "it",
-        context: "You are renovating your place and consider PHRASE at a building supplies store."
+        context: "You are examining building materials to renovate your place and touch some PHRASE."
     }],
 
 // -------- HEIGHT : TALL - SHORT (9) -----------
+
 
     height: [
       {
@@ -373,7 +381,7 @@ const items = {
         neutral: "monkey",
         negative: "bird",
         pronoun: "it",
-        context: "You see a PHRASE at the zoo."
+        context: "You are at a zoo and look at a PHRASE."
     },
     {
         worker_id: "22",
@@ -386,7 +394,7 @@ const items = {
         neutral: "bush",
         negative: "flower",
         pronoun: "it",
-        context: "You walk in a garden and see a PHRASE."
+        context: "You take a walk in a garden and see a PHRASE."
     },
     {
         worker_id: "23",
@@ -397,14 +405,14 @@ const items = {
         superordinate: "buildings",
         positive: "skyscraper",
         neutral: "apartment building",
-        negative: "srip mall",
+        negative: "strip mall",
         pre_positive: "a",
         pre_negative: "a",
         pre_neutral:"an",
         pronoun: "it",
-        context: "You look at PRE PHRASE in a city."
+        context: "You are looking at PRE PHRASE."
     },
-    {
+    { // MH: make sure this works
         worker_id: "24",
         stim_id: "15",
         degree: "height",
@@ -418,7 +426,7 @@ const items = {
         pre_neutral: "a",
         pre_negative:"a",
         pronoun: "they",
-        context: "You see PRE PHRASE outside."
+        context: "You see PRE PHRASE."
     },
     {
         worker_id: "25",
@@ -431,7 +439,7 @@ const items = {
         neutral: "tulip",
         negative: "pansy",
         pronoun: "it",
-        context: "You look at a PHRASE in a flowerbed."
+        context: "You are looking at a PHRASE."
     },
     {
         worker_id: "26",
@@ -444,7 +452,7 @@ const items = {
         neutral: "vine",
         negative: "shrub",
         pronoun: "it",
-        context: "You see a PHRASE in a park."
+        context: "You are in a park and see a PHRASE."
     },
     {
         worker_id: "27",
@@ -456,8 +464,8 @@ const items = {
         positive: "basketball player",
         neutral: "golfer",
         negative: "jockey",
-        pronoun: "he",
-        context: "You see a PHRASE called Jack."
+        pronoun: "they",
+        context: "You see a PHRASE."
     },
     {
       worjer_id: "28",
@@ -473,7 +481,7 @@ const items = {
       adj_positive: "tall",
       adj_negative: "short",
       pronoun: "it",
-      context: "You are walking in a forest and see PRE PHRASE."
+      context: "You are walking in a botanical garden and see PRE PHRASE."
     },
     {
       worker_id: "29",
@@ -482,7 +490,7 @@ const items = {
       positive: "dinosaur skeleton",
       neutral: "statue",
       negative: "doll",
-      superordinate: "exihibits",
+      superordinate: "exhibits",
       adj_positive: "tall",
       adj_negative: "short",
       pronoun: "it",
@@ -490,7 +498,7 @@ const items = {
     }],
 
 
-// ----------- DURATION / LENGTH : LONG - SHORT (11)----------
+// ----------- DURATION / LENGTH : LONG - SHORT (10)----------
 
     length: [
       {
@@ -516,8 +524,8 @@ const items = {
         positive: "train",
         neutral: "bus",
         negative: "car",
-        prnoun: "it",
-        context: "You live in a city and watch a PHRASE pass by."
+        pronoun: "it",
+        context: "You live in a city and see a PHRASE pass by."
     },
     {
         worker_id: "32",
@@ -543,33 +551,21 @@ const items = {
         neutral: "hamster",
         negative: "mouse",
         pronoun: "it",
-        context: "You are at a friend's house and notice their pet PHRASE."
+        context: "You are at a friend's house and notice the size of her pet PHRASE."
     },
-    {
-        worker_id: "34",
-        stim_id: "12",
-        degree: "length_duration",
-        adj_positive: "long",
-        adj_negative: "short",
-        superordinate: "moving items",
-        positive: "yardstick",
-        neutral: "tape measure",
-        negative: "ruler",
-        pronoun: "it",
-        context: "You rearrange your apartment and buy a PHRASE."
-    },
+
     {
         worker_id: "35",
         stim_id: "15",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
-        superordinate: "reading",
+        superordinate: "readings",
         positive: "novel",
         neutral: "story",
         negative: "poem",
         pronoun: "it",
-        context: "You think about reading a PHRASE."
+        context: "You think about reading your favorite PHRASE."
     },
     {
         worker_id: "36",
@@ -579,10 +575,10 @@ const items = {
         adj_negative: "short",
         superordinate: "vehicles",
         positive: "limo",
-        neutral: "pick up",
+        neutral: "pick-up truck",
         negative: "smartcar",
         pronoun:"it",
-        context: "You see a friend driving a PHRASE around the corner."
+        context: "You see a friend driving a PHRASE."
     },
     {
         worker_id: "37",
@@ -595,7 +591,7 @@ const items = {
         neutral: "documentary",
         negative: "sitcom",
         pronoun: "it",
-        context: "You think about watching a PHRASE."
+        context: "You think about watching your favorite PHRASE."
     },
     {
         worker_id: "38",
@@ -611,7 +607,7 @@ const items = {
         pre_negative: "an",
         pre_positive: "a",
         pronoun: "it",
-        context: "You look up the length of PRE PHRASE on a map."
+        context: "You are looking at PRE PHRASE on Google Maps."
     },
     {
         worker_id: "39",
@@ -620,19 +616,19 @@ const items = {
         adj_positive: "long",
         adj_negative: "short",
         superordinate: "races",
-        positive: "marathon",
-        neutral: "relay",
+        positive: "triathlon",
+        neutral: "relay race",
         negative: "sprint",
         pronoun: "it",
-        context: "You want to participate in a PHRASE."
+        context: "You look up information about an upcoming PHRASE."
     },
     {
       worker_id: "40",
       stim_id: "custom",
       degree: "length_duration",
       positive: "opera",
-      negative: "lullaby",
-      neutral: "podcast",
+      negative: "song",
+      neutral: "podcast episode",
       superordinate: "audios",
       pre_positive: "an",
       pre_negative: "a",
@@ -640,11 +636,11 @@ const items = {
       adj_positive: "long",
       adj_negative: "short",
       pronoun: "it",
-      context: "You listen to the recording of PRE PHRASE."
-    } ],
+      context: "You are considering listening to your favorite PHRASE."
+    }],
 
 
-// ------------ LOUDNESS : LOUD - / NOareY - QUIET (18) ----------
+// ------------ LOUDNESS : LOUD - / NOISY - QUIET (18) ----------
 
     loudness: [
       {
@@ -667,16 +663,16 @@ const items = {
         adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "entertainment",
-        positive: "rap concert",
-        neutral: "rock concert",
-        negative: "Baroque classical concert",
+        positive: "rock concert",
+        neutral: "rap concert",
+        negative: "choral concert",
         pronoun: "it",
-        context: "You are at a PHRASE."
+        context: "You are listening to a PHRASE."
     },
     {
         worker_id: "43",
         stim_id: "8",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "venue",
@@ -684,13 +680,13 @@ const items = {
         neutral: "meeting hall",
         negative: "church",
         pronoun: "it",
-        context: "You are meeting a friend at a PHRASE.",
+        context: "You meet a friend at a PHRASE.",
         environment_mod: "in here"
     },
     {
         worker_id: "44",
         stim_id: "7",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "pets",
@@ -698,12 +694,12 @@ const items = {
         neutral: "cat",
         negative: "fish",
         pronoun: "it",
-        context: "You are at a friend's place and see their pet PHRASE."
+        context: "You are at a friend's place and notice his pet PHRASE."
     },
     {
         worker_id: "45",
         stim_id: "6",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "venues",
@@ -711,13 +707,13 @@ const items = {
         neutral: "restaurant",
         negative: "library",
         pronoun: "it",
-        context: "You are spending Saturday night at a PHRASE.",
+        context: "You are spending your Saturday night at a PHRASE.",
         environment_mod: "in here"
     },
     {
         worker_id: "46",
         stim_id: "1",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "birds",
@@ -725,12 +721,12 @@ const items = {
         neutral: "crow",
         negative: "finch",
         pronoun: "it",
-        context: "You hear a PHRASE cry in a park."
+        context: "You are taking a walk in a park and hear the cry of a PHRASE."
     },
     {
         worker_id: "47",
         stim_id: "10",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "instruments",
@@ -759,7 +755,7 @@ const items = {
     {
         worker_id: "49",
         stim_id: "15",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "places",
@@ -767,7 +763,7 @@ const items = {
         neutral: "town",
         negative: "village",
         pronoun: "it",
-        context: "You think about moving to a PHRASE.",
+        context: "You are planning to move and check out a PHRASE.",
         environment_mod: "there"
     },
     {
@@ -777,7 +773,7 @@ const items = {
         adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "rooms",
-        positive: "audtorium",
+        positive: "auditorium",
         neutral: "classroom",
         negative: "study hall",
         pronoun: "it",
@@ -792,13 +788,13 @@ const items = {
         adj_negative: "quiet",
         superordinate: "animals",
         positive: "elephant",
-        neutral: "bird",
+        neutral: "flamingo",
         negative: "snake",
         pre_neutral: "a",
         pre_negative: "a",
         pre_positive: "an",
         pronoun: "it",
-        context: "You are watching PRE PHRASE at a zoo."
+        context: "You are at the zoo and walk by PRE PHRASE."
     },
     {
         worker_id: "52",
@@ -811,12 +807,12 @@ const items = {
         neutral: "violin",
         negative: "flute",
         pronoun: "it",
-        context: "You hear your friend play a PHRASE."
+        context: "You hear a friend play the PHRASE."
     },
     {
         worker_id: "53",
         stim_id: "14",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "vehicles",
@@ -827,12 +823,12 @@ const items = {
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "it",
-        context: "You are on a sidewalk and hear PRE PHRASE driving on the street."
+        context: "You are on the sidewalk and hear PRE PHRASE drive by."
     },
     {
         worker_id: "54",
         stim_id: "2",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "appliances",
@@ -840,12 +836,12 @@ const items = {
         neutral: "fan",
         negative: "toaster",
         pronoun: "it",
-        context: "You turn on a PHRASE in your appartment."
+        context: "You are in your appartment and turn on a PHRASE."
     },
     {
         worker_id: "55",
         stim_id: "11",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "rooms",
@@ -853,7 +849,7 @@ const items = {
         neutral: "classroom",
         negative: "library",
         pronoun: "it",
-        context: "You sit in a school PHRASE.",
+        context: "You are sitting in a school PHRASE.",
         environment_mod: "in here"
     },
     {
@@ -870,20 +866,20 @@ const items = {
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "it",
-        context: "You hear a PHRASE in a forest."
+        context: "You are in a forest and hear a PHRASE."
     },
     {
         worker_id: "57",
         stim_id: "7",
-        degree: "loudness",
+        degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "boats",
         positive: "powerboat",
         neutral: "sailboat",
-        negative: "row boat",
+        negative: "rowboat",
         pronoun: "it",
-        context: "You are watching a PHRASE on a lake."
+        context: "You are at a lake and hear the sound of a PHRASE."
     },
     {
         worker_id: "58",
@@ -900,8 +896,8 @@ const items = {
         pre_negative: "an",
         pronoun: "it",
         context: "You want to play music and try out PRE PHRASE."
-    }
-],
+    }],
+
 
 // ------------ PRICE: EXPENSIVE - CHEAP (12) -----------
 
@@ -915,7 +911,7 @@ const items = {
         superordinate: "vehicles",
         positive: "car",
         neutral: "motorcycle",
-        negative: "bicycle",
+        negative: "bike",
         pronoun: "it",
         context: "You consider buying a PHRASE for your commute."
     },
@@ -925,12 +921,12 @@ const items = {
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
-        superordinate: "materials",
+        superordinate: "statues",
         positive: "platinum",
         neutral: "bronze",
         negative: "plastic",
         pronoun: "it",
-        context: "You look at a statue made of PHRASE at a decoration shop."
+        context: "You are at a decoration shop and look at a statue made of PHRASE."
     },
     {
         worker_id: "61",
@@ -954,12 +950,12 @@ const items = {
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
-        superordinate: "food",
+        superordinate: "snacks",
         positive: "berries",
         neutral: "nuts",
         negative: "candies",
         pronoun: "they",
-        context: "You are buying some PHRASE at a grocery store."
+        context: "You are shopping for a snack and check out some PHRASE."
     },
     {
         worker_id: "63",
@@ -993,12 +989,12 @@ const items = {
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
-        superordinate: "jewelery",
-        positive: "gold jewelery",
-        neutral: "metal jewelery",
-        negative: "plastic jewelery",
+        superordinate: "jewelry",
+        positive: "gold",
+        neutral: "metal",
+        negative: "plastic",
         pronoun: "it",
-        context: "You think about buying PHRASE."
+        context: "You want to buy jewelry and look at one made of PHRASE."
     },
     {
         worker_id: "66",
@@ -1024,7 +1020,7 @@ const items = {
         neutral: "strawberries",
         negative: "bananas",
         pronoun: "they",
-        context: "You look at the price of PHRASE at a grocery store."
+        context: "You are at a grocery store and look at the price of PHRASE."
     },
     {
         worker_id: "68",
@@ -1044,13 +1040,13 @@ const items = {
          stim_id: "custom",
          degree: "price",
          positive: "bottle of top-shelf liquor",
-         negative: "sixpack of beer",
+         negative: "six-pack of beer",
          neutral: "bottle of wine",
          superordinate: "alcoholic drinks",
          adj_positive: "expensive",
          adj_negative: "cheap",
          pronoun: "it",
-         context: "You want to buy a PHRASE at a liquor store."
+         context: "You are at a liquor store and want to buy a PHRASE."
      },
      {
           worker_id: "70",
@@ -1064,9 +1060,7 @@ const items = {
           adj_negative: "cheap",
           pronoun: "it",
           context: "You are considering different places for dinner and look at the menu of a PHRASE."
-      } ],
-
-
+      }],
 
 // -------------SIZE : BIG - SMALL (11) -------------
 
@@ -1082,7 +1076,7 @@ const items = {
         neutral: "bush",
         negative: "flower",
         pronoun: "it",
-        context: "You want to do some landscaping and look at a PHRASE."
+        context: "You are at a gardening store and look at a PHRASE."
     },
     {
         worker_id: "72",
@@ -1114,7 +1108,7 @@ const items = {
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "it",
-        context: "You are at the zoo and see PRE PHRASE in a terrarium."
+        context: "You are looking in a terrarium at the zoo and see PRE PHRASE."
     },
     {
         worker_id: "74",
@@ -1124,10 +1118,10 @@ const items = {
         adj_negative: "small",
         superordinate: "buildings",
         positive: "skyscraper",
-        neutral: "house",
+        neutral: "townhouse",
         negative: "doghouse",
         pronoun: "it",
-        context: "You walk on the street and see a PHRASE."
+        context: "You are walking down the street and see a PHRASE."
     },
     {
         worker_id: "75",
@@ -1140,7 +1134,7 @@ const items = {
         neutral: "peach",
         negative: "kumquat",
         pronoun: "it",
-        context: "You pick up a PHRASE at a farmers' market."
+        context: "You are at a farmer's market and pick up a PHRASE."
     },
     {
         worker_id: "76",
@@ -1148,12 +1142,12 @@ const items = {
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
-        superordinate: "fareh",
+        superordinate: "fish",
         positive: "shark",
         neutral: "tuna",
         negative: "herring",
         pronoun: "it",
-        context: "You ia at an aquarium and see a PHRASE."
+        context: "You are at an aquarium and see a PHRASE."
     },
     {
         worker_id: "77",
@@ -1164,7 +1158,7 @@ const items = {
         superordinate: "vehicles",
         positive: "truck",
         neutral: "sedan",
-        negative: "smart car",
+        negative: "smartcar",
         pronoun: "it",
         context: "You see your friend's new PHRASE."
     },
@@ -1208,7 +1202,7 @@ const items = {
         neutral: "cactus",
         negative: "fern",
         pronoun: "it",
-        context: "You are at a botanic garden and see a PHRASE."
+        context: "You are at a botanical garden and see a PHRASE."
     },
     {
         worker_id: "81",
@@ -1221,10 +1215,8 @@ const items = {
         neutral: "squash",
         negative: "zucchini",
         pronoun: "it",
-        context: "You pick up a PHRASE at a grocery store."
-    } ],
-
-
+        context: "You are a grocery store and pick up a PHRASE."
+    }],
 
 // --------------- SPEED : QUICK / FAST - SLOW (1) -------------
 
@@ -1264,20 +1256,20 @@ const items = {
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
-        superordinate: "ways of cooking",
+        superordinate: "cookware",
         positive: "instant pot",
-        neutral: "pan",
+        neutral: "frying pan",
         negative: "crockpot",
         pronoun: "it",
         pre_neutral: "a",
         pre_positive: "an",
         pre_negative: "a",
-        context: "You want to cook dinner and considers using PRE PHRASE."
+        context: "You want to cook dinner and consider using PRE PHRASE."
     },
     {
         worker_id: "85",
         stim_id: "1",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "vehicles",
@@ -1285,12 +1277,12 @@ const items = {
         neutral: "car",
         negative: "truck",
         pronoun: "it",
-        context: "You see a PHRASE drive on the highway."
+        context: "You see a PHRASE on the highway."
     },
     {
         worker_id: "86",
         stim_id: "12",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "boats",
@@ -1298,7 +1290,7 @@ const items = {
         neutral: "sailboat",
         negative: "rowboat",
         pronoun: "it",
-        context: "You learn about your friend's new PHRASE."
+        context: "You are travelling on your friend's new PHRASE."
     },
     {
         worker_id: "87",
@@ -1311,12 +1303,12 @@ const items = {
         neutral: "cat",
         negative: "turtle",
         pronoun: "it",
-        context: "You are at a friend's house and see their pet PHRASE move."
+        context: "You are at a friend's house and see their pet PHRASE come towards them."
     },
     {
         worker_id: "88",
         stim_id: "4",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "reptiles",
@@ -1324,12 +1316,12 @@ const items = {
         neutral: "lizard",
         negative: "turtle",
         pronoun: "it",
-        context: "You are at the zoo and watch a PHRASE."
+        context: "You are at the zoo, watching a PHRASE."
     },
     {
         worker_id: "89",
         stim_id: "12",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "transportation",
@@ -1337,20 +1329,20 @@ const items = {
         neutral: "car",
         negative: "bike",
         pronoun: "it",
-        context: "You want to go on holidays and think about travelling by PHRASE."
+        context: "You want to go on vacation and think about travelling by PHRASE."
     },
     {
         worker_id: "90",
         stim_id: "13",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "athletes",
         positive: "runner",
-        neutral: "skiier",
+        neutral: "skier",
         negative: "weight lifter",
         pronoun: "they",
-        context: "You watch a PHRASE jog."
+        context: "You are watching a PHRASE jogging."
     },
     {
         worker_id: "91",
@@ -1371,7 +1363,7 @@ const items = {
     {
         worker_id: "92",
         stim_id: "10",
-        degree: "speed",
+        degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
         superordinate: "aircrafts",
@@ -1379,10 +1371,8 @@ const items = {
         neutral: "helicopter",
         negative: "glider",
         pronoun: "it",
-        context: "You are at an airport and watch a PHRASE in the air."
-    } ],
-
-
+        context: "You are at an airport and see a PHRASE in the air."
+    }],
 
 // -------------- STRENGTH : STRONG -WEAK (7)------------------
 
@@ -1414,7 +1404,7 @@ const items = {
         neutral: "dog",
         negative: "mouse",
         pronoun: "it",
-        context: "You look at a PHRASE at the zoo."
+        context: "You are at the zoo and look at a PHRASE."
     },
     {
         worker_id: "95",
@@ -1423,11 +1413,11 @@ const items = {
         adj_positive: "strong",
         adj_negative: "weak",
         superordinate: "storms",
-        positive: "tornado",
+        positive: "hurricane",
         neutral: "thunderstorm",
         negative: "rain",
         pronoun: "it",
-        context: "You learn about a PHRASE in another city."
+        context: "You are hearing about the PHRASE that are heading towards them."
     },
     {
         worker_id: "96",
@@ -1438,9 +1428,9 @@ const items = {
         superordinate: "athletes",
         positive: "wrestler",
         neutral: "cyclist",
-        negative: "golf player",
-        pronoun: "he",
-        context: "You watch a PHRASE called Jeff lift up weights."
+        negative: "golfer",
+        pronoun: "they",
+        context: "You are watching a PHRASE lift up weights."
     },
     {
         worker_id: "97",
@@ -1448,10 +1438,10 @@ const items = {
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
-        superordinate: "trees",
+        superordinate: "tree parts",
         positive: "trunk",
         neutral: "branch",
-        negative: "leaf",
+        negative: "twig",
         pronoun: "it",
         context: "You are in a forest and look at a tree PHRASE."
     },
@@ -1466,7 +1456,7 @@ const items = {
         neutral: "wall paint",
         negative: "watercolor",
         pronoun: "it",
-        context: "You are painting and try new PHRASE for the first time."
+        context: "You are painting and try a new PHRASE."
     },
     {
         worker_id: "99",
@@ -1474,14 +1464,13 @@ const items = {
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
-        superordinate: "buildings",
+        superordinate: "walls",
         positive: "mansion",
         neutral: "condo",
         negative: "cabin",
-        pronoun: "it",
-        context: "You notice the construction of a friend's new PHRASE."
-    } ],
-
+        pronoun: "they",
+        context: "You are examining the walls of a friend's new PHRASE."
+    }],
 
 // ------------ TEMPERATURE : HOT / WARM - COLD (8) ---------
     temp: [
@@ -1501,7 +1490,7 @@ const items = {
     {
         worker_id: "101",
         stim_id: "3",
-        degree: "temperature",
+        degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
         superordinate: "drinks",
@@ -1509,7 +1498,7 @@ const items = {
         neutral: "juice",
         negative: "milkshake",
         pronoun: "it",
-        context: "You take a first sip from a PHRASE."
+        context: "You take the first sip from a PHRASE."
     },
     {
         worker_id: "102",
@@ -1524,23 +1513,11 @@ const items = {
         pronoun: "it",
         context: "You step outside on a day in PHRASE."
     },
-    {
-        worker_id: "103",
-        stim_id: "4",
-        degree: "temperature",
-        adj_positive: "warm",
-        adj_negative: "cold",
-        superordinate: "clothes",
-        positive: "sweater",
-        neutral: "flannel",
-        negative: "shirt",
-        pronoun: "it",
-        context: "You consider buying a PHRASE and wearing it in the winter."
-    },
+
     {
         worker_id: "104",
         stim_id: "12",
-        degree: "temperature",
+        degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
         superordinate: "appliances",
@@ -1553,7 +1530,7 @@ const items = {
     {
         worker_id: "105",
         stim_id: "15",
-        degree: "temperature",
+        degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
         superordinate: "drinks",
@@ -1561,19 +1538,19 @@ const items = {
         neutral: "tea",
         negative: "soda",
         pronoun: "it",
-        context: "You buy a PHRASE and take the first sip."
+        context: "You take the first sip of a PHRASE."
     },
     {
         worker_id: "106",
         stim_id: "custom",
-        degree: "temperature",
+        degree: "temperature_h",
         positive: "sauna",
         negative: "ice rink",
         neutral: "shopping mall",
         pre_positive: "a",
         pre_negative: "an",
         pre_neutral: "a",
-        superordinate: "leareure places",
+        superordinate: "places",
         adj_positive: "hot",
         adj_negative: "cold",
         pronoun: "it",
@@ -1582,17 +1559,16 @@ const items = {
     {
         worker_id: "107",
         stim_id: "custom",
-        degree: "temperature",
-        positive: "fudge cake",
+        degree: "temperature_h",
+        positive: "chocolate fondue",
         neutral: "muffin",
         negative: "smoothie",
         superordinate: "desserts",
         adj_positive: "hot",
         adj_negative: "cold",
         pronoun: "it",
-        context: "You are at a restaurant and try a PHRASE after finishing your dinner. "
+        context: "You are at a restaurant and take a taste of a PHRASE. "
     }],
-
 
 // ------ WEIGHT: HEAVY - LIGHT (10)-------------
     weight: [
@@ -1606,11 +1582,24 @@ const items = {
         positive: "elephant",
         neutral: "dog",
         negative: "fish",
-        pre_positive: "an",
         pre_neutral: "a",
+        pre_positive: "an",
         pre_negative: "a",
         pronoun: "it",
-        context: "You are at the zoo and watch a PHRASE being lifted."
+        context: "You are at the zoo and watch PRE PHRASE being lifted."
+    },
+    {
+        worker_id: "103",
+        stim_id: "4",
+        degree: "weight",
+        adj_positive: "heavy",
+        adj_negative: "light",
+        superordinate: "clothes",
+        positive: "sweater",
+        neutral: "flannel",
+        negative: "shirt",
+        pronoun: "it",
+        context: "You are shopping for winter clothing and try on a PHRASE."
     },
     {
         worker_id: "109",
@@ -1635,11 +1624,11 @@ const items = {
         adj_positive: "heavy",
         adj_negative: "light",
         superordinate: "electronic devices",
-        positive: "laptop",
-        neutral: "tablet",
-        negative: "phone",
+        positive: "printer",
+        neutral: "laptop",
+        negative: "cell phone",
         pronoun: "it",
-        context: "You are at a tech store and pick up a PHRASE."
+        context: "You are at an electronics store and pick up a PHRASE."
     },
     {
         worker_id: "111",
@@ -1650,9 +1639,9 @@ const items = {
         superordinate: "furniture",
         positive: "couch",
         neutral: "chair",
-        negative: "coffee table",
+        negative: "trash can",
         pronoun: "it",
-        context: "You help a friend move and pick up a PHRASE."
+        context: "You are helping a friend move and pick up their PHRASE."
     },
     {
         worker_id: "112",
@@ -1665,7 +1654,7 @@ const items = {
         neutral: "stick",
         negative: "feather",
         pronoun: "it",
-        context: "You pick up a PHRASE."
+        context: "You are walking outside and pick up a PHRASE."
     },
     {
         worker_id: "113",
@@ -1675,10 +1664,10 @@ const items = {
         adj_negative: "light",
         superordinate: "materials",
         positive: "wood",
-        neutral: "plastic ",
+        neutral: "plastic",
         negative: "paper",
         pronoun: "it",
-        context: "You are at a material shop and pick up a piece of PHRASE."
+        context: "You are at a hardware store and pick up a piece of PHRASE."
     },
     {
         worker_id: "114",
@@ -1686,12 +1675,12 @@ const items = {
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
-        superordinate: "exercaree equipment",
+        superordinate: "exercise equipment",
         positive: "weight",
         neutral: "kettle ball",
         negative: "jump rope",
         pronoun: "it",
-        context: "You are at the gym and take a PHRASE."
+        context: "You are at the gym and pick up a PHRASE."
     },
     {
         worker_id: "115",
@@ -1713,11 +1702,11 @@ const items = {
         adj_positive: "heavy",
         adj_negative: "light",
         superordinate: "vehicles",
-        positive: "car",
+        positive: "truck",
         neutral: "motorcycle",
         negative: "bike",
         pronoun: "it",
-        context: "You learn about the weight of a friend's PHRASE."
+        context: "You learn about the weight of a friend's new PHRASE."
     },
     {
         worker_id: "117",
@@ -1730,20 +1719,19 @@ const items = {
         neutral: "squash",
         negative: "plum",
         pronoun: "it",
-        context: "You pick up a PHRASE at a grocery store."
-    } ],
-
+        context: "You are at a grocery store and pick up a PHRASE."
+    }],
 
 // --------- WIDTH: WIDE - NARROW (6)
 
-    width : [
+    width: [
       {
         worker_id: "118",
         stim_id: "9",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
-        superordinate: "nature formations",
+        superordinate: "holes",
         positive: "cave",
         neutral: "cavern",
         negative: "fox hole",
@@ -1761,7 +1749,8 @@ const items = {
         neutral: "downtown street",
         negative: "side road",
         pronoun: "it",
-        context: "You drive on a PHRASE."
+        context: "You are driving on a PHRASE.",
+        environment_mod: "here"
     },
     {
         worker_id: "120",
@@ -1774,7 +1763,7 @@ const items = {
         neutral: "stream",
         negative: "creek",
         pronoun: "it",
-        context: "You are at a PHRASE bank."
+        context: "You are standing at the bank of a PHRASE."
     },
     {
         worker_id: "121",
@@ -1783,14 +1772,15 @@ const items = {
         adj_positive: "wide",
         adj_negative: "narrow",
         superordinate: "roads",
-        positive: "avenue",
+        positive: "boulevard",
         neutral: "street",
-        negative: "lane",
-        pre_positive: "an",
+        negative: "country lane",
+        pre_positive: "a",
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "it",
-        context: "You walk on PRE PHRASE."
+        context: "You are walking on PRE PHRASE.",
+        environment_mod: "out here"
     },
     {
         worker_id: "122",
@@ -1803,7 +1793,7 @@ const items = {
         neutral: "car",
         negative: "golf cart",
         pronoun: "it",
-        context: "You see a PHRASE on a road."
+        context: "You see a PHRASE on the road."
     },
     {
       worker_id: "123",
@@ -1811,12 +1801,11 @@ const items = {
       degree: "width",
       adj_positive: "wide",
       adj_negative: "narrow",
-      superordinate: "doors",
-      positive: "gate",
+      superordinate: "doorways",
+      positive: "front gate",
       neutral: "patio door",
       negative: "back door",
-      pronoun: "it",
-      context: "You are moving and consider carrying your furniture through the PHRASE."
+      context: "You are attempting to move your furniture through the PHRASE of your house."
     }]
 }
 

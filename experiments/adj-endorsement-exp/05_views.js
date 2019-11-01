@@ -19,7 +19,7 @@
 */
 // elicit the trial views
 const main = custom_forced_choice({
-  trials: trial_info.main.length,
+  trials: trial_info.main.length ,
   name: 'main',
   data: _.shuffle(trial_info.main)
 })

@@ -16,7 +16,7 @@ var examples = [
         neither_nor: "parrot",
         negative: "crow",
         pronoun: "It",
-        context: "PERSON is going for a walk and notices the color of a PHRASE.",
+        context: "You are going for a walk and notice the color of a PHRASE.",
 
     },
     {
@@ -30,7 +30,7 @@ var examples = [
         neither_nor: "blue paint",
         negative: "black paint",
         pronoun: "It",
-        context: "PERSON bought a can of PHRASE and is testing it for the first time."
+        context: "You bought a can of PHRASE and test it for the first time."
     },
     {
         worker_id: "3",
@@ -43,7 +43,7 @@ var examples = [
         neither_nor: "fruit pie",
         negative: "chocolate cake",
         pronoun: "It",
-        context: "PERSON is at a bakery and looks at the color of a PHRASE."
+        context: "You are at a bakery and look at the color of a PHRASE."
     },
     {
         worker_id: "4",
@@ -59,7 +59,7 @@ var examples = [
         pre_negative: "a",
         pre_neutral: "an",
         pronoun: "It",
-        context: "PERSON is at a grocery store and looks at the color of PRE PHRASE."
+        context: "You are at a grocery store and look at the color of PRE PHRASE."
     },
     {
         worker_id: "5",
@@ -72,7 +72,7 @@ var examples = [
         neither_nor: "dusk",
         negative: "night",
         pronoun: "It",
-        context: "PERSON steps outside during the PHRASE.",
+        context: "You step outside during the PHRASE.",
         environment_mod: "out here"
     },
     {
@@ -86,7 +86,7 @@ var examples = [
         neither_nor: "pen",
         negative: "pencil",
         pronoun: "It",
-        context: "PERSON is writing with a PHRASE and notices the color of the script."
+        context: "You are writing with a PHRASE and notice the color of the script."
     },
     // {
     //     worker_id: "7",
@@ -99,7 +99,7 @@ var examples = [
     //     neither_nor: "main road",
     //     negative: "back road",
     //     pronoun: "It",
-    //     context: "PERSON is driving in the evening on a PHRASE.",
+    //     context: "You are driving in the evening on a PHRASE.",
     //     environment_mod: "out here"
     // },
     {
@@ -113,7 +113,7 @@ var examples = [
         neither_nor: "rose",
         negative: "dahlia",
         pronoun: "It",
-        context: "PERSON is creating a flower bouquet and picks out a PHRASE."
+        context: "You are creating a flower bouquet and pick out a PHRASE."
     },
     {
         worker_id: "9",
@@ -126,7 +126,7 @@ var examples = [
         neither_nor: "spaniel",
         negative: "pitbull",
         pronoun: "It",
-        context: "PERSON takes a walk and notices the color of a PHRASE."
+        context: "You take a walk and notice the color of a PHRASE."
     },
     {
         worker_id: "10",
@@ -139,7 +139,7 @@ var examples = [
         neither_nor: "tiger",
         negative: "panther",
         pronoun: "It",
-        context: "PERSON is at a zoo and notices the fur color of a PHRASE."
+        context: "You are at a zoo and notice the fur color of a PHRASE."
     },
 
 // --------- HARDNESS : HARD -SOFT (10) -----------
@@ -150,12 +150,12 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "vegetables",
+        superordinate: "food",
         positive: "cucumber",
         neither_nor: "tomato",
         negative: "mushroom",
         pronoun: "It",
-        context: "PERSON is at a grocery store and picks up a PHRASE."
+        context: "You are at a grocery store and pick up a PHRASE."
     },
     {
         worker_id: "12",
@@ -168,7 +168,7 @@ var examples = [
         neither_nor: "plum",
         negative: "grape",
         pronoun: "It",
-        context: "PERSON is at a farmer's market and picks up a PHRASE."
+        context: "You are at a farmer's market and pick up a PHRASE."
     },
     {
         worker_id: "13",
@@ -184,7 +184,7 @@ var examples = [
         pre_neutral: "",
         pre_negative: "",
         pronoun: "It",
-        context: "PERSON takes a bite of PRE PHRASE."
+        context: "You take a bite of PRE PHRASE."
     },
     {
         worker_id: "14",
@@ -197,7 +197,7 @@ var examples = [
         neither_nor: "piece of chocolate",
         negative: "marshmallow",
         pronoun: "It",
-        context: "PERSON is eating a PHRASE."
+        context: "You are eating a PHRASE."
     },
     {
         worker_id: "15",
@@ -210,7 +210,7 @@ var examples = [
         neither_nor: "wood",
         negative: "carpet",
         pronoun: "It",
-        context: "PERSON steps into a room with a PHRASE floor."
+        context: "You step into a room with a PHRASE floor."
     },
     {
         worker_id: "16",
@@ -223,7 +223,7 @@ var examples = [
         neither_nor: "bed",
         negative: "sofa",
         pronoun: "It",
-        context: "PERSON sits down on a PHRASE."
+        context: "You sit down on a PHRASE."
     },
     {
         worker_id: "17",
@@ -236,7 +236,7 @@ var examples = [
         neither_nor: "mango",
         negative: "banana",
         pronoun: "It",
-        context: "PERSON picks up a PHRASE."
+        context: "You pick up a PHRASE."
     },
     {
         worker_id: "18",
@@ -249,7 +249,7 @@ var examples = [
         neither_nor: "plastic",
         negative: "cotton",
         pronoun: "It",
-        context: "PERSON is at a hardware store and picks up a piece of PHRASE."
+        context: "You are at a hardware store and pick up a piece of PHRASE."
     },
     {
         worker_id: "19",
@@ -262,7 +262,7 @@ var examples = [
         neither_nor: "blanket",
         negative: "pillow",
         pronoun: "It",
-        context: "PERSON is in PRO bedroom and sits on a PHRASE."
+        context: "You are in your bedroom and sit on a PHRASE."
     },
     {
         worker_id: "20",
@@ -275,7 +275,7 @@ var examples = [
         neither_nor: "wood",
         negative: "fabric",
         pronoun: "It",
-        context: "PERSON is examining building materials to renovate PRO place and touches some PHRASE."
+        context: "You are examining building materials to renovate your place and touch some PHRASE."
     },
 
 // -------- HEIGHT : TALL - SHORT (9) -----------
@@ -292,7 +292,7 @@ var examples = [
         neither_nor: "monkey",
         negative: "bird",
         pronoun: "It",
-        context: "PERSON is at a zoo and looks at a PHRASE."
+        context: "You are at a zoo and look at a PHRASE."
     },
     {
         worker_id: "22",
@@ -305,7 +305,7 @@ var examples = [
         neither_nor: "bush",
         negative: "flower",
         pronoun: "It",
-        context: "PERSON takes a walk in a garden and sees a PHRASE."
+        context: "You take a walk in a garden and see a PHRASE."
     },
     {
         worker_id: "23",
@@ -321,7 +321,7 @@ var examples = [
         pre_negative: "a",
         pre_neutral:"an",
         pronoun: "It",
-        context: "PERSON is looking at PRE PHRASE."
+        context: "You are looking at PRE PHRASE."
     },
     { // MH: make sure this works
         worker_id: "24",
@@ -337,7 +337,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative:"a",
         pronoun: "They",
-        context: "PERSON sees PRE PHRASE."
+        context: "You see PRE PHRASE."
     },
     {
         worker_id: "25",
@@ -350,7 +350,7 @@ var examples = [
         neither_nor: "tulip",
         negative: "pansy",
         pronoun: "It",
-        context: "PERSON is looking at a PHRASE."
+        context: "You are looking at a PHRASE."
     },
     {
         worker_id: "26",
@@ -363,7 +363,7 @@ var examples = [
         neither_nor: "vine",
         negative: "shrub",
         pronoun: "It",
-        context: "PERSON is in a park and sees a PHRASE."
+        context: "You are in a park and see a PHRASE."
     },
     {
         worker_id: "27",
@@ -376,7 +376,7 @@ var examples = [
         neither_nor: "golfer",
         negative: "jockey",
         pronoun: "They",
-        context: "PERSON sees a PHRASE."
+        context: "You see a PHRASE."
     },
     {
       worjer_id: "28",
@@ -392,7 +392,7 @@ var examples = [
       adj_positive: "tall",
       adj_negative: "short",
       pronoun: "It",
-      context: "PERSON is walking in a botanical garden and sees PRE PHRASE."
+      context: "You are walking in a botanical garden and see PRE PHRASE."
     },
     {
       worker_id: "29",
@@ -405,7 +405,7 @@ var examples = [
       adj_positive: "tall",
       adj_negative: "short",
       pronoun: "It",
-      context: "PERSON is at a museum and sees a PHRASE."
+      context: "You are at a museum and see a PHRASE."
     },
 
 
@@ -422,7 +422,7 @@ var examples = [
         neither_nor: "capris",
         negative: "shorts",
         pronoun: "They",
-        context: "PERSON is shopping and looks at a pair of PHRASE."
+        context: "You are shopping and look at a pair of PHRASE."
     },
     {
         worker_id: "31",
@@ -435,7 +435,7 @@ var examples = [
         neither_nor: "bus",
         negative: "car",
         pronoun: "It",
-        context: "PERSON lives in a city and sees a PHRASE pass by."
+        context: "You live in a city and see a PHRASE pass by."
     },
     {
         worker_id: "32",
@@ -448,7 +448,7 @@ var examples = [
         neither_nor: "bassett hound",
         negative: "chihuahua",
         pronoun: "It",
-        context: "PERSON is at a pet store and notices the length of a PHRASE."
+        context: "You are at a pet store and notice the length of a PHRASE."
     },
     {
         worker_id: "33",
@@ -461,7 +461,7 @@ var examples = [
         neither_nor: "hamster",
         negative: "mouse",
         pronoun: "It",
-        context: "PERSON is at a friend's house and notices the size of PRO pet PHRASE."
+        context: "You are at a friend's house and notice the size of her pet PHRASE."
     },
 
     {
@@ -475,7 +475,7 @@ var examples = [
         neither_nor: "story",
         negative: "poem",
         pronoun: "It",
-        context: "PERSON thinks about reading PRO favorite PHRASE."
+        context: "You think about reading your favorite PHRASE."
     },
     {
         worker_id: "36",
@@ -488,7 +488,7 @@ var examples = [
         neither_nor: "pick-up truck",
         negative: "smartcar",
         pronoun:"It",
-        context: "PERSON sees a friend driving a PHRASE."
+        context: "You see a friend driving a PHRASE."
     },
     {
         worker_id: "37",
@@ -501,7 +501,7 @@ var examples = [
         neither_nor: "documentary",
         negative: "sitcom",
         pronoun: "It",
-        context: "PERSON thinks about watching PRO favorite PHRASE."
+        context: "You think about watching your favorite PHRASE."
     },
     {
         worker_id: "38",
@@ -517,7 +517,7 @@ var examples = [
         pre_negative: "an",
         pre_positive: "a",
         pronoun: "It",
-        context: "PERSON is looking at PRE PHRASE on Google Maps."
+        context: "You are looking at PRE PHRASE on Google Maps."
     },
     {
         worker_id: "39",
@@ -530,7 +530,7 @@ var examples = [
         neither_nor: "relay race",
         negative: "sprint",
         pronoun: "It",
-        context: "PERSON looks up information about an upcoming PHRASE."
+        context: "You look up information about an upcoming PHRASE."
     },
     {
       worker_id: "40",
@@ -546,7 +546,7 @@ var examples = [
       adj_positive: "long",
       adj_negative: "short",
       pronoun: "It",
-      context: "PERSON is considering listening to PRO favorite PHRASE."
+      context: "You are considering listening to your favorite PHRASE."
     },
 
 
@@ -563,7 +563,7 @@ var examples = [
         neither_nor: "dog",
         negative: "cat",
         pronoun: "It",
-        context: "PERSON walks by a courtyard and hears a PHRASE."
+        context: "You walk by a courtyard and hear a PHRASE."
     },
     {
         worker_id: "42",
@@ -576,7 +576,7 @@ var examples = [
         neither_nor: "rap concert",
         negative: "choral concert",
         pronoun: "It",
-        context: "PERSON is listening to a PHRASE."
+        context: "You are listening to a PHRASE."
     },
     {
         worker_id: "43",
@@ -589,7 +589,7 @@ var examples = [
         neither_nor: "meeting hall",
         negative: "church",
         pronoun: "It",
-        context: "PERSON meets a friend at a PHRASE.",
+        context: "You meet a friend at a PHRASE.",
         environment_mod: "in here"
     },
     {
@@ -603,7 +603,7 @@ var examples = [
         neither_nor: "cat",
         negative: "fish",
         pronoun: "It",
-        context: "PERSON is at a friend's place and notices PRO pet PHRASE."
+        context: "You are at a friend's place and notice his pet PHRASE."
     },
     {
         worker_id: "45",
@@ -616,7 +616,7 @@ var examples = [
         neither_nor: "restaurant",
         negative: "library",
         pronoun: "It",
-        context: "PERSON is spending PRO Saturday night at a PHRASE.",
+        context: "You are spending your Saturday night at a PHRASE.",
         environment_mod: "in here"
     },
     {
@@ -630,7 +630,7 @@ var examples = [
         neither_nor: "crow",
         negative: "finch",
         pronoun: "It",
-        context: "PERSON is taking a walk in a park and hears the cry of a PHRASE."
+        context: "You are taking a walk in a park and hear the cry of a PHRASE."
     },
     {
         worker_id: "47",
@@ -643,7 +643,7 @@ var examples = [
         neither_nor: "guitar",
         negative: "harp",
         pronoun: "It",
-        context: "PERSON is listening to a friend playing the PHRASE."
+        context: "You are listening to a friend playing the PHRASE."
     },
     {
         worker_id: "48",
@@ -659,7 +659,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "They",
-        context: "PERSON is in a room with PRE PHRASE."
+        context: "You are in a room with PRE PHRASE."
     },
     {
         worker_id: "49",
@@ -672,7 +672,7 @@ var examples = [
         neither_nor: "town",
         negative: "village",
         pronoun: "It",
-        context: "PERSON is planning to move and checks out a PHRASE.",
+        context: "You are planning to move and check out a PHRASE.",
         environment_mod: "there"
     },
     {
@@ -686,7 +686,7 @@ var examples = [
         neither_nor: "classroom",
         negative: "study hall",
         pronoun: "It",
-        context: "PERSON walks into a school PHRASE.",
+        context: "You walk into a school PHRASE.",
         environment_mod: "in here"
     },
     {
@@ -703,7 +703,7 @@ var examples = [
         pre_negative: "a",
         pre_positive: "an",
         pronoun: "It",
-        context: "PERSON is at the zoo and walks by PRE PHRASE."
+        context: "You are at the zoo and walk by PRE PHRASE."
     },
     {
         worker_id: "52",
@@ -716,7 +716,7 @@ var examples = [
         neither_nor: "violin",
         negative: "flute",
         pronoun: "It",
-        context: "PERSON hears a friend play the PHRASE."
+        context: "You hear a friend play the PHRASE."
     },
     {
         worker_id: "53",
@@ -732,7 +732,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "It",
-        context: "PERSON is on the sidewalk and hears PRE PHRASE drive by."
+        context: "You are on the sidewalk and hear PRE PHRASE drive by."
     },
     {
         worker_id: "54",
@@ -745,7 +745,7 @@ var examples = [
         neither_nor: "fan",
         negative: "toaster",
         pronoun: "It",
-        context: "PERSON is in PRO appartment and turns on a PHRASE."
+        context: "You are in your appartment and turn on a PHRASE."
     },
     {
         worker_id: "55",
@@ -758,7 +758,7 @@ var examples = [
         neither_nor: "classroom",
         negative: "library",
         pronoun: "It",
-        context: "PERSON is sitting in a school PHRASE.",
+        context: "You are sitting in a school PHRASE.",
         environment_mod: "in here"
     },
     {
@@ -775,7 +775,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "It",
-        context: "PERSON is in a forest and hears a PHRASE."
+        context: "You are in a forest and hear a PHRASE."
     },
     {
         worker_id: "57",
@@ -788,7 +788,7 @@ var examples = [
         neither_nor: "sailboat",
         negative: "rowboat",
         pronoun: "It",
-        context: "PERSON is at a lake and hears the sound of a PHRASE."
+        context: "You are at a lake and hear the sound of a PHRASE."
     },
     {
         worker_id: "58",
@@ -804,7 +804,7 @@ var examples = [
         pre_neutral: "an",
         pre_negative: "an",
         pronoun: "It",
-        context: "PERSON wants to play music and tries out PRE PHRASE."
+        context: "You want to play music and try out PRE PHRASE."
     },
 
 
@@ -822,7 +822,7 @@ var examples = [
         neither_nor: "motorcycle",
         negative: "bike",
         pronoun: "It",
-        context: "PERSON considers buying a PHRASE for PRO commute."
+        context: "You consider buying a PHRASE for your commute."
     },
     {
         worker_id: "60",
@@ -835,7 +835,7 @@ var examples = [
         neither_nor: "bronze",
         negative: "plastic",
         pronoun: "It",
-        context: "PERSON is at a decoration shop and looks at a statue made of PHRASE."
+        context: "You are at a decoration shop and look at a statue made of PHRASE."
     },
     {
         worker_id: "61",
@@ -851,7 +851,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "It",
-        context: "PERSON is looking for a new place and checks out PRE PHRASE."
+        context: "You are looking for a new place and check out PRE PHRASE."
     },
     {
         worker_id: "62",
@@ -864,7 +864,7 @@ var examples = [
         neither_nor: "nuts",
         negative: "candies",
         pronoun: "They",
-        context: "PERSON is shopping for a snack and checks out some PHRASE."
+        context: "You are shopping for a snack and check out some PHRASE."
     },
     {
         worker_id: "63",
@@ -877,7 +877,7 @@ var examples = [
         neither_nor: "sneakers",
         negative: "sandals",
         pronoun: "They",
-        context: "PERSON is shopping for a pair of PHRASE."
+        context: "You are shopping for a pair of PHRASE."
     },
     {
         worker_id: "64",
@@ -890,7 +890,7 @@ var examples = [
         neither_nor: "garlic",
         negative: "salt",
         pronoun: "It",
-        context: "PERSON is shopping for spices and looks at PHRASE."
+        context: "You are shopping for spices and look at PHRASE."
     },
     {
         worker_id: "65",
@@ -903,7 +903,7 @@ var examples = [
         neither_nor: "metal",
         negative: "plastic",
         pronoun: "It",
-        context: "PERSON wants to buy jewelry and looks at one made of PHRASE."
+        context: "You want to buy jewelry and look at one made of PHRASE."
     },
     {
         worker_id: "66",
@@ -916,7 +916,7 @@ var examples = [
         neither_nor: "coat",
         negative: "shirt",
         pronoun: "It",
-        context: "PERSON is shopping and looks at a PHRASE."
+        context: "You are shopping and look at a PHRASE."
     },
     {
         worker_id: "67",
@@ -929,7 +929,7 @@ var examples = [
         neither_nor: "strawberries",
         negative: "bananas",
         pronoun: "They",
-        context: "PERSON is at a grocery store and looks at the price of PHRASE."
+        context: "You are at a grocery store and look at the price of PHRASE."
     },
     {
         worker_id: "68",
@@ -942,7 +942,7 @@ var examples = [
         adj_positive: "expensive",
         adj_negative: "cheap",
         pronoun: "It",
-        context: "PERSON is at the butchershop and looks at a piece of PHRASE."
+        context: "You are at the butchershop and look at a piece of PHRASE."
     },
     {
          worker_id: "69",
@@ -955,7 +955,7 @@ var examples = [
          adj_positive: "expensive",
          adj_negative: "cheap",
          pronoun: "It",
-         context: "PERSON is at a liquor store and wants to buy a PHRASE."
+         context: "You are at a liquor store and want to buy a PHRASE."
      },
      {
           worker_id: "70",
@@ -968,7 +968,7 @@ var examples = [
           adj_positive: "expensive",
           adj_negative: "cheap",
           pronoun: "It",
-          context: "PERSON is considering different places for dinner and looks at the menu of a PHRASE."
+          context: "You are considering different places for dinner and look at the menu of a PHRASE."
       },
 
 
@@ -986,7 +986,7 @@ var examples = [
         neither_nor: "bush",
         negative: "flower",
         pronoun: "It",
-        context: "PERSON is at a gardening store and looks at a PHRASE."
+        context: "You are at a gardening store and look at a PHRASE."
     },
     {
         worker_id: "72",
@@ -1002,7 +1002,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "It",
-        context: "PERSON is at the zoo and sees PRE PHRASE."
+        context: "You are at the zoo and see PRE PHRASE."
     },
     {
         worker_id: "73",
@@ -1018,7 +1018,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "an",
         pronoun: "It",
-        context: "PERSON is looking in a terrarium at the zoo and sees PRE PHRASE."
+        context: "You are looking in a terrarium at the zoo and see PRE PHRASE."
     },
     {
         worker_id: "74",
@@ -1031,7 +1031,7 @@ var examples = [
         neither_nor: "townhouse",
         negative: "doghouse",
         pronoun: "It",
-        context: "PERSON is walking down the street and sees a PHRASE."
+        context: "You are walking down the street and see a PHRASE."
     },
     {
         worker_id: "75",
@@ -1044,7 +1044,7 @@ var examples = [
         neither_nor: "peach",
         negative: "kumquat",
         pronoun: "It",
-        context: "PERSON is at a farmer's market and picks up a PHRASE."
+        context: "You are at a farmer's market and pick up a PHRASE."
     },
     {
         worker_id: "76",
@@ -1057,7 +1057,7 @@ var examples = [
         neither_nor: "tuna",
         negative: "herring",
         pronoun: "It",
-        context: "PERSON is at an aquarium and sees a PHRASE."
+        context: "You are at an aquarium and see a PHRASE."
     },
     {
         worker_id: "77",
@@ -1070,7 +1070,7 @@ var examples = [
         neither_nor: "sedan",
         negative: "smartcar",
         pronoun: "It",
-        context: "PERSON sees PRO friend's new PHRASE."
+        context: "You see your friend's new PHRASE."
     },
     {
         worker_id: "78",
@@ -1086,7 +1086,7 @@ var examples = [
         pre_neutral: "an",
         pre_negative: "a",
         pronoun: "It",
-        context: "PERSON is shopping at an appliances store and looks at PRE PHRASE. "
+        context: "You are shopping at an appliances store and look at PRE PHRASE. "
     },
     {
         worker_id: "79",
@@ -1099,7 +1099,7 @@ var examples = [
         neither_nor: "poodle",
         negative: "chihuahua",
         pronoun: "It",
-        context: "PERSON is taking a walk and sees a PHRASE."
+        context: "You are taking a walk and see a PHRASE."
     },
     {
         worker_id: "80",
@@ -1112,7 +1112,7 @@ var examples = [
         neither_nor: "cactus",
         negative: "fern",
         pronoun: "It",
-        context: "PERSON is at a botanical garden and sees a PHRASE."
+        context: "You are at a botanical garden and see a PHRASE."
     },
     {
         worker_id: "81",
@@ -1125,7 +1125,7 @@ var examples = [
         neither_nor: "squash",
         negative: "zucchini",
         pronoun: "It",
-        context: "PERSON is a grocery store and picks up a PHRASE."
+        context: "You are a grocery store and pick up a PHRASE."
     },
 
 
@@ -1143,7 +1143,7 @@ var examples = [
         neither_nor: "jogger",
         negative: "walker",
         pronoun: "They",
-        context: "PERSON is in the park and sees a PHRASE."
+        context: "You are in the park and see a PHRASE."
     },
     {
         worker_id: "83",
@@ -1159,7 +1159,7 @@ var examples = [
         pre_neutral: "an",
         pre_negative: "a",
         pronoun: "It",
-        context: "PERSON is at the zoo and watches PRE PHRASE move."
+        context: "You are at the zoo and watch PRE PHRASE move."
     },
     {
         worker_id: "84",
@@ -1175,7 +1175,7 @@ var examples = [
         pre_neutral: "a",
         pre_positive: "an",
         pre_negative: "a",
-        context: "PERSON wants to cook dinner and considers using PRE PHRASE."
+        context: "You want to cook dinner and consider using PRE PHRASE."
     },
     {
         worker_id: "85",
@@ -1188,7 +1188,7 @@ var examples = [
         neither_nor: "car",
         negative: "truck",
         pronoun: "It",
-        context: "PERSON sees a PHRASE on the highway."
+        context: "You see a PHRASE on the highway."
     },
     {
         worker_id: "86",
@@ -1201,7 +1201,7 @@ var examples = [
         neither_nor: "sailboat",
         negative: "rowboat",
         pronoun: "It",
-        context: "PERSON is travelling on PRO friend's new PHRASE."
+        context: "You are travelling on your friend's new PHRASE."
     },
     {
         worker_id: "87",
@@ -1214,7 +1214,7 @@ var examples = [
         neither_nor: "cat",
         negative: "turtle",
         pronoun: "It",
-        context: "PERSON is at a friend's house and sees their pet PHRASE come towards them."
+        context: "You are at a friend's house and see their pet PHRASE come towards them."
     },
     {
         worker_id: "88",
@@ -1227,7 +1227,7 @@ var examples = [
         neither_nor: "lizard",
         negative: "turtle",
         pronoun: "It",
-        context: "PERSON is at the zoo, watching a PHRASE."
+        context: "You are at the zoo, watching a PHRASE."
     },
     {
         worker_id: "89",
@@ -1240,7 +1240,7 @@ var examples = [
         neither_nor: "car",
         negative: "bike",
         pronoun: "It",
-        context: "PERSON want to go on vacation and thinks about travelling by PHRASE."
+        context: "You want to go on vacation and think about travelling by PHRASE."
     },
     {
         worker_id: "90",
@@ -1253,7 +1253,7 @@ var examples = [
         neither_nor: "skier",
         negative: "weight lifter",
         pronoun: "They",
-        context: "PERSON is watching a PHRASE jogging."
+        context: "You are watching a PHRASE jogging."
     },
     {
         worker_id: "91",
@@ -1269,7 +1269,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "They",
-        context: "PERSON is taking a walk with PRE PHRASE."
+        context: "You are taking a walk with PRE PHRASE."
     },
     {
         worker_id: "92",
@@ -1282,7 +1282,7 @@ var examples = [
         neither_nor: "helicopter",
         negative: "glider",
         pronoun: "It",
-        context: "PERSON is at an airport and sees a PHRASE in the air."
+        context: "You are at an airport and see a PHRASE in the air."
     },
 
 
@@ -1303,7 +1303,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "They",
-        context: "PERSON watches PRE PHRASE lift up a box."
+        context: "You watch PRE PHRASE lift up a box."
     },
     {
         worker_id: "94",
@@ -1316,7 +1316,7 @@ var examples = [
         neither_nor: "dog",
         negative: "mouse",
         pronoun: "It",
-        context: "PERSON is at the zoo and looks at a PHRASE."
+        context: "You are at the zoo and look at a PHRASE."
     },
     {
         worker_id: "95",
@@ -1329,7 +1329,7 @@ var examples = [
         neither_nor: "thunderstorm",
         negative: "rain",
         pronoun: "It",
-        context: "PERSON is hearing about the PHRASE that is heading towards them."
+        context: "You are hearing about the PHRASE that are heading towards them."
     },
     {
         worker_id: "96",
@@ -1342,7 +1342,7 @@ var examples = [
         neither_nor: "cyclist",
         negative: "golfer",
         pronoun: "They",
-        context: "PERSON is watching a PHRASE lift up weights."
+        context: "You are watching a PHRASE lift up weights."
     },
     {
         worker_id: "97",
@@ -1355,7 +1355,7 @@ var examples = [
         neither_nor: "branch",
         negative: "twig",
         pronoun: "It",
-        context: "PERSON is in a forest and looks at a tree PHRASE."
+        context: "You are in a forest and look at a tree PHRASE."
     },
     {
         worker_id:"98",
@@ -1368,7 +1368,7 @@ var examples = [
         neither_nor: "wall paint",
         negative: "watercolor",
         pronoun: "It",
-        context: "PERSON is painting and tries a new PHRASE."
+        context: "You are painting and try a new PHRASE."
     },
     {
         worker_id: "99",
@@ -1381,7 +1381,7 @@ var examples = [
         neither_nor: "condo",
         negative: "cabin",
         pronoun: "They",
-        context: "PERSON is examining the walls of a friend's new PHRASE."
+        context: "You are examining the walls of a friend's new PHRASE."
     },
 
 
@@ -1397,7 +1397,7 @@ var examples = [
         neither_nor: "salad",
         negative: "ice cream",
         pronoun: "It",
-        context: "PERSON takes the first bite of PRO PHRASE."
+        context: "You take the first bite of your PHRASE."
     },
     {
         worker_id: "101",
@@ -1410,7 +1410,7 @@ var examples = [
         neither_nor: "juice",
         negative: "milkshake",
         pronoun: "It",
-        context: "PERSON takes the first sip from a PHRASE."
+        context: "You take the first sip from a PHRASE."
     },
     {
         worker_id: "102",
@@ -1423,9 +1423,21 @@ var examples = [
         neither_nor: "fall",
         negative: "winter",
         pronoun: "It",
-        context: "PERSON steps outside on a day in PHRASE."
+        context: "You step outside on a day in PHRASE."
     },
-
+    {
+        worker_id: "103",
+        stim_id: "4",
+        degree: "temperature",
+        adj_positive: "warm",
+        adj_negative: "cold",
+        superordinate: "clothes",
+        positive: "sweater",
+        neither_nor: "flannel",
+        negative: "shirt",
+        pronoun: "It",
+        context: "You are shopping for winter clothing and try on a PHRASE."
+    },
     {
         worker_id: "104",
         stim_id: "12",
@@ -1437,7 +1449,7 @@ var examples = [
         neither_nor: "pantry",
         negative: "freezer",
         pronoun: "It",
-        context: "PERSON is in PRO kitchen and touches the PHRASE."
+        context: "You are in your kitchen and touch the PHRASE."
     },
     {
         worker_id: "105",
@@ -1450,7 +1462,7 @@ var examples = [
         neither_nor: "tea",
         negative: "soda",
         pronoun: "It",
-        context: "PERSON takes the first sip of a PHRASE."
+        context: "You take the first sip of a PHRASE."
     },
     {
         worker_id: "106",
@@ -1466,7 +1478,7 @@ var examples = [
         adj_positive: "hot",
         adj_negative: "cold",
         pronoun: "It",
-        context: "PERSON is spending PRO Saturday at PRE PHRASE."
+        context: "You are spending your Saturday at PRE PHRASE."
     },
     {
         worker_id: "107",
@@ -1479,7 +1491,7 @@ var examples = [
         adj_positive: "hot",
         adj_negative: "cold",
         pronoun: "It",
-        context: "PERSON is at a restaurant and takes a taste of a PHRASE. "
+        context: "You are at a restaurant and take a taste of a PHRASE. "
     },
 
 
@@ -1498,20 +1510,7 @@ var examples = [
         pre_positive: "an",
         pre_negative: "a",
         pronoun: "It",
-        context: "PERSON is at the zoo and watches PRE PHRASE being lifted."
-    },
-    {
-        worker_id: "103",
-        stim_id: "4",
-        degree: "weight",
-        adj_positive: "heavy",
-        adj_negative: "light",
-        superordinate: "clothes",
-        positive: "sweater",
-        neither_nor: "flannel",
-        negative: "shirt",
-        pronoun: "It",
-        context: "PERSON is shopping for winter clothing and tries on a PHRASE."
+        context: "You are at the zoo and watch PRE PHRASE being lifted."
     },
     {
         worker_id: "109",
@@ -1527,7 +1526,7 @@ var examples = [
         pre_negative: "a",
         pre_neutral: "a",
         pronoun: "They",
-        context: "PERSON lifts up PRE PHRASE."
+        context: "You lift up PRE PHRASE."
     },
     {
         worker_id: "110",
@@ -1540,7 +1539,7 @@ var examples = [
         neither_nor: "laptop",
         negative: "cell phone",
         pronoun: "It",
-        context: "PERSON is at an electronics store and picks up a PHRASE."
+        context: "You are at an electronics store and pick up a PHRASE."
     },
     {
         worker_id: "111",
@@ -1553,7 +1552,7 @@ var examples = [
         neither_nor: "chair",
         negative: "trash can",
         pronoun: "It",
-        context: "PERSON is helping a friend move and picks up their PHRASE."
+        context: "You are helping a friend move and pick up their PHRASE."
     },
     {
         worker_id: "112",
@@ -1566,7 +1565,7 @@ var examples = [
         neither_nor: "stick",
         negative: "feather",
         pronoun: "It",
-        context: "PERSON is walking outside and picks up a PHRASE."
+        context: "You are walking outside and pick up a PHRASE."
     },
     {
         worker_id: "113",
@@ -1579,7 +1578,7 @@ var examples = [
         neither_nor: "plastic",
         negative: "paper",
         pronoun: "It",
-        context: "PERSON is at a hardware store and picks up a piece of PHRASE."
+        context: "You are at a hardware store and pick up a piece of PHRASE."
     },
     {
         worker_id: "114",
@@ -1592,7 +1591,7 @@ var examples = [
         neither_nor: "kettle ball",
         negative: "jump rope",
         pronoun: "It",
-        context: "PERSON is at the gym and picks up a PHRASE."
+        context: "You are at the gym and pick up a PHRASE."
     },
     {
         worker_id: "115",
@@ -1605,7 +1604,7 @@ var examples = [
         neither_nor: "cotton",
         negative: "silk",
         pronoun: "It",
-        context: "PERSON is at a craft shop and picks up a piece of PHRASE."
+        context: "You are at a craft shop and pick up a piece of PHRASE."
     },
     {
         worker_id: "116",
@@ -1618,7 +1617,7 @@ var examples = [
         neither_nor: "motorcycle",
         negative: "bike",
         pronoun: "It",
-        context: "PERSON learns about the weight of a friend's new PHRASE."
+        context: "You learn about the weight of a friend's new PHRASE."
     },
     {
         worker_id: "117",
@@ -1631,7 +1630,7 @@ var examples = [
         neither_nor: "squash",
         negative: "plum",
         pronoun: "It",
-        context: "PERSON is at a grocery store and picks up a PHRASE."
+        context: "You are at a grocery store and pick up a PHRASE."
     },
 
 
@@ -1648,7 +1647,7 @@ var examples = [
         neither_nor: "cavern",
         negative: "fox hole",
         pronoun: "It",
-        context: "PERSON is in a forest and sees a PHRASE."
+        context: "You are in a forest and see a PHRASE."
     },
     {
         worker_id: "119",
@@ -1661,7 +1660,7 @@ var examples = [
         neither_nor: "downtown street",
         negative: "side road",
         pronoun: "It",
-        context: "PERSON is driving on a PHRASE.",
+        context: "You are driving on a PHRASE.",
         environment_mod: "here"
     },
     {
@@ -1675,7 +1674,7 @@ var examples = [
         neither_nor: "stream",
         negative: "creek",
         pronoun: "It",
-        context: "PERSON is standing at the bank of a PHRASE."
+        context: "You are standing at the bank of a PHRASE."
     },
     {
         worker_id: "121",
@@ -1691,7 +1690,7 @@ var examples = [
         pre_neutral: "a",
         pre_negative: "a",
         pronoun: "It",
-        context: "PERSON is walking on PRE PHRASE.",
+        context: "You are walking on PRE PHRASE.",
         environment_mod: "out here"
     },
     {
@@ -1705,7 +1704,7 @@ var examples = [
         neither_nor: "car",
         negative: "golf cart",
         pronoun: "It",
-        context: "PERSON sees a PHRASE on the road."
+        context: "You see a PHRASE on the road."
     },
     {
       worker_id: "123",
@@ -1717,6 +1716,6 @@ var examples = [
       positive: "front gate",
       neither_nor: "patio door",
       negative: "back door",
-      context: "PERSON is attempting to move PRO furniture through the PHRASE of PRO house."
+      context: "You are attempting to move your furniture through the PHRASE of your house."
     }
 ]

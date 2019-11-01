@@ -5,40 +5,83 @@
 
 // first a context sentence is shown, below follows the quetion
 
-const custom_forced_choice = function(config) {
+const custom_forced_choice = function(config, startTime) {
+
   const view = {
     name: config.name,
     CT: 0,
     trials: config.trials ,
-    render: function(CT, magpie, startingTime) {
-      $("main").html(`<div class='magpie-view'>
-      <section class ="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].context}<br><br></p>
-      </section>
+    render: function(CT, magpie, startTime) {
+      const startingTime = Date.now()
+      $("main").html(
+
+      `<div class='magpie-view'>
+
       <section class="magpie-text-container">
-        <p class="magpie-view-question">${config.data[CT].question}</p>
-      <section class="magpie-view-answer-container">
-        <label><input type="radio" name="main" value="No"/>No</label>
-        <label><input type="radio" name="main" value="Yes"/>Yes</label>
+        <p class="magpie-view-text" style="font-size:20px">${config.data[CT].context}</br></br></p>
+      </section>
+      <section class="magpie-text-container" position="left">
+        <p class="magpie-view-text" style="font-size:20px;">${config.data[CT].question}</br></p>
       </section>
 
-      <button id='next' class='magpie-view-button'>next</button>
+      <div style="width:100%;">
+          <div style="width:60%;height:100px;float:left;position:relative;align:center;">
+              <div style="position:absolute;bottom:12px;right:20px;align:center;">
+                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[0]]}</p>
+              </div>
+          </div>
+              <div style="width:40%;height:100px;float:right;position:relative;align:center;">
+                  <span style="position:absolute;bottom:0px;left:20px;align:center">
+                      <div class='magpie-view-answer-container'>
+                        <label><input type="radio" name="main1" value="1"/>Yes</label>
+                        <label><input type="radio" name="main1" value="0"/>No</label>
+                      </div>
+                  </span>
+              </div>
+      </div>
+      <div style="width:100%;">
+          <div style="width:60%;height:70px;float:left;position:relative;align:center;">
+              <div style="position:absolute;bottom:12px;right:20px;align:center;">
+                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[1]]}</p>
+              </div>
+          </div>
+              <div style="width:40%;height:70px;float:right;position:relative;align:center;">
+                  <span style="position:absolute;bottom:0px;left:20px;align:center">
+                      <div class='magpie-view-answer-container'>
+                        <label><input type="radio" name="main2" value="1"/>Yes</label>
+                        <label><input type="radio" name="main2" value="0"/>No</label>
+                      </div>
+                  </span>
+              </div>
+      </div>
 
-        <p id='catch' class="magpie-view-question" >Please select an option before continuing.</p>
+          <button id='next' class='magpie-view-button'>next</button>
+          <p class="text" align="center" id="catch">Please select a response before proceeding.</p>
+      </div>`
 
-      </div>`)
+
+    )
 
 
       $("#catch").hide();
       $("#next").on("click", function() {
-        var response = $("input[name=main]:checked").val();
-        if (response === undefined) {
+        var response1 = $("input[name=main1]:checked").val();
+        var response2 = $("input[name=main2]:checked").val();
+        // var response3 = $("input[name=main3]:checked").val();
+        // var response4 = $("input[name=main4]:checked").val();
+        // var responses = [response1, response2, response3, response4];
+        if ((response1 === undefined) | (response2 === undefined) ) {
           $("#catch").show()
         } else {
+        const RT = Date.now() - startingTime;
           let trial_data = {
             trial_name: config.name,
             trial_number: CT + 1,
-            response: response
+            response1: response1,
+            response2: response2,
+            RT: RT
+            // response3: response3,
+            // response4: response4
           }
           trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
           magpie.trial_data.push(trial_data);
