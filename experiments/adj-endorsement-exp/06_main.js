@@ -15,30 +15,31 @@ $("document").ready(function() {
     window.magpie_monitor = magpieInit({
         // You have to specify all views you want to use in this experiment and the order of them
         views_seq: [
-            // custom_intro,
-            // botcaptcha,
+            custom_intro,
+            botcaptcha,
             // // instructions,
-            // instructions,
+            instructions,
             adj_endorsement_both,
             custom_postTest,
             thanks,
         ],
         // Here, you can specify all information for the deployment
         deploy: {
-            experimentID: "INSERT_A_NUMBER",
+            experimentID: "22",
             serverAppURL: "https://magpie-demo.herokuapp.com/api/submit_experiment/",
             // Possible deployment methods are:
             // "debug" and "directLink"
             // As well as "MTurk", "MTurkSandbox" and "Prolific"
-            deployMethod: "debug",
+            deployMethod: "MTurkSandbox",
             contact_email: "YOUREMAIL@wherelifeisgreat.you",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },
         // Here, you can specify how the progress bar should look like
+        uniqueTurkerID: '6d9aad7033352cde6934cd07b5e3d605',
         progress_bar: {
             in: [
                 // list the view-names of the views for which you want a progress bar
-                main.name,
+                adj_endorsement_both.name,
             ],
              // Possible styles are "default", "separate" and "chunks"
             style: "separate",
