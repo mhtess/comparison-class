@@ -25,32 +25,22 @@ const custom_forced_choice = function(config, startTime) {
       </section>
 
       <div style="width:100%;">
-          <div style="width:60%;height:100px;float:left;position:relative;align:center;">
-              <div style="position:absolute;bottom:12px;right:20px;align:center;">
-                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[0]]}</p>
+          <div style="width:60%;height:120px;float:left;position:relative;align:center;">
+              <div style="position:absolute;top:20px;right:20px;align:center;">
+                  <p class="magpie-view-text">${config.data[CT].sentence_1}</p> </br>
+                  <p class="magpie-view-text">${config.data[CT].sentence_2}</p>
               </div>
           </div>
-              <div style="width:40%;height:100px;float:right;position:relative;align:center;">
-                  <span style="position:absolute;bottom:0px;left:20px;align:center">
-                      <div class='magpie-view-answer-container'>
+              <div style="width:40%;height:120px;float:right;position:relative;align:center;">
+                  <span style="position:absolute;top:20px;left:20px;align:center">
+                      <p class='magpie-view-text'>
                         <label><input type="radio" name="main1" value="1"/>Yes</label>
                         <label><input type="radio" name="main1" value="0"/>No</label>
-                      </div>
-                  </span>
-              </div>
-      </div>
-      <div style="width:100%;">
-          <div style="width:60%;height:70px;float:left;position:relative;align:center;">
-              <div style="position:absolute;bottom:12px;right:20px;align:center;">
-                  <p class="magpie-view-question">${config.data[CT].text_1[fc_order[1]]}</p>
-              </div>
-          </div>
-              <div style="width:40%;height:70px;float:right;position:relative;align:center;">
-                  <span style="position:absolute;bottom:0px;left:20px;align:center">
-                      <div class='magpie-view-answer-container'>
+                      </p> </br>
+                      <p class='magpie-view-text'>
                         <label><input type="radio" name="main2" value="1"/>Yes</label>
                         <label><input type="radio" name="main2" value="0"/>No</label>
-                      </div>
+                      </p>
                   </span>
               </div>
       </div>
@@ -295,7 +285,15 @@ const custom_intro_view = function(config) {
             <img src="${config.picture1}">
           </div>
           <section class="magpie-text-container">
-            <p class="magpie-view-text"> Thank you for taking part in our study. We are studying how people talk about things around them. The study will take about 10-12 minutes.<br /> <br />
+            <p class="magpie-view-text"> Thank you for taking part in our study. We are studying how people talk about things around them. The study will take about 6-8 minutes.<br /> <br />
+            </br>
+            <p class="magpie-view-text" style="font-family:Courier New, Courier"> Please note: There will be multiple posted versions of this HIT (name:<b> Adjectives - 505</b>) throughout the next few days.
+            Please attempt only one HIT in this series. You will not be allowed to complete multiple HITs in this series. </br> </br>
+            </p>
+          </section>
+
+          <section class="magpie-text-container">
+          <p class="magpie-view-text">
             By continuing, you are participating in an experiment being performed by cognitive scientists in the MIT Computational Psycholinguistics Lab. If you have questions about this research, please contact Polina Tsvilodub, at <a href="mailto:polinats@mit.edu">polinats@mit.edu</a>, or MH Tessler, at tessler@mit.edu. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.
              </p>
           </section>

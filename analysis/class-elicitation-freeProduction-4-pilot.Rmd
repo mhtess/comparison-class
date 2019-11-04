@@ -90,9 +90,55 @@ df.attention.summary %>%
   count()
 ```
 
+```{r}
+# paste in the superordinate that was not recorded 
+insert_super = function(np) {
+  if (np %in% c("seagull", "parrot", "crow")) {
+    super = "birds"
+  }  else if (np %in% c("day", "dusk", "night")) {
+    super = "times of day"
+  } else if (np %in% c("jolly rancher", "piece of chocolate", "marshmallow")) {
+    super = "sweets"
+  } else if (np %in% c("tile", "wood", "carpet")) {
+    super = "floor materials"
+  } else if (np %in% c("giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "mouse", "cheetah", "sloth", "fish")) {
+    super = "animals"
+  } else if (np %in% c("basketball player", "golfer", "jockey", "runner", "jogger", "walker")) {
+    super = "athletes"
+  } else if (np %in% c("dachshund", "bassett hound", "chihuahua")) {
+    super = "dogs"
+  } else if( np %in% c("novel", "story", "poem")) {
+    super = "readings"
+  } else if( np %in% c("auditorium", "classroom", "study hall")) {
+    super = "rooms"
+  } else if ( np %in% c("platinum", "bronze", "plastic")) {
+    super = "statues"
+  } else if (np %in% c("bottle of top-shelf liquor", "six-pack of beer", "bottle of wine")) {
+    super = "alcoholic drinks"
+  } else if (np %in% c("tree", "bush", "flower")) {
+    super = "plants"
+  } else if(np %in% c("adult", "teenager", "child", "kid", "baby")) {
+    super = "people"
+  } else if (np %in% c("hurricane", "thunderstorm", "rain")) {
+    super = "storms"
+  } else if (np %in% c("soup", "salad", "ice cream")) {
+    super = "food"
+  } else if( np %in% c("summer", "fall", "winter")) {
+    super = "seasons"
+  } else if (np %in% c("cave", "cavern", "fox hole")) {
+    super = "holes"
+  } else {
+    super = "roads"
+  }
+  return (super)
+}
+df.trials.w.super <- df.trials %>% rowwise() %>% mutate(superordinate = insert_super(np))
+```
+
+
 Those multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
 ```{r filtered main trails}
-df.trials.filtered <- df.trials %>%
+df.trials.filtered <- df.trials.w.super %>%
   left_join(., df.attention.summary) %>%
   filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
   rowwise() %>%
@@ -100,7 +146,6 @@ df.trials.filtered <- df.trials %>%
     np = gsub("bottle of top-shelf liquor", "liquor", np),
     np = gsub("piece of chocolate", "chocolate", np),
     np = gsub("piece of chalk", "chalk", np),
-    np = gsub("strip mall", "mall", np),
     np = gsub("six-pack of beer", "beer", np),
     np = gsub("bottle of wine", "wine", np),
     np = gsub("pine tree", "pine", np),
@@ -144,6 +189,8 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("babies", "baby", response),
          response = gsub("stories", "story", response),
         response = gsub("6 packs", "beer", response),
+        response = gsub("six-packs", "beer", response),
+        response = gsub("six packs", "beer", response),
         response = gsub("basset", "bassett", response),
         response = gsub("dasies", "daisy", response),
         response = gsub("pansies", "pansy", response),
@@ -156,7 +203,14 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("gymnasia", "gymnasium", response),
          response = gsub("cacti", "cactus", response),
          response = gsub("pantries", "pantry", response),
-        response = gsub("bonzai", "bonsai", response)
+        response = gsub("bonzai", "bonsai", response),
+         response = gsub("seagul", "seagull", response),
+        response = gsub("dalia", "dahlia", response),
+        response = gsub("pitbul", "pitbull", response),
+        response = gsub("panter", "panther", response),
+        response = gsub("icecream", "ice cream", response),
+        response = gsub("ice-cream", "ice cream", response),
+        
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words
