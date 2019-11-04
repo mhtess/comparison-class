@@ -175,7 +175,7 @@ var examples = [
         stim_id: "10",
         degree: "hardness",
         adj_positive: "hard",
-        adj_negative: "soft",
+        adj_negative: "soft", 
         superordinate: "foods",
         positive: "apple",
         neither_nor: "bread",
