@@ -153,7 +153,12 @@ df.trials.filtered <- df.trials.w.super %>%
     np = gsub("relay race", "relay", np),
     np = gsub("podcast episode", "podcast", np),
     np = gsub("kettle ball", "ball", np),
-    np = gsub("basketball player", "basketball", np)
+    np = gsub("basketball player", "basketball", np),
+    np = gsub("study hall", "study", np),
+    np = gsub("electric car", "electric", np),
+    np = gsub("bass guitar", "bass", np),
+    np = gsub("rock concert", "rock", np),
+    np = gsub("rap concert", "rap", np),
     )
 
 df.trials.filtered %>% group_by(np) %>%
@@ -176,7 +181,7 @@ my_stop_words <-# bind_rows(
   # )
 #)
 
-d.tidy.phrase.w.original <- df.trials.filtered %>%
+d.tidy.phrase.w.original <- df.trials.filtered %>% 
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
@@ -206,7 +211,22 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
         response = gsub("panter", "panther", response),
         response = gsub("icecream", "ice cream", response),
         response = gsub("ice-cream", "ice cream", response),
-        
+        response = gsub("bed board", "bedboard", response),
+        response = gsub("jocky", "jockey", response),
+        response = gsub("jockie", "jockey", response),
+        response = gsub("smart car", "smartcar", response),
+        response = gsub("gym", "gymnasium", response),
+        response = gsub("beverage", "drink", response),
+        response = gsub("dog house", "doghouse", response),
+        response = gsub("fridge", "refrigerator", response),
+        response = gsub("chihuaua", "chihuahua", response),
+        response = gsub("zuccini", "zucchini", response),
+        response = gsub("cheeta", "cheetah", response),
+        response = gsub("skiier", "skier", response),
+        response = gsub("old", "elderly", response),
+        response = gsub("teen", "teenager", response),
+        response = gsub("cooking", "cookware", response),
+        response = gsub("mobile", "cell", response)
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words
