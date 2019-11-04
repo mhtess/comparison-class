@@ -11,6 +11,10 @@ library(tidyverse)
 library(jsonlite)
 library(tidyboot)
 library(tidytext)
+library(lme4)
+library(ggthemes)
+library(brms)
+theme_set(theme_few())
 ```
 
 ## Results
@@ -329,6 +333,39 @@ d.tidy.phrase.specificMarking.bs.item %>%
 
 # ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
 #        width = 7, height = 7)
+```
+
+# Regression modeling
+
+```{r}
+d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
+  mutate(adj_positiveness = factor(adj_positiveness, 
+                                   levels = c("negative", "positive")),
+         np_positiveness = factor(np_positiveness, 
+                                  levels = c("neither-nor", "negative", "postiive")))
+
+rs.glm.brm <- brm(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 +  np_positiveness*adj_positiveness | workerid) + 
+    (1 +  np_positiveness*adj_positiveness | degree),
+  family = bernoulli(), 
+  data = d.tidy.phrase.w.original.fac)
+
+summary(rs.glm.brm)
+
+contrasts(d.tidy.phrase.w.original.fac$adj_positiveness)
+```
+
+
+```{r}
+rs.glm <- glmer(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 | workerid) + 
+    (1| degree),
+  family = 'binomial', 
+  data = d.tidy.phrase.w.original.fac)
+
+summary(rs.glm)
 ```
 
 
