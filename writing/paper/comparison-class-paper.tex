@@ -52,8 +52,11 @@ what counts as the relevant context is often only implicit in everyday
 conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}:  warm
 relative to other days of the year, warm for the season, warm for the week, etc.. 
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener reasons through this open-ended inference problem.
-We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
-The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding. 
+We propose a Bayesian model of pragmatic reasoning that reasons flexibly about the comparison class intended by the speaker.
+We test the qualitative predictions of this model using a large-scale free-production experiments.
+We test the quantitative predictions by independently modeling and measuring a related set of linguistic judgments about the same domains, which we incorporate into a joint Bayesian data analytic model.
+%We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
+%The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding. 
 The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
 %We test the qualitative predictions of the model in a free production experiment and use a forced-choice version of the task to test the finer-grained, quantitative predictions. 
 %The resolution of a comparison class requires not only reasoning about what is likely to be the case but also what would be informative to talk about, thus incorporating comparison class inference into the larger study of pragmatic reasoning.
@@ -119,8 +122,9 @@ However, an adjective that is unlikely to be true of the subordinate category re
 We show that this inference relies upon a sophisticated pragmatic mechanism: A listener must use their knowledge of the subordinate category to guide their expectations of what is likely to be true in the world, while simultaneously imagining how a speaker would behave given a different comparison class (e.g., what a speaker would say given the comparison class of \emph{days of the year}). 
 
 The model we propose is quantitative in nature and thus, can predict graded inferences as a result of background knowledge.  
-Background knowledge for language understanding models is often measured empirically by having a separate group of participants estimate relevant quantities and probabilities \cite<e.g., plausible temperatures of day in Winter, Summer, etc..., >{Franke2016}.
-We take a different approach in this paper: 
+Background knowledge for language understanding models is often measured empirically by having a (separate) group of participants estimate relevant quantities and probabilities \cite<e.g., plausible temperatures of day in Winter, Summer, etc..., >{Franke2016}.
+These direct prior elicitation techniques are limited, however, to domains where people have an accurate representation of the underlying scale (e.g., temperature); many domains can be reasoned about intuitively (e.g., the loudness of a diesel engine~vs.~an electric car) without a clear representation of the underlying scale (e.g., how many decibels is the typical sound of a diesel engine?).
+For this reason, we take a different approach in this paper: 
 We embed our model of pragmatic reasoning in a Bayesian data-analytic model where the parameters that govern background knowledge in the pragmatics model are inferred from the experimental data, a kind of \emph{descriptive Bayesian} modeling \cite{tauber2017}.
 We go further, however, than merely asking what background knowledge would have to be like in order to account for comparison class inferences; we harness the productivity of natural language and the Rational Speech Act modeling framework to predict data from a related language experiment that relies upon the same background knowledge. 
 This joint data modeling provides a way to pin-down relevant model parameters by only asking participants simple, natural language questions, while also holding the cognitive models to a high standard of having to predict data from multiple language experiments using the same prior knowledge.
@@ -177,14 +181,25 @@ This joint data modeling provides a way to pin-down relevant model parameters by
 
 \section{Computational Model}
 
-We explicate our model with the example of hearing a basketball player described as \emph{tall} (Figure \ref{fig:modelCartoon}). 
-The basic intuition that the model formalizes is that, when describing the height of a basketball player, a speaker is more likely to say \emph{he's a tall person} than \emph{he's a tall basketball player} because it is a more likely state of affairs given distributional knowledge of the heights of people and the heights of basketball players. 
-A listener can use this knowledge to infer the unsaid comparison class when they hear only \emph{he's tall}.
-The opposite inference is predicted when the basketball player is described as \emph{short} (i.e., more likely to be a \emph{short basketball player} than a \emph{short person}).
-Finally, the same adjectives used to describe a jockey should invoke the opposite inferences (i.e., \emph{tall} $\rightarrow$ \emph{tall jockey}; \emph{short} $\rightarrow$ \emph{short person}).
+We explicate our model with the example of hearing a basketball player described as either \emph{tall} or \emph{short} (Figure \ref{fig:modelCartoon}). 
+The guiding intuition that our model tries to capture is that when the basketball player is described as \emph{tall}, it is likely that the comparison class intended by the speaker is the basic-level category (i.e., \emph{tall for a person}). 
+On the other hand, when the basketball player is described as \emph{short}, the comparison class intended by the speaker is likely to be a subordinate-level, or more specific, class (i.e., \emph{short for a basketball player}). 
+The opposite inference should follow for a member of a category that is generally short, such as a jockey: \emph{he's short} should mean \emph{short for a person}, while \emph{he's tall} should signal \emph{tall for a jockey}.
+More generally, when an adjective conflicts with a listener's \emph{general expectations} about members of a category (e.g., \emph{short} described of a basketball player; general expectation: basketball players are tall), listeners should accommodate this utterance by positing a more specific comparison class (e.g., \emph{short for a basketball player}). 
+Our model predicts this inference from the fact that the \emph{general expectations} a listener would have about members of the category are, in fact, an interpretation of the scalar adjective under a basic or superordinate-level class (e.g., basketball players tend to be tall people).
+
+
+% predicted when the basketball player is described as \emph{short} (i.e., more likely to be a \emph{short basketball player} than a \emph{short person}).
+
+
+%The basic intuition that the model formalizes is that, when describing the height of a basketball player, a speaker is more likely to say \emph{he's a tall person} than \emph{he's a tall basketball player} because it is a more likely state of affairs given distributional knowledge of the heights of people and the heights of basketball players. 
+%A listener then uses this knowledge of the speaker to infer the unsaid comparison class when the speaker says only: \emph{he's tall}.
+%
+%Finally, the same adjectives used to describe a jockey should invoke the opposite inferences (i.e., \emph{tall} $\rightarrow$ \emph{tall jockey}; \emph{short} $\rightarrow$ \emph{short person}).
 
 Formally, a listener is faced with a joint inference problem of determining the height of the person $x$ and the comparison class  $c$ assumed by the speaker when producing their adjectival utterance $u$ (e.g., \emph{he's tall}).
-We propose a Bayesian formulation to this problem, wherein a listener combines his prior knowledge about categories and what comparison classes are likely to be talked about with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker.}
+We propose a Bayesian formulation to this problem, wherein a listener combines his prior knowledge about categories and what comparison classes are likely to be talked about, with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker.}
+
 The hypothesis space of comparison classes is constrained by  beliefs about the referent that are shared between the speaker and listener: A speaker is unlikely to be assuming a comparison class about which she has no knowledge.
 %In our example, it is in common ground that the referent is a basketball player.
 Though comparison classes can be constructed in various ways, including out of sets of objects in the perceptual environment or hypothetical functions of an object \cite<cf.,>{Ebeling1994}, we restrict our analysis to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (i.e., \emph{conceptual comparison classes}, e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A).
@@ -220,41 +235,39 @@ Though we distinguish formally between the beliefs of the speaker and listener, 
 %  \label{fig:bayesnet}
 %\end{figure}
 
-A listener $L_n$ updates their beliefs about the degree $x$ and the comparison class $c$ by assuming that a speaker $S_n$ intentionally produced an adjectival utterance $u$ in order to communicate about the degree (e.g., height).
+A pragmatical listener $L_1$ updates their beliefs about the degree $x$ and the comparison class $c$ by assuming that a speaker $S_1$ intentionally produced an adjectival utterance $u$ in order to communicate about the degree (e.g., height).
 Formally, this inference can be captured in a Bayesian formulation:
-
+%
 \begin{align}
-L_n(x, c \mid u, f, g) &\propto S_n(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c \mid f) \label{eq:L2} 
+L_1(x, c \mid u, f, g) &\propto S_1(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c \mid f) \label{eq:L1} 
 \end{align}
-
-\noindent where $f$ denotes the beliefs shared between speaker and listener, and $g$ denotes the listener's private beliefs. Since our paradigm does not distinguish between these kinds of beliefs, we use a reduced-form of the model, where beliefs are represented by a single variable $k$ and can be thought of as relevant category information about the referent (e.g., the referent is a basketball player): 
-
+%
+\noindent where $f$ denotes the beliefs shared between speaker and listener, and $g$ denotes the listener's private beliefs. Since our paradigm does not distinguish between these kinds of beliefs, we use a reduced-form of the model, where beliefs are represented by a single variable $k$ and can be thought of as the most specific relevant category information about the referent (e.g., the referent is a basketball player): 
+%
 \begin{align}
-L_n(x, c \mid u, k) &\propto S_n(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L2} 
+L_1(x, c \mid u, k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L1a} 
 \end{align}
-
-Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information to a listener $L$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterances. Hence, our model reduces to simply: $S_n(u \mid x, c) \propto L_{n-1}(x \mid u, c)^{ \alpha}$}
+%
+Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information to a listener $L$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterances. Hence, our model reduces to simply: $S_1(u \mid x, c) \propto L_{0}(x \mid u, c)^{ \alpha}$}
 
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
-\caption{\label{fig:modelCartoon}Model overview. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A specific comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{n-1}(x \mid u, c)$---is sensitive to the comparison class. C: Listener $L_n$ imagines what a speaker $S_n$ would say given different comparison classes (facets) and assuming different possible heights of the referent (x-axis); the intensity of the colors (alpha/opacity) is in proportion to the listener's expectation of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Distribution of speaker utterances for different comparison classes marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} is the comparison class is \emph{people}. E: Comparison class inference by the listener in terms of the probability of a subordinate class (e.g., basketball players) computed by inverting the speaker model. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}.
+\caption{\small \label{fig:modelCartoon}Model overview. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A specific comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is sensitive to the comparison class. C: Listener $L_1$ imagines what a speaker $S_1$ would say given different comparison classes (facets) and assuming different possible heights of the referent (x-axis); the intensity of the colors (alpha/opacity) is in proportion to the listener's expectation of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Distribution of speaker utterances for different comparison classes marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} is the comparison class is \emph{people}. E: Comparison class inference by the listener in terms of the probability of a subordinate class (e.g., basketball players) computed by inverting the speaker model. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}.
 % speaker production probability distributions are shown with the.
 }
 \end{figure}
 
 
 \begin{align}
-S_n(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{n-1}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S2} 
+S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S1} 
 \end{align}
 %exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} )}
 
 We assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action). 
-The listener who updates their beliefs about the temperature given a vague adjectival utterance and a fixed comparison class $L_{n-1}(x \mid u, c)$ is model of context-sensitive adjective interpretation, a problem which has garnered a lot of recent attention by formal models of language understanding \cite{Lassiter2013, Qing2014a, Lassiter2017}.
-Our model of comparison class inference builds on top of these formal theories, and we treat this model component $L_{n-1}(x \mid u, c)$ as a black-box function that produces a probability distribution over degrees (e.g., heights) in a manner that is sensitive to the comparison class (e.g., respecting the interpretative difference between \emph{tall person} and \emph{tall basketball player}; Figure \ref{fig:modelCartoon}B). 
-%\red{Figure 1 shows the behavior of this model component.}
-We adopt the model of \citeA{Lassiter2013, Lassiter2017} which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![tall]\!] = height > \theta\)), where a pragmatic reasoning agent analogous to the speaker and listener models defined above reasons about the plausible threshold the speaker is using, given their knowledge of the comparison class.\footnote{Following standard treatment of antonyms, the
+The listener who updates their beliefs about the temperature given a vague adjectival utterance and a fixed comparison class $L_0(x \mid u, c)$ is model of context-sensitive adjective interpretation, a problem which has garnered a lot of recent attention by formal models of language understanding \cite{Lassiter2013, Qing2014a, Lassiter2017}.
+We use a model of a literal listener which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![tall]\!] = height > \theta\)) that gets combined with the listener's prior knowledge of the comparison class to produce a comparison class-specific interpretation of an adjective (Figure \ref{fig:modelCartoon}B).\footnote{Following standard treatment of antonyms, the
   semantics of \emph{short} are a threshold function on a distinct
   threshold variable: \([\![u_{short}]\!] = height < \theta_{short}\)), which
   is also inferred via the pragmatic listener (i.e., the listener infers
@@ -264,10 +277,21 @@ We adopt the model of \citeA{Lassiter2013, Lassiter2017} which, following standa
   alternative set. The comparison class inferences are also invariant to
   whether or not the antonym gets assigned its own unique threshold
   (\(\theta_{short}\)).}
-  A full presentation of this  part of the model is given in Appendix A.
+  %
+  \begin{align}
+L_{0}(x, \theta \mid u, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(\theta) \label{eq:L0}\\
+L_{0}(x \mid u, c) &= \int_{\theta} L_{0}(x, \theta \mid u, c) \diff\theta \label{eq:L0_marg} 
+\end{align}
+%
+Equation \ref{eq:L0} is a model of literal listener who updates their prior beliefs about the degree within a comparison class $P(x\mid c)$ via a threshold function, represented by the Kronecker delta function \(\delta_{\mbox{ $[\![ u ]\!]$}(x, \theta)}\) that returns probabilities proportional to \(1\) when the utterance is true (i.e., when \(x > \theta\)) and \(0\) otherwise.
+\citeA{Lassiter2013, Lassiter2017} showed how the context-sensitivity of gradable adjectives can be modeled as uncertainty about the threshold $P(\theta)$ (where $\theta$ comes from a uniform prior distribution over the support of the degree prior), which we adopt here in our literal listener model. 
+Finally, we assume the communicative goal of using an adjective like \emph{tall} is to convey information about the height of the referent $x$; thus, the speaker model $S_1$ (Equation \ref{eq:S1}) chooses utterances to convey the height to the literal listener $L_0$, which we calculate by marginalizing out the threshold variable $\theta$ (Equation \ref{eq:L0_marg}).
+%Our model of comparison class inference builds on top of these formal theories, and we treat this model component $L_{0}(x \mid u, c)$ as a black-box function that produces a probability distribution over degrees (e.g., heights) in a manner that is sensitive to the comparison class (e.g., respecting the interpretative difference between \emph{tall person} and \emph{tall basketball player}; ). 
+%\red{Figure 1 shows the behavior of this model component.}
+%We adopt the model of \citeA{Lassiter2013, Lassiter2017}   A full presentation of this  part of the model is given in Appendix A.
   
 We consider an idealized case where the comparison class can be either a relatively specific (subordinate-level, \(c_{sub}\)) or relatively general (basic-level, \(c_{basic}\)) categorization (e.g., tall relative to \emph{basketball players} or relative to \emph{people}): \(c \in \{c_{sub}, c_{basic}\}\).
-To understand the model behavior, consider the speaker model \(S_n\) under different assumptions (by the listener) about the implicit comparison class: \(S_{n}(u \mid x, c = c_{sub})\) and \(S_{n}(u \mid x, c = c_{basic})\). 
+To understand the model behavior, consider the speaker model \(S_1\) under different assumptions (by the listener) about the implicit comparison class: \(S_{1}(u \mid x, c = c_{sub})\) and \(S_{1}(u \mid x, c = c_{basic})\). 
 Figure \ref{fig:modelCartoon}C shows the speaker production probabilities of the three possible utterances for each value along the degree scale (e.g., each height) for the two different comparison classes.  If the comparison class is \emph{people}, the speaker will produce \emph{tall} when the height of the referent is substantially greater than the average height for people, with the speaker more likely to say \emph{tall} as the height of the referent increases.
   If the comparison class is \emph{basketball players}, the speaker's criterion shifts to the right and she becomes more reluctant to produce \emph{tall} until the height of the referent is much greater (all utterance curves shift to the right). 
   The listener combines this generative model of adjectival utterances with their prior knowledge about the height of the referent: The listener knows the referent is a basketball player and thus their likely height is given by the basketball player distribution (Figure \ref{fig:modelCartoon}B, bottom, black; this distribution is superimposed as an opacity on Figure \ref{fig:modelCartoon}C).
@@ -280,6 +304,16 @@ This inference is driven by prior knowledge about the category, and thus, we wou
 Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class. 
 Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should be driven. 
 
+The inference about the comparison class is necessarily a pragmatic inference involving representing a speaker's beliefs about the context separately from the listener's beliefs about the context. 
+This can be seen in comparing Equations \ref{eq:L1} and \ref{eq:L0}: the pragmatic listener $L_1$ uses a prior distribution over the degree given their knowledge of the referent $P(x \mid k)$ whereas the literal listener $L_0$ uses a distribution conditional on the comparison class $P(x \mid c)$. 
+We show that separation of the listener's knowledge of the referent $k$ from the comparison class $c$ is necessary for this inference via a comparison to a purely Bayesian listener model, who has uncertainty about the comparison class as well as all of the other relevant parameters (the degree $x$ and the threshold $\theta$): 
+%
+  \begin{align}
+L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c) \cdot P(c \mid k) \cdot P(\theta) \label{eq:L0alt}
+\end{align}
+%
+This listener uses their knowledge of the referent $k$ to constrain only the hypothesis space of comparison classes but doesn't use it to separate the speaker's representation of the context from their own. 
+This listener is instead answering the question of what is more likely: a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? This literal listener model predicts the exact opposite pattern of results from the pragmatic listener model (\red{Figure XX}). 
 %The utterance which does not reference a class (e.g., It's warm}) inherits the same meaning as the utterance with the explicit class that
 %matches the assumed implicit class (i.e., if \(c_{i} = c_{sub}\), then
 %\(u_i\) has the same meaning as \(u_{sub}\)). Therefore, reasoning about
@@ -292,16 +326,17 @@ Thus, our model predicts that the comparison class can be flexibly adjusted and 
 
 \begin{figure*}[htb]
 {\centering \includegraphics[width=1\textwidth]{figs/expt_overview} }
-\caption{Overview of Experiments. Step 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Step 2: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to validate our experimental stimuli as well as provide additional data to constrain the parameters of the comparison class inference model. Step 3: Free-production task to elicit the comparison class.}\label{fig:exptOverview}
+\caption{\small Overview of Experiments. Step 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Step 2: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to validate our experimental stimuli as well as provide additional data to constrain the parameters of the comparison class inference model. Step 3: Free-production task to elicit the comparison class.}\label{fig:exptOverview}
 \end{figure*}
 
-We test our hypothesis the comparison class can be flexibly adjusted based on world knowledge and pragmatic principles in a set of coordinated experiments (Figure \ref{fig:exptOverview}).
+We test our hypothesis that the comparison class can be flexibly adjusted based on world knowledge and pragmatic principles in a set of coordinated experiments (Figure \ref{fig:exptOverview}).
 We first empirically elicit test stimuli by having participants fill out phrasal templates that aim to elicit sets of categories at the same level of hierarchy that tend to be on extreme ends of a degree scale (e.g., categories that are generally big or generally small) as well as a control item (e.g., a category whose members are sometimes big and sometimes small; Step 1). 
 We then validate these stimuli using a forced-choice paradigm where participants are asked to judge whether an adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate category relative to the basic or superordinate category (Step 2). 
 This adjective endorsement task also provides additional data to constrain the parameters of the comparison class inference model (described below).
 Finally, we test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E by having participants rephrase a speaker's statement in a way that makes the comparison class explicit (Step 3).
-The quantitative predictions of the model are tested using a Bayesian data analytic strategy, where we explicitly model the data from both the Adjective Endorsement (Step 2) and Comparison Class Inference (Step 3) tasks jointly.
+The quantitative predictions of the model are tested using a Bayesian data analytic strategy, where we explicitly model the data from both the Adjective Endorsement (Step 2) and Comparison Class Inference (Step 3) tasks.
 This joint Bayesian data-analytic strategy allows us to infer, rather than stipulate, the world knowledge that guides the inference about the comparison class in the computational model. 
+\mht{may want to reverse the order, if we use the modal superordinate comparison class from the Inference experiment as the comparison class in the Adjective Endorsement experiment}
 
 \section{Data-analytic Strategy}
 
@@ -321,7 +356,7 @@ We infer the plausible values of the parameters governing the subordinate priors
 The data from the comparison class experiment would be insufficient, however, to reliably estimate the model parameters governing the world knowledge priors. 
 To alleviate this, we use the same RSA architecture to predict additional data about the related Adjective Endorsement task. 
 In the Adjective Endorsement task, participants are asked to judge whether a gradable adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate-level category relative to the basic- or superordinate level category (e.g., \emph{Do you think that the basketball player would be tall relative to other people?}).
-To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{2}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_1(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
+To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
 
 The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$. 
 As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
@@ -331,12 +366,13 @@ We construct a single data-analytic model with each of these RSA components as s
 The listener and speaker sub-models share their prior world knowledge $P(x \mid c)$ (e.g., heights of basketball players).
 We put the same priors over the parameters of each subordinate distribution: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$, since they have standardized units.
 The comparison class prior $P(c)$ scales the empirical frequency $\hat{f}$ by a free parameter, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
-The full model has three additional parameters not of direct theoretical interest: the speaker optimality parameters $\alpha^\text{expt}_{i}$, which can vary across the two tasks.
-The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
-The adjective endorsement model has two speaker optimality parameters: 
-$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
-We use priors consistent with the previous literature: $\alpha_1 \sim \text{Uniform}(0, 20)$, $\alpha_2 \sim \text{Uniform}(0, 5)$
+Each RSA model has an additional speaker optimality parameter $\alpha^{\text{expt}_{i}}$ not of direct theoretical interest.
+We use priors consistent with the previous literature: $\alpha_i \sim \text{Uniform}(0, 20)$.
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl}.
+
+%The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
+%The adjective endorsement model has two speaker optimality parameters: 
+%$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
 
 
 \begin{figure}[ht]
@@ -438,7 +474,7 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
     \end{tabular}
   \end{center}
-  \caption{Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_2$ and the comparison class inference model $L_1$) directly predict the data from Experiments 1 \& 2 ($d^{adj}$ and $d^{cc}$), respectively. Each of these models relies upon world knowledge $P(x_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu_k$ and variance $\sigma_k$). The prior on comparison classes $P(c)$ is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with unknown scale parameter $\beta$. Each RSA model has its own set of speaker optimality parameters ($L_1$ has one parameter $\alpha_1$, while $S_2$ has two parameters $\boldsymbol{\alpha_2}$.}
+  \caption{\small Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_2$ and the comparison class inference model $L_1$) directly predict the data from Experiments 1 \& 2 ($d^{adj}$ and $d^{cc}$), respectively. Each of these models relies upon world knowledge $P(x_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu_k$ and variance $\sigma_k$). The prior on comparison classes $P(c)$ is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with unknown scale parameter $\beta$. Each RSA model has its own set of speaker optimality parameters ($L_1$ has one parameter $\alpha_1$, while $S_2$ has two parameters $\boldsymbol{\alpha_2}$.}
   \label{fig:bayesnet}
 \end{figure}
 
@@ -694,17 +730,18 @@ Finally, the full model's posterior predictive distribution does an excellent jo
 \section{Discussion}
 
 Interpreting the words we hear requires understanding the context in which those words are uttered.
-Yet, the context is almost never described explicitly but rather left to the listener to pragmatically reconstruct. 
-The interpretation of gradable adjectives (e.g., \emph{tall}) is a case study of this larger phenomenon of reconstructing context. 
+Yet, the context is almost never described explicitly but left to the listener to pragmatically reconstruct. 
+Inferring comparison classes for gradable adjectives (e.g., \emph{tall}) is a case study of this larger phenomenon of reconstructing context. 
 We introduced a minimal extension to an adjective interpretation Rational Speech Act model to allow it to flexibly reason about the implicit comparison class (e.g., \emph{tall for a person}~vs.~\emph{tall for a basketball player}).
 This model made the qualitative prediction that listeners should prefer more specific (e.g., subordinate-level) comparison classes when the adjective conflicts with the general expectations a listener would have about a member of a category (e.g., a short basketball player), and we showed how this inference requires pragmatic reasoning with a literal interpretation model that cannot draw this inference. 
 The model also made quantitative predictions about the gradability of this inference given knowledge about the distributions of the relevant property for the categories. 
+The strong quantitative fit of this model to the free-production data provides strong support that the comparison class inference can be viewed as a rational Bayesian inference on top of pragmatic language understanding. 
 
-In addition to the novel empirical data and the computational model of comparison class inference, this paper also presents experimental and data-analytic methodological contributions. 
+In addition to the novel empirical data and the computational model of comparison class inference, this paper also presents experimental and data-analytic methodological innovations. 
 On the experimental side, we articulated an explicit generative model of our items, which we deployed on human participants to construct a large and diverse set of linguistic stimuli (n = 756 unique stimuli). 
-While this procedure wasn't fully ``end-to-end'' (i.e., we still needed to curate, edit, and add context to the items), it presents a significant advance beyond the traditional method of the scientist constructing a small set of stimuli, often inadvertently optimized to test a theory.
-On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \cite{tauber2017} with the productivity of probabilistic models of language understanding \cite{Goodman2016, scontras2017probabilistic} to jointly model two complementary data sets and infer the relevant prior knowledge that is shared between the tasks.
-The major feature of this method is that participants respond only to simple, natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed \cite<e.g.,>{Franke2016}. The fully Bayesian language approach we pioneer here also provides a further constraint on the language model, which must predict data from two similar but distinct language experiments. The productivity of natural language can thus be harnessed to productively design experiments that further constrain and test computational models of language and cognition.
+While this procedure was not entirely ``end-to-end'' (i.e., we still needed to curate, edit, and add context to the items), the method presents a significant advance beyond the traditional method of the scientist constructing a small set of stimuli, often inadvertently optimized to test a theory.
+On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \cite{tauber2017} with the productivity of probabilistic models of language understanding \cite{Goodman2016, scontras2017probabilistic} to jointly model two complementary language data sets and infer the relevant prior knowledge that is shared between the tasks.
+The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would be otherwise inaccessible through traditional prior elicitation techniques because human participants would not have sufficient knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?); in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimating numerical quantities for which complicated linking functions must be designed \cite<c.f.,>{Franke2016}. The fully Bayesian language approach we pioneer here also provides further constraints on the language model, which must predict data from two similar but distinct language experiments. The productivity of natural language can thus be harnessed to productively design experiments that further constrain and test computational models of language and cognition.
 
 This work builds upon previous studies on context-sensitive adjective interpretation.
 Previous experimental work on adjective understanding in young children has looked at what counts as being in the comparison class (e.g., the comparison class for a ``tall pimwit'' is \emph{other pimwits} and not \emph{other creatures in general}; Barner \& Snedeker, 2008) or how flexibly children can shift between different kinds of
@@ -839,7 +876,7 @@ and only make sense in context. The context, however, can also be
 underspecified, leaving the listener in the dark about both the
 speaker's intended meaning and about the context through which the
 listener is to make sense of the conversation. This work suggests,
-however, that listeners are able to jointly infer a lot from a little:
+however, that listeners infer a lot from a little:
 The meaning and the context from a single vague utterance.
 
 
@@ -860,48 +897,48 @@ FA8750-14-2-0009 to NDG.
 
 \bibliography{comparison-class}
 
-\newpage
-\section{Appendix}
-
-
-%Gradable adjectives like \emph{warm} and \emph{cold} are vague
-%descriptions of an underlying quantitative scale (e.g., temperature).
-Classic semantic theories posit the meaning of gradable adjectives to simply be that the scalar degree $x$ (e.g., temperature) is greater than or less than a contextually-supplied standard of comparison  \(\theta_c\): \([\![u_{pos}]\!] = x > \theta_c\), for positive-form adjectival utterance \(u_{pos}\) (e.g., warm) and \([\![u_{neg}]\!] = x < \theta_c\), for negative-form adjectival utterance \(u_{neg}\) (e.g., cold).
- Lassiter \& Goodman (2013) model the context-sensitivity of these adjectival utterances using threshold semantics, where
-the threshold is probabilistically set with respect to a comparison class \(c\) via pragmatic reasoning :
-
-\begin{align}
-L_{1}(x, \theta \mid u, c) &\propto S_{1}(u \mid x, \theta) \cdot P(x \mid c) \cdot P(\theta) \label{eq:L1} \\
-S_{1}(u \mid x, \theta, c) &\propto \exp{(\alpha_1 \cdot (\ln {L_{0}(x \mid u, \theta, c)} - \text{cost}(u)))} \label{eq:S1}\\
-L_{0}(x \mid u, \theta, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \label{eq:L0}
-\end{align}
-
-Eqs. \ref{eq:L1} - \ref{eq:L0} are the Rational Speech Act mode  Lassiter \& Goodman (2013). 
-In this model, a pragmatic listener \(L_1\)
-tries to resolve the degree \(x\) (e.g., the temperature)
-from the adjectival utterance she heard \(u\) (e.g., ``it's warm''), by assuming the utterance came from an approximately rational Bayesian
-speaker \(S_1\) trying to inform a naive listener \(L_0\), who in turn
-updates their prior beliefs \(P_c(x)\) via an utterance's literal meaning
-\([\![u]\!](x, \theta)\).
-Formally, the literal meaning is represented by the
-Kronecker delta function \(\delta_{\mbox{ $[\![ u ]\!]$}(x, \theta)}\)
-that returns probabilities proportional to \(1\) when the utterance is
-true (i.e., when \(x > \theta\)) and \(0\) otherwise.
-The key innovation used for modeling gradable adjectives is to have uncertainty over the
-semantic variable---the threshold \(\theta\) (Eq. \ref{eq:L1}). In
-Lassiter and Goodman (2013)'s model, \(\theta\) comes from an improper uniform
-prior distribution over thresholds defined over the real numbers and is resolved by the
-listener reasoning about the different thresholds a speaker might be
-using \(S_{1}(u \mid x, \theta)\) as well as the probabilities of
-different states of the world \(P(x \mid c)\) (e.g., different
-temperatures). Assuming the adjective adds some cost to the speaker's
-utterance (Eq. \ref{eq:S1}), the meaning of a gradable adjectives (e.g.,
-``warm'') is resolved by the pragmatic listener to mean something
-like ``significantly greater temperature than one might expect''
-(Lassiter \& Goodman, 2015). Critically, what ``one might
-expect''---the prior distribution over temperatures \(P(x \mid c)\)---is
-always with respect to some comparison class \(c\) (Eqs. \ref{eq:L1} \&
-\ref{eq:L0})
-
+%\newpage
+%\section{Appendix}
+%
+%
+%%Gradable adjectives like \emph{warm} and \emph{cold} are vague
+%%descriptions of an underlying quantitative scale (e.g., temperature).
+%Classic semantic theories posit the meaning of gradable adjectives to simply be that the scalar degree $x$ (e.g., temperature) is greater than or less than a contextually-supplied standard of comparison  \(\theta_c\): \([\![u_{pos}]\!] = x > \theta_c\), for positive-form adjectival utterance \(u_{pos}\) (e.g., warm) and \([\![u_{neg}]\!] = x < \theta_c\), for negative-form adjectival utterance \(u_{neg}\) (e.g., cold).
+% Lassiter \& Goodman (2013) model the context-sensitivity of these adjectival utterances using threshold semantics, where
+%the threshold is probabilistically set with respect to a comparison class \(c\) via pragmatic reasoning :
+%
+%\begin{align}
+%L_{1}(x, \theta \mid u, c) &\propto S_{1}(u \mid x, \theta) \cdot P(x \mid c) \cdot P(\theta) \label{eq:L1} \\
+%S_{1}(u \mid x, \theta, c) &\propto \exp{(\alpha_1 \cdot (\ln {L_{0}(x \mid u, \theta, c)} - \text{cost}(u)))} \label{eq:S1}\\
+%L_{0}(x \mid u, \theta, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \label{eq:L0}
+%\end{align}
+%
+%Eqs. \ref{eq:L1} - \ref{eq:L0} are the Rational Speech Act mode  Lassiter \& Goodman (2013). 
+%In this model, a pragmatic listener \(L_1\)
+%tries to resolve the degree \(x\) (e.g., the temperature)
+%from the adjectival utterance she heard \(u\) (e.g., ``it's warm''), by assuming the utterance came from an approximately rational Bayesian
+%speaker \(S_1\) trying to inform a naive listener \(L_0\), who in turn
+%updates their prior beliefs \(P_c(x)\) via an utterance's literal meaning
+%\([\![u]\!](x, \theta)\).
+%Formally, the literal meaning is represented by the
+%Kronecker delta function \(\delta_{\mbox{ $[\![ u ]\!]$}(x, \theta)}\)
+%that returns probabilities proportional to \(1\) when the utterance is
+%true (i.e., when \(x > \theta\)) and \(0\) otherwise.
+%The key innovation used for modeling gradable adjectives is to have uncertainty over the
+%semantic variable---the threshold \(\theta\) (Eq. \ref{eq:L1}). In
+%Lassiter and Goodman (2013)'s model, \(\theta\) comes from an improper uniform
+%prior distribution over thresholds defined over the real numbers and is resolved by the
+%listener reasoning about the different thresholds a speaker might be
+%using \(S_{1}(u \mid x, \theta)\) as well as the probabilities of
+%different states of the world \(P(x \mid c)\) (e.g., different
+%temperatures). Assuming the adjective adds some cost to the speaker's
+%utterance (Eq. \ref{eq:S1}), the meaning of a gradable adjectives (e.g.,
+%``warm'') is resolved by the pragmatic listener to mean something
+%like ``significantly greater temperature than one might expect''
+%(Lassiter \& Goodman, 2015). Critically, what ``one might
+%expect''---the prior distribution over temperatures \(P(x \mid c)\)---is
+%always with respect to some comparison class \(c\) (Eqs. \ref{eq:L1} \&
+%\ref{eq:L0})
+%
 
 \end{document}
