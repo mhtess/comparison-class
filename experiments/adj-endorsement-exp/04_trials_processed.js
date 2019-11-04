@@ -12,7 +12,7 @@ const trials = function(domain) {
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
-const fc_order = _.shuffle(["pos", "neg"])
+const fc_order = _.shuffle(["adj_positive", "adj_negative"])
 // these functions can be used for trials with randomly sampled adjective and noun phrase conditions
 // sample an example for the item
 // const item = function() {
@@ -44,7 +44,7 @@ const create_view = function(domain) {
   const sequence = trials(domain)
   var i;
   const domain_views = []
-  const np_seq = _.shuffle(["positive", "negative", "neutral", "positive", "negative", "neutral"])
+  const np_seq = _.shuffle(["positive", "negative", "neutral"])
   const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
 
   for (i=0; i < sequence.length ; i++) {
@@ -64,15 +64,18 @@ const create_view = function(domain) {
     // sample an adjective (positive or negative)
     // const adjective = adj()
     const adjective = adj_seq[i]
+    // construct condition of first question
     // return the view data
+    var text_1 = {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"}
     const view = {
       context: context_sent(current_item, single_item),
       question: "Do you think " + domain[x].pronoun + " would be:" ,
-      text_1: {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"},
-      text_pos:  "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
-      text_neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
-      sentence_1: fc_order[0],
-      sentence_2: fc_order[1],
+      // text_pos:  "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      // text_neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      sentence_1: "<b>" + domain[x][fc_order[0]] + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      sentence_2: "<b>" + domain[x][fc_order[1]] + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      condition_1: fc_order[0],
+      condition_2: fc_order[1],
       item_cond: current_item,
       item: domain[x][current_item],
       stim_id: domain[x].worker_id,
@@ -1427,7 +1430,7 @@ const items = {
         neutral: "thunderstorm",
         negative: "rain",
         pronoun: "it",
-        context: "You are hearing about the PHRASE that are heading towards them."
+        context: "You are hearing about the PHRASE that is heading towards you."
     },
     // {
     //     worker_id: "96",
