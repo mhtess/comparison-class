@@ -375,7 +375,7 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 %$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
 
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
   \begin{center}
     \begin{tabular}{cc}
 \begin{tikzpicture}
@@ -479,7 +479,7 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
     \end{tabular}
   \end{center}
-  \caption{\small Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_2$ and the comparison class inference model $L_1$) directly predict the data from Experiments 1 \& 2 ($d^{adj}$ and $d^{cc}$), respectively. Each of these models relies upon world knowledge $P(x_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu_k$ and variance $\sigma_k$). The prior on comparison classes $P(c)$ is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with unknown scale parameter $\beta$. Each RSA model has its own set of speaker optimality parameters ($L_1$ has one parameter $\alpha_1$, while $S_2$ has two parameters $\boldsymbol{\alpha_2}$.}
+  \caption{\small Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{adj}$ and $d^{cci}$), respectively. Each of these models relies upon world knowledge $P(x^d_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$), that vary by category (basketball player) and degree (height). The prior on comparison classes $P(c \mid k)$ varies according to the subordinate and superordinate categories, is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with global scale parameter $\beta$. Each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
 
