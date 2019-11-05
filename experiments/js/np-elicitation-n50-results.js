@@ -210,7 +210,7 @@ var examples = [
         neither_nor: "wood",
         negative: "carpet",
         pronoun: "It",
-        context: "PERSON steps into a room with a PHRASE floor."
+        context: "PERSON steps onto the PHRASE floor of a room."
     },
     {
         worker_id: "16",
