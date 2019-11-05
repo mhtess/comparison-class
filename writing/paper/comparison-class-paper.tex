@@ -340,10 +340,10 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 
 \section{Data-analytic Strategy}
 
-Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear an adjective in isolation (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E). 
-The model is a quantitative model, however, and can make quantitative predictions concerning the strength of comparison class inferences given model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
+Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E). 
+The model is quantitative in nature, however, and can make quantitative predictions concerning the strength of comparison class inferences given model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
 Previous modeling papers in the RSA tradition empirically elicit world knowledge through prior elicitation tasks.
-These tasks often involve estimating numerical quantities or making probability judgments, for which complicated linking functions must be designed \cite{Franke2016}. 
+These tasks often involve estimating numerical quantities or making probability judgments, for which the participant must have relevant knowledge concerning the units of measure (e.g., prices in dollars) and for which complicated linking functions are often designed to relate latent probabilities to the estimation data \cite{Franke2016}. 
 We take a different approach: We make small modifications to the same core RSA architecture to make predictions about a related language task concerning the same domains used in the Comparison Class Inference task. 
 We then construct a Bayesian data analytic model to infer the world knowledge shared between these two tasks, along with the few other free parameters of the model (Figure \ref{fig:bayesnet}). 
 This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to model broader coverage data sets while still constraining model flexibility by forcing the models to predict more distinct data points. 
@@ -351,22 +351,23 @@ This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explici
 In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
 Because we simplify the problem to only considering two comparison classes---a subordinate class (e.g., basketball players) and a basic or superordinate class (e.g., people)---only the relative values for the degrees affect model predictions. 
 Hence, we fix each basic/superordinate class in each domain to be a standard normal distribution---$P(x \mid c = c_{basic}) = \mathcal{N}(0, 1)$---and we assume the subordinate priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+These parameters vary by the category $k = c_{sub}$ as well as the degree scale (e.g., height vs. weight).
 We infer the plausible values of the parameters governing the subordinate priors from the data.
 
 The data from the comparison class experiment would be insufficient, however, to reliably estimate the model parameters governing the world knowledge priors. 
 To alleviate this, we use the same RSA architecture to predict additional data about the related Adjective Endorsement task. 
-In the Adjective Endorsement task, participants are asked to judge whether a gradable adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate-level category relative to the basic- or superordinate level category (e.g., \emph{Do you think that the basketball player would be tall relative to other people?}).
-To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement using a speaker model deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
+In the Adjective Endorsement task, participants are asked to judge whether a gradable adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate-level category relative to the basic- or superordinate level category (e.g., \emph{Do you think that they  [a basketball player] would be tall relative to other people?}).
+To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
 
 The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$. 
-As a proxy for comparison class usage frequency, we use empirical frequency \(\hat{f}\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f})}$.
+As a proxy for comparison class usage frequency, we use empirical frequency of the noun phrase \(\hat{f}_k\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f}_k)}$.
 
 %The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
 We construct a single data-analytic model with each of these RSA components as sub-models in order to make quantitative predictions about the data from both of our experiments.
-The listener and speaker sub-models share their prior world knowledge $P(x \mid c)$ (e.g., heights of basketball players).
-We put the same priors over the parameters of each subordinate distribution: $\mu \sim \text{Uniform}(-3, 3)$, $\sigma \sim \text{Uniform}(0, 5)$, since they have standardized units.
-The comparison class prior $P(c)$ scales the empirical frequency $\hat{f}$ by a free parameter, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
-Each RSA model has an additional speaker optimality parameter $\alpha^{\text{expt}_{i}}$ not of direct theoretical interest.
+The listener and speaker sub-models share their prior world knowledge $P(x \mid k)$ (e.g., heights of basketball players).
+We put the same priors over the parameters of each subordinate distribution $k$ for each degree $k$: $\mu^d_k \sim \text{Uniform}(-3, 3)$, $\sigma^d_k \sim \text{Uniform}(0, 5)$, since they have standardized units.
+The comparison class prior $P(c \mid k)$ scales the empirical frequency $\hat{f}_k$ by a free parameter, which we give the following prior: $\beta \sim \text{Uniform}(0, 3)$. 
+Each RSA model has an additional speaker optimality parameter $\alpha_{i}$ not of direct theoretical interest.
 We use priors consistent with the previous literature: $\alpha_i \sim \text{Uniform}(0, 20)$.
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl}.
 
@@ -665,7 +666,7 @@ Adjectives (scale) & Example subordinate classes (superordinate class) \\
   & \emph{truck}, \emph{car}, \emph{golf cart} (vehicles) \\
    \hline
 \end{tabularx}
-\caption{Adjectives used in experiments.} 
+\caption{Sets of adjectives and categories used in Experiments 2 and 3. Categories were curated from a set of empirically elicited noun phrases (Experiment 1).} 
 \label{tab:1}
 \endgroup
 \end{table*}
