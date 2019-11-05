@@ -382,38 +382,34 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
 
   % Y
-  \node[obs]          (d-c)   {$d^{cc}$}; %
-  \node[obs, left=2.5 of d-c]          (d-a)   {$d^{adj}$}; %
+  \node[obs]          (d-c)   {$d^{cci}_{i, u, d, k}$}; %
+  \node[obs, left=2.5 of d-c]          (d-a)   {$d^{adj}_{i, u, d, k}$}; %
   \factor[above=of d-a] {da-f} {left:Bern} {} {} ; %
   \factor[above=of d-c] {dc-f} {left:Bern} {} {} ; %
 
-  % W and X
-  \node[det, above=of d-c] (L1) {$L_1(c \mid u, k)$} ; % 
-  \node[det, above=of d-a] (S2) {$S_2(u \mid k)$} ; % 
+  \node[det, above=of d-c] (L1) {$L_1(c \mid d, k, u)$} ; % 
+  \node[det, above=of d-a] (S2) {$S_1(u \mid d, k)$} ; % 
   
-%  \node[det, above right=1.2 of S2] (RSA) {RSA} ; % 
-  
-  \node[det, above=of S2]  (x)   {$P(x_k)$}; %
-  \node[det, above=of L1] (c)   {$P(c)$}; %
+  \node[det, above=of S2]  (x)   {$P(x^d_k)$}; %
+  \node[det, above=2.5 of L1] (c)   {$P(c)$}; %
 
-  % C hyperpriors
-   \node[const, above=1.2 of c] (fhat) {$\hat{f}_k$} ; %
-   \node[latent, right=1.3 of c, yshift=1.1cm]  (b) {$\beta$} ; %
+   \node[const,  above=1 of c] (fhat) {$\hat{f}_k$} ; %
+%   \node[const, right=1.3 of c, yshift=1.5cm] (fshat) {$\hat{f}_s$} ; %
+   \node[latent, right=1.2 of c, yshift=1.1cm]  (b) {$\beta$} ; %
    \factor[above=of c] {c-f} {left:Bern} {fhat,b} {c} ; %
 
-  % X hyperpriors
-  \node[latent, above=1.2 of x, xshift=-0.5cm] (mx) {$\mu_k$} ; %
-  \node[latent, above=1.2 of x, xshift=0.5cm]  (sx) {$\sigma_k$} ; %
+  \node[latent, left=1.2 of x, yshift=-0.5cm] (mx) {$\mu^d_k$} ; %
+  \node[latent, left=1.2 of x, yshift=0.5cm]  (sx) {$\sigma^d_k$} ; %
+  \factor[left=of x] {x-f} {above:$\mathcal{N}$} {mx,sx} {x} ; %
 
   % sopt
-   \node[latent, right=1cm of L1, yshift=0.0cm]         (a1)   {$\alpha_1$}; %
-   \node[latent, left=2cm of S2]         (aa1)   {$\boldsymbol{\alpha_2}$}; %
+   \node[latent, right=0.8cm of L1, yshift=0.0cm]         (a1)   {$\alpha_1$}; %
+   \node[latent, left=2.2cm of S2]         (aa1)   {$\alpha_2$}; %
 %   \node[latent, left=2.5cm of S2, yshift=-0.6cm]         (aa2)   {$\alpha^{adj}_2$}; %
  % \node[const, above=of t, xshift=-0.5cm] (at)  {$\alpha_\tau$} ; %
   % \node[const, above=of t, xshift=0.5cm]  (bt)  {$\beta_\tau$} ; %
 
   % Factors
-  \factor[above=of x] {x-f} {left:$\mathcal{N}$} {mx,sx} {x} ; %
 %  \factor[above=of t] {t-f} {left:$\mathcal{G}$} {at,bt} {t} ; %
 \factoredge {L1} {dc-f} {d-c} ; %
 \factoredge {S2} {da-f} {d-a} ; %
@@ -429,23 +425,32 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 %  \edge[-] {aa2} {S2} ;
 
 \gate {RSAgate} {(L1)(S2)(x)(c)(x-f)(c-f)} {} ; %
-\node[text width=1cm] at (-1.5,1.6) {$RSA$};
+\node[text width=1cm] at (-4,7.6) {$RSA$};
   % Plates
-  \plate {P1} { %
-  %  (d-c)(dc-f)(dc-f-caption) %
-%    (x)(x-f)(x-f-caption) %
-    %(RSA)
-     (S2) (L1) (RSAgate)%
-    (d-c)(d-a)%(x-f)
-  } {$u \in \{tall, short\}$} ;
-  \plate {yx} { %
-  (P1)
-    (d-c)(dc-f) %
-    (x)(x-f)(mx)(sx)(fhat) %
-    %(RSA) 
-    (S2) (L1) %
-  } {$k \in \{\text{basketball player, gymnast, soccer player, }...\}$} ;
+    \plate {dataPlate} {
+     (d-c)(d-a)
+  } {$i \in \textsc{participants}$} ;
   
+  \plate {adjPlate} { %
+    (dataPlate)
+     (S2) (L1) 
+  } {$u \in  \textsc{adjectives}$} ;
+  
+        \plate {degreePlate} { %
+ (adjPlate)    (dataPlate)
+  (x)(x-f)(mx)(sx)
+  } {$d \in  \textsc{degree scales}$} ;
+  
+  \plate {subPlate} { %
+  (adjPlate)    (dataPlate)(degreePlate)
+   (fhat) (c-f) (c)%
+    %(RSA) 
+    (S2) (L1) (RSAgate)%%
+  } {$k \in  \textsc{categories}$} ;
+%    \plate {superPlate} { %
+%(adjPlate)  (subPlate)(fshat)    (dataPlate)(degreePlate)
+%  } {$s \in  \textsc{superordinate categories}$} ;
+
     
 %  \plate {} {%
 %    (d-c)(dc-f)(dc-f-caption) %
@@ -748,6 +753,14 @@ Previous experimental work on adjective understanding in young children has look
 comparison classes (Ebeling \& Gelman, 1994), but now the factors that
 determine the comparison class. We demonstrate one such factor: world
 knowledge.
+
+\mht{under development:}\red{
+The phenomenon of comparison class inference is a case study of inferred context, or what is in common ground.
+We model a situation where a listener is uncertain about the relevant context, but the speaker does not represent this. 
+This may be a kind of presupposition, then; an aspect of context assumed by the speaker about which the listener is uncertain.
+Were the speaker accurately representing this uncertainty in the listener, then the speaker would have produced a more circumscribed utterance.
+In our experiment, the speaker is talking to a third party and what information is in common ground between the interlocutors may be uncertain. 
+}
 
 It's been suggested that there exist qualitatively different kinds of
 comparison classes, constructed by reference to either: the perceptual
