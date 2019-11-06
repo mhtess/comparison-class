@@ -20,6 +20,7 @@ $("document").ready(function() {
             // // instructions,
             instructions,
             adj_endorsement_both,
+            custom_catch,
             custom_postTest,
             thanks,
         ],
@@ -30,7 +31,7 @@ $("document").ready(function() {
             // Possible deployment methods are:
             // "debug" and "directLink"
             // As well as "MTurk", "MTurkSandbox" and "Prolific"
-            deployMethod: "MTurk",
+            deployMethod: "debug",
             contact_email: "polinats@mit.edu",
             prolificURL: "https://app.prolific.ac/submissions/complete?cc=SAMPLE1234"
         },

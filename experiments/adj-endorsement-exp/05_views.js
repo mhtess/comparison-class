@@ -17,6 +17,12 @@
     * More about the properties and functions of the wrapping views - https://magpie-ea.github.io/magpie-docs/01_designing_experiments/01_template_views/#wrapping-views
 
 */
+const custom_catch = custom_memory_check({
+  trials: 1,
+  name: "custom_catch",
+  data: memory_check.catch
+})
+
 // elicit the trial views
 const adj_endorsement_both = custom_forced_choice({
   trials: trial_info.main.length ,

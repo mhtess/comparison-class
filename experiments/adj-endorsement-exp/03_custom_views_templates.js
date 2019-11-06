@@ -4,6 +4,78 @@
 // saves response to global data
 
 // first a context sentence is shown, below follows the quetion
+const custom_memory_check = function(config, startTime) {
+
+  const view = {
+    name: config.name,
+    CT: 0,
+    trials: config.trials,
+    render: function(CT, magpie, startTime) {
+      const startingTime = Date.now()
+      $("main").html(` <div class='magpie-view'>
+      <section class="magpie-text-container">
+        <p class="magpie-view-text" style="font-size:20px">Select all of the things you can remember seeing in this experiment.</p>
+      </section>
+
+      <section class="magpie-answer-container">
+      <div class="magpie-view-text">
+        <p><label><input type='radio' id='valid1' name='memory1' value='1'/>${config.data[CT].memory1}</label></p>
+        <p><label><input type='radio' id='valid2' name='memory2' value='1'/>${config.data[CT].memory2}</label></p>
+        <p><label><input type='radio' id='valid3' name='memory3' value='1'/>${config.data[CT].memory3}</label></p>
+        <p><label><input type='radio' id='invalid1' name='memory4' value='1'/>${config.data[CT].memory4}</label></p>
+        <p><label><input type='radio' id='invalid2' name='memory5' value='1'/>${config.data[CT].memory5}</label></p>
+        <p><label><input type='radio' id='valid4' name='memory6' value='1'/>${config.data[CT].memory6}</label></p>
+        <p><label><input type='radio' id='invalid3' name='memory7' value='1'/>${config.data[CT].memory7}</label></p>
+        <p><label><input type='radio' id='invalid4' name='memory8' value='1'/>${config.data[CT].memory8}</label></p>
+        <p><label><input type='radio' id='invalid5' name='memory9' value='1'/>${config.data[CT].memory9}</label></p>
+        <p><label><input type='radio' id='valid5' name='memory10' value='1'/>${config.data[CT].memory10}</label></p>
+      </div>
+      <p class="text" align="center" id="catch">Please select a response before proceeding.</p>
+      <button id='next' class='magpie-view-button'>next</button>
+      </section>
+      </div>
+        `)
+
+
+              $("#catch").hide();
+              $("#next").on("click", function() {
+                var response1 = $("input[name=memory1]:checked").val();
+                var response2 = $("input[name=memory2]:checked").val();
+                var response3 = $("input[name=memory3]:checked").val();
+                var response4 = $("input[name=memory4]:checked").val();
+                var response5 = $("input[name=memory5]:checked").val();
+                var response6 = $("input[name=memory6]:checked").val();
+                var response7 = $("input[name=memory7]:checked").val();
+                var response8 = $("input[name=memory8]:checked").val();
+                var response9 = $("input[name=memory9]:checked").val();
+                var response10 = $("input[name=memory10]:checked").val();
+
+                if ((response1 === undefined) & (response2 === undefined) & (response3 === undefined) & (response4 === undefined) & (response5 === undefined)
+                  & (response6 === undefined) & (response7 === undefined) & (response8 === undefined) & (response9 === undefined) & (response10 === undefined)) {
+                  $("#catch").show()
+                } else {
+                const RT = Date.now() - startingTime;
+                  let trial_data = {
+                    trial_name: config.name,
+                    trial_number: CT + 1,
+                    response1: [response1, response2, response3, response4, response5, response6, response7, response8, response9, response10],
+                    correct_mem: [1, 1, 1,,,1,,,,1],
+                    // response2: response2,
+                    RT: RT
+                    // response3: response3,
+                    // response4: response4
+                  }
+                  trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
+                  magpie.trial_data.push(trial_data);
+                  magpie.findNextView();
+                }
+              })
+
+    }
+  }
+  return view
+}
+
 
 const custom_forced_choice = function(config, startTime) {
 
