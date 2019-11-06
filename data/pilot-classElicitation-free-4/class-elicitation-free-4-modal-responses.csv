@@ -1,0 +1,492 @@
+degree,superordinate,np_match,np_positiveness,adj,adj_positiveness,diff,matchingSuper,matchingSuperResp,cleanedPhrase,n,n_unique_resps,mode,isModeNP,isModeSuper,isModeNeither,isModeNP2,isModeSuper2,cleanMode
+darkness,birds,crow,negative,dark,negative,0,0,0,_creatures_,1,1,birds,0,0,0,0,0,birds
+darkness,birds,crow,negative,dark,negative,0,1,0,_birds_,6,6,birds,0,0,0,0,0,birds
+darkness,birds,crow,negative,dark,negative,1,0,0,_crows_,5,5,birds,0,0,0,0,0,birds
+darkness,birds,crow,negative,light,positive,0,1,0,_birds_,1,1,crows,1,0,1,0,0,crows
+darkness,birds,crow,negative,light,positive,1,0,0,_crows_,7,7,crows,1,0,1,0,0,crows
+darkness,birds,parrot,neither-nor,dark,negative,0,0,0,_animals_,1,1,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,dark,negative,0,0,0,_times day_,1,1,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,dark,negative,0,1,0,_birds_,4,4,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,dark,negative,1,0,0,_parrots_,10,10,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,light,positive,0,0,0,_bird colors_,1,1,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,light,positive,0,0,0,_colors_,3,3,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,light,positive,0,1,0,_birds_,4,4,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,light,positive,1,0,0,_parrot's plumage_,1,1,parrots,1,0,1,0,0,parrots
+darkness,birds,parrot,neither-nor,light,positive,1,0,0,_parrots_,7,7,parrots,1,0,1,0,0,parrots
+darkness,birds,seagull,positive,dark,negative,0,1,0,_birds_,2,2,seagulls,1,0,1,0,0,seagulls
+darkness,birds,seagull,positive,dark,negative,1,0,0,_seagulls_,10,10,seagulls,1,0,1,0,0,seagulls
+darkness,birds,seagull,positive,light,positive,0,1,0,_birds_,4,4,birds,0,0,0,0,0,birds
+darkness,birds,seagull,positive,light,positive,1,0,0,_seagull colors_,1,1,birds,0,0,0,0,0,birds
+darkness,birds,seagull,positive,light,positive,1,0,0,_seagulls colors_,1,1,birds,0,0,0,0,0,birds
+darkness,birds,seagull,positive,light,positive,1,0,0,_seagulls_,2,2,birds,0,0,0,0,0,birds
+darkness,times day,day,positive,dark,negative,1,0,0,_days daylight_,1,1,days,1,0,1,0,0,days
+darkness,times day,day,positive,dark,negative,1,0,0,_days_,4,4,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,0,0,0,_environments_,1,1,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,0,0,0,_lightings_,1,1,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,0,0,0,_locations_,1,1,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,1,0,0,_days_,6,6,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,1,0,0,_time day_,1,1,days,1,0,1,0,0,days
+darkness,times day,day,positive,light,positive,1,1,0,_times day_,1,1,days,1,0,1,0,0,days
+darkness,times day,dusk,neither-nor,dark,negative,0,0,0,_evenings_,1,1,times day,0,0,0,0,0,times of day
+darkness,times day,dusk,neither-nor,dark,negative,0,0,0,_nights_,2,2,times day,0,0,0,0,0,times of day
+darkness,times day,dusk,neither-nor,dark,negative,0,1,0,_times day_,5,5,times day,0,0,0,0,0,times of day
+darkness,times day,dusk,neither-nor,dark,negative,1,0,0,_dusks_,1,1,times day,0,0,0,0,0,times of day
+darkness,times day,dusk,neither-nor,light,positive,0,0,0,_days_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,0,0,0,_evenings_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,0,0,0,_night_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,0,0,0,_nights_,3,3,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,0,0,0,_times evening_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,0,0,1,_times_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,1,0,0,_days dusk_,1,1,nights,0,0,0,0,0,nights
+darkness,times day,dusk,neither-nor,light,positive,1,0,0,_dusks_,3,3,nights,0,0,0,0,0,nights
+darkness,times day,night,negative,dark,negative,0,0,1,_times_,2,2,nights,1,0,1,0,0,nights
+darkness,times day,night,negative,dark,negative,0,1,0,_times day_,4,4,nights,1,0,1,0,0,nights
+darkness,times day,night,negative,dark,negative,1,0,0,_nights_,7,7,nights,1,0,1,0,0,nights
+darkness,times day,night,negative,light,positive,1,0,0,_night_,1,1,nights,1,0,1,0,0,nights
+darkness,times day,night,negative,light,positive,1,0,0,_nights_,10,10,nights,1,0,1,0,0,nights
+hardness,floors,carpet,negative,hard,positive,0,0,0,_surface_,1,1,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,hard,positive,0,1,0,_floors_,1,1,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,hard,positive,1,0,0,_carpet_,2,2,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,hard,positive,1,0,0,_carpets_,4,4,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,hard,positive,1,1,0,_carpeted floors_,1,1,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,soft,negative,0,1,0,_floors_,3,3,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,soft,negative,1,0,0,_carpet_,1,1,carpets,1,0,1,0,0,carpets
+hardness,floors,carpet,negative,soft,negative,1,0,0,_carpets_,6,6,carpets,1,0,1,0,0,carpets
+hardness,floors,tile,positive,hard,positive,0,0,1,_floor_,1,1,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,hard,positive,0,1,0,_floors building_,1,1,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,hard,positive,0,1,0,_floors_,13,13,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,hard,positive,0,1,0,_types floors_,1,1,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,soft,negative,0,1,0,_floors_,8,8,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,soft,negative,1,0,0,_tiles_,2,2,floors,0,0,0,0,0,floors
+hardness,floors,tile,positive,soft,negative,1,1,0,_tile floors_,5,5,floors,0,0,0,0,0,floors
+hardness,floors,wood,neither-nor,hard,positive,0,1,0,_floors surfaces_,1,1,floors,0,0,0,0,0,floors
+hardness,floors,wood,neither-nor,hard,positive,0,1,0,_floors_,7,7,floors,0,0,0,0,0,floors
+hardness,floors,wood,neither-nor,hard,positive,1,1,0,_wood floors_,1,1,floors,0,0,0,0,0,floors
+hardness,floors,wood,neither-nor,soft,negative,0,1,0,_floors_,9,9,floors,0,0,0,0,0,floors
+hardness,floors,wood,neither-nor,soft,negative,1,1,0,_wood floors_,4,4,floors,0,0,0,0,0,floors
+hardness,sweets,chocolate,neither-nor,hard,positive,0,0,0,_food_,1,1,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,0,1,0,_kinds sweets_,1,1,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,0,1,0,_sweets_,1,1,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,1,0,0,_chocolate_,6,6,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,1,0,0,_chocolates_,5,5,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,1,0,0,_pieces chocolate_,1,1,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,hard,positive,1,1,0,_chocolate sweets_,1,1,chocolate,0,0,0,0,0,chocolate
+hardness,sweets,chocolate,neither-nor,soft,negative,0,0,0,_foods_,1,1,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,0,1,0,_sweets_,3,3,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,0,1,0,_types sweets_,1,1,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,1,0,0,_chocolate_,3,3,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,1,0,0,_chocolates_,2,2,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,1,0,0,_pieces chocolate_,1,1,sweets,0,0,0,0,0,sweets
+hardness,sweets,chocolate,neither-nor,soft,negative,1,0,0,_types chocolate_,1,1,sweets,0,0,0,0,0,sweets
+hardness,sweets,jolly rancher,positive,hard,positive,0,1,0,_sweets_,8,8,sweets,0,0,0,0,0,sweets
+hardness,sweets,jolly rancher,positive,soft,negative,0,0,0,_food_,2,2,jolly ranchers,1,0,1,0,0,jolly ranchers
+hardness,sweets,jolly rancher,positive,soft,negative,0,1,0,_hard sweets_,1,1,jolly ranchers,1,0,1,0,0,jolly ranchers
+hardness,sweets,jolly rancher,positive,soft,negative,0,1,0,_sweets_,3,3,jolly ranchers,1,0,1,0,0,jolly ranchers
+hardness,sweets,jolly rancher,positive,soft,negative,1,0,0,_jolly ranchers_,5,5,jolly ranchers,1,0,1,0,0,jolly ranchers
+hardness,sweets,marshmallow,negative,hard,positive,0,1,0,_sweets_,1,1,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,hard,positive,1,0,0,_fresh marshmallows_,1,1,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,hard,positive,1,0,0,_marshmallows_,12,12,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,soft,negative,0,0,0,_foods_,4,4,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,soft,negative,1,0,0,_brands marshmallows_,1,1,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,soft,negative,1,0,0,_marshmallows eaten_,1,1,marshmallows,1,0,1,0,0,marshmallows
+hardness,sweets,marshmallow,negative,soft,negative,1,0,0,_marshmallows_,5,5,marshmallows,1,0,1,0,0,marshmallows
+height,animals,bird,negative,short,negative,0,1,0,_animals_,3,3,birds,1,0,1,0,0,birds
+height,animals,bird,negative,short,negative,1,0,0,_birds zoo_,1,1,birds,1,0,1,0,0,birds
+height,animals,bird,negative,short,negative,1,0,0,_birds_,11,11,birds,1,0,1,0,0,birds
+height,animals,bird,negative,tall,positive,0,1,0,_animals_,2,2,birds,1,0,1,0,0,birds
+height,animals,bird,negative,tall,positive,1,0,0,_birds_,13,13,birds,1,0,1,0,0,birds
+height,animals,giraffe,positive,short,negative,1,0,0,_giraffe_,1,1,giraffes,1,0,1,0,0,giraffes
+height,animals,giraffe,positive,short,negative,1,0,0,_giraffes_,13,13,giraffes,1,0,1,0,0,giraffes
+height,animals,giraffe,positive,tall,positive,0,0,0,_people_,1,1,animals,0,0,0,0,0,animals
+height,animals,giraffe,positive,tall,positive,0,1,0,_animals_,5,5,animals,0,0,0,0,0,animals
+height,animals,giraffe,positive,tall,positive,1,0,0,_giraffes_,3,3,animals,0,0,0,0,0,animals
+height,animals,monkey,neither-nor,short,negative,1,0,0,_monkeys zoo_,1,1,monkeys,1,0,1,0,0,monkeys
+height,animals,monkey,neither-nor,short,negative,1,0,0,_monkeys_,7,7,monkeys,1,0,1,0,0,monkeys
+height,animals,monkey,neither-nor,tall,positive,1,0,0,_monkeys_,11,11,monkeys,1,0,1,0,0,monkeys
+height,athletes,basketball,positive,short,negative,0,0,0,_players_,2,2,basketball players,1,0,1,0,0,basketball players
+height,athletes,basketball,positive,short,negative,1,0,0,_basketball players_,13,13,basketball players,1,0,1,0,0,basketball players
+height,athletes,basketball,positive,tall,positive,0,0,0,_people_,3,3,basketball players,1,0,1,0,0,basketball players
+height,athletes,basketball,positive,tall,positive,0,0,0,_players_,1,1,basketball players,1,0,1,0,0,basketball players
+height,athletes,basketball,positive,tall,positive,0,1,0,_athletes_,1,1,basketball players,1,0,1,0,0,basketball players
+height,athletes,basketball,positive,tall,positive,1,0,0,_basketball players_,5,5,basketball players,1,0,1,0,0,basketball players
+height,athletes,golfer,neither-nor,short,negative,0,0,0,_drives_,1,1,golfers,1,0,1,0,0,golfers
+height,athletes,golfer,neither-nor,short,negative,0,0,0,_human_,1,1,golfers,1,0,1,0,0,golfers
+height,athletes,golfer,neither-nor,short,negative,0,0,0,_people_,4,4,golfers,1,0,1,0,0,golfers
+height,athletes,golfer,neither-nor,short,negative,1,0,0,_golfers_,6,6,golfers,1,0,1,0,0,golfers
+height,athletes,golfer,neither-nor,tall,positive,0,0,0,_people_,7,7,people,0,0,0,0,0,people
+height,athletes,golfer,neither-nor,tall,positive,1,0,0,_golfers_,4,4,people,0,0,0,0,0,people
+height,athletes,jockey,negative,short,negative,0,0,0,_people_,5,5,people,0,0,0,0,0,people
+height,athletes,jockey,negative,short,negative,0,1,0,_athletes_,1,1,people,0,0,0,0,0,people
+height,athletes,jockey,negative,short,negative,1,0,0,_jockeys_,4,4,people,0,0,0,0,0,people
+height,athletes,jockey,negative,tall,positive,1,0,0,_jockeys_,12,12,jockeys,1,0,1,0,0,jockeys
+length_duration,dogs,bassett,neither-nor,long,positive,0,1,0,_dogs_,8,8,dogs,0,0,0,0,0,dogs
+length_duration,dogs,bassett,neither-nor,long,positive,1,0,0,_bassettt hounds_,1,1,dogs,0,0,0,0,0,dogs
+length_duration,dogs,bassett,neither-nor,short,negative,0,1,0,_dogs_,10,10,dogs,0,0,0,0,0,dogs
+length_duration,dogs,bassett,neither-nor,short,negative,1,0,0,_bassett hounds_,3,3,dogs,0,0,0,0,0,dogs
+length_duration,dogs,chihuahua,negative,long,positive,0,0,0,_chihuah's_,1,1,chihuahuas,1,0,1,0,0,chihuahuas
+length_duration,dogs,chihuahua,negative,long,positive,0,1,0,_dogs_,7,7,chihuahuas,1,0,1,0,0,chihuahuas
+length_duration,dogs,chihuahua,negative,long,positive,1,0,0,_chihuahuas_,9,9,chihuahuas,1,0,1,0,0,chihuahuas
+length_duration,dogs,chihuahua,negative,short,negative,0,0,0,_animals_,1,1,dogs,0,0,0,0,0,dogs
+length_duration,dogs,chihuahua,negative,short,negative,0,0,0,_breeds_,1,1,dogs,0,0,0,0,0,dogs
+length_duration,dogs,chihuahua,negative,short,negative,0,1,0,_dogs_,7,7,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,long,positive,0,1,0,_dogs_,6,6,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,long,positive,1,0,0,_dachshunds_,5,5,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,short,negative,0,0,0,_animals_,1,1,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,short,negative,0,0,0,_dog lengths_,1,1,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,short,negative,0,1,0,_dogs_,9,9,dogs,0,0,0,0,0,dogs
+length_duration,dogs,dachshund,positive,short,negative,1,0,0,_dachshunds_,2,2,dogs,0,0,0,0,0,dogs
+length_duration,readings,novel,positive,long,positive,0,0,0,_compared book lengths_,1,1,novels,1,0,1,0,0,novels
+length_duration,readings,novel,positive,long,positive,0,1,0,_readings_,3,3,novels,1,0,1,0,0,novels
+length_duration,readings,novel,positive,long,positive,1,0,0,_novels_,4,4,novels,1,0,1,0,0,novels
+length_duration,readings,novel,positive,short,negative,0,1,0,_readings_,3,3,novels,1,0,1,0,0,novels
+length_duration,readings,novel,positive,short,negative,1,0,0,_novels_,6,6,novels,1,0,1,0,0,novels
+length_duration,readings,poem,negative,long,positive,0,0,0,_peom_,1,1,poems,1,0,1,0,0,poems
+length_duration,readings,poem,negative,long,positive,1,0,0,_poems_,8,8,poems,1,0,1,0,0,poems
+length_duration,readings,poem,negative,short,negative,1,0,0,_poems friend read_,1,1,poems,1,0,1,0,0,poems
+length_duration,readings,poem,negative,short,negative,1,0,0,_poems_,14,14,poems,1,0,1,0,0,poems
+length_duration,readings,story,neither-nor,long,positive,0,1,0,_readings_,1,1,story,0,0,0,0,0,stories
+length_duration,readings,story,neither-nor,long,positive,1,0,0,_story_,15,15,story,0,0,0,0,0,stories
+length_duration,readings,story,neither-nor,short,negative,0,1,0,_readings_,3,3,story,0,0,0,0,0,stories
+length_duration,readings,story,neither-nor,short,negative,1,0,0,_story_,12,12,story,0,0,0,0,0,stories
+loudness,animals,cat,negative,loud,positive,0,0,0,_courtyard_,1,1,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,loud,positive,0,0,0,_noises_,1,1,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,loud,positive,0,0,0,_sounds_,1,1,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,loud,positive,0,1,0,_animals_,2,2,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,loud,positive,1,0,0,_cats_,7,7,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,quiet,negative,0,0,0,_courtyards_,3,3,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,quiet,negative,0,1,0,_animals_,2,2,cats,1,0,1,0,0,cats
+loudness,animals,cat,negative,quiet,negative,1,0,0,_cats_,7,7,cats,1,0,1,0,0,cats
+loudness,animals,dog,neither-nor,loud,positive,0,0,0,_inhabitants_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,loud,positive,0,0,0,_noises_,2,2,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,loud,positive,0,0,0,_sounds_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,loud,positive,1,0,0,_dogs_,9,9,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,quiet,negative,0,0,0,_courtyards_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,quiet,negative,0,1,0,_animals_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,quiet,negative,1,0,0,_dog barks_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,quiet,negative,1,0,0,_dogs_,8,8,dogs,1,0,1,0,0,dogs
+loudness,animals,dog,neither-nor,quiet,negative,1,0,0,_quiet dogs_,1,1,dogs,1,0,1,0,0,dogs
+loudness,animals,donkey,positive,loud,positive,0,0,0,_noiss_,1,1,animals,0,0,0,0,0,animals
+loudness,animals,donkey,positive,loud,positive,0,1,0,_animals_,10,10,animals,0,0,0,0,0,animals
+loudness,animals,donkey,positive,loud,positive,1,0,0,_donkeys_,1,1,animals,0,0,0,0,0,animals
+loudness,animals,donkey,positive,quiet,negative,0,0,0,_courtyards_,2,2,donkeys,1,0,1,0,0,donkeys
+loudness,animals,donkey,positive,quiet,negative,0,1,0,_animals_,1,1,donkeys,1,0,1,0,0,donkeys
+loudness,animals,donkey,positive,quiet,negative,1,0,0,_donkeys heard_,1,1,donkeys,1,0,1,0,0,donkeys
+loudness,animals,donkey,positive,quiet,negative,1,0,0,_donkeys_,7,7,donkeys,1,0,1,0,0,donkeys
+loudness,rooms,auditorium,positive,loud,positive,0,0,0,_school_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,loud,positive,0,0,0,_schools_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,loud,positive,0,1,0,_rooms school_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,loud,positive,0,1,0,_rooms_,4,4,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,loud,positive,0,1,0,_school rooms_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,loud,positive,1,0,0,_auditoriums_,2,2,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,0,0,_arenas_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,0,0,_building_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,0,0,_events_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,0,0,_school_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,0,0,_schools_,2,2,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,0,1,0,_rooms_,6,6,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,1,0,0,_auditoriums_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,auditorium,positive,quiet,negative,1,0,0,_school auditoriums_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,classroom,neither-nor,loud,positive,0,1,0,_rooms_,2,2,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,classroom,neither-nor,loud,positive,1,1,0,_classrooms_,3,3,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,classroom,neither-nor,quiet,negative,0,0,0,_locations_,1,1,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,classroom,neither-nor,quiet,negative,0,1,0,_class rooms_,1,1,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,classroom,neither-nor,quiet,negative,0,1,0,_rooms_,3,3,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,classroom,neither-nor,quiet,negative,1,1,0,_classrooms_,8,8,classrooms,1,0,1,0,0,classrooms
+loudness,rooms,study,negative,loud,positive,0,0,0,_school classes_,1,1,study halls,1,0,1,0,0,study halls
+loudness,rooms,study,negative,loud,positive,0,1,0,_rooms_,2,2,study halls,1,0,1,0,0,study halls
+loudness,rooms,study,negative,loud,positive,1,0,0,_study halls_,3,3,study halls,1,0,1,0,0,study halls
+loudness,rooms,study,negative,loud,positive,1,0,0,_study_,1,1,study halls,1,0,1,0,0,study halls
+loudness,rooms,study,negative,loud,positive,1,0,0,_times study hall_,1,1,study halls,1,0,1,0,0,study halls
+loudness,rooms,study,negative,quiet,negative,0,0,0,_buildings_,2,2,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,0,0,_classes_,2,2,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,0,0,_halls_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,1,0,_class rooms_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,1,0,_rooms school_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,1,0,_rooms_,3,3,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,0,1,0,_school rooms_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,1,0,0,_study hall_,1,1,rooms,0,0,0,0,0,rooms
+loudness,rooms,study,negative,quiet,negative,1,0,0,_study halls_,3,3,rooms,0,0,0,0,0,rooms
+price,alcoholic drinks,beer,negative,cheap,negative,0,0,0,_liquor stores_,1,1,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,cheap,negative,1,0,0,_beer_,7,7,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,cheap,negative,1,0,0,_beers_,2,2,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,expensive,positive,0,0,0,_liquor store prices_,1,1,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,expensive,positive,0,0,0,_stores_,1,1,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,expensive,positive,1,0,0,_beer beer_,1,1,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,expensive,positive,1,0,0,_beer_,7,7,beer,0,0,0,0,0,beer
+price,alcoholic drinks,beer,negative,expensive,positive,1,0,0,_beers_,4,4,beer,0,0,0,0,0,beer
+price,alcoholic drinks,liquor,positive,cheap,negative,0,0,0,_liqour_,1,1,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,cheap,negative,0,1,0,_alcoholic drinks_,1,1,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,cheap,negative,1,0,0,_liquor stores_,1,1,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,cheap,negative,1,0,0,_liquor_,6,6,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,cheap,negative,1,0,0,_top shelf liquor_,4,4,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,expensive,positive,0,0,0,_bottles alcohol_,1,1,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,liquor,positive,expensive,positive,1,0,0,_liquor_,8,8,liquor,0,0,0,0,0,liquor
+price,alcoholic drinks,wine,neither-nor,cheap,negative,0,0,0,_prices_,1,1,wines,1,0,1,0,0,wines
+price,alcoholic drinks,wine,neither-nor,cheap,negative,1,0,0,_bottles wine_,3,3,wines,1,0,1,0,0,wines
+price,alcoholic drinks,wine,neither-nor,cheap,negative,1,0,0,_wine_,5,5,wines,1,0,1,0,0,wines
+price,alcoholic drinks,wine,neither-nor,cheap,negative,1,0,0,_wines_,7,7,wines,1,0,1,0,0,wines
+price,alcoholic drinks,wine,neither-nor,expensive,positive,0,0,0,_purchase_,1,1,bottles wine,0,0,0,0,0,bottles of wine
+price,alcoholic drinks,wine,neither-nor,expensive,positive,1,0,0,_bottles wine_,3,3,bottles wine,0,0,0,0,0,bottles of wine
+price,alcoholic drinks,wine,neither-nor,expensive,positive,1,0,0,_wine_,3,3,bottles wine,0,0,0,0,0,bottles of wine
+price,alcoholic drinks,wine,neither-nor,expensive,positive,1,0,0,_wines_,3,3,bottles wine,0,0,0,0,0,bottles of wine
+price,statues,bronze,neither-nor,cheap,negative,0,0,0,_docorations_,1,1,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,cheap,negative,0,0,0,_products_,1,1,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,cheap,negative,0,1,0,_statues_,4,4,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,cheap,negative,1,1,0,_bronze statues_,2,2,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,expensive,positive,0,0,0,_decoration products_,1,1,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,expensive,positive,0,1,0,_statues_,7,7,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,expensive,positive,1,1,0,_bronze statues_,2,2,statues,0,0,0,0,0,statues
+price,statues,bronze,neither-nor,expensive,positive,1,1,0,_statues bronze_,1,1,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,cheap,negative,0,0,0,_decoration_,1,1,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,cheap,negative,0,0,0,_decorations_,1,1,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,cheap,negative,0,1,0,_statues_,14,14,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,cheap,negative,1,0,0,_plastics_,1,1,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,cheap,negative,1,1,0,_plastic statues_,1,1,statues,0,0,0,0,0,statues
+price,statues,plastic,negative,expensive,positive,0,0,0,_decorations_,3,3,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,0,0,0,_items purchased_,1,1,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,0,0,0,_items_,1,1,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,0,0,0,_tchotchkes_,1,1,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,0,0,1,_statue_,2,2,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,0,1,0,_statues_,2,2,decorations,0,0,0,0,0,decorations
+price,statues,plastic,negative,expensive,positive,1,0,0,_plastic items_,1,1,decorations,0,0,0,0,0,decorations
+price,statues,platinum,positive,cheap,negative,0,0,1,_statue_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,cheap,negative,0,1,0,_statues shop_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,cheap,negative,0,1,0,_statues_,5,5,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,cheap,negative,1,0,0,_platinum items_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,0,0,0,_bought store_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,0,0,0,_items sale_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,0,0,0,_minerals_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,0,0,0,_money buy_,1,1,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,0,1,0,_statues_,10,10,statues,0,0,0,0,0,statues
+price,statues,platinum,positive,expensive,positive,1,0,0,_platinum_,1,1,statues,0,0,0,0,0,statues
+size,animals,elephant,positive,big,positive,0,1,0,_animals_,8,8,animals,0,0,0,0,0,animals
+size,animals,elephant,positive,big,positive,0,1,0,_zoo animals_,1,1,animals,0,0,0,0,0,animals
+size,animals,elephant,positive,big,positive,1,0,0,_elephants_,4,4,animals,0,0,0,0,0,animals
+size,animals,elephant,positive,small,negative,1,0,0,_elephants_,17,17,elephants,1,0,1,0,0,elephants
+size,animals,monkey,neither-nor,big,positive,0,1,0,_animals_,1,1,monkeys,1,0,1,0,0,monkeys
+size,animals,monkey,neither-nor,big,positive,1,0,0,_monkeys_,8,8,monkeys,1,0,1,0,0,monkeys
+size,animals,monkey,neither-nor,small,negative,0,1,0,_animals_,1,1,monkeys,1,0,1,0,0,monkeys
+size,animals,monkey,neither-nor,small,negative,1,0,0,_monkey's_,1,1,monkeys,1,0,1,0,0,monkeys
+size,animals,monkey,neither-nor,small,negative,1,0,0,_monkey_,1,1,monkeys,1,0,1,0,0,monkeys
+size,animals,monkey,neither-nor,small,negative,1,0,0,_monkeys_,7,7,monkeys,1,0,1,0,0,monkeys
+size,animals,mouse,negative,big,positive,0,0,0,_rodents_,1,1,mouse,0,0,0,0,0,mice
+size,animals,mouse,negative,big,positive,1,0,0,_mouse_,12,12,mouse,0,0,0,0,0,mice
+size,animals,mouse,negative,big,positive,1,0,0,_mouses_,1,1,mouse,0,0,0,0,0,mice
+size,animals,mouse,negative,small,negative,0,0,0,_rodents_,1,1,mouse,0,0,0,0,0,mice
+size,animals,mouse,negative,small,negative,0,1,0,_animals_,3,3,mouse,0,0,0,0,0,mice
+size,animals,mouse,negative,small,negative,1,0,0,_mouse_,5,5,mouse,0,0,0,0,0,mice
+size,plants,bush,neither-nor,big,positive,0,1,0,_plants_,2,2,bushes,1,0,1,0,0,bushes
+size,plants,bush,neither-nor,big,positive,1,0,0,_bushes store_,1,1,bushes,1,0,1,0,0,bushes
+size,plants,bush,neither-nor,big,positive,1,0,0,_bushes_,18,18,bushes,1,0,1,0,0,bushes
+size,plants,bush,neither-nor,small,negative,0,1,0,_plants_,1,1,bushes,1,0,1,0,0,bushes
+size,plants,bush,neither-nor,small,negative,1,0,0,_bushes_,7,7,bushes,1,0,1,0,0,bushes
+size,plants,flower,negative,big,positive,0,1,0,_plants_,1,1,flowers,1,0,1,0,0,flowers
+size,plants,flower,negative,big,positive,1,0,0,_flowers gardening store_,1,1,flowers,1,0,1,0,0,flowers
+size,plants,flower,negative,big,positive,1,0,0,_flowers_,11,11,flowers,1,0,1,0,0,flowers
+size,plants,flower,negative,big,positive,1,0,0,_types flowers_,1,1,flowers,1,0,1,0,0,flowers
+size,plants,flower,negative,small,negative,1,0,0,_flowers_,14,14,flowers,1,0,1,0,0,flowers
+size,plants,tree,positive,big,positive,0,0,0,_objects_,1,1,trees,1,0,1,0,0,trees
+size,plants,tree,positive,big,positive,1,0,0,_trees gardening store_,1,1,trees,1,0,1,0,0,trees
+size,plants,tree,positive,big,positive,1,0,0,_trees_,5,5,trees,1,0,1,0,0,trees
+size,plants,tree,positive,small,negative,1,0,0,_trees_,8,8,trees,1,0,1,0,0,trees
+speed,animals,cheetah,positive,quick,positive,0,0,0,_cats_,2,2,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,quick,positive,0,0,0,_types land mammals_,1,1,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,quick,positive,0,1,0,_animals running_,1,1,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,quick,positive,0,1,0,_animals zoo_,1,1,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,quick,positive,0,1,0,_animals_,12,12,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,quick,positive,1,0,0,_cheetahhs zoo_,1,1,animals,0,0,0,0,0,animals
+speed,animals,cheetah,positive,slow,negative,0,1,0,_animals_,2,2,cheetahhs,1,0,1,0,0,cheetahs
+speed,animals,cheetah,positive,slow,negative,1,0,0,_cheetahh_,1,1,cheetahhs,1,0,1,0,0,cheetahs
+speed,animals,cheetah,positive,slow,negative,1,0,0,_cheetahhs_,7,7,cheetahhs,1,0,1,0,0,cheetahs
+speed,animals,elephant,neither-nor,quick,positive,0,1,0,_animals_,4,4,elephants,1,0,1,0,0,elephants
+speed,animals,elephant,neither-nor,quick,positive,1,0,0,_elephants_,10,10,elephants,1,0,1,0,0,elephants
+speed,animals,elephant,neither-nor,slow,negative,0,1,0,_animals_,10,10,animals,0,0,0,0,0,animals
+speed,animals,elephant,neither-nor,slow,negative,1,0,0,_elephants_,1,1,animals,0,0,0,0,0,animals
+speed,animals,sloth,negative,quick,positive,1,0,0,_sloths_,10,10,sloths,1,0,1,0,0,sloths
+speed,animals,sloth,negative,slow,negative,0,1,0,_animals_,8,8,animals,0,0,0,0,0,animals
+speed,animals,sloth,negative,slow,negative,1,0,0,_sloth_,1,1,animals,0,0,0,0,0,animals
+speed,athletes,jogger,neither-nor,quick,positive,0,0,0,_people_,1,1,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,quick,positive,1,0,0,_joggers_,6,6,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,slow,negative,0,0,0,_people_,1,1,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,slow,negative,0,0,0,_runners_,2,2,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,slow,negative,1,0,0,_joggers park_,2,2,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,slow,negative,1,0,0,_joggers_,14,14,joggers,1,0,1,0,0,joggers
+speed,athletes,jogger,neither-nor,slow,negative,1,0,0,_runners joggers_,1,1,joggers,1,0,1,0,0,joggers
+speed,athletes,runner,positive,quick,positive,0,0,0,_people park_,1,1,runners,1,0,1,0,0,runners
+speed,athletes,runner,positive,quick,positive,0,0,0,_people_,4,4,runners,1,0,1,0,0,runners
+speed,athletes,runner,positive,quick,positive,1,0,0,_runners_,6,6,runners,1,0,1,0,0,runners
+speed,athletes,runner,positive,slow,negative,0,0,0,_people_,1,1,runners,1,0,1,0,0,runners
+speed,athletes,runner,positive,slow,negative,1,0,0,_runners_,16,16,runners,1,0,1,0,0,runners
+speed,athletes,walker,negative,quick,positive,0,0,0,_people walking_,1,1,walkers,1,0,1,0,0,walkers
+speed,athletes,walker,negative,quick,positive,0,0,0,_people_,3,3,walkers,1,0,1,0,0,walkers
+speed,athletes,walker,negative,quick,positive,1,0,0,_walkers_,7,7,walkers,1,0,1,0,0,walkers
+speed,athletes,walker,negative,slow,negative,0,0,0,_people walking park_,1,1,people,0,0,0,0,0,people
+speed,athletes,walker,negative,slow,negative,0,0,0,_people walking_,1,1,people,0,0,0,0,0,people
+speed,athletes,walker,negative,slow,negative,0,0,0,_people_,2,2,people,0,0,0,0,0,people
+speed,athletes,walker,negative,slow,negative,1,0,0,_walkers_,2,2,people,0,0,0,0,0,people
+strength,people,adult,positive,strong,positive,0,0,0,_boxes_,1,1,people,0,0,0,0,0,people
+strength,people,adult,positive,strong,positive,0,1,0,_people_,6,6,people,0,0,0,0,0,people
+strength,people,adult,positive,strong,positive,1,0,0,_adults lift_,1,1,people,0,0,0,0,0,people
+strength,people,adult,positive,strong,positive,1,0,0,_adults_,5,5,people,0,0,0,0,0,people
+strength,people,adult,positive,weak,negative,0,1,0,_people_,2,2,adults,1,0,1,0,0,adults
+strength,people,adult,positive,weak,negative,1,0,0,_adult_,1,1,adults,1,0,1,0,0,adults
+strength,people,adult,positive,weak,negative,1,0,0,_adults_,4,4,adults,1,0,1,0,0,adults
+strength,people,child,negative,strong,positive,0,0,0,_kids_,1,1,children,1,0,1,0,0,children
+strength,people,child,negative,strong,positive,1,0,0,_children_,11,11,children,1,0,1,0,0,children
+strength,people,child,negative,weak,negative,0,0,0,_boxes_,1,1,children,1,0,1,0,0,children
+strength,people,child,negative,weak,negative,0,1,0,_people_,3,3,children,1,0,1,0,0,children
+strength,people,child,negative,weak,negative,1,0,0,_children_,10,10,children,1,0,1,0,0,children
+strength,people,teenager,neither-nor,strong,positive,0,0,0,_boxes_,1,1,teenageragers,1,0,1,0,0,teenagers
+strength,people,teenager,neither-nor,strong,positive,0,0,0,_kids_,1,1,teenageragers,1,0,1,0,0,teenagers
+strength,people,teenager,neither-nor,strong,positive,0,1,0,_people_,5,5,teenageragers,1,0,1,0,0,teenagers
+strength,people,teenager,neither-nor,strong,positive,1,0,0,_teenageragers_,6,6,teenageragers,1,0,1,0,0,teenagers
+strength,people,teenager,neither-nor,weak,negative,0,1,0,_people_,6,6,people,0,0,0,0,0,people
+strength,people,teenager,neither-nor,weak,negative,1,0,0,_teenageragers_,6,6,people,0,0,0,0,0,people
+strength,storms,hurricane,positive,strong,positive,0,0,0,_wind_,1,1,hurricanes,1,0,1,0,0,hurricanes
+strength,storms,hurricane,positive,strong,positive,0,1,0,_storms_,4,4,hurricanes,1,0,1,0,0,hurricanes
+strength,storms,hurricane,positive,strong,positive,1,0,0,_hurricanes_,6,6,hurricanes,1,0,1,0,0,hurricanes
+strength,storms,hurricane,positive,weak,negative,0,1,0,_storms_,3,3,hurricanes,1,0,1,0,0,hurricanes
+strength,storms,hurricane,positive,weak,negative,1,0,0,_hurricanes_,17,17,hurricanes,1,0,1,0,0,hurricanes
+strength,storms,rain,negative,strong,positive,0,0,0,_days_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,0,0,0,_weather conditions storm_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,0,0,0,_weather_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,0,1,0,_storms_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,0,0,_instances rain_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,0,0,_rain showers_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,0,0,_rain_,2,2,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,0,0,_rains_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,1,0,_rain storms_,1,1,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,strong,positive,1,1,0,_rainstorms_,2,2,rain,0,0,0,0,0,rain
+strength,storms,rain,negative,weak,negative,0,0,0,_sounds_,1,1,storms,0,0,0,0,0,storms
+strength,storms,rain,negative,weak,negative,0,1,0,_storms_,2,2,storms,0,0,0,0,0,storms
+strength,storms,rain,negative,weak,negative,1,0,0,_rain_,1,1,storms,0,0,0,0,0,storms
+strength,storms,rain,negative,weak,negative,1,1,0,_rain storms_,2,2,storms,0,0,0,0,0,storms
+strength,storms,rain,negative,weak,negative,1,1,0,_rainstorms_,2,2,storms,0,0,0,0,0,storms
+strength,storms,thunderstorm,neither-nor,strong,positive,0,1,0,_storms_,5,5,storms,0,0,0,0,0,storms
+strength,storms,thunderstorm,neither-nor,strong,positive,1,1,0,_thunderstorms_,5,5,storms,0,0,0,0,0,storms
+strength,storms,thunderstorm,neither-nor,weak,negative,0,1,0,_storms_,4,4,thunderstorms,1,0,1,0,0,thunderstorms
+strength,storms,thunderstorm,neither-nor,weak,negative,1,1,0,_thunderstorms_,7,7,thunderstorms,1,0,1,0,0,thunderstorms
+temperature,food,ice cream,negative,cold,negative,0,0,0,_deserts_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,0,0,0,_treats_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,0,1,0,_food_,2,2,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,0,1,0,_foods_,3,3,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,0,1,0,_types food_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,1,0,0,_ice cream treats_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,1,0,0,_ice cream_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,cold,negative,1,0,0,_ice creams_,1,1,foods,0,1,1,0,0,foods
+temperature,food,ice cream,negative,warm,positive,0,0,0,_days_,1,1,ice cream,0,0,0,0,0,ice creams
+temperature,food,ice cream,negative,warm,positive,1,0,0,_ice cream_,5,5,ice cream,0,0,0,0,0,ice creams
+temperature,food,ice cream,negative,warm,positive,1,0,0,_ice creams_,3,3,ice cream,0,0,0,0,0,ice creams
+temperature,food,salad,neither-nor,cold,negative,0,1,0,_food_,2,2,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,cold,negative,0,1,0,_foods partakes_,1,1,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,cold,negative,0,1,0,_foods_,2,2,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,cold,negative,1,0,0,_salads eaten_,1,1,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,cold,negative,1,0,0,_salads_,6,6,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,warm,positive,1,0,0,_salads eaten_,1,1,salads,1,0,1,0,0,salads
+temperature,food,salad,neither-nor,warm,positive,1,0,0,_salads_,11,11,salads,1,0,1,0,0,salads
+temperature,food,soup,positive,cold,negative,0,1,0,_food eating_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,cold,negative,0,1,0,_food_,2,2,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,cold,negative,0,1,0,_foods_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,cold,negative,1,0,0,_soup_,3,3,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,cold,negative,1,0,0,_soups_,9,9,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,0,0,0,_temperatures_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,0,1,0,_food_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,0,1,0,_foods_,3,3,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,1,0,0,_soup_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,1,0,0,_soups eaten_,1,1,soups,1,0,1,0,0,soups
+temperature,food,soup,positive,warm,positive,1,0,0,_soups_,5,5,soups,1,0,1,0,0,soups
+temperature,seasons,fall,neither-nor,cold,negative,0,0,0,_days_,3,3,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,cold,negative,0,1,0,_seasons_,1,1,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,cold,negative,1,0,0,_days fall_,3,3,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,cold,negative,1,0,0,_fall days_,2,2,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,cold,negative,1,0,0,_falls_,1,1,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,warm,positive,0,0,0,_days_,4,4,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,warm,positive,1,0,0,_days fall_,2,2,days,0,0,0,0,0,days
+temperature,seasons,fall,neither-nor,warm,positive,1,0,0,_fall days_,4,4,days,0,0,0,0,0,days
+temperature,seasons,summer,positive,cold,negative,0,0,0,_days_,3,3,summer days,1,0,1,0,0,summer days
+temperature,seasons,summer,positive,cold,negative,1,0,0,_days summer_,2,2,summer days,1,0,1,0,0,summer days
+temperature,seasons,summer,positive,cold,negative,1,0,0,_summer days_,4,4,summer days,1,0,1,0,0,summer days
+temperature,seasons,summer,positive,cold,negative,1,0,0,_summers_,1,1,summer days,1,0,1,0,0,summer days
+temperature,seasons,summer,positive,warm,positive,0,0,0,_city_,1,1,days,0,0,0,0,0,days
+temperature,seasons,summer,positive,warm,positive,0,0,0,_days_,5,5,days,0,0,0,0,0,days
+temperature,seasons,summer,positive,warm,positive,0,1,0,_seasons_,3,3,days,0,0,0,0,0,days
+temperature,seasons,summer,positive,warm,positive,1,0,0,_summer days_,4,4,days,0,0,0,0,0,days
+temperature,seasons,winter,negative,cold,negative,0,0,0,_days_,11,11,days,0,0,0,0,0,days
+temperature,seasons,winter,negative,cold,negative,0,0,0,_locations_,1,1,days,0,0,0,0,0,days
+temperature,seasons,winter,negative,cold,negative,1,0,0,_days winter_,1,1,days,0,0,0,0,0,days
+temperature,seasons,winter,negative,warm,positive,0,0,0,_days_,2,2,winter days,1,0,1,0,0,winter days
+temperature,seasons,winter,negative,warm,positive,0,1,0,_seasons_,1,1,winter days,1,0,1,0,0,winter days
+temperature,seasons,winter,negative,warm,positive,1,0,0,_days winter_,3,3,winter days,1,0,1,0,0,winter days
+temperature,seasons,winter,negative,warm,positive,1,0,0,_winter days_,10,10,winter days,1,0,1,0,0,winter days
+weight,animals,dog,neither-nor,heavy,positive,0,0,0,_objects_,1,1,dogs,1,0,1,0,0,dogs
+weight,animals,dog,neither-nor,heavy,positive,0,1,0,_animals_,1,1,dogs,1,0,1,0,0,dogs
+weight,animals,dog,neither-nor,heavy,positive,1,0,0,_dog_,1,1,dogs,1,0,1,0,0,dogs
+weight,animals,dog,neither-nor,heavy,positive,1,0,0,_dogs_,6,6,dogs,1,0,1,0,0,dogs
+weight,animals,dog,neither-nor,light,negative,0,1,0,_animals_,2,2,dogs,1,0,1,0,0,dogs
+weight,animals,dog,neither-nor,light,negative,1,0,0,_dogs_,8,8,dogs,1,0,1,0,0,dogs
+weight,animals,elephant,positive,heavy,positive,0,1,0,_animals_,13,13,animals,0,0,0,0,0,animals
+weight,animals,elephant,positive,heavy,positive,1,0,0,_elephants_,1,1,animals,0,0,0,0,0,animals
+weight,animals,elephant,positive,light,negative,1,0,0,_elephants_,6,6,elephants,1,0,1,0,0,elephants
+weight,animals,fish,negative,heavy,positive,0,0,0,_objects_,1,1,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,heavy,positive,1,0,0,_fish zoo_,1,1,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,heavy,positive,1,0,0,_fish_,14,14,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,heavy,positive,1,0,0,_fishes_,2,2,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,light,negative,0,0,0,_creatures_,1,1,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,light,negative,0,1,0,_animals_,2,2,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,light,negative,1,0,0,_fish_,8,8,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,light,negative,1,0,0,_fishes_,2,2,fish,0,0,0,0,0,fish
+weight,animals,fish,negative,light,negative,1,0,0,_types fishes_,1,1,fish,0,0,0,0,0,fish
+weight,people,adult,positive,heavy,positive,0,1,0,_people_,6,6,people,0,0,0,0,0,people
+weight,people,adult,positive,heavy,positive,1,0,0,_adults_,5,5,people,0,0,0,0,0,people
+weight,people,adult,positive,light,negative,0,1,0,_people_,1,1,adults,1,0,1,0,0,adults
+weight,people,adult,positive,light,negative,1,0,0,_adults_,7,7,adults,1,0,1,0,0,adults
+weight,people,baby,negative,heavy,positive,1,0,0,_baby_,7,7,baby,0,0,0,0,0,babies
+weight,people,baby,negative,light,negative,0,0,0,_objects_,1,1,baby,0,0,0,0,0,babies
+weight,people,baby,negative,light,negative,1,0,0,_baby_,9,9,baby,0,0,0,0,0,babies
+weight,people,kid,neither-nor,heavy,positive,0,0,0,_children_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,heavy,positive,1,0,0,_kid_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,heavy,positive,1,0,0,_kids age_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,heavy,positive,1,0,0,_kids_,14,14,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,0,0,0,_children age_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,0,0,0,_children picked_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,0,0,0,_children_,5,5,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,0,1,0,_people_,2,2,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,1,0,0,_kids age_,1,1,kids,1,0,1,0,0,kids
+weight,people,kid,neither-nor,light,negative,1,0,0,_kids_,8,8,kids,1,0,1,0,0,kids
+width,holes,cave,positive,narrow,negative,0,0,0,_ares_,1,1,caves,1,0,1,0,0,caves
+width,holes,cave,positive,narrow,negative,0,0,0,_people_,1,1,caves,1,0,1,0,0,caves
+width,holes,cave,positive,narrow,negative,0,0,0,_space_,1,1,caves,1,0,1,0,0,caves
+width,holes,cave,positive,narrow,negative,1,0,0,_cave entrances_,1,1,caves,1,0,1,0,0,caves
+width,holes,cave,positive,narrow,negative,1,0,0,_caves_,7,7,caves,1,0,1,0,0,caves
+width,holes,cave,positive,wide,positive,1,0,0,_cave_,1,1,caves,1,0,1,0,0,caves
+width,holes,cave,positive,wide,positive,1,0,0,_caves_,14,14,caves,1,0,1,0,0,caves
+width,holes,cavern,neither-nor,narrow,negative,0,0,0,_spaces_,1,1,caverns,1,0,1,0,0,caverns
+width,holes,cavern,neither-nor,narrow,negative,1,0,0,_cavern_,1,1,caverns,1,0,1,0,0,caverns
+width,holes,cavern,neither-nor,narrow,negative,1,0,0,_caverns_,2,2,caverns,1,0,1,0,0,caverns
+width,holes,cavern,neither-nor,wide,positive,0,0,0,_caves_,2,2,caverns,1,0,1,0,0,caverns
+width,holes,cavern,neither-nor,wide,positive,1,0,0,_caverns_,9,9,caverns,1,0,1,0,0,caverns
+width,holes,fox hole,negative,narrow,negative,0,1,0,_compared holes_,1,1,holes,0,0,0,0,0,holes
+width,holes,fox hole,negative,narrow,negative,0,1,0,_foxholes_,1,1,holes,0,0,0,0,0,holes
+width,holes,fox hole,negative,narrow,negative,0,1,0,_holes_,6,6,holes,0,0,0,0,0,holes
+width,holes,fox hole,negative,narrow,negative,1,1,0,_fox holes_,6,6,holes,0,0,0,0,0,holes
+width,holes,fox hole,negative,wide,positive,0,1,0,_holes ground_,1,1,fox holes,1,0,1,0,0,fox holes
+width,holes,fox hole,negative,wide,positive,0,1,0,_holes_,4,4,fox holes,1,0,1,0,0,fox holes
+width,holes,fox hole,negative,wide,positive,0,1,0,_natural holes_,1,1,fox holes,1,0,1,0,0,fox holes
+width,holes,fox hole,negative,wide,positive,1,1,0,_fox holes_,8,8,fox holes,1,0,1,0,0,fox holes
+width,roads,downtown street,neither-nor,narrow,negative,0,0,0,_streets_,13,13,streets,0,0,0,0,0,streets
+width,roads,downtown street,neither-nor,wide,positive,0,0,0,_steets_,1,1,streets,0,0,0,0,0,streets
+width,roads,downtown street,neither-nor,wide,positive,0,0,0,_streets_,12,12,streets,0,0,0,0,0,streets
+width,roads,downtown street,neither-nor,wide,positive,0,1,0,_roads_,2,2,streets,0,0,0,0,0,streets
+width,roads,highway,positive,narrow,negative,0,1,0,_roads_,6,6,highways,1,0,1,0,0,highways
+width,roads,highway,positive,narrow,negative,1,0,0,_highways_,7,7,highways,1,0,1,0,0,highways
+width,roads,highway,positive,narrow,negative,1,0,0,_stretches highway_,1,1,highways,1,0,1,0,0,highways
+width,roads,highway,positive,wide,positive,0,1,0,_roads driven_,1,1,highways,1,0,1,0,0,highways
+width,roads,highway,positive,wide,positive,0,1,0,_roads_,2,2,highways,1,0,1,0,0,highways
+width,roads,highway,positive,wide,positive,1,0,0,_highway driven_,1,1,highways,1,0,1,0,0,highways
+width,roads,highway,positive,wide,positive,1,0,0,_highway_,2,2,highways,1,0,1,0,0,highways
+width,roads,highway,positive,wide,positive,1,0,0,_highways_,5,5,highways,1,0,1,0,0,highways
+width,roads,side road,negative,narrow,negative,0,0,1,_road_,1,1,roads,0,0,0,0,0,roads
+width,roads,side road,negative,narrow,negative,0,1,0,_roads_,11,11,roads,0,0,0,0,0,roads
+width,roads,side road,negative,wide,positive,0,0,1,_road_,1,1,roads,0,0,0,0,0,roads
+width,roads,side road,negative,wide,positive,0,1,0,_roads_,4,4,roads,0,0,0,0,0,roads
+width,roads,side road,negative,wide,positive,1,1,0,_side roads_,2,2,roads,0,0,0,0,0,roads

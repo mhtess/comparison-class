@@ -1,0 +1,44 @@
+degree,superordinate,np_match,np_positiveness,adj,adj_positiveness,n_unique_resps,mode
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,3,nights
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,1,nights
+darkness,times day,dusk,neither-nor,light,positive,3,nights
+height,athletes,golfer,neither-nor,tall,positive,7,people
+height,athletes,golfer,neither-nor,tall,positive,4,people
+height,athletes,jockey,negative,short,negative,5,people
+height,athletes,jockey,negative,short,negative,1,people
+height,athletes,jockey,negative,short,negative,4,people
+price,statues,plastic,negative,expensive,positive,3,decorations
+price,statues,plastic,negative,expensive,positive,1,decorations
+price,statues,plastic,negative,expensive,positive,1,decorations
+price,statues,plastic,negative,expensive,positive,1,decorations
+price,statues,plastic,negative,expensive,positive,2,decorations
+price,statues,plastic,negative,expensive,positive,2,decorations
+price,statues,plastic,negative,expensive,positive,1,decorations
+speed,athletes,walker,negative,slow,negative,1,people
+speed,athletes,walker,negative,slow,negative,1,people
+speed,athletes,walker,negative,slow,negative,2,people
+speed,athletes,walker,negative,slow,negative,2,people
+temperature,seasons,fall,neither-nor,cold,negative,3,days
+temperature,seasons,fall,neither-nor,cold,negative,1,days
+temperature,seasons,fall,neither-nor,cold,negative,3,days
+temperature,seasons,fall,neither-nor,cold,negative,2,days
+temperature,seasons,fall,neither-nor,cold,negative,1,days
+temperature,seasons,fall,neither-nor,warm,positive,4,days
+temperature,seasons,fall,neither-nor,warm,positive,2,days
+temperature,seasons,fall,neither-nor,warm,positive,4,days
+temperature,seasons,summer,positive,warm,positive,1,days
+temperature,seasons,summer,positive,warm,positive,5,days
+temperature,seasons,summer,positive,warm,positive,3,days
+temperature,seasons,summer,positive,warm,positive,4,days
+temperature,seasons,winter,negative,cold,negative,11,days
+temperature,seasons,winter,negative,cold,negative,1,days
+temperature,seasons,winter,negative,cold,negative,1,days
+width,roads,downtown street,neither-nor,narrow,negative,13,streets
+width,roads,downtown street,neither-nor,wide,positive,1,streets
+width,roads,downtown street,neither-nor,wide,positive,12,streets
+width,roads,downtown street,neither-nor,wide,positive,2,streets

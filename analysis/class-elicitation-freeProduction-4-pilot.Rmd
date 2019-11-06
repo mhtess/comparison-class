@@ -79,6 +79,7 @@ df.attention %>%
   group_by(incorrect) %>%
   count()
 ```
+
 ```{r summarize catch trials}
 df.attention.summary <- df.attention %>%
   group_by(workerid) %>%
@@ -143,49 +144,55 @@ df.trials.filtered <- df.trials.w.super %>%
   filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
   rowwise() %>%
   mutate(
-    np = gsub("bottle of top-shelf liquor", "liquor", np),
-    np = gsub("piece of chocolate", "chocolate", np),
-    np = gsub("piece of chalk", "chalk", np),
-    np = gsub("six-pack of beer", "beer", np),
-    np = gsub("bottle of wine", "wine", np),
-    np = gsub("pine tree", "pine", np),
-    np = gsub("redwood tree", "redwood", np),
-    np = gsub("alpine tree", "alpine", np),
-    np = gsub("bonsai tree", "bonsai", np),
-    np = gsub("bassett hound", "bassett", np),
-    np = gsub("pick-up truck", "pick-up", np),
-    np = gsub("relay race", "relay", np),
-    np = gsub("podcast episode", "podcast", np),
-    np = gsub("kettle ball", "ball", np),
-    np = gsub("basketball player", "basketball", np),
-    np = gsub("study hall", "study", np),
-    np = gsub("electric car", "electric", np),
-    np = gsub("bass guitar", "bass", np),
-    np = gsub("rock concert", "rock", np),
-    np = gsub("rap concert", "rap", np),
+    np_match = np, # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
+    np_match = gsub("bottle of top-shelf liquor", "liquor", np_match),
+    np_match = gsub("piece of chocolate", "chocolate", np_match),
+    np_match = gsub("piece of chalk", "chalk", np_match),
+    np_match = gsub("six-pack of beer", "beer", np_match),
+    np_match = gsub("bottle of wine", "wine", np_match),
+    np_match = gsub("pine tree", "pine", np_match),
+    np_match = gsub("redwood tree", "redwood", np_match),
+    np_match = gsub("alpine tree", "alpine", np_match),
+    np_match = gsub("bonsai tree", "bonsai", np_match),
+    np_match = gsub("bassett hound", "bassett", np_match),
+    np_match = gsub("pick-up truck", "pick-up", np_match),
+    np_match = gsub("relay race", "relay", np_match),
+    np_match = gsub("podcast episode", "podcast", np_match),
+    np_match = gsub("kettle ball", "ball", np_match),
+    np_match = gsub("basketball player", "basketball", np_match),
+    np_match = gsub("study hall", "study", np_match),
+    np_match = gsub("electric car", "electric", np_match),
+    np_match = gsub("bass guitar", "bass", np_match),
+    np_match = gsub("rock concert", "rock", np_match),
+    np_match = gsub("rap concert", "rap", np_match),
     )
 
 df.trials.filtered %>% group_by(np) %>%
   count()
 ```
 
-Plurals of all irregular nouns in the stimuli set are converted to singulars to match the seed noun phrase. Common misspellings are also controlled for in this code.  
+Plurals of all irregular nouns in the stimuli set are converted to singulars to match the seed noun phrase. Common misspellings are also controlled for in this code. Based on pilot data, specific mistakes and synonyms are converted to the seed NPs.
 
 ```{r codeForSubCatTerms}
+
+# extended function to check matching between strings either way 
 containsString <- function(strng, substrng){
-  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 0))
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, ifelse( length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)))
 }
 
+#stop_words <- stopwords()
 my_stop_words <-# bind_rows(
+  
   stop_words %>%
-    filter(!(word %in% c("rooms", "year", "side")))#,
+  
+    filter(., !(stop_words %in% c("rooms", "year", "side", "area", "of")))#,
   # data.frame(
   #   word = c("relative", "compare"),
   #   lexicon = 'mh'
   # )
 #)
 
-d.tidy.phrase.w.original <- df.trials.filtered %>% 
+d.tidy.phrase.w.original2 <- df.trials.filtered %>% 
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
@@ -193,13 +200,13 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("car ride", "drive", response),
          response = gsub("babies", "baby", response),
          response = gsub("stories", "story", response),
-        response = gsub("6 packs", "beer", response),
-        response = gsub("six-packs", "beer", response),
-        response = gsub("six packs", "beer", response),
-        response = gsub("basset", "bassett", response),
-        response = gsub("dasies", "daisy", response),
-        response = gsub("pansies", "pansy", response),
-        response = gsub("mice", "mouse", response),
+         response = gsub("6 packs", "beer", response),
+         response = gsub("six-packs", "beer", response),
+         response = gsub("six packs", "beer", response),
+         response = gsub("basset", "bassett", response),
+         response = gsub("dasies", "daisy", response),
+         response = gsub("pansies", "pansy", response),
+         response = gsub("mice", "mouse", response),
          response = gsub("documentaries", "documentary", response),
          response = gsub("parties", "party", response),
          response = gsub("libraries", "library", response),
@@ -208,29 +215,60 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
          response = gsub("gymnasia", "gymnasium", response),
          response = gsub("cacti", "cactus", response),
          response = gsub("pantries", "pantry", response),
-        response = gsub("bonzai", "bonsai", response),
+         response = gsub("bonzai", "bonsai", response),
          response = gsub("seagul", "seagull", response),
-        response = gsub("dalia", "dahlia", response),
-        response = gsub("pitbul", "pitbull", response),
-        response = gsub("panter", "panther", response),
-        response = gsub("icecream", "ice cream", response),
-        response = gsub("ice-cream", "ice cream", response),
-        response = gsub("bed board", "bedboard", response),
-        response = gsub("jocky", "jockey", response),
-        response = gsub("jockie", "jockey", response),
-        response = gsub("smart car", "smartcar", response),
-        response = gsub("gym", "gymnasium", response),
-        response = gsub("beverage", "drink", response),
-        response = gsub("dog house", "doghouse", response),
-        response = gsub("fridge", "refrigerator", response),
-        response = gsub("chihuaua", "chihuahua", response),
-        response = gsub("zuccini", "zucchini", response),
-        response = gsub("cheeta", "cheetah", response),
-        response = gsub("skiier", "skier", response),
-        response = gsub("old", "elderly", response),
-        response = gsub("teen", "teenager", response),
-        response = gsub("cooking", "cookware", response),
-        response = gsub("mobile", "cell", response)
+         response = gsub("seagulll", "seagull", response),
+         response = gsub("dalia", "dahlia", response),
+         response = gsub("pitbul", "pitbull", response),
+         response = gsub("panter", "panther", response),
+         response = gsub("icecream", "ice cream", response),
+         response = gsub("ice-cream", "ice cream", response),
+         response = gsub("bed board", "bedboard", response),
+         response = gsub("jocky", "jockey", response),
+         response = gsub("jockie", "jockey", response),
+         response = gsub("smart car", "smartcar", response),
+         response = gsub("gym", "gymnasium", response),
+         response = gsub("beverage", "drink", response),
+         response = gsub("dog house", "doghouse", response),
+         response = gsub("fridge", "refrigerator", response),
+         response = gsub("chihuaua", "chihuahua", response),
+         response = gsub("zuccini", "zucchini", response),
+         response = gsub("cheeta", "cheetah", response),
+         response = gsub("skiier", "skier", response),
+         response = gsub("old", "elderly", response),
+         response = gsub("teen", "teenager", response),
+         response = gsub("cooking", "cookware", response),
+         response = gsub("mobile", "cell", response),
+         
+         response = gsub("candies", "sweets", response),
+         response = gsub("candy", "sweets", response),
+         response = gsub("dachund", "dachshund", response),
+         response = gsub("floor surfaces", "floors", response),
+         response = gsub("floor materials", "floors", response),
+         response = gsub("flooring", "floors", response),
+         response = gsub("humans", "people", response),
+         response = gsub("brands of beer", "beer", response),
+         response = gsub("players that play a different sport", "athletes", response),
+         response = gsub("liquors", "liquor", response),
+         response = gsub("monkies", "monkeys", response),
+         response = gsub("hours of the day", "times of day", response),
+         response = gsub("books", "readings", response),
+         response = gsub("brushes", "bushes", response),
+         response = gsub("writing", "reading", response),
+         response = gsub("poetry", "peom", response),
+         response = gsub("marshmellow", "marshmallow", response),
+         response = gsub("ape", "monkey", response),
+         response = gsub("cow", "crow", response),
+         response = gsub("burrow", "hole", response),
+         response = gsub("times of the year", "seasons", response),
+         response = gsub("times of year", "seasons", response),
+         response = gsub("jokceys", "jockeys", response),
+         response = gsub("golf player", "golfer", response),
+         response = gsub("marshamallow", "marshmallow", response),
+        
+         superordinate = gsub("times of day", "times day", superordinate),
+         superordinate = gsub("floor materials", "floors", superordinate)
+        
          ) %>%
   unnest_tokens(word, response)  %>% 
   #anti_join(stop_words)  %>% # remove stop words
@@ -246,18 +284,54 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
   rowwise() %>%
   mutate(
     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
-    np = as.character(np),
-    np = gsub('\"', "", np),
-    specific = containsString(as.character(cleanedPhrase), as.character(np)),
-    specificRespNP = containsString(as.character(np), gsub("_", "", as.character(cleanedPhrase))),
-    diff = specific - specificRespNP
+    np_match = as.character(np_match),
+    np_match = gsub('\"', "", np_match),
+    specific = containsString(as.character(cleanedPhrase), as.character(np_match)),
+    matchingSuper = containsString(as.character(cleanedPhrase), as.character(superordinate))
   ) %>%
-  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff)
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np_match, cleanedPhrase, originalResponse, specific, matchingSuper)
 
 ```
+The data points are grouped by NP, adjective and scale condition and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
 
+``` {r}
+# extract the mode response 
+d.tidy.resp.counts <- d.tidy.phrase.w.original %>% 
+  group_by(degree, superordinate, np_match, np_positiveness, adj, adj_positiveness, diff, matchingSuper, matchingSuperResp, cleanedPhrase) %>% count() %>%
+  mutate(n_unique_resps = n)
 
+#
+d.tidy.resp.counts <- d.tidy.resp.counts %>% group_by(np_match, adj) %>% mutate(mode = cleanedPhrase[which.max(n)])
 
+d.tidy.resp.counts <- d.tidy.resp.counts %>% rowwise() %>%  mutate(isModeNP = containsString(as.character(mode), as.character(np_match)),
+                                                                   isModeSuper = containsString(as.character(mode), as.character(superordinate)),
+                                                                   isModeNeither = sum(isModeNP, isModeSuper)) # isModeNeither = 0 means that the mode response is different from anticipated NPs
+
+non-matching-mode-resps <- d.tidy.resp.counts %>% filter(isModeNeither == 0) %>% mutate(mode = gsub("_", "", mode)) %>% select(degree, superordinate, np_match, np_positiveness, adj, adj_positiveness, n_unique_resps, mode)
+#%>% write_csv(., '../data/pilot-classElicitation-free-4/class-elicitation-free-4-nonmatching-mode-resps.csv')
+
+# substitute mode responses with typos or not mathcing equivalent seed NPs
+d.tidy.resp.counts <- d.tidy.resp.counts%>% rowwise() %>% mutate(cleanMode = gsub("_", "", mode),
+                                                                 cleanMode = gsub("baby", "babies", cleanMode),
+                                                                 cleanMode = gsub("days fall", "days in fall",
+                                                                                 cleanMode),
+                                                                 cleanMode = gsub("ice cream", "ice creams",
+                                                                                 cleanMode),
+                                                                 cleanMode = gsub("times day", "times of day",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("story", "stories", cleanMode),
+                                                                 cleanMode = gsub("bottles wine", 
+                                                                                  "bottles of wine", cleanMode),
+                                                                 cleanMode = gsub("mouse", "mice", cleanMode),
+                                                                 cleanMode = gsub("cheetahhs", "cheetahs",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("days fall", "fall days",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("teenageragers", "teenagers", cleanMode)
+                                                                 )
+
+#write_csv(d.tidy.resp.counts, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-modal-responses.csv')
+```
 
 # Viz: First prass
 
