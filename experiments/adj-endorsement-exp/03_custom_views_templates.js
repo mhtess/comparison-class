@@ -24,8 +24,8 @@ const custom_memory_check = function(config, startTime) {
         <p><label><input type='radio' id='valid3' name='memory3' value='1'/>${config.data[CT].memory3}</label></p>
         <p><label><input type='radio' id='invalid1' name='memory4' value='1'/>${config.data[CT].memory4}</label></p>
         <p><label><input type='radio' id='invalid2' name='memory5' value='1'/>${config.data[CT].memory5}</label></p>
-        <p><label><input type='radio' id='valid4' name='memory6' value='1'/>${config.data[CT].memory6}</label></p>
-        <p><label><input type='radio' id='invalid3' name='memory7' value='1'/>${config.data[CT].memory7}</label></p>
+        <p><label><input type='radio' id='invalid3' name='memory6' value='1'/>${config.data[CT].memory6}</label></p>
+        <p><label><input type='radio' id='valid4' name='memory7' value='1'/>${config.data[CT].memory7}</label></p>
         <p><label><input type='radio' id='invalid4' name='memory8' value='1'/>${config.data[CT].memory8}</label></p>
         <p><label><input type='radio' id='invalid5' name='memory9' value='1'/>${config.data[CT].memory9}</label></p>
         <p><label><input type='radio' id='valid5' name='memory10' value='1'/>${config.data[CT].memory10}</label></p>
@@ -55,11 +55,20 @@ const custom_memory_check = function(config, startTime) {
                   $("#catch").show()
                 } else {
                 const RT = Date.now() - startingTime;
+                const resps = [response1, response2, response3, response4, response5, response6, response7, response8, response9, response10]
+                console.log(resps)
+                const correct_mem = [1,1,1,,,,1,,,1]
+                var num_mem_false = 0
+                for (i = 0; i < 10; i++) {
+                  if (resps[i] != correct_mem[i]) {
+                    num_mem_false = num_mem_false + 1
+                  }
+                }
                   let trial_data = {
                     trial_name: config.name,
                     trial_number: CT + 1,
-                    response1: [response1, response2, response3, response4, response5, response6, response7, response8, response9, response10],
-                    correct_mem: [1, 1, 1,,,1,,,,1],
+                    response: num_mem_false,
+
                     // response2: response2,
                     RT: RT
                     // response3: response3,
