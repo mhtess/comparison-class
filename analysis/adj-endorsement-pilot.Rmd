@@ -1,0 +1,36 @@
+---
+title: "Adj endorsement pilot"
+author: "Polina Tsvilodub"
+date: "08 11 2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+library(tidyverse)
+library(jsonlite)
+library(tidyboot)
+library(tidytext)
+library(lme4)
+library(ggthemes)
+library(brms)
+theme_set(theme_few())
+```
+
+``` {r}
+
+df.adj <- read_csv('../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv')
+glimpse(df.adj)
+
+# substitute the superordinates
+df.adj.w.mode <- df.adj %>% mutate(superordinate = ifelse(item == "jockey", "people", superordinate ),
+                                   superordinate = ifelse(item == "plastic", "decorations", superordinate ),
+                                   superordinate = ifelse(item == "walker", "people", superordinate ),
+                                   superordinate = ifelse(item == "downtown street", "roads", superordinate ),
+                                   superordinate = ifelse(item == "dusk", "days", superordinate ),
+                                   )
+
+write_csv(df.adj.w.mode, '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-modal-super.csv')
+```
