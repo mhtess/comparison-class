@@ -1,6 +1,7 @@
 // adjective endorsement stimuli built from n = 50 NP free production experiment,
 // trial viee context created for comparison class expt and adjusted accrodingly
 
+
 const trials = function(domain) {
   var trial_list = []
   for( var x = 0; x < domain.length; x++) {
@@ -1838,4 +1839,21 @@ const trial_info = {
               create_view(items.width)
             )))))))))))
 
+}
+
+const random_adj = _.shuffle(["beautiful", "purple", "wild", "green", "shiny"])
+const mem_check_items = _.shuffle(trial_info.main).slice(0,10)
+const memory_check = {
+  catch: [
+  { memory1: mem_check_items[0].adj_positive + " " + mem_check_items[0].item,
+    memory2: mem_check_items[1].adj_negative + " " + mem_check_items[1].item,
+    memory3: mem_check_items[2].adj_positive + " " + mem_check_items[2].item,
+    memory4: random_adj[0] + " " + mem_check_items[3].item,
+    memory5: random_adj[1] + " " + mem_check_items[4].item,
+    memory6: random_adj[2] + " " + mem_check_items[5].item,
+    memory7: mem_check_items[6].adj_positive + " " + mem_check_items[6].item ,
+    memory8: random_adj[3] + " " + mem_check_items[7].item,
+    memory9: random_adj[4] + " " + mem_check_items[8].item,
+    memory10: mem_check_items[9].adj_negative + " " + mem_check_items[9].item}
+  ]
 }

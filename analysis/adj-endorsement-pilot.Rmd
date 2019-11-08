@@ -1,11 +1,13 @@
 ---
-title: "Adjective endorsement (final) pilot"
-author: "MH Tessler"
-date: "October 29, 2019"
+title: "Adj endorsement pilot"
+author: "Polina Tsvilodub"
+date: "08 11 2019"
+output: github_document
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load libraries.
+knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(tidyverse)
 library(jsonlite)
@@ -203,3 +205,67 @@ summary(rs.glm)
 ```
 
 
+``` {r}
+
+df.adj <- read_csv('../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv')
+glimpse(df.adj)
+
+# substitute the superordinates
+
+```
+
+``` {r}
+insert_super_sg = function(np) {
+  if (np %in% c("seagull", "parrot", "crow")) {
+    super = "bird"
+  }  else if (np %in% c("day", "dusk", "night")) {
+    super = "time"
+  } else if (np %in% c("jolly rancher", "piece of chocolate", "marshmallow")) {
+    super = "sweet"
+  } else if (np %in% c("tile", "wood", "carpet")) {
+    super = "floor"
+  } else if (np %in% c("giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "mouse", "cheetah", "sloth", "fish")) {
+    super = "animal"
+  } else if (np %in% c("basketball player", "golfer", "jockey", "runner", "jogger", "walker")) {
+    super = "people"
+  } else if (np %in% c("dachshund", "bassett hound", "chihuahua")) {
+    super = "dog"
+  } else if( np %in% c("novel", "story", "poem")) {
+    super = "reading"
+  } else if( np %in% c("auditorium", "classroom", "study hall")) {
+    super = "room"
+  } else if ( np %in% c("platinum", "bronze", "plastic")) {
+    super = "statue"
+  } else if (np %in% c("bottle of top-shelf liquor", "six-pack of beer", "bottle of wine")) {
+    super = "alcoholic drink"
+  } else if (np %in% c("tree", "bush", "flower")) {
+    super = "plant"
+  } else if(np %in% c("adult", "teenager", "child", "kid", "baby")) {
+    super = "people"
+  } else if (np %in% c("hurricane", "thunderstorm", "rain")) {
+    super = "storm"
+  } else if (np %in% c("soup", "salad", "ice cream")) {
+    super = "food"
+  } else if( np %in% c("summer", "fall", "winter")) {
+    super = "season"
+  } else if (np %in% c("cave", "cavern", "fox hole")) {
+    super = "hole"
+  } else {
+    super = "road"
+  }
+  return (super)
+}
+df.adj.w.mode <- df.adj.w.mode %>% rowwise() %>% mutate(super_sg = insert_super_sg(item))
+```
+
+``` {r}
+df.adj.w.mode <- df.adj %>% mutate(superordinate = ifelse(item == "jockey", "people", superordinate ),
+                                   superordinate = ifelse(item == "basketball player", "people", superordinate ),
+                                   superordinate = ifelse(item == "golfer", "people", superordinate ),
+                                   superordinate = ifelse(item == "walker", "people", superordinate ),
+                                   superordinate = ifelse(item == "jogger", "people", superordinate ),
+                                   superordinate = ifelse(item == "runner", "people", superordinate ),
+                                   ) %>% subset(., !(item %in% c("day", "night", "dusk")))
+
+write_csv(df.adj.w.mode, '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-modal-super-subset.csv')
+```
