@@ -18,7 +18,6 @@ worker_004,temperature,food,soup,positive,response_pos,1
 worker_004,size,plants,tree,positive,response_pos,1
 worker_004,width,roads,downtown street,neutral,response_pos,0
 worker_004,strength,storms,rain,negative,response_pos,0
-worker_004,darkness,times of day,night,negative,response_pos,0
 worker_004,loudness,animals,donkey,positive,response_pos,1
 worker_004,width,holes,cave,positive,response_pos,1
 worker_004,strength,people,adult,positive,response_pos,1
@@ -31,7 +30,6 @@ worker_071,width,roads,side road,negative,response_pos,0
 worker_071,loudness,animals,cat,negative,response_pos,1
 worker_071,speed,animals,sloth,negative,response_pos,0
 worker_071,speed,people,runner,positive,response_pos,1
-worker_071,darkness,times of day,dusk,neutral,response_pos,0
 worker_071,length_duration,dogs,dachshund,positive,response_pos,0
 worker_071,height,animals,monkey,neutral,response_pos,1
 worker_071,length_duration,readings,poem,negative,response_pos,0
@@ -54,7 +52,6 @@ worker_036,speed,animals,cheetah,positive,response_pos,1
 worker_036,temperature,food,salad,neutral,response_pos,0
 worker_036,size,plants,bush,neutral,response_pos,1
 worker_036,temperature,seasons,winter,negative,response_pos,0
-worker_036,darkness,times of day,day,positive,response_pos,1
 worker_036,strength,storms,thunderstorm,neutral,response_pos,1
 worker_036,width,roads,downtown street,neutral,response_pos,1
 worker_036,weight,people,kid,neutral,response_pos,0
@@ -86,7 +83,6 @@ worker_007,weight,animals,elephant,positive,response_pos,1
 worker_007,loudness,rooms,classroom,neutral,response_pos,1
 worker_007,speed,animals,elephant,neutral,response_pos,0
 worker_007,width,holes,cave,positive,response_pos,1
-worker_007,darkness,times of day,day,positive,response_pos,1
 worker_007,loudness,animals,cat,negative,response_pos,0
 worker_007,height,animals,giraffe,positive,response_pos,1
 worker_007,weight,people,kid,neutral,response_pos,0
@@ -117,7 +113,6 @@ worker_026,price,alcoholic drinks,bottle of wine,neutral,response_pos,0
 worker_026,speed,animals,sloth,negative,response_pos,0
 worker_026,weight,people,baby,negative,response_pos,0
 worker_026,hardness,floor materials,wood,neutral,response_pos,1
-worker_026,darkness,times of day,day,positive,response_pos,1
 worker_026,temperature,food,salad,neutral,response_pos,0
 worker_042,speed,animals,elephant,neutral,response_pos,0
 worker_042,price,statues,bronze,neutral,response_pos,1
@@ -137,7 +132,6 @@ worker_042,weight,animals,fish,negative,response_pos,0
 worker_042,hardness,sweets,jolly rancher,positive,response_pos,1
 worker_042,loudness,animals,donkey,positive,response_pos,1
 worker_042,speed,people,walker,negative,response_pos,0
-worker_042,darkness,times of day,dusk,neutral,response_pos,0
 worker_042,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_042,height,animals,monkey,neutral,response_pos,0
 worker_042,strength,people,child,negative,response_pos,0
@@ -151,7 +145,6 @@ worker_038,size,plants,tree,positive,response_pos,1
 worker_038,temperature,seasons,summer,positive,response_pos,0
 worker_038,weight,people,kid,neutral,response_pos,1
 worker_038,speed,animals,cheetah,positive,response_pos,1
-worker_038,darkness,times of day,day,positive,response_pos,0
 worker_038,price,statues,plastic,negative,response_pos,1
 worker_038,size,animals,mouse,negative,response_pos,0
 worker_038,length_duration,readings,novel,positive,response_pos,1
@@ -188,11 +181,9 @@ worker_049,size,animals,elephant,positive,response_pos,1
 worker_049,width,holes,cavern,neutral,response_pos,0
 worker_049,weight,animals,elephant,positive,response_pos,1
 worker_049,strength,storms,hurricane,positive,response_pos,1
-worker_049,darkness,times of day,night,negative,response_pos,0
 worker_049,temperature,food,ice cream,negative,response_pos,0
 worker_049,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_057,length_duration,dogs,chihuahua,negative,response_pos,0
-worker_057,darkness,times of day,day,positive,response_pos,1
 worker_057,height,animals,bird,negative,response_pos,0
 worker_057,temperature,food,ice cream,negative,response_pos,0
 worker_057,loudness,animals,dog,neutral,response_pos,1
@@ -223,7 +214,6 @@ worker_030,strength,storms,rain,negative,response_pos,1
 worker_030,temperature,food,soup,positive,response_pos,1
 worker_030,speed,people,jogger,neutral,response_pos,1
 worker_030,hardness,sweets,piece of chocolate,neutral,response_pos,0
-worker_030,darkness,times of day,night,negative,response_pos,0
 worker_030,price,statues,platinum,positive,response_pos,1
 worker_030,size,plants,tree,positive,response_pos,1
 worker_030,height,people,golfer,neutral,response_pos,1
@@ -259,14 +249,12 @@ worker_080,speed,animals,cheetah,positive,response_pos,1
 worker_080,width,holes,cavern,neutral,response_pos,0
 worker_080,darkness,birds,seagull,positive,response_pos,1
 worker_080,loudness,rooms,auditorium,positive,response_pos,1
-worker_080,darkness,times of day,dusk,neutral,response_pos,0
 worker_080,temperature,seasons,summer,positive,response_pos,1
 worker_080,height,animals,monkey,neutral,response_pos,0
 worker_080,size,plants,tree,positive,response_pos,1
 worker_072,darkness,birds,seagull,positive,response_pos,1
 worker_072,weight,animals,elephant,positive,response_pos,1
 worker_072,strength,people,teenager,neutral,response_pos,1
-worker_072,darkness,times of day,night,negative,response_pos,0
 worker_072,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_072,price,statues,plastic,negative,response_pos,0
 worker_072,loudness,rooms,study hall,negative,response_pos,0
@@ -307,7 +295,6 @@ worker_053,strength,people,adult,positive,response_pos,1
 worker_053,strength,storms,rain,negative,response_pos,0
 worker_053,weight,people,kid,neutral,response_pos,0
 worker_053,temperature,food,soup,positive,response_pos,1
-worker_053,darkness,times of day,day,positive,response_pos,1
 worker_053,hardness,sweets,marshmallow,negative,response_pos,0
 worker_053,size,animals,monkey,neutral,response_pos,0
 worker_053,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,0
@@ -332,7 +319,6 @@ worker_019,loudness,rooms,classroom,neutral,response_pos,1
 worker_019,strength,storms,hurricane,positive,response_pos,1
 worker_019,height,people,golfer,neutral,response_pos,0
 worker_019,speed,people,walker,negative,response_pos,0
-worker_019,darkness,times of day,night,negative,response_pos,0
 worker_019,width,holes,cave,positive,response_pos,1
 worker_019,temperature,food,soup,positive,response_pos,1
 worker_039,width,holes,cave,positive,response_pos,1
@@ -351,7 +337,6 @@ worker_039,weight,animals,fish,negative,response_pos,0
 worker_039,size,plants,tree,positive,response_pos,1
 worker_039,hardness,sweets,piece of chocolate,neutral,response_pos,0
 worker_039,temperature,food,ice cream,negative,response_pos,0
-worker_039,darkness,times of day,dusk,neutral,response_pos,0
 worker_039,length_duration,dogs,dachshund,positive,response_pos,0
 worker_039,width,roads,downtown street,neutral,response_pos,0
 worker_039,weight,people,adult,positive,response_pos,1
@@ -381,7 +366,6 @@ worker_009,width,holes,cavern,neutral,response_pos,0
 worker_009,temperature,food,salad,neutral,response_pos,0
 worker_009,speed,people,walker,negative,response_pos,0
 worker_009,speed,animals,elephant,neutral,response_pos,0
-worker_009,darkness,times of day,dusk,neutral,response_pos,0
 worker_009,strength,storms,hurricane,positive,response_pos,0
 worker_011,darkness,birds,seagull,positive,response_pos,1
 worker_011,size,animals,elephant,positive,response_pos,1
@@ -391,7 +375,6 @@ worker_011,size,plants,bush,neutral,response_pos,1
 worker_011,length_duration,readings,story,neutral,response_pos,0
 worker_011,weight,people,kid,neutral,response_pos,0
 worker_011,hardness,floor materials,carpet,negative,response_pos,0
-worker_011,darkness,times of day,night,negative,response_pos,0
 worker_011,price,statues,platinum,positive,response_pos,1
 worker_011,price,alcoholic drinks,bottle of wine,neutral,response_pos,1
 worker_011,loudness,rooms,study hall,negative,response_pos,0
@@ -425,7 +408,6 @@ worker_050,strength,people,adult,positive,response_pos,1
 worker_050,size,plants,flower,negative,response_pos,0
 worker_050,darkness,birds,seagull,positive,response_pos,1
 worker_050,speed,people,walker,negative,response_pos,0
-worker_050,darkness,times of day,dusk,neutral,response_pos,0
 worker_050,height,animals,bird,negative,response_pos,0
 worker_050,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_050,weight,people,adult,positive,response_pos,1
@@ -450,7 +432,6 @@ worker_055,speed,people,jogger,neutral,response_pos,1
 worker_055,width,holes,cave,positive,response_pos,1
 worker_055,loudness,animals,cat,negative,response_pos,1
 worker_055,weight,animals,dog,neutral,response_pos,0
-worker_055,darkness,times of day,dusk,neutral,response_pos,0
 worker_055,hardness,floor materials,wood,neutral,response_pos,1
 worker_055,weight,people,baby,negative,response_pos,0
 worker_055,darkness,birds,seagull,positive,response_pos,0
@@ -471,7 +452,6 @@ worker_014,temperature,seasons,winter,negative,response_pos,0
 worker_014,hardness,sweets,marshmallow,negative,response_pos,0
 worker_014,weight,people,kid,neutral,response_pos,1
 worker_014,size,plants,tree,positive,response_pos,0
-worker_014,darkness,times of day,dusk,neutral,response_pos,1
 worker_014,size,animals,monkey,neutral,response_pos,0
 worker_014,weight,animals,elephant,positive,response_pos,0
 worker_014,price,alcoholic drinks,bottle of wine,neutral,response_pos,0
@@ -489,7 +469,6 @@ worker_010,length_duration,readings,poem,negative,response_pos,0
 worker_010,speed,people,walker,negative,response_pos,0
 worker_010,hardness,floor materials,tile,positive,response_pos,1
 worker_010,loudness,animals,cat,negative,response_pos,0
-worker_010,darkness,times of day,night,negative,response_pos,0
 worker_010,length_duration,dogs,bassett hound,neutral,response_pos,0
 worker_010,strength,people,child,negative,response_pos,0
 worker_010,temperature,seasons,winter,negative,response_pos,0
@@ -509,7 +488,6 @@ worker_069,hardness,floor materials,wood,neutral,response_pos,1
 worker_069,length_duration,dogs,bassett hound,neutral,response_pos,0
 worker_069,weight,animals,fish,negative,response_pos,0
 worker_069,weight,people,adult,positive,response_pos,1
-worker_069,darkness,times of day,night,negative,response_pos,0
 worker_069,length_duration,readings,novel,positive,response_pos,1
 worker_069,price,statues,platinum,positive,response_pos,1
 worker_069,temperature,seasons,winter,negative,response_pos,0
@@ -548,7 +526,6 @@ worker_017,width,roads,highway,positive,response_pos,1
 worker_017,weight,people,adult,positive,response_pos,0
 worker_017,speed,animals,cheetah,positive,response_pos,1
 worker_017,length_duration,dogs,bassett hound,neutral,response_pos,0
-worker_017,darkness,times of day,night,negative,response_pos,0
 worker_017,temperature,food,ice cream,negative,response_pos,0
 worker_017,weight,animals,dog,neutral,response_pos,0
 worker_077,height,people,jockey,negative,response_pos,0
@@ -570,7 +547,6 @@ worker_077,width,roads,side road,negative,response_pos,0
 worker_077,speed,animals,sloth,negative,response_pos,0
 worker_077,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_077,strength,people,adult,positive,response_pos,1
-worker_077,darkness,times of day,dusk,neutral,response_pos,0
 worker_077,weight,animals,fish,negative,response_pos,0
 worker_077,price,statues,bronze,neutral,response_pos,1
 worker_077,loudness,animals,cat,negative,response_pos,0
@@ -581,7 +557,6 @@ worker_020,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_020,width,holes,cave,positive,response_pos,1
 worker_020,height,people,basketball player,positive,response_pos,1
 worker_020,weight,people,baby,negative,response_pos,0
-worker_020,darkness,times of day,dusk,neutral,response_pos,0
 worker_020,size,animals,monkey,neutral,response_pos,0
 worker_020,hardness,sweets,jolly rancher,positive,response_pos,1
 worker_020,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
@@ -606,7 +581,6 @@ worker_061,temperature,food,soup,positive,response_pos,1
 worker_061,width,roads,side road,negative,response_pos,0
 worker_061,strength,people,teenager,neutral,response_pos,0
 worker_061,hardness,sweets,marshmallow,negative,response_pos,0
-worker_061,darkness,times of day,dusk,neutral,response_pos,0
 worker_061,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_061,size,animals,monkey,neutral,response_pos,0
 worker_061,size,plants,tree,positive,response_pos,1
@@ -644,7 +618,6 @@ worker_013,strength,people,child,negative,response_pos,0
 worker_013,hardness,floor materials,carpet,negative,response_pos,0
 worker_013,strength,storms,thunderstorm,neutral,response_pos,1
 worker_013,temperature,seasons,fall,neutral,response_pos,0
-worker_013,darkness,times of day,night,negative,response_pos,0
 worker_013,darkness,birds,parrot,neutral,response_pos,1
 worker_013,size,plants,bush,neutral,response_pos,1
 worker_006,width,roads,side road,negative,response_pos,0
@@ -665,7 +638,6 @@ worker_006,darkness,birds,crow,negative,response_pos,0
 worker_006,speed,animals,elephant,neutral,response_pos,0
 worker_006,temperature,seasons,fall,neutral,response_pos,0
 worker_006,strength,people,child,negative,response_pos,1
-worker_006,darkness,times of day,dusk,neutral,response_pos,0
 worker_006,width,holes,cavern,neutral,response_pos,0
 worker_006,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_006,length_duration,readings,poem,negative,response_pos,0
@@ -689,7 +661,6 @@ worker_018,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_018,size,plants,bush,neutral,response_pos,0
 worker_018,price,statues,plastic,negative,response_pos,0
 worker_018,darkness,birds,crow,negative,response_pos,0
-worker_018,darkness,times of day,dusk,neutral,response_pos,0
 worker_018,width,holes,fox hole,negative,response_pos,0
 worker_018,loudness,animals,dog,neutral,response_pos,1
 worker_018,speed,people,walker,negative,response_pos,0
@@ -704,7 +675,6 @@ worker_025,temperature,food,salad,neutral,response_pos,0
 worker_025,size,animals,mouse,negative,response_pos,0
 worker_025,hardness,floor materials,tile,positive,response_pos,1
 worker_025,strength,people,teenager,neutral,response_pos,0
-worker_025,darkness,times of day,day,positive,response_pos,1
 worker_025,weight,people,baby,negative,response_pos,0
 worker_025,darkness,birds,crow,negative,response_pos,0
 worker_025,weight,animals,dog,neutral,response_pos,0
@@ -734,7 +704,6 @@ worker_068,darkness,birds,seagull,positive,response_pos,0
 worker_068,length_duration,readings,story,neutral,response_pos,0
 worker_068,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_068,width,holes,fox hole,negative,response_pos,1
-worker_068,darkness,times of day,night,negative,response_pos,1
 worker_068,size,animals,mouse,negative,response_pos,1
 worker_068,size,plants,bush,neutral,response_pos,0
 worker_068,price,statues,plastic,negative,response_pos,0
@@ -743,7 +712,6 @@ worker_068,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_068,weight,animals,elephant,positive,response_pos,0
 worker_068,strength,storms,thunderstorm,neutral,response_pos,0
 worker_068,strength,people,adult,positive,response_pos,1
-worker_065,darkness,times of day,night,negative,response_pos,0
 worker_065,speed,animals,sloth,negative,response_pos,0
 worker_065,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_065,price,statues,platinum,positive,response_pos,1
@@ -788,12 +756,10 @@ worker_066,loudness,rooms,auditorium,positive,response_pos,1
 worker_066,width,holes,cave,positive,response_pos,1
 worker_066,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_066,price,statues,bronze,neutral,response_pos,0
-worker_066,darkness,times of day,dusk,neutral,response_pos,0
 worker_066,temperature,food,salad,neutral,response_pos,0
 worker_066,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_037,hardness,sweets,piece of chocolate,neutral,response_pos,0
 worker_037,temperature,seasons,summer,positive,response_pos,1
-worker_037,darkness,times of day,night,negative,response_pos,0
 worker_037,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_037,weight,people,kid,neutral,response_pos,0
 worker_037,strength,people,adult,positive,response_pos,1
@@ -831,7 +797,6 @@ worker_001,temperature,seasons,fall,neutral,response_pos,0
 worker_001,price,alcoholic drinks,bottle of wine,neutral,response_pos,1
 worker_001,loudness,animals,dog,neutral,response_pos,1
 worker_001,height,animals,bird,negative,response_pos,0
-worker_001,darkness,times of day,day,positive,response_pos,1
 worker_001,length_duration,dogs,dachshund,positive,response_pos,0
 worker_001,weight,animals,elephant,positive,response_pos,1
 worker_001,weight,people,kid,neutral,response_pos,0
@@ -846,7 +811,6 @@ worker_024,hardness,sweets,piece of chocolate,neutral,response_pos,1
 worker_024,strength,people,adult,positive,response_pos,1
 worker_024,length_duration,dogs,chihuahua,negative,response_pos,0
 worker_024,strength,storms,thunderstorm,neutral,response_pos,1
-worker_024,darkness,times of day,night,negative,response_pos,0
 worker_024,temperature,food,ice cream,negative,response_pos,0
 worker_024,price,statues,platinum,positive,response_pos,1
 worker_024,size,plants,tree,positive,response_pos,1
@@ -881,7 +845,6 @@ worker_008,speed,people,walker,negative,response_pos,1
 worker_008,size,plants,flower,negative,response_pos,1
 worker_008,width,roads,side road,negative,response_pos,1
 worker_008,size,animals,monkey,neutral,response_pos,1
-worker_008,darkness,times of day,dusk,neutral,response_pos,1
 worker_008,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_008,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_008,hardness,floor materials,wood,neutral,response_pos,1
@@ -904,7 +867,6 @@ worker_051,speed,people,runner,positive,response_pos,1
 worker_051,strength,people,child,negative,response_pos,0
 worker_051,strength,storms,thunderstorm,neutral,response_pos,1
 worker_051,temperature,food,soup,positive,response_pos,1
-worker_051,darkness,times of day,dusk,neutral,response_pos,0
 worker_051,loudness,animals,donkey,positive,response_pos,1
 worker_051,hardness,sweets,marshmallow,negative,response_pos,0
 worker_051,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
@@ -931,7 +893,6 @@ worker_003,length_duration,readings,poem,negative,response_pos,0
 worker_003,price,statues,bronze,neutral,response_pos,1
 worker_003,weight,animals,elephant,positive,response_pos,1
 worker_003,length_duration,dogs,dachshund,positive,response_pos,1
-worker_003,darkness,times of day,day,positive,response_pos,1
 worker_003,loudness,animals,cat,negative,response_pos,0
 worker_003,temperature,food,soup,positive,response_pos,1
 worker_003,height,animals,monkey,neutral,response_pos,0
@@ -952,7 +913,6 @@ worker_078,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_078,size,plants,tree,positive,response_pos,0
 worker_078,price,statues,platinum,positive,response_pos,1
 worker_078,width,holes,fox hole,negative,response_pos,1
-worker_078,darkness,times of day,day,positive,response_pos,0
 worker_078,speed,animals,cheetah,positive,response_pos,1
 worker_078,temperature,seasons,winter,negative,response_pos,0
 worker_078,hardness,sweets,marshmallow,negative,response_pos,1
@@ -980,7 +940,6 @@ worker_023,price,statues,bronze,neutral,response_pos,1
 worker_023,temperature,food,salad,neutral,response_pos,0
 worker_023,width,roads,side road,negative,response_pos,0
 worker_023,size,plants,flower,negative,response_pos,0
-worker_023,darkness,times of day,dusk,neutral,response_pos,0
 worker_023,speed,people,jogger,neutral,response_pos,1
 worker_023,speed,animals,sloth,negative,response_pos,0
 worker_044,size,plants,bush,neutral,response_pos,1
@@ -996,7 +955,6 @@ worker_044,weight,people,baby,negative,response_pos,0
 worker_044,height,animals,monkey,neutral,response_pos,0
 worker_044,weight,animals,dog,neutral,response_pos,0
 worker_044,darkness,birds,parrot,neutral,response_pos,1
-worker_044,darkness,times of day,day,positive,response_pos,1
 worker_044,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_044,price,statues,bronze,neutral,response_pos,1
 worker_044,speed,animals,sloth,negative,response_pos,0
@@ -1023,7 +981,6 @@ worker_046,size,animals,mouse,negative,response_pos,0
 worker_046,weight,people,baby,negative,response_pos,0
 worker_046,darkness,birds,parrot,neutral,response_pos,0
 worker_046,weight,animals,elephant,positive,response_pos,1
-worker_046,darkness,times of day,day,positive,response_pos,1
 worker_046,speed,people,runner,positive,response_pos,0
 worker_046,hardness,floor materials,tile,positive,response_pos,1
 worker_046,strength,storms,hurricane,positive,response_pos,1
@@ -1049,7 +1006,6 @@ worker_060,height,animals,giraffe,positive,response_pos,0
 worker_060,weight,people,baby,negative,response_pos,1
 worker_060,size,animals,monkey,neutral,response_pos,0
 worker_060,width,roads,side road,negative,response_pos,1
-worker_060,darkness,times of day,day,positive,response_pos,0
 worker_060,price,alcoholic drinks,six-pack of beer,negative,response_pos,1
 worker_060,darkness,birds,parrot,neutral,response_pos,0
 worker_060,loudness,rooms,study hall,negative,response_pos,1
@@ -1059,7 +1015,6 @@ worker_002,strength,people,adult,positive,response_pos,1
 worker_002,length_duration,readings,story,neutral,response_pos,0
 worker_002,width,holes,cavern,neutral,response_pos,1
 worker_002,length_duration,dogs,chihuahua,negative,response_pos,0
-worker_002,darkness,times of day,day,positive,response_pos,1
 worker_002,hardness,floor materials,tile,positive,response_pos,1
 worker_002,size,plants,tree,positive,response_pos,1
 worker_002,width,roads,highway,positive,response_pos,1
@@ -1093,7 +1048,6 @@ worker_028,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_028,loudness,rooms,auditorium,positive,response_pos,1
 worker_028,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_028,loudness,animals,cat,negative,response_pos,1
-worker_028,darkness,times of day,night,negative,response_pos,0
 worker_028,temperature,food,soup,positive,response_pos,1
 worker_028,weight,people,baby,negative,response_pos,0
 worker_028,weight,animals,elephant,positive,response_pos,1
@@ -1125,7 +1079,6 @@ worker_075,loudness,rooms,study hall,negative,response_pos,0
 worker_075,weight,people,baby,negative,response_pos,0
 worker_075,temperature,food,salad,neutral,response_pos,0
 worker_075,speed,animals,sloth,negative,response_pos,0
-worker_075,darkness,times of day,day,positive,response_pos,1
 worker_075,width,holes,cave,positive,response_pos,1
 worker_015,length_duration,dogs,dachshund,positive,response_pos,0
 worker_015,loudness,animals,dog,neutral,response_pos,0
@@ -1144,7 +1097,6 @@ worker_015,height,animals,bird,negative,response_pos,0
 worker_015,temperature,seasons,winter,negative,response_pos,1
 worker_015,size,animals,monkey,neutral,response_pos,0
 worker_015,price,statues,platinum,positive,response_pos,0
-worker_015,darkness,times of day,day,positive,response_pos,1
 worker_015,price,alcoholic drinks,six-pack of beer,negative,response_pos,1
 worker_015,darkness,birds,crow,negative,response_pos,0
 worker_015,weight,animals,elephant,positive,response_pos,1
@@ -1154,7 +1106,6 @@ worker_015,hardness,floor materials,wood,neutral,response_pos,0
 worker_033,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_033,speed,people,runner,positive,response_pos,1
 worker_033,length_duration,readings,poem,negative,response_pos,1
-worker_033,darkness,times of day,night,negative,response_pos,0
 worker_033,temperature,food,soup,positive,response_pos,1
 worker_033,price,statues,plastic,negative,response_pos,0
 worker_033,strength,storms,thunderstorm,neutral,response_pos,1
@@ -1189,7 +1140,6 @@ worker_076,length_duration,readings,poem,negative,response_pos,1
 worker_076,loudness,rooms,study hall,negative,response_pos,0
 worker_076,speed,animals,cheetah,positive,response_pos,1
 worker_076,height,people,basketball player,positive,response_pos,1
-worker_076,darkness,times of day,night,negative,response_pos,0
 worker_076,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_076,width,holes,cavern,neutral,response_pos,1
 worker_076,speed,people,jogger,neutral,response_pos,0
@@ -1213,7 +1163,6 @@ worker_064,height,people,jockey,negative,response_pos,0
 worker_064,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
 worker_064,width,roads,downtown street,neutral,response_pos,0
 worker_064,strength,people,teenager,neutral,response_pos,1
-worker_064,darkness,times of day,dusk,neutral,response_pos,0
 worker_064,hardness,sweets,jolly rancher,positive,response_pos,1
 worker_064,darkness,birds,seagull,positive,response_pos,1
 worker_064,temperature,food,ice cream,negative,response_pos,0
@@ -1235,7 +1184,6 @@ worker_034,size,animals,elephant,positive,response_pos,1
 worker_034,length_duration,readings,novel,positive,response_pos,0
 worker_034,darkness,birds,parrot,neutral,response_pos,1
 worker_034,strength,storms,thunderstorm,neutral,response_pos,1
-worker_034,darkness,times of day,night,negative,response_pos,0
 worker_034,width,roads,highway,positive,response_pos,1
 worker_034,speed,animals,elephant,neutral,response_pos,0
 worker_034,hardness,sweets,piece of chocolate,neutral,response_pos,0
@@ -1249,7 +1197,6 @@ worker_034,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_034,strength,people,adult,positive,response_pos,1
 worker_021,strength,storms,hurricane,positive,response_pos,0
 worker_021,size,plants,bush,neutral,response_pos,0
-worker_021,darkness,times of day,dusk,neutral,response_pos,0
 worker_021,temperature,seasons,fall,neutral,response_pos,0
 worker_021,length_duration,readings,novel,positive,response_pos,1
 worker_021,speed,people,jogger,neutral,response_pos,0
@@ -1286,7 +1233,6 @@ worker_022,width,roads,side road,negative,response_pos,0
 worker_022,weight,people,adult,positive,response_pos,1
 worker_022,size,plants,flower,negative,response_pos,0
 worker_022,price,alcoholic drinks,bottle of wine,neutral,response_pos,1
-worker_022,darkness,times of day,day,positive,response_pos,1
 worker_022,size,animals,elephant,positive,response_pos,1
 worker_022,darkness,birds,crow,negative,response_pos,0
 worker_022,strength,people,teenager,neutral,response_pos,1
@@ -1298,7 +1244,6 @@ worker_022,price,statues,platinum,positive,response_pos,1
 worker_027,height,animals,giraffe,positive,response_pos,1
 worker_027,width,roads,side road,negative,response_pos,0
 worker_027,loudness,animals,donkey,positive,response_pos,1
-worker_027,darkness,times of day,day,positive,response_pos,1
 worker_027,price,statues,bronze,neutral,response_pos,1
 worker_027,weight,people,kid,neutral,response_pos,0
 worker_027,temperature,seasons,fall,neutral,response_pos,1
@@ -1335,7 +1280,6 @@ worker_054,strength,people,teenager,neutral,response_pos,1
 worker_054,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_054,height,people,golfer,neutral,response_pos,0
 worker_054,weight,animals,elephant,positive,response_pos,1
-worker_054,darkness,times of day,day,positive,response_pos,1
 worker_054,size,animals,elephant,positive,response_pos,1
 worker_054,temperature,seasons,summer,positive,response_pos,1
 worker_054,darkness,birds,parrot,neutral,response_pos,1
@@ -1349,7 +1293,6 @@ worker_012,weight,people,kid,neutral,response_pos,0
 worker_012,height,animals,monkey,neutral,response_pos,1
 worker_012,price,alcoholic drinks,bottle of wine,neutral,response_pos,1
 worker_012,temperature,seasons,summer,positive,response_pos,1
-worker_012,darkness,times of day,dusk,neutral,response_pos,0
 worker_012,hardness,floor materials,carpet,negative,response_pos,0
 worker_012,width,holes,cave,positive,response_pos,1
 worker_012,loudness,rooms,classroom,neutral,response_pos,1
@@ -1384,7 +1327,6 @@ worker_063,width,roads,highway,positive,response_pos,1
 worker_063,loudness,rooms,study hall,negative,response_pos,0
 worker_063,weight,animals,elephant,positive,response_pos,1
 worker_063,length_duration,dogs,chihuahua,negative,response_pos,0
-worker_063,darkness,times of day,night,negative,response_pos,0
 worker_063,width,holes,fox hole,negative,response_pos,0
 worker_063,hardness,floor materials,carpet,negative,response_pos,0
 worker_063,size,animals,mouse,negative,response_pos,0
@@ -1405,7 +1347,6 @@ worker_029,width,roads,downtown street,neutral,response_pos,0
 worker_029,size,animals,monkey,neutral,response_pos,0
 worker_029,price,statues,platinum,positive,response_pos,1
 worker_029,weight,people,baby,negative,response_pos,0
-worker_029,darkness,times of day,day,positive,response_pos,1
 worker_029,length_duration,readings,poem,negative,response_pos,0
 worker_029,size,plants,flower,negative,response_pos,0
 worker_029,weight,animals,dog,neutral,response_pos,0
@@ -1416,7 +1357,6 @@ worker_029,height,animals,bird,negative,response_pos,0
 worker_029,width,holes,cave,positive,response_pos,1
 worker_029,hardness,floor materials,carpet,negative,response_pos,0
 worker_041,hardness,sweets,marshmallow,negative,response_pos,0
-worker_041,darkness,times of day,night,negative,response_pos,1
 worker_041,price,statues,plastic,negative,response_pos,1
 worker_041,loudness,rooms,auditorium,positive,response_pos,1
 worker_041,speed,animals,cheetah,positive,response_pos,1
@@ -1459,13 +1399,11 @@ worker_031,width,holes,cave,positive,response_pos,1
 worker_031,width,roads,downtown street,neutral,response_pos,1
 worker_031,darkness,birds,seagull,positive,response_pos,1
 worker_031,hardness,floor materials,carpet,negative,response_pos,0
-worker_031,darkness,times of day,night,negative,response_pos,0
 worker_031,height,animals,monkey,neutral,response_pos,0
 worker_031,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_031,strength,storms,hurricane,positive,response_pos,1
 worker_067,weight,animals,elephant,positive,response_pos,1
 worker_067,height,people,basketball player,positive,response_pos,1
-worker_067,darkness,times of day,night,negative,response_pos,0
 worker_067,hardness,floor materials,wood,neutral,response_pos,1
 worker_067,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_067,temperature,seasons,fall,neutral,response_pos,0
@@ -1507,7 +1445,6 @@ worker_014,strength,storms,thunderstorm,neutral,response_pos,1
 worker_014,temperature,food,ice cream,negative,response_pos,0
 worker_014,weight,people,baby,negative,response_pos,1
 worker_014,strength,people,adult,positive,response_pos,1
-worker_014,darkness,times of day,night,negative,response_pos,1
 worker_014,height,people,jockey,negative,response_pos,1
 worker_014,width,holes,cavern,neutral,response_pos,1
 worker_014,size,plants,flower,negative,response_pos,1
@@ -1526,7 +1463,6 @@ worker_016,loudness,rooms,study hall,negative,response_pos,0
 worker_016,speed,animals,elephant,neutral,response_pos,0
 worker_016,height,people,basketball player,positive,response_pos,1
 worker_016,length_duration,dogs,chihuahua,negative,response_pos,0
-worker_016,darkness,times of day,night,negative,response_pos,0
 worker_016,strength,people,adult,positive,response_pos,1
 worker_016,length_duration,readings,novel,positive,response_pos,1
 worker_016,darkness,birds,parrot,neutral,response_pos,1
@@ -1555,11 +1491,9 @@ worker_059,temperature,food,soup,positive,response_pos,1
 worker_059,loudness,animals,cat,negative,response_pos,1
 worker_059,height,people,golfer,neutral,response_pos,1
 worker_059,length_duration,readings,poem,negative,response_pos,1
-worker_059,darkness,times of day,dusk,neutral,response_pos,0
 worker_059,width,roads,highway,positive,response_pos,0
 worker_059,weight,people,baby,negative,response_pos,0
 worker_059,speed,people,runner,positive,response_pos,1
-worker_070,darkness,times of day,night,negative,response_pos,0
 worker_070,width,roads,highway,positive,response_pos,0
 worker_070,speed,animals,elephant,neutral,response_pos,0
 worker_070,length_duration,readings,story,neutral,response_pos,1
@@ -1606,7 +1540,6 @@ worker_005,price,alcoholic drinks,six-pack of beer,negative,response_pos,0
 worker_005,weight,animals,dog,neutral,response_pos,0
 worker_005,height,animals,monkey,neutral,response_pos,0
 worker_005,length_duration,readings,story,neutral,response_pos,1
-worker_005,darkness,times of day,dusk,neutral,response_pos,0
 worker_043,speed,people,runner,positive,response_pos,1
 worker_043,width,roads,highway,positive,response_pos,1
 worker_043,speed,animals,elephant,neutral,response_pos,0
@@ -1621,7 +1554,6 @@ worker_043,size,plants,flower,negative,response_pos,0
 worker_043,temperature,food,soup,positive,response_pos,1
 worker_043,size,animals,monkey,neutral,response_pos,0
 worker_043,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
-worker_043,darkness,times of day,day,positive,response_pos,1
 worker_043,loudness,animals,dog,neutral,response_pos,1
 worker_043,width,holes,cavern,neutral,response_pos,1
 worker_043,price,statues,bronze,neutral,response_pos,1
@@ -1638,7 +1570,6 @@ worker_048,temperature,seasons,winter,negative,response_pos,1
 worker_048,strength,storms,rain,negative,response_pos,0
 worker_048,speed,animals,sloth,negative,response_pos,0
 worker_048,height,people,basketball player,positive,response_pos,1
-worker_048,darkness,times of day,day,positive,response_pos,1
 worker_048,darkness,birds,crow,negative,response_pos,0
 worker_048,size,animals,mouse,negative,response_pos,0
 worker_048,loudness,animals,cat,negative,response_pos,0
@@ -1670,7 +1601,6 @@ worker_074,weight,animals,elephant,positive,response_pos,1
 worker_074,size,animals,mouse,negative,response_pos,0
 worker_074,temperature,food,salad,neutral,response_pos,0
 worker_074,strength,storms,hurricane,positive,response_pos,1
-worker_074,darkness,times of day,dusk,neutral,response_pos,0
 worker_074,loudness,rooms,study hall,negative,response_pos,0
 worker_074,temperature,seasons,summer,positive,response_pos,1
 worker_074,strength,people,teenager,neutral,response_pos,0
@@ -1689,7 +1619,6 @@ worker_045,darkness,birds,crow,negative,response_pos,0
 worker_045,strength,storms,thunderstorm,neutral,response_pos,1
 worker_045,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_045,strength,people,adult,positive,response_pos,1
-worker_045,darkness,times of day,day,positive,response_pos,1
 worker_045,loudness,rooms,study hall,negative,response_pos,0
 worker_045,hardness,sweets,marshmallow,negative,response_pos,0
 worker_045,weight,animals,dog,neutral,response_pos,1
@@ -1713,7 +1642,6 @@ worker_040,speed,animals,sloth,negative,response_pos,0
 worker_040,darkness,birds,parrot,neutral,response_pos,0
 worker_040,speed,people,runner,positive,response_pos,1
 worker_040,hardness,floor materials,carpet,negative,response_pos,0
-worker_040,darkness,times of day,night,negative,response_pos,0
 worker_040,length_duration,readings,novel,positive,response_pos,1
 worker_040,size,plants,bush,neutral,response_pos,1
 worker_040,loudness,rooms,classroom,neutral,response_pos,1
@@ -1727,7 +1655,6 @@ worker_040,strength,storms,hurricane,positive,response_pos,1
 worker_040,weight,animals,fish,negative,response_pos,0
 worker_040,width,roads,side road,negative,response_pos,0
 worker_040,height,animals,bird,negative,response_pos,0
-worker_032,darkness,times of day,day,positive,response_pos,1
 worker_032,size,animals,monkey,neutral,response_pos,0
 worker_032,length_duration,readings,story,neutral,response_pos,0
 worker_032,temperature,food,salad,neutral,response_pos,0
@@ -1767,7 +1694,6 @@ worker_047,darkness,birds,crow,negative,response_pos,0
 worker_047,width,roads,side road,negative,response_pos,0
 worker_047,loudness,animals,donkey,positive,response_pos,1
 worker_047,size,animals,elephant,positive,response_pos,1
-worker_047,darkness,times of day,dusk,neutral,response_pos,0
 worker_047,price,statues,platinum,positive,response_pos,1
 worker_047,weight,people,baby,negative,response_pos,0
 worker_047,height,animals,monkey,neutral,response_pos,0
@@ -1789,7 +1715,6 @@ worker_079,size,plants,bush,neutral,response_pos,0
 worker_079,temperature,food,soup,positive,response_pos,1
 worker_079,length_duration,dogs,bassett hound,neutral,response_pos,1
 worker_079,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_pos,1
-worker_079,darkness,times of day,dusk,neutral,response_pos,0
 worker_079,price,statues,bronze,neutral,response_pos,1
 worker_079,width,roads,highway,positive,response_pos,1
 worker_079,darkness,birds,seagull,positive,response_pos,1
@@ -1816,7 +1741,6 @@ worker_056,speed,people,runner,positive,response_pos,1
 worker_056,weight,people,baby,negative,response_pos,0
 worker_056,hardness,floor materials,carpet,negative,response_pos,0
 worker_056,length_duration,dogs,chihuahua,negative,response_pos,0
-worker_056,darkness,times of day,dusk,neutral,response_pos,0
 worker_056,loudness,animals,dog,neutral,response_pos,1
 worker_056,size,plants,tree,positive,response_pos,1
 worker_056,strength,storms,thunderstorm,neutral,response_pos,1
@@ -1837,7 +1761,6 @@ worker_052,hardness,sweets,jolly rancher,positive,response_pos,1
 worker_052,length_duration,dogs,bassett hound,neutral,response_pos,0
 worker_052,temperature,seasons,summer,positive,response_pos,1
 worker_052,strength,people,teenager,neutral,response_pos,1
-worker_052,darkness,times of day,dusk,neutral,response_pos,0
 worker_052,width,holes,cavern,neutral,response_pos,1
 worker_052,price,statues,plastic,negative,response_pos,0
 worker_052,strength,storms,hurricane,positive,response_pos,1
@@ -1859,7 +1782,6 @@ worker_073,strength,people,child,negative,response_pos,1
 worker_073,length_duration,dogs,dachshund,positive,response_pos,0
 worker_073,strength,storms,thunderstorm,neutral,response_pos,1
 worker_073,speed,people,jogger,neutral,response_pos,1
-worker_073,darkness,times of day,night,negative,response_pos,1
 worker_073,loudness,rooms,auditorium,positive,response_pos,0
 worker_073,loudness,animals,cat,negative,response_pos,1
 worker_073,width,roads,downtown street,neutral,response_pos,1
@@ -1875,7 +1797,6 @@ worker_058,temperature,food,salad,neutral,response_pos,0
 worker_058,length_duration,readings,novel,positive,response_pos,1
 worker_058,width,roads,downtown street,neutral,response_pos,0
 worker_058,weight,people,kid,neutral,response_pos,0
-worker_058,darkness,times of day,night,negative,response_pos,0
 worker_058,width,holes,cave,positive,response_pos,1
 worker_058,size,plants,tree,positive,response_pos,1
 worker_058,strength,storms,hurricane,positive,response_pos,1
@@ -1902,7 +1823,6 @@ worker_035,size,animals,mouse,negative,response_pos,0
 worker_035,speed,animals,elephant,neutral,response_pos,0
 worker_035,temperature,food,salad,neutral,response_pos,0
 worker_035,strength,storms,thunderstorm,neutral,response_pos,1
-worker_035,darkness,times of day,night,negative,response_pos,0
 worker_035,height,people,basketball player,positive,response_pos,1
 worker_035,speed,people,runner,positive,response_pos,1
 worker_035,length_duration,readings,poem,negative,response_pos,0
@@ -1922,7 +1842,6 @@ worker_035,width,holes,cave,positive,response_pos,1
 worker_062,speed,people,runner,positive,response_pos,1
 worker_062,size,animals,mouse,negative,response_pos,0
 worker_062,price,statues,plastic,negative,response_pos,0
-worker_062,darkness,times of day,dusk,neutral,response_pos,0
 worker_062,strength,people,child,negative,response_pos,0
 worker_062,width,roads,highway,positive,response_pos,1
 worker_062,darkness,birds,seagull,positive,response_pos,1
@@ -1962,7 +1881,6 @@ worker_004,temperature,food,soup,positive,response_neg,0
 worker_004,size,plants,tree,positive,response_neg,0
 worker_004,width,roads,downtown street,neutral,response_neg,1
 worker_004,strength,storms,rain,negative,response_neg,1
-worker_004,darkness,times of day,night,negative,response_neg,1
 worker_004,loudness,animals,donkey,positive,response_neg,0
 worker_004,width,holes,cave,positive,response_neg,0
 worker_004,strength,people,adult,positive,response_neg,0
@@ -1975,7 +1893,6 @@ worker_071,width,roads,side road,negative,response_neg,1
 worker_071,loudness,animals,cat,negative,response_neg,0
 worker_071,speed,animals,sloth,negative,response_neg,1
 worker_071,speed,people,runner,positive,response_neg,0
-worker_071,darkness,times of day,dusk,neutral,response_neg,1
 worker_071,length_duration,dogs,dachshund,positive,response_neg,1
 worker_071,height,animals,monkey,neutral,response_neg,0
 worker_071,length_duration,readings,poem,negative,response_neg,1
@@ -1998,7 +1915,6 @@ worker_036,speed,animals,cheetah,positive,response_neg,0
 worker_036,temperature,food,salad,neutral,response_neg,1
 worker_036,size,plants,bush,neutral,response_neg,0
 worker_036,temperature,seasons,winter,negative,response_neg,1
-worker_036,darkness,times of day,day,positive,response_neg,0
 worker_036,strength,storms,thunderstorm,neutral,response_neg,0
 worker_036,width,roads,downtown street,neutral,response_neg,0
 worker_036,weight,people,kid,neutral,response_neg,1
@@ -2030,7 +1946,6 @@ worker_007,weight,animals,elephant,positive,response_neg,0
 worker_007,loudness,rooms,classroom,neutral,response_neg,0
 worker_007,speed,animals,elephant,neutral,response_neg,1
 worker_007,width,holes,cave,positive,response_neg,0
-worker_007,darkness,times of day,day,positive,response_neg,0
 worker_007,loudness,animals,cat,negative,response_neg,1
 worker_007,height,animals,giraffe,positive,response_neg,0
 worker_007,weight,people,kid,neutral,response_neg,1
@@ -2061,7 +1976,6 @@ worker_026,price,alcoholic drinks,bottle of wine,neutral,response_neg,1
 worker_026,speed,animals,sloth,negative,response_neg,1
 worker_026,weight,people,baby,negative,response_neg,1
 worker_026,hardness,floor materials,wood,neutral,response_neg,0
-worker_026,darkness,times of day,day,positive,response_neg,0
 worker_026,temperature,food,salad,neutral,response_neg,1
 worker_042,speed,animals,elephant,neutral,response_neg,1
 worker_042,price,statues,bronze,neutral,response_neg,0
@@ -2081,7 +1995,6 @@ worker_042,weight,animals,fish,negative,response_neg,1
 worker_042,hardness,sweets,jolly rancher,positive,response_neg,0
 worker_042,loudness,animals,donkey,positive,response_neg,0
 worker_042,speed,people,walker,negative,response_neg,1
-worker_042,darkness,times of day,dusk,neutral,response_neg,1
 worker_042,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_042,height,animals,monkey,neutral,response_neg,1
 worker_042,strength,people,child,negative,response_neg,1
@@ -2095,7 +2008,6 @@ worker_038,size,plants,tree,positive,response_neg,1
 worker_038,temperature,seasons,summer,positive,response_neg,0
 worker_038,weight,people,kid,neutral,response_neg,1
 worker_038,speed,animals,cheetah,positive,response_neg,0
-worker_038,darkness,times of day,day,positive,response_neg,1
 worker_038,price,statues,plastic,negative,response_neg,1
 worker_038,size,animals,mouse,negative,response_neg,1
 worker_038,length_duration,readings,novel,positive,response_neg,0
@@ -2132,11 +2044,9 @@ worker_049,size,animals,elephant,positive,response_neg,0
 worker_049,width,holes,cavern,neutral,response_neg,1
 worker_049,weight,animals,elephant,positive,response_neg,0
 worker_049,strength,storms,hurricane,positive,response_neg,0
-worker_049,darkness,times of day,night,negative,response_neg,1
 worker_049,temperature,food,ice cream,negative,response_neg,1
 worker_049,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_057,length_duration,dogs,chihuahua,negative,response_neg,1
-worker_057,darkness,times of day,day,positive,response_neg,0
 worker_057,height,animals,bird,negative,response_neg,1
 worker_057,temperature,food,ice cream,negative,response_neg,1
 worker_057,loudness,animals,dog,neutral,response_neg,0
@@ -2167,7 +2077,6 @@ worker_030,strength,storms,rain,negative,response_neg,0
 worker_030,temperature,food,soup,positive,response_neg,0
 worker_030,speed,people,jogger,neutral,response_neg,0
 worker_030,hardness,sweets,piece of chocolate,neutral,response_neg,1
-worker_030,darkness,times of day,night,negative,response_neg,1
 worker_030,price,statues,platinum,positive,response_neg,0
 worker_030,size,plants,tree,positive,response_neg,0
 worker_030,height,people,golfer,neutral,response_neg,0
@@ -2203,14 +2112,12 @@ worker_080,speed,animals,cheetah,positive,response_neg,0
 worker_080,width,holes,cavern,neutral,response_neg,1
 worker_080,darkness,birds,seagull,positive,response_neg,0
 worker_080,loudness,rooms,auditorium,positive,response_neg,0
-worker_080,darkness,times of day,dusk,neutral,response_neg,1
 worker_080,temperature,seasons,summer,positive,response_neg,0
 worker_080,height,animals,monkey,neutral,response_neg,1
 worker_080,size,plants,tree,positive,response_neg,0
 worker_072,darkness,birds,seagull,positive,response_neg,0
 worker_072,weight,animals,elephant,positive,response_neg,0
 worker_072,strength,people,teenager,neutral,response_neg,0
-worker_072,darkness,times of day,night,negative,response_neg,1
 worker_072,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_072,price,statues,plastic,negative,response_neg,1
 worker_072,loudness,rooms,study hall,negative,response_neg,1
@@ -2251,7 +2158,6 @@ worker_053,strength,people,adult,positive,response_neg,0
 worker_053,strength,storms,rain,negative,response_neg,1
 worker_053,weight,people,kid,neutral,response_neg,1
 worker_053,temperature,food,soup,positive,response_neg,0
-worker_053,darkness,times of day,day,positive,response_neg,0
 worker_053,hardness,sweets,marshmallow,negative,response_neg,1
 worker_053,size,animals,monkey,neutral,response_neg,1
 worker_053,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,1
@@ -2276,7 +2182,6 @@ worker_019,loudness,rooms,classroom,neutral,response_neg,0
 worker_019,strength,storms,hurricane,positive,response_neg,0
 worker_019,height,people,golfer,neutral,response_neg,1
 worker_019,speed,people,walker,negative,response_neg,1
-worker_019,darkness,times of day,night,negative,response_neg,1
 worker_019,width,holes,cave,positive,response_neg,0
 worker_019,temperature,food,soup,positive,response_neg,0
 worker_039,width,holes,cave,positive,response_neg,0
@@ -2295,7 +2200,6 @@ worker_039,weight,animals,fish,negative,response_neg,1
 worker_039,size,plants,tree,positive,response_neg,0
 worker_039,hardness,sweets,piece of chocolate,neutral,response_neg,1
 worker_039,temperature,food,ice cream,negative,response_neg,1
-worker_039,darkness,times of day,dusk,neutral,response_neg,1
 worker_039,length_duration,dogs,dachshund,positive,response_neg,0
 worker_039,width,roads,downtown street,neutral,response_neg,1
 worker_039,weight,people,adult,positive,response_neg,0
@@ -2325,7 +2229,6 @@ worker_009,width,holes,cavern,neutral,response_neg,1
 worker_009,temperature,food,salad,neutral,response_neg,1
 worker_009,speed,people,walker,negative,response_neg,1
 worker_009,speed,animals,elephant,neutral,response_neg,1
-worker_009,darkness,times of day,dusk,neutral,response_neg,1
 worker_009,strength,storms,hurricane,positive,response_neg,1
 worker_011,darkness,birds,seagull,positive,response_neg,0
 worker_011,size,animals,elephant,positive,response_neg,0
@@ -2335,7 +2238,6 @@ worker_011,size,plants,bush,neutral,response_neg,0
 worker_011,length_duration,readings,story,neutral,response_neg,1
 worker_011,weight,people,kid,neutral,response_neg,1
 worker_011,hardness,floor materials,carpet,negative,response_neg,1
-worker_011,darkness,times of day,night,negative,response_neg,1
 worker_011,price,statues,platinum,positive,response_neg,0
 worker_011,price,alcoholic drinks,bottle of wine,neutral,response_neg,1
 worker_011,loudness,rooms,study hall,negative,response_neg,1
@@ -2369,7 +2271,6 @@ worker_050,strength,people,adult,positive,response_neg,0
 worker_050,size,plants,flower,negative,response_neg,1
 worker_050,darkness,birds,seagull,positive,response_neg,0
 worker_050,speed,people,walker,negative,response_neg,1
-worker_050,darkness,times of day,dusk,neutral,response_neg,1
 worker_050,height,animals,bird,negative,response_neg,1
 worker_050,length_duration,dogs,chihuahua,negative,response_neg,1
 worker_050,weight,people,adult,positive,response_neg,0
@@ -2394,7 +2295,6 @@ worker_055,speed,people,jogger,neutral,response_neg,0
 worker_055,width,holes,cave,positive,response_neg,0
 worker_055,loudness,animals,cat,negative,response_neg,0
 worker_055,weight,animals,dog,neutral,response_neg,1
-worker_055,darkness,times of day,dusk,neutral,response_neg,1
 worker_055,hardness,floor materials,wood,neutral,response_neg,0
 worker_055,weight,people,baby,negative,response_neg,1
 worker_055,darkness,birds,seagull,positive,response_neg,1
@@ -2415,7 +2315,6 @@ worker_014,temperature,seasons,winter,negative,response_neg,1
 worker_014,hardness,sweets,marshmallow,negative,response_neg,1
 worker_014,weight,people,kid,neutral,response_neg,0
 worker_014,size,plants,tree,positive,response_neg,1
-worker_014,darkness,times of day,dusk,neutral,response_neg,0
 worker_014,size,animals,monkey,neutral,response_neg,1
 worker_014,weight,animals,elephant,positive,response_neg,1
 worker_014,price,alcoholic drinks,bottle of wine,neutral,response_neg,1
@@ -2433,7 +2332,6 @@ worker_010,length_duration,readings,poem,negative,response_neg,1
 worker_010,speed,people,walker,negative,response_neg,1
 worker_010,hardness,floor materials,tile,positive,response_neg,0
 worker_010,loudness,animals,cat,negative,response_neg,0
-worker_010,darkness,times of day,night,negative,response_neg,1
 worker_010,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_010,strength,people,child,negative,response_neg,1
 worker_010,temperature,seasons,winter,negative,response_neg,1
@@ -2453,7 +2351,6 @@ worker_069,hardness,floor materials,wood,neutral,response_neg,0
 worker_069,length_duration,dogs,bassett hound,neutral,response_neg,1
 worker_069,weight,animals,fish,negative,response_neg,1
 worker_069,weight,people,adult,positive,response_neg,0
-worker_069,darkness,times of day,night,negative,response_neg,1
 worker_069,length_duration,readings,novel,positive,response_neg,0
 worker_069,price,statues,platinum,positive,response_neg,0
 worker_069,temperature,seasons,winter,negative,response_neg,1
@@ -2492,7 +2389,6 @@ worker_017,width,roads,highway,positive,response_neg,0
 worker_017,weight,people,adult,positive,response_neg,1
 worker_017,speed,animals,cheetah,positive,response_neg,0
 worker_017,length_duration,dogs,bassett hound,neutral,response_neg,1
-worker_017,darkness,times of day,night,negative,response_neg,1
 worker_017,temperature,food,ice cream,negative,response_neg,1
 worker_017,weight,animals,dog,neutral,response_neg,1
 worker_077,height,people,jockey,negative,response_neg,1
@@ -2514,7 +2410,6 @@ worker_077,width,roads,side road,negative,response_neg,1
 worker_077,speed,animals,sloth,negative,response_neg,1
 worker_077,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_077,strength,people,adult,positive,response_neg,0
-worker_077,darkness,times of day,dusk,neutral,response_neg,1
 worker_077,weight,animals,fish,negative,response_neg,1
 worker_077,price,statues,bronze,neutral,response_neg,0
 worker_077,loudness,animals,cat,negative,response_neg,1
@@ -2525,7 +2420,6 @@ worker_020,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_020,width,holes,cave,positive,response_neg,0
 worker_020,height,people,basketball player,positive,response_neg,0
 worker_020,weight,people,baby,negative,response_neg,1
-worker_020,darkness,times of day,dusk,neutral,response_neg,1
 worker_020,size,animals,monkey,neutral,response_neg,1
 worker_020,hardness,sweets,jolly rancher,positive,response_neg,0
 worker_020,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
@@ -2550,7 +2444,6 @@ worker_061,temperature,food,soup,positive,response_neg,0
 worker_061,width,roads,side road,negative,response_neg,1
 worker_061,strength,people,teenager,neutral,response_neg,1
 worker_061,hardness,sweets,marshmallow,negative,response_neg,1
-worker_061,darkness,times of day,dusk,neutral,response_neg,1
 worker_061,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_061,size,animals,monkey,neutral,response_neg,1
 worker_061,size,plants,tree,positive,response_neg,0
@@ -2588,7 +2481,6 @@ worker_013,strength,people,child,negative,response_neg,1
 worker_013,hardness,floor materials,carpet,negative,response_neg,1
 worker_013,strength,storms,thunderstorm,neutral,response_neg,0
 worker_013,temperature,seasons,fall,neutral,response_neg,1
-worker_013,darkness,times of day,night,negative,response_neg,1
 worker_013,darkness,birds,parrot,neutral,response_neg,0
 worker_013,size,plants,bush,neutral,response_neg,0
 worker_006,width,roads,side road,negative,response_neg,1
@@ -2609,7 +2501,6 @@ worker_006,darkness,birds,crow,negative,response_neg,1
 worker_006,speed,animals,elephant,neutral,response_neg,1
 worker_006,temperature,seasons,fall,neutral,response_neg,1
 worker_006,strength,people,child,negative,response_neg,0
-worker_006,darkness,times of day,dusk,neutral,response_neg,1
 worker_006,width,holes,cavern,neutral,response_neg,1
 worker_006,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_006,length_duration,readings,poem,negative,response_neg,1
@@ -2633,7 +2524,6 @@ worker_018,length_duration,dogs,chihuahua,negative,response_neg,1
 worker_018,size,plants,bush,neutral,response_neg,0
 worker_018,price,statues,plastic,negative,response_neg,1
 worker_018,darkness,birds,crow,negative,response_neg,1
-worker_018,darkness,times of day,dusk,neutral,response_neg,1
 worker_018,width,holes,fox hole,negative,response_neg,1
 worker_018,loudness,animals,dog,neutral,response_neg,0
 worker_018,speed,people,walker,negative,response_neg,1
@@ -2648,7 +2538,6 @@ worker_025,temperature,food,salad,neutral,response_neg,1
 worker_025,size,animals,mouse,negative,response_neg,1
 worker_025,hardness,floor materials,tile,positive,response_neg,0
 worker_025,strength,people,teenager,neutral,response_neg,0
-worker_025,darkness,times of day,day,positive,response_neg,0
 worker_025,weight,people,baby,negative,response_neg,1
 worker_025,darkness,birds,crow,negative,response_neg,1
 worker_025,weight,animals,dog,neutral,response_neg,1
@@ -2678,7 +2567,6 @@ worker_068,darkness,birds,seagull,positive,response_neg,0
 worker_068,length_duration,readings,story,neutral,response_neg,0
 worker_068,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,1
 worker_068,width,holes,fox hole,negative,response_neg,1
-worker_068,darkness,times of day,night,negative,response_neg,1
 worker_068,size,animals,mouse,negative,response_neg,1
 worker_068,size,plants,bush,neutral,response_neg,0
 worker_068,price,statues,plastic,negative,response_neg,0
@@ -2687,7 +2575,6 @@ worker_068,length_duration,dogs,chihuahua,negative,response_neg,0
 worker_068,weight,animals,elephant,positive,response_neg,0
 worker_068,strength,storms,thunderstorm,neutral,response_neg,0
 worker_068,strength,people,adult,positive,response_neg,1
-worker_065,darkness,times of day,night,negative,response_neg,1
 worker_065,speed,animals,sloth,negative,response_neg,1
 worker_065,length_duration,dogs,chihuahua,negative,response_neg,1
 worker_065,price,statues,platinum,positive,response_neg,0
@@ -2732,12 +2619,10 @@ worker_066,loudness,rooms,auditorium,positive,response_neg,0
 worker_066,width,holes,cave,positive,response_neg,0
 worker_066,length_duration,dogs,chihuahua,negative,response_neg,1
 worker_066,price,statues,bronze,neutral,response_neg,1
-worker_066,darkness,times of day,dusk,neutral,response_neg,1
 worker_066,temperature,food,salad,neutral,response_neg,1
 worker_066,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_037,hardness,sweets,piece of chocolate,neutral,response_neg,1
 worker_037,temperature,seasons,summer,positive,response_neg,0
-worker_037,darkness,times of day,night,negative,response_neg,1
 worker_037,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_037,weight,people,kid,neutral,response_neg,1
 worker_037,strength,people,adult,positive,response_neg,0
@@ -2775,7 +2660,6 @@ worker_001,temperature,seasons,fall,neutral,response_neg,1
 worker_001,price,alcoholic drinks,bottle of wine,neutral,response_neg,0
 worker_001,loudness,animals,dog,neutral,response_neg,0
 worker_001,height,animals,bird,negative,response_neg,1
-worker_001,darkness,times of day,day,positive,response_neg,0
 worker_001,length_duration,dogs,dachshund,positive,response_neg,0
 worker_001,weight,animals,elephant,positive,response_neg,0
 worker_001,weight,people,kid,neutral,response_neg,1
@@ -2790,7 +2674,6 @@ worker_024,hardness,sweets,piece of chocolate,neutral,response_neg,0
 worker_024,strength,people,adult,positive,response_neg,0
 worker_024,length_duration,dogs,chihuahua,negative,response_neg,1
 worker_024,strength,storms,thunderstorm,neutral,response_neg,0
-worker_024,darkness,times of day,night,negative,response_neg,1
 worker_024,temperature,food,ice cream,negative,response_neg,1
 worker_024,price,statues,platinum,positive,response_neg,0
 worker_024,size,plants,tree,positive,response_neg,0
@@ -2825,7 +2708,6 @@ worker_008,speed,people,walker,negative,response_neg,1
 worker_008,size,plants,flower,negative,response_neg,1
 worker_008,width,roads,side road,negative,response_neg,1
 worker_008,size,animals,monkey,neutral,response_neg,1
-worker_008,darkness,times of day,dusk,neutral,response_neg,1
 worker_008,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,1
 worker_008,length_duration,dogs,bassett hound,neutral,response_neg,1
 worker_008,hardness,floor materials,wood,neutral,response_neg,1
@@ -2848,7 +2730,6 @@ worker_051,speed,people,runner,positive,response_neg,0
 worker_051,strength,people,child,negative,response_neg,1
 worker_051,strength,storms,thunderstorm,neutral,response_neg,0
 worker_051,temperature,food,soup,positive,response_neg,0
-worker_051,darkness,times of day,dusk,neutral,response_neg,1
 worker_051,loudness,animals,donkey,positive,response_neg,0
 worker_051,hardness,sweets,marshmallow,negative,response_neg,1
 worker_051,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
@@ -2875,7 +2756,6 @@ worker_003,length_duration,readings,poem,negative,response_neg,1
 worker_003,price,statues,bronze,neutral,response_neg,0
 worker_003,weight,animals,elephant,positive,response_neg,0
 worker_003,length_duration,dogs,dachshund,positive,response_neg,0
-worker_003,darkness,times of day,day,positive,response_neg,0
 worker_003,loudness,animals,cat,negative,response_neg,1
 worker_003,temperature,food,soup,positive,response_neg,0
 worker_003,height,animals,monkey,neutral,response_neg,1
@@ -2896,7 +2776,6 @@ worker_078,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_078,size,plants,tree,positive,response_neg,1
 worker_078,price,statues,platinum,positive,response_neg,0
 worker_078,width,holes,fox hole,negative,response_neg,0
-worker_078,darkness,times of day,day,positive,response_neg,1
 worker_078,speed,animals,cheetah,positive,response_neg,0
 worker_078,temperature,seasons,winter,negative,response_neg,1
 worker_078,hardness,sweets,marshmallow,negative,response_neg,0
@@ -2924,7 +2803,6 @@ worker_023,price,statues,bronze,neutral,response_neg,0
 worker_023,temperature,food,salad,neutral,response_neg,1
 worker_023,width,roads,side road,negative,response_neg,1
 worker_023,size,plants,flower,negative,response_neg,0
-worker_023,darkness,times of day,dusk,neutral,response_neg,1
 worker_023,speed,people,jogger,neutral,response_neg,0
 worker_023,speed,animals,sloth,negative,response_neg,1
 worker_044,size,plants,bush,neutral,response_neg,0
@@ -2940,7 +2818,6 @@ worker_044,weight,people,baby,negative,response_neg,1
 worker_044,height,animals,monkey,neutral,response_neg,1
 worker_044,weight,animals,dog,neutral,response_neg,1
 worker_044,darkness,birds,parrot,neutral,response_neg,0
-worker_044,darkness,times of day,day,positive,response_neg,0
 worker_044,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_044,price,statues,bronze,neutral,response_neg,0
 worker_044,speed,animals,sloth,negative,response_neg,1
@@ -2967,7 +2844,6 @@ worker_046,size,animals,mouse,negative,response_neg,1
 worker_046,weight,people,baby,negative,response_neg,1
 worker_046,darkness,birds,parrot,neutral,response_neg,1
 worker_046,weight,animals,elephant,positive,response_neg,0
-worker_046,darkness,times of day,day,positive,response_neg,0
 worker_046,speed,people,runner,positive,response_neg,1
 worker_046,hardness,floor materials,tile,positive,response_neg,0
 worker_046,strength,storms,hurricane,positive,response_neg,0
@@ -2993,7 +2869,6 @@ worker_060,height,animals,giraffe,positive,response_neg,1
 worker_060,weight,people,baby,negative,response_neg,0
 worker_060,size,animals,monkey,neutral,response_neg,1
 worker_060,width,roads,side road,negative,response_neg,0
-worker_060,darkness,times of day,day,positive,response_neg,1
 worker_060,price,alcoholic drinks,six-pack of beer,negative,response_neg,0
 worker_060,darkness,birds,parrot,neutral,response_neg,1
 worker_060,loudness,rooms,study hall,negative,response_neg,0
@@ -3003,7 +2878,6 @@ worker_002,strength,people,adult,positive,response_neg,0
 worker_002,length_duration,readings,story,neutral,response_neg,1
 worker_002,width,holes,cavern,neutral,response_neg,0
 worker_002,length_duration,dogs,chihuahua,negative,response_neg,1
-worker_002,darkness,times of day,day,positive,response_neg,0
 worker_002,hardness,floor materials,tile,positive,response_neg,0
 worker_002,size,plants,tree,positive,response_neg,0
 worker_002,width,roads,highway,positive,response_neg,0
@@ -3037,7 +2911,6 @@ worker_028,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_028,loudness,rooms,auditorium,positive,response_neg,0
 worker_028,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_028,loudness,animals,cat,negative,response_neg,0
-worker_028,darkness,times of day,night,negative,response_neg,1
 worker_028,temperature,food,soup,positive,response_neg,0
 worker_028,weight,people,baby,negative,response_neg,1
 worker_028,weight,animals,elephant,positive,response_neg,0
@@ -3069,7 +2942,6 @@ worker_075,loudness,rooms,study hall,negative,response_neg,1
 worker_075,weight,people,baby,negative,response_neg,1
 worker_075,temperature,food,salad,neutral,response_neg,1
 worker_075,speed,animals,sloth,negative,response_neg,1
-worker_075,darkness,times of day,day,positive,response_neg,0
 worker_075,width,holes,cave,positive,response_neg,0
 worker_015,length_duration,dogs,dachshund,positive,response_neg,0
 worker_015,loudness,animals,dog,neutral,response_neg,1
@@ -3088,7 +2960,6 @@ worker_015,height,animals,bird,negative,response_neg,1
 worker_015,temperature,seasons,winter,negative,response_neg,1
 worker_015,size,animals,monkey,neutral,response_neg,0
 worker_015,price,statues,platinum,positive,response_neg,1
-worker_015,darkness,times of day,day,positive,response_neg,1
 worker_015,price,alcoholic drinks,six-pack of beer,negative,response_neg,0
 worker_015,darkness,birds,crow,negative,response_neg,1
 worker_015,weight,animals,elephant,positive,response_neg,1
@@ -3098,7 +2969,6 @@ worker_015,hardness,floor materials,wood,neutral,response_neg,0
 worker_033,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_033,speed,people,runner,positive,response_neg,0
 worker_033,length_duration,readings,poem,negative,response_neg,0
-worker_033,darkness,times of day,night,negative,response_neg,1
 worker_033,temperature,food,soup,positive,response_neg,0
 worker_033,price,statues,plastic,negative,response_neg,1
 worker_033,strength,storms,thunderstorm,neutral,response_neg,0
@@ -3133,7 +3003,6 @@ worker_076,length_duration,readings,poem,negative,response_neg,0
 worker_076,loudness,rooms,study hall,negative,response_neg,1
 worker_076,speed,animals,cheetah,positive,response_neg,0
 worker_076,height,people,basketball player,positive,response_neg,0
-worker_076,darkness,times of day,night,negative,response_neg,1
 worker_076,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_076,width,holes,cavern,neutral,response_neg,0
 worker_076,speed,people,jogger,neutral,response_neg,1
@@ -3157,7 +3026,6 @@ worker_064,height,people,jockey,negative,response_neg,1
 worker_064,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
 worker_064,width,roads,downtown street,neutral,response_neg,1
 worker_064,strength,people,teenager,neutral,response_neg,0
-worker_064,darkness,times of day,dusk,neutral,response_neg,1
 worker_064,hardness,sweets,jolly rancher,positive,response_neg,0
 worker_064,darkness,birds,seagull,positive,response_neg,0
 worker_064,temperature,food,ice cream,negative,response_neg,1
@@ -3179,7 +3047,6 @@ worker_034,size,animals,elephant,positive,response_neg,0
 worker_034,length_duration,readings,novel,positive,response_neg,1
 worker_034,darkness,birds,parrot,neutral,response_neg,0
 worker_034,strength,storms,thunderstorm,neutral,response_neg,0
-worker_034,darkness,times of day,night,negative,response_neg,1
 worker_034,width,roads,highway,positive,response_neg,0
 worker_034,speed,animals,elephant,neutral,response_neg,1
 worker_034,hardness,sweets,piece of chocolate,neutral,response_neg,1
@@ -3193,7 +3060,6 @@ worker_034,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_034,strength,people,adult,positive,response_neg,0
 worker_021,strength,storms,hurricane,positive,response_neg,1
 worker_021,size,plants,bush,neutral,response_neg,1
-worker_021,darkness,times of day,dusk,neutral,response_neg,0
 worker_021,temperature,seasons,fall,neutral,response_neg,1
 worker_021,length_duration,readings,novel,positive,response_neg,0
 worker_021,speed,people,jogger,neutral,response_neg,0
@@ -3230,7 +3096,6 @@ worker_022,width,roads,side road,negative,response_neg,1
 worker_022,weight,people,adult,positive,response_neg,0
 worker_022,size,plants,flower,negative,response_neg,1
 worker_022,price,alcoholic drinks,bottle of wine,neutral,response_neg,0
-worker_022,darkness,times of day,day,positive,response_neg,0
 worker_022,size,animals,elephant,positive,response_neg,0
 worker_022,darkness,birds,crow,negative,response_neg,1
 worker_022,strength,people,teenager,neutral,response_neg,0
@@ -3242,7 +3107,6 @@ worker_022,price,statues,platinum,positive,response_neg,0
 worker_027,height,animals,giraffe,positive,response_neg,0
 worker_027,width,roads,side road,negative,response_neg,1
 worker_027,loudness,animals,donkey,positive,response_neg,0
-worker_027,darkness,times of day,day,positive,response_neg,0
 worker_027,price,statues,bronze,neutral,response_neg,0
 worker_027,weight,people,kid,neutral,response_neg,1
 worker_027,temperature,seasons,fall,neutral,response_neg,0
@@ -3279,7 +3143,6 @@ worker_054,strength,people,teenager,neutral,response_neg,0
 worker_054,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_054,height,people,golfer,neutral,response_neg,1
 worker_054,weight,animals,elephant,positive,response_neg,0
-worker_054,darkness,times of day,day,positive,response_neg,0
 worker_054,size,animals,elephant,positive,response_neg,0
 worker_054,temperature,seasons,summer,positive,response_neg,0
 worker_054,darkness,birds,parrot,neutral,response_neg,0
@@ -3293,7 +3156,6 @@ worker_012,weight,people,kid,neutral,response_neg,1
 worker_012,height,animals,monkey,neutral,response_neg,0
 worker_012,price,alcoholic drinks,bottle of wine,neutral,response_neg,0
 worker_012,temperature,seasons,summer,positive,response_neg,0
-worker_012,darkness,times of day,dusk,neutral,response_neg,1
 worker_012,hardness,floor materials,carpet,negative,response_neg,1
 worker_012,width,holes,cave,positive,response_neg,0
 worker_012,loudness,rooms,classroom,neutral,response_neg,0
@@ -3328,7 +3190,6 @@ worker_063,width,roads,highway,positive,response_neg,0
 worker_063,loudness,rooms,study hall,negative,response_neg,1
 worker_063,weight,animals,elephant,positive,response_neg,0
 worker_063,length_duration,dogs,chihuahua,negative,response_neg,1
-worker_063,darkness,times of day,night,negative,response_neg,1
 worker_063,width,holes,fox hole,negative,response_neg,1
 worker_063,hardness,floor materials,carpet,negative,response_neg,1
 worker_063,size,animals,mouse,negative,response_neg,1
@@ -3349,7 +3210,6 @@ worker_029,width,roads,downtown street,neutral,response_neg,0
 worker_029,size,animals,monkey,neutral,response_neg,1
 worker_029,price,statues,platinum,positive,response_neg,0
 worker_029,weight,people,baby,negative,response_neg,1
-worker_029,darkness,times of day,day,positive,response_neg,0
 worker_029,length_duration,readings,poem,negative,response_neg,1
 worker_029,size,plants,flower,negative,response_neg,1
 worker_029,weight,animals,dog,neutral,response_neg,1
@@ -3360,7 +3220,6 @@ worker_029,height,animals,bird,negative,response_neg,1
 worker_029,width,holes,cave,positive,response_neg,0
 worker_029,hardness,floor materials,carpet,negative,response_neg,1
 worker_041,hardness,sweets,marshmallow,negative,response_neg,1
-worker_041,darkness,times of day,night,negative,response_neg,1
 worker_041,price,statues,plastic,negative,response_neg,1
 worker_041,loudness,rooms,auditorium,positive,response_neg,1
 worker_041,speed,animals,cheetah,positive,response_neg,1
@@ -3403,13 +3262,11 @@ worker_031,width,holes,cave,positive,response_neg,0
 worker_031,width,roads,downtown street,neutral,response_neg,0
 worker_031,darkness,birds,seagull,positive,response_neg,0
 worker_031,hardness,floor materials,carpet,negative,response_neg,1
-worker_031,darkness,times of day,night,negative,response_neg,1
 worker_031,height,animals,monkey,neutral,response_neg,1
 worker_031,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_031,strength,storms,hurricane,positive,response_neg,0
 worker_067,weight,animals,elephant,positive,response_neg,0
 worker_067,height,people,basketball player,positive,response_neg,0
-worker_067,darkness,times of day,night,negative,response_neg,1
 worker_067,hardness,floor materials,wood,neutral,response_neg,0
 worker_067,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_067,temperature,seasons,fall,neutral,response_neg,1
@@ -3451,7 +3308,6 @@ worker_014,strength,storms,thunderstorm,neutral,response_neg,0
 worker_014,temperature,food,ice cream,negative,response_neg,1
 worker_014,weight,people,baby,negative,response_neg,1
 worker_014,strength,people,adult,positive,response_neg,0
-worker_014,darkness,times of day,night,negative,response_neg,0
 worker_014,height,people,jockey,negative,response_neg,0
 worker_014,width,holes,cavern,neutral,response_neg,0
 worker_014,size,plants,flower,negative,response_neg,1
@@ -3470,7 +3326,6 @@ worker_016,loudness,rooms,study hall,negative,response_neg,1
 worker_016,speed,animals,elephant,neutral,response_neg,1
 worker_016,height,people,basketball player,positive,response_neg,0
 worker_016,length_duration,dogs,chihuahua,negative,response_neg,1
-worker_016,darkness,times of day,night,negative,response_neg,1
 worker_016,strength,people,adult,positive,response_neg,0
 worker_016,length_duration,readings,novel,positive,response_neg,0
 worker_016,darkness,birds,parrot,neutral,response_neg,0
@@ -3499,11 +3354,9 @@ worker_059,temperature,food,soup,positive,response_neg,0
 worker_059,loudness,animals,cat,negative,response_neg,0
 worker_059,height,people,golfer,neutral,response_neg,0
 worker_059,length_duration,readings,poem,negative,response_neg,0
-worker_059,darkness,times of day,dusk,neutral,response_neg,1
 worker_059,width,roads,highway,positive,response_neg,1
 worker_059,weight,people,baby,negative,response_neg,1
 worker_059,speed,people,runner,positive,response_neg,0
-worker_070,darkness,times of day,night,negative,response_neg,1
 worker_070,width,roads,highway,positive,response_neg,1
 worker_070,speed,animals,elephant,neutral,response_neg,1
 worker_070,length_duration,readings,story,neutral,response_neg,0
@@ -3550,7 +3403,6 @@ worker_005,price,alcoholic drinks,six-pack of beer,negative,response_neg,1
 worker_005,weight,animals,dog,neutral,response_neg,1
 worker_005,height,animals,monkey,neutral,response_neg,1
 worker_005,length_duration,readings,story,neutral,response_neg,0
-worker_005,darkness,times of day,dusk,neutral,response_neg,1
 worker_043,speed,people,runner,positive,response_neg,0
 worker_043,width,roads,highway,positive,response_neg,0
 worker_043,speed,animals,elephant,neutral,response_neg,1
@@ -3565,7 +3417,6 @@ worker_043,size,plants,flower,negative,response_neg,1
 worker_043,temperature,food,soup,positive,response_neg,0
 worker_043,size,animals,monkey,neutral,response_neg,1
 worker_043,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
-worker_043,darkness,times of day,day,positive,response_neg,0
 worker_043,loudness,animals,dog,neutral,response_neg,0
 worker_043,width,holes,cavern,neutral,response_neg,0
 worker_043,price,statues,bronze,neutral,response_neg,0
@@ -3582,7 +3433,6 @@ worker_048,temperature,seasons,winter,negative,response_neg,0
 worker_048,strength,storms,rain,negative,response_neg,1
 worker_048,speed,animals,sloth,negative,response_neg,1
 worker_048,height,people,basketball player,positive,response_neg,0
-worker_048,darkness,times of day,day,positive,response_neg,0
 worker_048,darkness,birds,crow,negative,response_neg,1
 worker_048,size,animals,mouse,negative,response_neg,1
 worker_048,loudness,animals,cat,negative,response_neg,1
@@ -3614,7 +3464,6 @@ worker_074,weight,animals,elephant,positive,response_neg,0
 worker_074,size,animals,mouse,negative,response_neg,1
 worker_074,temperature,food,salad,neutral,response_neg,1
 worker_074,strength,storms,hurricane,positive,response_neg,0
-worker_074,darkness,times of day,dusk,neutral,response_neg,1
 worker_074,loudness,rooms,study hall,negative,response_neg,1
 worker_074,temperature,seasons,summer,positive,response_neg,0
 worker_074,strength,people,teenager,neutral,response_neg,1
@@ -3633,7 +3482,6 @@ worker_045,darkness,birds,crow,negative,response_neg,1
 worker_045,strength,storms,thunderstorm,neutral,response_neg,0
 worker_045,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_045,strength,people,adult,positive,response_neg,0
-worker_045,darkness,times of day,day,positive,response_neg,0
 worker_045,loudness,rooms,study hall,negative,response_neg,1
 worker_045,hardness,sweets,marshmallow,negative,response_neg,1
 worker_045,weight,animals,dog,neutral,response_neg,0
@@ -3657,7 +3505,6 @@ worker_040,speed,animals,sloth,negative,response_neg,1
 worker_040,darkness,birds,parrot,neutral,response_neg,0
 worker_040,speed,people,runner,positive,response_neg,0
 worker_040,hardness,floor materials,carpet,negative,response_neg,1
-worker_040,darkness,times of day,night,negative,response_neg,1
 worker_040,length_duration,readings,novel,positive,response_neg,0
 worker_040,size,plants,bush,neutral,response_neg,0
 worker_040,loudness,rooms,classroom,neutral,response_neg,0
@@ -3671,7 +3518,6 @@ worker_040,strength,storms,hurricane,positive,response_neg,0
 worker_040,weight,animals,fish,negative,response_neg,1
 worker_040,width,roads,side road,negative,response_neg,1
 worker_040,height,animals,bird,negative,response_neg,1
-worker_032,darkness,times of day,day,positive,response_neg,0
 worker_032,size,animals,monkey,neutral,response_neg,1
 worker_032,length_duration,readings,story,neutral,response_neg,1
 worker_032,temperature,food,salad,neutral,response_neg,1
@@ -3711,7 +3557,6 @@ worker_047,darkness,birds,crow,negative,response_neg,1
 worker_047,width,roads,side road,negative,response_neg,1
 worker_047,loudness,animals,donkey,positive,response_neg,0
 worker_047,size,animals,elephant,positive,response_neg,0
-worker_047,darkness,times of day,dusk,neutral,response_neg,1
 worker_047,price,statues,platinum,positive,response_neg,0
 worker_047,weight,people,baby,negative,response_neg,1
 worker_047,height,animals,monkey,neutral,response_neg,1
@@ -3733,7 +3578,6 @@ worker_079,size,plants,bush,neutral,response_neg,1
 worker_079,temperature,food,soup,positive,response_neg,0
 worker_079,length_duration,dogs,bassett hound,neutral,response_neg,0
 worker_079,price,alcoholic drinks,bottle of top-shelf liquor,positive,response_neg,0
-worker_079,darkness,times of day,dusk,neutral,response_neg,1
 worker_079,price,statues,bronze,neutral,response_neg,0
 worker_079,width,roads,highway,positive,response_neg,0
 worker_079,darkness,birds,seagull,positive,response_neg,0
@@ -3760,7 +3604,6 @@ worker_056,speed,people,runner,positive,response_neg,0
 worker_056,weight,people,baby,negative,response_neg,1
 worker_056,hardness,floor materials,carpet,negative,response_neg,1
 worker_056,length_duration,dogs,chihuahua,negative,response_neg,1
-worker_056,darkness,times of day,dusk,neutral,response_neg,1
 worker_056,loudness,animals,dog,neutral,response_neg,0
 worker_056,size,plants,tree,positive,response_neg,0
 worker_056,strength,storms,thunderstorm,neutral,response_neg,0
@@ -3781,7 +3624,6 @@ worker_052,hardness,sweets,jolly rancher,positive,response_neg,0
 worker_052,length_duration,dogs,bassett hound,neutral,response_neg,1
 worker_052,temperature,seasons,summer,positive,response_neg,0
 worker_052,strength,people,teenager,neutral,response_neg,0
-worker_052,darkness,times of day,dusk,neutral,response_neg,1
 worker_052,width,holes,cavern,neutral,response_neg,0
 worker_052,price,statues,plastic,negative,response_neg,1
 worker_052,strength,storms,hurricane,positive,response_neg,0
@@ -3803,7 +3645,6 @@ worker_073,strength,people,child,negative,response_neg,0
 worker_073,length_duration,dogs,dachshund,positive,response_neg,1
 worker_073,strength,storms,thunderstorm,neutral,response_neg,0
 worker_073,speed,people,jogger,neutral,response_neg,0
-worker_073,darkness,times of day,night,negative,response_neg,0
 worker_073,loudness,rooms,auditorium,positive,response_neg,1
 worker_073,loudness,animals,cat,negative,response_neg,0
 worker_073,width,roads,downtown street,neutral,response_neg,0
@@ -3819,7 +3660,6 @@ worker_058,temperature,food,salad,neutral,response_neg,1
 worker_058,length_duration,readings,novel,positive,response_neg,0
 worker_058,width,roads,downtown street,neutral,response_neg,1
 worker_058,weight,people,kid,neutral,response_neg,1
-worker_058,darkness,times of day,night,negative,response_neg,1
 worker_058,width,holes,cave,positive,response_neg,0
 worker_058,size,plants,tree,positive,response_neg,0
 worker_058,strength,storms,hurricane,positive,response_neg,0
@@ -3846,7 +3686,6 @@ worker_035,size,animals,mouse,negative,response_neg,1
 worker_035,speed,animals,elephant,neutral,response_neg,1
 worker_035,temperature,food,salad,neutral,response_neg,1
 worker_035,strength,storms,thunderstorm,neutral,response_neg,0
-worker_035,darkness,times of day,night,negative,response_neg,1
 worker_035,height,people,basketball player,positive,response_neg,0
 worker_035,speed,people,runner,positive,response_neg,0
 worker_035,length_duration,readings,poem,negative,response_neg,1
@@ -3866,7 +3705,6 @@ worker_035,width,holes,cave,positive,response_neg,0
 worker_062,speed,people,runner,positive,response_neg,0
 worker_062,size,animals,mouse,negative,response_neg,1
 worker_062,price,statues,plastic,negative,response_neg,1
-worker_062,darkness,times of day,dusk,neutral,response_neg,1
 worker_062,strength,people,child,negative,response_neg,1
 worker_062,width,roads,highway,positive,response_neg,0
 worker_062,darkness,birds,seagull,positive,response_neg,0
