@@ -132,7 +132,9 @@ insert_super = function(np) {
   }
   return (super)
 }
-df.trials.w.super <- df.trials %>% rowwise() %>% mutate(superordinate = insert_super(np))
+df.trials.w.super <- df.trials %>% 
+  rowwise() %>% 
+  mutate(superordinate = insert_super(np))
 ```
 
 
@@ -165,7 +167,8 @@ df.trials.filtered <- df.trials.w.super %>%
     np = gsub("rap concert", "rap", np),
     )
 
-df.trials.filtered %>% group_by(np) %>%
+df.trials.filtered %>% 
+  group_by(np) %>%
   count()
 ```
 
@@ -185,7 +188,7 @@ my_stop_words <-# bind_rows(
   # )
 #)
 
-d.tidy.phrase.w.original <- df.trials.filtered %>% 
+df.trials.filtered %>% 
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
          response = gsub("biking", "bike", response),
@@ -240,20 +243,23 @@ d.tidy.phrase.w.original <- df.trials.filtered %>%
   spread(wordNumber, word) %>%
   unite(phrase, starts_with("word_"), sep = " ") %>%
   mutate(phrase = gsub(" NA", "", phrase)) %>%
-  left_join(
-     df.trials.filtered %>% select(workerid, trial_num, response)) %>% 
+  left_join(df.trials.filtered %>% select(workerid, trial_num, response)) %>% 
   rename(cleanedPhrase = phrase, originalResponse = response) %>% 
   rowwise() %>%
   mutate(
     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
-    np = as.character(np),
+    # np = as.character(np),
     np = gsub('\"', "", np),
     specific = containsString(as.character(cleanedPhrase), as.character(np)),
     specificRespNP = containsString(as.character(np), gsub("_", "", as.character(cleanedPhrase))),
     diff = specific - specificRespNP
   ) %>%
-  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff)
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff) -> d.tidy.phrase.w.original
 
+```
+
+```{r}
+write_csv(d.tidy.phrase.w.original, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials-clean_filtered.csv")
 ```
 
 
@@ -299,10 +305,21 @@ d.tidy.phrase.specificMarking.bs %>%
 
 # by item
 
-```{r figCollapseItems}
+
+add superordinate labels
+```{r}
+df.adj <- read_csv("../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
+
+df.adj %>% 
+  distinct(item, superordinate) -> df.super
+```
+
+
+```{r figIndivItems}
 d.tidy.phrase.specificMarking.bs.item <- d.tidy.phrase.w.original %>% 
+  #left_join(., df.super %>% rename( np = item)) %>%
   mutate() %>%
-  group_by(np_positiveness,  np, degree, adj_positiveness) %>%
+  group_by( degree, superordinate, np_positiveness,  np, adj_positiveness) %>%
   tidyboot_mean(column = specific)
 
 d.tidy.phrase.specificMarking.bs.item %>%
@@ -311,8 +328,8 @@ d.tidy.phrase.specificMarking.bs.item %>%
          adj_positiveness = gsub('\"', "", adj_positiveness),
          np_positiveness = factor(np_positiveness,
                                levels = c("negative", "neither-nor", "positive"),
-                               labels = c("low", "medium", "high")
-)) %>%
+                               labels = c("low", "medium", "high")),
+         np = fct_reorder(np, as.numeric(np_positiveness))) %>%
   rename(adj_polarity = adj_positiveness) %>%
   ggplot(., 
        aes( x = np, y = mean, 
@@ -325,14 +342,14 @@ d.tidy.phrase.specificMarking.bs.item %>%
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "black"))+
-  facet_wrap(~degree, scales = 'free')+
+  facet_wrap(~degree + superordinate, scales = 'free', nrow = 4)+
  # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   ylab("Proportion paraphrases that contain NP")+
   xlab("Subordinate Category Prior Mean")
 
-# ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
-#        width = 7, height = 7)
+ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
+       width = 9, height = 9)
 ```
 
 # Regression modeling
@@ -342,18 +359,18 @@ d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
   mutate(adj_positiveness = factor(adj_positiveness, 
                                    levels = c("negative", "positive")),
          np_positiveness = factor(np_positiveness, 
-                                  levels = c("neither-nor", "negative", "postiive")))
+                                  levels = c("neither-nor", "negative", "positive")))
+contrasts(d.tidy.phrase.w.original.fac$adj_positiveness) <- c(-1/2, 1/2)
 
 rs.glm.brm <- brm(
   formula = specific ~ np_positiveness * adj_positiveness + 
     (1 +  np_positiveness*adj_positiveness | workerid) + 
-    (1 +  np_positiveness*adj_positiveness | degree),
-  family = bernoulli(), 
+    (1 +  np_positiveness*adj_positiveness | superordinate),
+  family = bernoulli(), chains = 3, cores = 3,
   data = d.tidy.phrase.w.original.fac)
 
 summary(rs.glm.brm)
 
-contrasts(d.tidy.phrase.w.original.fac$adj_positiveness)
 ```
 
 
@@ -361,9 +378,11 @@ contrasts(d.tidy.phrase.w.original.fac$adj_positiveness)
 rs.glm <- glmer(
   formula = specific ~ np_positiveness * adj_positiveness + 
     (1 | workerid) + 
-    (1| degree),
+    (1 | superordinate),
   family = 'binomial', 
   data = d.tidy.phrase.w.original.fac)
+
+contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
 
 summary(rs.glm)
 ```
