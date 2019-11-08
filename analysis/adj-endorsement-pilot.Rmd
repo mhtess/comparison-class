@@ -1,0 +1,205 @@
+---
+title: "Adjective endorsement (final) pilot"
+author: "MH Tessler"
+date: "October 29, 2019"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load libraries.
+library(knitr)
+library(tidyverse)
+library(jsonlite)
+library(tidyboot)
+library(tidytext)
+library(lme4)
+library(ggthemes)
+library(forcats)
+library(brms)
+library(stringr)
+theme_set(theme_few())
+```
+
+## Results
+
+
+```{r load data from json, eval = F}
+data.path <- "../mturk/adjective-endorsement-1-pilot/production-results/"
+result.files <- list.files(data.path, pattern="json")
+
+df.subject <- data.frame()
+df.trials <- data.frame()
+df.attention <- data.frame()
+for (result_file in result.files) {
+  result_json = fromJSON(paste(data.path, result_file, sep ="/"))
+  worker.id =  result_json$answers$trials$worker_id
+  #condition = result_json$answers$condition
+  
+  # df.attention = bind_rows(
+  #   df.attention, 
+  #   data.frame(result_json$answers$catch_trials) %>%
+  #     mutate(workerid = worker.id)
+  # )
+  #   
+  df.subject = bind_rows(
+    df.subject, 
+    data.frame(result_json$answers$trials) %>% 
+      select(age, sex, education, languages, enjoyment, problems, fairprice, comments, experiment_id)
+  )
+    
+  df.trials = bind_rows(
+    df.trials, 
+    data.frame(result_json$answers$trials$trials) %>%
+      mutate(workerid = worker.id)
+  )
+}
+
+df.trials %>%
+  mutate(workerid = factor(workerid),
+         workerid = paste("worker_", as.character(str_pad(as.numeric(workerid), 3, pad = "0")), sep = "")) -> df.trials
+
+write_csv(df.trials, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
+# write_csv(df.subject, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+# write_csv(df.attention, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+```
+
+
+```{r load data from csv}
+df.trials <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
+df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+```
+
+
+```{r}
+df.trials %>%
+  group_by(degree, superordinate, item) %>%
+  count()
+```
+
+```{r}
+df.trials %>%
+  rowwise() %>%
+  mutate(
+    response_pos = as.numeric(
+        ifelse(condition_1 == "adj_positive", response1, response2)
+      ),
+    response_neg = as.numeric(
+      ifelse(condition_1 == "adj_negative", response1, response2)
+    )
+  ) %>%
+  select(workerid, response_pos, response_neg, degree, superordinate, 
+         item, item_cond) %>%
+  gather(key, val, response_pos, response_neg, -degree, -superordinate, 
+         -item, -item_cond) -> df.trials.tidy
+
+write_csv(df.trials.tidy, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv")
+
+glimpse(df.trials.tidy)
+```
+
+
+# Viz: First prass
+
+```{r figCollapseItems}
+d.tidy.adj.bs <- df.trials.tidy %>% 
+  group_by(item_cond, key) %>%
+  tidyboot_mean(column = val)
+
+d.tidy.adj.bs %>%
+  ungroup() %>%
+  mutate(key = gsub('response_', "", key),
+         item_cond = factor(item_cond,
+                               levels = c("negative", "neutral", "positive"),
+                               labels = c("low", "medium", "high")
+)) %>%
+  ggplot(., 
+       aes( x = item_cond, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = key))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+# ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
+#        width = 5, height = 3.6)
+```
+
+
+# by item
+
+```{r figCollapseItems}
+d.tidy.adj.bs.item <- df.trials.tidy %>% 
+  group_by(degree, superordinate, item, item_cond, key) %>%
+  tidyboot_mean(column = val)
+
+
+d.tidy.adj.bs.item %>%
+  ungroup() %>%
+  mutate(key = gsub('response_', "", key),
+         item_cond = factor(item_cond,
+                               levels = c("negative", "neutral", "positive"),
+                               labels = c("low", "medium", "high"))) %>%
+  mutate(item = fct_reorder(item, as.numeric(item_cond))) %>%
+  ggplot(., 
+       aes( x = item, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = key))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  facet_wrap(~superordinate + degree, scales = 'free', nrow = 4)+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion endorse adjective")+
+  xlab("Subordinate Category")
+
+ggsave("../analysis/figs/bars_adj_finalExpt_pilot_byItem.png",
+       width = 9, height = 9)
+```
+
+# Regression modeling
+
+```{r}
+d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
+  mutate(adj_positiveness = factor(adj_positiveness, 
+                                   levels = c("negative", "positive")),
+         np_positiveness = factor(np_positiveness, 
+                                  levels = c("neither-nor", "negative", "postiive")))
+
+rs.glm.brm <- brm(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 +  np_positiveness*adj_positiveness | workerid) + 
+    (1 +  np_positiveness*adj_positiveness | degree),
+  family = bernoulli(), 
+  data = d.tidy.phrase.w.original.fac)
+
+summary(rs.glm.brm)
+
+contrasts(d.tidy.phrase.w.original.fac$adj_positiveness)
+```
+
+
+```{r}
+rs.glm <- glmer(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 | workerid) + 
+    (1| degree),
+  family = 'binomial', 
+  data = d.tidy.phrase.w.original.fac)
+
+summary(rs.glm)
+```
+
+
