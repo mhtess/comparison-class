@@ -77,8 +77,8 @@ function make_slides(f) {
       // Building the appropriate context information
       this.context_mod = stim.context
       this.degree = stim.degree
-      this.stim_id = stim.stim_id
-
+      this.stim_id = stim.worker_id
+      this.superordinate = stim.superordinate
       // Insert name info
       re_name = new RegExp("PERSON", "g")
       this.context_mod = this.context_mod.replace(re_name, stim.name)
@@ -167,8 +167,11 @@ function make_slides(f) {
           "stim_id": this.stim_id,
           "rt": this.rt,
           "context" : this.context_mod,
-          "degree" : this.degree,
+          "np" : this.phrase,
           "np_positiveness" : this.np_positiveness,
+          "adj" : this.adj,
+          "degree" : this.degree,
+          "superordinate": this.superordinate,
           "adj_positiveness" : this.adj_positiveness,
           "adj" : this.adj,
           "np" : this.phrase,

@@ -135,7 +135,7 @@ insert_super = function(np) {
   return (super)
 }
 
-# paste singular superordinates to it the frequency data
+# paste singular superordinates to match it to the frequency data
 insert_super_sg = function(np) {
   if (np %in% c("seagull", "parrot", "crow")) {
     super = "bird"
@@ -148,7 +148,7 @@ insert_super_sg = function(np) {
   } else if (np %in% c("giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "mouse", "cheetah", "sloth", "fish")) {
     super = "animal"
   } else if (np %in% c("basketball player", "golfer", "jockey", "runner", "jogger", "walker")) {
-    super = "athlete"
+    super = "people"
   } else if (np %in% c("dachshund", "bassett hound", "chihuahua")) {
     super = "dog"
   } else if( np %in% c("novel", "story", "poem")) {
@@ -362,18 +362,18 @@ d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% mutate(superordina
                                                                        ifelse(np_match == "jockey", "people", superordinate),
                                                                      superordinate = 
                                                                        ifelse(np_match == "basketball", "people", superordinate),
-                                                                     superordinate = 
-                                                                       ifelse(np_match == "plastic", "decorations", superordinate),
+                                                                  #   superordinate = 
+                                                                   #    ifelse(np_match == "plastic", "decorations", superordinate),
                                                                      superordinate = 
                                                                        ifelse(np_match == "walker", "people", superordinate),
                                                                       superordinate = 
                                                                        ifelse(np_match == "jogger", "people", superordinate),
                                                                       superordinate = 
-                                                                       ifelse(np_match == "runner", "people", superordinate),
+                                                                       ifelse(np_match == "runner", "people", superordinate))
                                                                   #   superordinate = 
                                                                    #    ifelse(np_match == "downtown street", "street", superordinate),
-                                                                     superordinate = 
-                                                                       ifelse(np_match == "dusk", "days", superordinate))
+                                                                #     superordinate = 
+                                                                 #      ifelse(np_match == "dusk", "days", superordinate))
 
 d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original.mode %>% mutate(np_for_freq = np_match,
                                                                      np_for_freq = gsub("study", "study hall", np_for_freq),
@@ -420,7 +420,7 @@ non.matching.mode.resps <- d.tidy.resp.counts.web %>% filter(isModeNeither == 0)
 #%>% write_csv(., '../data/pilot-classElicitation-free-4/class-elicitation-free-4-nonmatching-mode-resps.csv')
 
 # substitute mode responses with typos or not mathcing equivalent seed NPs
-d.tidy.resp.counts <- d.tidy.resp.counts%>% rowwise() %>% mutate(cleanMode = gsub("_", "", mode),
+d.tidy.resp.counts.web <- d.tidy.resp.counts.web %>% rowwise() %>% mutate(cleanMode = gsub("_", "", mode),
                                                                  cleanMode = gsub("baby", "babies", cleanMode),
                                                                  cleanMode = gsub("days fall", "days in fall",
                                                                                  cleanMode),
@@ -465,9 +465,9 @@ df.mode <- left_join(d.tidy.phrase.w.original, d.tidy.resp.counts.web) %>%
   left_join(., df.frequencies, by = c("np_for_freq" ="NPs_SG")) %>% # add sub freqs
   left_join(., df.frequencies, by=c("superordinate_sg"="NPs_SG")) # add super freqs
 
-df.mode.final <- df.mode %>% select(workerid, degree, superordinate_sg, adj, adj_positiveness, mode_np, specific, Frequencies_SG.x, Frequencies_SG.y) %>% mutate(superordinate = superordinate_sg, NP = mode_np, subFreq = Frequencies_SG.x, superFreq = Frequencies_SG.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, specific, subFreq, superFreq)
+df.mode.final <- df.mode %>% select(workerid, degree, superordinate_sg, adj, adj_positiveness, np_match, mode_np, specific, Frequencies_SG.x, Frequencies_SG.y) %>% mutate(superordinate = superordinate_sg, NP = np_match,  response = mode_np, subFreq = Frequencies_SG.x, superFreq = Frequencies_SG.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
 
-write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-update.csv')
+write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub.csv')
 
 
 ```

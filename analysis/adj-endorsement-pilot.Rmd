@@ -329,12 +329,13 @@ df.adj.w.mode <- df.adj.w.mode %>% rowwise() %>% mutate(super_sg = insert_super_
 
 ``` {r}
 df.adj.w.mode <- df.adj %>% mutate(superordinate = ifelse(item == "jockey", "people", superordinate ),
-                                   superordinate = ifelse(item == "basketball player", "people", superordinate ),
+                                   superordinate = ifelse(item == "basketball player", "people", 
+                                                          superordinate ),
                                    superordinate = ifelse(item == "golfer", "people", superordinate ),
                                    superordinate = ifelse(item == "walker", "people", superordinate ),
                                    superordinate = ifelse(item == "jogger", "people", superordinate ),
                                    superordinate = ifelse(item == "runner", "people", superordinate ),
                                    ) %>% subset(., !(item %in% c("day", "night", "dusk")))
-
-write_csv(df.adj.w.mode, '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-modal-super-subset.csv')
+df.adj.w.mode %>% select(workerid, degree, super_sg, item, item_cond, key, val) %>% 
+  write_csv( '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG.csv')
 ```
