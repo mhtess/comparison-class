@@ -465,7 +465,7 @@ df.mode <- left_join(d.tidy.phrase.w.original, d.tidy.resp.counts.web) %>%
   left_join(., df.frequencies, by = c("np_for_freq" ="NPs_SG")) %>% # add sub freqs
   left_join(., df.frequencies, by=c("superordinate_sg"="NPs_SG")) # add super freqs
 
-df.mode.final <- df.mode %>% select(workerid, degree, superordinate_sg, adj, adj_positiveness, np_match, mode_np, specific, Frequencies_SG.x, Frequencies_SG.y) %>% mutate(superordinate = superordinate_sg, NP = np_match,  response = mode_np, subFreq = Frequencies_SG.x, superFreq = Frequencies_SG.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
+df.mode.final <- df.mode %>% select(workerid, degree, superordinate_sg, adj, adj_positiveness, np, mode_np, specific, Frequencies_SG.x, Frequencies_SG.y) %>% mutate(superordinate = superordinate_sg, NP = np,  response = mode_np, subFreq = Frequencies_SG.x, superFreq = Frequencies_SG.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
 
 write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub.csv')
 
