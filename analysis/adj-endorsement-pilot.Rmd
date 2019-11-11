@@ -59,16 +59,14 @@ df.trials %>%
   mutate(workerid = factor(workerid),
          workerid = paste("worker_", as.character(str_pad(as.numeric(workerid), 3, pad = "0")), sep = "")) -> df.trials
 
-write_csv(df.trials, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
-# write_csv(df.subject, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
-# write_csv(df.attention, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+#write_csv(df.trials, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
 ```
 
 
 ```{r load data from csv}
-df.trials <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
-df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
-df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+df.trials <- read_csv("../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
+#df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+#df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
 ```
 
 
@@ -89,12 +87,13 @@ df.trials %>%
       ifelse(condition_1 == "adj_negative", response1, response2)
     )
   ) %>%
+  mutate(degree = ifelse(degree == "length_duration", "length", degree)) %>%
   select(workerid, response_pos, response_neg, degree, superordinate, 
          item, item_cond) %>%
   gather(key, val, response_pos, response_neg, -degree, -superordinate, 
          -item, -item_cond) -> df.trials.tidy
 
-write_csv(df.trials.tidy, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv")
+# write_csv(df.trials.tidy, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv")
 
 glimpse(df.trials.tidy)
 ```
@@ -112,8 +111,8 @@ d.tidy.adj.bs %>%
   mutate(key = gsub('response_', "", key),
          item_cond = factor(item_cond,
                                levels = c("negative", "neutral", "positive"),
-                               labels = c("low", "medium", "high")
-)) %>%
+                               labels = c("low", "medium", "high")),
+         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive"))) %>%
   ggplot(., 
        aes( x = item_cond, y = mean, 
             ymin = ci_lower, ymax = ci_upper, fill = key))+  
@@ -125,13 +124,61 @@ d.tidy.adj.bs %>%
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "black"))+
+  guides(fill = guide_legend(reverse = T, title = "Adjective polarity"))+
  # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
-  ylab("Proportion paraphrases that contain NP")+
-  xlab("Subordinate Category Prior Mean")
+  ylab("Proportion Endorsement")+
+  xlab("General Expectations for Subordinate Category")
 
 # ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
 #        width = 5, height = 3.6)
+```
+
+error bars computed by item.
+```{r figCollapseItems}
+d.tidy.adj.itemMeans <- df.trials.tidy %>% 
+  ungroup() %>%
+  mutate(key = gsub('response_', "", key),
+         item_cond = factor(item_cond,
+                               levels = c("negative", "neutral", "positive"),
+                               labels = c("low", "medium", "high")),
+         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive"))) %>%
+  group_by(degree, superordinate, item, item_cond, key) %>%
+  summarize(item_val = mean(val))
+  
+d.tidy.adj.bs.itemCI <- d.tidy.adj.itemMeans %>%
+  ungroup() %>%
+  group_by(item_cond, key) %>%
+  tidyboot_mean(column = item_val)
+
+d.tidy.adj.bs.itemCI %>%
+  ggplot(., 
+       aes( x = item_cond, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = key))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.4, color = 'black')+
+  geom_point(data = d.tidy.adj.itemMeans,
+           position = position_jitterdodge(),
+           inherit.aes = F, 
+            aes( x = item_cond, y = item_val, fill = key),
+           color = 'black', 
+           shape = 21,
+           alpha = 0.5) +
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  scale_color_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  guides(fill = guide_legend(reverse = T, title = "Adjective polarity"))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion Endorsement")+
+  xlab("General Expectations for Subordinate Category")
+
+ggsave("../analysis/figs/bars_cc_finalExpt_pilot.pdf",
+       width = 5, height = 3.6)
 ```
 
 
@@ -139,53 +186,75 @@ d.tidy.adj.bs %>%
 
 ```{r figCollapseItems}
 d.tidy.adj.bs.item <- df.trials.tidy %>% 
-  group_by(degree, superordinate, item, item_cond, key) %>%
+  mutate(full_item = paste(degree, superordinate, item, sep = "_")) %>%
+  group_by(degree, full_item, superordinate, item, item_cond, key) %>%
   tidyboot_mean(column = val)
-
 
 d.tidy.adj.bs.item %>%
   ungroup() %>%
   mutate(key = gsub('response_', "", key),
+         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive")),
          item_cond = factor(item_cond,
                                levels = c("negative", "neutral", "positive"),
-                               labels = c("low", "medium", "high"))) %>%
-  mutate(item = fct_reorder(item, as.numeric(item_cond))) %>%
-  ggplot(., 
+                               labels = c("low", "medium", "high")),
+         
+         item_set = paste(degree, " (", superordinate, ")", sep = ""),
+         degree = factor(degree), 
+         item_set = fct_reorder(item_set, as.numeric(degree))) %>%
+  #group_by(item_set) %>%
+  mutate(item = fct_reorder(item, as.numeric(item_cond))) -> d.tidy.adj.bs.item.reordered
+
+fac.levels <- levels(d.tidy.adj.bs.item.reordered$item)
+el.num <- which(fac.levels == "elephant")
+ch.num <- which(fac.levels == "cheetah")
+fac.levels[el.num] <- "cheetah"
+fac.levels[ch.num] <- "elephant"
+
+d.tidy.adj.bs.item.reordered %>%
+  mutate(item = factor(item, levels = fac.levels)) %>%
+ggplot(., 
        aes( x = item, y = mean, 
             ymin = ci_lower, ymax = ci_upper, fill = key))+  
   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
   geom_linerange(position = position_dodge(0.8), color = 'black')+  
   scale_fill_brewer(palette = "Set3")+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+  theme(axis.text.x = element_text(angle = 30, hjust = 0.9, vjust = 0.9),
         #axis.title.x = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
-        axis.line = element_line(colour = "black"))+
-  facet_wrap(~superordinate + degree, scales = 'free', nrow = 4)+
+        axis.line = element_line(colour = "black"),
+        legend.position = 'bottom', legend.direction = 'horizontal')+
+  facet_wrap(~item_set, scales = 'free', nrow = 4)+
  # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
-  ylab("Proportion endorse adjective")+
+  guides(fill = guide_legend(reverse = F, title = "Adjective polarity"))+
+  ylab("Proportion Endorsement")+
   xlab("Subordinate Category")
 
-ggsave("../analysis/figs/bars_adj_finalExpt_pilot_byItem.png",
-       width = 9, height = 9)
+ggsave("../analysis/figs/bars_adj_finalExpt_pilot_byItem.pdf",
+       width = 12.5, height = 8.5)
 ```
 
 # Regression modeling
 
 ```{r}
-d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
-  mutate(adj_positiveness = factor(adj_positiveness, 
-                                   levels = c("negative", "positive")),
-         np_positiveness = factor(np_positiveness, 
-                                  levels = c("neither-nor", "negative", "postiive")))
+df.trials.tidy.fac <- df.trials.tidy %>%
+  mutate(adj_positiveness = factor(key, 
+                                   levels = c("response_neg", "response_pos"),
+                                   labels = c("negAdj", "posAdj")),
+         np_positiveness = factor(item_cond, 
+                                  levels = c("neutral", "negative", "positive")),
+         item_set = paste(degree, "_", superordinate, sep = ""),
+         item_set = factor(item_set),
+         workerid = factor(workerid))
 
-rs.glm.brm <- brm(
-  formula = specific ~ np_positiveness * adj_positiveness + 
+rs.glm.brm.adj <- brm(
+  formula = val ~ np_positiveness * adj_positiveness + 
     (1 +  np_positiveness*adj_positiveness | workerid) + 
-    (1 +  np_positiveness*adj_positiveness | degree),
+    (1 +  np_positiveness*adj_positiveness | item_set),
   family = bernoulli(), 
-  data = d.tidy.phrase.w.original.fac)
+   chains = 3, cores = 3, iter = 2000, 
+  data = df.trials.tidy.fac)
 
 summary(rs.glm.brm)
 

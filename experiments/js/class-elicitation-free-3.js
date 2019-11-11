@@ -11,15 +11,27 @@ function make_slides(f) {
   slides.instructions = slide({
     name : "instructions",
     start: function() {
+      $(".catchErr").hide();
     },
-    button : function() {
-      num_wrong = ! document.getElementById('valid1').checked + ! document.getElementById('valid2').checked + document.getElementById('invalid1').checked + document.getElementById('invalid2').checked
-      exp.catch_trials.push({
-        condition: "sanity_check",
-        incorrect: num_wrong
-      })
-      exp.go();
-    },
+    button: function() {
+      catch_response = $("#catch_response").val();
+
+      // displays an error if no response has been entered
+      if (catch_response.length == 0) {
+        $(".catchErr").show();
+      }
+      else {
+        exp.catch_trials.push({
+          condition: "warm_up",
+          check_index: 0,
+          property: "tall",
+          tested_on: "Empire State Building",
+          response: catch_response,
+          correct: catch_response.indexOf("building") > -1 ? 1 : 0
+        });
+        exp.go();
+      }
+    }
   });
 
   slides.single_trial = slide({
@@ -152,14 +164,15 @@ function make_slides(f) {
         exp.data_trials.push(_.extend({
           "trial_type" : "free_class_elicitation",
           "trial_num": this.trial_num,
-          "rt": this.rt,
           "stim_id": this.stim_id,
+          "rt": this.rt,
           "context" : this.context_mod,
-          "np" : this.phrase,
-          "np_positiveness" : this.np_positiveness,
-          "adj" : this.adj,
           "degree" : this.degree,
+          "np_positiveness" : this.np_positiveness,
           "adj_positiveness" : this.adj_positiveness,
+          "adj" : this.adj,
+          "np" : this.phrase,
+          "superordinate": this.stim.superordinate,
           "response" : response
         }));
         this.trial_num++;
