@@ -1,0 +1,262 @@
+
+// var index = utils.wpParseFloat(last(process.argv)) // load index as last command line index
+
+// requires webppl packages: webppl-csv and webppl-mht custom packages
+// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork/ 1
+
+var utterances = ["positiveAdjective", "negativeAdjective", "silence"]
+
+var chain = last(process.argv) // load index as last command line index
+
+var meaning = function(utterance, state, threshold) {
+  utterance == "positiveAdjective" ? state > threshold :
+  utterance == "negativeAdjective" ? state < threshold :
+  true
+}
+
+var round = function(x){
+  return Math.round(x*10)/10
+};
+
+var binParam = 3;
+var superordinate_parameters = {mu: 0, sigma: 1}
+var stateVals = map(
+  round,
+  _.range(superordinate_parameters.mu - 3 * superordinate_parameters.sigma,
+          superordinate_parameters.mu + 3 * superordinate_parameters.sigma,
+          superordinate_parameters.sigma/binParam)
+);
+
+var thresholdBins ={
+	positive: map(function(x){
+		return  x - (1/(binParam*2));
+	}, sort(stateVals)),
+	negative: map(function(x){
+		return  x + (1/(binParam*2));
+	}, sort(stateVals))
+};
+
+var thresholdPrior = cache(function(form){
+	return Infer({
+		model: function() { return uniformDraw(thresholdBins[form]) }
+	});
+});
+
+
+var dataPath = "/Users/mht/projects/comparison-class/data/";
+// var dataPath = "/home/mtessler/projects/comparison-class/data/"
+var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
+var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
+// var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
+
+// var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
+// var vsData = dataFrame(csv.read(dataPath + adj_endorse_DataFile), ["val"])
+// var corpus_frequency_data =  dataFrame(csv.read(dataPath + corpus_frequency_DataFile), ["Frequencies"])
+var ccData = readDataFile(dataPath + cc_inference_DataFile,  ["specific", "subFreq", "superFreq"])
+var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["val"])
+// var corpus_frequency_data = readDataFile(dataPath + corpus_frequency_DataFile, ["Frequencies"])
+
+
+var degrees = levels(vsData, "degree");
+// var degrees = degrees0.slice(0, degrees0.length - 1);
+
+// var degree = degrees[0]
+// display(degree)
+// var data_within_degree = _.filter(vsData, {degree:degree});
+// display(data_within_degree)
+// var superordinate_categories = levels(data_within_degree, "superordinate")
+// display(superordinate_categories)
+
+// var superordinate = superordinate_categories[0]
+// display(superordinate)
+
+// var data_within_superordinate = _.filter(data_within_degree, {superordinate: superordinate});
+// var subordinate_categories = levels(data_within_superordinate, "NP")
+// var subordinate = subordinate_categories[0]
+// display(subordinate)
+// data_within_superordinate
+// var data_within_subordinate = _.filter(data_within_superordinate, {"NP": subordinate});
+// data_within_subordinate
+//
+var model = function(){
+
+  // separate speakerOptimality for each task
+  var alphas = {
+    adj_endorse: uniformDrift( { a:0, b: 20, width: 2} ),
+    cc_inference: uniformDrift( { a:0, b: 20, width: 2} )
+  }
+
+  var silenceCost = uniformDrift({a: 0, b: 1, width : 0.1})
+  var utteranceProbs = [1, 1, silenceCost];
+  // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
+  var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
+
+  var classParameters = {
+    frequency: uniformDrift({a:0, b: 1, width: 0.05})
+  };
+
+  foreach(degrees, function(degree){
+		// display(degree)
+    var data_within_degree_cc = _.filter(ccData, {degree: degree});
+		var data_within_degree_adj = _.filter(vsData, {degree: degree});
+    var superordinate_categories = levels(data_within_degree_cc, "superordinate")
+
+    foreach(superordinate_categories, function(superordinate){
+			// display(superordinate)
+
+      var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate: superordinate});
+			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {super_sg: superordinate});
+      var subordinate_categories = levels(data_within_superordinate_cc, "NP")
+
+			var supercatWeight = exp(classParameters.frequency * Math.log(data_within_superordinate_cc[0].superFreq));
+
+      foreach(subordinate_categories, function(subordinate){
+				// display(subordinate)
+        var subordinate_parameters = {
+          mu: uniformDrift({a: -3, b: 3, width: 0.5}),
+          sigma: uniformDrift({a: 0, b: 3, width: 0.3})
+        };
+
+        var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP": subordinate});
+				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"item": subordinate});
+
+        var subcatWeight = exp(classParameters.frequency * Math.log(data_within_subordinate_cc[0].subFreq));
+
+        var comparisonClass_prior = Categorical({vs: ["superordinate", "subordinate"], ps:[supercatWeight, subcatWeight]})
+
+				// displayObj(subordinate_parameters)
+				// displayObj(superordinate_parameters)
+				// displayObj(stateVals)
+        var stateProbs = {
+          subordinate: map(function(s){
+            Math.exp(Gaussian(subordinate_parameters).score(s))+
+            Number.EPSILON
+          }, stateVals),
+          superordinate: map(function(s){
+            Math.exp(Gaussian(superordinate_parameters).score(s))+
+            Number.EPSILON
+          }, stateVals)
+        };
+				// displayObj(stateProbs)
+        var statePrior = {
+          subordinate: Categorical({vs:stateVals, ps:stateProbs.subordinate}),
+          superordinate: Categorical({vs:stateVals, ps:stateProbs.superordinate})
+        };
+
+      var literalListener = cache(function(utterance, comparisonClass) {
+				var form = utterance.split('Adjective')[0]
+				// display(form)
+        Infer({model: function(){
+          var state = sample(statePrior[comparisonClass]);
+          var threshold = form == "silence" ? "NA" : sample(thresholdPrior(form));
+          var m = meaning(utterance, state, threshold);
+          condition(m);
+          return state;
+        }})
+      }, 10000);
+
+			/////////////////////////////////////////////////
+      // for Comparison Class Inference task
+      var speaker1 = cache(function(state, comparisonClass, form) {
+        Infer({model: function(){
+          var utterance = sample(UtterancePrior)
+          var L0 = literalListener(utterance, comparisonClass)
+          factor( alphas.cc_inference * L0.score(state) )
+          return utterance
+        }})
+      }, 10000)
+
+      var pragmaticListener = function(form) {
+        var utterance = form + "Adjective";
+        Infer({model: function(){
+          var comparisonClass = sample(comparisonClass_prior);
+          var state = sample(statePrior.subordinate);
+          var threshold = sample(thresholdPrior(form));
+          var S1 = speaker1(state, comparisonClass, form);
+          observe(S1, utterance);
+          return comparisonClass == "subordinate" ? 1 : 0
+        }})
+      }
+			/////////////////////////////////////////////////
+
+      /////////////////////////////////////////////////
+      // for Adjective Endorsement task
+      var speaker1_super = cache(function(form) {
+        Infer({model: function(){
+          var utterance = uniformDraw([form + "Adjective", "silence"])
+          var speakerBeliefs = statePrior.subordinate;
+          var L0 = literalListener(utterance, "superordinate")
+
+          var _kl = KL(speakerBeliefs, L0, speakerBeliefs.support());
+          factor(-1 * alphas.adj_endorse * _kl)
+
+          return utterance == (form + "Adjective") ? 1 : 0
+        }})
+      }, 10000)
+      ////////////////////////////////////////
+
+      foreach(["positive","negative"], function(form){
+
+        var d_subcat_superSpeaker = _.map(
+          _.filter(data_within_subordinate_adj, {key: "response_" + form.slice(0, 3)}),
+        "val");
+
+        var d_subcat_ccInference = _.map(
+            _.filter(data_within_subordinate_cc, {adj_positiveness: form}),
+        "specific");
+
+        var superSpeakerProbs = speaker1_super(form);
+				d_subcat_superSpeaker.length == 0 ? display("====EMPTY ADJ====") : null
+
+
+				d_subcat_ccInference.length == 0 ? display("====EMPTY CC====") : null
+
+        mapData({data:d_subcat_superSpeaker}, function(d){
+	         // console.log("superSpeaker = " + superSpeakerProbs.score(d))
+          observe(superSpeakerProbs, d)
+        })
+
+        var ccRSA = pragmaticListener(form);
+
+        mapData({data:d_subcat_ccInference}, function(d){
+         // console.log("cc = "+ ccRSA.score(d))
+          observe(ccRSA, d);
+        })
+
+        query.add([degree, superordinate, subordinate,  "adjEndorse", form], Math.exp(superSpeakerProbs.score(1)))
+        query.add([degree, superordinate, subordinate, "subordinateCC", form], Math.exp(ccRSA.score(1)))
+
+      })
+
+      query.add([degree, superordinate, subordinate, "mu", "NA"], subordinate_parameters.mu);
+      query.add([degree, superordinate, subordinate, "sigma", "NA"], subordinate_parameters.sigma);
+
+      })
+    })
+	})
+
+  query.add(["parameter", "silenceProb", "NA",  "NA", "NA"], silenceCost)
+  query.add(["parameter", "beta", "frequency",  "NA", "NA"], classParameters.frequency)
+  query.add(["parameter", "speakerOptimality","adjEndorse", "NA", "NA"], alphas.adj_endorse)
+  query.add(["parameter", "speakerOptimality","subordinateCC", "NA", "NA"], alphas.cc_inference)
+
+  // return _.object(_.flatten(parameters, true));
+  return query
+}
+
+var totalIterations = 2, lag =  1;
+var samples = totalIterations/lag, burn = totalIterations / 2;
+var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCC-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+
+var header = "iteration,degree,superodinate,subordinate,task,adjective,val,score"
+var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
+
+Infer({model,
+      samples: samples, burn: burn, lag: lag,
+       method: 'incrementalMH',
+       onlyMAP: true,
+       verbose: T,
+       verboseLag: totalIterations / 20,
+       callbacks: [callback]});
+
+ "written to " + outfile;
