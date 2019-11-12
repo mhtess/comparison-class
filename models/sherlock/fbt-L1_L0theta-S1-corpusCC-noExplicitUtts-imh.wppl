@@ -43,7 +43,7 @@ var thresholdPrior = cache(function(form){
 });
 
 
-var dataPath = "/Users/mht/projects/comparison-class/data/";
+var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
@@ -60,24 +60,6 @@ var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["val"])
 var degrees = levels(vsData, "degree");
 // var degrees = degrees0.slice(0, degrees0.length - 1);
 
-// var degree = degrees[0]
-// display(degree)
-// var data_within_degree = _.filter(vsData, {degree:degree});
-// display(data_within_degree)
-// var superordinate_categories = levels(data_within_degree, "superordinate")
-// display(superordinate_categories)
-
-// var superordinate = superordinate_categories[0]
-// display(superordinate)
-
-// var data_within_superordinate = _.filter(data_within_degree, {superordinate: superordinate});
-// var subordinate_categories = levels(data_within_superordinate, "NP")
-// var subordinate = subordinate_categories[0]
-// display(subordinate)
-// data_within_superordinate
-// var data_within_subordinate = _.filter(data_within_superordinate, {"NP": subordinate});
-// data_within_subordinate
-//
 var model = function(){
 
   // separate speakerOptimality for each task
@@ -86,13 +68,13 @@ var model = function(){
     cc_inference: uniformDrift( { a:0, b: 20, width: 2} )
   }
 
-  var silenceCost = uniformDrift({a: 0, b: 1, width : 0.1})
+  var silenceCost = uniformDrift({a: 0, b: 10, width : 0.5})
   var utteranceProbs = [1, 1, silenceCost];
   // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
   var classParameters = {
-    frequency: uniformDrift({a:0, b: 1, width: 0.05})
+    frequency: uniformDrift({a:0, b: 3, width: 0.5})
   };
 
   foreach(degrees, function(degree){
@@ -108,7 +90,10 @@ var model = function(){
 			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {super_sg: superordinate});
       var subordinate_categories = levels(data_within_superordinate_cc, "NP")
 
-			var supercatWeight = exp(classParameters.frequency * Math.log(data_within_superordinate_cc[0].superFreq));
+			var supercatWeight = exp(
+				classParameters.frequency *
+				Math.log(data_within_superordinate_cc[0].superFreq)
+			);
 
       foreach(subordinate_categories, function(subordinate){
 				// display(subordinate)
@@ -120,9 +105,15 @@ var model = function(){
         var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP": subordinate});
 				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"item": subordinate});
 
-        var subcatWeight = exp(classParameters.frequency * Math.log(data_within_subordinate_cc[0].subFreq));
+        var subcatWeight = exp(
+					classParameters.frequency *
+					Math.log(data_within_subordinate_cc[0].subFreq)
+				);
 
-        var comparisonClass_prior = Categorical({vs: ["superordinate", "subordinate"], ps:[supercatWeight, subcatWeight]})
+        var comparisonClass_prior = Categorical({
+					vs: ["superordinate", "subordinate"],
+					ps: [supercatWeight, subcatWeight]
+				})
 
 				// displayObj(subordinate_parameters)
 				// displayObj(superordinate_parameters)
@@ -139,8 +130,8 @@ var model = function(){
         };
 				// displayObj(stateProbs)
         var statePrior = {
-          subordinate: Categorical({vs:stateVals, ps:stateProbs.subordinate}),
-          superordinate: Categorical({vs:stateVals, ps:stateProbs.superordinate})
+          subordinate: Categorical({ vs:stateVals, ps:stateProbs.subordinate}),
+          superordinate: Categorical({ vs:stateVals, ps:stateProbs.superordinate})
         };
 
       var literalListener = cache(function(utterance, comparisonClass) {
@@ -171,7 +162,6 @@ var model = function(){
         Infer({model: function(){
           var comparisonClass = sample(comparisonClass_prior);
           var state = sample(statePrior.subordinate);
-          var threshold = sample(thresholdPrior(form));
           var S1 = speaker1(state, comparisonClass, form);
           observe(S1, utterance);
           return comparisonClass == "subordinate" ? 1 : 0
@@ -206,9 +196,8 @@ var model = function(){
         "specific");
 
         var superSpeakerProbs = speaker1_super(form);
+
 				d_subcat_superSpeaker.length == 0 ? display("====EMPTY ADJ====") : null
-
-
 				d_subcat_ccInference.length == 0 ? display("====EMPTY CC====") : null
 
         mapData({data:d_subcat_superSpeaker}, function(d){
@@ -244,11 +233,11 @@ var model = function(){
   return query
 }
 
-var totalIterations = 2, lag =  1;
+var totalIterations = 500000, lag =  50;
 var samples = totalIterations/lag, burn = totalIterations / 2;
 var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCC-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
-var header = "iteration,degree,superodinate,subordinate,task,adjective,val,score"
+var header = "iteration,degree,superordinate,subordinate,task,adjective,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
 
 Infer({model,
