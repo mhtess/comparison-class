@@ -8,10 +8,17 @@
 \usepackage{amsfonts}
 \usepackage{url}
 \usepackage{tikz}
+\usepackage{listings}
 \usepackage{enumitem}
 \usepackage{subfigure}
 \usetikzlibrary{bayesnet}
 \usepackage{bm}
+\usepackage{cprotect}
+\lstset{
+    language=C,
+    basicstyle=\small
+}
+
 
 %\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
 %\DeclareLanguageMapping{american}{american-apa}
@@ -38,17 +45,64 @@
 \usepackage{caption}
 \usepackage{booktabs}
 
-\authornote{Complete departmental affiliations for each author
-(note the indentation, if you start a new paragraph). Enter author note
-here.
 
-Correspondence concerning this article should be addressed to Michael
-Henry Tessler, 450 Serra Mall, Bldg. 420, Rm. 316, Stanford, CA 94305.
-E-mail:}
+% these packages are needed to insert results 
+% obtained from R into the LaTeX document
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+\usepackage{siunitx}
+
+% set the name of the folder in which the CSV files with 
+% information from R is stored
+\newcommand{\datafoldername}{csv_data_4_tex}
+
+% the following code defines the convenience functions
+% as described in the main text below
+
+% rlgetvalue returns whatever is the in cell of the CSV file
+% be it string or number; it does not format anything
+\newcommand{\rlgetvalue}[4]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\myvalue}}
+
+% rlgetvariable is a shortcut for a specific CSV file (myvars.csv) in which
+% individual variables that do not belong to a larger chunk can be stored
+\newcommand{\rlgetvariable}[1]{\csvreader[]{\datafoldername/myvars.csv}{#1=\myvar}{\myvar}\xspace}
+
+% rlnum format a decimal number
+\newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
+                             exponent-product = \cdot,
+                             round-mode=places,
+                             round-precision=#2,
+                             group-digits=false]{#1}}
+
+\newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
+                          scientific-notation = true,
+                             exponent-product = \cdot,
+                             round-mode=places,
+                             round-precision=#2,
+                             group-digits=false]{#1}}
+
+\newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
+
+\newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
+
+\newcommand{\lmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\), t\((\rlgetnum{#1}{Rowname}{#2}{df}{0}) = \rlgetnum{#1}{Rowname}{#2}{t.value}{2}, p = \rlgetnum{#1}{Rowname}{#2}{Pr...t..}{3}\)}
+
+\newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\) (\rlgetnum{#1}{Rowname}{#2}{l.95..CI}{3}, \rlgetnum{#1}{Rowname}{#2}{u.95..CI}{3})}
+
+
+\authornote{Correspondence concerning this article should be addressed to Michael
+Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
+E-mail: tessler@mit.edu}
 
 \abstract{
 The meaning of an utterance can change depending on the context. Yet,
-what counts as the relevant context is often only implicit in everyday
+what counts as context is often only implicit in everyday
 conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}:  warm
 relative to other days of the year, warm for the season, warm for the week, etc.. 
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener reasons through this open-ended inference problem.
@@ -81,7 +135,7 @@ The methods and results we present open the door to studying richer aspects of c
 
 \section{Introduction}
 
-A 75\degree F (24\degree C) day is warm. A 60\degree F (16\degree C) day is not. That is, unless it's January; 60\degree F could be warm for January. \emph{Warm} is a relative adjective, and its felicity depends upon what the speaker uses as a basis of comparison---the \emph{comparison class} (e.g., other days of the year or other days in January). Comparison classes are necessary for understanding relative adjectives and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers \cite<e.g., ``He ate a lot of burgers.'';>{Scholler2017} and generic language \cite<e.g., ``Dogs are friendly'';>{Tessler2019psychrev}. Deciding on the relevant comparison class is a case study in the larger question of inferring the appropriate aspects of context for interpreting an utterance.  The trouble is: Comparison classes, as with relevant aspects of context more generally, often go unsaid (e.g., in ``It's warm outside'').
+A 75\degree F (24\degree C) day is warm. A 50\degree F (10\degree C) day is not. That is, unless it's Winter; 50\degree F could be warm for Winter. \emph{Warm} is a relative adjective, and its felicity depends upon what the speaker uses as a basis of comparison---the \emph{comparison class} (e.g., other days of the year or other days in January). Comparison classes are necessary for understanding relative adjectives and, in fact, any part of language whose meaning must be pragmatically reconstructed from context, including vague quantifiers \cite<e.g., ``He ate a lot of burgers.'';>{Scholler2017} and generic language \cite<e.g., ``Dogs are friendly'';>{Tessler2019psychrev}. Deciding on the relevant comparison class is a case study in the larger question of inferring the appropriate aspects of context for interpreting an utterance.  The trouble is: Comparison classes, as with relevant aspects of context more generally, often go unsaid (e.g., in ``It's warm outside'').
 
 The existence of comparison classes for understanding relative adjectives is
 uncontroversial \cite{cresswell1976semantics, klein1980semantics, kennedy2005scale, bale2008universal, Bale2011, Solt2009}. %\red{more standard citations for this?}
@@ -200,7 +254,7 @@ Our model predicts this inference from the fact that the \emph{general expectati
 Formally, a listener is faced with a joint inference problem of determining the height of the person $x$ and the comparison class  $c$ assumed by the speaker when producing their adjectival utterance $u$ (e.g., \emph{he's tall}).
 We propose a Bayesian formulation to this problem, wherein a listener combines his prior knowledge about categories and what comparison classes are likely to be talked about, with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker.}
 
-The hypothesis space of comparison classes is constrained by  beliefs about the referent that are shared between the speaker and listener: A speaker is unlikely to be assuming a comparison class about which she has no knowledge.
+The hypothesis space of comparison classes is constrained by beliefs about the referent that are shared between the speaker and listener: A speaker is unlikely to be assuming a comparison class about which she has no knowledge.
 %In our example, it is in common ground that the referent is a basketball player.
 Though comparison classes can be constructed in various ways, including out of sets of objects in the perceptual environment or hypothetical functions of an object \cite<cf.,>{Ebeling1994}, we restrict our analysis to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (i.e., \emph{conceptual comparison classes}, e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A).
 In contrast to the space of comparison classes, the hypothesis space of degrees (e.g., heights) is informed by the totality of the listener's relevant beliefs (i.e., including both the shared beliefs with the speaker and the listener's private beliefs).
@@ -304,16 +358,26 @@ This inference is driven by prior knowledge about the category, and thus, we wou
 Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class. 
 Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should be driven. 
 
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{figs/cc_inference_L0.pdf}
+\caption{\small \label{fig:alternativeModelPredictions}Alternative model predictions for a literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall?
+% speaker production probability distributions are shown with the.
+}
+\end{figure}
+
+
 The inference about the comparison class is necessarily a pragmatic inference involving representing a speaker's beliefs about the context separately from the listener's beliefs about the context. 
-This can be seen in comparing Equations \ref{eq:L1} and \ref{eq:L0}: the pragmatic listener $L_1$ uses a prior distribution over the degree given their knowledge of the referent $P(x \mid k)$ whereas the literal listener $L_0$ uses a distribution conditional on the comparison class $P(x \mid c)$. 
-We show that separation of the listener's knowledge of the referent $k$ from the comparison class $c$ is necessary for this inference via a comparison to a purely Bayesian listener model, who has uncertainty about the comparison class as well as all of the other relevant parameters (the degree $x$ and the threshold $\theta$): 
+This can be seen by comparing Equations \ref{eq:L1} and \ref{eq:L0}: the pragmatic listener $L_1$ uses a prior distribution over the degree given their knowledge of the referent $P(x \mid k)$ whereas the literal listener $L_0$ uses a distribution conditional on the comparison class $P(x \mid c)$. 
+This separation of the listener's knowledge of the referent $k$ from the comparison class $c$ is necessary for the comparison class inferences shown in Figure \ref{fig:modelCartoon}E.
+A purely Bayesian listener model, who has uncertainty about the comparison class as well as all of the other parameters of the full model (the degree $x$ and the threshold $\theta$), but does not separate their knowledge of the referent from the speaker's representation of the context is given by: 
 %
   \begin{align}
 L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c) \cdot P(c \mid k) \cdot P(\theta) \label{eq:L0alt}
 \end{align}
 %
-This listener uses their knowledge of the referent $k$ to constrain only the hypothesis space of comparison classes but doesn't use it to separate the speaker's representation of the context from their own. 
-This listener is instead answering the question of what is more likely: a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? This literal listener model predicts the exact opposite pattern of results from the pragmatic listener model (\red{Figure XX}). 
+This listener uses their knowledge of the referent $k$ to constrain only the hypothesis space of comparison classes but not to separate the speaker's representation of the context from their own. 
+In effect, this listener is answering a different question, more about the referent than the comparison class: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? This literal listener model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
 %The utterance which does not reference a class (e.g., It's warm}) inherits the same meaning as the utterance with the explicit class that
 %matches the assumed implicit class (i.e., if \(c_{i} = c_{sub}\), then
 %\(u_i\) has the same meaning as \(u_{sub}\)). Therefore, reasoning about
@@ -330,11 +394,11 @@ This listener is instead answering the question of what is more likely: a basket
 \end{figure*}
 
 We test our hypothesis that the comparison class can be flexibly adjusted based on world knowledge and pragmatic principles in a set of coordinated experiments (Figure \ref{fig:exptOverview}).
-We first empirically elicit test stimuli by having participants fill out phrasal templates that aim to elicit sets of categories at the same level of hierarchy that tend to be on extreme ends of a degree scale (e.g., categories that are generally big or generally small) as well as a control item (e.g., a category whose members are sometimes big and sometimes small; Step 1). 
-We then validate these stimuli using a forced-choice paradigm where participants are asked to judge whether an adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate category relative to the basic or superordinate category (Step 2). 
+We first empirically elicit test stimuli by having participants fill out phrasal templates that aim to elicit sets of categories at the same level of abstraction that tend to be on extreme ends of a degree scale (e.g., categories that are generally big or generally small) as well as a control item (e.g., a category whose members are sometimes big and sometimes small; Experiment~1). 
+We then validate these stimuli using a forced-choice paradigm where participants are asked to judge whether an adjective (e.g., \emph{big} or \emph{small}) would be true of a member of a subordinate category relative to the basic or superordinate category (Experiment~2). 
 This adjective endorsement task also provides additional data to constrain the parameters of the comparison class inference model (described below).
-Finally, we test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E by having participants rephrase a speaker's statement in a way that makes the comparison class explicit (Step 3).
-The quantitative predictions of the model are tested using a Bayesian data analytic strategy, where we explicitly model the data from both the Adjective Endorsement (Step 2) and Comparison Class Inference (Step 3) tasks.
+Finally, we test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E by having participants rephrase a speaker's statement in a way that makes the comparison class explicit (Experiment~3).
+The quantitative predictions of the model are tested using a Bayesian data analytic strategy, where we explicitly model the data from both the Adjective Endorsement (Experiment~2) and Comparison Class Inference (Experiment~3) tasks.
 This joint Bayesian data-analytic strategy allows us to infer, rather than stipulate, the world knowledge that guides the inference about the comparison class in the computational model. 
 \mht{may want to reverse the order, if we use the modal superordinate comparison class from the Inference experiment as the comparison class in the Adjective Endorsement experiment}
 
@@ -673,6 +737,7 @@ Adjectives (scale) & Example subordinate classes (superordinate class) \\
 
 \subsubsection{Results}
 From the 750 sets of responses, we selected a subset of 123 sets of subordinate categories to serve as the stimuli for our next two experiments. Two examples from each adjective pair are shown in Table \ref{tab:1}. 
+We code each of the subordinate categories as to whether they were expected to fall low, high, or in the middle of the degree scale (i.e., those generated in response to the \emph{generally positive adjective}, \emph{generally negative adjective}, or \emph{sometimes positive and sometimes negative}). 
 
 
 \subsection{Experiment 2: Adjective endorsement}
@@ -681,16 +746,33 @@ This experiment served to validate our experiment items generated in Step 1, as 
 
 \subsubsection{Procedure}
 
-On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., Alicia lives in Maryland and steps outside in winter.). 
-This was followed by a question asking if the participant would endorse an adjective explicitly relative to the superordinate category (e.g., Do you think the day in winter would be warm relative to other days of the year?).
-Participants could respond with either a \emph{yes} or \emph{no} judgment.
+On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., You step outside during the winter.). 
+This was followed by a question asking if the participant would endorse either the positive- or negative-form adjective explicitly relative to the superordinate category (e.g., Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?).
+Participants could respond to each question with either a \emph{yes} or \emph{no} judgment (2 judgments per trial).
 
 \subsubsection{Materials}
 
-The experimental materials were a modified subset of those generated in Step 1. 
+The experimental materials were a modified subset of those generated in Experiment 1. 
 In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered. 
 
 \subsubsection{Results}
+
+The primary goal of this experiment is to validate the stimuli generated in Experiment 1 and to use to data to constrain the parameters governing world knowledge in the joint Bayesian data-analytic model (see Data-analytic Strategy section). We build a logistic mixed-effects model to predict participants' responses as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
+The model is judgment $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
+}
+
+As expected by the generating procedure for these stimuli, the only regression coefficients that were credibly different from zero were the interaction terms. 
+When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between endorsements of the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt2_brm_pilot.csv}{adj_positiveness1}.
+Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
+When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
+The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{figs/bars_adj_finalExpt_pilot_byItem.pdf}
+%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+\caption{Experiment 2 results for a subset of the items.}\label{fig:adjEndorseItems}
+\end{figure}
 
 \subsection{Experiment 3: Comparison class inference}
 
@@ -709,14 +791,7 @@ adjective sentence with a freely-produced comparison class:
 \{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \_\_\_\_.
 \end{quote}
 
-\begin{figure*}[htb]
 
-{\centering \includegraphics{figs/posteriorPredictiveScatters-1} 
-
-}
-
-\caption{Human endorsement of subordinate comparison class paraphrases (middle; Expt. 1) and adjective sentences (left; Expt. 2) as a function of listener model $L_1$ and speaker model $S_2$ predictions, respectively. The right facet displays a subset of the paraphrase data (Expt. 1) to reveal good quantitative fit even in a small dynamic range. Error bars correspond to 95\% Bayesian credible intervals.}\label{fig:posteriorPredictiveScatters}
-\end{figure*}
 
 \subsubsection{Results}
 
