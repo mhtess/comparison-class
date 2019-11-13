@@ -424,7 +424,7 @@ In the Adjective Endorsement task, participants are asked to judge whether a gra
 To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, following \citeA{Tessler2019psychrev} (see Supplement for more details on this model). 
 
 The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$. 
-As a proxy for comparison class usage frequency, we use empirical frequency of the noun phrase \(\hat{f}_k\) estimated from the Google WebGram corpus, scaled by a free parameter $\beta$ such that $P(c) \propto \exp{(\beta \cdot \log \hat{f}_k)}$.
+As a proxy for comparison class usage frequency, we use empirical (log) frequency of the noun phrase \(\hat{f}_k\)  estimated from the Google WebGram corpus and the length of the noun phrase in characters $|k|$, each scaled by a free parameter $\beta_{freq}$,  $\beta_{length}$ such that $P(c) \propto \exp{(\beta_{freq} \cdot \log \hat{f}_k - \beta_{length} \cdot |k|)}$.
 
 %The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
 We construct a single data-analytic model with each of these RSA components as sub-models in order to make quantitative predictions about the data from both of our experiments.
@@ -452,7 +452,7 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
   \factor[above=of d-a] {da-f} {left:Bern} {} {} ; %
   \factor[above=of d-c] {dc-f} {left:Bern} {} {} ; %
 
-  \node[det, above=of d-c] (L1) {$L_1(c \mid d, k, u)$} ; % 
+  \node[det, above=of d-c] (L1) {$L_1(c \mid u, d, k)$} ; % 
   \node[det, above=of d-a] (S2) {$S_1(u \mid d, k)$} ; % 
   
   \node[det, above=of S2]  (x)   {$P(x^d_k)$}; %
@@ -669,7 +669,7 @@ We conduct three experiments to collect the data necessary to test the quantitat
 
 We recruited 50 participants from Amazon's Mechanical
 Turk, restricted to those with U.S. IP addresses with at least a
-95\% work approval rating. Each experiment took about 5 minutes and
+95\% work approval rating. The experiment took about 5 minutes and
 participants were compensated \$0.60 for their work.
 
 \subsubsection{Materials}
@@ -703,34 +703,39 @@ Participants filled out one template for each of the 15 pairs of adjectives.
 Adjectives (scale) & Example subordinate classes (superordinate class) \\ 
   \hline
   \emph{big}, \emph{small} (size) & \emph{great dane}, \emph{poodle}, \emph{chihuahua} (dogs) \\ 
- & \emph{elephant}, \emph{monkey}, \emph{mouse} (animals) \\ 
-\emph{tall}, \emph{short} (height) & \\ 
+						 & \emph{elephant}, \emph{monkey}, \emph{mouse} (animals) \\ 
+\emph{tall}, \emph{short} (height) &  \emph{basketball player}, \emph{golfer}, \emph{jockey} (people) \\ 
+							&  \emph{redwood}, \emph{alpine}, \emph{bonsai} (trees) \\ 
   \emph{expensive}, \emph{cheap} (price) & \emph{boots}, \emph{sneakers}, \emph{sandals} (footwear) \\ 
-   & \emph{steakhouse}, \emph{buffet}, \emph{diner} (restaurants) \\ 
+						   & \emph{steakhouse}, \emph{buffet}, \emph{diner} (restaurants) \\ 
     \emph{warm}, \emph{cold} (temperature) & \emph{summer}, \emph{fall}, \emph{winter} (seasons) \\ 
-& \emph{soup}, \emph{salad}, \emph{ice cream} (food) \\ 
+							& \emph{soup}, \emph{salad}, \emph{ice cream} (food) \\ 
     \emph{hot}, \emph{cold} (temperature) & \emph{coffee}, \emph{juice}, \emph{milkshake} (drinks) \\ 
-& \emph{sauna}, \emph{shopping mall}, \emph{ice rink} (places) \\ 
+								& \emph{sauna}, \emph{shopping mall}, \emph{ice rink} (places) \\ 
   \emph{heavy}, \emph{light} (weight) &  \emph{wool}, \emph{cotton}, \emph{silk} (materials) \\ 
-  &  \emph{rock}, \emph{stick}, \emph{feather} (objects) \\ 
-  \emph{long}, \emph{short} (duration / length) &  \\ 
+							  &  \emph{rock}, \emph{stick}, \emph{feather} (objects) \\ 
+  \emph{long}, \emph{short} (duration / length) & \emph{slacks}, \emph{capris}, \emph{shorts} (pants) \\ 
+								  & \emph{novel}, \emph{story}, \emph{poem} (readings) \\ 
   \emph{loud}, \emph{quiet} (loudness) &   \emph{baby}, \emph{teenager}, \emph{adult} (people) \\ 
-  &  \emph{auditorium}, \emph{classroom},   \emph{study hall} (rooms) \\ 
+							  &  \emph{auditorium}, \emph{classroom},   \emph{study hall} (rooms) \\ 
  \emph{noisy}, \emph{quiet} (loudness) &  \emph{horn}, \emph{guitar}, \emph{harp} (instruments) \\  
- &  \emph{powerboat}, \emph{sailboat}, \emph{row boat}  (boats) \\  
-  \emph{light}, \emph{dark} (luminance) &  \\
-  \emph{fast}, \emph{slow} (speed)   &  \emph{runner}, \emph{skier}, \emph{weight lifter} (athletes) \\
-  &  \emph{glider}, \emph{helicopter}, \emph{plane} (aircraft) \\
+							 &  \emph{powerboat}, \emph{sailboat}, \emph{row boat}  (boats) \\  
+  \emph{light}, \emph{dark} (luminance) & \emph{day}, \emph{dusk}, \emph{night}  (times of day) \\  
+								  & \emph{white paint}, \emph{blue paint}, \emph{black paint}  (paints) \\  
+   \emph{fast}, \emph{slow} (speed)   &  \emph{runner}, \emph{skier}, \emph{weight lifter} (athletes) \\
+								  &  \emph{glider}, \emph{helicopter}, \emph{plane} (aircraft) \\
   \emph{quick}, \emph{slow} (speed) &  \emph{rabbit}, \emph{cat}, \emph{turtle} (pets) \\
-  &  \emph{instant pot}, \emph{frying pan}, \emph{crockpot} (cookware) \\
+							  &  \emph{instant pot}, \emph{frying pan}, \emph{crockpot} (cookware) \\
   \emph{strong}, \emph{weak} (strength) &  \emph{hurricane}, \emph{thunderstorm}, \emph{rain} (storms)\\
-  &  \emph{lion}, \emph{dog}, \emph{mouse} (animals)\\
-  \emph{hard}, \emph{soft} (hardness) &  \\
+						  &  \emph{lion}, \emph{dog}, \emph{mouse} (animals)\\
+  \emph{hard}, \emph{soft} (hardness) &  \emph{jolly rancher}, \emph{chocolate}, \emph{marshmallow} (sweets)\\
+							  &  \emph{tile}, \emph{wood}, \emph{carpet} (floor materials)\\
   \emph{wide}, \emph{narrow} (width) & \emph{boulevard}, \emph{street}, \emph{country lane} (roads) \\
-  & \emph{truck}, \emph{car}, \emph{golf cart} (vehicles) \\
+							  & \emph{truck}, \emph{car}, \emph{golf cart} (vehicles) \\
    \hline
 \end{tabularx}
-\caption{Sets of adjectives and categories used in Experiments 2 and 3. Categories were curated from a set of empirically elicited noun phrases (Experiment 1).} 
+\caption{Example sets of adjectives and categories used in Experiments 2 and 3. 
+Categories were curated from a set of empirically elicited noun phrases (Experiment 1).} 
 \label{tab:1}
 \endgroup
 \end{table*}
@@ -743,17 +748,30 @@ We code each of the subordinate categories as to whether they were expected to f
 \subsection{Experiment 2: Adjective endorsement}
 
 This experiment served to validate our experiment items generated in Step 1, as well as to provide further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
+Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/XXXX}.
+
+\subsubsection{Participants}
+
+We recruited 750 participants from Amazon's Mechanical Turk, restricted to those with U.S. IP addresses with at least a 95\% work approval rating. 
+This number was arrived at with the goal of estimating endorsement probabilities for each item with a 95\% confidence interval width of 0.2 for each item. 
+Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed a sequential sampling procedure in order to over-sample items that exhibit non-categorical judgments (i.e., high between-participant variability). 
+We first collected 25 responses for each item, computed 95\% CIs for each item, and stopped collecting data for items whose 95\% CIs were smaller than 0.2.
+After the first 25 responses, we collected 10 more responses for each item until the 95\% for that item was smaller than 0.2.
+The experiment took about 10 minutes and participants were compensated \$1.25 for their work.
 
 \subsubsection{Procedure}
 
-On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., You step outside during the winter.). 
-This was followed by a question asking if the participant would endorse either the positive- or negative-form adjective explicitly relative to the superordinate category (e.g., Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?).
+On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., \emph{You step outside during the winter.}). 
+This was followed by a question asking if the participant would endorse the positive- and/or negative-form adjective explicitly relative to the superordinate category (e.g., \emph{Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?}).
 Participants could respond to each question with either a \emph{yes} or \emph{no} judgment (2 judgments per trial).
+Each participant completed 50 items. 
 
 \subsubsection{Materials}
 
 The experimental materials were a modified subset of those generated in Experiment 1. 
 In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered. 
+In total, we had 126 sets of stimuli (3 subordinates with 1 superordinate), thus this experiment had 378 unique trials (one per subordinate category). 
+Each trial contained 2 judgments (positive and negative adjectives) for a total of 756 total unique judgments.
 
 \subsubsection{Results}
 
@@ -766,6 +784,7 @@ When the subordinate category was expected to be near the middle of the scale (e
 Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
 When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
 The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
+This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
 
 \begin{figure}[t!]
 \centering
@@ -776,30 +795,64 @@ The opposite interaction term was also credibly different from zero: When the su
 
 \subsection{Experiment 3: Comparison class inference}
 
-\subsubsection{Procedure}
+Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered: \url{osf.io/XXXX}.
+
+\subsubsection{Participants}
+
+We recruited 1250 participants from Amazon's Mechanical Turk. 
+This number was arrived at with the goal of collecting 50 comparison class paraphrases for each unique item in the data set.
+Participants were restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
+In addition, participants were prohibited from participating in this experiment if they participated in Experiment 2.
+
+\subsubsection{Procedure and Materials}
 
 On each trial, participants were given a context sentence to introduce
-the subordinate category (e.g., ``Tanya lives in Maryland and
-steps outside in winter''). This was followed by an adjective sentence,
-which predicated either a positive- or negative-form gradable adjective
-over the item (e.g., ``Tanya says to her friend, ``It's
-warm.''). Participants were asked ``What do you think Tanya
-meant?'' and given a two-alternative forced-choice to rephrase the
-adjective sentence with a freely-produced comparison class:
+the subordinate category (e.g., \emph{Tanya lives in Maryland and
+steps outside in winter}). This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., \emph{Tanya says to her friend, ``It's warm.''}). Participants were asked \emph{What do you think Tanya meant?} and given a sentence frame they could complete with with a freely-produced comparison class:
 
 \begin{quote}
-\{She / He / It\} is \textsc{adjective} (e.g., warm) relative to other \_\_\_\_.
+It is warm relative to other \_\_\_\_\_\_.
 \end{quote}
 
+Materials were the same as in Experiment 2.
+There were 756 unique trials. 
+Each participant completed 30 trials. 
+At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- subordinate category pairs (``tall --- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 
+
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{figs/bars_cc_finalExpt_pilot_byItem.pdf}
+%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+\caption{Experiment 3 results for a subset of the items.}\label{fig:ccInferenceItems}
+\end{figure}
 
 \subsubsection{Results}
 
-We observed no systematic differences between participants' responses when the superordinate category was previously mentioned in the context and those when it was not; thus, we collapse across these two conditions for all analyses. Figure \ref{fig:expt1results} shows the proportion of participants choosing the \emph{subordinate} paraphrase for each item, revealing considerable variability both \emph{within}- and \emph{across}- scales. The predicted effects are visually apparent within each scale (compare with Figure \ref{fig:modelSchematics} right).
+Participants were excluded if they answered fewer than 7 out of 10 memory check questions accurately. 
+Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate class by which the referent is introduced (e.g., a basketball player) or a more general (basic or superordinate) category. 
+Thus, we coded each response as either subordinate vs. basic/superordinate. 
+\red{X responses were excluded because they could not be coded as either.}
+%We observed no systematic differences between participants' responses when the superordinate category was previously mentioned in the context and those when it was not; thus, we collapse across these two conditions for all analyses. 
+Figure XXX shows the proportion of participants choosing the \emph{subordinate} paraphrase for each item, revealing considerable variability both \emph{within}- and \emph{across}- scales. 
+The predicted effects are visually apparent within each scale (compare with Figure XXX).
+We build a logistic mixed-effects model to predict participants' subordinate class paraphrases; this model mirrors the structure of the model of Experiment 2 data.
+We predict subordinate class paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
+The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
+}
 
-Our qualitative predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs.~negative) and the \emph{a priori} judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables. In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and interaction between form and strength\footnote{This was the maximal mixed-effects structure that converged.}. Confirming our two qualitative model predictions, there was an interaction between form and strength (\(\beta = -3.82\); \(SE = 0.57;\) \(z = -6.73\)) and there was an overall preference for subordinate category paraphrases (\(\beta = 1.23\); \(SE = 0.45;\) \(z = 2.70\)). The main effects of form and strength were not significant.
+As predicted, the only regression coefficients that were credibly different from zero were the interaction terms. 
+When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between subordinate comparison classes for the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt3_brm_pilot.csv}{adj_positiveness1}.
+Also, there were no credible differences in comparison class inferences for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt3_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt3_brm_pilot.csv}{np_positivenessnegative}).
+When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), the positive form adjective (e.g., tall) led to credibly more inferences of a basic/superordinate comparison class than the negative form adjective (e.g., short) in comparison to middle-of-the-scale items (e.g., soccer player):  \brmresults{expt3_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
+The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player),  hearing the positive form adjective led to credibly more inferences of a subordinate comparison class than hearing a negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt3_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
+This analysis confirms the primary hypothesis.
 
-We then test the simple effects. For items low on the degree scale (e.g., temperatures in winter), positive form adjectives were significantly more likely to imply subordinate comparison classes (\(\beta = 1.41\); \(SE = 0.15;\) \(z = 9.43\)), while the opposite is true for items high on the scale (e.g., summer days; \(\beta = -2.50\); \(SE = 0.19;\) \(z = -13.15\)). Participants reason pragmatically to resolve the comparison class, combining world knowledge with informativity as predicted by our model.
+%Our qualitative predictions are confirmed using a generalized linear mixed effects model with main effects of adjective form (positive vs.~negative) and the \emph{a priori} judgment by the first author of whether the sub-category was expected to be low or high on the degree scale, and of critical theoretical interest, the interaction between these two variables. In addition, we included by-participant random effects of intercept and by-subordinate category random effects of intercept and interaction between form and strength\footnote{This was the maximal mixed-effects structure that converged.}. Confirming our two qualitative model predictions, there was an interaction between form and strength (\(\beta = -3.82\); \(SE = 0.57;\) \(z = -6.73\)) and there was an overall preference for subordinate category paraphrases (\(\beta = 1.23\); \(SE = 0.45;\) \(z = 2.70\)). The main effects of form and strength were not significant.
+%
+%We then test the simple effects. For items low on the degree scale (e.g., temperatures in winter), positive form adjectives were significantly more likely to imply subordinate comparison classes (\(\beta = 1.41\); \(SE = 0.15;\) \(z = 9.43\)), while the opposite is true for items high on the scale (e.g., summer days; \(\beta = -2.50\); \(SE = 0.19;\) \(z = -13.15\)). Participants reason pragmatically to resolve the comparison class, combining world knowledge with informativity as predicted by our model.
 
 \subsection{Quantitative modeling}
 
