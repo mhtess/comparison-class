@@ -324,18 +324,77 @@ insert_super_sg = function(np) {
   }
   return (super)
 }
-df.adj.w.mode <- df.adj.w.mode %>% rowwise() %>% mutate(super_sg = insert_super_sg(item))
+
+insert_plural_np = function(np) {
+  if (np %in% c("seagull", "parrot", "crow", "day", "dusk", "night", "jolly rancher", "marshmallow",
+               "tile", "carpet", "giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "cheetah",
+               "sloth","basketball player", "golfer", "jockey", "runner", "jogger", "walker", "dachshund",
+               "bassett hound", "chihuahua", "novel", "poem", "classroom", "study hall", "tree", "flower",
+               "adult", "teenager",  "kid", "hurricane", "thunderstorm", "rain", "soup", "salad",
+               "cave", "cavern", "fox hole")) 
+  {
+    np_pl = paste(np, "s", sep="")
+  } else if (np %in% c("piece of chocolate" )) {
+    np_pl = "pieces of chocolate"
+  } else if (np %in% c(   "fish", "wood", "platinum", "bronze", "plastic",  "ice cream", 
+                       "summer", "fall", "winter" )) {
+    np_pl = np
+  } else if( np %in% c("story")) {
+    np_pl = "stories"
+  } else if( np %in% c("mouse")) {
+    np_pl = "mice"
+  } else if( np %in% c("auditorium")) {
+    np_pl = "auditoria"
+  } else if (np %in% c("bottle of top-shelf liquor")) {
+    np_pl = "liquors"
+    } else if (np %in% c("six-pack of beer")) {
+    np_pl = "beers"
+    } else if (np %in% c( "bottle of wine")) {
+    np_pl = "bottles of wine"
+  } else if (np %in% c("six-pack of beer", "bottle of wine")) {
+    np_pl = "beers"
+  } else if (np %in% c("bottle of wine")) {
+    np_pl = "bottles of wine"
+  } else if (np %in% c( "bush" )) {
+    np_pl = "bushes"
+  } else if(np %in% c( "child")) {
+    np_pl = "children"
+  } else if (np %in% c("baby")) {
+    np_pl = "babies"
+  } else {
+    np_pl = np
+  }
+  return (np_pl)
+}
+
+
+df.adj.w.mode <- df.adj.w.mode %>% rowwise() %>% mutate(np_pl = insert_plural_np(item))
 ```
 
 ``` {r}
-df.adj.w.mode <- df.adj %>% mutate(superordinate = ifelse(item == "jockey", "people", superordinate ),
+df.adj.w.mode <- df.adj.w.mode %>% mutate(superordinate = ifelse(item == "jockey", "people", superordinate ),
                                    superordinate = ifelse(item == "basketball player", "people", 
                                                           superordinate ),
                                    superordinate = ifelse(item == "golfer", "people", superordinate ),
                                    superordinate = ifelse(item == "walker", "people", superordinate ),
                                    superordinate = ifelse(item == "jogger", "people", superordinate ),
                                    superordinate = ifelse(item == "runner", "people", superordinate ),
+                                   superordinate = gsub("holes", "burrows", superordinate ),
+        np_pl = gsub("carpets", "carpet floors", np_pl),
+        np_pl = gsub("tiles", "tile floors", np_pl),
+        np_pl = gsub("wood", "wood floors", np_pl),
+         np_pl = gsub("winter", "winter days", np_pl),
+         np_pl = gsub("fall", "fall days", np_pl),
+         np_pl = gsub("summer", "summer days", np_pl),
+        np_pl = gsub("highway", "highways", np_pl),  
+        np_pl = gsub("side road", "side roads", np_pl), 
+        np_pl = gsub("downtown street", "downtown streets", np_pl), 
+        np_pl = gsub("plastic", "plastic statues", np_pl),
+        np_pl = gsub("bronze", "bronze statues", np_pl),
+        np_pl = gsub("platinum", "platinum statue", np_pl),
+        np_pl = gsub("pieces of chocolate", "chocolates", np_pl),
                                    ) %>% subset(., !(item %in% c("day", "night", "dusk")))
-df.adj.w.mode %>% select(workerid, degree, super_sg, item, item_cond, key, val) %>% 
-  write_csv( '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG.csv')
+
+df.adj.w.mode %>% select(workerid, degree, superordinate, np_pl, item_cond, key, val) %>% 
+  write_csv( '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv')
 ```
