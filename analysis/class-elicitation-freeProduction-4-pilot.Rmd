@@ -555,7 +555,9 @@ d.tidy.phrase.specificMarking.bs.item %>%
   ylab("Proportion paraphrases that contain NP")+
   xlab("Subordinate Category Prior Mean")
 
-ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
+# ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
+#        width = 9, height = 9)
+ggsave("../writing/paper/figs/bars_cc_finalExpt_pilot_byItem.png",
        width = 9, height = 9)
 ```
 
@@ -566,20 +568,36 @@ d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
   mutate(adj_positiveness = factor(adj_positiveness, 
                                    levels = c("negative", "positive")),
          np_positiveness = factor(np_positiveness, 
-                                  levels = c("neither-nor", "negative", "positive")))
+                                  levels = c("neither-nor", "negative", "positive"))) %>%
+  rowwise() %>%
+  mutate(item_set = paste(degree, "_", superordinate, sep = "")) %>%
+  ungroup() %>%
+  mutate(item_set = factor(item_set),
+         workerid = factor(workerid))
+
+
+
 contrasts(d.tidy.phrase.w.original.fac$adj_positiveness) <- c(-1/2, 1/2)
 
 rs.glm.brm <- brm(
   formula = specific ~ np_positiveness * adj_positiveness + 
     (1 +  np_positiveness*adj_positiveness | workerid) + 
-    (1 +  np_positiveness*adj_positiveness | superordinate),
+    (1 +  np_positiveness*adj_positiveness | item_set),
   family = bernoulli(), chains = 3, cores = 3,
   data = d.tidy.phrase.w.original.fac)
 
-summary(rs.glm.brm)
+
+rs.glm.brm.summary <- summary(rs.glm.brm)
+
+rs.glm.brm.summary
 
 ```
 
+```{r}
+write_csv(data.frame(rs.glm.brm.summary[["fixed"]]) %>% 
+            mutate(Rowname = row.names(.)), 
+          path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv")
+```
 
 ```{r}
 rs.glm <- glmer(

@@ -248,6 +248,9 @@ df.trials.tidy.fac <- df.trials.tidy %>%
          item_set = factor(item_set),
          workerid = factor(workerid))
 
+contrasts(df.trials.tidy.fac$adj_positiveness) <- c(-1/2, 1/2)
+
+
 rs.glm.brm.adj <- brm(
   formula = val ~ np_positiveness * adj_positiveness + 
     (1 +  np_positiveness*adj_positiveness | workerid) + 
@@ -256,9 +259,15 @@ rs.glm.brm.adj <- brm(
    chains = 3, cores = 3, iter = 2000, 
   data = df.trials.tidy.fac)
 
-summary(rs.glm.brm)
+rs.glm.brm.adj.summary <-summary(rs.glm.brm.adj)
 
-contrasts(d.tidy.phrase.w.original.fac$adj_positiveness)
+contrasts(df.trials.tidy.fac$adj_positiveness)
+contrasts(df.trials.tidy.fac$np_positiveness)
+
+
+write_csv(data.frame(rs.glm.brm.adj.summary[["fixed"]]) %>% 
+            mutate(Rowname = row.names(.)), 
+          path = "../writing/paper/csv_data_4_tex/expt2_brm_pilot.csv")
 ```
 
 
