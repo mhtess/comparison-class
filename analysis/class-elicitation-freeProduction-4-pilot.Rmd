@@ -135,7 +135,7 @@ insert_super = function(np) {
   return (super)
 }
 
-# paste singular superordinates to match it to the frequency data
+# paste singular superordinates to use singulars frequency data
 insert_super_sg = function(np) {
   if (np %in% c("seagull", "parrot", "crow")) {
     super = "bird"
@@ -182,22 +182,20 @@ df.trials.w.super <- df.trials %>%
   mutate(#superordinate_sg = insert_super_sg(np), 
          superordinate = insert_super(np))
 
-# df.trials.w.super <- df.trials %>% 
-#   rowwise() %>% 
-#   mutate(superordinate = insert_super(np))
 
+# insert plural noun phrases additionally to recorded seed NPs in order to use plural frequencies 
+# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
 insert_plural_np = function(np) {
   if (np %in% c("seagull", "parrot", "crow", "day", "dusk", "night", "jolly rancher", "marshmallow",
                "tile", "carpet", "giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "cheetah",
                "sloth","basketball player", "golfer", "jockey", "runner", "jogger", "walker", "dachshund",
                "bassett hound", "chihuahua", "novel", "poem", "classroom", "study hall", "tree", "flower",
                "adult", "teenager",  "kid", "hurricane", "thunderstorm", "rain", "soup", "salad",
-               "cave", "cavern", "fox hole")) 
-  {
+               "cave", "cavern", "fox hole", "highway", "side road", "downtown street"))  {
     np_pl = paste(np, "s", sep="")
   } else if (np %in% c("piece of chocolate" )) {
     np_pl = "pieces of chocolate"
-  } else if (np %in% c(   "fish", "wood", "platinum", "bronze", "plastic",  "ice cream", 
+  } else if (np %in% c( "fish", "wood", "platinum", "bronze", "plastic",  "ice cream", 
                        "summer", "fall", "winter" )) {
     np_pl = np
   } else if( np %in% c("story")) {
@@ -208,13 +206,9 @@ insert_plural_np = function(np) {
     np_pl = "auditoria"
   } else if (np %in% c("bottle of top-shelf liquor")) {
     np_pl = "liquors"
-    } else if (np %in% c("six-pack of beer")) {
+  } else if (np %in% c("six-pack of beer")) {
     np_pl = "beers"
-    } else if (np %in% c( "bottle of wine")) {
-    np_pl = "bottles of wine"
-  } else if (np %in% c("six-pack of beer", "bottle of wine")) {
-    np_pl = "beers"
-  } else if (np %in% c("bottle of wine")) {
+  } else if (np %in% c( "bottle of wine")) {
     np_pl = "bottles of wine"
   } else if (np %in% c( "bush" )) {
     np_pl = "bushes"
@@ -235,7 +229,7 @@ df.trials.w.super <- df.trials.w.super %>%
 ```
 
 
-Those multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
+These multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
 ```{r filtered main trails}
 df.trials.filtered <- df.trials.w.super %>%
   left_join(., df.attention.summary) %>%
@@ -265,12 +259,9 @@ df.trials.filtered <- df.trials.w.super %>%
     np_match = gsub("rap concert", "rap", np_match),
     )
 
-df.trials.filtered <- df.trials.w.super %>%
-  left_join(., df.attention.summary) %>%
-  filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
-  rowwise() %>%
-  mutate(
-    np_match = np_pl) 
+#df.trials.filtered <- df.trials.filtered %>%
+ # left_join(., df.attention.summary) %>%
+  #filter(n_memory_correct > 8, n_check_incorrect < 2) 
 
 df.trials.filtered %>% 
   group_by(np) %>%
@@ -283,7 +274,8 @@ Plurals of all irregular nouns in the stimuli set are converted to singulars to 
 
 # extended function to check matching between strings either way 
 containsString <- function(strng, substrng){
-  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, ifelse( length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)))
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 
+                ifelse( length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)))
 }
 
 #stop_words <- stopwords()
@@ -298,6 +290,7 @@ my_stop_words <-# bind_rows(
   # )
 #)
 
+# clean produced responses to match NPs 
 df.trials.filtered %>% 
   mutate(response = as.character(response),
          response = gsub("&quotechar", "", response),
@@ -371,14 +364,13 @@ df.trials.filtered %>%
          response = gsub("jokceys", "jockeys", response),
          response = gsub("golf player", "golfer", response),
          response = gsub("marshamallow", "marshmallow", response),
-        
-         superordinate = gsub("times of day", "times day", superordinate),
+        # substitute subordinate 
          superordinate = gsub("floor materials", "floors", superordinate)
         
          ) %>%
   unnest_tokens(word, response)  %>% 
-  #anti_join(stop_words)  %>% # remove stop words
-  anti_join(my_stop_words) %>%  # remove stop words
+  anti_join(stop_words)  %>% # remove stop words
+  #anti_join(my_stop_words) %>%  # remove stop words
   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
   spread(wordNumber, word) %>%
@@ -398,7 +390,9 @@ df.trials.filtered %>%
   # select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff) -> d.tidy.phrase.w.original
     np_match = as.character(np_match),
     np_match = gsub('\"', "", np_match),
+  # check if response and seed NP match 
     specific = containsString(as.character(cleanedPhrase), as.character(np_match)),
+  # check if response and anticipated superordinate match
     matchingSuper = containsString(as.character(cleanedPhrase), as.character(superordinate))
   ) %>%
   select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np, np_pl, np_match, cleanedPhrase, originalResponse, specific, matchingSuper) -> d.tidy.phrase.w.original
@@ -406,44 +400,75 @@ df.trials.filtered %>%
 
 ```
 
-The data points are grouped by NP, adjective and scale condition and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
+The data points are grouped by NP, specificity and scale condition and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
 ``` {r}
-d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% subset(., !(np_pl %in% c("days", "dusks", "nights"))) %>%
+
+# np_for_match includes just the key words to match the specific reponses, whereas np_for_freq has the full np for which the frequency was searched such that the frequency can be matched 
+# the superordinate for the NPs where the modal responses did not match the anticipated one are substituted to the modal participant response 
+
+# extract the mode response 
+d.tidy.resp.counts <- d.tidy.phrase.w.original %>% 
+  group_by(degree, superordinate, np, specific, adj, cleanedPhrase) %>% count() %>% 
+  mutate(n_unique_resps = n)
+
+# insert the mode NP (modal subordinate where participants gave subordinate response, modal superordinate where they gave superordinate response)
+# in column mode
+d.tidy.resp.counts <- d.tidy.resp.counts %>% group_by(np, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
+
+# analysis of modal responses
+d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>% rowwise() %>%  
+  mutate(isModeNP = containsString(as.character(mode), as.character(np_match)),
+        isModeSuper = containsString(as.character(mode), as.character(superordinate)),
+        isModeNeither = sum(isModeNP, isModeSuper)) # isModeNeither = 0 means that the mode response is different from anticipated NPs
+
+non.matching.mode.resps <- d.tidy.resp.counts.web %>% filter(isModeNeither == 0) %>% 
+  mutate(mode = gsub("_", "", mode))# %>% select(degree, superordinate, np_match, specific, np_positiveness, adj, adj_positiveness, n_unique_resps, mode) %>% distinct()
+#%>% write_csv(., '../data/pilot-classElicitation-free-4/class-elicitation-free-4-nonmatching-mode-resps.csv')
+
+# the data is adjusted to the human modal responses in the following chunks
+```
+
+``` {r}
+
+# plural noun phrases are adjusted to the frequency queries 
+d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original %>% subset(., !(np_pl %in% c("days", "dusks", "nights"))) %>%
   mutate(np_for_freq = np_pl,
         np_for_freq = gsub("carpets", "carpet floors", np_for_freq),
         np_for_freq = gsub("tiles", "tile floors", np_for_freq),
         np_for_freq = gsub("wood", "wood floors", np_for_freq),
-         np_for_freq = gsub("winter", "winter days", np_for_freq),
-         np_for_freq = gsub("fall", "fall days", np_for_freq),
-         np_for_freq = gsub("summer", "summer days", np_for_freq),
-        np_for_freq = gsub("highway", "highways", np_for_freq),  
-        np_for_freq = gsub("side road", "side roads", np_for_freq), 
-        np_for_freq = gsub("downtown street", "downtown streets", np_for_freq), 
+        np_for_freq = gsub("winter", "winter days", np_for_freq),
+        np_for_freq = gsub("fall", "fall days", np_for_freq),
+        np_for_freq = gsub("summer", "summer days", np_for_freq),
         np_for_freq = gsub("plastic", "plastic statues", np_for_freq),
         np_for_freq = gsub("bronze", "bronze statues", np_for_freq),
         np_for_freq = gsub("platinum", "platinum statue", np_for_freq),
         np_for_freq = gsub("pieces of chocolate", "chocolates", np_for_freq),
-         superordinate = ifelse(np_for_freq == "golfers", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "jockeys", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "basketball players", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "walkers", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "runners", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "joggers", "people", superordinate),
+        
+        # substitutions made based on human modal responses 
+        superordinate = ifelse(np_for_freq == "golfers", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "jockeys", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "basketball players", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "walkers", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "runners", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "joggers", "people", superordinate),
         superordinate = gsub("holes", "burrows",  superordinate)
-       # superordinate = gsub("readings", "books",  superordinate),
-       # superordinate = gsub("roads", "ways", superordinate),
-    #    superordinate = gsub("rooms", "areas", superordinate),
-      #   superordinate = gsub("floors", "surfaces", superordinate)
-         )
+         ) %>% 
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted 
+  mutate(mode_np = ifelse(specific == 1, np_for_freq, superordinate))
+# this data can be fed into python frequency extractor, frequencies to be extracted are unique mode_np's and superordinates
 
+d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode.pl %>%
+  left_join(., df.frequencies, by = c("mode_np" ="Nps")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by=c("superordinate"="Nps"))   # add superordinate frequencies
 
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate, adj, adj_positiveness, np_for_freq, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate = superordinate, NP = np_for_freq,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
 
-d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original.mode %>% 
-  #left_join(., df.frequencies, by = c("np_for_freq" ="NPs")) %>% left_join(., df.frequencies, by=c("superordinate"="NPs")) #%>%View()
-# the subordinate and the superordinate frequencies are included
+write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl-update.csv')
 ```
 
+
 ``` {r}
+#substitution of superordinates based on human data for singular NPs
 d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% mutate(superordinate = 
                                                                        ifelse(np_match == "golfer", "people", superordinate),
                                                                      superordinate = 
@@ -466,43 +491,7 @@ d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% mutate(superordina
 ```
 
 ``` {r}
-# insert plural nps
-d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode %>% 
-  rowwise() %>% 
-  mutate(np_pl = insert_plural_np(np))
-
-d.tidy.resp.counts.pl <- d.tidy.phrase.w.original.mode.pl %>% subset(., !(np_pl %in% c("days", "dusks", "nights"))) %>%
-  mutate(np_for_freq = np_pl,
-        np_for_freq = gsub("carpets", "carpet floors", np_for_freq),
-        np_for_freq = gsub("tiles", "tile floors", np_for_freq),
-        np_for_freq = gsub("wood", "wood floors", np_for_freq),
-         np_for_freq = gsub("winter", "winter days", np_for_freq),
-         np_for_freq = gsub("fall", "fall days", np_for_freq),
-         np_for_freq = gsub("summer", "summer days", np_for_freq),
-        np_for_freq = gsub("highway", "highways", np_for_freq),  
-        np_for_freq = gsub("side road", "side roads", np_for_freq), 
-        np_for_freq = gsub("downtown street", "downtown streets", np_for_freq), 
-        np_for_freq = gsub("plastic", "plastic statues", np_for_freq),
-        np_for_freq = gsub("bronze", "bronze statues", np_for_freq),
-        np_for_freq = gsub("platinum", "platinum statue", np_for_freq),
-        np_for_freq = gsub("pieces of chocolate", "chocolates", np_for_freq),
-         superordinate = ifelse(np_for_freq == "golfers", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "jockeys", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "basketball players", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "walkers", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "runners", "people", superordinate),
-         superordinate = ifelse(np_for_freq == "joggers", "people", superordinate),
-        superordinate = gsub("holes", "burrows",  superordinate),
-       # superordinate = gsub("readings", "books",  superordinate),
-       # superordinate = gsub("roads", "ways", superordinate),
-    #    superordinate = gsub("rooms", "areas", superordinate),
-      #   superordinate = gsub("floors", "surfaces", superordinate)
-         )%>% 
-  mutate(mode_np = ifelse(specific == 1, np_for_freq, superordinate)) %>%  
-  left_join(., df.frequencies, by = c("mode_np" ="NPs")) %>% # add sub freqs
-  left_join(., df.frequencies, by=c("superordinate"="NPs"))   # add super freqs
-
-
+# exploration of prior estimation by frequency
 df.plural <- d.tidy.resp.counts.pl %>% select(degree, superordinate, specific, mode_np, Frequencies.x, Frequencies.y) %>% distinct() %>% rowwise() %>%
 # beta = 0.1
   mutate(
@@ -521,9 +510,6 @@ df.plural <- d.tidy.resp.counts.pl %>% select(degree, superordinate, specific, m
          #    mean_exp_log_ratio = mean(exp_log_ratio)
              )# %>% View()
 
-#df.plural.std <- cbind(df.plural.02, df.plural.01, df.plural.04, df.plural.01, df.plural.07)
-#df.plural.std <- cbind(df.plural.01, df.plural.mh, df.plural.ratio)
-
         
 my.degrees <- c("size", "height", "price", "length_duration", "speed", "size", "width", "weight", "price", "weight", "width", "height", "hardness", "hardness", "temperature", "strength", "loudness", "strength", "darkness", "length_duration", "loudness", "temperature", "speed")
 my.super <- c("plants", "animals", "statues", "readings", "people", "animals", "burrows", "people", "alcoholic drinks", "animals", "roads", "people", "floors", "sweets", "food", "people", "rooms", "storms", "birds", "dogs", "animals", "seasons", "animals")
@@ -532,42 +518,11 @@ df.mh <- tibble(my.degrees, my.super, est.cc)
 df.joint <- df.plural %>% left_join(., df.mh, by=c("superordinate"="my.super", "degree" ="my.degrees")) 
 df.joint <- df.joint  %>% mutate(sqErr = round( ((est.cc - mean_exp_ratio)^2) , 5),
                                  sqErrSum = round( ((est.cc - mean_exp_sum)^2), 5) )
-write_csv(df.joint, "../data/pilot-classElicitation-free-4/class-elicitation-model-empirical-sub-priors.csv")
+#write_csv(df.joint, "../data/pilot-classElicitation-free-4/class-elicitation-model-empirical-sub-priors.csv")
 ```
 
-```{r}
-#write_csv(d.tidy.phrase.w.original, "../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials-clean_filtered.csv")
-```
 
 ``` {r}
-
-# np_for_match includes just the key words to match the specific reponses, whereas np_for_freq has the full np for which the frequency was searched such that the frequency can be matched 
-# the superordinate for the NPs where the modal responses did not match the anticipated one are substituted to the modal participant response 
-
-# extract the mode response 
-d.tidy.resp.counts <- d.tidy.phrase.w.original.mode %>% 
-  group_by(degree, superordinate, np_for_freq, specific, adj, cleanedPhrase) %>% count() %>% 
-  mutate(n_unique_resps = n)
-
-#new.modes <- d.tidy.phrase.w.original %>% 
- # group_by(degree, superordinate, np_match, specific, adj, cleanedPhrase) %>% count() %>%
-  #mutate(n_unique_resps = n) %>% group_by(np_match, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
-
-
-d.tidy.resp.counts.web <- d.tidy.resp.counts %>% group_by(np_for_freq, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
-```
-
-``` {r}
-# analysis of modal responses
-d.tidy.resp.counts.web <- d.tidy.resp.counts.web %>% rowwise() %>%  
-  mutate(isModeNP = containsString(as.character(mode), as.character(np_match)),
-        isModeSuper = containsString(as.character(mode), as.character(superordinate)),
-        isModeNeither = sum(isModeNP, isModeSuper)) # isModeNeither = 0 means that the mode response is different from anticipated NPs
-
-non.matching.mode.resps <- d.tidy.resp.counts.web %>% filter(isModeNeither == 0) %>% 
-  mutate(mode = gsub("_", "", mode))# %>% select(degree, superordinate, np_match, specific, np_positiveness, adj, adj_positiveness, n_unique_resps, mode) %>% distinct()
-#%>% write_csv(., '../data/pilot-classElicitation-free-4/class-elicitation-free-4-nonmatching-mode-resps.csv')
-
 # substitute mode responses with typos or not mathcing equivalent seed NPs
 d.tidy.resp.counts.web <- d.tidy.resp.counts.web %>% rowwise() %>% mutate(cleanMode = gsub("_", "", mode),
                                                                  cleanMode = gsub("baby", "babies", cleanMode),
@@ -591,35 +546,6 @@ d.tidy.resp.counts.web <- d.tidy.resp.counts.web %>% rowwise() %>% mutate(cleanM
 #write_csv(d.tidy.resp.counts, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-modal-responses.csv')
 ```
 
-``` {r}
-# add the mode to the data with 'specific' markers
-# do the substitutions based on analysis of modal responses and necessary for matching frequency
-df.mode <- left_join(d.tidy.phrase.w.original.mode, d.tidy.resp.counts.web) %>% 
- # subset(., !(np_m %in% c("day", "dusk", "night"))) %>%
- # mutate(np_for_freq = np_match,
-  #       np_for_freq = gsub("study", "study hall", np_for_freq),
-   #      np_for_freq = gsub("winter", "winter day", np_for_freq),
-    #     np_for_freq = gsub("fall", "fall day", np_for_freq),
-     #    np_for_freq = gsub("summer", "summer day", np_for_freq),
-      #   np_for_freq = gsub("basketball", "basketball player", np_for_freq),
-       #  superordinate_sg = ifelse(np_for_freq == "golfer", "people", superordinate_sg),
-        # superordinate_sg = ifelse(np_for_freq == "jockey", "people", superordinate_sg),
-    #     superordinate_sg = ifelse(np_for_freq == "basketball player", "people", superordinate_sg),
-     #    superordinate_sg = ifelse(np_for_freq == "walker", "people", superordinate_sg),
-      #   superordinate_sg = ifelse(np_for_freq == "runner", "people", superordinate_sg),
-       #  superordinate_sg = ifelse(np_for_freq == "jogger", "people", superordinate_sg)
-        
-        # )%>% 
-  mutate(mode_np = ifelse(specific == 1, np_for_freq, superordinate))%>%  
-  left_join(., df.frequencies, by = c("np_for_freq" ="NPs")) %>% # add sub freqs
- left_join(., df.frequencies, by=c("superordinate"="NPs")) # add super freqs
-
-df.mode.final <- df.mode %>% select(workerid, degree, superordinate, adj, adj_positiveness, np_for_freq, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate = superordinate, NP = np_for_freq,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
-
-write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv')
-
-
-```
 
 # Viz: First prass
 

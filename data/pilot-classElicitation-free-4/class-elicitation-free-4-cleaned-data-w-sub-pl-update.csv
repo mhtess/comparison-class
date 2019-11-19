@@ -1,0 +1,1621 @@
+workerid,degree,superordinate,adj,adj_positiveness,NP,response,specific,subFreq,superFreq
+cd19c7155f8801c3c7d1c90c276594a3,price,statues,expensive,positive,bronze statues,bronze statues,1,53960,2837498
+cd19c7155f8801c3c7d1c90c276594a3,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+cd19c7155f8801c3c7d1c90c276594a3,size,animals,small,negative,mice,animals,0,58179731,58179731
+cd19c7155f8801c3c7d1c90c276594a3,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+cd19c7155f8801c3c7d1c90c276594a3,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+cd19c7155f8801c3c7d1c90c276594a3,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+cd19c7155f8801c3c7d1c90c276594a3,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+cd19c7155f8801c3c7d1c90c276594a3,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+cd19c7155f8801c3c7d1c90c276594a3,height,people,short,negative,jockeys,people,0,480323270,480323270
+cd19c7155f8801c3c7d1c90c276594a3,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+cd19c7155f8801c3c7d1c90c276594a3,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+cd19c7155f8801c3c7d1c90c276594a3,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+cd19c7155f8801c3c7d1c90c276594a3,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+cd19c7155f8801c3c7d1c90c276594a3,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+cd19c7155f8801c3c7d1c90c276594a3,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+cd19c7155f8801c3c7d1c90c276594a3,strength,storms,weak,negative,thunderstorms,storms,0,3614108,3614108
+cd19c7155f8801c3c7d1c90c276594a3,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+cd19c7155f8801c3c7d1c90c276594a3,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+cd19c7155f8801c3c7d1c90c276594a3,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+cd19c7155f8801c3c7d1c90c276594a3,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+cd19c7155f8801c3c7d1c90c276594a3,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+cd19c7155f8801c3c7d1c90c276594a3,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+cd19c7155f8801c3c7d1c90c276594a3,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+8c9dfdd0f0b931d9ce63ddec0e73127a,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+8c9dfdd0f0b931d9ce63ddec0e73127a,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+8c9dfdd0f0b931d9ce63ddec0e73127a,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+8c9dfdd0f0b931d9ce63ddec0e73127a,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+8c9dfdd0f0b931d9ce63ddec0e73127a,size,animals,big,positive,mice,mice,1,11969407,58179731
+8c9dfdd0f0b931d9ce63ddec0e73127a,strength,storms,strong,positive,hurricanes,storms,0,3614108,3614108
+8c9dfdd0f0b931d9ce63ddec0e73127a,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+8c9dfdd0f0b931d9ce63ddec0e73127a,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+8c9dfdd0f0b931d9ce63ddec0e73127a,height,animals,tall,positive,birds,birds,1,19695831,58179731
+8c9dfdd0f0b931d9ce63ddec0e73127a,width,burrows,narrow,negative,caverns,caverns,1,572761,1094175
+8c9dfdd0f0b931d9ce63ddec0e73127a,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+8c9dfdd0f0b931d9ce63ddec0e73127a,weight,animals,light,negative,dogs,animals,0,58179731,58179731
+8c9dfdd0f0b931d9ce63ddec0e73127a,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+8c9dfdd0f0b931d9ce63ddec0e73127a,hardness,sweets,hard,positive,chocolates,sweets,0,2968535,2968535
+8c9dfdd0f0b931d9ce63ddec0e73127a,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+8c9dfdd0f0b931d9ce63ddec0e73127a,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+8c9dfdd0f0b931d9ce63ddec0e73127a,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+8c9dfdd0f0b931d9ce63ddec0e73127a,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+8c9dfdd0f0b931d9ce63ddec0e73127a,weight,people,light,negative,kids,people,0,480323270,480323270
+8c9dfdd0f0b931d9ce63ddec0e73127a,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+8c9dfdd0f0b931d9ce63ddec0e73127a,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+8c9dfdd0f0b931d9ce63ddec0e73127a,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+80eabd8d2b329ef481629d9ada20e415,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+80eabd8d2b329ef481629d9ada20e415,length_duration,dogs,long,positive,dachshunds,dachshunds,1,116109,28409576
+80eabd8d2b329ef481629d9ada20e415,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+80eabd8d2b329ef481629d9ada20e415,loudness,animals,loud,positive,dogs,animals,0,58179731,58179731
+80eabd8d2b329ef481629d9ada20e415,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+80eabd8d2b329ef481629d9ada20e415,loudness,rooms,quiet,negative,classrooms,rooms,0,65454304,65454304
+80eabd8d2b329ef481629d9ada20e415,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+80eabd8d2b329ef481629d9ada20e415,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+80eabd8d2b329ef481629d9ada20e415,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+80eabd8d2b329ef481629d9ada20e415,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+80eabd8d2b329ef481629d9ada20e415,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+80eabd8d2b329ef481629d9ada20e415,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+80eabd8d2b329ef481629d9ada20e415,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+80eabd8d2b329ef481629d9ada20e415,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+80eabd8d2b329ef481629d9ada20e415,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+80eabd8d2b329ef481629d9ada20e415,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+80eabd8d2b329ef481629d9ada20e415,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+80eabd8d2b329ef481629d9ada20e415,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+80eabd8d2b329ef481629d9ada20e415,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+80eabd8d2b329ef481629d9ada20e415,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+80eabd8d2b329ef481629d9ada20e415,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+80eabd8d2b329ef481629d9ada20e415,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+80eabd8d2b329ef481629d9ada20e415,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+b8141494a705a35005a7e05587f1b616,loudness,animals,loud,positive,cats,animals,0,58179731,58179731
+b8141494a705a35005a7e05587f1b616,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+b8141494a705a35005a7e05587f1b616,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+b8141494a705a35005a7e05587f1b616,strength,people,weak,negative,children,children,1,206543771,480323270
+b8141494a705a35005a7e05587f1b616,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+b8141494a705a35005a7e05587f1b616,temperature,seasons,warm,positive,summer days,summer days,1,229054,12035578
+b8141494a705a35005a7e05587f1b616,length_duration,dogs,long,positive,dachshunds,dachshunds,1,116109,28409576
+b8141494a705a35005a7e05587f1b616,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+b8141494a705a35005a7e05587f1b616,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+b8141494a705a35005a7e05587f1b616,weight,people,heavy,positive,adults,adults,1,32847475,480323270
+b8141494a705a35005a7e05587f1b616,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+b8141494a705a35005a7e05587f1b616,size,animals,big,positive,mice,mice,1,11969407,58179731
+b8141494a705a35005a7e05587f1b616,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+b8141494a705a35005a7e05587f1b616,speed,people,slow,negative,walkers,people,0,480323270,480323270
+b8141494a705a35005a7e05587f1b616,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+b8141494a705a35005a7e05587f1b616,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+b8141494a705a35005a7e05587f1b616,speed,animals,quick,positive,cheetahs,cheetahs,1,217628,58179731
+b8141494a705a35005a7e05587f1b616,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+b8141494a705a35005a7e05587f1b616,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+b8141494a705a35005a7e05587f1b616,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+b8141494a705a35005a7e05587f1b616,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+b8141494a705a35005a7e05587f1b616,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+b8141494a705a35005a7e05587f1b616,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+1d32575eebdbc8e606a04a2f909a08a5,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+1d32575eebdbc8e606a04a2f909a08a5,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+1d32575eebdbc8e606a04a2f909a08a5,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+1d32575eebdbc8e606a04a2f909a08a5,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+1d32575eebdbc8e606a04a2f909a08a5,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+1d32575eebdbc8e606a04a2f909a08a5,size,plants,small,negative,trees,trees,1,27379426,35939932
+1d32575eebdbc8e606a04a2f909a08a5,strength,people,strong,positive,children,children,1,206543771,480323270
+1d32575eebdbc8e606a04a2f909a08a5,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+1d32575eebdbc8e606a04a2f909a08a5,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+1d32575eebdbc8e606a04a2f909a08a5,height,people,short,negative,jockeys,people,0,480323270,480323270
+1d32575eebdbc8e606a04a2f909a08a5,width,roads,wide,positive,highways,highways,1,5745573,15093824
+1d32575eebdbc8e606a04a2f909a08a5,height,animals,tall,positive,birds,birds,1,19695831,58179731
+1d32575eebdbc8e606a04a2f909a08a5,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+1d32575eebdbc8e606a04a2f909a08a5,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+1d32575eebdbc8e606a04a2f909a08a5,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+1d32575eebdbc8e606a04a2f909a08a5,loudness,rooms,loud,positive,study halls,study halls,1,17223,65454304
+1d32575eebdbc8e606a04a2f909a08a5,length_duration,readings,short,negative,novels,readings,0,8678675,8678675
+1d32575eebdbc8e606a04a2f909a08a5,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+1d32575eebdbc8e606a04a2f909a08a5,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+1d32575eebdbc8e606a04a2f909a08a5,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+1d32575eebdbc8e606a04a2f909a08a5,weight,people,light,negative,kids,people,0,480323270,480323270
+1d32575eebdbc8e606a04a2f909a08a5,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+1d32575eebdbc8e606a04a2f909a08a5,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+aab34adfbf5a03212376be01f97bfd32,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+aab34adfbf5a03212376be01f97bfd32,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+aab34adfbf5a03212376be01f97bfd32,loudness,animals,quiet,negative,cats,animals,0,58179731,58179731
+aab34adfbf5a03212376be01f97bfd32,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+aab34adfbf5a03212376be01f97bfd32,size,animals,big,positive,elephants,animals,0,58179731,58179731
+aab34adfbf5a03212376be01f97bfd32,strength,storms,strong,positive,thunderstorms,storms,0,3614108,3614108
+aab34adfbf5a03212376be01f97bfd32,speed,people,quick,positive,runners,runners,1,3917217,480323270
+aab34adfbf5a03212376be01f97bfd32,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+aab34adfbf5a03212376be01f97bfd32,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+aab34adfbf5a03212376be01f97bfd32,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+aab34adfbf5a03212376be01f97bfd32,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+aab34adfbf5a03212376be01f97bfd32,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+aab34adfbf5a03212376be01f97bfd32,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+aab34adfbf5a03212376be01f97bfd32,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+aab34adfbf5a03212376be01f97bfd32,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+aab34adfbf5a03212376be01f97bfd32,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+aab34adfbf5a03212376be01f97bfd32,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+aab34adfbf5a03212376be01f97bfd32,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+aab34adfbf5a03212376be01f97bfd32,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+aab34adfbf5a03212376be01f97bfd32,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+aab34adfbf5a03212376be01f97bfd32,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+aab34adfbf5a03212376be01f97bfd32,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+aab34adfbf5a03212376be01f97bfd32,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+e5927e80fc20543641b7d15f5da5a2a3,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+e5927e80fc20543641b7d15f5da5a2a3,size,animals,small,negative,mice,animals,0,58179731,58179731
+e5927e80fc20543641b7d15f5da5a2a3,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+e5927e80fc20543641b7d15f5da5a2a3,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+e5927e80fc20543641b7d15f5da5a2a3,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+e5927e80fc20543641b7d15f5da5a2a3,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+e5927e80fc20543641b7d15f5da5a2a3,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+e5927e80fc20543641b7d15f5da5a2a3,height,animals,tall,positive,birds,birds,1,19695831,58179731
+e5927e80fc20543641b7d15f5da5a2a3,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+e5927e80fc20543641b7d15f5da5a2a3,hardness,sweets,hard,positive,chocolates,sweets,0,2968535,2968535
+e5927e80fc20543641b7d15f5da5a2a3,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+e5927e80fc20543641b7d15f5da5a2a3,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+e5927e80fc20543641b7d15f5da5a2a3,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+e5927e80fc20543641b7d15f5da5a2a3,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+e5927e80fc20543641b7d15f5da5a2a3,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+e5927e80fc20543641b7d15f5da5a2a3,height,people,tall,positive,basketball players,people,0,480323270,480323270
+e5927e80fc20543641b7d15f5da5a2a3,strength,people,strong,positive,adults,people,0,480323270,480323270
+e5927e80fc20543641b7d15f5da5a2a3,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+e5927e80fc20543641b7d15f5da5a2a3,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+e5927e80fc20543641b7d15f5da5a2a3,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+e5927e80fc20543641b7d15f5da5a2a3,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+e5927e80fc20543641b7d15f5da5a2a3,loudness,animals,loud,positive,cats,animals,0,58179731,58179731
+6271248deff56192a6c60cbf11fcb399,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+6271248deff56192a6c60cbf11fcb399,speed,people,slow,negative,runners,runners,1,3917217,480323270
+6271248deff56192a6c60cbf11fcb399,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+6271248deff56192a6c60cbf11fcb399,height,animals,tall,positive,birds,birds,1,19695831,58179731
+6271248deff56192a6c60cbf11fcb399,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+6271248deff56192a6c60cbf11fcb399,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+6271248deff56192a6c60cbf11fcb399,speed,animals,quick,positive,elephants,animals,0,58179731,58179731
+6271248deff56192a6c60cbf11fcb399,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+6271248deff56192a6c60cbf11fcb399,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+6271248deff56192a6c60cbf11fcb399,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+6271248deff56192a6c60cbf11fcb399,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+6271248deff56192a6c60cbf11fcb399,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+6271248deff56192a6c60cbf11fcb399,weight,animals,light,negative,fish,fish,1,52768568,58179731
+6271248deff56192a6c60cbf11fcb399,size,plants,small,negative,trees,trees,1,27379426,35939932
+6271248deff56192a6c60cbf11fcb399,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+6271248deff56192a6c60cbf11fcb399,height,people,tall,positive,basketball players,people,0,480323270,480323270
+6271248deff56192a6c60cbf11fcb399,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+6271248deff56192a6c60cbf11fcb399,price,statues,cheap,negative,bronze statues,bronze statues,1,53960,2837498
+6271248deff56192a6c60cbf11fcb399,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+6271248deff56192a6c60cbf11fcb399,weight,people,light,negative,adults,adults,1,32847475,480323270
+6271248deff56192a6c60cbf11fcb399,strength,people,weak,negative,children,people,0,480323270,480323270
+6271248deff56192a6c60cbf11fcb399,width,roads,wide,positive,highways,highways,1,5745573,15093824
+6271248deff56192a6c60cbf11fcb399,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+3949a9872c687a8e8967131c062f6515,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+3949a9872c687a8e8967131c062f6515,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+3949a9872c687a8e8967131c062f6515,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+3949a9872c687a8e8967131c062f6515,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+3949a9872c687a8e8967131c062f6515,temperature,food,cold,negative,salads,food,0,180152837,180152837
+3949a9872c687a8e8967131c062f6515,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+3949a9872c687a8e8967131c062f6515,darkness,birds,light,positive,seagulls,birds,0,19695831,19695831
+3949a9872c687a8e8967131c062f6515,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+3949a9872c687a8e8967131c062f6515,loudness,rooms,loud,positive,study halls,study halls,1,17223,65454304
+3949a9872c687a8e8967131c062f6515,price,statues,expensive,positive,plastic statues,plastic statues,1,707,2837498
+3949a9872c687a8e8967131c062f6515,size,animals,big,positive,elephants,animals,0,58179731,58179731
+3949a9872c687a8e8967131c062f6515,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+3949a9872c687a8e8967131c062f6515,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+3949a9872c687a8e8967131c062f6515,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+3949a9872c687a8e8967131c062f6515,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+3949a9872c687a8e8967131c062f6515,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+3949a9872c687a8e8967131c062f6515,weight,people,light,negative,babies,babies,1,13073168,480323270
+3949a9872c687a8e8967131c062f6515,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+3949a9872c687a8e8967131c062f6515,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+3949a9872c687a8e8967131c062f6515,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+ddc47dbddce56062e4d441fc07c6749a,hardness,sweets,soft,negative,marshmallows,sweets,0,2968535,2968535
+ddc47dbddce56062e4d441fc07c6749a,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+ddc47dbddce56062e4d441fc07c6749a,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+ddc47dbddce56062e4d441fc07c6749a,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+ddc47dbddce56062e4d441fc07c6749a,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+ddc47dbddce56062e4d441fc07c6749a,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+ddc47dbddce56062e4d441fc07c6749a,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+ddc47dbddce56062e4d441fc07c6749a,strength,people,strong,positive,children,children,1,206543771,480323270
+ddc47dbddce56062e4d441fc07c6749a,height,people,tall,positive,basketball players,basketball players,1,174833,480323270
+ddc47dbddce56062e4d441fc07c6749a,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+ddc47dbddce56062e4d441fc07c6749a,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+ddc47dbddce56062e4d441fc07c6749a,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+ddc47dbddce56062e4d441fc07c6749a,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+ddc47dbddce56062e4d441fc07c6749a,size,animals,big,positive,elephants,elephants,1,2082778,58179731
+ddc47dbddce56062e4d441fc07c6749a,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+ddc47dbddce56062e4d441fc07c6749a,temperature,food,cold,negative,ice cream,ice cream,1,6277647,180152837
+ddc47dbddce56062e4d441fc07c6749a,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+ddc47dbddce56062e4d441fc07c6749a,weight,people,heavy,positive,adults,adults,1,32847475,480323270
+ddc47dbddce56062e4d441fc07c6749a,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+ddc47dbddce56062e4d441fc07c6749a,strength,storms,strong,positive,thunderstorms,thunderstorms,1,1410569,3614108
+ddc47dbddce56062e4d441fc07c6749a,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+ddc47dbddce56062e4d441fc07c6749a,loudness,rooms,quiet,negative,study halls,study halls,1,17223,65454304
+ddc47dbddce56062e4d441fc07c6749a,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+6f3423dc38aad583b36cdf1b0882b31a,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+6f3423dc38aad583b36cdf1b0882b31a,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+6f3423dc38aad583b36cdf1b0882b31a,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+6f3423dc38aad583b36cdf1b0882b31a,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+6f3423dc38aad583b36cdf1b0882b31a,weight,animals,heavy,positive,elephants,elephants,1,2082778,58179731
+6f3423dc38aad583b36cdf1b0882b31a,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+6f3423dc38aad583b36cdf1b0882b31a,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+6f3423dc38aad583b36cdf1b0882b31a,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+6f3423dc38aad583b36cdf1b0882b31a,strength,people,strong,positive,children,children,1,206543771,480323270
+6f3423dc38aad583b36cdf1b0882b31a,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+6f3423dc38aad583b36cdf1b0882b31a,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+6f3423dc38aad583b36cdf1b0882b31a,speed,animals,slow,negative,cheetahs,animals,0,58179731,58179731
+6f3423dc38aad583b36cdf1b0882b31a,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+6f3423dc38aad583b36cdf1b0882b31a,temperature,seasons,cold,negative,winter days,winter days,1,80466,12035578
+6f3423dc38aad583b36cdf1b0882b31a,height,people,short,negative,golfers,golfers,1,1664649,480323270
+6f3423dc38aad583b36cdf1b0882b31a,weight,people,light,negative,kids,people,0,480323270,480323270
+6f3423dc38aad583b36cdf1b0882b31a,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+6f3423dc38aad583b36cdf1b0882b31a,loudness,animals,loud,positive,cats,animals,0,58179731,58179731
+6f3423dc38aad583b36cdf1b0882b31a,strength,storms,weak,negative,hurricanes,storms,0,3614108,3614108
+6f3423dc38aad583b36cdf1b0882b31a,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+6f3423dc38aad583b36cdf1b0882b31a,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+6f3423dc38aad583b36cdf1b0882b31a,height,animals,short,negative,birds,animals,0,58179731,58179731
+6f3423dc38aad583b36cdf1b0882b31a,darkness,birds,light,positive,seagulls,seagulls,1,329923,19695831
+be8aed1b830340dbf264cc447bbba8c9,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+be8aed1b830340dbf264cc447bbba8c9,price,alcoholic drinks,expensive,positive,beers,alcoholic drinks,0,377118,377118
+be8aed1b830340dbf264cc447bbba8c9,height,animals,tall,positive,birds,birds,1,19695831,58179731
+be8aed1b830340dbf264cc447bbba8c9,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+be8aed1b830340dbf264cc447bbba8c9,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+be8aed1b830340dbf264cc447bbba8c9,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+be8aed1b830340dbf264cc447bbba8c9,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+be8aed1b830340dbf264cc447bbba8c9,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+be8aed1b830340dbf264cc447bbba8c9,loudness,animals,quiet,negative,cats,animals,0,58179731,58179731
+be8aed1b830340dbf264cc447bbba8c9,speed,people,quick,positive,runners,runners,1,3917217,480323270
+be8aed1b830340dbf264cc447bbba8c9,size,plants,big,positive,bushes,plants,0,35939932,35939932
+be8aed1b830340dbf264cc447bbba8c9,weight,people,light,negative,babies,babies,1,13073168,480323270
+be8aed1b830340dbf264cc447bbba8c9,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+be8aed1b830340dbf264cc447bbba8c9,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+be8aed1b830340dbf264cc447bbba8c9,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+be8aed1b830340dbf264cc447bbba8c9,strength,storms,strong,positive,rains,storms,0,3614108,3614108
+be8aed1b830340dbf264cc447bbba8c9,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+be8aed1b830340dbf264cc447bbba8c9,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+be8aed1b830340dbf264cc447bbba8c9,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+be8aed1b830340dbf264cc447bbba8c9,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+be8aed1b830340dbf264cc447bbba8c9,size,animals,big,positive,elephants,elephants,1,2082778,58179731
+be8aed1b830340dbf264cc447bbba8c9,darkness,birds,light,positive,seagulls,birds,0,19695831,19695831
+be8aed1b830340dbf264cc447bbba8c9,height,people,tall,positive,golfers,people,0,480323270,480323270
+a06d14d2d44d9f03e90fe5ae1b0ab118,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+a06d14d2d44d9f03e90fe5ae1b0ab118,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+a06d14d2d44d9f03e90fe5ae1b0ab118,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+a06d14d2d44d9f03e90fe5ae1b0ab118,hardness,sweets,hard,positive,marshmallows,sweets,0,2968535,2968535
+a06d14d2d44d9f03e90fe5ae1b0ab118,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+a06d14d2d44d9f03e90fe5ae1b0ab118,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+a06d14d2d44d9f03e90fe5ae1b0ab118,temperature,food,cold,negative,soups,food,0,180152837,180152837
+a06d14d2d44d9f03e90fe5ae1b0ab118,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+a06d14d2d44d9f03e90fe5ae1b0ab118,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+a06d14d2d44d9f03e90fe5ae1b0ab118,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+a06d14d2d44d9f03e90fe5ae1b0ab118,strength,storms,strong,positive,rains,storms,0,3614108,3614108
+a06d14d2d44d9f03e90fe5ae1b0ab118,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+a06d14d2d44d9f03e90fe5ae1b0ab118,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+a06d14d2d44d9f03e90fe5ae1b0ab118,height,people,short,negative,golfers,people,0,480323270,480323270
+a06d14d2d44d9f03e90fe5ae1b0ab118,weight,people,heavy,positive,adults,people,0,480323270,480323270
+a06d14d2d44d9f03e90fe5ae1b0ab118,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+a06d14d2d44d9f03e90fe5ae1b0ab118,loudness,animals,loud,positive,dogs,animals,0,58179731,58179731
+a06d14d2d44d9f03e90fe5ae1b0ab118,size,animals,big,positive,elephants,animals,0,58179731,58179731
+a06d14d2d44d9f03e90fe5ae1b0ab118,speed,people,slow,negative,joggers,people,0,480323270,480323270
+a06d14d2d44d9f03e90fe5ae1b0ab118,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+a06d14d2d44d9f03e90fe5ae1b0ab118,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+a06d14d2d44d9f03e90fe5ae1b0ab118,length_duration,readings,short,negative,stories,readings,0,8678675,8678675
+a06d14d2d44d9f03e90fe5ae1b0ab118,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+c21ed66956eb4bf5099ddcb21218c202,length_duration,dogs,short,negative,bassett hounds,bassett hounds,1,4658,28409576
+c21ed66956eb4bf5099ddcb21218c202,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+c21ed66956eb4bf5099ddcb21218c202,length_duration,readings,long,positive,poems,readings,0,8678675,8678675
+c21ed66956eb4bf5099ddcb21218c202,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+c21ed66956eb4bf5099ddcb21218c202,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+c21ed66956eb4bf5099ddcb21218c202,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+c21ed66956eb4bf5099ddcb21218c202,height,people,short,negative,jockeys,people,0,480323270,480323270
+c21ed66956eb4bf5099ddcb21218c202,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+c21ed66956eb4bf5099ddcb21218c202,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+c21ed66956eb4bf5099ddcb21218c202,width,burrows,narrow,negative,caves,burrows,0,1094175,1094175
+c21ed66956eb4bf5099ddcb21218c202,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+c21ed66956eb4bf5099ddcb21218c202,height,animals,short,negative,birds,birds,1,19695831,58179731
+c21ed66956eb4bf5099ddcb21218c202,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+c21ed66956eb4bf5099ddcb21218c202,weight,people,light,negative,kids,people,0,480323270,480323270
+c21ed66956eb4bf5099ddcb21218c202,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+c21ed66956eb4bf5099ddcb21218c202,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+c21ed66956eb4bf5099ddcb21218c202,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+c21ed66956eb4bf5099ddcb21218c202,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+c21ed66956eb4bf5099ddcb21218c202,size,plants,small,negative,trees,trees,1,27379426,35939932
+c21ed66956eb4bf5099ddcb21218c202,strength,people,strong,positive,adults,adults,1,32847475,480323270
+c21ed66956eb4bf5099ddcb21218c202,width,roads,wide,positive,highways,roads,0,15093824,15093824
+c21ed66956eb4bf5099ddcb21218c202,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+c21ed66956eb4bf5099ddcb21218c202,weight,animals,light,negative,fish,animals,0,58179731,58179731
+33b9680d6d234eb4a0563b1f519fafdc,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+33b9680d6d234eb4a0563b1f519fafdc,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+33b9680d6d234eb4a0563b1f519fafdc,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+33b9680d6d234eb4a0563b1f519fafdc,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+33b9680d6d234eb4a0563b1f519fafdc,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+33b9680d6d234eb4a0563b1f519fafdc,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+33b9680d6d234eb4a0563b1f519fafdc,height,animals,tall,positive,giraffes,giraffes,1,260416,58179731
+33b9680d6d234eb4a0563b1f519fafdc,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+33b9680d6d234eb4a0563b1f519fafdc,strength,people,strong,positive,children,children,1,206543771,480323270
+33b9680d6d234eb4a0563b1f519fafdc,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+33b9680d6d234eb4a0563b1f519fafdc,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+33b9680d6d234eb4a0563b1f519fafdc,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+33b9680d6d234eb4a0563b1f519fafdc,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+33b9680d6d234eb4a0563b1f519fafdc,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+33b9680d6d234eb4a0563b1f519fafdc,weight,people,light,negative,babies,babies,1,13073168,480323270
+33b9680d6d234eb4a0563b1f519fafdc,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+33b9680d6d234eb4a0563b1f519fafdc,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+33b9680d6d234eb4a0563b1f519fafdc,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+33b9680d6d234eb4a0563b1f519fafdc,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+33b9680d6d234eb4a0563b1f519fafdc,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+33b9680d6d234eb4a0563b1f519fafdc,price,statues,expensive,positive,bronze statues,bronze statues,1,53960,2837498
+33b9680d6d234eb4a0563b1f519fafdc,loudness,rooms,quiet,negative,auditoria,auditoria,1,36765,65454304
+33b9680d6d234eb4a0563b1f519fafdc,width,roads,wide,positive,highways,highways,1,5745573,15093824
+8c6589e45f2e1280823a3f3bde594f18,weight,people,light,negative,kids,kids,1,96621142,480323270
+8c6589e45f2e1280823a3f3bde594f18,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+8c6589e45f2e1280823a3f3bde594f18,loudness,rooms,loud,positive,auditoria,rooms,0,65454304,65454304
+8c6589e45f2e1280823a3f3bde594f18,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+8c6589e45f2e1280823a3f3bde594f18,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+8c6589e45f2e1280823a3f3bde594f18,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+8c6589e45f2e1280823a3f3bde594f18,speed,people,slow,negative,runners,runners,1,3917217,480323270
+8c6589e45f2e1280823a3f3bde594f18,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+8c6589e45f2e1280823a3f3bde594f18,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+8c6589e45f2e1280823a3f3bde594f18,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+8c6589e45f2e1280823a3f3bde594f18,size,animals,small,negative,mice,mice,1,11969407,58179731
+8c6589e45f2e1280823a3f3bde594f18,darkness,birds,light,positive,seagulls,birds,0,19695831,19695831
+8c6589e45f2e1280823a3f3bde594f18,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+8c6589e45f2e1280823a3f3bde594f18,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+8c6589e45f2e1280823a3f3bde594f18,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+8c6589e45f2e1280823a3f3bde594f18,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+8c6589e45f2e1280823a3f3bde594f18,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+8c6589e45f2e1280823a3f3bde594f18,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+8c6589e45f2e1280823a3f3bde594f18,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+8c6589e45f2e1280823a3f3bde594f18,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+8c6589e45f2e1280823a3f3bde594f18,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+8c6589e45f2e1280823a3f3bde594f18,strength,people,strong,positive,children,children,1,206543771,480323270
+8c6589e45f2e1280823a3f3bde594f18,strength,storms,strong,positive,hurricanes,storms,0,3614108,3614108
+b2f85997c64ac460d0aba3932d73255f,height,people,short,negative,basketball players,people,0,480323270,480323270
+b2f85997c64ac460d0aba3932d73255f,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+b2f85997c64ac460d0aba3932d73255f,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+b2f85997c64ac460d0aba3932d73255f,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+b2f85997c64ac460d0aba3932d73255f,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+b2f85997c64ac460d0aba3932d73255f,strength,people,strong,positive,children,children,1,206543771,480323270
+b2f85997c64ac460d0aba3932d73255f,weight,people,heavy,positive,adults,adults,1,32847475,480323270
+b2f85997c64ac460d0aba3932d73255f,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+b2f85997c64ac460d0aba3932d73255f,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+b2f85997c64ac460d0aba3932d73255f,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+b2f85997c64ac460d0aba3932d73255f,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+b2f85997c64ac460d0aba3932d73255f,strength,storms,weak,negative,thunderstorms,storms,0,3614108,3614108
+b2f85997c64ac460d0aba3932d73255f,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+b2f85997c64ac460d0aba3932d73255f,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+b2f85997c64ac460d0aba3932d73255f,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+b2f85997c64ac460d0aba3932d73255f,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+b2f85997c64ac460d0aba3932d73255f,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+b2f85997c64ac460d0aba3932d73255f,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+b2f85997c64ac460d0aba3932d73255f,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+b2f85997c64ac460d0aba3932d73255f,height,animals,short,negative,birds,birds,1,19695831,58179731
+b2f85997c64ac460d0aba3932d73255f,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+b2f85997c64ac460d0aba3932d73255f,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+b2f85997c64ac460d0aba3932d73255f,loudness,rooms,quiet,negative,study halls,study halls,1,17223,65454304
+58c2c7af04ada266329e8b02b8257f6a,width,roads,wide,positive,highways,roads,0,15093824,15093824
+58c2c7af04ada266329e8b02b8257f6a,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+58c2c7af04ada266329e8b02b8257f6a,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+58c2c7af04ada266329e8b02b8257f6a,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+58c2c7af04ada266329e8b02b8257f6a,strength,people,strong,positive,children,children,1,206543771,480323270
+58c2c7af04ada266329e8b02b8257f6a,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+58c2c7af04ada266329e8b02b8257f6a,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+58c2c7af04ada266329e8b02b8257f6a,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+58c2c7af04ada266329e8b02b8257f6a,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+58c2c7af04ada266329e8b02b8257f6a,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+58c2c7af04ada266329e8b02b8257f6a,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+58c2c7af04ada266329e8b02b8257f6a,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+58c2c7af04ada266329e8b02b8257f6a,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+58c2c7af04ada266329e8b02b8257f6a,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+58c2c7af04ada266329e8b02b8257f6a,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+58c2c7af04ada266329e8b02b8257f6a,height,people,tall,positive,golfers,people,0,480323270,480323270
+58c2c7af04ada266329e8b02b8257f6a,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+58c2c7af04ada266329e8b02b8257f6a,hardness,sweets,soft,negative,jolly ranchers,jolly ranchers,1,10556,2968535
+58c2c7af04ada266329e8b02b8257f6a,hardness,floors,soft,negative,wood floors,wood floors,1,352083,7863848
+58c2c7af04ada266329e8b02b8257f6a,darkness,birds,light,positive,seagulls,seagulls,1,329923,19695831
+58c2c7af04ada266329e8b02b8257f6a,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+58c2c7af04ada266329e8b02b8257f6a,weight,animals,light,negative,fish,fish,1,52768568,58179731
+c528990cd02b9d4c5de969d2e808187c,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+c528990cd02b9d4c5de969d2e808187c,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+c528990cd02b9d4c5de969d2e808187c,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+c528990cd02b9d4c5de969d2e808187c,height,animals,tall,positive,giraffes,giraffes,1,260416,58179731
+c528990cd02b9d4c5de969d2e808187c,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+c528990cd02b9d4c5de969d2e808187c,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+c528990cd02b9d4c5de969d2e808187c,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+c528990cd02b9d4c5de969d2e808187c,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+c528990cd02b9d4c5de969d2e808187c,weight,animals,light,negative,dogs,animals,0,58179731,58179731
+c528990cd02b9d4c5de969d2e808187c,speed,people,slow,negative,runners,runners,1,3917217,480323270
+c528990cd02b9d4c5de969d2e808187c,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+c528990cd02b9d4c5de969d2e808187c,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+c528990cd02b9d4c5de969d2e808187c,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+c528990cd02b9d4c5de969d2e808187c,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+c528990cd02b9d4c5de969d2e808187c,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+c528990cd02b9d4c5de969d2e808187c,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+c528990cd02b9d4c5de969d2e808187c,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+c528990cd02b9d4c5de969d2e808187c,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+c528990cd02b9d4c5de969d2e808187c,height,people,short,negative,golfers,golfers,1,1664649,480323270
+c528990cd02b9d4c5de969d2e808187c,hardness,sweets,soft,negative,marshmallows,sweets,0,2968535,2968535
+c528990cd02b9d4c5de969d2e808187c,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+c528990cd02b9d4c5de969d2e808187c,temperature,food,warm,positive,soups,food,0,180152837,180152837
+c528990cd02b9d4c5de969d2e808187c,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+5468d6418c1fcfcac187f21881243f98,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+5468d6418c1fcfcac187f21881243f98,size,plants,small,negative,trees,trees,1,27379426,35939932
+5468d6418c1fcfcac187f21881243f98,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+5468d6418c1fcfcac187f21881243f98,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+5468d6418c1fcfcac187f21881243f98,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+5468d6418c1fcfcac187f21881243f98,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+5468d6418c1fcfcac187f21881243f98,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+5468d6418c1fcfcac187f21881243f98,temperature,food,warm,positive,ice cream,food,0,180152837,180152837
+5468d6418c1fcfcac187f21881243f98,speed,people,slow,negative,walkers,people,0,480323270,480323270
+5468d6418c1fcfcac187f21881243f98,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+5468d6418c1fcfcac187f21881243f98,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+5468d6418c1fcfcac187f21881243f98,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+5468d6418c1fcfcac187f21881243f98,weight,people,light,negative,babies,babies,1,13073168,480323270
+5468d6418c1fcfcac187f21881243f98,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+5468d6418c1fcfcac187f21881243f98,height,people,short,negative,basketball players,people,0,480323270,480323270
+5468d6418c1fcfcac187f21881243f98,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+5468d6418c1fcfcac187f21881243f98,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+5468d6418c1fcfcac187f21881243f98,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+5468d6418c1fcfcac187f21881243f98,height,animals,short,negative,birds,birds,1,19695831,58179731
+5468d6418c1fcfcac187f21881243f98,size,animals,small,negative,mice,mice,1,11969407,58179731
+5468d6418c1fcfcac187f21881243f98,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+10de00addaa50fdb63468d1fb702bfbf,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+10de00addaa50fdb63468d1fb702bfbf,height,people,short,negative,jockeys,people,0,480323270,480323270
+10de00addaa50fdb63468d1fb702bfbf,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+10de00addaa50fdb63468d1fb702bfbf,height,animals,short,negative,birds,birds,1,19695831,58179731
+10de00addaa50fdb63468d1fb702bfbf,strength,storms,strong,positive,thunderstorms,thunderstorms,1,1410569,3614108
+10de00addaa50fdb63468d1fb702bfbf,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+10de00addaa50fdb63468d1fb702bfbf,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+10de00addaa50fdb63468d1fb702bfbf,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+10de00addaa50fdb63468d1fb702bfbf,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+10de00addaa50fdb63468d1fb702bfbf,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+10de00addaa50fdb63468d1fb702bfbf,size,animals,big,positive,mice,mice,1,11969407,58179731
+10de00addaa50fdb63468d1fb702bfbf,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+10de00addaa50fdb63468d1fb702bfbf,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+10de00addaa50fdb63468d1fb702bfbf,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+10de00addaa50fdb63468d1fb702bfbf,size,plants,small,negative,trees,trees,1,27379426,35939932
+10de00addaa50fdb63468d1fb702bfbf,strength,people,weak,negative,children,children,1,206543771,480323270
+10de00addaa50fdb63468d1fb702bfbf,speed,people,quick,positive,walkers,people,0,480323270,480323270
+10de00addaa50fdb63468d1fb702bfbf,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+10de00addaa50fdb63468d1fb702bfbf,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+10de00addaa50fdb63468d1fb702bfbf,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+10de00addaa50fdb63468d1fb702bfbf,weight,people,light,negative,adults,people,0,480323270,480323270
+10de00addaa50fdb63468d1fb702bfbf,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+10de00addaa50fdb63468d1fb702bfbf,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+527479df7ef0926d66b5b846400d51e6,size,animals,big,positive,mice,mice,1,11969407,58179731
+527479df7ef0926d66b5b846400d51e6,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+527479df7ef0926d66b5b846400d51e6,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+527479df7ef0926d66b5b846400d51e6,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+527479df7ef0926d66b5b846400d51e6,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+527479df7ef0926d66b5b846400d51e6,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+527479df7ef0926d66b5b846400d51e6,temperature,food,warm,positive,soups,food,0,180152837,180152837
+527479df7ef0926d66b5b846400d51e6,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+527479df7ef0926d66b5b846400d51e6,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+527479df7ef0926d66b5b846400d51e6,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+527479df7ef0926d66b5b846400d51e6,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+527479df7ef0926d66b5b846400d51e6,hardness,floors,soft,negative,wood floors,wood floors,1,352083,7863848
+527479df7ef0926d66b5b846400d51e6,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+527479df7ef0926d66b5b846400d51e6,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+527479df7ef0926d66b5b846400d51e6,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+527479df7ef0926d66b5b846400d51e6,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+527479df7ef0926d66b5b846400d51e6,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+527479df7ef0926d66b5b846400d51e6,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+527479df7ef0926d66b5b846400d51e6,weight,people,light,negative,kids,people,0,480323270,480323270
+527479df7ef0926d66b5b846400d51e6,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+527479df7ef0926d66b5b846400d51e6,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+527479df7ef0926d66b5b846400d51e6,speed,people,quick,positive,runners,runners,1,3917217,480323270
+527479df7ef0926d66b5b846400d51e6,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+074dfdcc487cf659ec07543946e46e62,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+074dfdcc487cf659ec07543946e46e62,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+074dfdcc487cf659ec07543946e46e62,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+074dfdcc487cf659ec07543946e46e62,strength,storms,strong,positive,thunderstorms,storms,0,3614108,3614108
+074dfdcc487cf659ec07543946e46e62,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+074dfdcc487cf659ec07543946e46e62,speed,people,quick,positive,runners,people,0,480323270,480323270
+074dfdcc487cf659ec07543946e46e62,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+074dfdcc487cf659ec07543946e46e62,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+074dfdcc487cf659ec07543946e46e62,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+074dfdcc487cf659ec07543946e46e62,temperature,food,cold,negative,soups,food,0,180152837,180152837
+074dfdcc487cf659ec07543946e46e62,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+074dfdcc487cf659ec07543946e46e62,darkness,birds,dark,negative,crows,crows,1,1295877,19695831
+074dfdcc487cf659ec07543946e46e62,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+074dfdcc487cf659ec07543946e46e62,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+074dfdcc487cf659ec07543946e46e62,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+074dfdcc487cf659ec07543946e46e62,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+074dfdcc487cf659ec07543946e46e62,strength,people,strong,positive,children,children,1,206543771,480323270
+074dfdcc487cf659ec07543946e46e62,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+074dfdcc487cf659ec07543946e46e62,weight,people,heavy,positive,adults,people,0,480323270,480323270
+074dfdcc487cf659ec07543946e46e62,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+074dfdcc487cf659ec07543946e46e62,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+074dfdcc487cf659ec07543946e46e62,hardness,sweets,soft,negative,marshmallows,sweets,0,2968535,2968535
+dad40a969bfe80397747ad18f78e6c29,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+dad40a969bfe80397747ad18f78e6c29,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+dad40a969bfe80397747ad18f78e6c29,size,plants,big,positive,bushes,plants,0,35939932,35939932
+dad40a969bfe80397747ad18f78e6c29,size,animals,big,positive,elephants,elephants,1,2082778,58179731
+dad40a969bfe80397747ad18f78e6c29,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+dad40a969bfe80397747ad18f78e6c29,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+dad40a969bfe80397747ad18f78e6c29,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+dad40a969bfe80397747ad18f78e6c29,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+dad40a969bfe80397747ad18f78e6c29,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+dad40a969bfe80397747ad18f78e6c29,height,people,short,negative,golfers,golfers,1,1664649,480323270
+dad40a969bfe80397747ad18f78e6c29,height,animals,tall,positive,giraffes,giraffes,1,260416,58179731
+dad40a969bfe80397747ad18f78e6c29,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+dad40a969bfe80397747ad18f78e6c29,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+dad40a969bfe80397747ad18f78e6c29,weight,people,light,negative,adults,adults,1,32847475,480323270
+dad40a969bfe80397747ad18f78e6c29,price,statues,cheap,negative,bronze statues,bronze statues,1,53960,2837498
+dad40a969bfe80397747ad18f78e6c29,strength,people,weak,negative,children,children,1,206543771,480323270
+dad40a969bfe80397747ad18f78e6c29,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+dad40a969bfe80397747ad18f78e6c29,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+dad40a969bfe80397747ad18f78e6c29,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+dad40a969bfe80397747ad18f78e6c29,length_duration,readings,short,negative,novels,readings,0,8678675,8678675
+dad40a969bfe80397747ad18f78e6c29,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+dad40a969bfe80397747ad18f78e6c29,speed,people,quick,positive,walkers,people,0,480323270,480323270
+ea1165292c86af46ff87e74ebdd41955,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+ea1165292c86af46ff87e74ebdd41955,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+ea1165292c86af46ff87e74ebdd41955,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+ea1165292c86af46ff87e74ebdd41955,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+ea1165292c86af46ff87e74ebdd41955,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+ea1165292c86af46ff87e74ebdd41955,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+ea1165292c86af46ff87e74ebdd41955,speed,people,quick,positive,runners,people,0,480323270,480323270
+ea1165292c86af46ff87e74ebdd41955,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+ea1165292c86af46ff87e74ebdd41955,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+ea1165292c86af46ff87e74ebdd41955,speed,animals,quick,positive,elephants,animals,0,58179731,58179731
+ea1165292c86af46ff87e74ebdd41955,weight,animals,light,negative,fish,animals,0,58179731,58179731
+ea1165292c86af46ff87e74ebdd41955,loudness,animals,loud,positive,dogs,animals,0,58179731,58179731
+ea1165292c86af46ff87e74ebdd41955,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+ea1165292c86af46ff87e74ebdd41955,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+ea1165292c86af46ff87e74ebdd41955,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+ea1165292c86af46ff87e74ebdd41955,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+ea1165292c86af46ff87e74ebdd41955,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+ea1165292c86af46ff87e74ebdd41955,height,animals,short,negative,birds,animals,0,58179731,58179731
+ea1165292c86af46ff87e74ebdd41955,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+ea1165292c86af46ff87e74ebdd41955,size,animals,big,positive,mice,mice,1,11969407,58179731
+ea1165292c86af46ff87e74ebdd41955,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+ea1165292c86af46ff87e74ebdd41955,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+c7974a52353001a3e91dd1ee5adedae3,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+c7974a52353001a3e91dd1ee5adedae3,height,animals,short,negative,birds,birds,1,19695831,58179731
+c7974a52353001a3e91dd1ee5adedae3,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+c7974a52353001a3e91dd1ee5adedae3,temperature,food,cold,negative,ice cream,ice cream,1,6277647,180152837
+c7974a52353001a3e91dd1ee5adedae3,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+c7974a52353001a3e91dd1ee5adedae3,height,people,short,negative,golfers,golfers,1,1664649,480323270
+c7974a52353001a3e91dd1ee5adedae3,loudness,rooms,quiet,negative,auditoria,auditoria,1,36765,65454304
+c7974a52353001a3e91dd1ee5adedae3,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+c7974a52353001a3e91dd1ee5adedae3,hardness,sweets,soft,negative,chocolates,sweets,0,2968535,2968535
+c7974a52353001a3e91dd1ee5adedae3,size,animals,big,positive,elephants,animals,0,58179731,58179731
+c7974a52353001a3e91dd1ee5adedae3,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+c7974a52353001a3e91dd1ee5adedae3,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+c7974a52353001a3e91dd1ee5adedae3,darkness,birds,dark,negative,seagulls,birds,0,19695831,19695831
+c7974a52353001a3e91dd1ee5adedae3,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+c7974a52353001a3e91dd1ee5adedae3,strength,people,weak,negative,adults,adults,1,32847475,480323270
+c7974a52353001a3e91dd1ee5adedae3,speed,people,quick,positive,joggers,people,0,480323270,480323270
+c7974a52353001a3e91dd1ee5adedae3,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+c7974a52353001a3e91dd1ee5adedae3,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+c7974a52353001a3e91dd1ee5adedae3,temperature,seasons,warm,positive,fall days,seasons,0,12035578,12035578
+c7974a52353001a3e91dd1ee5adedae3,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+c7974a52353001a3e91dd1ee5adedae3,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+c7974a52353001a3e91dd1ee5adedae3,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+c7974a52353001a3e91dd1ee5adedae3,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+d765f98093cab28b5469925c88433b9c,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+d765f98093cab28b5469925c88433b9c,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+d765f98093cab28b5469925c88433b9c,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+d765f98093cab28b5469925c88433b9c,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+d765f98093cab28b5469925c88433b9c,height,people,short,negative,golfers,golfers,1,1664649,480323270
+d765f98093cab28b5469925c88433b9c,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+d765f98093cab28b5469925c88433b9c,length_duration,readings,long,positive,novels,novels,1,7525142,8678675
+d765f98093cab28b5469925c88433b9c,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+d765f98093cab28b5469925c88433b9c,strength,storms,strong,positive,thunderstorms,storms,0,3614108,3614108
+d765f98093cab28b5469925c88433b9c,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+d765f98093cab28b5469925c88433b9c,speed,people,slow,negative,runners,runners,1,3917217,480323270
+d765f98093cab28b5469925c88433b9c,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+d765f98093cab28b5469925c88433b9c,strength,people,weak,negative,adults,adults,1,32847475,480323270
+d765f98093cab28b5469925c88433b9c,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+d765f98093cab28b5469925c88433b9c,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+d765f98093cab28b5469925c88433b9c,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+d765f98093cab28b5469925c88433b9c,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+d765f98093cab28b5469925c88433b9c,weight,people,light,negative,adults,adults,1,32847475,480323270
+d765f98093cab28b5469925c88433b9c,height,animals,short,negative,birds,birds,1,19695831,58179731
+d765f98093cab28b5469925c88433b9c,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+d765f98093cab28b5469925c88433b9c,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+910ad29b7ea10e30ccba89fdf385d6bd,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+910ad29b7ea10e30ccba89fdf385d6bd,temperature,food,cold,negative,soups,food,0,180152837,180152837
+910ad29b7ea10e30ccba89fdf385d6bd,size,animals,big,positive,mice,mice,1,11969407,58179731
+910ad29b7ea10e30ccba89fdf385d6bd,loudness,animals,quiet,negative,donkeys,animals,0,58179731,58179731
+910ad29b7ea10e30ccba89fdf385d6bd,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+910ad29b7ea10e30ccba89fdf385d6bd,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+910ad29b7ea10e30ccba89fdf385d6bd,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+910ad29b7ea10e30ccba89fdf385d6bd,length_duration,readings,short,negative,stories,readings,0,8678675,8678675
+910ad29b7ea10e30ccba89fdf385d6bd,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+910ad29b7ea10e30ccba89fdf385d6bd,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+910ad29b7ea10e30ccba89fdf385d6bd,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+910ad29b7ea10e30ccba89fdf385d6bd,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+910ad29b7ea10e30ccba89fdf385d6bd,temperature,seasons,warm,positive,fall days,seasons,0,12035578,12035578
+910ad29b7ea10e30ccba89fdf385d6bd,loudness,rooms,loud,positive,classrooms,classrooms,1,4002675,65454304
+910ad29b7ea10e30ccba89fdf385d6bd,speed,people,slow,negative,runners,runners,1,3917217,480323270
+910ad29b7ea10e30ccba89fdf385d6bd,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+910ad29b7ea10e30ccba89fdf385d6bd,height,people,short,negative,jockeys,jockeys,1,875781,480323270
+910ad29b7ea10e30ccba89fdf385d6bd,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+910ad29b7ea10e30ccba89fdf385d6bd,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+910ad29b7ea10e30ccba89fdf385d6bd,weight,people,light,negative,babies,babies,1,13073168,480323270
+910ad29b7ea10e30ccba89fdf385d6bd,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+910ad29b7ea10e30ccba89fdf385d6bd,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+910ad29b7ea10e30ccba89fdf385d6bd,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+afcbc739f0138a12b346a93040cff5ec,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+afcbc739f0138a12b346a93040cff5ec,speed,people,quick,positive,runners,people,0,480323270,480323270
+afcbc739f0138a12b346a93040cff5ec,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+afcbc739f0138a12b346a93040cff5ec,width,burrows,narrow,negative,caverns,caverns,1,572761,1094175
+afcbc739f0138a12b346a93040cff5ec,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+afcbc739f0138a12b346a93040cff5ec,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+afcbc739f0138a12b346a93040cff5ec,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+afcbc739f0138a12b346a93040cff5ec,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+afcbc739f0138a12b346a93040cff5ec,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+afcbc739f0138a12b346a93040cff5ec,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+afcbc739f0138a12b346a93040cff5ec,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+afcbc739f0138a12b346a93040cff5ec,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+afcbc739f0138a12b346a93040cff5ec,strength,people,weak,negative,children,children,1,206543771,480323270
+afcbc739f0138a12b346a93040cff5ec,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+afcbc739f0138a12b346a93040cff5ec,height,animals,tall,positive,birds,birds,1,19695831,58179731
+afcbc739f0138a12b346a93040cff5ec,weight,people,light,negative,kids,kids,1,96621142,480323270
+afcbc739f0138a12b346a93040cff5ec,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+afcbc739f0138a12b346a93040cff5ec,size,animals,big,positive,elephants,animals,0,58179731,58179731
+afcbc739f0138a12b346a93040cff5ec,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+afcbc739f0138a12b346a93040cff5ec,strength,storms,strong,positive,thunderstorms,thunderstorms,1,1410569,3614108
+afcbc739f0138a12b346a93040cff5ec,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+afcbc739f0138a12b346a93040cff5ec,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+afcbc739f0138a12b346a93040cff5ec,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+f532bf79f47e08efebe4cfd0e83da050,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+f532bf79f47e08efebe4cfd0e83da050,speed,people,quick,positive,walkers,people,0,480323270,480323270
+f532bf79f47e08efebe4cfd0e83da050,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+f532bf79f47e08efebe4cfd0e83da050,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+f532bf79f47e08efebe4cfd0e83da050,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+f532bf79f47e08efebe4cfd0e83da050,weight,people,light,negative,babies,babies,1,13073168,480323270
+f532bf79f47e08efebe4cfd0e83da050,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+f532bf79f47e08efebe4cfd0e83da050,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+f532bf79f47e08efebe4cfd0e83da050,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+f532bf79f47e08efebe4cfd0e83da050,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+f532bf79f47e08efebe4cfd0e83da050,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+f532bf79f47e08efebe4cfd0e83da050,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+f532bf79f47e08efebe4cfd0e83da050,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+f532bf79f47e08efebe4cfd0e83da050,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+f532bf79f47e08efebe4cfd0e83da050,height,people,short,negative,golfers,golfers,1,1664649,480323270
+f532bf79f47e08efebe4cfd0e83da050,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+f532bf79f47e08efebe4cfd0e83da050,strength,people,strong,positive,adults,people,0,480323270,480323270
+f532bf79f47e08efebe4cfd0e83da050,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+f532bf79f47e08efebe4cfd0e83da050,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+f532bf79f47e08efebe4cfd0e83da050,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+f532bf79f47e08efebe4cfd0e83da050,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+f532bf79f47e08efebe4cfd0e83da050,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+45031f3423a8bec246f8b77dec30a96c,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+45031f3423a8bec246f8b77dec30a96c,hardness,floors,soft,negative,carpet floors,floors,0,7863848,7863848
+45031f3423a8bec246f8b77dec30a96c,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+45031f3423a8bec246f8b77dec30a96c,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+45031f3423a8bec246f8b77dec30a96c,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+45031f3423a8bec246f8b77dec30a96c,speed,people,slow,negative,runners,runners,1,3917217,480323270
+45031f3423a8bec246f8b77dec30a96c,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+45031f3423a8bec246f8b77dec30a96c,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+45031f3423a8bec246f8b77dec30a96c,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+45031f3423a8bec246f8b77dec30a96c,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+45031f3423a8bec246f8b77dec30a96c,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+45031f3423a8bec246f8b77dec30a96c,strength,people,strong,positive,children,people,0,480323270,480323270
+45031f3423a8bec246f8b77dec30a96c,strength,storms,weak,negative,thunderstorms,storms,0,3614108,3614108
+45031f3423a8bec246f8b77dec30a96c,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+45031f3423a8bec246f8b77dec30a96c,weight,animals,light,negative,fish,fish,1,52768568,58179731
+45031f3423a8bec246f8b77dec30a96c,temperature,food,cold,negative,ice cream,ice cream,1,6277647,180152837
+45031f3423a8bec246f8b77dec30a96c,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+45031f3423a8bec246f8b77dec30a96c,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+45031f3423a8bec246f8b77dec30a96c,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+45031f3423a8bec246f8b77dec30a96c,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+45031f3423a8bec246f8b77dec30a96c,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+45031f3423a8bec246f8b77dec30a96c,height,people,tall,positive,basketball players,people,0,480323270,480323270
+3cef732fd8b2d5f3036d510441c1c9f6,speed,animals,quick,positive,elephants,animals,0,58179731,58179731
+3cef732fd8b2d5f3036d510441c1c9f6,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+3cef732fd8b2d5f3036d510441c1c9f6,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+3cef732fd8b2d5f3036d510441c1c9f6,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+3cef732fd8b2d5f3036d510441c1c9f6,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+3cef732fd8b2d5f3036d510441c1c9f6,height,people,tall,positive,basketball players,basketball players,1,174833,480323270
+3cef732fd8b2d5f3036d510441c1c9f6,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+3cef732fd8b2d5f3036d510441c1c9f6,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+3cef732fd8b2d5f3036d510441c1c9f6,size,animals,small,negative,mice,mice,1,11969407,58179731
+3cef732fd8b2d5f3036d510441c1c9f6,hardness,floors,soft,negative,wood floors,wood floors,1,352083,7863848
+3cef732fd8b2d5f3036d510441c1c9f6,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+3cef732fd8b2d5f3036d510441c1c9f6,strength,people,strong,positive,children,children,1,206543771,480323270
+3cef732fd8b2d5f3036d510441c1c9f6,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+3cef732fd8b2d5f3036d510441c1c9f6,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+3cef732fd8b2d5f3036d510441c1c9f6,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+3cef732fd8b2d5f3036d510441c1c9f6,weight,people,light,negative,kids,kids,1,96621142,480323270
+3cef732fd8b2d5f3036d510441c1c9f6,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+3cef732fd8b2d5f3036d510441c1c9f6,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+3cef732fd8b2d5f3036d510441c1c9f6,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+3cef732fd8b2d5f3036d510441c1c9f6,hardness,sweets,soft,negative,chocolates,chocolates,1,3141854,2968535
+3cef732fd8b2d5f3036d510441c1c9f6,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+aebcb4bcfe145e177b548c818f3e8bf9,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+aebcb4bcfe145e177b548c818f3e8bf9,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+aebcb4bcfe145e177b548c818f3e8bf9,price,alcoholic drinks,expensive,positive,bottles of wine,alcoholic drinks,0,377118,377118
+aebcb4bcfe145e177b548c818f3e8bf9,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+aebcb4bcfe145e177b548c818f3e8bf9,temperature,seasons,cold,negative,fall days,seasons,0,12035578,12035578
+aebcb4bcfe145e177b548c818f3e8bf9,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+aebcb4bcfe145e177b548c818f3e8bf9,size,plants,big,positive,trees,plants,0,35939932,35939932
+aebcb4bcfe145e177b548c818f3e8bf9,speed,people,slow,negative,runners,runners,1,3917217,480323270
+aebcb4bcfe145e177b548c818f3e8bf9,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+aebcb4bcfe145e177b548c818f3e8bf9,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+aebcb4bcfe145e177b548c818f3e8bf9,temperature,food,cold,negative,salads,food,0,180152837,180152837
+aebcb4bcfe145e177b548c818f3e8bf9,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+aebcb4bcfe145e177b548c818f3e8bf9,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+aebcb4bcfe145e177b548c818f3e8bf9,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+aebcb4bcfe145e177b548c818f3e8bf9,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+aebcb4bcfe145e177b548c818f3e8bf9,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+aebcb4bcfe145e177b548c818f3e8bf9,strength,people,weak,negative,children,children,1,206543771,480323270
+aebcb4bcfe145e177b548c818f3e8bf9,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+aebcb4bcfe145e177b548c818f3e8bf9,height,people,short,negative,golfers,people,0,480323270,480323270
+aebcb4bcfe145e177b548c818f3e8bf9,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+aebcb4bcfe145e177b548c818f3e8bf9,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+aebcb4bcfe145e177b548c818f3e8bf9,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+ba163ef33983efe55f371ecec2ba1b6f,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+ba163ef33983efe55f371ecec2ba1b6f,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+ba163ef33983efe55f371ecec2ba1b6f,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+ba163ef33983efe55f371ecec2ba1b6f,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+ba163ef33983efe55f371ecec2ba1b6f,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+ba163ef33983efe55f371ecec2ba1b6f,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+ba163ef33983efe55f371ecec2ba1b6f,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+ba163ef33983efe55f371ecec2ba1b6f,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+ba163ef33983efe55f371ecec2ba1b6f,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+ba163ef33983efe55f371ecec2ba1b6f,temperature,seasons,cold,negative,summer days,seasons,0,12035578,12035578
+ba163ef33983efe55f371ecec2ba1b6f,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+ba163ef33983efe55f371ecec2ba1b6f,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+ba163ef33983efe55f371ecec2ba1b6f,width,roads,wide,positive,highways,roads,0,15093824,15093824
+ba163ef33983efe55f371ecec2ba1b6f,length_duration,readings,short,negative,novels,readings,0,8678675,8678675
+ba163ef33983efe55f371ecec2ba1b6f,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+ba163ef33983efe55f371ecec2ba1b6f,height,animals,tall,positive,birds,birds,1,19695831,58179731
+ba163ef33983efe55f371ecec2ba1b6f,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+ba163ef33983efe55f371ecec2ba1b6f,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+ba163ef33983efe55f371ecec2ba1b6f,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+ba163ef33983efe55f371ecec2ba1b6f,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+ba163ef33983efe55f371ecec2ba1b6f,strength,storms,weak,negative,rains,storms,0,3614108,3614108
+ba163ef33983efe55f371ecec2ba1b6f,weight,people,light,negative,kids,kids,1,96621142,480323270
+267fe0bc607c2e6c8d46ffdec67b7585,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+267fe0bc607c2e6c8d46ffdec67b7585,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+267fe0bc607c2e6c8d46ffdec67b7585,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+267fe0bc607c2e6c8d46ffdec67b7585,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+267fe0bc607c2e6c8d46ffdec67b7585,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+267fe0bc607c2e6c8d46ffdec67b7585,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+267fe0bc607c2e6c8d46ffdec67b7585,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+267fe0bc607c2e6c8d46ffdec67b7585,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+267fe0bc607c2e6c8d46ffdec67b7585,temperature,seasons,warm,positive,summer days,summer days,1,229054,12035578
+267fe0bc607c2e6c8d46ffdec67b7585,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+267fe0bc607c2e6c8d46ffdec67b7585,height,people,tall,positive,golfers,people,0,480323270,480323270
+267fe0bc607c2e6c8d46ffdec67b7585,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+267fe0bc607c2e6c8d46ffdec67b7585,loudness,animals,quiet,negative,dogs,animals,0,58179731,58179731
+267fe0bc607c2e6c8d46ffdec67b7585,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+267fe0bc607c2e6c8d46ffdec67b7585,size,plants,big,positive,flowers,plants,0,35939932,35939932
+267fe0bc607c2e6c8d46ffdec67b7585,length_duration,dogs,long,positive,dachshunds,dachshunds,1,116109,28409576
+267fe0bc607c2e6c8d46ffdec67b7585,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+267fe0bc607c2e6c8d46ffdec67b7585,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+267fe0bc607c2e6c8d46ffdec67b7585,strength,people,weak,negative,children,children,1,206543771,480323270
+267fe0bc607c2e6c8d46ffdec67b7585,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+267fe0bc607c2e6c8d46ffdec67b7585,loudness,rooms,quiet,negative,study halls,study halls,1,17223,65454304
+267fe0bc607c2e6c8d46ffdec67b7585,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+267fe0bc607c2e6c8d46ffdec67b7585,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+278fcbf40885f0b2dc03a078bad75cba,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+278fcbf40885f0b2dc03a078bad75cba,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+278fcbf40885f0b2dc03a078bad75cba,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+278fcbf40885f0b2dc03a078bad75cba,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+278fcbf40885f0b2dc03a078bad75cba,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+278fcbf40885f0b2dc03a078bad75cba,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+278fcbf40885f0b2dc03a078bad75cba,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+278fcbf40885f0b2dc03a078bad75cba,height,people,tall,positive,basketball players,basketball players,1,174833,480323270
+278fcbf40885f0b2dc03a078bad75cba,speed,people,slow,negative,walkers,walkers,1,1526422,480323270
+278fcbf40885f0b2dc03a078bad75cba,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+278fcbf40885f0b2dc03a078bad75cba,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+278fcbf40885f0b2dc03a078bad75cba,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+278fcbf40885f0b2dc03a078bad75cba,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+278fcbf40885f0b2dc03a078bad75cba,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+278fcbf40885f0b2dc03a078bad75cba,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+278fcbf40885f0b2dc03a078bad75cba,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+278fcbf40885f0b2dc03a078bad75cba,strength,storms,weak,negative,rains,rains,1,2183544,3614108
+278fcbf40885f0b2dc03a078bad75cba,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+278fcbf40885f0b2dc03a078bad75cba,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+278fcbf40885f0b2dc03a078bad75cba,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+278fcbf40885f0b2dc03a078bad75cba,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+278fcbf40885f0b2dc03a078bad75cba,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+278fcbf40885f0b2dc03a078bad75cba,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+43abf1cd601a24457aaecb3e03cace2d,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+43abf1cd601a24457aaecb3e03cace2d,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+43abf1cd601a24457aaecb3e03cace2d,weight,animals,heavy,positive,dogs,animals,0,58179731,58179731
+43abf1cd601a24457aaecb3e03cace2d,weight,people,light,negative,kids,people,0,480323270,480323270
+43abf1cd601a24457aaecb3e03cace2d,temperature,seasons,warm,positive,winter days,seasons,0,12035578,12035578
+43abf1cd601a24457aaecb3e03cace2d,height,animals,short,negative,birds,birds,1,19695831,58179731
+43abf1cd601a24457aaecb3e03cace2d,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+43abf1cd601a24457aaecb3e03cace2d,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+43abf1cd601a24457aaecb3e03cace2d,loudness,rooms,loud,positive,classrooms,classrooms,1,4002675,65454304
+43abf1cd601a24457aaecb3e03cace2d,strength,storms,strong,positive,rains,storms,0,3614108,3614108
+43abf1cd601a24457aaecb3e03cace2d,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+43abf1cd601a24457aaecb3e03cace2d,size,animals,big,positive,elephants,animals,0,58179731,58179731
+43abf1cd601a24457aaecb3e03cace2d,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+43abf1cd601a24457aaecb3e03cace2d,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+43abf1cd601a24457aaecb3e03cace2d,speed,animals,slow,negative,cheetahs,animals,0,58179731,58179731
+43abf1cd601a24457aaecb3e03cace2d,speed,people,slow,negative,runners,runners,1,3917217,480323270
+43abf1cd601a24457aaecb3e03cace2d,length_duration,readings,short,negative,stories,readings,0,8678675,8678675
+43abf1cd601a24457aaecb3e03cace2d,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+43abf1cd601a24457aaecb3e03cace2d,strength,people,strong,positive,adults,adults,1,32847475,480323270
+43abf1cd601a24457aaecb3e03cace2d,size,plants,big,positive,trees,trees,1,27379426,35939932
+43abf1cd601a24457aaecb3e03cace2d,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+43abf1cd601a24457aaecb3e03cace2d,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+43abf1cd601a24457aaecb3e03cace2d,darkness,birds,dark,negative,crows,crows,1,1295877,19695831
+49ed7586603c268f4eaca6c1050722ea,darkness,birds,light,positive,seagulls,seagulls,1,329923,19695831
+49ed7586603c268f4eaca6c1050722ea,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+49ed7586603c268f4eaca6c1050722ea,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+49ed7586603c268f4eaca6c1050722ea,size,animals,big,positive,mice,mice,1,11969407,58179731
+49ed7586603c268f4eaca6c1050722ea,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+49ed7586603c268f4eaca6c1050722ea,height,people,tall,positive,basketball players,basketball players,1,174833,480323270
+49ed7586603c268f4eaca6c1050722ea,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+49ed7586603c268f4eaca6c1050722ea,weight,animals,light,negative,fish,fish,1,52768568,58179731
+49ed7586603c268f4eaca6c1050722ea,hardness,sweets,soft,negative,jolly ranchers,jolly ranchers,1,10556,2968535
+49ed7586603c268f4eaca6c1050722ea,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+49ed7586603c268f4eaca6c1050722ea,length_duration,dogs,long,positive,dachshunds,dachshunds,1,116109,28409576
+49ed7586603c268f4eaca6c1050722ea,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+49ed7586603c268f4eaca6c1050722ea,length_duration,readings,long,positive,novels,novels,1,7525142,8678675
+49ed7586603c268f4eaca6c1050722ea,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+49ed7586603c268f4eaca6c1050722ea,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+49ed7586603c268f4eaca6c1050722ea,temperature,seasons,cold,negative,fall days,seasons,0,12035578,12035578
+49ed7586603c268f4eaca6c1050722ea,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+49ed7586603c268f4eaca6c1050722ea,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+49ed7586603c268f4eaca6c1050722ea,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+49ed7586603c268f4eaca6c1050722ea,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+49ed7586603c268f4eaca6c1050722ea,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+49ed7586603c268f4eaca6c1050722ea,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+49ed7586603c268f4eaca6c1050722ea,hardness,floors,hard,positive,wood floors,wood floors,1,352083,7863848
+1c304fa6940e84368866cd8049dd3928,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+1c304fa6940e84368866cd8049dd3928,loudness,animals,quiet,negative,cats,animals,0,58179731,58179731
+1c304fa6940e84368866cd8049dd3928,size,animals,big,positive,mice,mice,1,11969407,58179731
+1c304fa6940e84368866cd8049dd3928,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+1c304fa6940e84368866cd8049dd3928,temperature,seasons,warm,positive,fall days,seasons,0,12035578,12035578
+1c304fa6940e84368866cd8049dd3928,weight,animals,heavy,positive,fish,animals,0,58179731,58179731
+1c304fa6940e84368866cd8049dd3928,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+1c304fa6940e84368866cd8049dd3928,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+1c304fa6940e84368866cd8049dd3928,hardness,sweets,soft,negative,jolly ranchers,jolly ranchers,1,10556,2968535
+1c304fa6940e84368866cd8049dd3928,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+1c304fa6940e84368866cd8049dd3928,height,people,tall,positive,basketball players,people,0,480323270,480323270
+1c304fa6940e84368866cd8049dd3928,weight,people,heavy,positive,adults,people,0,480323270,480323270
+1c304fa6940e84368866cd8049dd3928,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+1c304fa6940e84368866cd8049dd3928,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+1c304fa6940e84368866cd8049dd3928,height,animals,short,negative,birds,birds,1,19695831,58179731
+1c304fa6940e84368866cd8049dd3928,size,plants,small,negative,trees,trees,1,27379426,35939932
+1c304fa6940e84368866cd8049dd3928,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+1c304fa6940e84368866cd8049dd3928,speed,people,slow,negative,walkers,people,0,480323270,480323270
+1c304fa6940e84368866cd8049dd3928,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+1c304fa6940e84368866cd8049dd3928,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+1c304fa6940e84368866cd8049dd3928,strength,people,strong,positive,adults,people,0,480323270,480323270
+a295ab159efed7118b938fa9d1173175,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+a295ab159efed7118b938fa9d1173175,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+a295ab159efed7118b938fa9d1173175,loudness,animals,quiet,negative,dogs,animals,0,58179731,58179731
+a295ab159efed7118b938fa9d1173175,strength,people,weak,negative,children,people,0,480323270,480323270
+a295ab159efed7118b938fa9d1173175,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+a295ab159efed7118b938fa9d1173175,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+a295ab159efed7118b938fa9d1173175,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+a295ab159efed7118b938fa9d1173175,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+a295ab159efed7118b938fa9d1173175,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+a295ab159efed7118b938fa9d1173175,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+a295ab159efed7118b938fa9d1173175,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+a295ab159efed7118b938fa9d1173175,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+a295ab159efed7118b938fa9d1173175,length_duration,readings,long,positive,novels,readings,0,8678675,8678675
+a295ab159efed7118b938fa9d1173175,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+a295ab159efed7118b938fa9d1173175,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+a295ab159efed7118b938fa9d1173175,loudness,rooms,loud,positive,study halls,study halls,1,17223,65454304
+a295ab159efed7118b938fa9d1173175,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+a295ab159efed7118b938fa9d1173175,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+a295ab159efed7118b938fa9d1173175,height,animals,short,negative,birds,animals,0,58179731,58179731
+a295ab159efed7118b938fa9d1173175,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+a295ab159efed7118b938fa9d1173175,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+a295ab159efed7118b938fa9d1173175,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+a295ab159efed7118b938fa9d1173175,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+386d0e61aa25f914ea62f040744afe8e,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+386d0e61aa25f914ea62f040744afe8e,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+386d0e61aa25f914ea62f040744afe8e,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+386d0e61aa25f914ea62f040744afe8e,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+386d0e61aa25f914ea62f040744afe8e,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+386d0e61aa25f914ea62f040744afe8e,size,animals,big,positive,mice,mice,1,11969407,58179731
+386d0e61aa25f914ea62f040744afe8e,weight,people,light,negative,kids,people,0,480323270,480323270
+386d0e61aa25f914ea62f040744afe8e,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+386d0e61aa25f914ea62f040744afe8e,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+386d0e61aa25f914ea62f040744afe8e,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+386d0e61aa25f914ea62f040744afe8e,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+386d0e61aa25f914ea62f040744afe8e,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+386d0e61aa25f914ea62f040744afe8e,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+386d0e61aa25f914ea62f040744afe8e,hardness,floors,soft,negative,wood floors,wood floors,1,352083,7863848
+386d0e61aa25f914ea62f040744afe8e,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+386d0e61aa25f914ea62f040744afe8e,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+386d0e61aa25f914ea62f040744afe8e,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+386d0e61aa25f914ea62f040744afe8e,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+386d0e61aa25f914ea62f040744afe8e,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+386d0e61aa25f914ea62f040744afe8e,height,people,short,negative,golfers,people,0,480323270,480323270
+386d0e61aa25f914ea62f040744afe8e,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+386d0e61aa25f914ea62f040744afe8e,speed,people,slow,negative,joggers,people,0,480323270,480323270
+0d1fa6de19ba6d3a8867fb82df353042,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+0d1fa6de19ba6d3a8867fb82df353042,size,animals,small,negative,monkeys,animals,0,58179731,58179731
+0d1fa6de19ba6d3a8867fb82df353042,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+0d1fa6de19ba6d3a8867fb82df353042,strength,people,strong,positive,teenagers,teenagers,1,4979216,480323270
+0d1fa6de19ba6d3a8867fb82df353042,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+0d1fa6de19ba6d3a8867fb82df353042,speed,people,slow,negative,runners,runners,1,3917217,480323270
+0d1fa6de19ba6d3a8867fb82df353042,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+0d1fa6de19ba6d3a8867fb82df353042,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+0d1fa6de19ba6d3a8867fb82df353042,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+0d1fa6de19ba6d3a8867fb82df353042,height,animals,tall,positive,birds,birds,1,19695831,58179731
+0d1fa6de19ba6d3a8867fb82df353042,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+0d1fa6de19ba6d3a8867fb82df353042,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+0d1fa6de19ba6d3a8867fb82df353042,height,people,tall,positive,golfers,people,0,480323270,480323270
+0d1fa6de19ba6d3a8867fb82df353042,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+0d1fa6de19ba6d3a8867fb82df353042,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+0d1fa6de19ba6d3a8867fb82df353042,temperature,seasons,warm,positive,fall days,seasons,0,12035578,12035578
+0d1fa6de19ba6d3a8867fb82df353042,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+0d1fa6de19ba6d3a8867fb82df353042,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+0d1fa6de19ba6d3a8867fb82df353042,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+0d1fa6de19ba6d3a8867fb82df353042,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+0d1fa6de19ba6d3a8867fb82df353042,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+0d1fa6de19ba6d3a8867fb82df353042,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+2db770eecee3c9be87b06452f3ac2f35,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+2db770eecee3c9be87b06452f3ac2f35,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+2db770eecee3c9be87b06452f3ac2f35,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+2db770eecee3c9be87b06452f3ac2f35,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+2db770eecee3c9be87b06452f3ac2f35,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+2db770eecee3c9be87b06452f3ac2f35,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+2db770eecee3c9be87b06452f3ac2f35,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+2db770eecee3c9be87b06452f3ac2f35,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+2db770eecee3c9be87b06452f3ac2f35,strength,people,strong,positive,adults,adults,1,32847475,480323270
+2db770eecee3c9be87b06452f3ac2f35,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+2db770eecee3c9be87b06452f3ac2f35,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+2db770eecee3c9be87b06452f3ac2f35,length_duration,dogs,long,positive,bassett hounds,bassett hounds,1,4658,28409576
+2db770eecee3c9be87b06452f3ac2f35,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+2db770eecee3c9be87b06452f3ac2f35,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+2db770eecee3c9be87b06452f3ac2f35,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+2db770eecee3c9be87b06452f3ac2f35,height,people,tall,positive,basketball players,basketball players,1,174833,480323270
+2db770eecee3c9be87b06452f3ac2f35,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+2db770eecee3c9be87b06452f3ac2f35,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+2db770eecee3c9be87b06452f3ac2f35,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+2db770eecee3c9be87b06452f3ac2f35,speed,people,quick,positive,runners,runners,1,3917217,480323270
+2db770eecee3c9be87b06452f3ac2f35,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+2db770eecee3c9be87b06452f3ac2f35,weight,people,light,negative,babies,babies,1,13073168,480323270
+2db770eecee3c9be87b06452f3ac2f35,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+bbf8b9a7e176bd19230df6922e125b51,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+bbf8b9a7e176bd19230df6922e125b51,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+bbf8b9a7e176bd19230df6922e125b51,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+bbf8b9a7e176bd19230df6922e125b51,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+bbf8b9a7e176bd19230df6922e125b51,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+bbf8b9a7e176bd19230df6922e125b51,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+bbf8b9a7e176bd19230df6922e125b51,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+bbf8b9a7e176bd19230df6922e125b51,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+bbf8b9a7e176bd19230df6922e125b51,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+bbf8b9a7e176bd19230df6922e125b51,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+bbf8b9a7e176bd19230df6922e125b51,width,burrows,narrow,negative,caverns,caverns,1,572761,1094175
+bbf8b9a7e176bd19230df6922e125b51,strength,storms,weak,negative,rains,rains,1,2183544,3614108
+bbf8b9a7e176bd19230df6922e125b51,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+bbf8b9a7e176bd19230df6922e125b51,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+bbf8b9a7e176bd19230df6922e125b51,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+bbf8b9a7e176bd19230df6922e125b51,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+bbf8b9a7e176bd19230df6922e125b51,size,plants,small,negative,trees,trees,1,27379426,35939932
+bbf8b9a7e176bd19230df6922e125b51,strength,people,weak,negative,children,children,1,206543771,480323270
+bbf8b9a7e176bd19230df6922e125b51,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+bbf8b9a7e176bd19230df6922e125b51,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+bbf8b9a7e176bd19230df6922e125b51,speed,animals,slow,negative,sloths,sloths,1,57052,58179731
+bbf8b9a7e176bd19230df6922e125b51,loudness,rooms,loud,positive,auditoria,auditoria,1,36765,65454304
+f1599d54f1d32c5661b424f3417711f0,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+f1599d54f1d32c5661b424f3417711f0,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+f1599d54f1d32c5661b424f3417711f0,height,animals,tall,positive,birds,animals,0,58179731,58179731
+f1599d54f1d32c5661b424f3417711f0,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+f1599d54f1d32c5661b424f3417711f0,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+f1599d54f1d32c5661b424f3417711f0,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+f1599d54f1d32c5661b424f3417711f0,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+f1599d54f1d32c5661b424f3417711f0,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+f1599d54f1d32c5661b424f3417711f0,loudness,animals,quiet,negative,cats,animals,0,58179731,58179731
+f1599d54f1d32c5661b424f3417711f0,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+f1599d54f1d32c5661b424f3417711f0,temperature,seasons,warm,positive,winter days,seasons,0,12035578,12035578
+f1599d54f1d32c5661b424f3417711f0,width,burrows,narrow,negative,caves,burrows,0,1094175,1094175
+f1599d54f1d32c5661b424f3417711f0,hardness,sweets,soft,negative,jolly ranchers,jolly ranchers,1,10556,2968535
+f1599d54f1d32c5661b424f3417711f0,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+f1599d54f1d32c5661b424f3417711f0,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+f1599d54f1d32c5661b424f3417711f0,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+f1599d54f1d32c5661b424f3417711f0,price,statues,cheap,negative,plastic statues,plastic statues,1,707,2837498
+f1599d54f1d32c5661b424f3417711f0,hardness,floors,soft,negative,carpet floors,floors,0,7863848,7863848
+f1599d54f1d32c5661b424f3417711f0,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+f1599d54f1d32c5661b424f3417711f0,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+f1599d54f1d32c5661b424f3417711f0,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+c52179251ac6ff186a32dd5d8786dceb,price,alcoholic drinks,cheap,negative,beers,beers,1,2634057,377118
+c52179251ac6ff186a32dd5d8786dceb,width,roads,wide,positive,highways,highways,1,5745573,15093824
+c52179251ac6ff186a32dd5d8786dceb,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+c52179251ac6ff186a32dd5d8786dceb,speed,people,quick,positive,walkers,walkers,1,1526422,480323270
+c52179251ac6ff186a32dd5d8786dceb,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+c52179251ac6ff186a32dd5d8786dceb,strength,people,strong,positive,children,children,1,206543771,480323270
+c52179251ac6ff186a32dd5d8786dceb,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+c52179251ac6ff186a32dd5d8786dceb,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+c52179251ac6ff186a32dd5d8786dceb,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+c52179251ac6ff186a32dd5d8786dceb,strength,storms,weak,negative,rains,rains,1,2183544,3614108
+c52179251ac6ff186a32dd5d8786dceb,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+c52179251ac6ff186a32dd5d8786dceb,size,animals,big,positive,mice,mice,1,11969407,58179731
+c52179251ac6ff186a32dd5d8786dceb,price,statues,expensive,positive,bronze statues,bronze statues,1,53960,2837498
+c52179251ac6ff186a32dd5d8786dceb,weight,people,light,negative,kids,people,0,480323270,480323270
+c52179251ac6ff186a32dd5d8786dceb,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+c52179251ac6ff186a32dd5d8786dceb,size,plants,big,positive,trees,trees,1,27379426,35939932
+c52179251ac6ff186a32dd5d8786dceb,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+c52179251ac6ff186a32dd5d8786dceb,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+c52179251ac6ff186a32dd5d8786dceb,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+c52179251ac6ff186a32dd5d8786dceb,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+c52179251ac6ff186a32dd5d8786dceb,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+c52179251ac6ff186a32dd5d8786dceb,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+c52179251ac6ff186a32dd5d8786dceb,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+4c557b8928653f880aa69b280d292359,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+4c557b8928653f880aa69b280d292359,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+4c557b8928653f880aa69b280d292359,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+4c557b8928653f880aa69b280d292359,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+4c557b8928653f880aa69b280d292359,strength,people,strong,positive,adults,adults,1,32847475,480323270
+4c557b8928653f880aa69b280d292359,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+4c557b8928653f880aa69b280d292359,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+4c557b8928653f880aa69b280d292359,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+4c557b8928653f880aa69b280d292359,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+4c557b8928653f880aa69b280d292359,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+4c557b8928653f880aa69b280d292359,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+4c557b8928653f880aa69b280d292359,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+4c557b8928653f880aa69b280d292359,loudness,rooms,loud,positive,auditoria,rooms,0,65454304,65454304
+4c557b8928653f880aa69b280d292359,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+4c557b8928653f880aa69b280d292359,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+4c557b8928653f880aa69b280d292359,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+4c557b8928653f880aa69b280d292359,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+4c557b8928653f880aa69b280d292359,height,people,short,negative,jockeys,jockeys,1,875781,480323270
+4c557b8928653f880aa69b280d292359,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+4c557b8928653f880aa69b280d292359,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+4c557b8928653f880aa69b280d292359,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+4c557b8928653f880aa69b280d292359,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+4c557b8928653f880aa69b280d292359,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+a871126ffe0e5a2e19cfc48b91d703ae,weight,people,light,negative,kids,people,0,480323270,480323270
+a871126ffe0e5a2e19cfc48b91d703ae,height,animals,short,negative,birds,birds,1,19695831,58179731
+a871126ffe0e5a2e19cfc48b91d703ae,speed,people,slow,negative,joggers,people,0,480323270,480323270
+a871126ffe0e5a2e19cfc48b91d703ae,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+a871126ffe0e5a2e19cfc48b91d703ae,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+a871126ffe0e5a2e19cfc48b91d703ae,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+a871126ffe0e5a2e19cfc48b91d703ae,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+a871126ffe0e5a2e19cfc48b91d703ae,strength,people,strong,positive,adults,people,0,480323270,480323270
+a871126ffe0e5a2e19cfc48b91d703ae,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+a871126ffe0e5a2e19cfc48b91d703ae,strength,storms,weak,negative,rains,storms,0,3614108,3614108
+a871126ffe0e5a2e19cfc48b91d703ae,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+a871126ffe0e5a2e19cfc48b91d703ae,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+a871126ffe0e5a2e19cfc48b91d703ae,temperature,seasons,warm,positive,fall days,fall days,1,12564,12035578
+a871126ffe0e5a2e19cfc48b91d703ae,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+a871126ffe0e5a2e19cfc48b91d703ae,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+a871126ffe0e5a2e19cfc48b91d703ae,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+a871126ffe0e5a2e19cfc48b91d703ae,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+a871126ffe0e5a2e19cfc48b91d703ae,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+a871126ffe0e5a2e19cfc48b91d703ae,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+a871126ffe0e5a2e19cfc48b91d703ae,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+a871126ffe0e5a2e19cfc48b91d703ae,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+a871126ffe0e5a2e19cfc48b91d703ae,speed,animals,quick,positive,elephants,animals,0,58179731,58179731
+a871126ffe0e5a2e19cfc48b91d703ae,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+bb60f66d24fe142311f1d1bfdccd48b5,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+bb60f66d24fe142311f1d1bfdccd48b5,darkness,birds,dark,negative,seagulls,seagulls,1,329923,19695831
+bb60f66d24fe142311f1d1bfdccd48b5,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+bb60f66d24fe142311f1d1bfdccd48b5,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+bb60f66d24fe142311f1d1bfdccd48b5,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+bb60f66d24fe142311f1d1bfdccd48b5,loudness,animals,loud,positive,donkeys,donkeys,1,427065,58179731
+bb60f66d24fe142311f1d1bfdccd48b5,temperature,food,cold,negative,salads,food,0,180152837,180152837
+bb60f66d24fe142311f1d1bfdccd48b5,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+bb60f66d24fe142311f1d1bfdccd48b5,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+bb60f66d24fe142311f1d1bfdccd48b5,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+bb60f66d24fe142311f1d1bfdccd48b5,weight,people,light,negative,kids,kids,1,96621142,480323270
+bb60f66d24fe142311f1d1bfdccd48b5,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+bb60f66d24fe142311f1d1bfdccd48b5,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+bb60f66d24fe142311f1d1bfdccd48b5,weight,animals,light,negative,fish,fish,1,52768568,58179731
+bb60f66d24fe142311f1d1bfdccd48b5,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+bb60f66d24fe142311f1d1bfdccd48b5,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+bb60f66d24fe142311f1d1bfdccd48b5,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+bb60f66d24fe142311f1d1bfdccd48b5,strength,people,weak,negative,children,people,0,480323270,480323270
+bb60f66d24fe142311f1d1bfdccd48b5,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+bb60f66d24fe142311f1d1bfdccd48b5,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+bb60f66d24fe142311f1d1bfdccd48b5,height,people,short,negative,jockeys,people,0,480323270,480323270
+bb60f66d24fe142311f1d1bfdccd48b5,loudness,rooms,loud,positive,auditoria,rooms,0,65454304,65454304
+bb60f66d24fe142311f1d1bfdccd48b5,strength,storms,weak,negative,rains,rains,1,2183544,3614108
+cbea5d5919b21484902aee96719c01b3,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+cbea5d5919b21484902aee96719c01b3,speed,people,slow,negative,runners,runners,1,3917217,480323270
+cbea5d5919b21484902aee96719c01b3,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+cbea5d5919b21484902aee96719c01b3,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+cbea5d5919b21484902aee96719c01b3,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+cbea5d5919b21484902aee96719c01b3,temperature,food,warm,positive,soups,food,0,180152837,180152837
+cbea5d5919b21484902aee96719c01b3,height,animals,tall,positive,birds,birds,1,19695831,58179731
+cbea5d5919b21484902aee96719c01b3,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+cbea5d5919b21484902aee96719c01b3,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+cbea5d5919b21484902aee96719c01b3,loudness,animals,quiet,negative,cats,animals,0,58179731,58179731
+cbea5d5919b21484902aee96719c01b3,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+cbea5d5919b21484902aee96719c01b3,weight,people,light,negative,adults,adults,1,32847475,480323270
+cbea5d5919b21484902aee96719c01b3,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+cbea5d5919b21484902aee96719c01b3,length_duration,readings,long,positive,novels,novels,1,7525142,8678675
+cbea5d5919b21484902aee96719c01b3,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+cbea5d5919b21484902aee96719c01b3,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+cbea5d5919b21484902aee96719c01b3,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+cbea5d5919b21484902aee96719c01b3,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+cbea5d5919b21484902aee96719c01b3,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+cbea5d5919b21484902aee96719c01b3,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+cbea5d5919b21484902aee96719c01b3,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+cbea5d5919b21484902aee96719c01b3,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+2597da10880a373374f0e8be8013087c,height,animals,tall,positive,birds,animals,0,58179731,58179731
+2597da10880a373374f0e8be8013087c,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+2597da10880a373374f0e8be8013087c,price,statues,cheap,negative,plastic statues,plastic statues,1,707,2837498
+2597da10880a373374f0e8be8013087c,weight,animals,heavy,positive,dogs,animals,0,58179731,58179731
+2597da10880a373374f0e8be8013087c,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+2597da10880a373374f0e8be8013087c,speed,people,slow,negative,runners,people,0,480323270,480323270
+2597da10880a373374f0e8be8013087c,size,animals,big,positive,elephants,animals,0,58179731,58179731
+2597da10880a373374f0e8be8013087c,weight,people,light,negative,babies,people,0,480323270,480323270
+2597da10880a373374f0e8be8013087c,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+2597da10880a373374f0e8be8013087c,hardness,sweets,soft,negative,jolly ranchers,sweets,0,2968535,2968535
+2597da10880a373374f0e8be8013087c,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+2597da10880a373374f0e8be8013087c,height,people,tall,positive,golfers,people,0,480323270,480323270
+2597da10880a373374f0e8be8013087c,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+2597da10880a373374f0e8be8013087c,price,alcoholic drinks,cheap,negative,bottles of wine,alcoholic drinks,0,377118,377118
+2597da10880a373374f0e8be8013087c,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+2597da10880a373374f0e8be8013087c,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+2597da10880a373374f0e8be8013087c,strength,storms,weak,negative,hurricanes,storms,0,3614108,3614108
+2597da10880a373374f0e8be8013087c,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+2597da10880a373374f0e8be8013087c,darkness,birds,light,positive,seagulls,seagulls,1,329923,19695831
+2597da10880a373374f0e8be8013087c,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+2597da10880a373374f0e8be8013087c,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+2597da10880a373374f0e8be8013087c,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+d0b9dc004196cdf607342fe34f675931,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+d0b9dc004196cdf607342fe34f675931,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+d0b9dc004196cdf607342fe34f675931,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+d0b9dc004196cdf607342fe34f675931,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+d0b9dc004196cdf607342fe34f675931,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+d0b9dc004196cdf607342fe34f675931,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+d0b9dc004196cdf607342fe34f675931,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+d0b9dc004196cdf607342fe34f675931,length_duration,readings,long,positive,stories,readings,0,8678675,8678675
+d0b9dc004196cdf607342fe34f675931,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+d0b9dc004196cdf607342fe34f675931,strength,people,weak,negative,adults,adults,1,32847475,480323270
+d0b9dc004196cdf607342fe34f675931,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+d0b9dc004196cdf607342fe34f675931,size,plants,small,negative,trees,trees,1,27379426,35939932
+d0b9dc004196cdf607342fe34f675931,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+d0b9dc004196cdf607342fe34f675931,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+d0b9dc004196cdf607342fe34f675931,height,people,tall,positive,golfers,golfers,1,1664649,480323270
+d0b9dc004196cdf607342fe34f675931,weight,animals,light,negative,fish,fish,1,52768568,58179731
+d0b9dc004196cdf607342fe34f675931,hardness,sweets,soft,negative,chocolates,sweets,0,2968535,2968535
+d0b9dc004196cdf607342fe34f675931,weight,people,light,negative,kids,kids,1,96621142,480323270
+d0b9dc004196cdf607342fe34f675931,price,alcoholic drinks,cheap,negative,liquors,alcoholic drinks,0,377118,377118
+d0b9dc004196cdf607342fe34f675931,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+d0b9dc004196cdf607342fe34f675931,strength,storms,strong,positive,rains,storms,0,3614108,3614108
+d0b9dc004196cdf607342fe34f675931,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+9f56d0a211883f3036bc3f5eb6200153,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+9f56d0a211883f3036bc3f5eb6200153,size,animals,big,positive,monkeys,animals,0,58179731,58179731
+9f56d0a211883f3036bc3f5eb6200153,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+9f56d0a211883f3036bc3f5eb6200153,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+9f56d0a211883f3036bc3f5eb6200153,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+9f56d0a211883f3036bc3f5eb6200153,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+9f56d0a211883f3036bc3f5eb6200153,weight,animals,light,negative,fish,fish,1,52768568,58179731
+9f56d0a211883f3036bc3f5eb6200153,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+9f56d0a211883f3036bc3f5eb6200153,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+9f56d0a211883f3036bc3f5eb6200153,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+9f56d0a211883f3036bc3f5eb6200153,width,roads,narrow,negative,highways,highways,1,5745573,15093824
+9f56d0a211883f3036bc3f5eb6200153,height,people,short,negative,golfers,people,0,480323270,480323270
+9f56d0a211883f3036bc3f5eb6200153,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+9f56d0a211883f3036bc3f5eb6200153,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+9f56d0a211883f3036bc3f5eb6200153,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+9f56d0a211883f3036bc3f5eb6200153,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+9f56d0a211883f3036bc3f5eb6200153,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+9f56d0a211883f3036bc3f5eb6200153,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+9f56d0a211883f3036bc3f5eb6200153,loudness,animals,loud,positive,cats,animals,0,58179731,58179731
+9f56d0a211883f3036bc3f5eb6200153,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+9f56d0a211883f3036bc3f5eb6200153,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+9f56d0a211883f3036bc3f5eb6200153,strength,storms,strong,positive,hurricanes,storms,0,3614108,3614108
+abc5519f98d84df572763e6ae6f76546,weight,people,heavy,positive,kids,people,0,480323270,480323270
+abc5519f98d84df572763e6ae6f76546,height,animals,short,negative,birds,birds,1,19695831,58179731
+abc5519f98d84df572763e6ae6f76546,length_duration,readings,long,positive,novels,readings,0,8678675,8678675
+abc5519f98d84df572763e6ae6f76546,height,people,short,negative,golfers,people,0,480323270,480323270
+abc5519f98d84df572763e6ae6f76546,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+abc5519f98d84df572763e6ae6f76546,speed,people,slow,negative,walkers,people,0,480323270,480323270
+abc5519f98d84df572763e6ae6f76546,price,statues,cheap,negative,platinum statue,statues,0,2837498,2837498
+abc5519f98d84df572763e6ae6f76546,size,plants,big,positive,trees,trees,1,27379426,35939932
+abc5519f98d84df572763e6ae6f76546,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+abc5519f98d84df572763e6ae6f76546,temperature,food,cold,negative,salads,food,0,180152837,180152837
+abc5519f98d84df572763e6ae6f76546,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+abc5519f98d84df572763e6ae6f76546,strength,people,strong,positive,adults,adults,1,32847475,480323270
+abc5519f98d84df572763e6ae6f76546,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+abc5519f98d84df572763e6ae6f76546,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+abc5519f98d84df572763e6ae6f76546,hardness,sweets,soft,negative,marshmallows,sweets,0,2968535,2968535
+abc5519f98d84df572763e6ae6f76546,loudness,rooms,loud,positive,study halls,study halls,1,17223,65454304
+abc5519f98d84df572763e6ae6f76546,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+abc5519f98d84df572763e6ae6f76546,price,alcoholic drinks,expensive,positive,beers,alcoholic drinks,0,377118,377118
+abc5519f98d84df572763e6ae6f76546,hardness,floors,hard,positive,carpet floors,floors,0,7863848,7863848
+abc5519f98d84df572763e6ae6f76546,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+abc5519f98d84df572763e6ae6f76546,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+abc5519f98d84df572763e6ae6f76546,weight,animals,heavy,positive,dogs,dogs,1,28409576,58179731
+abc5519f98d84df572763e6ae6f76546,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+76ad3362e5a33a9191950739777ccf6d,height,people,tall,positive,golfers,people,0,480323270,480323270
+76ad3362e5a33a9191950739777ccf6d,height,animals,tall,positive,birds,birds,1,19695831,58179731
+76ad3362e5a33a9191950739777ccf6d,temperature,food,warm,positive,soups,food,0,180152837,180152837
+76ad3362e5a33a9191950739777ccf6d,temperature,seasons,cold,negative,fall days,seasons,0,12035578,12035578
+76ad3362e5a33a9191950739777ccf6d,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+76ad3362e5a33a9191950739777ccf6d,hardness,sweets,hard,positive,chocolates,sweets,0,2968535,2968535
+76ad3362e5a33a9191950739777ccf6d,weight,people,light,negative,kids,kids,1,96621142,480323270
+76ad3362e5a33a9191950739777ccf6d,hardness,floors,soft,negative,carpet floors,floors,0,7863848,7863848
+76ad3362e5a33a9191950739777ccf6d,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+76ad3362e5a33a9191950739777ccf6d,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+76ad3362e5a33a9191950739777ccf6d,loudness,rooms,quiet,negative,study halls,rooms,0,65454304,65454304
+76ad3362e5a33a9191950739777ccf6d,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+76ad3362e5a33a9191950739777ccf6d,price,alcoholic drinks,expensive,positive,liquors,alcoholic drinks,0,377118,377118
+76ad3362e5a33a9191950739777ccf6d,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+76ad3362e5a33a9191950739777ccf6d,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+76ad3362e5a33a9191950739777ccf6d,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+76ad3362e5a33a9191950739777ccf6d,length_duration,dogs,long,positive,dachshunds,dogs,0,28409576,28409576
+76ad3362e5a33a9191950739777ccf6d,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+76ad3362e5a33a9191950739777ccf6d,strength,people,weak,negative,children,children,1,206543771,480323270
+76ad3362e5a33a9191950739777ccf6d,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+76ad3362e5a33a9191950739777ccf6d,strength,storms,strong,positive,thunderstorms,storms,0,3614108,3614108
+76ad3362e5a33a9191950739777ccf6d,weight,animals,light,negative,elephants,elephants,1,2082778,58179731
+76ad3362e5a33a9191950739777ccf6d,width,roads,wide,positive,side roads,roads,0,15093824,15093824
+82b7e6d07476c3048bf85c2517b3b3a2,strength,people,weak,negative,children,children,1,206543771,480323270
+82b7e6d07476c3048bf85c2517b3b3a2,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+82b7e6d07476c3048bf85c2517b3b3a2,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+82b7e6d07476c3048bf85c2517b3b3a2,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+82b7e6d07476c3048bf85c2517b3b3a2,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+82b7e6d07476c3048bf85c2517b3b3a2,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+82b7e6d07476c3048bf85c2517b3b3a2,height,people,tall,positive,golfers,golfers,1,1664649,480323270
+82b7e6d07476c3048bf85c2517b3b3a2,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+82b7e6d07476c3048bf85c2517b3b3a2,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+82b7e6d07476c3048bf85c2517b3b3a2,length_duration,dogs,short,negative,bassett hounds,bassett hounds,1,4658,28409576
+82b7e6d07476c3048bf85c2517b3b3a2,weight,animals,light,negative,fish,fish,1,52768568,58179731
+82b7e6d07476c3048bf85c2517b3b3a2,weight,people,light,negative,kids,kids,1,96621142,480323270
+82b7e6d07476c3048bf85c2517b3b3a2,loudness,rooms,loud,positive,auditoria,auditoria,1,36765,65454304
+82b7e6d07476c3048bf85c2517b3b3a2,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+82b7e6d07476c3048bf85c2517b3b3a2,price,statues,expensive,positive,platinum statue,platinum statue,1,503,2837498
+82b7e6d07476c3048bf85c2517b3b3a2,hardness,sweets,soft,negative,jolly ranchers,jolly ranchers,1,10556,2968535
+82b7e6d07476c3048bf85c2517b3b3a2,size,animals,big,positive,mice,mice,1,11969407,58179731
+82b7e6d07476c3048bf85c2517b3b3a2,speed,people,quick,positive,runners,runners,1,3917217,480323270
+82b7e6d07476c3048bf85c2517b3b3a2,loudness,animals,loud,positive,cats,cats,1,15738388,58179731
+82b7e6d07476c3048bf85c2517b3b3a2,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+82b7e6d07476c3048bf85c2517b3b3a2,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+82b7e6d07476c3048bf85c2517b3b3a2,strength,storms,strong,positive,thunderstorms,thunderstorms,1,1410569,3614108
+82b7e6d07476c3048bf85c2517b3b3a2,temperature,seasons,warm,positive,summer days,summer days,1,229054,12035578
+f5f05f34c7f225fd12b74abebbdded0e,darkness,birds,dark,negative,crows,crows,1,1295877,19695831
+f5f05f34c7f225fd12b74abebbdded0e,length_duration,dogs,short,negative,bassett hounds,bassett hounds,1,4658,28409576
+f5f05f34c7f225fd12b74abebbdded0e,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+f5f05f34c7f225fd12b74abebbdded0e,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+f5f05f34c7f225fd12b74abebbdded0e,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+f5f05f34c7f225fd12b74abebbdded0e,loudness,animals,quiet,negative,donkeys,animals,0,58179731,58179731
+f5f05f34c7f225fd12b74abebbdded0e,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+f5f05f34c7f225fd12b74abebbdded0e,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+f5f05f34c7f225fd12b74abebbdded0e,size,animals,big,positive,mice,animals,0,58179731,58179731
+f5f05f34c7f225fd12b74abebbdded0e,weight,people,heavy,positive,adults,adults,1,32847475,480323270
+f5f05f34c7f225fd12b74abebbdded0e,strength,people,weak,negative,adults,adults,1,32847475,480323270
+f5f05f34c7f225fd12b74abebbdded0e,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+f5f05f34c7f225fd12b74abebbdded0e,strength,storms,strong,positive,thunderstorms,thunderstorms,1,1410569,3614108
+f5f05f34c7f225fd12b74abebbdded0e,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+f5f05f34c7f225fd12b74abebbdded0e,speed,people,quick,positive,walkers,people,0,480323270,480323270
+f5f05f34c7f225fd12b74abebbdded0e,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+f5f05f34c7f225fd12b74abebbdded0e,weight,animals,light,negative,fish,fish,1,52768568,58179731
+f5f05f34c7f225fd12b74abebbdded0e,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+f5f05f34c7f225fd12b74abebbdded0e,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+f5f05f34c7f225fd12b74abebbdded0e,height,people,short,negative,jockeys,people,0,480323270,480323270
+f5f05f34c7f225fd12b74abebbdded0e,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+f5f05f34c7f225fd12b74abebbdded0e,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+f5f05f34c7f225fd12b74abebbdded0e,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+93bfcf0b29c17a8f6e0f03ec69d80ab2,weight,people,light,negative,adults,adults,1,32847475,480323270
+93bfcf0b29c17a8f6e0f03ec69d80ab2,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+93bfcf0b29c17a8f6e0f03ec69d80ab2,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+93bfcf0b29c17a8f6e0f03ec69d80ab2,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+93bfcf0b29c17a8f6e0f03ec69d80ab2,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+93bfcf0b29c17a8f6e0f03ec69d80ab2,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+93bfcf0b29c17a8f6e0f03ec69d80ab2,strength,storms,strong,positive,hurricanes,hurricanes,1,3785008,3614108
+93bfcf0b29c17a8f6e0f03ec69d80ab2,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+93bfcf0b29c17a8f6e0f03ec69d80ab2,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+93bfcf0b29c17a8f6e0f03ec69d80ab2,darkness,birds,dark,negative,crows,crows,1,1295877,19695831
+93bfcf0b29c17a8f6e0f03ec69d80ab2,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+93bfcf0b29c17a8f6e0f03ec69d80ab2,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+93bfcf0b29c17a8f6e0f03ec69d80ab2,strength,people,weak,negative,adults,people,0,480323270,480323270
+93bfcf0b29c17a8f6e0f03ec69d80ab2,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+93bfcf0b29c17a8f6e0f03ec69d80ab2,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+93bfcf0b29c17a8f6e0f03ec69d80ab2,size,animals,big,positive,elephants,elephants,1,2082778,58179731
+93bfcf0b29c17a8f6e0f03ec69d80ab2,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+93bfcf0b29c17a8f6e0f03ec69d80ab2,length_duration,dogs,short,negative,bassett hounds,dogs,0,28409576,28409576
+93bfcf0b29c17a8f6e0f03ec69d80ab2,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+93bfcf0b29c17a8f6e0f03ec69d80ab2,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+93bfcf0b29c17a8f6e0f03ec69d80ab2,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+93bfcf0b29c17a8f6e0f03ec69d80ab2,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+ea75879df390562627d865e21627facb,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+ea75879df390562627d865e21627facb,temperature,seasons,warm,positive,winter days,seasons,0,12035578,12035578
+ea75879df390562627d865e21627facb,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+ea75879df390562627d865e21627facb,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+ea75879df390562627d865e21627facb,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+ea75879df390562627d865e21627facb,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+ea75879df390562627d865e21627facb,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+ea75879df390562627d865e21627facb,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+ea75879df390562627d865e21627facb,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+ea75879df390562627d865e21627facb,loudness,animals,quiet,negative,donkeys,animals,0,58179731,58179731
+ea75879df390562627d865e21627facb,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+ea75879df390562627d865e21627facb,temperature,food,cold,negative,salads,food,0,180152837,180152837
+ea75879df390562627d865e21627facb,speed,people,slow,negative,runners,runners,1,3917217,480323270
+ea75879df390562627d865e21627facb,strength,people,strong,positive,adults,people,0,480323270,480323270
+ea75879df390562627d865e21627facb,size,animals,big,positive,mice,mice,1,11969407,58179731
+ea75879df390562627d865e21627facb,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+ea75879df390562627d865e21627facb,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+ea75879df390562627d865e21627facb,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+ea75879df390562627d865e21627facb,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+ea75879df390562627d865e21627facb,hardness,sweets,hard,positive,jolly ranchers,sweets,0,2968535,2968535
+ea75879df390562627d865e21627facb,size,plants,small,negative,flowers,flowers,1,58380229,35939932
+ea75879df390562627d865e21627facb,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+b833b0109c6c55a14bdc791a13c50ba7,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+b833b0109c6c55a14bdc791a13c50ba7,loudness,animals,loud,positive,donkeys,animals,0,58179731,58179731
+b833b0109c6c55a14bdc791a13c50ba7,speed,people,quick,positive,runners,people,0,480323270,480323270
+b833b0109c6c55a14bdc791a13c50ba7,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+b833b0109c6c55a14bdc791a13c50ba7,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+b833b0109c6c55a14bdc791a13c50ba7,height,animals,short,negative,birds,birds,1,19695831,58179731
+b833b0109c6c55a14bdc791a13c50ba7,strength,storms,strong,positive,hurricanes,storms,0,3614108,3614108
+b833b0109c6c55a14bdc791a13c50ba7,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+b833b0109c6c55a14bdc791a13c50ba7,loudness,rooms,loud,positive,study halls,study halls,1,17223,65454304
+b833b0109c6c55a14bdc791a13c50ba7,width,burrows,narrow,negative,fox holes,burrows,0,1094175,1094175
+b833b0109c6c55a14bdc791a13c50ba7,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+b833b0109c6c55a14bdc791a13c50ba7,height,people,tall,positive,golfers,golfers,1,1664649,480323270
+b833b0109c6c55a14bdc791a13c50ba7,hardness,sweets,soft,negative,chocolates,sweets,0,2968535,2968535
+b833b0109c6c55a14bdc791a13c50ba7,temperature,seasons,cold,negative,summer days,seasons,0,12035578,12035578
+b833b0109c6c55a14bdc791a13c50ba7,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+b833b0109c6c55a14bdc791a13c50ba7,darkness,birds,dark,negative,crows,birds,0,19695831,19695831
+b833b0109c6c55a14bdc791a13c50ba7,price,alcoholic drinks,cheap,negative,liquors,alcoholic drinks,0,377118,377118
+b833b0109c6c55a14bdc791a13c50ba7,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+b833b0109c6c55a14bdc791a13c50ba7,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+b833b0109c6c55a14bdc791a13c50ba7,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+b833b0109c6c55a14bdc791a13c50ba7,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+b833b0109c6c55a14bdc791a13c50ba7,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+b833b0109c6c55a14bdc791a13c50ba7,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+e175a68d160d43145e56c6cfb9ae2f2b,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+e175a68d160d43145e56c6cfb9ae2f2b,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+e175a68d160d43145e56c6cfb9ae2f2b,speed,animals,quick,positive,sloths,sloths,1,57052,58179731
+e175a68d160d43145e56c6cfb9ae2f2b,size,animals,big,positive,monkeys,monkeys,1,4144229,58179731
+e175a68d160d43145e56c6cfb9ae2f2b,speed,people,slow,negative,runners,runners,1,3917217,480323270
+e175a68d160d43145e56c6cfb9ae2f2b,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+e175a68d160d43145e56c6cfb9ae2f2b,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+e175a68d160d43145e56c6cfb9ae2f2b,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+e175a68d160d43145e56c6cfb9ae2f2b,loudness,rooms,loud,positive,study halls,rooms,0,65454304,65454304
+e175a68d160d43145e56c6cfb9ae2f2b,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+e175a68d160d43145e56c6cfb9ae2f2b,strength,storms,weak,negative,rains,rains,1,2183544,3614108
+e175a68d160d43145e56c6cfb9ae2f2b,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+e175a68d160d43145e56c6cfb9ae2f2b,temperature,food,cold,negative,salads,salads,1,2387032,180152837
+e175a68d160d43145e56c6cfb9ae2f2b,strength,people,strong,positive,adults,people,0,480323270,480323270
+e175a68d160d43145e56c6cfb9ae2f2b,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+e175a68d160d43145e56c6cfb9ae2f2b,length_duration,dogs,short,negative,dachshunds,dachshunds,1,116109,28409576
+e175a68d160d43145e56c6cfb9ae2f2b,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+e175a68d160d43145e56c6cfb9ae2f2b,weight,people,light,negative,kids,kids,1,96621142,480323270
+e175a68d160d43145e56c6cfb9ae2f2b,width,roads,wide,positive,highways,highways,1,5745573,15093824
+e175a68d160d43145e56c6cfb9ae2f2b,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+e175a68d160d43145e56c6cfb9ae2f2b,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+e175a68d160d43145e56c6cfb9ae2f2b,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+e175a68d160d43145e56c6cfb9ae2f2b,width,burrows,narrow,negative,caverns,burrows,0,1094175,1094175
+783d70c594aac790465859223dd3966f,size,plants,small,negative,bushes,plants,0,35939932,35939932
+783d70c594aac790465859223dd3966f,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+783d70c594aac790465859223dd3966f,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+783d70c594aac790465859223dd3966f,width,burrows,wide,positive,fox holes,burrows,0,1094175,1094175
+783d70c594aac790465859223dd3966f,length_duration,dogs,long,positive,dachshunds,dachshunds,1,116109,28409576
+783d70c594aac790465859223dd3966f,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+783d70c594aac790465859223dd3966f,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+783d70c594aac790465859223dd3966f,height,people,short,negative,jockeys,jockeys,1,875781,480323270
+783d70c594aac790465859223dd3966f,darkness,birds,dark,negative,seagulls,birds,0,19695831,19695831
+783d70c594aac790465859223dd3966f,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+783d70c594aac790465859223dd3966f,hardness,floors,soft,negative,carpet floors,carpet floors,1,38431,7863848
+783d70c594aac790465859223dd3966f,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+783d70c594aac790465859223dd3966f,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+783d70c594aac790465859223dd3966f,temperature,food,cold,negative,ice cream,food,0,180152837,180152837
+783d70c594aac790465859223dd3966f,weight,people,heavy,positive,adults,people,0,480323270,480323270
+783d70c594aac790465859223dd3966f,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+783d70c594aac790465859223dd3966f,price,statues,cheap,negative,platinum statue,platinum statue,1,503,2837498
+783d70c594aac790465859223dd3966f,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+783d70c594aac790465859223dd3966f,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+783d70c594aac790465859223dd3966f,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+783d70c594aac790465859223dd3966f,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+783d70c594aac790465859223dd3966f,speed,people,quick,positive,runners,people,0,480323270,480323270
+783d70c594aac790465859223dd3966f,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+90d462079517e59834b029ccc3cc90e1,speed,people,slow,negative,runners,runners,1,3917217,480323270
+90d462079517e59834b029ccc3cc90e1,width,burrows,narrow,negative,fox holes,fox holes,1,4713,1094175
+90d462079517e59834b029ccc3cc90e1,length_duration,dogs,short,negative,dachshunds,dachshunds,1,116109,28409576
+90d462079517e59834b029ccc3cc90e1,speed,animals,slow,negative,elephants,animals,0,58179731,58179731
+90d462079517e59834b029ccc3cc90e1,weight,people,light,negative,adults,adults,1,32847475,480323270
+90d462079517e59834b029ccc3cc90e1,size,animals,big,positive,mice,mice,1,11969407,58179731
+90d462079517e59834b029ccc3cc90e1,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+90d462079517e59834b029ccc3cc90e1,hardness,sweets,soft,negative,chocolates,sweets,0,2968535,2968535
+90d462079517e59834b029ccc3cc90e1,weight,animals,light,negative,dogs,dogs,1,28409576,58179731
+90d462079517e59834b029ccc3cc90e1,strength,storms,strong,positive,rains,rains,1,2183544,3614108
+90d462079517e59834b029ccc3cc90e1,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+90d462079517e59834b029ccc3cc90e1,strength,people,strong,positive,adults,people,0,480323270,480323270
+90d462079517e59834b029ccc3cc90e1,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+90d462079517e59834b029ccc3cc90e1,temperature,seasons,cold,negative,summer days,seasons,0,12035578,12035578
+90d462079517e59834b029ccc3cc90e1,width,roads,wide,positive,highways,highways,1,5745573,15093824
+90d462079517e59834b029ccc3cc90e1,price,alcoholic drinks,cheap,negative,beers,alcoholic drinks,0,377118,377118
+90d462079517e59834b029ccc3cc90e1,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+90d462079517e59834b029ccc3cc90e1,loudness,rooms,quiet,negative,classrooms,classrooms,1,4002675,65454304
+90d462079517e59834b029ccc3cc90e1,length_duration,readings,long,positive,novels,novels,1,7525142,8678675
+90d462079517e59834b029ccc3cc90e1,height,people,tall,positive,golfers,golfers,1,1664649,480323270
+90d462079517e59834b029ccc3cc90e1,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+90d462079517e59834b029ccc3cc90e1,height,animals,tall,positive,birds,birds,1,19695831,58179731
+90d462079517e59834b029ccc3cc90e1,loudness,animals,loud,positive,cats,animals,0,58179731,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+c0a2a5029d1a5fecaca9907a0249ca49,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,strength,people,weak,negative,children,children,1,206543771,480323270
+c0a2a5029d1a5fecaca9907a0249ca49,weight,people,heavy,positive,adults,people,0,480323270,480323270
+c0a2a5029d1a5fecaca9907a0249ca49,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,strength,storms,weak,negative,hurricanes,storms,0,3614108,3614108
+c0a2a5029d1a5fecaca9907a0249ca49,loudness,rooms,quiet,negative,auditoria,rooms,0,65454304,65454304
+c0a2a5029d1a5fecaca9907a0249ca49,height,people,short,negative,golfers,people,0,480323270,480323270
+c0a2a5029d1a5fecaca9907a0249ca49,size,animals,small,negative,mice,mice,1,11969407,58179731
+c0a2a5029d1a5fecaca9907a0249ca49,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+c0a2a5029d1a5fecaca9907a0249ca49,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+c0a2a5029d1a5fecaca9907a0249ca49,speed,people,slow,negative,runners,runners,1,3917217,480323270
+c0a2a5029d1a5fecaca9907a0249ca49,size,plants,big,positive,trees,trees,1,27379426,35939932
+c0a2a5029d1a5fecaca9907a0249ca49,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+c0a2a5029d1a5fecaca9907a0249ca49,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+c0a2a5029d1a5fecaca9907a0249ca49,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+c0a2a5029d1a5fecaca9907a0249ca49,darkness,birds,dark,negative,parrots,birds,0,19695831,19695831
+c0a2a5029d1a5fecaca9907a0249ca49,length_duration,readings,long,positive,novels,readings,0,8678675,8678675
+c0a2a5029d1a5fecaca9907a0249ca49,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+c0a2a5029d1a5fecaca9907a0249ca49,temperature,seasons,cold,negative,summer days,summer days,1,229054,12035578
+c0a2a5029d1a5fecaca9907a0249ca49,width,burrows,wide,positive,fox holes,fox holes,1,4713,1094175
+1fb75ca7804c955bf0ca8c8884d0b73d,length_duration,readings,long,positive,poems,poems,1,12665322,8678675
+1fb75ca7804c955bf0ca8c8884d0b73d,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+1fb75ca7804c955bf0ca8c8884d0b73d,strength,people,weak,negative,adults,people,0,480323270,480323270
+1fb75ca7804c955bf0ca8c8884d0b73d,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+1fb75ca7804c955bf0ca8c8884d0b73d,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+1fb75ca7804c955bf0ca8c8884d0b73d,strength,storms,strong,positive,thunderstorms,storms,0,3614108,3614108
+1fb75ca7804c955bf0ca8c8884d0b73d,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+1fb75ca7804c955bf0ca8c8884d0b73d,loudness,rooms,quiet,negative,classrooms,rooms,0,65454304,65454304
+1fb75ca7804c955bf0ca8c8884d0b73d,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+1fb75ca7804c955bf0ca8c8884d0b73d,height,animals,short,negative,monkeys,monkeys,1,4144229,58179731
+1fb75ca7804c955bf0ca8c8884d0b73d,price,alcoholic drinks,expensive,positive,bottles of wine,bottles of wine,1,127405,377118
+1fb75ca7804c955bf0ca8c8884d0b73d,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+1fb75ca7804c955bf0ca8c8884d0b73d,darkness,birds,dark,negative,crows,crows,1,1295877,19695831
+1fb75ca7804c955bf0ca8c8884d0b73d,size,plants,big,positive,trees,trees,1,27379426,35939932
+1fb75ca7804c955bf0ca8c8884d0b73d,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+1fb75ca7804c955bf0ca8c8884d0b73d,temperature,food,warm,positive,soups,soups,1,2141445,180152837
+1fb75ca7804c955bf0ca8c8884d0b73d,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+1fb75ca7804c955bf0ca8c8884d0b73d,weight,people,heavy,positive,adults,people,0,480323270,480323270
+1fb75ca7804c955bf0ca8c8884d0b73d,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+1fb75ca7804c955bf0ca8c8884d0b73d,speed,people,slow,negative,runners,runners,1,3917217,480323270
+1fb75ca7804c955bf0ca8c8884d0b73d,height,people,tall,positive,golfers,people,0,480323270,480323270
+1fb75ca7804c955bf0ca8c8884d0b73d,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+1fb75ca7804c955bf0ca8c8884d0b73d,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+817d275bf8220a4e63e2892f0faf1d8c,size,animals,small,negative,mice,animals,0,58179731,58179731
+817d275bf8220a4e63e2892f0faf1d8c,width,burrows,narrow,negative,caves,caves,1,2358085,1094175
+817d275bf8220a4e63e2892f0faf1d8c,hardness,floors,soft,negative,tile floors,tile floors,1,123821,7863848
+817d275bf8220a4e63e2892f0faf1d8c,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+817d275bf8220a4e63e2892f0faf1d8c,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+817d275bf8220a4e63e2892f0faf1d8c,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+817d275bf8220a4e63e2892f0faf1d8c,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+817d275bf8220a4e63e2892f0faf1d8c,weight,people,light,negative,adults,adults,1,32847475,480323270
+817d275bf8220a4e63e2892f0faf1d8c,height,animals,short,negative,birds,birds,1,19695831,58179731
+817d275bf8220a4e63e2892f0faf1d8c,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+817d275bf8220a4e63e2892f0faf1d8c,loudness,rooms,loud,positive,auditoria,rooms,0,65454304,65454304
+817d275bf8220a4e63e2892f0faf1d8c,strength,people,strong,positive,adults,adults,1,32847475,480323270
+817d275bf8220a4e63e2892f0faf1d8c,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+817d275bf8220a4e63e2892f0faf1d8c,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+817d275bf8220a4e63e2892f0faf1d8c,loudness,animals,quiet,negative,cats,cats,1,15738388,58179731
+817d275bf8220a4e63e2892f0faf1d8c,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+817d275bf8220a4e63e2892f0faf1d8c,width,roads,wide,positive,downtown streets,roads,0,15093824,15093824
+817d275bf8220a4e63e2892f0faf1d8c,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+817d275bf8220a4e63e2892f0faf1d8c,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+817d275bf8220a4e63e2892f0faf1d8c,darkness,birds,dark,negative,parrots,parrots,1,1049654,19695831
+817d275bf8220a4e63e2892f0faf1d8c,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+817d275bf8220a4e63e2892f0faf1d8c,speed,animals,quick,positive,elephants,elephants,1,2082778,58179731
+817d275bf8220a4e63e2892f0faf1d8c,speed,people,quick,positive,runners,runners,1,3917217,480323270
+fc6a8c195743e4d3c80a1420271aabc1,length_duration,dogs,long,positive,bassett hounds,dogs,0,28409576,28409576
+fc6a8c195743e4d3c80a1420271aabc1,size,plants,big,positive,flowers,flowers,1,58380229,35939932
+fc6a8c195743e4d3c80a1420271aabc1,temperature,food,warm,positive,soups,food,0,180152837,180152837
+fc6a8c195743e4d3c80a1420271aabc1,size,animals,big,positive,elephants,animals,0,58179731,58179731
+fc6a8c195743e4d3c80a1420271aabc1,width,roads,narrow,negative,highways,roads,0,15093824,15093824
+fc6a8c195743e4d3c80a1420271aabc1,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+fc6a8c195743e4d3c80a1420271aabc1,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+fc6a8c195743e4d3c80a1420271aabc1,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+fc6a8c195743e4d3c80a1420271aabc1,width,burrows,wide,positive,caverns,caverns,1,572761,1094175
+fc6a8c195743e4d3c80a1420271aabc1,price,alcoholic drinks,expensive,positive,beers,beers,1,2634057,377118
+fc6a8c195743e4d3c80a1420271aabc1,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+fc6a8c195743e4d3c80a1420271aabc1,darkness,birds,light,positive,parrots,birds,0,19695831,19695831
+fc6a8c195743e4d3c80a1420271aabc1,hardness,floors,soft,negative,wood floors,floors,0,7863848,7863848
+fc6a8c195743e4d3c80a1420271aabc1,strength,people,weak,negative,teenagers,people,0,480323270,480323270
+fc6a8c195743e4d3c80a1420271aabc1,weight,animals,light,negative,fish,animals,0,58179731,58179731
+fc6a8c195743e4d3c80a1420271aabc1,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+fc6a8c195743e4d3c80a1420271aabc1,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+fc6a8c195743e4d3c80a1420271aabc1,weight,people,heavy,positive,babies,babies,1,13073168,480323270
+fc6a8c195743e4d3c80a1420271aabc1,temperature,seasons,warm,positive,summer days,seasons,0,12035578,12035578
+fc6a8c195743e4d3c80a1420271aabc1,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+fc6a8c195743e4d3c80a1420271aabc1,strength,storms,weak,negative,thunderstorms,storms,0,3614108,3614108
+fc6a8c195743e4d3c80a1420271aabc1,length_duration,readings,short,negative,poems,poems,1,12665322,8678675
+2f51838048fe1172a132c78077637bdb,length_duration,readings,long,positive,novels,readings,0,8678675,8678675
+2f51838048fe1172a132c78077637bdb,temperature,seasons,cold,negative,fall days,fall days,1,12564,12035578
+2f51838048fe1172a132c78077637bdb,weight,people,light,negative,babies,babies,1,13073168,480323270
+2f51838048fe1172a132c78077637bdb,price,alcoholic drinks,expensive,positive,liquors,liquors,1,518686,377118
+2f51838048fe1172a132c78077637bdb,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+2f51838048fe1172a132c78077637bdb,hardness,floors,soft,negative,tile floors,floors,0,7863848,7863848
+2f51838048fe1172a132c78077637bdb,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+2f51838048fe1172a132c78077637bdb,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+2f51838048fe1172a132c78077637bdb,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+2f51838048fe1172a132c78077637bdb,height,people,short,negative,jockeys,jockeys,1,875781,480323270
+2f51838048fe1172a132c78077637bdb,width,roads,wide,positive,highways,highways,1,5745573,15093824
+2f51838048fe1172a132c78077637bdb,speed,animals,slow,negative,elephants,elephants,1,2082778,58179731
+2f51838048fe1172a132c78077637bdb,temperature,food,cold,negative,soups,soups,1,2141445,180152837
+2f51838048fe1172a132c78077637bdb,speed,people,quick,positive,joggers,joggers,1,260504,480323270
+2f51838048fe1172a132c78077637bdb,loudness,animals,loud,positive,dogs,dogs,1,28409576,58179731
+2f51838048fe1172a132c78077637bdb,strength,people,weak,negative,children,people,0,480323270,480323270
+2f51838048fe1172a132c78077637bdb,height,animals,tall,positive,birds,birds,1,19695831,58179731
+2f51838048fe1172a132c78077637bdb,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+2f51838048fe1172a132c78077637bdb,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+2f51838048fe1172a132c78077637bdb,price,statues,expensive,positive,bronze statues,statues,0,2837498,2837498
+2f51838048fe1172a132c78077637bdb,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+2f51838048fe1172a132c78077637bdb,size,animals,small,negative,monkeys,monkeys,1,4144229,58179731
+28bc5992145cdef69f959587378d1419,strength,storms,weak,negative,rains,storms,0,3614108,3614108
+28bc5992145cdef69f959587378d1419,width,burrows,wide,positive,caves,caves,1,2358085,1094175
+28bc5992145cdef69f959587378d1419,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+28bc5992145cdef69f959587378d1419,weight,people,heavy,positive,adults,adults,1,32847475,480323270
+28bc5992145cdef69f959587378d1419,hardness,sweets,hard,positive,chocolates,chocolates,1,3141854,2968535
+28bc5992145cdef69f959587378d1419,darkness,birds,light,positive,crows,birds,0,19695831,19695831
+28bc5992145cdef69f959587378d1419,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+28bc5992145cdef69f959587378d1419,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+28bc5992145cdef69f959587378d1419,height,animals,tall,positive,monkeys,monkeys,1,4144229,58179731
+28bc5992145cdef69f959587378d1419,height,people,tall,positive,basketball players,people,0,480323270,480323270
+28bc5992145cdef69f959587378d1419,length_duration,dogs,long,positive,chihuahuas,dogs,0,28409576,28409576
+28bc5992145cdef69f959587378d1419,strength,people,weak,negative,teenagers,teenagers,1,4979216,480323270
+28bc5992145cdef69f959587378d1419,hardness,floors,hard,positive,carpet floors,carpet floors,1,38431,7863848
+28bc5992145cdef69f959587378d1419,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+28bc5992145cdef69f959587378d1419,size,animals,small,negative,elephants,elephants,1,2082778,58179731
+28bc5992145cdef69f959587378d1419,size,plants,big,positive,bushes,bushes,1,1558141,35939932
+28bc5992145cdef69f959587378d1419,price,statues,cheap,negative,bronze statues,statues,0,2837498,2837498
+28bc5992145cdef69f959587378d1419,temperature,seasons,warm,positive,summer days,summer days,1,229054,12035578
+28bc5992145cdef69f959587378d1419,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+28bc5992145cdef69f959587378d1419,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+28bc5992145cdef69f959587378d1419,loudness,rooms,quiet,negative,study halls,study halls,1,17223,65454304
+28bc5992145cdef69f959587378d1419,loudness,animals,quiet,negative,donkeys,donkeys,1,427065,58179731
+28bc5992145cdef69f959587378d1419,weight,animals,heavy,positive,fish,fish,1,52768568,58179731
+666a6c58fae874f5e0dd26450e9e01e0,width,burrows,wide,positive,caverns,burrows,0,1094175,1094175
+666a6c58fae874f5e0dd26450e9e01e0,width,roads,narrow,negative,side roads,roads,0,15093824,15093824
+666a6c58fae874f5e0dd26450e9e01e0,temperature,seasons,cold,negative,winter days,seasons,0,12035578,12035578
+666a6c58fae874f5e0dd26450e9e01e0,weight,animals,light,negative,fish,fish,1,52768568,58179731
+666a6c58fae874f5e0dd26450e9e01e0,size,plants,big,positive,trees,trees,1,27379426,35939932
+666a6c58fae874f5e0dd26450e9e01e0,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+666a6c58fae874f5e0dd26450e9e01e0,hardness,sweets,hard,positive,marshmallows,marshmallows,1,301577,2968535
+666a6c58fae874f5e0dd26450e9e01e0,price,alcoholic drinks,cheap,negative,bottles of wine,bottles of wine,1,127405,377118
+666a6c58fae874f5e0dd26450e9e01e0,length_duration,dogs,long,positive,chihuahuas,chihuahuas,1,164502,28409576
+666a6c58fae874f5e0dd26450e9e01e0,height,people,short,negative,basketball players,basketball players,1,174833,480323270
+666a6c58fae874f5e0dd26450e9e01e0,strength,storms,weak,negative,hurricanes,hurricanes,1,3785008,3614108
+666a6c58fae874f5e0dd26450e9e01e0,temperature,food,warm,positive,salads,salads,1,2387032,180152837
+666a6c58fae874f5e0dd26450e9e01e0,price,statues,expensive,positive,platinum statue,statues,0,2837498,2837498
+666a6c58fae874f5e0dd26450e9e01e0,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+666a6c58fae874f5e0dd26450e9e01e0,hardness,floors,hard,positive,tile floors,floors,0,7863848,7863848
+666a6c58fae874f5e0dd26450e9e01e0,length_duration,readings,short,negative,stories,stories,1,115510308,8678675
+666a6c58fae874f5e0dd26450e9e01e0,speed,people,slow,negative,joggers,joggers,1,260504,480323270
+666a6c58fae874f5e0dd26450e9e01e0,height,animals,short,negative,giraffes,giraffes,1,260416,58179731
+666a6c58fae874f5e0dd26450e9e01e0,darkness,birds,light,positive,parrots,parrots,1,1049654,19695831
+666a6c58fae874f5e0dd26450e9e01e0,size,animals,small,negative,mice,mice,1,11969407,58179731
+666a6c58fae874f5e0dd26450e9e01e0,strength,people,strong,positive,children,children,1,206543771,480323270
+666a6c58fae874f5e0dd26450e9e01e0,speed,animals,slow,negative,cheetahs,cheetahs,1,217628,58179731
+011fcd0d44189f5e54890984894c24ca,temperature,food,cold,negative,soups,food,0,180152837,180152837
+011fcd0d44189f5e54890984894c24ca,loudness,animals,quiet,negative,dogs,dogs,1,28409576,58179731
+011fcd0d44189f5e54890984894c24ca,hardness,sweets,soft,negative,chocolates,sweets,0,2968535,2968535
+011fcd0d44189f5e54890984894c24ca,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+011fcd0d44189f5e54890984894c24ca,weight,people,heavy,positive,kids,kids,1,96621142,480323270
+011fcd0d44189f5e54890984894c24ca,temperature,seasons,warm,positive,winter days,winter days,1,80466,12035578
+011fcd0d44189f5e54890984894c24ca,weight,animals,heavy,positive,elephants,animals,0,58179731,58179731
+011fcd0d44189f5e54890984894c24ca,darkness,birds,light,positive,crows,crows,1,1295877,19695831
+011fcd0d44189f5e54890984894c24ca,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+011fcd0d44189f5e54890984894c24ca,strength,storms,strong,positive,hurricanes,storms,0,3614108,3614108
+011fcd0d44189f5e54890984894c24ca,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+011fcd0d44189f5e54890984894c24ca,strength,people,weak,negative,adults,adults,1,32847475,480323270
+011fcd0d44189f5e54890984894c24ca,speed,animals,slow,negative,sloths,animals,0,58179731,58179731
+011fcd0d44189f5e54890984894c24ca,size,animals,small,negative,mice,animals,0,58179731,58179731
+011fcd0d44189f5e54890984894c24ca,length_duration,dogs,short,negative,chihuahuas,dogs,0,28409576,28409576
+011fcd0d44189f5e54890984894c24ca,width,roads,narrow,negative,downtown streets,roads,0,15093824,15093824
+011fcd0d44189f5e54890984894c24ca,hardness,floors,hard,positive,carpet floors,floors,0,7863848,7863848
+011fcd0d44189f5e54890984894c24ca,loudness,rooms,loud,positive,classrooms,classrooms,1,4002675,65454304
+011fcd0d44189f5e54890984894c24ca,length_duration,readings,long,positive,stories,stories,1,115510308,8678675
+011fcd0d44189f5e54890984894c24ca,height,animals,tall,positive,giraffes,animals,0,58179731,58179731
+011fcd0d44189f5e54890984894c24ca,width,burrows,wide,positive,caverns,burrows,0,1094175,1094175
+011fcd0d44189f5e54890984894c24ca,price,statues,cheap,negative,plastic statues,statues,0,2837498,2837498
+011fcd0d44189f5e54890984894c24ca,speed,people,slow,negative,runners,runners,1,3917217,480323270
+4fed900e0c59a4b91f517fd79eac8829,weight,animals,light,negative,fish,fish,1,52768568,58179731
+4fed900e0c59a4b91f517fd79eac8829,size,plants,small,negative,bushes,bushes,1,1558141,35939932
+4fed900e0c59a4b91f517fd79eac8829,strength,people,strong,positive,teenagers,people,0,480323270,480323270
+4fed900e0c59a4b91f517fd79eac8829,length_duration,dogs,short,negative,dachshunds,dogs,0,28409576,28409576
+4fed900e0c59a4b91f517fd79eac8829,length_duration,readings,short,negative,novels,novels,1,7525142,8678675
+4fed900e0c59a4b91f517fd79eac8829,height,people,tall,positive,jockeys,jockeys,1,875781,480323270
+4fed900e0c59a4b91f517fd79eac8829,speed,animals,quick,positive,cheetahs,animals,0,58179731,58179731
+4fed900e0c59a4b91f517fd79eac8829,price,alcoholic drinks,cheap,negative,liquors,liquors,1,518686,377118
+4fed900e0c59a4b91f517fd79eac8829,width,burrows,narrow,negative,caves,burrows,0,1094175,1094175
+4fed900e0c59a4b91f517fd79eac8829,hardness,sweets,soft,negative,marshmallows,marshmallows,1,301577,2968535
+4fed900e0c59a4b91f517fd79eac8829,hardness,floors,hard,positive,wood floors,floors,0,7863848,7863848
+4fed900e0c59a4b91f517fd79eac8829,speed,people,slow,negative,walkers,walkers,1,1526422,480323270
+4fed900e0c59a4b91f517fd79eac8829,loudness,animals,loud,positive,dogs,animals,0,58179731,58179731
+4fed900e0c59a4b91f517fd79eac8829,width,roads,wide,positive,highways,highways,1,5745573,15093824
+4fed900e0c59a4b91f517fd79eac8829,height,animals,tall,positive,birds,birds,1,19695831,58179731
+4fed900e0c59a4b91f517fd79eac8829,temperature,seasons,cold,negative,fall days,seasons,0,12035578,12035578
+4fed900e0c59a4b91f517fd79eac8829,strength,storms,weak,negative,thunderstorms,thunderstorms,1,1410569,3614108
+4fed900e0c59a4b91f517fd79eac8829,size,animals,big,positive,elephants,animals,0,58179731,58179731
+4fed900e0c59a4b91f517fd79eac8829,temperature,food,warm,positive,ice cream,ice cream,1,6277647,180152837
+4fed900e0c59a4b91f517fd79eac8829,weight,people,light,negative,babies,babies,1,13073168,480323270
+4fed900e0c59a4b91f517fd79eac8829,price,statues,expensive,positive,plastic statues,statues,0,2837498,2837498
+4fed900e0c59a4b91f517fd79eac8829,darkness,birds,light,positive,seagulls,birds,0,19695831,19695831
