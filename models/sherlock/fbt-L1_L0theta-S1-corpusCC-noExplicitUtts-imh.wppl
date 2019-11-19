@@ -1,4 +1,4 @@
-// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork/ 1
+// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork/ 2
 
 var utterances = ["positiveAdjective", "negativeAdjective", "silence"]
 
@@ -41,8 +41,10 @@ var thresholdPrior = cache(function(form){
 
 var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
-var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
-var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
+// var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
+var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
+var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
+// var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
 
 // var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
@@ -52,6 +54,7 @@ var ccData = readDataFile(dataPath + cc_inference_DataFile,  ["specific", "subFr
 var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["val"])
 // var corpus_frequency_data = readDataFile(dataPath + corpus_frequency_DataFile, ["Frequencies"])
 
+var logistic = function(x) {1 / (1 + Math.exp(-x))}
 
 var degrees = levels(vsData, "degree");
 // var degrees = degrees0.slice(0, degrees0.length - 1);
@@ -69,9 +72,10 @@ var model = function(){
   // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
-  // var classParameters = {
-  //   frequency: uniformDrift({a:0, b: 3, width: 0.5})
-  // };
+  var classParameters = {
+		intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
+    frequency: uniformDrift({a: -3, b: 3, width: 0.5})
+  };
 
   foreach(degrees, function(degree){
 		// display(degree)
@@ -81,9 +85,9 @@ var model = function(){
 
     foreach(superordinate_categories, function(superordinate){
 			// display(superordinate)
-
+			var sup = superordinate == "floors" ? "floor materials" : superordinate
       var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate: superordinate});
-			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {super_sg: superordinate});
+			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {superordinate: sup});
       var subordinate_categories = levels(data_within_superordinate_cc, "NP")
 
 			// var supercatWeight = exp(
@@ -99,14 +103,14 @@ var model = function(){
         };
 
         var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP": subordinate});
-				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"item": subordinate});
+				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"np_pl": subordinate});
 
-        // var subcatWeight = exp(
-				// 	classParameters.frequency *
-				// 	Math.log(data_within_subordinate_cc[0].subFreq)
-				// );
+        var subcatWeight = logistic(
+					classParameters.intercept +
+					classParameters.frequency * Math.log(data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq)
+				)
 
-				var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
+				// var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
 				var supercatWeight = 1 - subcatWeight
 
         var comparisonClass_prior = Categorical({
@@ -196,8 +200,8 @@ var model = function(){
 
         var superSpeakerProbs = speaker1_super(form);
 
-				d_subcat_superSpeaker.length == 0 ? display("====EMPTY ADJ====") : null
-				d_subcat_ccInference.length == 0 ? display("====EMPTY CC====") : null
+				d_subcat_superSpeaker.length == 0 ? display("====EMPTY ADJ====" + superordinate + "_" + subordinate) : null
+				d_subcat_ccInference.length == 0 ? display("====EMPTY CC====" + superordinate + "_" + subordinate) : null
 
         mapData({data:d_subcat_superSpeaker}, function(d){
 	         // console.log("superSpeaker = " + superSpeakerProbs.score(d))
@@ -225,7 +229,8 @@ var model = function(){
 	})
 
   query.add(["parameter", "silenceProb", "NA",  "NA", "NA"], silenceCost)
-  // query.add(["parameter", "beta", "frequency",  "NA", "NA"], classParameters.frequency)
+  query.add(["parameter", "beta", "frequency",  "NA", "NA"], classParameters.frequency)
+	query.add(["parameter", "beta", "intercept",  "NA", "NA"], classParameters.intercept)
   query.add(["parameter", "speakerOptimality","adjEndorse", "NA", "NA"], alphas.adj_endorse)
   query.add(["parameter", "speakerOptimality","subordinateCC", "NA", "NA"], alphas.cc_inference)
 
@@ -233,10 +238,10 @@ var model = function(){
   return query
 }
 
-// var totalIterations = 50, lag =  1;
-var totalIterations = 250000, lag =  25;
+var totalIterations = 50, lag =  1;
+// var totalIterations = 250000, lag =  25;
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-silenceAlt-silenceCost-subcatWeightBySub-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,degree,superordinate,subordinate,task,adjective,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
