@@ -73,8 +73,14 @@ var model = function(){
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
   var classParameters = {
-		intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
-    frequency: uniformDrift({a: -3, b: 3, width: 0.5})
+		sub_basic: {
+			intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
+			frequency: uniformDrift({a: -3, b: 3, width: 0.5})
+		},
+		basic_super: {
+			intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
+			frequency: uniformDrift({a: -3, b: 3, width: 0.5})
+		}
   };
 
   foreach(degrees, function(degree){
@@ -89,6 +95,8 @@ var model = function(){
       var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate: superordinate});
 			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {superordinate: sup});
       var subordinate_categories = levels(data_within_superordinate_cc, "NP")
+
+			var item_set_heirarchy = categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
 
 			// var supercatWeight = exp(
 			// 	classParameters.frequency *
@@ -106,8 +114,8 @@ var model = function(){
 				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"np_pl": subordinate});
 
         var subcatWeight = logistic(
-					classParameters.intercept +
-					classParameters.frequency * Math.log(data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq)
+					classParameters[item_set_heirarchy].intercept +
+					classParameters[item_set_heirarchy].frequency * Math.log(data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq)
 				)
 
 				// var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
@@ -225,12 +233,19 @@ var model = function(){
 			query.add([degree, superordinate, subordinate, "sub_classprior", "NA"], subcatWeight);
 
       })
+
+			query.add([degree, superordinate, "item_set_heirarchy", "sub_basic", "NA"], item_set_heirarchy == "sub_basic" ? 1 : 0)
+
     })
+
 	})
 
   query.add(["parameter", "silenceProb", "NA",  "NA", "NA"], silenceCost)
-  query.add(["parameter", "beta", "frequency",  "NA", "NA"], classParameters.frequency)
-	query.add(["parameter", "beta", "intercept",  "NA", "NA"], classParameters.intercept)
+  query.add(["parameter", "beta", "frequency",  "sub_basic", "NA"], classParameters.sub_basic.frequency)
+	query.add(["parameter", "beta", "intercept",  "sub_basic", "NA"], classParameters.sub_basic.intercept)
+	query.add(["parameter", "beta", "frequency",  "basic_super", "NA"], classParameters.basic_super.frequency)
+	query.add(["parameter", "beta", "intercept",  "basic_super", "NA"], classParameters.basic_super.intercept)
+
   query.add(["parameter", "speakerOptimality","adjEndorse", "NA", "NA"], alphas.adj_endorse)
   query.add(["parameter", "speakerOptimality","subordinateCC", "NA", "NA"], alphas.cc_inference)
 
@@ -238,10 +253,10 @@ var model = function(){
   return query
 }
 
-var totalIterations = 50, lag =  1;
-// var totalIterations = 250000, lag =  25;
+// var totalIterations = 50, lag =  1;
+var totalIterations = 250000, lag =  25;
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogisticByItemSetHeirarchy-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,degree,superordinate,subordinate,task,adjective,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
