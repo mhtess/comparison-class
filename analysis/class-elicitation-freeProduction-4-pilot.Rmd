@@ -179,7 +179,7 @@ insert_super_sg = function(np) {
 
 df.trials.w.super <- df.trials %>% 
   rowwise() %>% 
-  mutate(#superordinate_sg = insert_super_sg(np), 
+  mutate(superordinate_sg = insert_super_sg(np), 
          superordinate = insert_super(np))
 
 
@@ -369,7 +369,7 @@ df.trials.filtered %>%
         
          ) %>%
   unnest_tokens(word, response)  %>% 
-  anti_join(stop_words)  %>% # remove stop words
+  #nti_join(stop_words)  %>% # remove stop words
   #anti_join(my_stop_words) %>%  # remove stop words
   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
@@ -395,7 +395,7 @@ df.trials.filtered %>%
   # check if response and anticipated superordinate match
     matchingSuper = containsString(as.character(cleanedPhrase), as.character(superordinate))
   ) %>%
-  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np, np_pl, np_match, cleanedPhrase, originalResponse, specific, matchingSuper) -> d.tidy.phrase.w.original
+  select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, superordinate_sg, adj_positiveness, np, np_pl, np_match, cleanedPhrase, originalResponse, specific, matchingSuper) -> d.tidy.phrase.w.original
 
 
 ```
@@ -408,12 +408,12 @@ The data points are grouped by NP, specificity and scale condition and the numbe
 
 # extract the mode response 
 d.tidy.resp.counts <- d.tidy.phrase.w.original %>% 
-  group_by(degree, superordinate, np, specific, adj, cleanedPhrase) %>% count() %>% 
+  group_by(degree, superordinate, np_match, specific, adj, cleanedPhrase) %>% count() %>% 
   mutate(n_unique_resps = n)
 
 # insert the mode NP (modal subordinate where participants gave subordinate response, modal superordinate where they gave superordinate response)
 # in column mode
-d.tidy.resp.counts <- d.tidy.resp.counts %>% group_by(np, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
+d.tidy.resp.counts <- d.tidy.resp.counts %>% group_by(np_match, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
 
 # analysis of modal responses
 d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>% rowwise() %>%  
@@ -461,9 +461,14 @@ d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode.pl %>%
   left_join(., df.frequencies, by = c("mode_np" ="Nps")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by=c("superordinate"="Nps"))   # add superordinate frequencies
 
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate, adj, adj_positiveness, np_for_freq, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate = superordinate, NP = np_for_freq,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate, adj, adj_positiveness, NP, response, specific, subFreq, superFreq)
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
 
-write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl-update.csv')
+# check if singular matches original
+df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv')
+anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
+
+
+write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL.csv')
 ```
 
 

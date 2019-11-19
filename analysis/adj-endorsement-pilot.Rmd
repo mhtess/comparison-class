@@ -372,7 +372,8 @@ insert_plural_np = function(np) {
 }
 
 
-df.adj.w.mode <- df.adj %>% rowwise() %>% mutate(np_pl = insert_plural_np(item))
+df.adj.w.mode <- df.adj %>% rowwise() %>% mutate(np_pl = insert_plural_np(item),
+                                                 superordinate_sg = insert_super_sg(item))
 ```
 
 ``` {r}
@@ -402,7 +403,9 @@ df.adj.w.mode <- df.adj.w.mode %>% mutate(superordinate = ifelse(item == "jockey
 df.cc.infer <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl-update.csv')
 anti_join(df.adj.w.mode, df.cc.infer, by=c("superordinate"="superordinate")) %>% View()
 anti_join(df.adj.w.mode, df.cc.infer, by=c("np_pl"="NP")) %>% View()
+adj.sg <- read_csv('../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv')
+anti_join(df.adj.w.mode, adj.sg, by =c("item"="item")) %>% View()
 
-df.adj.w.mode %>% select(workerid, degree, superordinate, item = np_pl, item_cond, key, val) %>% 
-  write_csv( '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL-update.csv')
+df.adj.w.mode %>% select(workerid, degree, superordinate_sg, superordinate_pl = superordinate, item_sg = item, item_pl = np_pl, item_cond, key, val) %>% 
+  write_csv( '../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-SG-PL.csv')
 ```
