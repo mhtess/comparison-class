@@ -42,9 +42,11 @@ var thresholdPrior = cache(function(form){
 var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
-var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
-var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
+// var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
+var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
+// var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
+var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-SG-PL.csv"
 // var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
 
 // var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
@@ -72,31 +74,65 @@ var model = function(){
   // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
-  var classParameters = {
-		sub_basic: {
+  var dummyClassParameters = {
+		class_type_1: {
 			intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
 			frequency: uniformDrift({a: -3, b: 3, width: 0.5})
 		},
-		basic_super: {
+		class_type_2: {
 			intercept: gaussianDrift({mu:0, sigma: 1, width: 0.5}),
 			frequency: uniformDrift({a: -3, b: 3, width: 0.5})
 		}
   };
 
+	// could be made smarter by not conditioning the prior on class_type_2 on the sampled value of class_type_1?
+	var comparison_class_subordiante_prior_prob = {
+		class_type_1: logistic(dummyClassParameters.class_type_1.intercept),
+		class_type_2: logistic(dummyClassParameters.class_type_2.intercept)
+	}
+
+	var classParameters = {
+			sub_basic: (
+				comparison_class_subordiante_prior_prob.class_type_1 >
+				comparison_class_subordiante_prior_prob.class_type_2
+			) ? dummyClassParameters.class_type_1 : dummyClassParameters.class_type_2,
+			basic_super: (
+				comparison_class_subordiante_prior_prob.class_type_1 >
+				comparison_class_subordiante_prior_prob.class_type_2
+			) ? dummyClassParameters.class_type_2 : dummyClassParameters.class_type_1,
+	}
+
+	// what we assume about the comparison class priors
+	// there is a basic-level bias, where the basic level will be preferred
+	// -- this means that the prior will be > 0.5 for one item_type and < 0.5 for the other_item type
+	// -- we code the higher of the two prior intercepts as the basic_super and the lower as sub_basic
+	// (we don't know which items are sub-basic and which ones are basic-super)
+	//
+
+	// we coiuld also assume just positive vs. negative slope for the two kinds (no diff. intercept)
+
   foreach(degrees, function(degree){
 		// display(degree)
     var data_within_degree_cc = _.filter(ccData, {degree: degree});
 		var data_within_degree_adj = _.filter(vsData, {degree: degree});
-    var superordinate_categories = levels(data_within_degree_cc, "superordinate")
+    var superordinate_categories = levels(data_within_degree_cc, "superordinate_pl")
+
+		data_within_degree_cc.length == 0 ? display("====EMPTY DEGREE ADJ====" + degree + "_") : null
+		data_within_degree_adj.length == 0 ? display("====EMPTY DEGREE CC====" + degree + "_") : null
+
 
     foreach(superordinate_categories, function(superordinate){
 			// display(superordinate)
-			var sup = superordinate == "floors" ? "floor materials" : superordinate
-      var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate: superordinate});
-			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {superordinate: sup});
-      var subordinate_categories = levels(data_within_superordinate_cc, "NP")
+			// var sup = superordinate == "floors" ? "floor materials" : superordinate
+      var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate_pl: superordinate});
+			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {superordinate_pl: superordinate});
+      var subordinate_categories = levels(data_within_superordinate_cc, "NP_sg")
 
 			var item_set_heirarchy = categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
+
+			data_within_superordinate_cc.length == 0 ? display("====EMPTY SUPER ADJ====" + superordinate + "_") : null
+			data_within_superordinate_adj.length == 0 ? display("====EMPTY SUPER CC====" + superordinate + "_") : null
+
 
 			// var supercatWeight = exp(
 			// 	classParameters.frequency *
@@ -110,8 +146,12 @@ var model = function(){
           sigma: uniformDrift({a: 0, b: 3, width: 0.3})
         };
 
-        var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP": subordinate});
-				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"np_pl": subordinate});
+        var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP_sg": subordinate});
+				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"item_sg": subordinate});
+
+				data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB ADJ====" + superordinate + "_" + subordinate) : null
+				data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB CC====" + superordinate + "_" + subordinate) : null
+
 
         var subcatWeight = logistic(
 					classParameters[item_set_heirarchy].intercept +
@@ -208,8 +248,8 @@ var model = function(){
 
         var superSpeakerProbs = speaker1_super(form);
 
-				d_subcat_superSpeaker.length == 0 ? display("====EMPTY ADJ====" + superordinate + "_" + subordinate) : null
-				d_subcat_ccInference.length == 0 ? display("====EMPTY CC====" + superordinate + "_" + subordinate) : null
+				d_subcat_superSpeaker.length == 0 ? display("====EMPTY form ADJ====" + superordinate + "_" + subordinate) : null
+				d_subcat_ccInference.length == 0 ? display("====EMPTY form CC====" + superordinate + "_" + subordinate) : null
 
         mapData({data:d_subcat_superSpeaker}, function(d){
 	         // console.log("superSpeaker = " + superSpeakerProbs.score(d))
@@ -253,8 +293,8 @@ var model = function(){
   return query
 }
 
-// var totalIterations = 50, lag =  1;
-var totalIterations = 250000, lag =  25;
+var totalIterations = 50, lag =  1;
+// var totalIterations = 250000, lag =  25;
 var samples = totalIterations/lag, burn = totalIterations / 2;
 var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogisticByItemSetHeirarchy-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
