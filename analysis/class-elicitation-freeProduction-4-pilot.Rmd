@@ -458,17 +458,17 @@ d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original %>% subset(., !(np_
 # this data can be fed into python frequency extractor, frequencies to be extracted are unique mode_np's and superordinates
 
 d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode.pl %>%
-  left_join(., df.frequencies, by = c("mode_np" ="Nps")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by = c("np_for_freq" ="Nps")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by=c("superordinate"="Nps"))   # add superordinate frequencies
 
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x.x, Frequencies.y.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x.x, superFreq = Frequencies.y.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
 
 # check if singular matches original
 df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv')
 anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
 
-write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL.csv')
+write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')
 ```
 
 
