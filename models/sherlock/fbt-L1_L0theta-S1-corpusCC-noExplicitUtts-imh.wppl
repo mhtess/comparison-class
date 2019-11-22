@@ -75,7 +75,7 @@ var model = function(){
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
 	var globalFrequencyEffect = uniformDrift({a: -3, b: 3, width: 0.5})
-	var globalInterceptEffect =  gaussianDrift({mu:0, sigma: 1, width: 0.5}),
+	var globalInterceptEffect =  gaussianDrift({mu:0, sigma: 1, width: 0.5})
 
   var dummyClassParameters = {
 		class_type_1: {
@@ -296,9 +296,9 @@ var model = function(){
   return query
 }
 
-// var totalIterations = 50, lag =  1;
+var totalIterations = 50, lag =  1;
 // var totalIterations = 250000, lag =  25;
-var totalIterations = 125000, lag =  20;
+// var totalIterations = 125000, lag =  20;
 var samples = totalIterations/lag, burn = totalIterations / 2;
 var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogisticTry2-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
