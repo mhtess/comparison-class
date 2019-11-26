@@ -526,9 +526,9 @@ var examples = [
         adj_positive: "long",
         adj_negative: "short",
         superordinate: "races",
-        positive: "triathlon",
+        positive: "triathlon race",
         neither_nor: "relay race",
-        negative: "sprint",
+        negative: "sprinting race",
         pronoun: "It",
         context: "PERSON looks up information about an upcoming PHRASE."
     },
@@ -672,7 +672,7 @@ var examples = [
         neither_nor: "town",
         negative: "village",
         pronoun: "It",
-        context: "PERSON is planning to move and checks out a PHRASE.",
+        context: "PERSON is planning to move and reads about a nearby PHRASE.",
         environment_mod: "there"
     },
     {
@@ -745,7 +745,7 @@ var examples = [
         neither_nor: "fan",
         negative: "toaster",
         pronoun: "It",
-        context: "PERSON is in PRO appartment and turns on a PHRASE."
+        context: "PERSON is in PRO apartment and turns on a PHRASE."
     },
     {
         worker_id: "55",
@@ -1432,12 +1432,12 @@ var examples = [
         degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
-        superordinate: "appliances",
+        superordinate: "locations",
         positive: "stove",
         neither_nor: "pantry",
         negative: "freezer",
         pronoun: "It",
-        context: "PERSON is in PRO kitchen and touches the PHRASE."
+        context: "PERSON is in PRO kitchen and puts PRO hand in the PHRASE."
     },
     {
         worker_id: "105",
