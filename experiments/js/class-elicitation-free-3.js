@@ -79,6 +79,7 @@ function make_slides(f) {
   slides.instructions = slide({
     name : "instructions",
     start: function() {
+      $(".display_trials").html(30)
       $(".catchErr").hide();
     },
     button: function() {
@@ -233,17 +234,14 @@ function make_slides(f) {
           "trial_type" : "free_class_elicitation",
           "trial_num": this.trial_num,
           "stim_id": this.stim_id,
-          "rt": this.rt,
-          "context" : this.context_mod,
           "np" : this.phrase,
-          "np_positiveness" : this.np_positiveness,
+          "np_expectations" : this.np_positiveness,
           "adj" : this.adj,
+          "adj_polarity" : this.adj_positiveness,
+          "rt": this.rt,
+          "context_sentence" : this.context_mod,
           "degree" : this.degree,
           "superordinate": this.superordinate,
-          "adj_positiveness" : this.adj_positiveness,
-          "adj" : this.adj,
-          "np" : this.phrase,
-          "superordinate": this.stim.superordinate,
           "response" : response
         }));
         this.trial_num++;
@@ -312,7 +310,7 @@ function make_slides(f) {
        "green shirt",
        "shiny necklace",
        "purple guitar",
-       "wild dog"
+       "wild animal"
      ]
 
      this.check_properties = _.shuffle(_.flatten([exp.memory_properties, this.catch_properties]))
@@ -422,7 +420,7 @@ function init() {
   })();
   console.log(examples.length)
   // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
-  exp.n_trials = 24
+  exp.n_trials = 36
 
   // Randomize ordering of positive, negative, and neither-nor trials
   exp.positivities = [];
