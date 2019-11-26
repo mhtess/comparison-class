@@ -90,29 +90,16 @@
 
   <div class="slide" id="instructions">
     <h3>Instructions</h3>
-    <p>On each trial, you will be asked to rephrase something a person said. The sentence will contain a word that is <i>relative</i> and your task is to figure out what the word is relative to!</p>
-
-    <p>For example: </p>
-
-    <center>
+    <p align="left">On each trial, you will be asked to rephrase something a person said.
+      The person that contains a word that is <em>relative</em> and your task is to figure out what the word is relative to!</p>
+    <p align="left">For example:</p>
     <p>Speaker A: "The Empire State Building is tall."</p>
     <p><i>What do you think Speaker A meant?</i></p>
-
-    <p>Check the boxes next to all of the sentence completions that you think are reasonable:</p>
-
-    <p>The Empire State Building is tall relative to other <b>skyscrapers</b>. <input type="checkbox" id="valid1"></input>
-    <p>The Empire State Building is tall relative to other <b>birds</b>. <input type="checkbox" id="invalid1"></input>
-    <p>The Empire State Building is tall relative to other <b>men</b>. <input type="checkbox" id="invalid2"></input>
-    <p>The Empire State Building is tall relative to other <b>buildings</b>. <input type="checkbox" id="valid2"></input>
-
-
-</p>
-
-    <p>In each of the following trials, you will be asked to complete the given sentence in the way that you feel is most reasonable for the given situation. There are 24 trials in total. Press "Continue" to begin.</p>
-    </center>
-
+    <p>"The Empire State Building is tall relative to other <input type="text" class="textbox" id="catch_response" style="width:160px;"></input>."<p></p></p>
+    <p align="left">Fill in the blank with the most sensible comparison. <strong>Try to use your common sense!</strong> There are <span class="display_trials"></span> trials in total. Press "Continue" to begin.</p>
     <button onclick="_s.button()">Continue</button>
-  </div>
+    <p class="catchErr">Please enter the correct text response before continuing.</p>
+    </div>
 
   <div class="slide" id="single_trial">
     <p class="display_condition">{{}}</p>
