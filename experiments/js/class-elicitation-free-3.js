@@ -244,7 +244,7 @@ function make_slides(f) {
        "green shirt",
        "shiny necklace",
        "purple guitar",
-       "wild dog"
+       "wild animal"
      ]
 
      this.check_properties = _.shuffle(_.flatten([exp.memory_properties, this.catch_properties]))
