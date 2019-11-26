@@ -10,6 +10,7 @@ function make_slides(f) {
 
   slides.botcaptcha = slide({
      name : "botcaptcha",
+     trial_num: 1,
      start: function() {
        $("#error").hide();
        $("#error_incorrect").hide();
@@ -17,13 +18,23 @@ function make_slides(f) {
        $("#error_1more").hide();
      },
      button: function() {
-       bot_response = $("#botresponse").val().trim();
-       bot_listener = $("#listener").val();
-       if (bot_response == botlistener) {
+       // var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
+       // var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
 
+       bot_response = $("#botresponse").val();
+       if (bot_response.length == 0) {
+           $("#error_incorrect").show();
+
+       } else {
+         exp.catch_trials.push({
+           "condition": "botcaptcha",
+           "response": bot_response
+         });
        }
+       exp.go();
      }
   });
+
 
   slides.instructions = slide({
     name : "instructions",
@@ -453,14 +464,4 @@ function init() {
   });
 
   exp.go(); //show first slide
-}
-
-function botspeaker() {
-  var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
-  return speaker;
-}
-
-function botlistener() {
-  var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
-  return listener;
 }
