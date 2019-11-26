@@ -6,8 +6,8 @@ var examples = [
   // ---------  DARKNESS: DARK - LIGHT (10) -----------
 
     {
-        worker_id: "1",
-        stim_id: "9",
+        stim_id: "1",
+        author_id: "9",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -20,8 +20,8 @@ var examples = [
 
     },
     {
-        worker_id: "2",
-        stim_id: "9",
+        stim_id: "2",
+        author_id: "9",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -33,8 +33,8 @@ var examples = [
         context: "PERSON bought a can of PHRASE and is testing it for the first time."
     },
     {
-        worker_id: "3",
-        stim_id: "15",
+        stim_id: "3",
+        author_id: "15",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -46,8 +46,8 @@ var examples = [
         context: "PERSON is at a bakery and looks at the color of a PHRASE."
     },
     {
-        worker_id: "4",
-        stim_id: "6",
+        stim_id: "4",
+        author_id: "6",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -62,8 +62,8 @@ var examples = [
         context: "PERSON is at a grocery store and looks at the color of PRE PHRASE."
     },
     {
-        worker_id: "5",
-        stim_id: "13",
+        stim_id: "5",
+        author_id: "13",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -76,8 +76,8 @@ var examples = [
         environment_mod: "out here"
     },
     {
-        worker_id: "6",
-        stim_id: "3",
+        stim_id: "6",
+        author_id: "3",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -89,8 +89,8 @@ var examples = [
         context: "PERSON is writing with a PHRASE and notices the color of the script."
     },
     // {
-    //     worker_id: "7",
-    //     stim_id: "2",
+    //     stim_id: "7",
+    //     author_id: "2",
     //     degree: "darkness",
     //     adj_positive: "light",
     //     adj_negative: "dark",
@@ -103,8 +103,8 @@ var examples = [
     //     environment_mod: "out here"
     // },
     {
-        worker_id: "8",
-        stim_id: "9",
+        stim_id: "8",
+        author_id: "9",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -116,8 +116,8 @@ var examples = [
         context: "PERSON is creating a flower bouquet and picks out a PHRASE."
     },
     {
-        worker_id: "9",
-        stim_id: "2",
+        stim_id: "9",
+        author_id: "2",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -129,8 +129,8 @@ var examples = [
         context: "PERSON takes a walk and notices the color of a PHRASE."
     },
     {
-        worker_id: "10",
-        stim_id: "3",
+        stim_id: "10",
+        author_id: "3",
         degree: "darkness",
         adj_positive: "light",
         adj_negative: "dark",
@@ -145,8 +145,8 @@ var examples = [
 // --------- HARDNESS : HARD -SOFT (10) -----------
 
     {
-        worker_id: "11",
-        stim_id: "3",
+        stim_id: "11",
+        author_id: "3",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -158,8 +158,8 @@ var examples = [
         context: "PERSON is at a grocery store and picks up a PHRASE."
     },
     {
-        worker_id: "12",
-        stim_id: "6",
+        stim_id: "12",
+        author_id: "6",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -171,8 +171,8 @@ var examples = [
         context: "PERSON is at a farmer's market and picks up a PHRASE."
     },
     {
-        worker_id: "13",
-        stim_id: "10",
+        stim_id: "13",
+        author_id: "10",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -187,8 +187,8 @@ var examples = [
         context: "PERSON takes a bite of PRE PHRASE."
     },
     {
-        worker_id: "14",
-        stim_id: "5",
+        stim_id: "14",
+        author_id: "5",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -200,8 +200,8 @@ var examples = [
         context: "PERSON is eating a PHRASE."
     },
     {
-        worker_id: "15",
-        stim_id: "3",
+        stim_id: "15",
+        author_id: "3",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -213,8 +213,8 @@ var examples = [
         context: "PERSON steps onto the PHRASE floor of a room."
     },
     {
-        worker_id: "16",
-        stim_id: "7",
+        stim_id: "16",
+        author_id: "7",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -226,8 +226,8 @@ var examples = [
         context: "PERSON sits down on a PHRASE."
     },
     {
-        worker_id: "17",
-        stim_id: "3",
+        stim_id: "17",
+        author_id: "3",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -239,8 +239,8 @@ var examples = [
         context: "PERSON picks up a PHRASE."
     },
     {
-        worker_id: "18",
-        stim_id: "11",
+        stim_id: "18",
+        author_id: "11",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -252,8 +252,8 @@ var examples = [
         context: "PERSON is at a hardware store and picks up a piece of PHRASE."
     },
     {
-        worker_id: "19",
-        stim_id: "14",
+        stim_id: "19",
+        author_id: "14",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -265,8 +265,8 @@ var examples = [
         context: "PERSON is in PRO bedroom and sits on a PHRASE."
     },
     {
-        worker_id: "20",
-        stim_id: "12",
+        stim_id: "20",
+        author_id: "12",
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
@@ -282,8 +282,8 @@ var examples = [
 
 
     {
-        worker_id: "21",
-        stim_id: "6",
+        stim_id: "21",
+        author_id: "6",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -295,8 +295,8 @@ var examples = [
         context: "PERSON is at a zoo and looks at a PHRASE."
     },
     {
-        worker_id: "22",
-        stim_id: "2",
+        stim_id: "22",
+        author_id: "2",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -308,8 +308,8 @@ var examples = [
         context: "PERSON takes a walk in a garden and sees a PHRASE."
     },
     {
-        worker_id: "23",
-        stim_id: "7",
+        stim_id: "23",
+        author_id: "7",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -324,8 +324,8 @@ var examples = [
         context: "PERSON is looking at PRE PHRASE."
     },
     { // MH: make sure this works
-        worker_id: "24",
-        stim_id: "15",
+        stim_id: "24",
+        author_id: "15",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -340,8 +340,8 @@ var examples = [
         context: "PERSON sees PRE PHRASE."
     },
     {
-        worker_id: "25",
-        stim_id: "6",
+        stim_id: "25",
+        author_id: "6",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -353,8 +353,8 @@ var examples = [
         context: "PERSON is looking at a PHRASE."
     },
     {
-        worker_id: "26",
-        stim_id: "2",
+        stim_id: "26",
+        author_id: "2",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -366,8 +366,8 @@ var examples = [
         context: "PERSON is in a park and sees a PHRASE."
     },
     {
-        worker_id: "27",
-        stim_id: "8",
+        stim_id: "27",
+        author_id: "8",
         degree: "height",
         adj_positive: "tall",
         adj_negative: "short",
@@ -380,7 +380,7 @@ var examples = [
     },
     {
       worjer_id: "28",
-      stim_id: "custom",
+      author_id: "custom",
       degree: "height",
       positive: "redwood tree",
       negative: "bonsai tree",
@@ -395,8 +395,8 @@ var examples = [
       context: "PERSON is walking in a botanical garden and sees PRE PHRASE."
     },
     {
-      worker_id: "29",
-      stim_id: "custom",
+      stim_id: "29",
+      author_id: "custom",
       degree: "height",
       positive: "dinosaur skeleton",
       neither_nor: "statue",
@@ -412,8 +412,8 @@ var examples = [
 // ----------- DURATION / LENGTH : LONG - SHORT (10)----------
 
     {
-        worker_id: "30",
-        stim_id: "3",
+        stim_id: "30",
+        author_id: "3",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -425,8 +425,8 @@ var examples = [
         context: "PERSON is shopping and looks at a pair of PHRASE."
     },
     {
-        worker_id: "31",
-        stim_id: "3",
+        stim_id: "31",
+        author_id: "3",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -438,8 +438,8 @@ var examples = [
         context: "PERSON lives in a city and sees a PHRASE pass by."
     },
     {
-        worker_id: "32",
-        stim_id: "1",
+        stim_id: "32",
+        author_id: "1",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -451,8 +451,8 @@ var examples = [
         context: "PERSON is at a pet store and notices the length of a PHRASE."
     },
     {
-        worker_id: "33",
-        stim_id: "15",
+        stim_id: "33",
+        author_id: "15",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -465,8 +465,8 @@ var examples = [
     },
 
     {
-        worker_id: "35",
-        stim_id: "15",
+        stim_id: "35",
+        author_id: "15",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -478,8 +478,8 @@ var examples = [
         context: "PERSON thinks about reading PRO favorite PHRASE."
     },
     {
-        worker_id: "36",
-        stim_id: "7",
+        stim_id: "36",
+        author_id: "7",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -491,8 +491,8 @@ var examples = [
         context: "PERSON sees a friend driving a PHRASE."
     },
     {
-        worker_id: "37",
-        stim_id: "14",
+        stim_id: "37",
+        author_id: "14",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -504,8 +504,8 @@ var examples = [
         context: "PERSON thinks about watching PRO favorite PHRASE."
     },
     {
-        worker_id: "38",
-        stim_id: "1",
+        stim_id: "38",
+        author_id: "1",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -520,8 +520,8 @@ var examples = [
         context: "PERSON is looking at PRE PHRASE on Google Maps."
     },
     {
-        worker_id: "39",
-        stim_id: "3",
+        stim_id: "39",
+        author_id: "3",
         degree: "length_duration",
         adj_positive: "long",
         adj_negative: "short",
@@ -533,8 +533,8 @@ var examples = [
         context: "PERSON looks up information about an upcoming PHRASE."
     },
     {
-      worker_id: "40",
-      stim_id: "custom",
+      stim_id: "40",
+      author_id: "custom",
       degree: "length_duration",
       positive: "opera",
       negative: "song",
@@ -553,8 +553,8 @@ var examples = [
 // ------------ LOUDNESS : LOUD - / NOISY - QUIET (18) ----------
 
     {
-        worker_id: "41",
-        stim_id: "11",
+        stim_id: "41",
+        author_id: "11",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -566,8 +566,8 @@ var examples = [
         context: "PERSON walks by a courtyard and hears a PHRASE."
     },
     {
-        worker_id: "42",
-        stim_id: "7",
+        stim_id: "42",
+        author_id: "7",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -579,8 +579,8 @@ var examples = [
         context: "PERSON is listening to a PHRASE."
     },
     {
-        worker_id: "43",
-        stim_id: "8",
+        stim_id: "43",
+        author_id: "8",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -593,8 +593,8 @@ var examples = [
         environment_mod: "in here"
     },
     {
-        worker_id: "44",
-        stim_id: "7",
+        stim_id: "44",
+        author_id: "7",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -606,8 +606,8 @@ var examples = [
         context: "PERSON is at a friend's place and notices PRO pet PHRASE."
     },
     {
-        worker_id: "45",
-        stim_id: "6",
+        stim_id: "45",
+        author_id: "6",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -620,8 +620,8 @@ var examples = [
         environment_mod: "in here"
     },
     {
-        worker_id: "46",
-        stim_id: "1",
+        stim_id: "46",
+        author_id: "1",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -633,8 +633,8 @@ var examples = [
         context: "PERSON is taking a walk in a park and hears the cry of a PHRASE."
     },
     {
-        worker_id: "47",
-        stim_id: "10",
+        stim_id: "47",
+        author_id: "10",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -646,8 +646,8 @@ var examples = [
         context: "PERSON is listening to a friend playing the PHRASE."
     },
     {
-        worker_id: "48",
-        stim_id: "2",
+        stim_id: "48",
+        author_id: "2",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -662,8 +662,8 @@ var examples = [
         context: "PERSON is in a room with PRE PHRASE."
     },
     {
-        worker_id: "49",
-        stim_id: "15",
+        stim_id: "49",
+        author_id: "15",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -676,8 +676,8 @@ var examples = [
         environment_mod: "there"
     },
     {
-        worker_id: "50",
-        stim_id: "13",
+        stim_id: "50",
+        author_id: "13",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -690,8 +690,8 @@ var examples = [
         environment_mod: "in here"
     },
     {
-        worker_id: "51",
-        stim_id: "7",
+        stim_id: "51",
+        author_id: "7",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -706,8 +706,8 @@ var examples = [
         context: "PERSON is at the zoo and walks by PRE PHRASE."
     },
     {
-        worker_id: "52",
-        stim_id: "1",
+        stim_id: "52",
+        author_id: "1",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -719,8 +719,8 @@ var examples = [
         context: "PERSON hears a friend play the PHRASE."
     },
     {
-        worker_id: "53",
-        stim_id: "14",
+        stim_id: "53",
+        author_id: "14",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -735,8 +735,8 @@ var examples = [
         context: "PERSON is on the sidewalk and hears PRE PHRASE drive by."
     },
     {
-        worker_id: "54",
-        stim_id: "2",
+        stim_id: "54",
+        author_id: "2",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -748,8 +748,8 @@ var examples = [
         context: "PERSON is in PRO appartment and turns on a PHRASE."
     },
     {
-        worker_id: "55",
-        stim_id: "11",
+        stim_id: "55",
+        author_id: "11",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -762,8 +762,8 @@ var examples = [
         environment_mod: "in here"
     },
     {
-        worker_id: "56",
-        stim_id: "5",
+        stim_id: "56",
+        author_id: "5",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -778,8 +778,8 @@ var examples = [
         context: "PERSON is in a forest and hears a PHRASE."
     },
     {
-        worker_id: "57",
-        stim_id: "7",
+        stim_id: "57",
+        author_id: "7",
         degree: "loudness_n",
         adj_positive: "noisy",
         adj_negative: "quiet",
@@ -791,8 +791,8 @@ var examples = [
         context: "PERSON is at a lake and hears the sound of a PHRASE."
     },
     {
-        worker_id: "58",
-        stim_id: "10",
+        stim_id: "58",
+        author_id: "10",
         degree: "loudness",
         adj_positive: "loud",
         adj_negative: "quiet",
@@ -812,8 +812,8 @@ var examples = [
 // ------------ PRICE: EXPENSIVE - CHEAP (12) -----------
 
     {
-        worker_id: "59",
-        stim_id: "3",
+        stim_id: "59",
+        author_id: "3",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -825,8 +825,8 @@ var examples = [
         context: "PERSON considers buying a PHRASE for PRO commute."
     },
     {
-        worker_id: "60",
-        stim_id: "5",
+        stim_id: "60",
+        author_id: "5",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -838,8 +838,8 @@ var examples = [
         context: "PERSON is at a decoration shop and looks at a statue made of PHRASE."
     },
     {
-        worker_id: "61",
-        stim_id: "6",
+        stim_id: "61",
+        author_id: "6",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -854,8 +854,8 @@ var examples = [
         context: "PERSON is looking for a new place and checks out PRE PHRASE."
     },
     {
-        worker_id: "62",
-        stim_id: "5",
+        stim_id: "62",
+        author_id: "5",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -867,8 +867,8 @@ var examples = [
         context: "PERSON is shopping for a snack and checks out some PHRASE."
     },
     {
-        worker_id: "63",
-        stim_id: "15",
+        stim_id: "63",
+        author_id: "15",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -880,8 +880,8 @@ var examples = [
         context: "PERSON is shopping for a pair of PHRASE."
     },
     {
-        worker_id: "64",
-        stim_id: "2",
+        stim_id: "64",
+        author_id: "2",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -893,8 +893,8 @@ var examples = [
         context: "PERSON is shopping for spices and looks at PHRASE."
     },
     {
-        worker_id: "65",
-        stim_id: "7",
+        stim_id: "65",
+        author_id: "7",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -906,8 +906,8 @@ var examples = [
         context: "PERSON wants to buy jewelry and looks at one made of PHRASE."
     },
     {
-        worker_id: "66",
-        stim_id: "7",
+        stim_id: "66",
+        author_id: "7",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -919,8 +919,8 @@ var examples = [
         context: "PERSON is shopping and looks at a PHRASE."
     },
     {
-        worker_id: "67",
-        stim_id: "15",
+        stim_id: "67",
+        author_id: "15",
         degree: "price",
         adj_positive: "expensive",
         adj_negative: "cheap",
@@ -932,8 +932,8 @@ var examples = [
         context: "PERSON is at a grocery store and looks at the price of PHRASE."
     },
     {
-        worker_id: "68",
-        stim_id: "custom",
+        stim_id: "68",
+        author_id: "custom",
         degree: "price",
         positive: "steak",
         negative: "pork",
@@ -945,8 +945,8 @@ var examples = [
         context: "PERSON is at the butchershop and looks at a piece of PHRASE."
     },
     {
-         worker_id: "69",
-         stim_id: "custom",
+         stim_id: "69",
+         author_id: "custom",
          degree: "price",
          positive: "bottle of top-shelf liquor",
          negative: "six-pack of beer",
@@ -958,8 +958,8 @@ var examples = [
          context: "PERSON is at a liquor store and wants to buy a PHRASE."
      },
      {
-          worker_id: "70",
-          stim_id: "custom",
+          stim_id: "70",
+          author_id: "custom",
           degree: "price",
           positive: "steak house",
           negative: "diner",
@@ -976,8 +976,8 @@ var examples = [
 // -------------SIZE : BIG - SMALL (11) -------------
 
     {
-        worker_id: "71",
-        stim_id: "5",
+        stim_id: "71",
+        author_id: "5",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -989,8 +989,8 @@ var examples = [
         context: "PERSON is at a gardening store and looks at a PHRASE."
     },
     {
-        worker_id: "72",
-        stim_id: "4",
+        stim_id: "72",
+        author_id: "4",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1005,8 +1005,8 @@ var examples = [
         context: "PERSON is at the zoo and sees PRE PHRASE."
     },
     {
-        worker_id: "73",
-        stim_id: "10",
+        stim_id: "73",
+        author_id: "10",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1021,8 +1021,8 @@ var examples = [
         context: "PERSON is looking in a terrarium at the zoo and sees PRE PHRASE."
     },
     {
-        worker_id: "74",
-        stim_id: "3",
+        stim_id: "74",
+        author_id: "3",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1034,8 +1034,8 @@ var examples = [
         context: "PERSON is walking down the street and sees a PHRASE."
     },
     {
-        worker_id: "75",
-        stim_id: "3",
+        stim_id: "75",
+        author_id: "3",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1047,8 +1047,8 @@ var examples = [
         context: "PERSON is at a farmer's market and picks up a PHRASE."
     },
     {
-        worker_id: "76",
-        stim_id: "2",
+        stim_id: "76",
+        author_id: "2",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1060,8 +1060,8 @@ var examples = [
         context: "PERSON is at an aquarium and sees a PHRASE."
     },
     {
-        worker_id: "77",
-        stim_id: "3",
+        stim_id: "77",
+        author_id: "3",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1073,8 +1073,8 @@ var examples = [
         context: "PERSON sees PRO friend's new PHRASE."
     },
     {
-        worker_id: "78",
-        stim_id: "7",
+        stim_id: "78",
+        author_id: "7",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1089,8 +1089,8 @@ var examples = [
         context: "PERSON is shopping at an appliances store and looks at PRE PHRASE. "
     },
     {
-        worker_id: "79",
-        stim_id: "12",
+        stim_id: "79",
+        author_id: "12",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1102,8 +1102,8 @@ var examples = [
         context: "PERSON is taking a walk and sees a PHRASE."
     },
     {
-        worker_id: "80",
-        stim_id: "4",
+        stim_id: "80",
+        author_id: "4",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1115,8 +1115,8 @@ var examples = [
         context: "PERSON is at a botanical garden and sees a PHRASE."
     },
     {
-        worker_id: "81",
-        stim_id: "11",
+        stim_id: "81",
+        author_id: "11",
         degree: "size",
         adj_positive: "big",
         adj_negative: "small",
@@ -1133,8 +1133,8 @@ var examples = [
 // --------------- SPEED : QUICK / FAST - SLOW (1) -------------
 
     {
-        worker_id: "82",
-        stim_id: "11",
+        stim_id: "82",
+        author_id: "11",
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
@@ -1146,8 +1146,8 @@ var examples = [
         context: "PERSON is in the park and sees a PHRASE."
     },
     {
-        worker_id: "83",
-        stim_id: "1",
+        stim_id: "83",
+        author_id: "1",
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
@@ -1162,8 +1162,8 @@ var examples = [
         context: "PERSON is at the zoo and watches PRE PHRASE move."
     },
     {
-        worker_id: "84",
-        stim_id: "3",
+        stim_id: "84",
+        author_id: "3",
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
@@ -1178,8 +1178,8 @@ var examples = [
         context: "PERSON wants to cook dinner and considers using PRE PHRASE."
     },
     {
-        worker_id: "85",
-        stim_id: "1",
+        stim_id: "85",
+        author_id: "1",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1191,8 +1191,8 @@ var examples = [
         context: "PERSON sees a PHRASE on the highway."
     },
     {
-        worker_id: "86",
-        stim_id: "12",
+        stim_id: "86",
+        author_id: "12",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1204,8 +1204,8 @@ var examples = [
         context: "PERSON is travelling on PRO friend's new PHRASE."
     },
     {
-        worker_id: "87",
-        stim_id: "1",
+        stim_id: "87",
+        author_id: "1",
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
@@ -1217,8 +1217,8 @@ var examples = [
         context: "PERSON is at a friend's house and sees their pet PHRASE come towards them."
     },
     {
-        worker_id: "88",
-        stim_id: "4",
+        stim_id: "88",
+        author_id: "4",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1230,8 +1230,8 @@ var examples = [
         context: "PERSON is at the zoo, watching a PHRASE."
     },
     {
-        worker_id: "89",
-        stim_id: "12",
+        stim_id: "89",
+        author_id: "12",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1243,8 +1243,8 @@ var examples = [
         context: "PERSON want to go on vacation and thinks about travelling by PHRASE."
     },
     {
-        worker_id: "90",
-        stim_id: "13",
+        stim_id: "90",
+        author_id: "13",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1256,8 +1256,8 @@ var examples = [
         context: "PERSON is watching a PHRASE jogging."
     },
     {
-        worker_id: "91",
-        stim_id: "14",
+        stim_id: "91",
+        author_id: "14",
         degree: "speed",
         adj_positive: "quick",
         adj_negative: "slow",
@@ -1272,8 +1272,8 @@ var examples = [
         context: "PERSON is taking a walk with PRE PHRASE."
     },
     {
-        worker_id: "92",
-        stim_id: "10",
+        stim_id: "92",
+        author_id: "10",
         degree: "speed_f",
         adj_positive: "fast",
         adj_negative: "slow",
@@ -1290,8 +1290,8 @@ var examples = [
 // -------------- STRENGTH : STRONG -WEAK (7)------------------
 
     {
-        worker_id: "93",
-        stim_id: "4",
+        stim_id: "93",
+        author_id: "4",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1306,8 +1306,8 @@ var examples = [
         context: "PERSON watches PRE PHRASE lift up a box."
     },
     {
-        worker_id: "94",
-        stim_id: "10",
+        stim_id: "94",
+        author_id: "10",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1319,8 +1319,8 @@ var examples = [
         context: "PERSON is at the zoo and looks at a PHRASE."
     },
     {
-        worker_id: "95",
-        stim_id: "3",
+        stim_id: "95",
+        author_id: "3",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1332,8 +1332,8 @@ var examples = [
         context: "PERSON is hearing about the PHRASE that is heading towards them."
     },
     {
-        worker_id: "96",
-        stim_id: "14",
+        stim_id: "96",
+        author_id: "14",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1345,8 +1345,8 @@ var examples = [
         context: "PERSON is watching a PHRASE lift up weights."
     },
     {
-        worker_id: "97",
-        stim_id: "9",
+        stim_id: "97",
+        author_id: "9",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1358,8 +1358,8 @@ var examples = [
         context: "PERSON is in a forest and looks at a tree PHRASE."
     },
     {
-        worker_id:"98",
-        stim_id: "custom",
+        stim_id:"98",
+        author_id: "custom",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1371,8 +1371,8 @@ var examples = [
         context: "PERSON is painting and tries a new PHRASE."
     },
     {
-        worker_id: "99",
-        stim_id: "custom",
+        stim_id: "99",
+        author_id: "custom",
         degree: "strength",
         adj_positive: "strong",
         adj_negative: "weak",
@@ -1387,8 +1387,8 @@ var examples = [
 
 // ------------ TEMPERATURE : HOT / WARM - COLD (8) ---------
     {
-        worker_id: "100",
-        stim_id: "3",
+        stim_id: "100",
+        author_id: "3",
         degree: "temperature",
         adj_positive: "warm",
         adj_negative: "cold",
@@ -1400,8 +1400,8 @@ var examples = [
         context: "PERSON takes the first bite of PRO PHRASE."
     },
     {
-        worker_id: "101",
-        stim_id: "3",
+        stim_id: "101",
+        author_id: "3",
         degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
@@ -1413,8 +1413,8 @@ var examples = [
         context: "PERSON takes the first sip from a PHRASE."
     },
     {
-        worker_id: "102",
-        stim_id: "14",
+        stim_id: "102",
+        author_id: "14",
         degree: "temperature",
         adj_positive: "warm",
         adj_negative: "cold",
@@ -1427,8 +1427,8 @@ var examples = [
     },
 
     {
-        worker_id: "104",
-        stim_id: "12",
+        stim_id: "104",
+        author_id: "12",
         degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
@@ -1440,8 +1440,8 @@ var examples = [
         context: "PERSON is in PRO kitchen and touches the PHRASE."
     },
     {
-        worker_id: "105",
-        stim_id: "15",
+        stim_id: "105",
+        author_id: "15",
         degree: "temperature_h",
         adj_positive: "hot",
         adj_negative: "cold",
@@ -1453,8 +1453,8 @@ var examples = [
         context: "PERSON takes the first sip of a PHRASE."
     },
     {
-        worker_id: "106",
-        stim_id: "custom",
+        stim_id: "106",
+        author_id: "custom",
         degree: "temperature_h",
         positive: "sauna",
         negative: "ice rink",
@@ -1469,8 +1469,8 @@ var examples = [
         context: "PERSON is spending PRO Saturday at PRE PHRASE."
     },
     {
-        worker_id: "107",
-        stim_id: "custom",
+        stim_id: "107",
+        author_id: "custom",
         degree: "temperature_h",
         positive: "chocolate fondue",
         neither_nor: "muffin",
@@ -1485,8 +1485,8 @@ var examples = [
 
 // ------ WEIGHT: HEAVY - LIGHT (10)-------------
     {
-        worker_id: "108",
-        stim_id: "4",
+        stim_id: "108",
+        author_id: "4",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1501,8 +1501,8 @@ var examples = [
         context: "PERSON is at the zoo and watches PRE PHRASE being lifted."
     },
     {
-        worker_id: "103",
-        stim_id: "4",
+        stim_id: "103",
+        author_id: "4",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1514,8 +1514,8 @@ var examples = [
         context: "PERSON is shopping for winter clothing and tries on a PHRASE."
     },
     {
-        worker_id: "109",
-        stim_id: "7",
+        stim_id: "109",
+        author_id: "7",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1530,8 +1530,8 @@ var examples = [
         context: "PERSON lifts up PRE PHRASE."
     },
     {
-        worker_id: "110",
-        stim_id: "1",
+        stim_id: "110",
+        author_id: "1",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1543,8 +1543,8 @@ var examples = [
         context: "PERSON is at an electronics store and picks up a PHRASE."
     },
     {
-        worker_id: "111",
-        stim_id: "12",
+        stim_id: "111",
+        author_id: "12",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1556,8 +1556,8 @@ var examples = [
         context: "PERSON is helping a friend move and picks up their PHRASE."
     },
     {
-        worker_id: "112",
-        stim_id: "1",
+        stim_id: "112",
+        author_id: "1",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1569,8 +1569,8 @@ var examples = [
         context: "PERSON is walking outside and picks up a PHRASE."
     },
     {
-        worker_id: "113",
-        stim_id: "1",
+        stim_id: "113",
+        author_id: "1",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1582,8 +1582,8 @@ var examples = [
         context: "PERSON is at a hardware store and picks up a piece of PHRASE."
     },
     {
-        worker_id: "114",
-        stim_id: "12",
+        stim_id: "114",
+        author_id: "12",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1595,8 +1595,8 @@ var examples = [
         context: "PERSON is at the gym and picks up a PHRASE."
     },
     {
-        worker_id: "115",
-        stim_id: "7",
+        stim_id: "115",
+        author_id: "7",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1608,8 +1608,8 @@ var examples = [
         context: "PERSON is at a craft shop and picks up a piece of PHRASE."
     },
     {
-        worker_id: "116",
-        stim_id: "8",
+        stim_id: "116",
+        author_id: "8",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1621,8 +1621,8 @@ var examples = [
         context: "PERSON learns about the weight of a friend's new PHRASE."
     },
     {
-        worker_id: "117",
-        stim_id: "10",
+        stim_id: "117",
+        author_id: "10",
         degree: "weight",
         adj_positive: "heavy",
         adj_negative: "light",
@@ -1638,8 +1638,8 @@ var examples = [
 // --------- WIDTH: WIDE - NARROW (6)
 
     {
-        worker_id: "118",
-        stim_id: "9",
+        stim_id: "118",
+        author_id: "9",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
@@ -1651,8 +1651,8 @@ var examples = [
         context: "PERSON is in a forest and sees a PHRASE."
     },
     {
-        worker_id: "119",
-        stim_id: "2",
+        stim_id: "119",
+        author_id: "2",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
@@ -1665,8 +1665,8 @@ var examples = [
         environment_mod: "here"
     },
     {
-        worker_id: "120",
-        stim_id: "10",
+        stim_id: "120",
+        author_id: "10",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
@@ -1678,8 +1678,8 @@ var examples = [
         context: "PERSON is standing at the bank of a PHRASE."
     },
     {
-        worker_id: "121",
-        stim_id: "4",
+        stim_id: "121",
+        author_id: "4",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
@@ -1695,8 +1695,8 @@ var examples = [
         environment_mod: "out here"
     },
     {
-        worker_id: "122",
-        stim_id: "2",
+        stim_id: "122",
+        author_id: "2",
         degree: "width",
         adj_positive: "wide",
         adj_negative: "narrow",
@@ -1708,8 +1708,8 @@ var examples = [
         context: "PERSON sees a PHRASE on the road."
     },
     {
-      worker_id: "123",
-      stim_id: "custom",
+      stim_id: "123",
+      author_id: "custom",
       degree: "width",
       adj_positive: "wide",
       adj_negative: "narrow",

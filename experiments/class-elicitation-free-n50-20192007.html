@@ -74,12 +74,10 @@
 
   <div class="slide" id="botcaptcha">
     <h3>Are you a bot?</h3>
-    <p id="botcpatcha">Mary says to Linda: It's a beautiful day, isn't it? </p>
-    <p id="bot_question"></p>
-    <p> Who is Mary talking to? </p>
+    <div id="bot_context"> </div>
     <p> <i> Please enter your answer in lower case. </i></p>
     <input type="text" id="botresponse" size="30"></input>
-    <button onclick="_s.button()">Continue</button>
+    <button onclick="_s.button()" id="bot_button">Continue</button>
     <p class="text" id="error_incorrect" style="color: #7CB637">This is incorrect.</p>
     <p class="text" id="error_2more" style="color: #7CB637">You have 2 more trials.</p>
     <p class="text" id="error_1more" style="color: #7CB637">You have 1 more trial.</p>

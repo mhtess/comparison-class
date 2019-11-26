@@ -1,3 +1,6 @@
+// variable for couting trials on the botcaptcha
+var bot_trials = 0;
+
 function make_slides(f) {
   var   slides = {};
 
@@ -10,26 +13,63 @@ function make_slides(f) {
 
   slides.botcaptcha = slide({
      name : "botcaptcha",
-     trial_num: 1,
      start: function() {
        $("#error").hide();
        $("#error_incorrect").hide();
        $("#error_2more").hide();
        $("#error_1more").hide();
+       // list of speaker names to be sampled from
+       speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
+       // list of listener names to be sampled from
+       listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
+       // create the utterance
+       this.bot_utterance = speaker + " says to " + listener + ": It's a beautiful day, isn't it?"
+       // creat ethe question
+       this.bot_question = "Who is " + speaker + " talking to?"
+       // append the utterance and the question to the view
+       var bot_sentence = document.createElement("p");
+       var bot_question = document.createElement("p");
+       var content = document.createTextNode(this.bot_utterance);
+       var q_content = document.createTextNode(this.bot_question);
+       bot_sentence.name = "bot_sentence";
+       bot_question.name = "bot_question";
+       bot_sentence.appendChild(content);
+       bot_question.appendChild(q_content);
+       document.getElementById('bot_context').appendChild(bot_sentence);
+       document.getElementById('bot_context').appendChild(document.createElement("br"));
+       document.getElementById('bot_context').appendChild(bot_question);
+       document.getElementById('bot_context').appendChild(document.createElement("br"));
+
      },
      button: function() {
-       // var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
-       // var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
 
-       bot_response = $("#botresponse").val();
-       if (bot_response.length == 0) {
-           $("#error_incorrect").show();
-
-       } else {
+       // get the participants' input
+       var bot_response = $("#botresponse").val();
+       // append data if response correct
+       if (bot_response.toLowerCase() == listener.toLowerCase()) {
          exp.catch_trials.push({
-           "condition": "botcaptcha",
-           "response": bot_response
+           condition: "botcaptcha",
+           response: bot_response,
+           bot_sentence: this.bot_utterance,
+           bot_question: this.bot_question
          });
+         // gives participant two more trials if the response was incorrect
+       } else {
+         bot_trials = bot_trials + 1;
+         $("#error_incorrect").show();
+         if (bot_trials == 1) {
+             $("#error_2more").show();
+         } else if (bot_trials == 2) {
+             $("#error_2more").hide();
+             $("#error_1more").show();
+         } else {
+           // in case participant fails, he cannot proceed
+             $("#error_incorrect").hide();
+             $("#error_1more").hide();
+             $("#bot_button").hide();
+             $('#botresponse').prop("disabled", true);
+             $("#error").show();
+         };
        }
        exp.go();
      }
@@ -105,7 +145,7 @@ function make_slides(f) {
       // Building the appropriate context information
       this.context_mod = stim.context
       this.degree = stim.degree
-      this.stim_id = stim.worker_id
+      this.stim_id = stim.stim_id
       this.superordinate = stim.superordinate
       // Insert name info
       re_name = new RegExp("PERSON", "g")
