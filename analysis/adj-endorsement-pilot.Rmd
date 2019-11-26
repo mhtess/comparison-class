@@ -401,12 +401,11 @@ df.adj.w.mode <- df.adj.w.mode %>% mutate(superordinate = ifelse(item == "jockey
 
 df.adj.w.mode %>% distinct(degree, superordinate, np_pl, item_cond) %>% mutate(test = "test") %>% left_join(df.cc.infer, by=c("degree", "superordinate", "np_pl", "item_cond")) %>% filter(is.na(np_pl) == T) %>% View() 
 # check if the data is consistent with the cc inference data
-df.cc.infer <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv') %>% select(degree, superordinate = superordinate_pl,np_pl= NP_pl, item_cond = adj_positiveness) %>% distinct()
+df.cc.infer <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')# %>% select(degree, superordinate = superordinate_pl,np_pl= NP_pl, item_cond = adj_positiveness) %>% distinct()
 
-df.cc.infer <- df.cc.infer %>% rowwise() %>% mutate(test = paste(degree, superordinate_pl, NP_sg, NP_pl, superordinate_sg, sep=","))
-left_join(df.adj.w.mode, df.cc.infer, by=c("test"="test")) %>% View()
-
-
+ df.adj.w.mode %>% distinct(item) %>%View()
+df.cc.infer %>% distinct(NP_sg) %>% View()
+right_join(dist.super.sg, dist.sg.super, by=c("item"="NP_sg")) %>% View()
 
 anti_join(df.adj.w.mode, df.cc.infer, by=c("superordinate"="superordinate_pl")) %>% View()
 anti_join(df.adj.w.mode, df.cc.infer, by=c("item"="NP_sg")) %>% View()

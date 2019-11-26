@@ -8,6 +8,34 @@ function make_slides(f) {
      }
   });
 
+  slides.botcaptcha = slide({
+     name : "botcaptcha",
+     trial_num: 1,
+     start: function() {
+       $("#error").hide();
+       $("#error_incorrect").hide();
+       $("#error_2more").hide();
+       $("#error_1more").hide();
+     },
+     button: function() {
+       // var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
+       // var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
+
+       bot_response = $("#botresponse").val();
+       if (bot_response.length == 0) {
+           $("#error_incorrect").show();
+
+       } else {
+         exp.catch_trials.push({
+           "condition": "botcaptcha",
+           "response": bot_response
+         });
+       }
+       exp.go();
+     }
+  });
+
+
   slides.instructions = slide({
     name : "instructions",
     start: function() {
@@ -414,7 +442,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
+  exp.structure=["i0","botcaptcha", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
 
   exp.data_trials = [];
   //make corresponding slides:
