@@ -8,6 +8,23 @@ function make_slides(f) {
      }
   });
 
+  slides.botcaptcha = slide({
+     name : "botcaptcha",
+     start: function() {
+       $("#error").hide();
+       $("#error_incorrect").hide();
+       $("#error_2more").hide();
+       $("#error_1more").hide();
+     },
+     button: function() {
+       bot_response = $("#botresponse").val().trim();
+       bot_listener = $("#listener").val();
+       if (bot_response == botlistener) {
+
+       }
+     }
+  });
+
   slides.instructions = slide({
     name : "instructions",
     start: function() {
@@ -414,7 +431,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
+  exp.structure=["i0","botcaptcha", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
 
   exp.data_trials = [];
   //make corresponding slides:
@@ -436,4 +453,14 @@ function init() {
   });
 
   exp.go(); //show first slide
+}
+
+function botspeaker() {
+  var speaker = _.sample(["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Thomas", "Charles"]);
+  return speaker;
+}
+
+function botlistener() {
+  var listener = _.sample(["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Margaret"]);
+  return listener;
 }
