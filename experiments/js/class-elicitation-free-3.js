@@ -42,9 +42,8 @@ function make_slides(f) {
 
      },
      button: function() {
-
        // get the participants' input
-       var bot_response = $("#botresponse").val();
+       bot_response = $("#botresponse").val();
        // append data if response correct
        if (bot_response.toLowerCase() == listener.toLowerCase()) {
          exp.catch_trials.push({
@@ -53,6 +52,7 @@ function make_slides(f) {
            bot_sentence: this.bot_utterance,
            bot_question: this.bot_question
          });
+         exp.go();
          // gives participant two more trials if the response was incorrect
        } else {
          bot_trials = bot_trials + 1;
@@ -71,7 +71,7 @@ function make_slides(f) {
              $("#error").show();
          };
        }
-       exp.go();
+
      }
   });
 
