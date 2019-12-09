@@ -3,7 +3,7 @@
 // removing all the responses including ethnicity or potentially not pc conform
 var examples = [
 
-  // ---------  DARKNESS: DARK - LIGHT (10) -----------
+  // ---------  DARKNESs: DARK - LIGHT (9) -----------
 
     {
         stim_id: "1",
@@ -176,7 +176,7 @@ var examples = [
         degree: "hardness",
         adj_positive: "hard",
         adj_negative: "soft",
-        superordinate: "foods",
+        superordinate: "food",
         positive: "apple",
         neither_nor: "bread",
         negative: "ice cream",
@@ -596,7 +596,7 @@ var examples = [
         stim_id: "44",
         author_id: "7",
         degree: "loudness_n",
-        adj_positive: "noisy",
+        adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "pets",
         positive: "parrot",
@@ -623,7 +623,7 @@ var examples = [
         stim_id: "46",
         author_id: "1",
         degree: "loudness_n",
-        adj_positive: "noisy",
+        adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "birds",
         positive: "rooster",
@@ -636,7 +636,7 @@ var examples = [
         stim_id: "47",
         author_id: "10",
         degree: "loudness_n",
-        adj_positive: "noisy",
+        adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "instruments",
         positive: "horn",
@@ -679,7 +679,7 @@ var examples = [
         stim_id: "50",
         author_id: "13",
         degree: "loudness",
-        adj_positive: "loud",
+        adj_positive: "noisy",
         adj_negative: "quiet",
         superordinate: "rooms",
         positive: "auditorium",
@@ -722,7 +722,7 @@ var examples = [
         stim_id: "53",
         author_id: "14",
         degree: "loudness_n",
-        adj_positive: "noisy",
+        adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "vehicles",
         positive: "tractor",
@@ -781,7 +781,7 @@ var examples = [
         stim_id: "57",
         author_id: "7",
         degree: "loudness_n",
-        adj_positive: "noisy",
+        adj_positive: "loud",
         adj_negative: "quiet",
         superordinate: "boats",
         positive: "powerboat",
@@ -1130,7 +1130,7 @@ var examples = [
 
 
 
-// --------------- SPEED : QUICK / FAST - SLOW (1) -------------
+// --------------- SPEED : QUICK (5) / FAST - SLOW (6) -------------
 
     {
         stim_id: "82",
@@ -1385,7 +1385,7 @@ var examples = [
     },
 
 
-// ------------ TEMPERATURE : HOT / WARM - COLD (8) ---------
+// ------------ TEMPERATURE : HOT / WARM - COLD (7) ---------
     {
         stim_id: "100",
         author_id: "3",
@@ -1483,7 +1483,7 @@ var examples = [
     },
 
 
-// ------ WEIGHT: HEAVY - LIGHT (10)-------------
+// ------ WEIGHT: HEAVY - LIGHT (11)-------------
     {
         stim_id: "108",
         author_id: "4",
