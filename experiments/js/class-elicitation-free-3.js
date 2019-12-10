@@ -79,7 +79,7 @@ function make_slides(f) {
   slides.instructions = slide({
     name : "instructions",
     start: function() {
-      $(".display_trials").html(30)
+      $(".display_trials").html(exp.n_trials)
       $(".catchErr").hide();
     },
     button: function() {
