@@ -379,7 +379,7 @@ var examples = [
         context: "PERSON sees a PHRASE."
     },
     {
-      worjer_id: "20",
+      stim_id: "20",
       author_id: "custom",
       degree: "height",
       positive: "redwood tree",
@@ -1628,7 +1628,7 @@ var examples = [
         adj_negative: "light",
         superordinate: "fruit",
         positive: "watermelon",
-        neither_nor: "squash",
+        neither_nor: "orange",
         negative: "plum",
         pronoun: "It",
         context: "PERSON is at a grocery store and picks up a PHRASE."
