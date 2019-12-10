@@ -63,27 +63,43 @@ function getUniqueTrials(examples) {
   }
 }
 
-function getNounElicitationTrials(examples) {
-  var trials = []//, form;
+function getNounElicitationTrials(examples, n_trials) {
+  var trials = [], all_trials = []//, form;
   for (var i = 0; i < examples.length; i++) {
-    form = _.sample(["positive", "negative", "neither_nor"]);
-    trials.push({
-      stim_id: examples[i].stim_id,
-      positive: examples[i].positive,
-      negative: examples[i].negative,
-      neither_nor: examples[i].neither_nor,
-      form: form,
-      context: examples[i].context,
-      degree: examples[i].degree,
-      adj_positive: examples[i].adj_positive,
-      adj_negative: examples[i].adj_negative,
-      pre_positive: examples[i].pre_positive,
-      pre_negative: examples[i].pre_negative,
-      pre_neutral: examples[i].pre_neutral,
-      pronoun: examples[i].pronoun,
-      environment_mod: examples[i].environment_mod
-    });
+		for (var j = 0; j < 3; j++){
+			form = ["positive", "negative", "neither_nor"][j]
+			all_trials.push({
+				// worker_id: examples[i].worker_id,
+				stim_id: examples[i].stim_id,
+				positive: examples[i].positive,
+				negative: examples[i].negative,
+				neither_nor: examples[i].neither_nor,
+				superordinate: examples[i].superordinate,
+				form: form,
+				context: examples[i].context,
+				degree: examples[i].degree,
+				adj_positive: examples[i].adj_positive,
+				adj_negative: examples[i].adj_negative,
+				pre_positive: examples[i].pre_positive,
+				pre_negative: examples[i].pre_negative,
+				pre_neutral: examples[i].pre_neutral,
+				pronoun: examples[i].pronoun,
+				environment_mod: examples[i].environment_mod
+			});
+		}
   }
+	// sample item sets to be used in this experiment
+	var all_stim_ids = _.uniq(_.pluck(all_trials, "stim_id"))
+	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
+
+	// shuffle all trials
+	var shuffled_all_trials = _.shuffle(all_trials)
+
+	// pick out first instance of item_set in all_trials
+	for (var k = 0; k < n_trials; k++) {
+		var stim = _.findWhere(shuffled_all_trials, {stim_id: stims_for_this_expt[k]})
+		trials.push(stim)
+	}
 
   // loops until a suitable trials array is foundp
   while(1) {
@@ -107,15 +123,15 @@ function VPE2AFCTrials(examples) {
     "size_neg": "small",
     "light_pos": "light",
     "light_neg": "dark",
-    "weight_pos": "heavy", 
+    "weight_pos": "heavy",
     "weight_neg": "light",
-    "temperature_pos": "warm", 
+    "temperature_pos": "warm",
     "temperature_neg": "cold",
-    "price_pos": "expensive", 
+    "price_pos": "expensive",
     "price_neg": "cheap",
     "sound_pos": "loud",
     "sound_neg": "quiet",
-    "height_pos": "tall", 
+    "height_pos": "tall",
     "height_neg": "short",
     "time_pos": "long",
     "time_neg": "short"

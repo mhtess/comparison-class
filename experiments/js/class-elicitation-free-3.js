@@ -435,7 +435,7 @@ function init() {
   exp.positivities = _.shuffle(exp.positivities)
 
   // Also randomize provided example scenarios and names
-  exp.examples = _.shuffle(getNounElicitationTrials(examples)).slice(0, exp.n_trials)
+  exp.examples = getNounElicitationTrials(examples, exp.n_trials)
   exp.names = sampleNames(characters).slice(0, exp.n_trials)
   exp.memorycheck_examples = []
 
