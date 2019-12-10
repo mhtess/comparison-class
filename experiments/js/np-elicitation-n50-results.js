@@ -1628,7 +1628,7 @@ var examples = [
         adj_negative: "light",
         superordinate: "fruit",
         positive: "watermelon",
-        neither_nor: "squash",
+        neither_nor: "orange",
         negative: "plum",
         pronoun: "It",
         context: "PERSON is at a grocery store and picks up a PHRASE."
