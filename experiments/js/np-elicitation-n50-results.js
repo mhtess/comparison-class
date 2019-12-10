@@ -379,7 +379,7 @@ var examples = [
         context: "PERSON sees a PHRASE."
     },
     {
-      worjer_id: "28",
+      stim_id: "28",
       author_id: "custom",
       degree: "height",
       positive: "redwood tree",
