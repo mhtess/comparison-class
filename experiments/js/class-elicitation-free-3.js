@@ -2,7 +2,7 @@
 var bot_trials = 0;
 
 function make_slides(f) {
-  var   slides = {};
+  var slides = {};
 
   slides.i0 = slide({
      name : "i0",
@@ -75,7 +75,6 @@ function make_slides(f) {
      }
   });
 
-
   slides.instructions = slide({
     name : "instructions",
     start: function() {
@@ -103,42 +102,19 @@ function make_slides(f) {
     }
   });
 
-  slides.single_trial = slide({
-    name: "single_trial",
-    start: function() {
-      $(".err").hide();
-      $(".display_condition").html("You are in " + exp.condition + ".");
-      //context_mod = exp.examples[i].context
-      //re = new RegExp("PERSON", "g")
-      //context_mod.replace(re, exp.names[i])
-      //display_context.html(context_mod)
-
-    },
-    button : function() {
-      response = $("#text_response").val();
-      if (response.length == 0) {
-        $(".err").show();
-      } else {
-        exp.data_trials.push({
-          "trial_type" : "single_trial",
-          "response" : response
-        });
-        exp.go(); //make sure this is at the *end*, after you log your data
-      }
-    },
-  });
-
   slides.one_textbox = slide({
     name : "one_textbox",
 
     /* trial information for this block
      (the variable 'stim' will change between each of these values,
       and for each of these, present_handle will be run.) */
-    present : exp.examples,
+    present : exp.stimuli.reverse(),
     trial_num : 1,
 
     //this gets run only at the beginning of the block
     present_handle : function(stim) {
+      // console.log(exp.stimuli)
+      console.log(stim)
       $(".err").hide();
       this.startTime = Date.now();
       this.stim = stim; //I like to store this information in the slide so I can record it later.
@@ -155,35 +131,16 @@ function make_slides(f) {
       // Insert phrase info
       re_phrase = new RegExp("PHRASE", "g")
 
-      this.np_positiveness = stim.np_positiveness
-      this.adj_positiveness = stim.adj_positiveness
-
-      if (stim.np_positiveness == "positive") {
-        this.phrase = stim.positive
-      } else if (stim.np_positiveness == "negative") {
-        this.phrase = stim.negative
-      } else {
-        this.phrase = stim.neither_nor
-      }
-
-      // Insert descriptive info
-      if (stim.adj_positiveness == "positive") {
-        this.adj = stim.adj_positive
-      } else {
-        this.adj = stim.adj_negative
-      }
+      this.np_expectations = stim.np_expectations
+      this.adj_polarity = stim.adj_polarity
+      this.phrase = stim.np
+      this.adj = stim.adj
 
       this.context_mod = this.context_mod.replace(re_phrase, this.phrase)
 
       re_pre = new RegExp("PRE", "g")
       if (re_pre.test(this.context_mod)) {
-        if (stim.np_positiveness == "positive") {
-          this.context_mod = this.context_mod.replace(re_pre, stim.pre_positive)
-        } else if (stim.np_positiveness == "negative") {
-          this.context_mod = this.context_mod.replace(re_pre, stim.pre_negative)
-        } else {
-          this.context_mod = this.context_mod.replace(re_pre, stim.pre_neutral)
-        }
+        this.context_mod = this.context_mod.replace(re_pre, stim.pre)
       }
 
       this.gender = getGender(stim.name)
@@ -199,8 +156,7 @@ function make_slides(f) {
 
       if (stim.pronoun == "They") {
         this.np_pronoun = "They're"
-      }
-      else {
+      } else {
         this.np_pronoun = stim.pronoun + "\'s"
       }
 
@@ -234,14 +190,14 @@ function make_slides(f) {
           "trial_type" : "free_class_elicitation",
           "trial_num": this.trial_num,
           "stim_id": this.stim_id,
-          "np" : this.phrase,
-          "np_expectations" : this.np_positiveness,
-          "adj" : this.adj,
-          "adj_polarity" : this.adj_positiveness,
-          "rt": this.rt,
-          "context_sentence" : this.context_mod,
           "degree" : this.degree,
+          "context_sentence" : this.context_mod,
           "superordinate": this.superordinate,
+          "np" : this.phrase,
+          "np_expectations" : this.np_expectations,
+          "adj" : this.adj,
+          "adj_polarity" : this.adj_polarity,
+          "rt": this.rt,
           "response" : response
         }));
         this.trial_num++;
@@ -249,51 +205,6 @@ function make_slides(f) {
       }
     },
 
-  });
-
-  slides.one_slider = slide({
-    name : "one_slider",
-
-    /* trial information for this block
-     (the variable 'stim' will change between each of these values,
-      and for each of these, present_handle will be run.) */
-    present : exp.examples,
-
-    //this gets run only at the beginning of the block
-    present_handle : function(stim) {
-      $(".err").hide();
-
-      this.stim = stim; //I like to store this information in the slide so I can record it later.
-
-      $(".prompt").html(stim.subject + "s like " + stim.object + "s.");
-      this.init_sliders();
-      exp.sliderPost = null; //erase current slider value
-    },
-
-    button : function() {
-      if (exp.sliderPost == null) {
-        $(".err").show();
-      } else {
-        this.log_responses();
-
-        /* use _stream.apply(this); if and only if there is
-        "present" data. (and only *after* responses are logged) */
-        _stream.apply(this);
-      }
-    },
-
-    init_sliders : function() {
-      utils.make_slider("#single_slider", function(event, ui) {
-        exp.sliderPost = ui.value;
-      });
-    },
-
-    log_responses : function() {
-      exp.data_trials.push({
-        "trial_type" : "one_slider",
-        "response" : exp.sliderPost
-      });
-    }
   });
 
   slides.memory_check = slide({
@@ -418,59 +329,25 @@ function init() {
         alert("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
       }
   })();
-  console.log(examples.length)
   // Prereq: should be a multiple of 6 (for even distribution of positive, negative, neither-nor questions)
   exp.n_trials = 36
-
-  // Randomize ordering of positive, negative, and neither-nor trials
-  exp.positivities = [];
-  for (var k = 0; k < Math.floor(exp.n_trials/6); k++) {
-    exp.positivities.push(["positive", "positive"])
-    exp.positivities.push(["positive", "negative"])
-    exp.positivities.push(["negative", "positive"])
-    exp.positivities.push(["negative", "negative"])
-    exp.positivities.push(["neither-nor", "positive"])
-    exp.positivities.push(["neither-nor", "negative"])
-  }
-  exp.positivities = _.shuffle(exp.positivities)
-
-  // Also randomize provided example scenarios and names
-  exp.examples = getNounElicitationTrials(examples, exp.n_trials)
+  exp.stimuli = getNounElicitationTrials(examples, exp.n_trials)
   exp.names = sampleNames(characters).slice(0, exp.n_trials)
   exp.memorycheck_examples = []
+  // console.log(exp.stimuli)
 
+  // add speaker names and set aside memory check items
   for (var k = 0; k < exp.n_trials; k++) {
-
-    exp.examples[k].name = exp.names[k];
-    exp.examples[k].np_positiveness = exp.positivities[k][0]
-    exp.examples[k].adj_positiveness = exp.positivities[k][1]
-
-    if (exp.examples[k].np_positiveness == "positive") {
-      phrase = exp.examples[k].positive
-    } else if (exp.examples[k].np_positiveness == "negative") {
-      phrase = exp.examples[k].negative
-    } else {
-      phrase = exp.examples[k].neither_nor
-    }
-
-    if (phrase.slice(0, 4) == "the ") {
-      phrase = phrase.slice(4)
-    }
-
-    // Insert descriptive info
-    if (exp.examples[k].adj_positiveness == "positive") {
-      adj = exp.examples[k].adj_positive
-    } else {
-      adj = exp.examples[k].adj_negative
-    }
-
-    exp.memorycheck_examples.push(adj + " " + phrase)
-
+    exp.stimuli[k].name = exp.names[k];
+    adj = exp.stimuli[k].adj
+    np = exp.stimuli[k].np
+    exp.memorycheck_examples.push(adj + " " + np)
   }
+  // console.log(exp.stimuli.slice(10, exp.stimuli.length))
 
-  exp.trials = exp.n_trials;
+  // exp.trials = exp.n_trials;
   exp.catch_trials = [];
-  //exp.condition = sampleCondition(); //can randomize between subject conditions here
+
   exp.system = {
       Browser : BrowserDetect.browser,
       OS : BrowserDetect.OS,
@@ -480,7 +357,15 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0","botcaptcha", "instructions", "one_textbox", "memory_check", "subj_info", "thanks"]
+  exp.structure=[
+    "i0",
+    "botcaptcha",
+    "instructions",
+    "one_textbox",
+    "memory_check",
+    "subj_info",
+    "thanks"
+  ]
 
   exp.data_trials = [];
   //make corresponding slides:

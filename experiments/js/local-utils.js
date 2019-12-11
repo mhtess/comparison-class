@@ -67,39 +67,74 @@ function getNounElicitationTrials(examples, n_trials) {
   var trials = [], all_trials = []//, form;
   for (var i = 0; i < examples.length; i++) {
 		for (var j = 0; j < 3; j++){
-			form = ["positive", "negative", "neither_nor"][j]
-			all_trials.push({
-				// worker_id: examples[i].worker_id,
-				stim_id: examples[i].stim_id,
-				positive: examples[i].positive,
-				negative: examples[i].negative,
-				neither_nor: examples[i].neither_nor,
-				superordinate: examples[i].superordinate,
-				form: form,
-				context: examples[i].context,
-				degree: examples[i].degree,
-				adj_positive: examples[i].adj_positive,
-				adj_negative: examples[i].adj_negative,
-				pre_positive: examples[i].pre_positive,
-				pre_negative: examples[i].pre_negative,
-				pre_neutral: examples[i].pre_neutral,
-				pronoun: examples[i].pronoun,
-				environment_mod: examples[i].environment_mod
-			});
+			np_expectations = ["low", "medium", "high"][j]
+			for (var k = 0; k < 2; k++){
+				adj_polarity = ["positive", "negative"][k]
+				all_trials.push({
+					stim_id: examples[i].stim_id,
+					context: examples[i].context,
+					degree: examples[i].degree,
+					np_expectations: np_expectations,
+					np: examples[i][np_expectations],
+					superordinate: examples[i].superordinate,
+					adj_polarity: adj_polarity,
+					adj: examples[i]["adj_" + adj_polarity],
+					pre: examples[i]["pre_" + np_expectations],
+					pronoun: examples[i].pronoun,
+					environment_mod: examples[i].environment_mod
+				});
+			}
 		}
   }
+	// debugger;
+	console.log("all possible trials = " + all_trials.length)
+	var reduced_all_trials = _.reject(all_trials, function(x){
+		return _.some(_.map(omitted_stimuli, function(y){
+			return x.degree == y.degree &&
+			x.adj == y.adj &&
+			x.np == y.np
+		}))
+	})
+	console.log("after exclusions = " + reduced_all_trials.length)
 	// sample item sets to be used in this experiment
-	var all_stim_ids = _.uniq(_.pluck(all_trials, "stim_id"))
+	var all_stim_ids = _.uniq(_.pluck(reduced_all_trials, "stim_id"))
+	// console.log(stims_for_this_expt)
 	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
-
 	// shuffle all trials
-	var shuffled_all_trials = _.shuffle(all_trials)
+	var shuffled_all_trials = _.shuffle(reduced_all_trials)
 
-	// pick out first instance of item_set in all_trials
-	for (var k = 0; k < n_trials; k++) {
-		var stim = _.findWhere(shuffled_all_trials, {stim_id: stims_for_this_expt[k]})
-		trials.push(stim)
+	var all_conditions = [
+		{np_expectations: "high", adj_polarity: "positive"},
+		{np_expectations: "high", adj_polarity: "negative"},
+		{np_expectations: "medium", adj_polarity: "positive"},
+		{np_expectations: "medium", adj_polarity: "negative"},
+		{np_expectations: "low", adj_polarity: "positive"},
+		{np_expectations: "low", adj_polarity: "negative"}
+	]
+
+	var n_trials_per_condition = n_trials / all_conditions.length
+
+	// loop over 6 conditions
+	for (var i = 0; i < all_conditions.length; i++) {
+		var condition = all_conditions[i]
+		// console.log(condition)
+		// console.log(n_trials_per_condition)
+
+		// for each condition, select n trials
+		for (var j = 0; j < n_trials_per_condition; j++) {
+				var item_num = n_trials_per_condition*i + j
+				// console.log(item_num)
+				var stim = _.findWhere(shuffled_all_trials,
+					{
+						stim_id: stims_for_this_expt[item_num],
+						np_expectations: condition.np_expectations,
+						adj_polarity: condition.adj_polarity
+					})
+				trials.push(stim)
+		}
 	}
+	// return trials
+
 
   // loops until a suitable trials array is foundp
   while(1) {
