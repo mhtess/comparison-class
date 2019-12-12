@@ -1,0 +1,898 @@
+---
+title: "Comparison class elicitation (final) pilot"
+author: "MH Tessler"
+date: "October 29, 2019"
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load libraries.
+library(knitr)
+library(tidyverse)
+library(jsonlite)
+library(tidyboot)
+library(tidytext)
+library(lme4)
+library(ggthemes)
+library(brms)
+library(stringr)
+theme_set(theme_few())
+
+# extended function to check matching between strings either way 
+containsString <- function(strng, substrng){
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1, 
+                ifelse( length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)))
+}
+```
+
+## Results
+
+
+```{r load data from json, eval = F}
+data.path <- "../mturk/class-elicitation-prereg-final/production-results/"
+result.files <- list.files(data.path, pattern="json")
+
+df.subject <- data.frame()
+df.trials <- data.frame()
+df.attention <- data.frame()
+for (result_file in result.files) {
+  result_json = fromJSON(paste(data.path, result_file, sep ="/"))
+  worker.id = paste("workerid_", str_pad(match(result_file, result.files), 4, pad="0"), sep = "")
+#  result_json$WorkerId
+  condition = result_json$answers$condition
+  
+  df.attention = bind_rows(
+    df.attention, 
+    data.frame(result_json$answers$catch_trials) %>%
+      mutate(workerid = worker.id)
+  )
+    
+  df.subject = bind_rows(
+    df.subject, 
+    data.frame(result_json$answers$subject_information) %>% 
+      mutate(
+        workerid = worker.id,
+        language = gsub("\"", "", language),
+        enjoyment = gsub("\"", "", enjoyment),
+        age = gsub("\"", "", age),
+        gender = gsub("\"", "", gender),
+        problems = gsub("\"", "", problems),
+        comments = gsub("\"", "", comments)
+      ) 
+  )
+    
+  df.trials = bind_rows(
+    df.trials, 
+    data.frame(result_json$answers$trials) %>%
+      mutate(workerid = worker.id)
+  )
+}
+
+
+
+
+write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+```
+
+
+```{r load data from csv}
+df.trials <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
+df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
+df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+df.frequencies <- read_csv("../data/pilot-classElicitation-free-4/webgram-freqs-unique-nps.csv")
+```
+
+
+### Exclusions
+
+```{r}
+
+df.botcaptcha <- df.attention %>%
+  filter(condition == "botcaptcha")
+
+df.comprehension <- df.attention %>%
+  filter(condition == "warm_up") %>%
+  rowwise() %>%
+  mutate(pass_comp = (
+    containsString(tolower(response), "build") | 
+      containsString(tolower(response), "bulid") | 
+      containsString(tolower(response), "buid") |
+      containsString(tolower(response), "skyscraper") | 
+      containsString(tolower(response), "skyscaper") | 
+      containsString(tolower(response), "structure") | 
+      containsString(tolower(response), "bulding")
+    ))
+
+df.memory <- df.attention %>%
+  filter(condition == "memory_check") %>%
+  group_by(workerid) %>%
+  summarize(n_correct = sum(correct),
+            pass_memory = n_correct >= 7)
+
+```
+
+
+```{r}
+df.memory %>%
+  group_by(n_correct) %>%
+  count()
+```
+
+```{r summarize catch trials}
+df.attention.summary <- left_join(
+  df.comprehension %>% select(workerid, pass_comp), 
+  df.memory %>% select(workerid, pass_memory)) %>%
+  mutate(pass_both = pass_comp & pass_memory)
+  
+
+df.attention.summary %>%
+  group_by(pass_comp, pass_memory, pass_both) %>%
+  count()
+```
+
+```{r}
+# paste in the superordinate that was not recorded 
+insert_super = function(np) {
+  if (np %in% c("seagull", "parrot", "crow")) {
+    super = "birds"
+  }  else if (np %in% c("day", "dusk", "night")) {
+    super = "times of day"
+  } else if (np %in% c("jolly rancher", "piece of chocolate", "marshmallow")) {
+    super = "sweets"
+  } else if (np %in% c("tile", "wood", "carpet")) {
+    super = "floor materials"
+  } else if (np %in% c("giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "mouse", "cheetah", "sloth", "fish")) {
+    super = "animals"
+  } else if (np %in% c("basketball player", "golfer", "jockey", "runner", "jogger", "walker")) {
+    super = "athletes"
+  } else if (np %in% c("dachshund", "bassett hound", "chihuahua")) {
+    super = "dogs"
+  } else if( np %in% c("novel", "story", "poem")) {
+    super = "readings"
+  } else if( np %in% c("auditorium", "classroom", "study hall")) {
+    super = "rooms"
+  } else if ( np %in% c("platinum", "bronze", "plastic")) {
+    super = "statues"
+  } else if (np %in% c("bottle of top-shelf liquor", "six-pack of beer", "bottle of wine")) {
+    super = "alcoholic drinks"
+  } else if (np %in% c("tree", "bush", "flower")) {
+    super = "plants"
+  } else if(np %in% c("adult", "teenager", "child", "kid", "baby")) {
+    super = "people"
+  } else if (np %in% c("hurricane", "thunderstorm", "rain")) {
+    super = "storms"
+  } else if (np %in% c("soup", "salad", "ice cream")) {
+    super = "food"
+  } else if( np %in% c("summer", "fall", "winter")) {
+    super = "seasons"
+  } else if (np %in% c("cave", "cavern", "fox hole")) {
+    super = "holes"
+  } else {
+    super = "roads"
+  }
+  return (super)
+}
+
+# paste singular superordinates to use singulars frequency data
+insert_super_sg = function(np) {
+  if (np %in% c("seagull", "parrot", "crow")) {
+    super = "bird"
+  }  else if (np %in% c("day", "dusk", "night")) {
+    super = "time"
+  } else if (np %in% c("jolly rancher", "piece of chocolate", "marshmallow")) {
+    super = "sweet"
+  } else if (np %in% c("tile", "wood", "carpet")) {
+    super = "floor"
+  } else if (np %in% c("giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "mouse", "cheetah", "sloth", "fish")) {
+    super = "animal"
+  } else if (np %in% c("basketball player", "golfer", "jockey", "runner", "jogger", "walker")) {
+    super = "people"
+  } else if (np %in% c("dachshund", "bassett hound", "chihuahua")) {
+    super = "dog"
+  } else if( np %in% c("novel", "story", "poem")) {
+    super = "reading"
+  } else if( np %in% c("auditorium", "classroom", "study hall")) {
+    super = "room"
+  } else if ( np %in% c("platinum", "bronze", "plastic")) {
+    super = "statue"
+  } else if (np %in% c("bottle of top-shelf liquor", "six-pack of beer", "bottle of wine")) {
+    super = "alcoholic drink"
+  } else if (np %in% c("tree", "bush", "flower")) {
+    super = "plant"
+  } else if(np %in% c("adult", "teenager", "child", "kid", "baby")) {
+    super = "people"
+  } else if (np %in% c("hurricane", "thunderstorm", "rain")) {
+    super = "storm"
+  } else if (np %in% c("soup", "salad", "ice cream")) {
+    super = "food"
+  } else if( np %in% c("summer", "fall", "winter")) {
+    super = "season"
+  } else if (np %in% c("cave", "cavern", "fox hole")) {
+    super = "hole"
+  } else {
+    super = "road"
+  }
+  return (super)
+}
+
+df.trials.w.super <- df.trials %>% 
+  rowwise() %>% 
+  mutate(superordinate_sg = insert_super_sg(np), 
+         superordinate = insert_super(np))
+
+
+# insert plural noun phrases additionally to recorded seed NPs in order to use plural frequencies 
+# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
+insert_plural_np = function(np) {
+  if (np %in% c("seagull", "parrot", "crow", "day", "dusk", "night", "jolly rancher", "marshmallow",
+               "tile", "carpet", "giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "cheetah",
+               "sloth","basketball player", "golfer", "jockey", "runner", "jogger", "walker", "dachshund",
+               "bassett hound", "chihuahua", "novel", "poem", "classroom", "study hall", "tree", "flower",
+               "adult", "teenager",  "kid", "hurricane", "thunderstorm", "rain", "soup", "salad",
+               "cave", "cavern", "fox hole", "highway", "side road", "downtown street"))  {
+    np_pl = paste(np, "s", sep="")
+  } else if (np %in% c("piece of chocolate" )) {
+    np_pl = "pieces of chocolate"
+  } else if (np %in% c( "fish", "wood", "platinum", "bronze", "plastic",  "ice cream", 
+                       "summer", "fall", "winter" )) {
+    np_pl = np
+  } else if( np %in% c("story")) {
+    np_pl = "stories"
+  } else if( np %in% c("mouse")) {
+    np_pl = "mice"
+  } else if( np %in% c("auditorium")) {
+    np_pl = "auditoria"
+  } else if (np %in% c("bottle of top-shelf liquor")) {
+    np_pl = "liquors"
+  } else if (np %in% c("six-pack of beer")) {
+    np_pl = "beers"
+  } else if (np %in% c( "bottle of wine")) {
+    np_pl = "bottles of wine"
+  } else if (np %in% c( "bush" )) {
+    np_pl = "bushes"
+  } else if(np %in% c( "child")) {
+    np_pl = "children"
+  } else if (np %in% c("baby")) {
+    np_pl = "babies"
+  } else {
+    np_pl = np
+  }
+  return (np_pl)
+}
+
+df.trials.w.super <- df.trials.w.super %>% 
+  rowwise() %>% 
+  mutate(np_pl = insert_plural_np(np))
+
+```
+
+
+These multi-word NPs are substituted by one-word expressions where the expressions of this subordinate category are highly likely to include and depend on this one word. 
+```{r filtered main trails}
+df.trials.filtered <- df.trials.w.super %>%
+  left_join(., df.attention.summary) %>%
+  filter(pass_both) %>%
+  #filter(n_memory_correct > 8, n_check_incorrect < 2)  %>% 
+  rowwise() %>%
+  mutate(
+    np_match = np, # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
+    np_match = gsub("bottle of top-shelf liquor", "liquor", np_match),
+    np_match = gsub("piece of chocolate", "chocolate", np_match),
+    np_match = gsub("piece of chalk", "chalk", np_match),
+    np_match = gsub("six-pack of beer", "beer", np_match),
+    np_match = gsub("bottle of wine", "wine", np_match),
+    np_match = gsub("pine tree", "pine", np_match),
+    np_match = gsub("redwood tree", "redwood", np_match),
+    np_match = gsub("alpine tree", "alpine", np_match),
+    np_match = gsub("bonsai tree", "bonsai", np_match),
+    np_match = gsub("bassett hound", "bassett", np_match),
+    np_match = gsub("pick-up truck", "pick-up", np_match),
+    np_match = gsub("relay race", "relay", np_match),
+    np_match = gsub("podcast episode", "podcast", np_match),
+    np_match = gsub("kettle ball", "ball", np_match),
+    np_match = gsub("basketball player", "basketball", np_match),
+    np_match = gsub("study hall", "study", np_match),
+    np_match = gsub("electric car", "electric", np_match),
+    np_match = gsub("bass guitar", "bass", np_match),
+    np_match = gsub("rock concert", "rock", np_match),
+    np_match = gsub("rap concert", "rap", np_match),
+    )
+
+#df.trials.filtered <- df.trials.filtered %>%
+ # left_join(., df.attention.summary) %>%
+  #filter(n_memory_correct > 8, n_check_incorrect < 2) 
+
+df.trials.filtered %>% 
+  group_by(np) %>%
+  count()
+```
+
+Plurals of all irregular nouns in the stimuli set are converted to singulars to match the seed noun phrase. Common misspellings are also controlled for in this code. Based on pilot data, specific mistakes and synonyms are converted to the seed NPs.
+
+```{r codeForSubCatTerms}
+
+
+#stop_words <- stopwords()
+#my_stop_words <-# bind_rows(
+
+# my_stop_words <- stop_words %>%
+#     filter(!(stop_words %in% c("rooms", "year", "side", "area", "of")))#,
+
+
+  # data.frame(
+  #   word = c("relative", "compare"),
+  #   lexicon = 'mh'
+  # )
+#)
+
+# clean produced responses to match NPs 
+df.trials.filtered %>% 
+  mutate(response = as.character(response),
+         response = gsub("&quotechar", "", response),
+         response = gsub("biking", "bike", response),
+         response = gsub("bicycle", "bike", response),
+         response = gsub("car ride", "drive", response),
+         response = gsub("babies", "baby", response),
+         response = gsub("stories", "story", response),
+         response = gsub("6 packs", "beer", response),
+         response = gsub("six-packs", "beer", response),
+         response = gsub("six packs", "beer", response),
+         response = gsub("basset", "bassett", response),
+         response = gsub("dasies", "daisy", response),
+         response = gsub("pansies", "pansy", response),
+         response = gsub("mice", "mouse", response),
+         response = gsub("documentaries", "documentary", response),
+         response = gsub("parties", "party", response),
+         response = gsub("libraries", "library", response),
+         response = gsub("cities", "city", response),
+         response = gsub("auditoria", "auditorium", response),
+         response = gsub("gymnasia", "gymnasium", response),
+         response = gsub("cacti", "cactus", response),
+         response = gsub("pantries", "pantry", response),
+         response = gsub("bonzai", "bonsai", response),
+         response = gsub("seagul", "seagull", response),
+         response = gsub("seagulll", "seagull", response),
+         response = gsub("dalia", "dahlia", response),
+         response = gsub("pitbul", "pitbull", response),
+         response = gsub("panter", "panther", response),
+         response = gsub("icecream", "ice cream", response),
+         response = gsub("ice-cream", "ice cream", response),
+         response = gsub("bed board", "bedboard", response),
+         response = gsub("jocky", "jockey", response),
+         response = gsub("jockie", "jockey", response),
+         response = gsub("smart car", "smartcar", response),
+         response = gsub("gym", "gymnasium", response),
+         response = gsub("beverage", "drink", response),
+         response = gsub("dog house", "doghouse", response),
+         response = gsub("fridge", "refrigerator", response),
+         response = gsub("chihuaua", "chihuahua", response),
+         response = gsub("zuccini", "zucchini", response),
+         response = gsub("cheeta", "cheetah", response),
+         response = gsub("skiier", "skier", response),
+         response = gsub("old", "elderly", response),
+         response = gsub("teen", "teenager", response),
+         response = gsub("cooking", "cookware", response),
+         response = gsub("mobile", "cell", response),
+         
+         response = gsub("candies", "sweets", response),
+         response = gsub("candy", "sweets", response),
+         response = gsub("dachund", "dachshund", response),
+         response = gsub("floor surfaces", "floors", response),
+         response = gsub("floor materials", "floors", response),
+         response = gsub("flooring", "floors", response),
+         response = gsub("humans", "people", response),
+         response = gsub("brands of beer", "beer", response),
+         response = gsub("players that play a different sport", "athletes", response),
+         response = gsub("liquors", "liquor", response),
+         response = gsub("monkies", "monkeys", response),
+         response = gsub("hours of the day", "times of day", response),
+         response = gsub("books", "readings", response),
+         response = gsub("brushes", "bushes", response),
+         response = gsub("writing", "reading", response),
+         response = gsub("poetry", "peom", response),
+         response = gsub("marshmellow", "marshmallow", response),
+         response = gsub("ape", "monkey", response),
+         response = gsub("cow", "crow", response),
+         response = gsub("burrow", "hole", response),
+         response = gsub("times of the year", "seasons", response),
+         response = gsub("times of year", "seasons", response),
+         response = gsub("jokceys", "jockeys", response),
+         response = gsub("golf player", "golfer", response),
+         response = gsub("marshamallow", "marshmallow", response),
+        # substitute subordinate 
+         superordinate = gsub("floor materials", "floors", superordinate)
+        
+         ) %>%
+  unnest_tokens(word, response)  %>% 
+  #nti_join(stop_words)  %>% # remove stop words
+  #anti_join(my_stop_words) %>%  # remove stop words
+  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(phrase, starts_with("word_"), sep = " ") %>%
+  mutate(phrase = gsub(" NA", "", phrase)) %>%
+  left_join(df.trials.filtered %>% select(workerid, trial_num, response)) %>% 
+  rename(cleanedPhrase = phrase, originalResponse = response) %>% 
+  rowwise() %>%
+  mutate(
+    cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+  #   # np = as.character(np),
+  #   np = gsub('\"', "", np),
+  #   specific = containsString(as.character(cleanedPhrase), as.character(np)),
+  #   specificRespNP = containsString(as.character(np), gsub("_", "", as.character(cleanedPhrase))),
+  #   diff = specific - specificRespNP
+  # ) %>%
+  # select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, adj_positiveness, np, cleanedPhrase, originalResponse, specific, specificRespNP, diff) -> d.tidy.phrase.w.original
+    np_match = as.character(np),
+    np_match = gsub('\"', "", np_match),
+  # check if response and seed NP match 
+    specific = containsString(as.character(cleanedPhrase), as.character(np_match)),
+  # check if response and anticipated superordinate match
+    matchingSuper = containsString(as.character(cleanedPhrase), as.character(superordinate))
+  )-> d.tidy.phrase.w.original
+ #%>%
+  #select(workerid, trial_num, stim_id, context, np_positiveness, adj, degree, superordinate, superordinate_sg, adj_positiveness, np, np_pl, np_match, cleanedPhrase, originalResponse, specific, matchingSuper) -> d.tidy.phrase.w.original
+
+
+```
+
+
+```{r}
+d.tidy.phrase.w.original %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  count() %>% 
+  filter(n >=35 )
+
+d.tidy.phrase.w.original %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  count()
+```
+
+
+
+```{r}
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>% 
+  mutate() %>%
+  group_by(np_expectations, adj_polarity) %>%
+  tidyboot_mean(column = specific)
+
+d.tidy.phrase.specificMarking.bs %>%
+  ungroup() %>%
+  mutate(np_expectations = gsub('\"', "", np_expectations),
+         adj_polarity = gsub('\"', "", adj_polarity),
+         np_expectations = factor(np_expectations,
+                               levels = c("low", "medium", "high"))
+) %>%
+  ggplot(., 
+       aes( x = np_expectations, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+
+```
+
+
+The data points are grouped by NP, specificity and scale condition and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
+``` {r}
+
+# np_for_match includes just the key words to match the specific reponses, whereas np_for_freq has the full np for which the frequency was searched such that the frequency can be matched 
+# the superordinate for the NPs where the modal responses did not match the anticipated one are substituted to the modal participant response 
+
+# extract the mode response 
+d.tidy.resp.counts <- d.tidy.phrase.w.original %>% 
+  group_by(degree, superordinate, np_match, specific, adj, cleanedPhrase) %>% count() %>% 
+  mutate(n_unique_resps = n)
+
+# insert the mode NP (modal subordinate where participants gave subordinate response, modal superordinate where they gave superordinate response)
+# in column mode
+d.tidy.resp.counts <- d.tidy.resp.counts %>% group_by(np_match, specific) %>% mutate(mode = cleanedPhrase[which.max(n)])
+
+# analysis of modal responses
+d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>% rowwise() %>%  
+  mutate(isModeNP = containsString(as.character(mode), as.character(np_match)),
+        isModeSuper = containsString(as.character(mode), as.character(superordinate)),
+        isModeNeither = sum(isModeNP, isModeSuper)) # isModeNeither = 0 means that the mode response is different from anticipated NPs
+
+non.matching.mode.resps <- d.tidy.resp.counts.web %>% filter(isModeNeither == 0) %>% 
+  mutate(mode = gsub("_", "", mode))# %>% select(degree, superordinate, np_match, specific, np_positiveness, adj, adj_positiveness, n_unique_resps, mode) %>% distinct()
+#%>% write_csv(., '../data/pilot-classElicitation-free-4/class-elicitation-free-4-nonmatching-mode-resps.csv')
+
+# the data is adjusted to the human modal responses in the following chunks
+```
+
+``` {r}
+
+# plural noun phrases are adjusted to the frequency queries 
+d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original %>% subset(., !(np_pl %in% c("days", "dusks", "nights"))) %>%
+  mutate(np_for_freq = np_pl,
+        np_for_freq = gsub("carpets", "carpet floors", np_for_freq),
+        np_for_freq = gsub("tiles", "tile floors", np_for_freq),
+        np_for_freq = gsub("wood", "wood floors", np_for_freq),
+        np_for_freq = gsub("winter", "winter days", np_for_freq),
+        np_for_freq = gsub("fall", "fall days", np_for_freq),
+        np_for_freq = gsub("summer", "summer days", np_for_freq),
+        np_for_freq = gsub("plastic", "plastic statues", np_for_freq),
+        np_for_freq = gsub("bronze", "bronze statues", np_for_freq),
+        np_for_freq = gsub("platinum", "platinum statue", np_for_freq),
+        np_for_freq = gsub("pieces of chocolate", "chocolates", np_for_freq),
+        
+        # substitutions made based on human modal responses 
+        superordinate = ifelse(np_for_freq == "golfers", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "jockeys", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "basketball players", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "walkers", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "runners", "people", superordinate),
+        superordinate = ifelse(np_for_freq == "joggers", "people", superordinate),
+        superordinate = gsub("holes", "burrows",  superordinate)
+         ) %>% 
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted 
+  mutate(mode_np = ifelse(specific == 1, np_for_freq, superordinate))
+# this data can be fed into python frequency extractor, frequencies to be extracted are unique mode_np's and superordinates
+
+d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode.pl %>%
+  left_join(., df.frequencies, by = c("np_for_freq" ="Nps")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by=c("superordinate"="Nps"))   # add superordinate frequencies
+
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x.x, Frequencies.y.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x.x, superFreq = Frequencies.y.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
+
+# check if singular matches original
+df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv')
+anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
+
+
+write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')
+```
+
+
+``` {r}
+#substitution of superordinates based on human data for singular NPs
+d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% mutate(superordinate = 
+                                                                       ifelse(np_match == "golfer", "people", superordinate),
+                                                                     superordinate = 
+                                                                       ifelse(np_match == "jockey", "people", superordinate),
+                                                                     superordinate = 
+                                                                       ifelse(np_match == "basketball", "people", superordinate),
+                                                                  #   superordinate = 
+                                                                   #    ifelse(np_match == "plastic", "decorations", superordinate),
+                                                                     superordinate = 
+                                                                       ifelse(np_match == "walker", "people", superordinate),
+                                                                      superordinate = 
+                                                                       ifelse(np_match == "jogger", "people", superordinate),
+                                                                      superordinate = 
+                                                                       ifelse(np_match == "runner", "people", superordinate))
+                                                                  #   superordinate = 
+                                                                   #    ifelse(np_match == "downtown street", "street", superordinate),
+                                                                #     superordinate = 
+                                                                 #      ifelse(np_match == "dusk", "days", superordinate))
+
+```
+
+``` {r}
+# exploration of prior estimation by frequency
+df.plural <- d.tidy.resp.counts.pl %>% select(degree, superordinate, specific, mode_np, Frequencies.x, Frequencies.y) %>% distinct() %>% rowwise() %>%
+# beta = 0.1
+  mutate(
+    exp_ratio = exp(0.1*log(Frequencies.x))/exp(0.1*log(Frequencies.y)),
+    exp_ratio_sum = exp(0.1*log(Frequencies.x))/(exp(0.1*log(Frequencies.y)) + exp(0.1*log(Frequencies.x))),
+    #log_ratio = exp( 0.1*log(Frequencies.x/Frequencies.y) ),
+   # beta_log_ratio = exp( 0.1 * log(Frequencies.x)/log(Frequencies.y) ),
+    #exp_log_ratio = exp( 0.1 * log(Frequencies.x)/0.1*log(Frequencies.y) )
+    #mean_mh = (0.1*log(Frequencies.x))/( (0.1*log(Frequencies.x)) + (0.1*log(Frequencies.y)))
+    ) %>% 
+  group_by(degree, superordinate) %>%
+  summarize( mean_exp_ratio = mean(exp_ratio),
+             mean_exp_sum = mean(exp_ratio_sum) 
+             #   mean_log_ratio = mean(log_ratio),
+         #    mean_beta_log_ratio = mean(beta_log_ratio),
+         #    mean_exp_log_ratio = mean(exp_log_ratio)
+             )# %>% View()
+
+        
+my.degrees <- c("size", "height", "price", "length_duration", "speed", "size", "width", "weight", "price", "weight", "width", "height", "hardness", "hardness", "temperature", "strength", "loudness", "strength", "darkness", "length_duration", "loudness", "temperature", "speed")
+my.super <- c("plants", "animals", "statues", "readings", "people", "animals", "burrows", "people", "alcoholic drinks", "animals", "roads", "people", "floors", "sweets", "food", "people", "rooms", "storms", "birds", "dogs", "animals", "seasons", "animals")
+est.cc <- c(0.931, 0.857, 0.151, 0.805, 0.722, 0.792, 0.728, 0.762, 0.887, 0.671, 0.248, 0.627, 0.396, 0.592, 0.673, 0.612, 0.389, 0.654, 0.620, 0.273, 0.578, 0.520, 0.446)
+df.mh <- tibble(my.degrees, my.super, est.cc)
+df.joint <- df.plural %>% left_join(., df.mh, by=c("superordinate"="my.super", "degree" ="my.degrees")) 
+df.joint <- df.joint  %>% mutate(sqErr = round( ((est.cc - mean_exp_ratio)^2) , 5),
+                                 sqErrSum = round( ((est.cc - mean_exp_sum)^2), 5) )
+#write_csv(df.joint, "../data/pilot-classElicitation-free-4/class-elicitation-model-empirical-sub-priors.csv")
+```
+
+
+``` {r}
+# substitute mode responses with typos or not mathcing equivalent seed NPs
+d.tidy.resp.counts.web <- d.tidy.resp.counts.web %>% rowwise() %>% mutate(cleanMode = gsub("_", "", mode),
+                                                                 cleanMode = gsub("baby", "babies", cleanMode),
+                                                                 cleanMode = gsub("days fall", "days in fall",
+                                                                                 cleanMode),
+                                                                 cleanMode = gsub("ice cream", "ice creams",
+                                                                                 cleanMode),
+                                                                 cleanMode = gsub("times day", "times of day",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("story", "stories", cleanMode),
+                                                                 cleanMode = gsub("bottles wine", 
+                                                                                  "bottles of wine", cleanMode),
+                                                                 cleanMode = gsub("mouse", "mice", cleanMode),
+                                                                 cleanMode = gsub("cheetahhs", "cheetahs",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("days fall", "fall days",
+                                                                                  cleanMode),
+                                                                 cleanMode = gsub("teenageragers", "teenagers", cleanMode)
+                                                                 )
+
+#write_csv(d.tidy.resp.counts, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-modal-responses.csv')
+```
+
+
+# Viz: First prass
+
+```{r figCollapseItems}
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>% 
+  mutate() %>%
+  group_by(np_positiveness,  adj_positiveness) %>%
+  tidyboot_mean(column = specific)
+
+d.tidy.phrase.specificMarking.bs %>%
+  ungroup() %>%
+  mutate(np_positiveness = gsub('\"', "", np_positiveness),
+         adj_positiveness = gsub('\"', "", adj_positiveness),
+         np_positiveness = factor(np_positiveness,
+                               levels = c("negative", "neither-nor", "positive"),
+                               labels = c("low", "medium", "high")
+)) %>%
+  rename(adj_polarity = adj_positiveness) %>%
+  ggplot(., 
+       aes( x = np_positiveness, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+# ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
+#        width = 5, height = 3.6)
+```
+
+
+# by item
+
+
+add superordinate labels
+```{r}
+df.adj <- read_csv("../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
+
+df.adj %>% 
+  distinct(item, superordinate) -> df.super
+```
+
+
+```{r figIndivItems}
+d.tidy.phrase.specificMarking.bs.item <- d.tidy.phrase.w.original %>% 
+  #left_join(., df.super %>% rename( np = item)) %>%
+  mutate() %>%
+  group_by( degree, superordinate, np_positiveness,  np, adj_positiveness) %>%
+  tidyboot_mean(column = specific)
+
+d.tidy.phrase.specificMarking.bs.item %>%
+  ungroup() %>%
+  mutate(np_positiveness = gsub('\"', "", np_positiveness),
+         adj_positiveness = gsub('\"', "", adj_positiveness),
+         np_positiveness = factor(np_positiveness,
+                               levels = c("negative", "neither-nor", "positive"),
+                               labels = c("low", "medium", "high")),
+         np = fct_reorder(np, as.numeric(np_positiveness))) %>%
+  rename(adj_polarity = adj_positiveness) %>%
+  ggplot(., 
+       aes( x = np, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  facet_wrap(~degree + superordinate, scales = 'free', nrow = 4)+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+# ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
+#        width = 9, height = 9)
+ggsave("../writing/paper/figs/bars_cc_finalExpt_pilot_byItem.png",
+       width = 9, height = 9)
+```
+
+# Regression modeling
+
+
+### Simulate data to get contrast coding right
+
+```{r}
+simulated.data <- bind_rows(
+  data.frame(
+    np = "mid",
+    adj = "short",
+    x = rnorm(n = 20, mean = 1, sd = 0.5)
+  ),
+  data.frame(
+    np = "mid",
+    adj = "tall",
+    x = rnorm(n = 20, mean = 1, sd = 0.5)
+  ), 
+  data.frame(
+    np = "low",
+    adj = "short",
+    x = rnorm(n = 20, mean = 0.5, sd = 0.5)
+  ),
+  data.frame(
+    np = "low",
+    adj = "tall",
+    x = rnorm(n = 20, mean = 1.5, sd = 0.5)
+  ), 
+  data.frame(
+    np = "high",
+    adj = "short",
+    x = rnorm(n = 20, mean = 1.5, sd = 0.5)
+  ),
+  data.frame(
+    np = "high",
+    adj = "tall",
+    x = rnorm(n = 20, mean = 0.5, sd = 0.5)
+  )
+) %>%
+  mutate(np = factor(np, levels = c("mid", "low", "high")),
+         adj = factor(adj, levels = c("short", "tall")))
+
+simulated.data.means <- simulated.data %>%
+  group_by(np, adj) %>%
+  summarize(m = mean(x)) 
+
+simulated.data.means %>%
+  ggplot(., aes (x = np, y = m, fill = adj))+
+  geom_col(position = position_dodge())
+
+
+contrasts(simulated.data$adj) <- c(-0.5, 0.5)
+
+contrasts(simulated.data$np) 
+
+lm.sim<- lm(x ~ np*adj, data = simulated.data)
+
+lm.sim.summ <- summary(lm.sim)
+
+sim.int <- lm.sim.summ$coefficients[["(Intercept)", "Estimate"]]
+sim.beta_adj <- lm.sim.summ$coefficients[["adj1", "Estimate"]]
+sim.beta_npLow <- lm.sim.summ$coefficients[["nplow", "Estimate"]]
+sim.beta_npHigh <- lm.sim.summ$coefficients[["nphigh", "Estimate"]]
+sim.beta_npLow_adj <- lm.sim.summ$coefficients[["nplow:adj1", "Estimate"]]
+sim.beta_npHigh_adj <- lm.sim.summ$coefficients[["nphigh:adj1", "Estimate"]]
+
+print(
+  paste(
+    "actual mean of MID tall" ,  
+    simulated.data.means %>% filter(np == "mid", adj == "tall") %>% pull(m),
+    "model prediction", 
+    sim.int + 0.5 * sim.beta_adj
+  )
+)
+
+print(
+  paste(
+    "actual mean of MID short" ,  
+    simulated.data.means %>% filter(np == "mid", adj == "short") %>% pull(m),
+    "model prediction", 
+    sim.int - 0.5 * sim.beta_adj
+  )
+)
+
+print(
+  paste(
+    "actual mean of HIGH tall" ,  
+    simulated.data.means %>% filter(np == "high", adj == "tall") %>% pull(m),
+    "model prediction", 
+    sim.int + 0.5 * sim.beta_adj + sim.beta_npHigh + 0.5 * sim.beta_npHigh_adj
+  )
+)
+
+print(
+  paste(
+    "actual mean of HIGH short" ,  
+    simulated.data.means %>% filter(np == "high", adj == "short") %>% pull(m),
+    "model prediction", 
+    sim.int - 0.5 * sim.beta_adj + sim.beta_npHigh - 0.5 * sim.beta_npHigh_adj
+  )
+)
+
+print(
+  paste(
+    "actual mean of LOW tall" ,  
+    simulated.data.means %>% filter(np == "low", adj == "tall") %>% pull(m),
+    "model prediction", 
+    sim.int + 0.5 * sim.beta_adj + sim.beta_npLow + 0.5 * sim.beta_npLow_adj
+  )
+)
+
+print(
+  paste(
+    "actual mean of LOW short" ,  
+    simulated.data.means %>% filter(np == "low", adj == "short") %>% pull(m),
+    "model prediction", 
+    sim.int - 0.5 * sim.beta_adj + sim.beta_npLow - 0.5 * sim.beta_npLow_adj
+  )
+)
+```
+
+
+```{r}
+d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
+  mutate(adj_positiveness = factor(adj_positiveness, 
+                                   levels = c("negative", "positive")),
+         np_positiveness = factor(np_positiveness, 
+                                  levels = c("neither-nor", "negative", "positive"))) %>%
+  rowwise() %>%
+  mutate(item_set = paste(degree, "_", superordinate, sep = "")) %>%
+  ungroup() %>%
+  mutate(item_set = factor(item_set),
+         workerid = factor(workerid))
+
+
+
+contrasts(d.tidy.phrase.w.original.fac$adj_positiveness) <- c(-1/2, 1/2)
+
+rs.glm.brm <- brm(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 +  np_positiveness*adj_positiveness | workerid) + 
+    (1 +  np_positiveness*adj_positiveness | item_set),
+  family = bernoulli(), chains = 3, cores = 3, iter = 1000,
+  data = d.tidy.phrase.w.original.fac)
+
+
+rs.glm.brm.summary <- summary(rs.glm.brm)
+
+rs.glm.brm.summary
+
+```
+
+```{r}
+write_csv(data.frame(rs.glm.brm.summary[["fixed"]]) %>% 
+            mutate(Rowname = row.names(.)), 
+          path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv")
+```
+
+```{r}
+rs.glm <- glmer(
+  formula = specific ~ np_positiveness * adj_positiveness + 
+    (1 | workerid) + 
+    (1 | superordinate),
+  family = 'binomial', 
+  data = d.tidy.phrase.w.original.fac)
+
+contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
+
+summary(rs.glm)
+```
+
+
