@@ -70,17 +70,17 @@ for (result_file in result.files) {
 
 
 
-write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+# write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+# write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+# write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
 ```
 
 
 ```{r load data from csv}
-df.trials <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-trials.csv")
-df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
-df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
-df.frequencies <- read_csv("../data/pilot-classElicitation-free-4/webgram-freqs-unique-nps.csv")
+df.trials <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+df.subject <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+df.attention <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+#df.frequencies <- read_csv("../data/pilot-classElicitation-free-4/webgram-freqs-unique-nps.csv")
 ```
 
 
