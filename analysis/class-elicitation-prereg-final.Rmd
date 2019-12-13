@@ -68,8 +68,6 @@ for (result_file in result.files) {
 }
 
 
-
-
 # write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
 # write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
 # write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
@@ -101,8 +99,13 @@ df.comprehension <- df.attention %>%
       containsString(tolower(response), "skyscraper") | 
       containsString(tolower(response), "skyscaper") | 
       containsString(tolower(response), "structure") | 
-      containsString(tolower(response), "bulding")
+      containsString(tolower(response), "bulding") | 
+      containsString(tolower(response), "builing")
     ))
+
+df.comprehension %>%
+  filter(!pass_comp) %>% 
+  View()
 
 df.memory <- df.attention %>%
   filter(condition == "memory_check") %>%
@@ -304,7 +307,7 @@ df.trials.filtered <- df.trials.w.super %>%
   #filter(n_memory_correct > 8, n_check_incorrect < 2) 
 
 df.trials.filtered %>% 
-  group_by(np) %>%
+  group_by(degree, np) %>%
   count()
 ```
 
@@ -439,10 +442,14 @@ df.trials.filtered %>%
 
 
 ```{r}
-d.tidy.phrase.w.original %>%
+d.item.count <- d.tidy.phrase.w.original %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
-  count() %>% 
-  filter(n >=35 )
+  count() 
+
+d.item.count %>% 
+  ungroup() %>% 
+  group_by(n) %>% 
+  count()
 
 d.tidy.phrase.w.original %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
@@ -482,6 +489,27 @@ d.tidy.phrase.specificMarking.bs %>%
 
 
 ```
+
+
+
+## Look at items with n>=35
+
+```{r}
+
+d.item.n35 <- d.item.count %>%
+  filter(n >= 35) %>%
+  mutate(unique_id = paste(stim_id, np_expectations, adj_polarity, sep = "_")) %>%
+  pull(unique_id)
+
+
+d.item.n35.bs <- d.tidy.phrase.w.original %>%
+  mutate(unique_id = paste(stim_id, np_expectations, adj_polarity, sep = "_")) %>%
+  filter(unique_id %in% d.item.n35) %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  summarize(n_sum = sum(specific), n = n())
+```
+
+
 
 
 The data points are grouped by NP, specificity and scale condition and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
