@@ -1732,157 +1732,253 @@ var examples = [
 
 var omitted_stimuli = [
   {
-    "stim_id": 2,
-    "np_expectations": "low",
-    "adj_polarity": "positive",
-    "n": 39
-  },
-  {
-    "stim_id": 8,
+    "stim_id": "12",
     "np_expectations": "high",
-    "adj_polarity": "positive",
-    "n": 36
+    "adj_polarity": "negative",
+    "n": 35
   },
   {
-    "stim_id": 12,
+    "stim_id": "12",
     "np_expectations": "high",
     "adj_polarity": "positive",
     "n": 35
   },
   {
-    "stim_id": 13,
+    "stim_id": "13",
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 41
   },
   {
-    "stim_id": 19,
+    "stim_id": "17",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "19",
     "np_expectations": "high",
     "adj_polarity": "positive",
     "n": 35
   },
   {
-    "stim_id": 23,
+    "stim_id": "2",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "23",
     "np_expectations": "high",
     "adj_polarity": "negative",
     "n": 39
   },
   {
-    "stim_id": 32,
+    "stim_id": "24",
     "np_expectations": "low",
-    "adj_polarity": "positive",
-    "n": 36
-  },
-  {
-    "stim_id": 40,
-    "np_expectations": "medium",
-    "adj_polarity": "positive",
+    "adj_polarity": "negative",
     "n": 35
   },
   {
-    "stim_id": 43,
+    "stim_id": "24",
     "np_expectations": "medium",
     "adj_polarity": "positive",
     "n": 37
   },
   {
-    "stim_id": 49,
+    "stim_id": "26",
     "np_expectations": "medium",
-    "adj_polarity": "positive",
-    "n": 35
-  },
-  {
-    "stim_id": 52,
-    "np_expectations": "high",
-    "adj_polarity": "positive",
-    "n": 35
-  },
-  {
-    "stim_id": 58,
-    "np_expectations": "high",
-    "adj_polarity": "positive",
-    "n": 35
-  },
-  {
-    "stim_id": 59,
-    "np_expectations": "low",
     "adj_polarity": "negative",
     "n": 36
   },
   {
-    "stim_id": 61,
-    "np_expectations": "low",
-    "adj_polarity": "negative",
-    "n": 37
-  },
-  {
-    "stim_id": 63,
-    "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 35
-  },
-  {
-    "stim_id": 65,
-    "np_expectations": "low",
-    "adj_polarity": "negative",
-    "n": 35
-  },
-  {
-    "stim_id": 67,
-    "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 37
-  },
-  {
-    "stim_id": 79,
-    "np_expectations": "high",
-    "adj_polarity": "negative",
-    "n": 35
-  },
-  {
-    "stim_id": 80,
-    "np_expectations": "low",
-    "adj_polarity": "negative",
-    "n": 35
-  },
-  {
-    "stim_id": 81,
+    "stim_id": "29",
     "np_expectations": "high",
     "adj_polarity": "positive",
-    "n": 35
+    "n": 36
   },
   {
-    "stim_id": 82,
+    "stim_id": "32",
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 36
   },
   {
-    "stim_id": 84,
+    "stim_id": "40",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "43",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "58",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "66",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "84",
     "np_expectations": "high",
     "adj_polarity": "negative",
     "n": 38
   },
   {
-    "stim_id": 85,
+    "stim_id": "85",
     "np_expectations": "medium",
     "adj_polarity": "positive",
     "n": 35
   },
   {
-    "stim_id": 86,
+    "stim_id": "86",
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 35
   },
   {
-    "stim_id": 88,
+    "stim_id": "88",
     "np_expectations": "high",
     "adj_polarity": "positive",
     "n": 35
   },
   {
-    "stim_id": 90,
+    "stim_id": "89",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "90",
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 40
