@@ -4,7 +4,7 @@
 
 // if we find highly consistent responses on an item part-way through data collection
 // we will remove the stimulus from the set
-var omitted_stimuli = []
+
 //     {degree: "darkness", adj: "dark", np: "parrot"},
 //     {degree: "darkness", adj: "dark", np: "seagull"}
 
@@ -1727,4 +1727,2570 @@ var examples = [
       pronoun: "It",
       context: "PERSON is attempting to move furniture through the PHRASE of PRO house."
     }
+]
+
+
+var omitted_stimuli = [
+  {
+    "stim_id": "1",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "1",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "1",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "1",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "1",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "1",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "10",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "10",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "10",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "10",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "12",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "12",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "12",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "12",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "12",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "13",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "13",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "13",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "13",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "13",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "14",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "14",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "14",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "14",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "14",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 44
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "16",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "16",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "16",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "16",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 43
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "18",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "18",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "18",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "18",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "18",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "19",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "19",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "19",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "2",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "2",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "2",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "2",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "2",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 43
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "21",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "22",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "22",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "22",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "22",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "22",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "23",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "23",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "23",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "23",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "24",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "25",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "25",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "25",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "25",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "26",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "27",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "27",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "27",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "27",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "27",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "28",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "28",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "28",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "29",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "29",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "29",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "29",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "29",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "3",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 45
+  },
+  {
+    "stim_id": "30",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "30",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "30",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "30",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "31",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "31",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "31",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "31",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "31",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "32",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 45
+  },
+  {
+    "stim_id": "32",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "32",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "32",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "32",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "33",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "33",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "33",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "33",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "34",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "34",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "34",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "34",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "34",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "35",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "36",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "36",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "36",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "36",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "37",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "37",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "37",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "37",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "38",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "38",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "38",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "38",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "39",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "39",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "39",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "39",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "4",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "4",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 43
+  },
+  {
+    "stim_id": "4",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "4",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "4",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "40",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "40",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "40",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "40",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "41",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "42",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "43",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "43",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 43
+  },
+  {
+    "stim_id": "43",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "43",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "44",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "44",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "44",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "45",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "45",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "45",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "45",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "45",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "46",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "46",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "46",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "46",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "46",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "47",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "47",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "47",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "47",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "47",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "48",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "48",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "48",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "48",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 50
+  },
+  {
+    "stim_id": "49",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "5",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "50",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "51",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "51",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "51",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "51",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "51",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "52",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "53",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "53",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "53",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "53",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "53",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "54",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 45
+  },
+  {
+    "stim_id": "54",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "54",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "54",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "55",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "55",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "55",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 45
+  },
+  {
+    "stim_id": "56",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "56",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "56",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "56",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "56",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "57",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "57",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "57",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "57",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "57",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "58",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 44
+  },
+  {
+    "stim_id": "58",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "58",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "58",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "59",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "6",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "6",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "6",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "6",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "60",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "60",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "60",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "60",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "60",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "61",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "62",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "62",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "62",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "63",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "64",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "64",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "64",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "64",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "64",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "65",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "66",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "66",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "66",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "67",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "68",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "68",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "68",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "68",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "69",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "69",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 44
+  },
+  {
+    "stim_id": "69",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "69",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "7",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "7",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "7",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "7",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "7",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "70",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "70",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "70",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "73",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 44
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 43
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 44
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "78",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "78",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "78",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "78",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "78",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "79",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 42
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "82",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "83",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "84",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "85",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": "85",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "85",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 44
+  },
+  {
+    "stim_id": "85",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "86",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "86",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 38
+  },
+  {
+    "stim_id": "86",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "86",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "86",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 40
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 42
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 45
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": "9",
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": "9",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 41
+  },
+  {
+    "stim_id": "9",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": "9",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": "90",
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "90",
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 40
+  },
+  {
+    "stim_id": "90",
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": "90",
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 40
+  }
 ]
