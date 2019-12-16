@@ -90,9 +90,9 @@ function getNounElicitationTrials(examples, n_trials) {
 	console.log("all possible trials = " + all_trials.length)
 	var reduced_all_trials = _.reject(all_trials, function(x){
 		return _.some(_.map(omitted_stimuli, function(y){
-			return x.degree == y.degree &&
-			x.adj == y.adj &&
-			x.np == y.np
+			return x.stim_id == y.stim_id &&
+			x.adj_polarity == y.adj_polarity &&
+			x.np_expectations == y.np_expectations
 		}))
 	})
 	console.log("after exclusions = " + reduced_all_trials.length)
@@ -100,7 +100,7 @@ function getNounElicitationTrials(examples, n_trials) {
 	var all_stim_ids = _.uniq(_.pluck(reduced_all_trials, "stim_id"))
 	// console.log(stims_for_this_expt)
 	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
-	// shuffle all trials
+	// shuffle  all trials
 	var shuffled_all_trials = _.shuffle(reduced_all_trials)
 
 	var all_conditions = [
@@ -117,28 +117,56 @@ function getNounElicitationTrials(examples, n_trials) {
 	// loop over 6 conditions
 	for (var i = 0; i < all_conditions.length; i++) {
 		var condition = all_conditions[i]
+		var possible_stims_in_condition = _.where(shuffled_all_trials,
+			{
+				np_expectations: condition.np_expectations,
+				adj_polarity: condition.adj_polarity
+			})
+		var selected_stims = _.shuffle(possible_stims_in_condition).slice(0, n_trials_per_condition)
+		var condition_stim_ids = _.pluck(selected_stims, "stim_id")
+		// console.log(condition_stim_ids)
+		var all_stim_ids = _.without(all_stim_ids, condition_stim_ids)
+
+		for (var j = 0; j < n_trials_per_condition; j++) {
+				// var item_num = n_trials_per_condition*i + j
+				// // console.log(item_num)
+				// var stim = _.findWhere(shuffled_all_trials,
+				// 	{
+				// 		stim_id: stims_for_this_expt[item_num],
+				// 		np_expectations: condition.np_expectations,
+				// 		adj_polarity: condition.adj_polarity
+				// 	})
+				trials.push(selected_stims[j])
+		}
+
 		// console.log(condition)
 		// console.log(n_trials_per_condition)
 
 		// for each condition, select n trials
-		for (var j = 0; j < n_trials_per_condition; j++) {
-				var item_num = n_trials_per_condition*i + j
-				// console.log(item_num)
-				var stim = _.findWhere(shuffled_all_trials,
-					{
-						stim_id: stims_for_this_expt[item_num],
-						np_expectations: condition.np_expectations,
-						adj_polarity: condition.adj_polarity
-					})
-				trials.push(stim)
-		}
+		// j = 0;
+		// while (j < n_trials_per_condition) {
+		// 	var item_num = stims_for_this_expt //n_trials_per_condition*i + j
+		//
+		// }
+		// for (var j = 0; j < n_trials_per_condition; j++) {
+		// 		var item_num = n_trials_per_condition*i + j
+		// 		// console.log(item_num)
+		// 		var stim = _.findWhere(shuffled_all_trials,
+		// 			{
+		// 				stim_id: stims_for_this_expt[item_num],
+		// 				np_expectations: condition.np_expectations,
+		// 				adj_polarity: condition.adj_polarity
+		// 			})
+		// 		trials.push(stim)
+		// }
 	}
 	// return trials
 
-
+	// console.log(trials.slice(0, 6))
   // loops until a suitable trials array is foundp
   while(1) {
     for (var i = 0; i < trials.length-1; i++) {
+			console.log(i)
       if (trials[i]["degree"] == trials[i+1]["degree"]) {
         trials = _.shuffle(trials);
         break;

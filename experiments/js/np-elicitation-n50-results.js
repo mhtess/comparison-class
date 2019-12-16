@@ -4,7 +4,7 @@
 
 // if we find highly consistent responses on an item part-way through data collection
 // we will remove the stimulus from the set
-var omitted_stimuli = []
+
 //     {degree: "darkness", adj: "dark", np: "parrot"},
 //     {degree: "darkness", adj: "dark", np: "seagull"}
 
@@ -1727,4 +1727,164 @@ var examples = [
       pronoun: "It",
       context: "PERSON is attempting to move furniture through the PHRASE of PRO house."
     }
+]
+
+
+var omitted_stimuli = [
+  {
+    "stim_id": 2,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 39
+  },
+  {
+    "stim_id": 8,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": 12,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 13,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 41
+  },
+  {
+    "stim_id": 19,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 23,
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 39
+  },
+  {
+    "stim_id": 32,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": 40,
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 43,
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 37
+  },
+  {
+    "stim_id": 49,
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 52,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 58,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 59,
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 36
+  },
+  {
+    "stim_id": 61,
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": 63,
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": 65,
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": 67,
+    "np_expectations": "medium",
+    "adj_polarity": "negative",
+    "n": 37
+  },
+  {
+    "stim_id": 79,
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": 80,
+    "np_expectations": "low",
+    "adj_polarity": "negative",
+    "n": 35
+  },
+  {
+    "stim_id": 81,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 82,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 36
+  },
+  {
+    "stim_id": 84,
+    "np_expectations": "high",
+    "adj_polarity": "negative",
+    "n": 38
+  },
+  {
+    "stim_id": 85,
+    "np_expectations": "medium",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 86,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 88,
+    "np_expectations": "high",
+    "adj_polarity": "positive",
+    "n": 35
+  },
+  {
+    "stim_id": 90,
+    "np_expectations": "low",
+    "adj_polarity": "positive",
+    "n": 40
+  }
 ]
