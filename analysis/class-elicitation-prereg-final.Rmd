@@ -490,7 +490,7 @@ d.tidy.resp.analysis <- d.tidy.resp.valid.resps %>% filter((specific == 0) & (ma
 
 ``` {r}
 # categorize the responses upon looking at the reponses not matching the NP nor the superordinate
-d.tidy.phrase.unexpected.resps1 <- d.tidy.resp.analysis %>% 
+d.tidy.phrase.classified <- d.tidy.resp.valid.resps %>% 
   
   mutate(cat_cleanedPhrase = cleanedPhrase,
          cat_cleanedPhrase = gsub("rinks", "ice rink", cat_cleanedPhrase),
@@ -506,7 +506,7 @@ d.tidy.phrase.unexpected.resps1 <- d.tidy.resp.analysis %>%
          cat_cleanedPhrase = gsub("environments", "places", cat_cleanedPhrase),
     #     cat_cleanedPhrase = gsub("fondues", "chocolate fondues", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("segalls", "seagulls", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("players", "athletes", cat_cleanedPhrase),
+     #    cat_cleanedPhrase = gsub("players", "athletes", cat_cleanedPhrase),
      #    cat_cleanedPhrase = gsub("conference room", "conference center", cat_cleanedPhrase),
      #    cat_cleanedPhrase = gsub("ways", "roads", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("triatlon", "triathlon", cat_cleanedPhrase),
@@ -744,6 +744,7 @@ d.tidy.phrase.unexpected.resps1 <- d.tidy.resp.analysis %>%
    cat_cleanedPhrase = ifelse(degree == "price",  gsub("time", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("time", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "price",  gsub("store", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(degree == "price",  gsub("shop", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "size",  gsub("store", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "loudness_n",  gsub("store", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "length_duration",  gsub("store", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
@@ -775,7 +776,7 @@ d.tidy.phrase.unexpected.resps1 <- d.tidy.resp.analysis %>%
    cat_cleanedPhrase = gsub("palnes", "plane", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("paties", "party", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("patios", "patio door", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("pencial's", "pencil", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("pencials", "pencil", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("rapberriees", "raspberries", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("rock music", "rock concert", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("rug", "carpet", cat_cleanedPhrase),
@@ -798,8 +799,8 @@ d.tidy.phrase.unexpected.resps1 <- d.tidy.resp.analysis %>%
   mutate( cat_cleaned = gsub("_", "", cat_cleanedPhrase),
     specific = containsString_responses(as.character(cat_cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
          matchingSuper = containsString_responses(as.character(cat_cleanedPhrase), as.character(superordinate), cat_cleaned, super_us)
-         ) %>%
-  filter((specific == 0) & (matchingSuper == 0)) %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
+         ) #%>%
+  #filter((specific == 0) & (matchingSuper == 0)) %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
   
 
 d.tidy.resp.analysis.update <- d.tidy.phrase.w.original %>% filter((specific == 0) & (matchingSuper == 0))  %>% distinct(degree, superordinate, np, adj, np_match, cleanedPhrase, specific, matchingSuper)
@@ -824,7 +825,7 @@ d.tidy.phrase.w.original %>%
 
 
 ```{r}
-d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>% 
+d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.classified %>% 
   mutate() %>%
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
