@@ -808,10 +808,10 @@ d.tidy.resp.analysis.update <- d.tidy.phrase.w.original %>% filter((specific == 
 
 
 ```{r}
-d.item.count <- d.tidy.phrase.w.original %>%
+d.item.count <- d.tidy.phrase.classified %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   count() 
-
+d.item.count
 d.item.count %>% 
   ungroup() %>% 
   group_by(n) %>% 
@@ -820,6 +820,15 @@ d.item.count %>%
 d.tidy.phrase.w.original %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   count()
+
+d.sub.counts <- d.tidy.phrase.classified %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  count(specific)
+d.sub.counts
+d.consistent.items <- d.sub.counts %>% group_by(stim_id, np_expectations, adj_polarity) %>% mutate(nr_dp = sum(n)) %>% filter(n >= nr_dp-2)#filter( ((specific == 1) & (n >= nr_dp-2)) | ((specific == 0 ) & (n >= nr_dp-2))) # extract the consistent items 
+d.consistent.items
+d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
+d.inconsistent.items
 ```
 
 
