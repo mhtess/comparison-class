@@ -1756,12 +1756,6 @@ var omitted_stimuli = [
     "n": 24
   },
   {
-    "stim_id": "1",
-    "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 36
-  },
-  {
     "stim_id": "5",
     "np_expectations": "high",
     "adj_polarity": "positive",
@@ -1788,12 +1782,6 @@ var omitted_stimuli = [
   {
     "stim_id": "9",
     "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 33
-  },
-  {
-    "stim_id": "9",
-    "np_expectations": "medium",
     "adj_polarity": "positive",
     "n": 34
   },
@@ -1808,12 +1796,6 @@ var omitted_stimuli = [
     "np_expectations": "high",
     "adj_polarity": "negative",
     "n": 37
-  },
-  {
-    "stim_id": "12",
-    "np_expectations": "low",
-    "adj_polarity": "positive",
-    "n": 26
   },
   {
     "stim_id": "13",
@@ -1852,12 +1834,6 @@ var omitted_stimuli = [
     "n": 38
   },
   {
-    "stim_id": "16",
-    "np_expectations": "low",
-    "adj_polarity": "negative",
-    "n": 33
-  },
-  {
     "stim_id": "17",
     "np_expectations": "low",
     "adj_polarity": "negative",
@@ -1928,12 +1904,6 @@ var omitted_stimuli = [
     "np_expectations": "medium",
     "adj_polarity": "negative",
     "n": 38
-  },
-  {
-    "stim_id": "23",
-    "np_expectations": "medium",
-    "adj_polarity": "positive",
-    "n": 30
   },
   {
     "stim_id": "24",
@@ -1997,12 +1967,6 @@ var omitted_stimuli = [
   },
   {
     "stim_id": "30",
-    "np_expectations": "high",
-    "adj_polarity": "positive",
-    "n": 21
-  },
-  {
-    "stim_id": "30",
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 29
@@ -2048,12 +2012,6 @@ var omitted_stimuli = [
     "np_expectations": "medium",
     "adj_polarity": "negative",
     "n": 36
-  },
-  {
-    "stim_id": "45",
-    "np_expectations": "high",
-    "adj_polarity": "positive",
-    "n": 30
   },
   {
     "stim_id": "45",
@@ -2120,12 +2078,6 @@ var omitted_stimuli = [
     "np_expectations": "high",
     "adj_polarity": "negative",
     "n": 45
-  },
-  {
-    "stim_id": "54",
-    "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 36
   },
   {
     "stim_id": "56",
@@ -2284,24 +2236,6 @@ var omitted_stimuli = [
     "n": 35
   },
   {
-    "stim_id": "87",
-    "np_expectations": "low",
-    "adj_polarity": "negative",
-    "n": 36
-  },
-  {
-    "stim_id": "87",
-    "np_expectations": "low",
-    "adj_polarity": "positive",
-    "n": 41
-  },
-  {
-    "stim_id": "87",
-    "np_expectations": "medium",
-    "adj_polarity": "negative",
-    "n": 31
-  },
-  {
     "stim_id": "88",
     "np_expectations": "high",
     "adj_polarity": "negative",
@@ -2318,12 +2252,6 @@ var omitted_stimuli = [
     "np_expectations": "low",
     "adj_polarity": "positive",
     "n": 39
-  },
-  {
-    "stim_id": "89",
-    "np_expectations": "medium",
-    "adj_polarity": "positive",
-    "n": 33
   },
   {
     "stim_id": "90",
