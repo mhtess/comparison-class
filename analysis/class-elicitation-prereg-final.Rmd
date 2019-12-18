@@ -343,11 +343,11 @@ Plurals of all irregular nouns in the stimuli set are converted to singulars to 
 ```{r codeForSubCatTerms}
 
 
-stop_words <- stopwords()
-my_stop_words <-# bind_rows(
+#stop_words <- stopwords()
+#my_stop_words <-# bind_rows(
 
- my_stop_words <- stop_words %>%
-     filter(!(stop_words %in% c("rooms", "year", "side", "area", "of", "up")))#,
+ my_stop_words <- stop_words %>% rowwise() %>%
+    subset(!(stop_words$word %in% c("rooms", "year", "side", "area", "of", "up")))#,
 
 
   # data.frame(
@@ -437,8 +437,8 @@ df.trials.filtered %>%
         
          ) %>%
   unnest_tokens(word, response)  %>% 
-  anti_join(stop_words)  %>% # remove stop words
-  #anti_join(my_stop_words) %>%  # remove stop words
+ #anti_join(stop_words)  %>% # remove stop words
+  anti_join(my_stop_words) %>%  # remove stop words
   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
   spread(wordNumber, word) %>%
@@ -803,7 +803,7 @@ d.tidy.phrase.classified <- d.tidy.resp.valid.resps %>%
   #filter((specific == 0) & (matchingSuper == 0)) %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
   
 
-d.tidy.resp.analysis.update <- d.tidy.phrase.w.original %>% filter((specific == 0) & (matchingSuper == 0))  %>% distinct(degree, superordinate, np, adj, np_match, cleanedPhrase, specific, matchingSuper)
+d.tidy.resp.analysis.update <- d.tidy.phrase.classified %>% filter((specific == 0) & (matchingSuper == 0))  %>% distinct(degree, superordinate, np, adj, np_match, cleanedPhrase, specific, matchingSuper)
 ```
 
 
@@ -831,6 +831,23 @@ d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
 d.inconsistent.items
 ```
 
+``` {r}
+# classify superordinate responses
+d.unexpected.resps <- d.tidy.phrase.classified %>% filter((specific == 0) & (matchingSuper == 0)) %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
+
+d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
+  mutate(
+    cleanedPhrase = gsub("age", "people", cleanedPhrase),
+    cleanedPhrase = gsub("alcohol drinks", "alcoholic drinks", cleanedPhrase),
+    cleanedPhrase = gsub("animal homes", "dens", cleanedPhrase),
+    cleanedPhrase = gsub("animal noises", "noises", cleanedPhrase),
+    cleanedPhrase = gsub("animal sounds", "sounds", cleanedPhrase),
+    cleanedPhrase = gsub("aniumals", "animals", cleanedPhrase),
+    cleanedPhrase = gsub("apartmets", "apartments", cleanedPhrase),
+    cleanedPhrase = gsub("animal sounds", "sounds", cleanedPhrase),
+    cleanedPhrase = gsub("animal sounds", "sounds", cleanedPhrase),
+         )
+```
 
 
 ```{r}
