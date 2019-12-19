@@ -812,6 +812,7 @@ d.item.count <- d.tidy.phrase.classified %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   count() 
 d.item.count
+
 d.item.count %>% 
   ungroup() %>% 
   group_by(n) %>% 
@@ -825,11 +826,27 @@ d.sub.counts <- d.tidy.phrase.classified %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   count(specific)
 d.sub.counts
-d.consistent.items <- d.sub.counts %>% group_by(stim_id, np_expectations, adj_polarity) %>% mutate(nr_dp = sum(n)) %>% filter(n >= nr_dp-2)#filter( ((specific == 1) & (n >= nr_dp-2)) | ((specific == 0 ) & (n >= nr_dp-2))) # extract the consistent items 
+d.consistent.items <- d.sub.counts %>% 
+  group_by(stim_id, np_expectations, adj_polarity) %>% 
+  mutate(nr_dp = sum(n)) %>% 
+  filter(n >= nr_dp-2)#filter( ((specific == 1) & (n >= nr_dp-2)) | ((specific == 0 ) & (n >= nr_dp-2))) # extract the consistent items 
+
+
 d.consistent.items
 d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
 d.inconsistent.items
 ```
+
+
+```{r}
+  filter(n < 35)
+ write(
+   jsonlite::toJSON(d.item.n35, pretty = T),
+   file = "../experiments/js/prereg-cce-n35.json"
+ )
+
+```
+
 
 ``` {r}
 # classify superordinate responses
