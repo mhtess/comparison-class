@@ -409,8 +409,8 @@ All irregular plurals in the set set are converted to singulars to match the see
 
 # lemmatization (PL to SG to match our seed NPs) as well as confident synonyms transformation
 df.trials.filtered.spelling %>% 
+  # synonyms
   mutate(response = gsub("6 packs", "beer", response),
-         response = gsub("monkies", "monkey", response),
          response = gsub("golf player", "golfer", response),
          response = gsub("six-packs", "beer", response),
          response = gsub("six-pack", "beer", response),
@@ -422,21 +422,14 @@ df.trials.filtered.spelling %>%
          response = gsub("biking", "bike", response),
          response = gsub("bicycle", "bike", response),
          response = gsub("car ride", "drive", response),
-         response = gsub("milshakes", "milkshake", response),
-         response = gsub("watermenlons", "watermelon", response),
-         response = gsub("docuentaries", "documentary", response),
          response = gsub("brands of beer", "beer", response),
-         response = gsub("cooking", "cookware", response),
          response = gsub("mobile", "cell", response),
          response = gsub("fridge", "refrigerator", response),
          response = gsub("gym", "gymnasium", response),
          response = gsub("players that play a different sport", "athletes", response),
          response = gsub("hours of the day", "times of day", response),
-         response = gsub("book", "readings", response),
-         response = gsub("parites", "party", response),
          response = gsub("times of the year", "seasons", response),
          response = gsub("times of year", "seasons", response),
-         response = gsub("jollies", "jolly rancher", response),
          response = gsub("conference room", "conference center", response),
          response = gsub("clothing", "clothes", response),
          response = gsub("parts of the day", "times of day", response),
@@ -452,6 +445,42 @@ df.trials.filtered.spelling %>%
          response = gsub("restaurant menu", "restaurant", response),
          response = gsub("footwear", "shoes", response),
          response = gsub("alochols", "alcoholic drinks", response),
+         response = gsub("book", "readings", response),
+         response = gsub("parites", "party", response),
+         response = gsub("floor surfaces", "floors", response),
+         response = gsub("floor materials", "floors", response),
+         response = gsub("flooring", "floors", response),
+         response = gsub("poetry", "poem", response),
+         response = gsub("burrow", "hole", response),
+         response = gsub("times of the day", "times of day", response),
+         response = gsub("jollies", "jolly rancher", response),
+         response = gsub("milshakes", "milkshake", response),
+         response = gsub("monkies", "monkey", response),
+         response = gsub("watermenlons", "watermelon", response),
+         response = gsub("docuentaries", "documentary", response),
+         response = gsub("basket athletes", "basketball players", response),
+         response = gsub("alcohol drink", "alcoholic drink", response),
+         response = gsub("animal home", "den", response),
+         response = gsub("choirs", "choral", response),
+         response = gsub("animals houses", "dens", response),
+         response = gsub("rock music", "rock concert", response),
+         response = gsub("patios", "patio door", response),
+         response = gsub("rug", "carpet", response),
+         response = gsub("wooffloor", "wood", response),
+         response = gsub("pet mouose", "mouse", response),
+         response = gsub("fungus", "mushroom", response),
+         response = gsub("episodes of this podcast", "podcast episode", response),
+         response = gsub("flat", "apartment", response),
+         response = gsub("pans for frying", "frying pans", response),
+         response = gsub("pickup's", "pick-up truck", response),
+         response = gsub("pick up track", "pick-up truck", response),
+         response = gsub("podcasts he has heard", "podcast episode", response),
+         response = gsub("podcasts listened", "podcast episode", response),
+         response = gsub("podcasts", "podcast episode", response),
+         response = gsub("sofa", "couch", response),
+         response = gsub("teens", "teenager", response),
+         
+         # lemmatization
          response = gsub("gates", "gate", response),
          response = gsub("dasies", "daisy", response),
          response = gsub("pansies", "pansy", response),
@@ -466,13 +495,7 @@ df.trials.filtered.spelling %>%
          response = gsub("gymnasia", "gymnasium", response),
          response = gsub("cacti", "cactus", response),
          response = gsub("pantries", "pantry", response),
-         response = gsub("floor surfaces", "floors", response),
-         response = gsub("floor materials", "floors", response),
-         response = gsub("flooring", "floors", response),
          response = gsub("liquors", "liquor", response),
-         response = gsub("poetry", "poem", response),
-         response = gsub("burrow", "hole", response),
-         response = gsub("times of the day", "times of day", response),
          response = gsub("babies", "baby", response),
          response = gsub("stories", "story", response),
          response = gsub("berry", "berries", response),
@@ -485,33 +508,12 @@ df.trials.filtered.spelling %>%
          response = gsub("paties", "party", response),
          response = gsub("magoes", "mango", response),
          response = gsub("organes", "orange", response),
-         response = gsub("basket athletes", "basketball players", response),
-         response = gsub("alcohol drink", "alcoholic drink", response),
          response = gsub("allies", "alley", response),
-         response = gsub("animal home", "den", response),
          response = gsub("daisies", "daisy", response),
          response = gsub("chijldren", "child", response),
          response = gsub("childern", "child", response),
-         response = gsub("child fussy", "child", response),
-         response = gsub("choirs", "choral", response),
-         response = gsub("animals houses", "dens", response),
-         response = gsub("rock music", "rock concert", response),
-         response = gsub("patios", "patio door", response),
-         response = gsub("rug", "carpet", response),
-         response = gsub("wooffloor", "wood", response),
-         response = gsub("pet mouose", "mouse", response),
-         response = gsub("fungus", "mushroom", response),
-         response = gsub("episodes of this podcast", "podcast episode", response),
-         response = gsub("flat", "apartment", response),
          response = gsub("libraries", "library", response),
-         response = gsub("pans for frying", "frying pans", response),
-         response = gsub("pickup's", "pick-up truck", response),
-         response = gsub("pick up track", "pick-up truck", response),
-         response = gsub("podcasts he has heard", "podcast episode", response),
-         response = gsub("podcasts listened", "podcast episode", response),
-         response = gsub("podcasts", "podcast episode", response),
-         response = gsub("sofa", "couch", response),
-         response = gsub("teens", "teenager", response),
+         
          ) -> df.trials.filtered.spellsyn
 ```
 
@@ -563,10 +565,10 @@ There are 19906 (of 23758) automatically classified responses responseswhich pas
 
 ``` {r}
 # remove responses with uncertainty marker "similar" for more restrictive analysis
-d.tidy.phrase.w.original %>% filter(grepl("similar", originalResponse, ignore.case=T)) %>% View()
+d.tidy.phrase.w.original %>% filter(grepl("similar", originalResponse, ignore.case=T)) -> d.uncertain.resps
 
 # extrcat the automatically matched data
-d.matchedResponses <- d.tidy.phrase.w.original %>% filter((specific == 1) | (matchingSuper == 1))
+d.matchedResponses <- anti_join(d.tidy.phrase.w.original, d.uncertain.resps) %>% filter((specific == 1) | (matchingSuper == 1))
 
 # extract the consistent responses based on automatically classified data
 d.sub.counts <- d.matchedResponses %>%
