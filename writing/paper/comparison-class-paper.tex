@@ -406,7 +406,7 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 
 \begin{figure*}[htb]
 {\centering \includegraphics[width=0.9\textwidth]{figs/expt_overview} }
-\caption{\small Overview of Experiments. Step 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Step 2: Free-production task to elicit the comparison class. Step 3: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to provide additional data to constrain the parameters of the comparison class inference model. }\label{fig:exptOverview}
+\caption{\small Overview of Experimental Tasks. Task 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Task 2: Free-production task to elicit the comparison class. Task 3: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to provide additional data to constrain the parameters of the comparison class inference model. }\label{fig:exptOverview}
 \end{figure*}
 
 
@@ -521,41 +521,8 @@ This joint Bayesian data-analytic strategy allows us to infer, rather than stipu
 %\caption{Reconstructed degree priors (top) and empirically derived comparison class priors (botton). Top: Inferred prior distributions of world knowledge used to model Experiment 1 and 2 data. Bottom: Inferred prior probability of the subordinate comparison classes based on Google WebGram frequencies. Error bars correspond to 95\% Bayesian credible intervals, derived from the posterior on the $\beta$ scale parameter.}\label{fig:modelParameters}
 %\end{figure*}
 
-\section{Behavioral experiment}
+\section{Behavioral Experiment}
 
-
-
-\subsection{Task 1: Stimuli Generation}
-
-\subsubsection{Participants}
-
-We recruited 50 participants from Amazon's Mechanical
-Turk, restricted to those with U.S. IP addresses with at least a
-95\% work approval rating. The experiment took about 5 minutes and
-participants were compensated \$0.60 for their work.
-
-\subsubsection{Materials}
-
-We used 15 pairs of positive- and negative-form gradable adjectives that describe physical dimensions (Table \ref{tab:1}).
-Some of the adjective pairs described the same dimension and/or had an adjective in common with another pair (e.g., \emph{fast}--\emph{slow} and \emph{quick}--\emph{slow}); these were included because we believed they would bring to mind different kinds of categories.
-
-\subsubsection{Procedure}
-
-On each trial, participants were given a phrasal template, for which they were asked to fill-in the missing elements.
-The template was composed of three sentences, each missing a subject; the content of the sentence described the subject as one generally having the adjective applied to them (Figure \ref{fig:exptOverview}, Step 1). 
-These sentences were followed with another that said that the three kinds of subjects from the previous sentences were all instances of a more general category: ``all kinds of \_\_\_''.
-This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category. 
-
-The template for ``big'' and ``small'' looked like: 
-\begin{description}[noitemsep]
-%\tightlist
-\item \_\_\_\_\_ are generally big.
-\item  \_\_\_\_\_ are generally small.
-\item \_\_\_\_\_ are sometimes big and sometimes small.
-\item These three are all kinds of \_\_\_\_\_.
-\end{description}
-%
-Participants filled out one template for each of the 15 pairs of adjectives. 
 
 \begin{table*}[ht]
 \centering
@@ -602,66 +569,70 @@ Categories were curated from a set of empirically elicited noun phrases (Experim
 \endgroup
 \end{table*}
 
-\subsubsection{Results}
-From the full set of responses (750, in total), we select sets of items to be used in the subsequent experiments. 
-We selected item sets on the basis of hierarchal consistency of the categories (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and based on how well the items would make sense in the kinds of minimal contexts we use in Expt.~2. 
-Two examples from each adjective pair are shown in Table \ref{tab:1}. 
-We code each of the subordinate categories as to whether they were expected to fall low, high, or in the middle of the degree scale (i.e., those generated in response to the \emph{generally positive adjective}, \emph{generally negative adjective}, or \emph{sometimes positive and sometimes negative}). 
 
 
-\subsection{Task 2: Comparison class inference}
 
-Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered: \url{osf.io/XXXX}.
+%\subsection{Task 2: Comparison class inference}
+
+We report detailed methods for Task 2 (Comparison Class Inference) here. 
+Methods and results concerning Task 1 (Stimuli Generation) and Task 3 (Adjective Endorsement) are described in brief here, and in full detail in the Supplement.
+Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered for the Comparison Class Inference task: \url{osf.io/XXXX}.
+
+
+\subsection{Methods}
 
 \subsubsection{Participants}
 
 We recruited 800 participants from Amazon's Mechanical Turk. 
 This number was arrived at with the goal of collecting 50 comparison class paraphrases for each unique item in the data set.
 Participants were restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
-In addition, participants were prohibited from participating in this experiment if they participated in Experiment 2.
 
 \subsubsection{Materials}
 
-The experimental materials were a modified subset of those generated by participants in Experiment 1. 
-In total, we used 90 sets of stimuli: each set contains 3 specific categories, which varied in their general expectations (low, medium, high) within the same general category (e.g., basketball player [high], soccer player [medium], jockey [low]; general category: people). 
-The categories within each set of stimuli could be paired with either a positive-form or negative-form adjective (e.g., tall or short). 
-Thus, this experiment had 90 sets $\times$ 3 levels of general expectations (specific categories) $\times$ 2 adjectives = 540 unique items. 
+The experimental materials were a modified subset of those generated by a separate group of participants in the Stimuli Generation Task (Task 1). 
+In that task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing subjects were either described as generally having one adjective apply to them (e.g., \emph{Xs are generally big}; \empty{Ys are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{Zs are sometimes big and sometimes small}; see Appendix for more details). 
+Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table \ref{tab:1}). 
+From the full set of 750 responses, we selected 90 item sets -- (X, Y, Z)  triples -- that were hierarchally consistent (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and that made sense in the kinds of minimal contexts we use in the Comparison Class Inference experiment.
+Two examples from each adjective pair are shown in Table \ref{tab:1}. 
 
-We used a \emph{context sentence} to introduce the referent as a member of the specific category and provide an appropriate but minimal context in which the adjective could be uttered (e.g., \emph{John sees a \{basketball player, golfer, jockey\}}); these context sentences were the same for all 3 categories in an item set.
-
-The adjectival utterance predicated the adjective of a pronoun used to refer to the referent (e.g., \emph{John says: ``They're tall''}). We had the speaker use a pronoun so as to provide a strong linguistic cue as to the intended comparison class. If the referent was a person, we used to the singular ``they'' to refer to them; otherwise, we used either ``it'' or ``they'' depending on the plurality of the referent. 
-
-Finally, the participant was asked what they thought the speaker meant (e.g., \emph{What do you think John meant?}). Participants responded by freely filling in a sentence that required an explicit comparison class. 
-
-\begin{quote}
-\emph{They're tall relative to other \_\_\_\_\_\_.}
-\end{quote}
-
-We used the word ``other'' to invoke the presupposition that the referent is a member of the comparison class. Pilot testing suggesting that omitting this word invoked many direct comparisons to singular entities (e.g., \emph{They're tall relative to me}), which were wildly heterogeneous in nature. 
-
-We used a sequential sampling method for items, wherein we paused data collection after collecting 35 responses on each item.
-We then analyzed the partial data set on a by-item basis to see which (if any) items had received at least exceedingly consistent responses, which we defined to be 33 out of 35  ($>94\%$) of the same response. 
-For those items that received exceedingly consistent responses, we stopped data collected at 35 responses in order to focus resources to get a better estimate of those items with more variability in responses. 
-This sampling procedure was decided ahead of time and is documented in the pre-registration report. 
+Each of the 90 item sets contains 3 specific categories, which vary in their general expectations (low, medium, high), within the same general category (e.g., basketball player [high], soccer player [medium], jockey [low]; general category: people). 
+The categories within each item set are paired with either a positive-form or negative-form adjective (e.g., tall or short). 
+Thus, this experiment had 540 unique items (90 sets $\times$ 3 levels of general expectations (specific categories) $\times$ 2 adjectives).
 
 \subsubsection{Procedure}
 
 The experiment began with a simple language comprehension test to weed out bots and other bad-faith participants. 
 The screen had a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. Participants were asked to type in a text box to whom the speaker (Joseph) is talking (i.e., Elizabeth).
-Names used were randomized and could not be read off the source .html file.
+Speaker and listener names were randomized and could not be read off the source .html file.
 Participants were given three attempts to correctly identify the listener. 
 If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
+Since participants who fail this check are required to exit the experiment before completing the task, we do not have an estimate for how many participants fail this check. 
 
-After the language comprehension test, participants read instructions about the task. They were told they they would be asked to rephrase something a person said, that the person said a word that is relative, and that their task was to figure out what the word was relative to. They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked to fill-in the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). Participants were told to fill in the blank with a group or category that makes the most sense and use their common sense.
+Following the language comprehension test, participants read instructions about the task. They were told they they would be asked to rephrase something a person said:  the person said a word that is relative and their task was to figure out what the word was relative to. They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked to fill-in a sentence with the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). Participants were told to fill in the blank with a group or category that makes the most sense and to use their common sense.
 Responses to this warm-up trial were used as a basis for exclusion (any response other than buildings, structures, towers, skyscrapers, etc.). 
 
 %On each trial, participants were given a context sentence to introduce
 %the subordinate category (e.g., \emph{Tanya lives in Maryland and
 %steps outside in winter}). This was followed by an adjective sentence, which predicated either a positive- or negative-form gradable adjective over the item (e.g., \emph{Tanya says to her friend, ``It's warm.''}). Participants were asked \emph{What do you think Tanya meant?} and given a sentence frame they could complete with with a freely-produced comparison class:
 
-Participants then completed 36 main trials, described in the materials section.
+Participants then completed 36 main trials. Each main trial began with a \emph{context sentence} that introduced the referent as a member of a specific category and provided an appropriate but minimal context in which the adjective could be uttered (e.g., \emph{John sees a \{basketball player, golfer, jockey\}}); the same context sentence was used for all 3 categories in an item set.
+Then, a speaker utters an adjectival utterance predicating the adjective of a pronoun used to refer to the referent (e.g., \emph{John says: ``They're tall''}). 
+We had the speaker use a pronoun so as to not provide a strong linguistic cue as to the intended comparison class. If the referent was a person, we used to the singular ``they'' to refer to them; otherwise, we used either ``it'' or ``they'' depending on the plurality of the referent. 
+Finally, the participant was asked what they thought the speaker meant (e.g., \emph{What do you think John meant?}). Participants responded by freely filling in a sentence that required an explicit comparison class. 
+
+\begin{quote}
+They're tall relative to other \_\_\_\_\_\_.
+\end{quote}
+
+We used the word ``other'' to invoke the presupposition that the referent is a member of the comparison class. Pilot testing suggesting that omitting this word invoked many direct comparisons to singular entities (e.g., \emph{They're tall relative to me}), which were wildly heterogeneous in nature. 
+
 At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- subordinate category pairs (``tall --- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 This memory check trial was also used as a basis for exclusion. 
+
+We used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
+We then analyzed the partial data set on a by-item basis to see which (if any) items had received at least exceedingly consistent responses, which we defined to be 33 out of 35  ($>94\%$) of the same response. 
+For those items that received exceedingly consistent responses, we stopped data collected at 35 responses in order to focus resources to better estimate the items with more variability in responses. 
+This sampling procedure was decided ahead of time and is documented in the pre-registration report. 
 
 
 \begin{figure}[t!]
@@ -679,12 +650,12 @@ This memory check trial was also used as a basis for exclusion.
 \end{figure}
 
 
-\subsubsection{Results}
+\subsection{Results}
 
 Participants were excluded if they either incorrectly to the warm-up trial (answering something other than buildings or the like) or answered fewer than 7 out of 10 memory check questions accurately. 
 We processed the responses by correcting for misspellings,  lemmatizing, and collapsing across some synonyms. 
 
-\paragraph{Preprocessing}
+\subsubsection{Preprocessing}
 
 Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the specific noun phrase (specific NP) by which the referent is introduced (e.g., a basketball player) or a more general (e.g., basic or superordinate) category. 
 In order to convey a category at least as specific as the specific-NP, one must include the specific-NP in the response. 
@@ -699,7 +670,7 @@ Of the remaining N\%, M\% were entirely ambiguous and L\% were nonsensical.
 \red{X responses were excluded because they could not be coded as either.}
 %We observed no systematic differences between participants' responses when the superordinate category was previously mentioned in the context and those when it was not; thus, we collapse across these two conditions for all analyses. 
 
-\paragraph{Regression analysis}
+\subsubsection{Regression analysis}
 
 
 As predicted, the proportion of specific comparison classes (i.e., paraphrases that mentioned the Specific NP) were influenced via an interaction between the general expectations about the specific category and the adjective polarity (Figure \ref{fig:ccInferenceItems}).\footnote{
@@ -1104,7 +1075,49 @@ FA8750-14-2-0009 to NDG.
 
 \newpage
 
-\section{Task 3: Adjective endorsement details} 
+\section{Supplementary Methods}
+
+\subsection{Task 1: Stimuli Generation}
+
+\subsubsection{Participants}
+
+We recruited 50 participants from Amazon's Mechanical
+Turk, restricted to those with U.S. IP addresses with at least a
+95\% work approval rating. The experiment took about 5 minutes and
+participants were compensated \$0.60 for their work.
+
+\subsubsection{Materials}
+
+We used 15 pairs of positive- and negative-form gradable adjectives that describe physical dimensions (Table \ref{tab:1}).
+Some of the adjective pairs described the same dimension and/or had an adjective in common with another pair (e.g., \emph{fast}--\emph{slow} and \emph{quick}--\emph{slow}); these were included because we believed they would bring to mind different kinds of categories.
+
+\subsubsection{Procedure}
+
+On each trial, participants were given a phrasal template, for which they were asked to fill-in the missing elements.
+The template was composed of three sentences, each missing a subject; the content of the sentence described the subject as one generally having the adjective applied to them (Figure \ref{fig:exptOverview}, Step 1). 
+These sentences were followed with another that said that the three kinds of subjects from the previous sentences were all instances of a more general category: ``all kinds of \_\_\_''.
+This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category. 
+
+The template for ``big'' and ``small'' looked like: 
+\begin{description}[noitemsep]
+%\tightlist
+\item \_\_\_\_\_ are generally big.
+\item  \_\_\_\_\_ are generally small.
+\item \_\_\_\_\_ are sometimes big and sometimes small.
+\item These three are all kinds of \_\_\_\_\_.
+\end{description}
+%
+Participants filled out one template for each of the 15 pairs of adjectives. 
+
+
+\subsubsection{Results}
+From the full set of responses (750, in total), we select sets of items to be used in the subsequent experiments. 
+We selected item sets on the basis of hierarchal consistency of the categories (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and based on how well the items would make sense in the kinds of minimal contexts we use in Expt.~2. 
+Two examples from each adjective pair are shown in Table \ref{tab:1}. 
+We code each of the subordinate categories as to whether they were expected to fall low, high, or in the middle of the degree scale (i.e., those generated in response to the \emph{generally positive adjective}, \emph{generally negative adjective}, or \emph{sometimes positive and sometimes negative}). 
+
+
+\subsection{Task 3: Adjective endorsement details} 
 
 This experiment served to generate further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
 Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/XXXX}.
