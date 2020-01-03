@@ -253,11 +253,13 @@ Thus, the opposite pattern should follow for a member of a category that is gene
 Formally, when interpreting an adjective without a specified comparison class, a listener is faced with a joint inference problem of determining the value of the degree being described by the adjective $x$ (e.g., height) and the comparison class  $c$ assumed by the speaker when producing their adjectival utterance $u$ (e.g., \emph{he's tall}).
 We use a Bayesian formulation to this problem, wherein a listener combines his prior knowledge about categories and what comparison classes are likely to be talked about, with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker.}
 
-The hypothesis space of comparison classes is constrained by beliefs about the referent that are shared between the speaker and listener: A speaker is unlikely to be assuming a comparison class about which she has no knowledge.
+The hypothesis space of comparison classes is constrained by beliefs about the referent that are shared between the speaker and listener: A speaker is cannot be assumed to intend a comparison class about which she has no knowledge.
 %In our example, it is in common ground that the referent is a basketball player.
-Though comparison classes can be constructed in various ways, including out of sets of objects in the perceptual environment or hypothetical functions of an object \cite<cf.,>{Ebeling1994}, we restrict our analysis to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (i.e., \emph{conceptual comparison classes}, e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A).
-In contrast to the space of comparison classes, the hypothesis space of degrees (e.g., heights) is informed by the totality of the listener's relevant beliefs (i.e., including both the shared beliefs with the speaker and the listener's private beliefs).
-Though we distinguish formally between the beliefs of the speaker and listener, in the contexts we consider, it can be assumed that all relevant beliefs are shared beliefs; in our example, the listener knows that the referent is a basketball player, and hence would expect a height of the referent consistent with their knowledge of basketball players.
+Though comparison classes can be constructed in various ways, including out of sets of objects in the perceptual environment (e.g., \emph{big relative to these other things}) or hypothetical functions of an object \cite<e.g., \emph{the shirt is big for the doll;}>{Ebeling1994}, we restrict our analysis to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (i.e., \emph{conceptual comparison classes}, e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A).
+
+In contrast to the space of comparison classes, the hypothesis space of degrees (e.g., heights) given by the semantics of the adjectives (e.g., \emph{tall} $\rightarrow$ height) and is informed by the totality of the listener's relevant beliefs. 
+The listener will use all the knowledge they have about the referent, even that not shared with the speaker, to make predictions about the degree (e.g., if the listener had private knowledge that the person in question was taking a growth-stunting medication, they would use that knowledge to guide their predictions about that person's height).
+Though we distinguish in the abstract between the beliefs of the speaker and listener, in the contexts we consider, it can be assumed that all relevant beliefs are shared beliefs; in our example, the listener knows that the referent is a basketball player, and hence would expect a height of the referent consistent with their knowledge of basketball players.
 
 %For both of these random variables, the listener can employ knowledge to constrain the inference problem. 
 %Specifically, 
@@ -301,16 +303,7 @@ L_1(x, c \mid u, f, g) &\propto S_1(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c 
 L_1(x, c \mid u, k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L1a} 
 \end{align}
 %
-Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S_1$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information to a listener $L_0$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterances. Hence, our model reduces to simply: $S_1(u \mid x, c) \propto L_{0}(x \mid u, c)^{ \alpha}$}
-
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
-\caption{\small \label{fig:modelCartoon}Model overview. A listener hears a basketball player described as ``tall''. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is sensitive to the comparison class. C: Listener $L_1$ imagines what a speaker $S_1$ would say given different heights of the referent (x-axis) and assuming different comparison classes (facets); the opacity of the colors is in proportion to the listener's prior beliefs of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Distribution of speaker utterances for different comparison classes marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} is the comparison class is \emph{people}. E: Comparison class inference by the listener in terms of the probability of a subordinate class (e.g., basketball players) computed by inverting the speaker model. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}.
-% speaker production probability distributions are shown with the.
-}
-\end{figure}
+Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S_1$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information to a listener $L_0$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For simplicity, for all of our quantitative and quantitative modeling, we assume no difference in production cost for different utterances. Hence, our model reduces to simply: $S_1(u \mid x, c) \propto L_{0}(x \mid u, c)^{ \alpha}$}
 
 
 \begin{align}
@@ -343,21 +336,31 @@ Finally, we assume the communicative goal of using an adjective like \emph{tall}
 %\red{Figure 1 shows the behavior of this model component.}
 %We adopt the model of \citeA{Lassiter2013, Lassiter2017}   A full presentation of this  part of the model is given in Appendix A.
   
+  
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
+\caption{\small \label{fig:modelCartoon}Model overview. A listener hears a basketball player described as ``tall'' by a speaker. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is a function of the comparison class (facets). C: Listener $L_1$ imagines what a speaker $S_1$ would say given different heights of the referent (x-axis) and assuming different comparison classes (facets); the opacity of the colors is in proportion to the listener's prior beliefs of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Speaker utterance production probabilities for different comparison classes, marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} if the comparison class is \emph{people}. E: Pragmatic listener inferences about the comparison class is computed by inverting the speaker model. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}. Prior distribution of heights for people is a unit normal distribution $\mathcal{N}(0, 1)$ and the heights of basketball players is a right-shifted normal with smaller variance $\mathcal{N}(0, 0.5)$.
+% speaker production probability distributions are shown with the.
+}
+\end{figure}
+  
+  
 \subsection{Model behavior}
 
 We consider an idealized case where the comparison class can be either a relatively specific (e.g., subordinate-level, \(c_{sub}\)) or relatively general (e.g., basic-level, \(c_{basic}\)) categorization (e.g., tall relative to \emph{basketball players} or relative to \emph{people}): \(c \in \{c_{sub}, c_{basic}\}\).
 To understand the model behavior, consider the speaker model \(S_1\) under different assumptions (by the listener) about the implicit comparison class: \(S_{1}(u \mid x, c = c_{sub})\) and \(S_{1}(u \mid x, c = c_{basic})\). 
 Figure \ref{fig:modelCartoon}C shows the speaker production probabilities of the three possible utterances for each value along the degree scale (e.g., each height) for the two different comparison classes.  If the comparison class is \emph{people}, the speaker will produce \emph{tall} when the height of the referent is substantially greater than the average height for people, with the speaker more likely to say \emph{tall} as the height of the referent increases.
   If the comparison class is \emph{basketball players}, the speaker's criterion shifts to the right and she becomes more reluctant to produce \emph{tall} until the height of the referent is much greater. 
-  The listener combines this generative model of adjectival utterances with his prior knowledge about the height of the referent: The listener knows the referent is a basketball player and thus their height is sampled from the basketball player distribution (Figure \ref{fig:modelCartoon}B, bottom, black; this distribution is superimposed as an opacity on Figure \ref{fig:modelCartoon}C).
-  When the listener marginalizes over their beliefs about the height of the referent, the speaker is more likely to produce \emph{tall} if the comparison class were \emph{people} (Figure \ref{fig:modelCartoon}D).  
 
-The listener inverts this generative model of the utterance (i.e., the speaker model) to infer the implicit comparison class (Figure \ref{fig:modelCartoon}E).
-Because the speaker is more likely to stay \emph{tall} if the comparison class were \emph{people}, the listener reasons that a speaker who says \emph{tall} probably was assuming a more general comparison class (i.e., that the comparison class is \emph{people}). 
+The listener inverts this generative model of the utterance (i.e., the speaker model) to infer the implicit comparison class .
+ They combine the speaker model with their prior knowledge about the height of the referent: The listener knows the referent is a basketball player and thus their height is sampled from the basketball player distribution (Figure \ref{fig:modelCartoon}B, bottom, black; this distribution is superimposed as an opacity on Figure \ref{fig:modelCartoon}C).
+  When the listener marginalizes over their beliefs about the height of the referent, they believe the speaker is more likely to produce \emph{tall} if the comparison class were \emph{people} (Figure \ref{fig:modelCartoon}D).  
+ Therefore,  a speaker who says \emph{tall} probably was assuming a more general comparison class (i.e., that the comparison class is \emph{people}; Figure \ref{fig:modelCartoon}E). 
 If, however, the listener hears of the basketball player that he is \emph{short}, the more likely comparison class is the subordinate class of \emph{basketball players}.
 This inference is driven by prior knowledge about the category, and thus, we would expect the inferences to change if the prior knowledge changes.
-Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class. 
-Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should be driven. 
+Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class (Figure \ref{fig:modelCartoon}E left bars). 
+Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should depend upon the quantitative details of the priors. 
 
 \begin{figure}
 \centering
@@ -369,23 +372,32 @@ Thus, our model predicts that the comparison class can be flexibly adjusted and 
 
 \subsection{Alternative model}
 
-The inference about the comparison class is necessarily a pragmatic inference involving representing a speaker's beliefs about the context separately from the listener's beliefs about the context. 
-This can be seen by comparing Equations \ref{eq:L1} and \ref{eq:L0}: the pragmatic listener $L_1$ uses a prior distribution over the degree given their knowledge of the referent $P(x \mid k)$ whereas the literal listener $L_0$ uses a distribution conditional on the comparison class $P(x \mid c)$. 
-This separation of the listener's knowledge of the referent $k$ from the comparison class $c$ is necessary for the comparison class inferences shown in Figure \ref{fig:modelCartoon}E.
-A purely Bayesian listener model, who has uncertainty about the comparison class as well as all of the other parameters of the full model (the degree $x$ and the threshold $\theta$), but does not separate their knowledge of the referent from the speaker's representation of the context is given by: 
+The inference about the comparison class outlined above involves a listener reasoning about a speaker reasoning about a listener.
+One might wonder whether the inference about the comparison class is necessarily a pragmatic inference.
+We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
+This literal comparison class inference model is given by:
 %
   \begin{align}
 L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c) \cdot P(c \mid k) \cdot P(\theta) \label{eq:L0alt}
 \end{align}
 %
-This listener uses their knowledge of the referent $k$ to constrain only the hypothesis space of comparison classes but not to separate the speaker's representation of the context from their own. 
-In effect, this listener is answering a different question, a question more about the referent than the comparison class: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? This literal listener model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
+Similar to the pragmatic listener model (Eq.~\ref{eq:L1}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
+Unlike the pragmatic listener model, however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener knows the referent is a basketball player, but believes the speaker was assuming a \emph{person comparison class}).
+The literal listener version of the model cannot separate these representations.
+In effect, this listener is answering a slightly different question: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
+This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
 %The utterance which does not reference a class (e.g., It's warm}) inherits the same meaning as the utterance with the explicit class that
 %matches the assumed implicit class (i.e., if \(c_{i} = c_{sub}\), then
 %\(u_i\) has the same meaning as \(u_{sub}\)). Therefore, reasoning about
 %the likely comparison class reduces to reasoning about which explicit
 %utterance the speaker would have been more likely to say.
-  
+
+
+% it involves representing a speaker's beliefs about the context separately from the listener's beliefs about the context. 
+%This can be seen by comparing and \ref{eq:L0}: the pragmatic listener $L_1$ uses a prior distribution over the degree given their knowledge of the referent $P(x \mid k)$ whereas the literal listener $L_0$ uses a distribution conditional on the comparison class $P(x \mid c)$. 
+%This separation of the listener's knowledge of the referent $k$ from the comparison class $c$ is necessary for the comparison class inferences shown in Figure \ref{fig:modelCartoon}E.
+%A purely Bayesian listener model, who has uncertainty about the comparison class as well as all of the other parameters of the full model (the degree $x$ and the threshold $\theta$), but does not separate their knowledge of the referent from the speaker's representation of the context is given by: 
+%  
 
 
 
@@ -590,20 +602,20 @@ Participants were restricted to those with U.S. IP addresses with at least a 95\
 \subsubsection{Materials}
 
 The experimental materials were a modified subset of those generated by a separate group of participants in the Stimuli Generation Task (Task 1). 
-In that task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing subjects were either described as generally having one adjective apply to them (e.g., \emph{Xs are generally big}; \empty{Ys are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{Zs are sometimes big and sometimes small}; see Appendix for more details). 
+In that task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing subjects were either described as generally having one adjective apply to them (e.g., \emph{Xs are generally big}; \emph{Ys are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{Zs are sometimes big and sometimes small}; see Appendix for more details). 
 Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table \ref{tab:1}). 
 From the full set of 750 responses, we selected 90 item sets -- (X, Y, Z)  triples -- that were hierarchally consistent (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and that made sense in the kinds of minimal contexts we use in the Comparison Class Inference experiment.
 Two examples from each adjective pair are shown in Table \ref{tab:1}. 
 
-Each of the 90 item sets contains 3 specific categories, which vary in their general expectations (low, medium, high), within the same general category (e.g., basketball player [high], soccer player [medium], jockey [low]; general category: people). 
+Each of the 90 item sets contains 3 specific categories, which vary in their general expectations (low, medium, high) about some degree (e.g., height), within the same general category (e.g., basketball player [high], soccer player [medium], jockey [low]; general category: people). 
 The categories within each item set are paired with either a positive-form or negative-form adjective (e.g., tall or short). 
-Thus, this experiment had 540 unique items (90 sets $\times$ 3 levels of general expectations (specific categories) $\times$ 2 adjectives).
+Thus, this experiment had 270 unique categories (90 sets $\times$ 3 levels of general expectations) described with 2 adjectives each (e.g., tall and short), for a total of 540 unique items.
 
 \subsubsection{Procedure}
 
 The experiment began with a simple language comprehension test to weed out bots and other bad-faith participants. 
-The screen had a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. Participants were asked to type in a text box to whom the speaker (Joseph) is talking (i.e., Elizabeth).
-Speaker and listener names were randomized and could not be read off the source .html file.
+The screen had a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
+Speaker and listener names were randomized in a way that could not be read off the source .html file.
 Participants were given three attempts to correctly identify the listener. 
 If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
 Since participants who fail this check are required to exit the experiment before completing the task, we do not have an estimate for how many participants fail this check. 
@@ -626,11 +638,11 @@ They're tall relative to other \_\_\_\_\_\_.
 
 We used the word ``other'' to invoke the presupposition that the referent is a member of the comparison class. Pilot testing suggesting that omitting this word invoked many direct comparisons to singular entities (e.g., \emph{They're tall relative to me}), which were wildly heterogeneous in nature. 
 
-At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- subordinate category pairs (``tall --- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
+At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- subordinate category pairs (``tall --- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 This memory check trial was also used as a basis for exclusion. 
 
 We used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
-We then analyzed the partial data set on a by-item basis to see which (if any) items had received at least exceedingly consistent responses, which we defined to be 33 out of 35  ($>94\%$) of the same response. 
+We then analyzed the partial data set on a by-item basis to see which (if any) items had received exceedingly consistent responses, which we defined to be at least 33 out of 35  ($>94\%$ agreement) of the same response. 
 For those items that received exceedingly consistent responses, we stopped data collected at 35 responses in order to focus resources to better estimate the items with more variability in responses. 
 This sampling procedure was decided ahead of time and is documented in the pre-registration report. 
 
