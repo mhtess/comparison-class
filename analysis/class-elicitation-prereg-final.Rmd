@@ -28,8 +28,10 @@ containsString <- function(strng, substrng){
 }
 
 my_stop_words <- stop_words %>% rowwise() %>%
-    subset(!(stop_words$word %in% c("rooms", "year", "years", "side", "sides", "area", "of", "up", "great", "things", "places", "thing", "room", "areas",
-                                    "part", "parts", "works", "way", "ways", "-", "show", "shows")))
+    subset(!(stop_words$word %in% c("rooms", "year", "years", "side", "sides", "area",
+                                    "of", "up", "great", "things", "places", "thing",
+                                    "room", "areas", "part", "parts", "works", "way", "ways",
+                                    "-", "show", "shows", "goods", "novel")))
 
 ```
 
@@ -240,17 +242,41 @@ After the responses are analysed manually, nonsense responses were added to this
 d.tidy.resps.catch <- df.trials.filtered %>%  filter((grepl("it's", response, ignore.case = T) |
                                                       grepl("they're", response, ignore.case = T)  )) 
 
+# get invalid responses which are full sentences without any comparison class 
 d.tidy.resp.valid.resps <- anti_join(df.trials.filtered, d.tidy.resps.catch) %>% rowwise() %>%
-  subset(., !(response %in% c("unsure", "long", "short", "tall", "dark", "light", "fast", "quick", "slow", "hard", "soft", "loud", "noisy", "quiet", 
-                                    # all the adjectives
-                                    "expensive", "cheap", "big", "small", "strong", "weak", "warm", "hot", "cold", "heavy", "wide", "narrow",
-                                    "alexander", "alicia", "cheep", "daniel", "darker", "david", "easy", "empire building",
-                                    "eric", "gabriel", "anthony", "william", "john", "tom", "lucas", "michael", "cameron", "stephen", # all the referent names
-                                    "lee", "greg", "robert", "chrales",  "gary", "josh", "simon", 
-                                    "angela", "jennifer", "monica", "melinda", "veronica", "alicia", "maya", "sophie", "kim", "laura", "julia",
-                                    "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya", "mika", "natalia", "barbell snatch", "bank of america",
-                                    "exensive", "finished", "flexibility", "health", "hot cold", "lazy", "low", # extracted invalid resps
-                                    "public", "ripe" , "silent", "baked", "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft", 
+  mutate(stopPhrase = paste("the", np, "is", adj, sep=" "),
+         stopPhrase2 = paste("the", np, "is", paste(adj, ".", sep=""), sep=" "),
+         responseLength = lengths(str_split(response, " "))) %>% filter((tolower(response) != stopPhrase) & 
+                                                                          (tolower(response) != stopPhrase2)) 
+# get the long responses that were not matched above and filter them out manually
+d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
+
+d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>% rowwise() %>%
+  # exclude responses which excatly match the ones in the following list
+  subset(., !(response %in% c("unsure",
+                              # all the adjectives
+                              "long", "short", "tall", "dark", "light", "fast", "quick", "slow",
+                              "hard", "soft", "loud", "noisy", "quiet", "bright", "bruises",
+                              "expensive", "cheap", "big", "small", "strong", "weak", "warm", "hot", "cold",
+                              "heavy", "wide", "narrow", "chill", "chinn", 
+                              # all the actor names
+                              "alexander", "alicia", "cheep", "daniel", "darker", 
+                              "david", "easy", "empire building",
+                              "eric", "gabriel", "anthony", "william", "john", "tom", "lucas",
+                              "michael", "cameron", "stephen", 
+                              "lee", "greg", "robert", "chrales",  "gary", "josh", "simon", 
+                              # female names
+                               "angela", "jennifer", "monica", "melinda", "veronica", "alicia",
+                              "maya", "sophie", "kim", "laura", "julia",
+                              "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
+                              "mika", "natalia",
+                              # invalid responses
+                              "barbell snatch", "bank of america",
+                              "finished", "flexibility", "health", "hot cold",
+                              "lazy", "low", "cliaire", 
+                                "public", "ripe" , "silent", "baked", "burn", "more costly", "exacting", 
+                              # filter out the sentences without a CC
+                              "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft", 
                               "A spider in an insect terrarium was big", "At the butchershop the chicken was expensive", "At the conference center it was noisy when she met her friend", "during the night its light out there",
                               "hears the cry of a crow", "In Aquarium a tuna was big", "In botanical garden an alpine tree was short.", "In summer that day was cold", "In the freezer michelle hand was cold", "it has a lot of stuff", 
                               "It was noisy in the nearby city", "its not a hot and cold", "move furniture through the front gate of her house", "picks up a piece of silk.", "the coat is light in weight", "	The coat of poodle was dark",
@@ -258,16 +284,20 @@ d.tidy.resp.valid.resps <- anti_join(df.trials.filtered, d.tidy.resps.catch) %>%
                               "the sound of the shower is strong", "The statue made of plastic was cheap", "the walls of the condo are strong", "While walking heard the cry of a rooster when it was quiet", "Basketball player was tall",
                               "Friend's new rowboat was fast","Friend's new smartcar is big", "his favorite poem was short", "it is not destructive", "it is not loud", "it is not sold expensively", "it s not wide", "its noisy in here",
                               	"its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", 
-                              "the color is not much","the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud"
+                              "the color is not much","the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud",
+                              "the movie i hope", "all light of off", "sits on a blanket", "try a new water color",
+                              "driving on a downtown street", "The spider was small", "The music was Loud",
+                              "powerboat sound little quiet", "Horn was too loud", "Villa price was costly", 
+                              "choral consert was too loud", "milkshake was so hot", "strip mall was tall", 
+                              "plastic was so soft", "pork was too expensive", "price of raspberries expensive", 
+                              "coat of a spaniel was little light", "village area was too quit to read", 
+                              "elderly person was too quick", "conference room was too quiet", "instant pot was slow",
+                              "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat", 
+                              "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
+                              "they are bold", "the blade spinning", "its finished"
                               )))
 
-# get invalid responses which are full sentences without any comparison class 
-d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>% rowwise() %>%
-  mutate(stopPhrase = paste("the", np, "is", adj, sep=" "),
-         stopPhrase2 = paste("the", np, "is", paste(adj, ".", sep=""), sep=" "),
-         responseLength = lengths(str_split(response, " "))) %>% filter((tolower(response) != stopPhrase) & 
-                                                                          (tolower(response) != stopPhrase2)) 
-
+# check
 d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
 ```
 
@@ -286,6 +316,7 @@ d.tidy.resp.valid.resps %>%
          response = gsub("pitbul", "pitbull", response),
          response = gsub("panter", "panther", response),
          response = gsub("icecream", "ice cream", response),
+         response = gsub("high way", "highway", response),
          response = gsub("ice-cream", "ice cream", response),
          response = gsub("bed board", "bedboard", response),
          response = gsub("jocky", "jockey", response),
@@ -326,6 +357,7 @@ d.tidy.resp.valid.resps %>%
          response = gsub("braclets", "bracelets", response),
          response = gsub("oragne", "orange", response),
          response = gsub("trashcan", "trash can", response),
+         response = gsub("buildig", "building", response),
          response = gsub("monekys", "monkey", response),
          response = gsub("ukulele", "ukelele", response),
          response = gsub("pit bull", "pitbull", response),
@@ -354,8 +386,6 @@ d.tidy.resp.valid.resps %>%
          response = gsub("fruitcake", "fruit cake", response),
          response = gsub("mialkshake", "milkshake", response),
          response = gsub("liqour", "liquor", response),
-         
-         
          response = gsub("runer", "runner", response),
          response = gsub("pencial's", "pencil", response),
          response = gsub("rapberriees", "raspberries", response),
@@ -388,12 +418,22 @@ d.tidy.resp.valid.resps %>%
          response = gsub("sald", "salad", response),
          response = gsub("satues", "statues", response),
          response = gsub("sanddals", "sandals", response),
-         response = gsub("shes", "shoes", response),
          response = gsub("skyscrapper", "skyscraper", response),
          response = gsub("spirinting", "sprinting", response),
          response = gsub("statue's", "statues", response),
          response = gsub("statutes", "statues", response),
          response = gsub("thundersorm", "thunderstorm", response),
+         response = gsub("aniumal", "animal", response),
+         response = gsub("envrionments", "environments", response),
+         response = gsub("freind", "friend", response),
+         response = gsub("inatrument", "instrument", response),
+         response = gsub("instruent", "instrument", response),
+         response = gsub("insturuments", "instrument", response),
+         response = gsub("perty", "party", response),
+         response = gsub("pick up", "pick-up", response),
+         response = gsub("restaruants", "restaurants", response),
+         response = gsub("thundertsorm", "thunderstorm", response),
+         response = gsub("tkime of day", "time of day", response),
          )  -> df.trials.filtered.spelling
 ```
 
@@ -419,6 +459,7 @@ df.trials.filtered.spelling %>%
          response = gsub("humans", "people", response),
          response = gsub("persons", "people", response),
          response = gsub("individuals", "people", response),
+         response = gsub("automobile", "car", response),
          response = gsub("biking", "bike", response),
          response = gsub("bicycle", "bike", response),
          response = gsub("car ride", "drive", response),
@@ -428,6 +469,12 @@ df.trials.filtered.spelling %>%
          response = gsub("gym", "gymnasium", response),
          response = gsub("players that play a different sport", "athletes", response),
          response = gsub("hours of the day", "times of day", response),
+         response = gsub("periods of the day", "times of day", response),
+         response = gsub("parts of the day", "times of day", response),
+         response = gsub("day times", "times of day", response), 
+         response = gsub("times during the day", "times of day", response), 
+         response = gsub("times in the day", "times of day", response),
+         response = gsub("times of the day", "times of day", response),
          response = gsub("times of the year", "seasons", response),
          response = gsub("times of year", "seasons", response),
          response = gsub("conference room", "conference center", response),
@@ -441,7 +488,6 @@ df.trials.filtered.spelling %>%
          response = gsub("flying machines", "aircrafts", response),
          response = gsub("race courses", "races", response),
          response = gsub("race paths", "races", response),
-         response = gsub("day times", "times of day", response), 
          response = gsub("restaurant menu", "restaurant", response),
          response = gsub("footwear", "shoes", response),
          response = gsub("alochols", "alcoholic drinks", response),
@@ -449,15 +495,12 @@ df.trials.filtered.spelling %>%
          response = gsub("parites", "party", response),
          response = gsub("floor surfaces", "floors", response),
          response = gsub("floor materials", "floors", response),
+         response = gsub("floor coverings", "floors", response),
+         response = gsub("floor of a room", "floors", response),
          response = gsub("flooring", "floors", response),
          response = gsub("poetry", "poem", response),
          response = gsub("burrow", "hole", response),
-         response = gsub("times of the day", "times of day", response),
          response = gsub("jollies", "jolly rancher", response),
-         response = gsub("milshakes", "milkshake", response),
-         response = gsub("monkies", "monkey", response),
-         response = gsub("watermenlons", "watermelon", response),
-         response = gsub("docuentaries", "documentary", response),
          response = gsub("basket athletes", "basketball players", response),
          response = gsub("alcohol drink", "alcoholic drink", response),
          response = gsub("animal home", "den", response),
@@ -479,15 +522,27 @@ df.trials.filtered.spelling %>%
          response = gsub("podcasts", "podcast episode", response),
          response = gsub("sofa", "couch", response),
          response = gsub("teens", "teenager", response),
+         response = gsub("freeway", "highway", response),
+         response = gsub("grownup", "adult", response),
+         response = gsub("human beings", "people", response),
+         response = gsub("humans", "people", response),
+         response = gsub("lumber", "wood", response),
+         response = gsub("older adults", "elderly person", response),
+         response = gsub("senior", "elderly person", response),
+         response = gsub("pedestrian", "walker", response),
+        
          
          # lemmatization
+         response = gsub("milshakes", "milkshake", response),
+         response = gsub("monkies", "monkey", response),
+         response = gsub("watermenlons", "watermelon", response),
+         response = gsub("docuentaries", "documentary", response),
          response = gsub("gates", "gate", response),
          response = gsub("dasies", "daisy", response),
          response = gsub("pansies", "pansy", response),
          response = gsub("mice", "mouse", response),
          response = gsub("documentaries", "documentary", response),
          response = gsub("parties", "party", response),
-         response = gsub("libraries", "library", response),
          response = gsub("cities", "city", response),
          response = gsub("stirps", "strip mall", response),
          response = gsub("joly ranchers", "jolly rancher", response),
@@ -513,6 +568,8 @@ df.trials.filtered.spelling %>%
          response = gsub("chijldren", "child", response),
          response = gsub("childern", "child", response),
          response = gsub("libraries", "library", response),
+         response = gsub("marhsmallows", "marshmallow", response),
+         
          
          ) -> df.trials.filtered.spellsyn
 ```
@@ -542,12 +599,14 @@ df.trials.filtered.spellsyn %>%
     np_match_us = paste("_", np_match, "_", sep=""), # insert underscores for the matching the other way around 
     super_us = paste("_", superordinate, "_", sep=""),
   # check if response and seed NP match 
-    specific = containsString_responses(
+    specific = ifelse(originalPhrase == "times of day", 
+                      ifelse(originalPhrase == "berries", 0, 0), 
+                      containsString_responses(
       as.character(cleanedPhrase), 
       np_match, 
       originalPhrase, 
       np_match_us
-      ),
+      )),
   # check if response and anticipated superordinate match
     matchingSuper = containsString_responses(
       as.character(cleanedPhrase), 
@@ -558,16 +617,16 @@ df.trials.filtered.spellsyn %>%
  
 d.tidy.phrase.w.original %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
-  count()
+  count() %>% View()
 ```
 
-There are 19906 (of 23758) automatically classified responses responseswhich passed the first round of exclusion (responses which are just actor names or adjectives and several invalid responses). 
+
 
 ``` {r}
 # remove responses with uncertainty marker "similar" for more restrictive analysis
 d.tidy.phrase.w.original %>% filter(grepl("similar", originalResponse, ignore.case=T)) -> d.uncertain.resps
 
-# extrcat the automatically matched data
+# extrcat the automatically matched data (out of 26.602 responses (post exclusion) 22.056 are matched )
 d.matchedResponses <- anti_join(d.tidy.phrase.w.original, d.uncertain.resps) %>% filter((specific == 1) | (matchingSuper == 1))
 
 # extract the consistent responses based on automatically classified data
@@ -583,6 +642,19 @@ d.consistent.items <- d.sub.counts %>%
 d.consistent.items
 d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
 d.inconsistent.items
+
+d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>% 
+  group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
+  count(specific) %>%
+  mutate(nr = sum(n))
+
+d.confident.phrase.specificMarking.bs.item %>% filter((n == 0) | (n == nr))
+
+# chwck the matched items where the mean of responses is 1 or 0
+d.matchedResponses %>% group_by(stim_id, np_expectations, adj_polarity) %>% mutate(meanResp = mean(specific)) %>% filter((meanResp == 1) | (meanResp == 0)) %>% select(stim_id, context_sentence, np_expectations, np_match, adj_polarity, originalResponse, meanResp) %>% distinct() %>% View()
+# it happns for some items where the number of matched responses is very low, e.g. for the NP "pick-up truck", positive adjective, only 3 responses out of 44 are matched automatically
+
+d.matchedResponses %>% group_by(stim_id, np_expectations, adj_polarity) %>% count() %>% View()
 ```
 
 
@@ -590,115 +662,55 @@ d.inconsistent.items
 # look at the unique non-matched responses
 d.tidy.resp.analysis <- anti_join(d.tidy.phrase.w.original, d.matchedResponses)
 
-d.tidy.resp.analysis %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, cleanedPhrase, originalResponse, originalPhrase, specific, matchingSuper) %>% View()
+d.tidy.resp.analysis %>% distinct(degree, superordinate, super_us, np, adj, np_match, originalResponse, originalPhrase, specific, matchingSuper) %>% View()
 ```
 
 Here, we look at the responses that were not matched to our anticipated NPs and superordinates and the synonyms of the NPs we already caught. We judge if the deviating responses are synonymous to our seed NPs or our superordinates and match them.
 ``` {r}
 # categorize the responses upon looking at the reponses not matching the NP nor the superordinate
+
+# this is the more sketchy part of the classification
+# also, responses that are synonyms of other non-matching responses are mutated in order to receive accurate modal responses
+
+# first , the responses which are held to be subordinate responses are changed to the seed subordinate NPs 
+
+# the ubstituted word forms might seem weird because the stop words are removed. For context, see original responses
 d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>% 
   
   # sketchy subordinate synonyms 
   mutate(cat_cleanedPhrase = cleanedPhrase,
+         cat_cleanedPhrase = gsub("'", "", cat_cleanedPhrase),
          cat_cleanedPhrase = ifelse( superordinate == "cookware", gsub("pans", "frying pan", cat_cleanedPhrase), cat_cleanedPhrase),
-         
-         cat_cleanedPhrase = gsub("flying crafts", "aircrafts", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("passageways", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("mattresses", "bedboard", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("areas around", "areas", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("hours", "times of day", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("animal movement", "animal", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("home", "house", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("door passages", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("liquid", "drink", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("shows", "entertainment", cat_cleanedPhrase)
-         cat_cleanedPhrase = gsub("roadway", "road", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("liuids", "drinks", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("watercraft", "boat", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("types of restaurant food", "food", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("similar shakes", "milkshake", cat_cleanedPhrase),
-         cat_cleanedPhrase =ifelse(degree == "darkness",  gsub("times", "times of day", cat_cleanedPhrase), cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("top shelf options", "liquor", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("shades", "paint", cat_cleanedPhrase),
-         cat_cleanedPhrase = ifelse(degree == "price", gsub("rent", "rentals", cat_cleanedPhrase), cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("other computer equipment", "electronic devices", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("bodies of water", "waterways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("places to rent", "rentals", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("ways too cook food", "cookware", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("paint colors", "paints", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("elderlyer adults", "elderly person", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("wall supports", "walls", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("things in the air", "aircrafts", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("places to live", "rentals", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("road widths", "width", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("booze", "alcoholic drinks", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("holes", "dens", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("flower arrangements", "bouquets", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("entrances", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("illunation", np_match, cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("illumination", np_match, cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("entryways", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("flower bouquets", "flowers", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("computers", "laptop", cat_cleanedPhrase),
+         at_cleanedPhrase = gsub("computer", "laptop", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("dane", "great dane", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("podcast", "podcast episode", cat_cleanedPhrase),
-         cat_cleanedPhrase = ifelse(superordinate == "paints",  gsub("color", "paint", cat_cleanedPhrase), cat_cleanedPhrase),
-         cat_cleanedPhrase = ifelse(superordinate == "seasons",  gsub("day", "season", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "desserts",  gsub("chocolate", "chocolate fondue", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "times of day",  ifelse(cat_cleanedPhrase == "days", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "statues",  gsub("material", "statues", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "insects",  gsub("bug", "insect", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "cookware",  gsub("cook", "cookware", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "buildings",  gsub("apartments", "apartment building", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "venues",  gsub("auditoriums", "concert", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(superordinate == "writing utensils",  gsub("ink", "pen", cat_cleanedPhrase), cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("meals restaurant", "restaurant", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("bouquet", "flower", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("rain", "rain shower", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("shower", "rain shower", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("bodys water", "waterways", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("bodies water", "waterways", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("bouqet", "flower", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("competition", "race", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("concert music", "concerts", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("condiments", "spices", cat_cleanedPhrase),
-  
-   cat_cleanedPhrase = gsub("'", "", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("electronics", "electronic devices", cat_cleanedPhrase),
- 
-   cat_cleanedPhrase = gsub("activities", "places", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("amount", "beer", cat_cleanedPhrase),
-   
-   
+         cat_cleanedPhrase = gsub("illunation", np_match, cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("illumination", np_match, cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("elderlyer adults", "elderly person", cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "desserts",  gsub("chocolate", "chocolate fondue", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "times of day",  ifelse(cat_cleanedPhrase == "days", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "writing utensils",  gsub("ink", "pen", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "buildings",  gsub("apartments", "apartment building", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("rain", "rain shower", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("shower", "rain shower", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("amount", "beer", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("bags of trash", "trash can", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("blade spinning", "helicopter", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("bottles win", "wine", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("brands", np_match, cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("butchershops", np_match, cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "places",  gsub("baths", "sauna", cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "alcoholic drinks",  gsub("bottles", "wine", cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "furniture",  gsub("cans", "trash cans", cat_cleanedPhrase), cat_cleanedPhrase),
-  # cat_cleanedPhrase = ifelse(superordinate == "venues",  gsub("centers", "conference", cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "loudness",  gsub("child", "baby", cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "weight",  gsub("children", "kid", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(degree == "temperature_h",  gsub("chocolate", "fondue", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(degree == "weight",  gsub("childern", "kid", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(degree == "temperature_h",  gsub("chocolate", "chocolate fondue", cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("duck", "dusk", cat_cleanedPhrase), cat_cleanedPhrase),
-   
    cat_cleanedPhrase = gsub("cell hone", "phone", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("cites", "city", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("compared store", np_match, cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("cry frinch", "finch", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("cycles", "motorcycle", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("driving lanes", np_match, cat_cleanedPhrase),
-   
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("color", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("fur color", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("fur", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
@@ -706,23 +718,19 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
    cat_cleanedPhrase = ifelse(degree == "loudness_n",  gsub("days", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "price",  gsub("days", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "price",  gsub("flats", "apartments", cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("evenings", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "speed",  gsub("kid", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "height",  gsub("kid", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "loudness",  gsub("kid", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "strength",  gsub("kid", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "weight",  gsub("kid", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "width",  gsub("lane", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
-   cat_cleanedPhrase = ifelse(degree == "weight",  gsub("light", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "darkness",  gsub("light", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "height",  gsub("mall", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "speed_f",  gsub("planes", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "height",  gsub("player", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "temperature_h",  gsub("rinks", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "temperature_h",  gsub("saturday", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
-   #cat_cleanedPhrase = ifelse(degree == "loudness_n",  gsub("rinks", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "animals",  gsub("shade", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
-  # cat_cleanedPhrase = ifelse(superordinate == "objects",  gsub("wood", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "loudness_n",  gsub("time", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "temperature_h",  gsub("time", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(degree == "speed",  gsub("time", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
@@ -740,29 +748,78 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
    cat_cleanedPhrase = ifelse(superordinate == "flowers",  gsub("color", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "materials",  gsub("color", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
    cat_cleanedPhrase = ifelse(superordinate == "birds",  gsub("color", np_match, cat_cleanedPhrase), cat_cleanedPhrase),
-   
    cat_cleanedPhrase = gsub("gorilla", "monkey", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("hounds", "bassett hound", cat_cleanedPhrase),
-  
-   cat_cleanedPhrase = gsub("kids age", "teenager", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("kids walks", "child", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("mattress", "bedboard", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("neighborhood", "town", cat_cleanedPhrase),
-   
    cat_cleanedPhrase = gsub("pages", "novel", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("water tempertatures", "sauna", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("trash light", "trash can", cat_cleanedPhrase),
-   
-   cat_cleanedPhrase = gsub("spa", "sauna", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("skyscrapper", "skyscraper", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("skarks", "shark", cat_cleanedPhrase),
-   cat_cleanedPhrase = gsub("childern", "kid", cat_cleanedPhrase),
-  
-   cat_cleanedPhrase = gsub("animal coats", "coats", cat_cleanedPhrase),
+   
+         
+         cat_cleanedPhrase = gsub("flying craft", "aircrafts", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("flying things", "aircrafts", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("forest spaces", "forest", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("wheelers", "vehicles", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("passageways", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("areas around", "areas", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("hours", "times of day", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("animal movement", "animal", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("home", "house", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("door passages", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("shows", "entertainment", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("roadway", "road", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("liuids", "drinks", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("watercraft", "boat", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("types of restaurant food", "food", cat_cleanedPhrase),
+         cat_cleanedPhrase =ifelse(degree == "darkness",  gsub("times", "times of day", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("top shelf options", "liquor", cat_cleanedPhrase),
+        # cat_cleanedPhrase = gsub("shades", "paint", cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(degree == "price", gsub("rent", "rentals", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("other computer equipment", "electronic devices", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("bodies of water", "waterways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("places to rent", "rentals", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("ways too cook food", "cookware", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("paint colors", "paints", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("wall supports", "walls", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("things in the air", "aircrafts", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("places to live", "rentals", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("booze", "alcoholic drinks", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("holes", "dens", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("flower arrangements", "bouquet", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("entrances", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("entryways", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("flower bouquets", "bouquet", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "paints",  gsub("color", "paint", cat_cleanedPhrase), cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse(superordinate == "seasons",  gsub("day", "seasons", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(superordinate == "statues",  gsub("material", "statues", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(superordinate == "insects",  gsub("bug", "insect", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(superordinate == "cookware",  gsub("cook", "cookware", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = ifelse(superordinate == "venues",  gsub("auditoriums", "concert", cat_cleanedPhrase), cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("meals restaurant", "restaurant", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("bouquets", "bouquet", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("bodys water", "waterways", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("bodies water", "waterways", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("bouqet", "bouquet", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("competition", "race", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("concert music", "concerts", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("condiments", "spices", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("electronics", "electronic devices", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("activities", "places", cat_cleanedPhrase),
+   #cat_cleanedPhrase = gsub("animal coats", "", cat_cleanedPhrase),
    cat_cleanedPhrase = gsub("animal houses openings", "animal houses", cat_cleanedPhrase),
    
+   # classification of those responses which were not caught above (looking at d.tidy.resp.analysis.update below): mostly adjusting synonymous responses to get accurate mode estinates
+   cat_cleanedPhrase = gsub("air room", "air", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("ambient temperatures", "temperatures", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animals houses", "animal houses", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animal structures", "animal houses", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animal noise", "animal sound", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animals aquiariums", "animals", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animals forest", "animals", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animals forrest", "animals", cat_cleanedPhrase),
+   cat_cleanedPhrase = gsub("animals forest", "animals", cat_cleanedPhrase),
          ) %>%
   mutate( cat_cleaned = gsub("_", "", cat_cleanedPhrase),
     specific = containsString_responses(as.character(cat_cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
@@ -770,7 +827,7 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          ) 
   
 
-d.tidy.resp.analysis.update <- d.tidy.phrase.classified %>% filter((specific == 0) & (matchingSuper == 0))  %>% distinct(degree, superordinate, np, adj, np_match, originalResponse, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
+d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0))  %>% distinct(degree, superordinate, np, adj, np_match, originalResponse, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
 ```
 
 
@@ -783,63 +840,61 @@ d.unexpected.resps <- d.tidy.phrase.classified %>% filter((specific == 0) & (mat
 d.tidy.phrase.classified <- d.tidy.phrase.classified %>% 
 subset(., !(cat_cleanedPhrase %in% c("bright", "cliaire", "exacting", "glare", "noisy", "sold expensively") ))
 
+"black", "boiling", "coat of paints", "Empire State Building", "glare", "individual experience", "information", "it is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast" , "thrill", "though", "Very slow", "walking outside", "walking assitance tools", "word", "worthy"
 
-d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
+d.tidy.phase.classifiedSuper <- d.tidy.phrase.handClassified %>%
   mutate(
     cleanedPhrase = cat_cleanedPhrase,
     cleanedPhrase = gsub("pieces of", "", cleanedPhrase),
     cleanedPhrase = gsub("alcohol drinks", "alcoholic drinks", cleanedPhrase),
     cleanedPhrase = gsub("animal houses", "dens", cleanedPhrase),
-    cleanedPhrase = gsub("animal noises", "noises", cleanedPhrase),
-    cleanedPhrase = gsub("animal sounds", "sounds", cleanedPhrase),
+    cleanedPhrase = gsub("animal noise", "animal sound", cleanedPhrase),
     cleanedPhrase = gsub("aniumals", "animals", cleanedPhrase),
     cleanedPhrase = gsub("apartmets", "apartments", cleanedPhrase),
     cleanedPhrase = ifelse(degree == "speed", gsub("appliances", "cookware", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = gsub("aquarium", "aquariums", cleanedPhrase),
+    cleanedPhrase = gsub("aquariums", "aquarium", cleanedPhrase),
     cleanedPhrase = gsub("athelete", "athlete", cleanedPhrase),
-    cleanedPhrase = gsub("bags oftrash", "trash can", cleanedPhrase),
-    cleanedPhrase = gsub("baked", "dessert", cleanedPhrase),
-    cleanedPhrase = gsub("bank", "banks", cleanedPhrase),
     cleanedPhrase = gsub("barries", "berries", cleanedPhrase),
     cleanedPhrase = gsub("bird cries", "bird sound", cleanedPhrase),
+    cleanedPhrase = gsub("bird species", "birds", cleanedPhrase),
     cleanedPhrase = gsub("bird loud", "bird sound", cleanedPhrase),
+    cleanedPhrase = gsub("bird sounds", "bird sound", cleanedPhrase),
     cleanedPhrase = gsub("bodys of water", "waterways", cleanedPhrase),
     cleanedPhrase = gsub("boxes", "box", cleanedPhrase),
     cleanedPhrase = gsub("boxs", "box", cleanedPhrase),
     cleanedPhrase = gsub("bracelts", "bracelets", cleanedPhrase),
-    cleanedPhrase = gsub("building", "buildings", cleanedPhrase),
+    cleanedPhrase = gsub("buildings", "building", cleanedPhrase),
+    cleanedPhrase = gsub("blwnkets", "blanket", cleanedPhrase),
     cleanedPhrase = gsub("chacolate", "chocolate", cleanedPhrase),
     cleanedPhrase = gsub("chocholate", "chocolate", cleanedPhrase),
     cleanedPhrase = gsub("clothes", "cloth", cleanedPhrase),
     cleanedPhrase = gsub("cloths", "cloth", cleanedPhrase),
-    cleanedPhrase = gsub("coat of paints", "coat", cleanedPhrase),
-    cleanedPhrase = gsub("coat of animals", "coat", cleanedPhrase),
+    cleanedPhrase = gsub("coat of animals", "animal coat", cleanedPhrase),
     cleanedPhrase = gsub("coats", "coat", cleanedPhrase),
     cleanedPhrase = gsub("cockpots", "crockpot", cleanedPhrase),
-    cleanedPhrase = gsub("craft shop", "crafts", cleanedPhrase),
-    cleanedPhrase = gsub("craft supplies", "crafts", cleanedPhrase),
+#    cleanedPhrase = gsub("craft shop", "crafts", cleanedPhrase),
+    cleanedPhrase = gsub("craft supplies", "materials", cleanedPhrase),
+    cleanedPhrase = gsub("crafts", "materials", cleanedPhrase),
     cleanedPhrase = gsub("compared noise", "noise", cleanedPhrase),
     cleanedPhrase = gsub("creators", "creatures", cleanedPhrase),
+    cleanedPhrase = gsub("car models", "cars", cleanedPhrase),
     cleanedPhrase = gsub("cry of finch", "finch", cleanedPhrase),
     cleanedPhrase = gsub("crying", "cries", cleanedPhrase),
     cleanedPhrase = gsub("days", "day", cleanedPhrase),
     cleanedPhrase = gsub("dinners", "dinner", cleanedPhrase),
     cleanedPhrase = gsub("distances", "distance", cleanedPhrase),
     cleanedPhrase = gsub("documentry", "documentary", cleanedPhrase),
-    cleanedPhrase = gsub("dog hair", "dog coats", cleanedPhrase),
-    cleanedPhrase = gsub("door of house", "doors house", cleanedPhrase),
+    cleanedPhrase = gsub("dog hair", "dog coat", cleanedPhrase),
+    cleanedPhrase = gsub("door of house", "doorways", cleanedPhrase),
     cleanedPhrase = gsub("drink choices", "drinks", cleanedPhrase),
-    cleanedPhrase = gsub("environment quiet", "environment", cleanedPhrase),
     cleanedPhrase = gsub("environments", "environment", cleanedPhrase),
     cleanedPhrase = gsub("fabrics", "fabric", cleanedPhrase),
     cleanedPhrase = gsub("floor types", "floors", cleanedPhrase),
     cleanedPhrase = gsub("floor styles", "floors", cleanedPhrase),
     cleanedPhrase = gsub("flyers", "aircrafts", cleanedPhrase),
-    
-    cleanedPhrase = gsub("flying", "aircrafts", cleanedPhrase),
     cleanedPhrase = gsub("food items", "food", cleanedPhrase),
     cleanedPhrase = gsub("food products", "food", cleanedPhrase),
-    cleanedPhrase = gsub("food expensive", "food", cleanedPhrase),
+    #cleanedPhrase = gsub("food expensive", "food", cleanedPhrase),
     cleanedPhrase = gsub("food served", "food", cleanedPhrase),
     cleanedPhrase = gsub("foods", "food", cleanedPhrase),
     cleanedPhrase = gsub("forest paths", "forest", cleanedPhrase),
@@ -848,15 +903,15 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("forms of transportation", "transportation", cleanedPhrase),
     cleanedPhrase = gsub("fowers", "flowers", cleanedPhrase),
     cleanedPhrase = gsub("fruits", "fruit", cleanedPhrase),
-    cleanedPhrase = gsub("furniture narrow door of house", "furniture", cleanedPhrase),
+  #  cleanedPhrase = gsub("furniture narrow door of house", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("furniture of type", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("furniture pieces", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("furniture sizes", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("furnitures", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("gutiars", "guitars", cleanedPhrase),
-    cleanedPhrase = gsub("hardware store", "cotton", cleanedPhrase),
+   # cleanedPhrase = gsub("hardware store", "cotton", cleanedPhrase),
     cleanedPhrase = gsub("highways", "highway", cleanedPhrase),
-    cleanedPhrase = gsub("homes", "house", cleanedPhrase),
+    cleanedPhrase = gsub("home", "house", cleanedPhrase),
     cleanedPhrase = gsub("houses", "house", cleanedPhrase),
     cleanedPhrase = gsub("housing", "rental", cleanedPhrase),
     cleanedPhrase = gsub("insect terrarium", "insects", cleanedPhrase),
@@ -887,10 +942,10 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("marine life", "sealife", cleanedPhrase),
     cleanedPhrase = gsub("desswerts", "desserts", cleanedPhrase),
     cleanedPhrase = gsub("means of transportation", "transportation", cleanedPhrase),
-    cleanedPhrase = gsub("meeting hall", "venues", cleanedPhrase),
-    cleanedPhrase = gsub("meeting rooms", "venues", cleanedPhrase),
+    #cleanedPhrase = gsub("meeting hall", "venues", cleanedPhrase),
+    cleanedPhrase = gsub("meeting rooms", "meeting hall", cleanedPhrase),
     cleanedPhrase = gsub("menus", "menu", cleanedPhrase),
-    cleanedPhrase = gsub("metal bracelet", "bracelets", cleanedPhrase),
+    cleanedPhrase = gsub("bracelet", "bracelets", cleanedPhrase),
     cleanedPhrase = gsub("metals", "metal", cleanedPhrase),
     cleanedPhrase = gsub("methods of transportation", "transportation", cleanedPhrase),
     cleanedPhrase = gsub("move furniture", "furniture", cleanedPhrase),
@@ -912,17 +967,11 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("objects sitting", "objects", cleanedPhrase),
     cleanedPhrase = gsub("objects store", "objects", cleanedPhrase),
     cleanedPhrase = gsub("objects terrarium", "objects", cleanedPhrase),
-    cleanedPhrase = gsub("ofart", "art", cleanedPhrase),
-    cleanedPhrase = gsub("offorest", "forest", cleanedPhrase),
-    cleanedPhrase = gsub("oftravel", "travel", cleanedPhrase),
-    cleanedPhrase = gsub("ofspace", "space", cleanedPhrase),
-    cleanedPhrase = gsub("of walking", "walks", cleanedPhrase),
-    cleanedPhrase = gsub("ofkitchen", "kitchen", cleanedPhrase),
     cleanedPhrase = gsub("openings earth", "openings", cleanedPhrase),
     cleanedPhrase = gsub("objects house", "objects", cleanedPhrase),
-    cleanedPhrase = gsub("papers writing scripts", "scripts", cleanedPhrase),
+    cleanedPhrase = gsub("papers writing scripts", "paper", cleanedPhrase),
     cleanedPhrase = gsub("parks", "park", cleanedPhrase),
-    cleanedPhrase = gsub("pathways", "paths", cleanedPhrase),
+    cleanedPhrase = gsub("pathways", "path", cleanedPhrase),
     cleanedPhrase = gsub("people lifting weights", "people", cleanedPhrase),
     cleanedPhrase = gsub("person", "people", cleanedPhrase),
     cleanedPhrase = gsub("peunguins", "penguin", cleanedPhrase),
@@ -934,19 +983,17 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("real estate", "rentals", cleanedPhrase),
     cleanedPhrase = gsub("restaraunts", "restaurants", cleanedPhrase),
     cleanedPhrase = gsub("restaraunt prices", "restaurants", cleanedPhrase),
-    
     cleanedPhrase = gsub("rooms building venue", "venues", cleanedPhrase),
     cleanedPhrase = gsub("rooms house", "rooms", cleanedPhrase),
-    cleanedPhrase = gsub("run fast", "runners", cleanedPhrase),
     cleanedPhrase = gsub("satues", "statues", cleanedPhrase),
     cleanedPhrase = gsub("saturday nights", np_match, cleanedPhrase),
     cleanedPhrase = gsub("script writings", "script", cleanedPhrase),
     cleanedPhrase = gsub("scripts", "script", cleanedPhrase),
     cleanedPhrase = gsub("seacreatures", "sealife", cleanedPhrase),
     cleanedPhrase = gsub("selling price", "price", cleanedPhrase),
-    cleanedPhrase = gsub("shades stronger characteristic", "wall", cleanedPhrase),
-    cleanedPhrase = gsub("shopping centers", "mall", cleanedPhrase),
-    cleanedPhrase = gsub("shopping", "mall", cleanedPhrase),
+    cleanedPhrase = gsub("shades stronger characteristic", "paints", cleanedPhrase),
+ #   cleanedPhrase = gsub("shopping centers", "mall", cleanedPhrase),
+  #  cleanedPhrase = gsub("shopping", "mall", cleanedPhrase),
     cleanedPhrase = gsub("snack foods", "snacks", cleanedPhrase),
     cleanedPhrase = gsub("sofas", "couch", cleanedPhrase),
     cleanedPhrase = gsub("satues", "statues", cleanedPhrase),
@@ -960,7 +1007,7 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("sounds vicinity", "sound", cleanedPhrase),
     cleanedPhrase = gsub("sounds", "sound", cleanedPhrase),
     cleanedPhrase = gsub("spa services", "sauna", cleanedPhrase),
-    cleanedPhrase = gsub("sounds area", "sounds", cleanedPhrase),
+    cleanedPhrase = gsub("sounds area", "sound", cleanedPhrase),
     cleanedPhrase = gsub("spirinting race", "sprint", cleanedPhrase),
     cleanedPhrase = gsub("statutes", "statues", cleanedPhrase),
     cleanedPhrase = gsub("stringed instruments", "string instruments", cleanedPhrase),
@@ -970,9 +1017,9 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("transportation methods", "transportation", cleanedPhrase),
     cleanedPhrase = gsub("types of music", "music", cleanedPhrase),
     cleanedPhrase = ifelse(superordinate == "places", sub("venues", "places", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse(superordinate == "concerts", sub("singing", "concerts", cleanedPhrase), cleanedPhrase),
     cleanedPhrase = gsub("water color", "watercolor", cleanedPhrase),
     cleanedPhrase = gsub("watercoolers", "watercolor", cleanedPhrase),
-    cleanedPhrase = gsub("weather cold", "weather", cleanedPhrase),
     cleanedPhrase = gsub("weather events", "weather", cleanedPhrase),
     cleanedPhrase = gsub("weather conditions", "weather", cleanedPhrase),
     cleanedPhrase = gsub("weather patterns", "weather", cleanedPhrase),
@@ -980,7 +1027,220 @@ d.tidy.phase.classifiedSuper <- d.tidy.phrase.classified %>%
     cleanedPhrase = gsub("wooffloor", "wood", cleanedPhrase),
     cleanedPhrase = gsub("furnature", "furniture", cleanedPhrase),
     cleanedPhrase = gsub("alochols", "alcoholic drinks", cleanedPhrase),
+    cleanedPhrase = gsub("random wood", "wood", cleanedPhrase),
+    cleanedPhrase = gsub("areas furniture", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("areas kitchen", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("areas nearby", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("areas of house", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("areas of population", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("areas of space", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("banks", "bank", cleanedPhrase),
+    cleanedPhrase = gsub("areas sound", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("bird call", "bird sound", cleanedPhrase),
+    cleanedPhrase = gsub("birds zoo", "birds", cleanedPhrase),
+    cleanedPhrase = ifelse( degree == "strength", gsub("body", "athlete", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "materials", gsub("cloth", "fabric", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "shoes", gsub("shes", "shoes", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "concerts", gsub("show", "concert", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "audios", gsub("show", "audio", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "statues", gsub("metal", "statue", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "cookware", gsub("method", "cookware", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "venues", gsub("night", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "doorways", gsub("opening", "doorway", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "dens", gsub("opening", "den", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "times of day", gsub("area", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "times of day", gsub("places", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "times of day", gsub("area", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "times of day", gsub("street", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "rentals", gsub("places", "rentals", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "restaurants", gsub("places", "restaurants", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "restaurants", gsub("places dinner", "restaurants", cleanedPhrase), cleanedPhrase),
+
+    cleanedPhrase = ifelse( superordinate == "alcoholic drinks", gsub("places", np_match, cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "doorways", gsub("path", "doorway", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "dens", gsub("passage", "den", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "roads", gsub("path", "road", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "waterways", gsub("path", "waterways", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "audios", gsub("performance", "audio", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "audios", gsub("music", "audio", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "materials", gsub("hardware", "materials", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "audios", gsub("performance", "venues", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "locations", gsub("places house", "locations", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "locations", gsub("places kitchen", "locations", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "locations", gsub("refrigerator", "freezer", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "doorways", gsub("places house", "doorways", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "floors", gsub("surfaces", "floors", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = ifelse( superordinate == "races", gsub("tracks", "races", cleanedPhrase), cleanedPhrase),
+    cleanedPhrase = gsub("buildings materials", "building", cleanedPhrase),
+    cleanedPhrase = gsub("cars highway", "cars", cleanedPhrase),
+    cleanedPhrase = gsub("climates", "places", cleanedPhrase),
     cleanedPhrase = gsub("coat of animals", "animal coat", cleanedPhrase),
+    cleanedPhrase = gsub("cold things", "things", cleanedPhrase),
+    cleanedPhrase = gsub("concert volumes", "concert", cleanedPhrase),
+    cleanedPhrase = gsub("conferences", "conference center", cleanedPhrase),
+    cleanedPhrase = gsub("convert", "concert", cleanedPhrase),
+    cleanedPhrase = gsub("costs of living", "rentals", cleanedPhrase),
+    cleanedPhrase = gsub("crawly animals", "animals", cleanedPhrase),
+    cleanedPhrase = gsub("creams", "ice cream", cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_cries_", np_match_us, cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_crying_", np_match_us, cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_episodes_", np_match_us, cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_car_", "cars", cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_map_", "maps", cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_pots_", "cookware", cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_settings_", superordinate_us, cleanedPhrase),
+    cleanedPhrase = gsub("crowds", "concerts", cleanedPhrase),
+    cleanedPhrase = gsub("decorations", "decor", cleanedPhrase),
+    cleanedPhrase = gsub("decors", "decor", cleanedPhrase),
+    cleanedPhrase = gsub("diners methods", "cookware", cleanedPhrase),
+    cleanedPhrase = gsub("dog breeds", "dogs", cleanedPhrase),
+    cleanedPhrase = gsub("domiciles", "rentals", cleanedPhrase),
+    cleanedPhrase = gsub("door sizes", "doorways", cleanedPhrase),
+    cleanedPhrase = gsub("door ways", "doorways", cleanedPhrase),
+    cleanedPhrase = gsub("doors house", "doors", cleanedPhrase),
+    cleanedPhrase = gsub("driving", "vehicle", cleanedPhrase),
+    cleanedPhrase = gsub("eateries", "restaurant", cleanedPhrase),
+    cleanedPhrase = gsub("eatermelon", "watermelon", cleanedPhrase),
+    cleanedPhrase = gsub("entrance den", "den", cleanedPhrase),
+    cleanedPhrase = gsub("fabric material", "material", cleanedPhrase),
+    cleanedPhrase = gsub("decor sale", "decor", cleanedPhrase),
+    cleanedPhrase = gsub("decor plan buy", "decor", cleanedPhrase),
+    cleanedPhrase = gsub("friends", "friend", cleanedPhrase),
+    cleanedPhrase = gsub("front of house", "front gate", cleanedPhrase),
+    cleanedPhrase = gsub("fuel economy cars", "smartcar", cleanedPhrase),
+    cleanedPhrase = gsub("gas engine cars", "cars", cleanedPhrase),
+    cleanedPhrase = gsub("gates", "front gate", cleanedPhrase),
+    cleanedPhrase = gsub("gates", "front gate", cleanedPhrase),
+    cleanedPhrase = gsub("gents", "men", cleanedPhrase),
+    cleanedPhrase = gsub("google map", "length", cleanedPhrase),
+    cleanedPhrase = gsub("griter", "guitar", cleanedPhrase),
+    cleanedPhrase = gsub("groceries", "food", cleanedPhrase),
+    cleanedPhrase = gsub("heavier weights", "weights", cleanedPhrase),
+    cleanedPhrase = gsub("heavy traffic", "traffic", cleanedPhrase),
+    cleanedPhrase = gsub("heavy equipment construction", "vehicles", cleanedPhrase),
+    cleanedPhrase = gsub("herbs", "spices", cleanedPhrase),
+    cleanedPhrase = gsub("highway speeds", "vehicles", cleanedPhrase),
+    cleanedPhrase = gsub("hot food", "food", cleanedPhrase),
+    cleanedPhrase = gsub("household items", "items", cleanedPhrase),
+    cleanedPhrase = gsub("indoor area", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("indoor event", "event", cleanedPhrase),
+    cleanedPhrase = gsub("indoor retail stores", "store", cleanedPhrase),
+    cleanedPhrase = gsub("indoor space", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("venues", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("ingredients", "food", cleanedPhrase),
+    cleanedPhrase = gsub("items sale", "items", cleanedPhrase),
+    cleanedPhrase = gsub("items craft shop", "items", cleanedPhrase),
+    cleanedPhrase = gsub("joggers predestrians", "jogger", cleanedPhrase),
+    cleanedPhrase = gsub("light object", "object", cleanedPhrase),
+    cleanedPhrase = gsub("loud sound", "sound", cleanedPhrase),
+    cleanedPhrase = gsub("wood choices", "wood", cleanedPhrase),
+    cleanedPhrase = gsub("meeting hall", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("mattress", "bedboard", cleanedPhrase),
+    cleanedPhrase = gsub("merchandise", "items", cleanedPhrase),
+    cleanedPhrase = gsub("musical instruments", "musical instrument", cleanedPhrase),
+    cleanedPhrase = gsub("musical performance", "instruments", cleanedPhrase),
+    cleanedPhrase = gsub("musical instrument", "instruments", cleanedPhrase),
+    cleanedPhrase = gsub("musicals", "concert", cleanedPhrase),
+    cleanedPhrase = gsub("neighborhood", "town", cleanedPhrase),
+    cleanedPhrase = gsub("nests", "dens", cleanedPhrase),
+    cleanedPhrase = gsub("noise room", "noise", cleanedPhrase),
+    cleanedPhrase = gsub("noise nearby", "noise", cleanedPhrase),
+    cleanedPhrase = gsub("normal pick up truck", "pick-up", cleanedPhrase),
+    cleanedPhrase = gsub("objectsed", "objects", cleanedPhrase),
+    cleanedPhrase = gsub("things garden", "things", cleanedPhrase),
+    cleanedPhrase = gsub("outerware", "coat", cleanedPhrase),
+    cleanedPhrase = gsub("paint coverage", "paints", cleanedPhrase),
+    cleanedPhrase = gsub("paint odors", "paint smells", cleanedPhrase),
+    cleanedPhrase = gsub("paint scents", "paint smells", cleanedPhrase),
+    cleanedPhrase = gsub("papers", "paper", cleanedPhrase),
+    cleanedPhrase = gsub("park sound", "sound", cleanedPhrase),
+    cleanedPhrase = gsub("parts of a ", "", cleanedPhrase),
+    cleanedPhrase = gsub("parts of his ", "", cleanedPhrase),
+    cleanedPhrase = gsub("parts of the ", "", cleanedPhrase),
+    cleanedPhrase = gsub("pastries", "desserts", cleanedPhrase),
+    cleanedPhrase = gsub("peoples house", "house", cleanedPhrase),
+    cleanedPhrase = gsub("pet birds", "birds", cleanedPhrase),
+    cleanedPhrase = gsub("pet house", "pets", cleanedPhrase),
+    cleanedPhrase = gsub("pick up", "pick-up", cleanedPhrase),
+    cleanedPhrase = gsub("places htey", "venues", cleanedPhrase),
+    cleanedPhrase = gsub("places forest", "forest", cleanedPhrase),
+    cleanedPhrase = gsub("places darker", "places", cleanedPhrase),
+    cleanedPhrase = gsub("places quiet", "places", cleanedPhrase),
+    cleanedPhrase = gsub("places met", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("places live", "rentals", cleanedPhrase),
+    cleanedPhrase = gsub("places sit", "furniture", cleanedPhrase),
+    cleanedPhrase = gsub("plant fibers", "materials", cleanedPhrase),
+    cleanedPhrase = gsub("plays", "audios", cleanedPhrase),
+    cleanedPhrase = gsub("pools", "places", cleanedPhrase),
+    cleanedPhrase = gsub("precipitation", "stroms", cleanedPhrase),
+    cleanedPhrase = gsub("predictions", "weather", cleanedPhrase),
+    cleanedPhrase = gsub("premises", "walls", cleanedPhrase),
+    cleanedPhrase = gsub("price of fruit", "price", cleanedPhrase),
+    cleanedPhrase = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
+    cleanedPhrase = ifelse( np == "sauna", gsub("spa", "sauna", cleanedPhrase), cleanedPhrase),
+
+    cleanedPhrase = gsub("primates", "monkey", cleanedPhrase),
+    cleanedPhrase = gsub("produce", "food", cleanedPhrase),
+    cleanedPhrase = gsub("programs", "entertainment", cleanedPhrase),
+    cleanedPhrase = gsub("public areas", "areas", cleanedPhrase),
+    cleanedPhrase = gsub("public places", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("recipe", "cookware", cleanedPhrase),
+    cleanedPhrase = gsub("restaurant price", "restaurant", cleanedPhrase),
+    cleanedPhrase = gsub("retail stores", "stores", cleanedPhrase),
+    cleanedPhrase = gsub("room temperature liquids", "liquid", cleanedPhrase),
+    cleanedPhrase = gsub("room temperatures", "temperature", cleanedPhrase),
+    cleanedPhrase = gsub("rooms buildings venue", "venue", cleanedPhrase),
+    cleanedPhrase = gsub("rowing", "rowboat", cleanedPhrase),
+    cleanedPhrase = gsub("runnres", "runner", cleanedPhrase),
+    cleanedPhrase = gsub("seasoning", "spice", cleanedPhrase),
+    cleanedPhrase = gsub("seats", "furniture", cleanedPhrase),
+    cleanedPhrase = gsub("shopping", np_match, cleanedPhrase),
+    cleanedPhrase = gsub("sitting surface", "furniture", cleanedPhrase),
+    cleanedPhrase = gsub("snack food", "snacks", cleanedPhrase),
+    cleanedPhrase = gsub("sound environment", "sound", cleanedPhrase),
+    cleanedPhrase = gsub("sound of nature", "sound", cleanedPhrase),
+    cleanedPhrase = gsub("spirits", "liquor", cleanedPhrase),
+    cleanedPhrase = gsub("speed highway", "speed", cleanedPhrase),
+    cleanedPhrase = gsub("spots", "venues", cleanedPhrase),
+    cleanedPhrase = gsub("squirrel coat", "animal coat", cleanedPhrase),
+    cleanedPhrase = gsub("study area", "area", cleanedPhrase),
+    cleanedPhrase = gsub("substances", "materials", cleanedPhrase),
+    cleanedPhrase = gsub("surfaces of bed", "bed", cleanedPhrase),
+    cleanedPhrase = gsub("surrounding", "places", cleanedPhrase),
+    cleanedPhrase = gsub("taller breeds", "dogs", cleanedPhrase),
+    cleanedPhrase = gsub("temperatures room", "temperature", cleanedPhrase),
+    cleanedPhrase = gsub("temporary shelters", "tents", cleanedPhrase),
+    cleanedPhrase = gsub("terrariums", "terrarium", cleanedPhrase),
+    cleanedPhrase = gsub("text", "script", cleanedPhrase),
+    cleanedPhrase = gsub("things hardware store", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things craft shop", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things lake", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things eaten", "food", cleanedPhrase),
+    cleanedPhrase = gsub("things lifted", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things air", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things airport", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things forest", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things kitchen", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things ocean", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things room", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things store", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things sky", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things terrarium", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things table", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things lake", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things fast", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things short", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things pick up", "things", cleanedPhrase),
+    cleanedPhrase = gsub("things move", "things", cleanedPhrase),
+    cleanedPhrase = gsub("tings weight", "things", cleanedPhrase),
+    cleanedPhrase = gsub("trucks", "truck", cleanedPhrase),
+    cleanedPhrase = gsub("wheeled transportation", "transportation", cleanedPhrase),
+    cleanedPhrase = gsub("types of ", "", cleanedPhrase),
+    cleanedPhrase = gsub("ways of travel", "transportation", cleanedPhrase),
+    cleanedPhrase = gsub("ways of walking", "walking", cleanedPhrase),
+    cleanedPhrase = gsub("wooffloor", "wood floor", cleanedPhrase),
+    cleanedPhrase = gsub("writings", "script", cleanedPhrase),
+    cleanedPhrase = gsub("works of art", superordinate, cleanedPhrase),
          ) %>%
   mutate( cat_cleaned = gsub("_", "", cleanedPhrase),
     specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
@@ -1019,6 +1279,12 @@ d.tidy.phrase.specificMarking.bs.item <- d.tidy.phase.classifiedSuper %>%
   group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
+# look at data matched automatically by-item
+d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
+ # mutate() %>%
+  group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
+  mean(specific)
+
 d.tidy.phrase.specificMarking.bs %>%
   ungroup() %>%
   mutate(np_expectations = gsub('\"', "", np_expectations),
@@ -1056,7 +1322,11 @@ By-item plot
 
 ```{r figIndivItems}
 
-d.tidy.phrase.specificMarking.bs.item %>%
+d.matchedResponses %>%
+  filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
+  mutate() %>%
+  group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
+  mean(column = specific) %>%
    ungroup() %>%
    mutate(np_expectations = gsub('\"', "", np_expectations),
           adj_polarity = gsub('\"', "", adj_polarity),
@@ -1079,7 +1349,7 @@ d.tidy.phrase.specificMarking.bs.item %>%
    # theme_black()+
    scale_y_continuous(limits = c(-0.02, 1.02), breaks = c(0, 0.5, 1))+
    ylab("Proportion paraphrases that contain NP")+
-   xlab("Subordinate Category Prior Mean") -> bars_cc_finalExpt_prereg_prelim_byItem
+   xlab("Subordinate Category Prior Mean") -> bars_cc_finalExpt_prereg_confident_byItem
 
  # ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
  #        width = 9, height = 9)
