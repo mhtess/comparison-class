@@ -1469,8 +1469,10 @@ d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
   mutate(mode_np = ifelse(specific == 1, np, superordinate))
 
 #write_csv(d.tidy.resps.classified.full.adjust.Super, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_adjusted_super.csv')
+``` 
 
-# this data can be fed into python frequency extractor, frequencies to be extracted are unique mode_np's and superordinates
+``` {r frequencies}
+# data is prepared for frequency extraction: the freuqncies for plural forms of the NPs and the most superordinatesare pulled, so the plural NPs are added
 
 d.tidy.phrase.w.original.mode.pl <- d.tidy.phrase.w.original.mode.pl %>%
   left_join(., df.frequencies, by = c("np_for_freq" ="Nps")) %>% # add subordinate frequencies
@@ -1483,31 +1485,114 @@ df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-
 anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
 
-write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')
-```
+#write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')
 
+#this data can be fed into python frequency extractor, frequencies to be extracted are unique mode_np's and superordinates
 
-``` {r}
-#substitution of superordinates based on human data for singular NPs
-d.tidy.phrase.w.original.mode <- d.tidy.phrase.w.original %>% mutate(superordinate = 
-                                                                       ifelse(np_match == "golfer", "people", superordinate),
-                                                                     superordinate = 
-                                                                       ifelse(np_match == "jockey", "people", superordinate),
-                                                                     superordinate = 
-                                                                       ifelse(np_match == "basketball", "people", superordinate),
-                                                                  #   superordinate = 
-                                                                   #    ifelse(np_match == "plastic", "decorations", superordinate),
-                                                                     superordinate = 
-                                                                       ifelse(np_match == "walker", "people", superordinate),
-                                                                      superordinate = 
-                                                                       ifelse(np_match == "jogger", "people", superordinate),
-                                                                      superordinate = 
-                                                                       ifelse(np_match == "runner", "people", superordinate))
-                                                                  #   superordinate = 
-                                                                   #    ifelse(np_match == "downtown street", "street", superordinate),
-                                                                #     superordinate = 
-                                                                 #      ifelse(np_match == "dusk", "days", superordinate))
+ 
+# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
+insert_plural_np = function(np, superordinate) {
+   if (np %in% c("piece of chocolate" )) {
+    np_pl = "chocolates"
+  } else if (np %in% c("piece of chalk" )) {
+    np_pl = "chalks"  
+  } else if( np %in% c("story")) {
+    np_pl = "stories" 
+  } else if( np %in% c("daisy")) {
+    np_pl = "daisies"   
+  } else if( np %in% c("library")) {
+    np_pl = "libraries"   
+  } else if( np %in% c("party")) {
+    np_pl = "parties" 
+  } else if( np %in% c("bush")) {
+    np_pl = "bushes"  
+  } else if( np %in% c("finch")) {
+    np_pl = "finches"    
+  } else if( np %in% c("pansy")) {
+    np_pl = "pansies"
+  } else if ( np %in% c("documentary")) {
+    np_pl = "documentaries"   
+  } else if ( np %in% c("pantry")) {
+    np_pl = "pantries"
+  } else if ( np %in% c("choral concert")) {
+    np_pl = "choirs"  
+  } else if( np %in% c("elderly person")) {
+    np_pl = "elderly people"   
+  } else if( np %in% c("mouse")) {
+    np_pl = "mice"
+  } else if( np %in% c("church")) {
+    np_pl = "churches"  
+  } else if( np %in% c("tile")) {
+    np_pl = "tile floors"
+  } else if( np %in% c("wood") & (superordinate == "floors")) {
+    np_pl = "wood floors"  
+  } else if( np %in% c("carpet") & (superordinate == "floors")) {
+    np_pl = "carpet floors"    
+  } else if( np %in% c("summer")) {
+    np_pl = "summer days" 
+  } else if( np %in% c("fall")) {
+    np_pl = "fall days"   
+  } else if( np %in% c("winter")) {
+    np_pl = "winter days"   
+  } else if( np %in% c("couch")) {
+    np_pl = "couches"  
+  } else if( np %in% c("tomato")) {
+    np_pl = "tomatoes"
+  } else if( np %in% c("jolly rancher")) {
+    np_pl = "jollies"
+  } else if( np %in% c("peach")) {
+    np_pl = "peaches"
+  } else if( np %in% c("city")) {
+    np_pl = "cities"   
+  } else if( np %in% c("auditorium")) {
+    np_pl = "auditoria"
+  } else if (np %in% c("bottle of top-shelf liquor")) {
+    np_pl = "liquors"
+  } else if (np %in% c("six-pack of beer")) {
+    np_pl = "beers"
+  } else if (np %in% c( "bottle of wine")) {
+    np_pl = "wine bottles"
+  } else if (np %in% c( "bush" )) {
+    np_pl = "bushes"
+  } else if(np %in% c( "child")) {
+    np_pl = "children"
+  } else if (np %in% c("baby")) {
+    np_pl = "babies"
+  } else if (np %in% c("platinum")) {
+    np_pl = "platinum statues"
+  } else if( np %in% c("bronze")) {
+    np_pl = "bronze statues"   
+  } else if ((np %in% c("plastic")) & (superordinate == "bracelets")) {
+    np_pl = "plastic bracelets"
+  } else if( np %in% c("gold")) {
+    np_pl = "gold bracelets"
+  } else if( np %in% c("metal")) {
+    np_pl = "metal bracelets"  
+  } else if ((np %in% c("plastic")) & (superordinate == "statues")) {
+    np_pl = "plastic statues"  
+  } else if (np %in% c("wool", "wood", "fish", "ice cream", "garlic", "saffron", "coffee", "raspberries",
+                       "boysenberries",
+                "strawberries", "sneakers", "chicken", "boots", "tuna", "pork", "sandals", "plastic"))  {
+    np_pl = np # the items left singular
+    
+  } else {
+    np_pl = paste(np, "s", sep="")
+  }
+  return (np_pl)
+}
 
+d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full %>% 
+  rowwise() %>% 
+  mutate(np_pl = insert_plural_np(np, superordinate))
+
+# adjust some superordinates 
+d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
+  mutate(superordinate.freq = superordinate,
+    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq) # avois polysemy
+         )
+# this data can be fed into python frequency extractor
+#write_csv(d.tidy.resps.w.pl.np, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_pl_np.csv')
 ```
 
 
@@ -1731,50 +1816,5 @@ contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
 summary(rs.glm)
 ```
 
-```{r pluralNP}
 
-# insert plural noun phrases additionally to recorded seed NPs in order to use plural frequencies 
-# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
-insert_plural_np = function(np) {
-  if (np %in% c("seagull", "parrot", "crow", "day", "dusk", "night", "jolly rancher", "marshmallow",
-               "tile", "carpet", "giraffe", "monkey", "bird", "donkey", "dog", "cat", "elephant", "cheetah",
-               "sloth","basketball player", "golfer", "jockey", "runner", "jogger", "walker", "dachshund",
-               "bassett hound", "chihuahua", "novel", "poem", "classroom", "study hall", "tree", "flower",
-               "adult", "teenager",  "kid", "hurricane", "thunderstorm", "rain", "soup", "salad",
-               "cave", "cavern", "fox hole", "highway", "side road", "downtown street"))  {
-    np_pl = paste(np, "s", sep="")
-  } else if (np %in% c("piece of chocolate" )) {
-    np_pl = "pieces of chocolate"
-  } else if (np %in% c( "fish", "wood", "platinum", "bronze", "plastic",  "ice cream", 
-                       "summer", "fall", "winter" )) {
-    np_pl = np
-  } else if( np %in% c("story")) {
-    np_pl = "stories"
-  } else if( np %in% c("mouse")) {
-    np_pl = "mice"
-  } else if( np %in% c("auditorium")) {
-    np_pl = "auditoria"
-  } else if (np %in% c("bottle of top-shelf liquor")) {
-    np_pl = "liquors"
-  } else if (np %in% c("six-pack of beer")) {
-    np_pl = "beers"
-  } else if (np %in% c( "bottle of wine")) {
-    np_pl = "bottles of wine"
-  } else if (np %in% c( "bush" )) {
-    np_pl = "bushes"
-  } else if(np %in% c( "child")) {
-    np_pl = "children"
-  } else if (np %in% c("baby")) {
-    np_pl = "babies"
-  } else {
-    np_pl = np
-  }
-  return (np_pl)
-}
-
-df.trials.w.super <- df.trials.w.super %>% 
-  rowwise() %>% 
-  mutate(np_pl = insert_plural_np(np))
-
-```
 
