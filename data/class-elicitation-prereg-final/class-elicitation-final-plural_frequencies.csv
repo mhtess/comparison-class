@@ -1,288 +1,287 @@
 ,NPs,Frequencies
-0,birds,19695831
-1,liquors,518686
-2,coats,4107452
-3,pansies,176007
-4,rap concerts,1191
-5,trees,27379426
-6,horns,2427037
-7,dachshunds,116109
-8,gliders,653558
-9,streets,15936688
-10,coffee,42090859
-11,smoothies,457222
-12,sitcoms,479686
-13,bonsai trees,154424
-14,parrots,1049654
-15,walkers,1526422
-16,sloths,57052
-17,times of day,99907
-18,golfers,1664649
-19,front gates,16932
-20,wrestlers,772270
-21,meat,17654214
-22,adults,32847475
-23,furniture,67400151
-24,cats,15738388
-25,korean restaurants,37242
-26,thunderstorms,1410569
-27,side roads,35379
-28,pantries,105460
-29,skyscrapers,550406
-30,flowers,58380229
-31,villas,9561875
-32,acoustic guitars,549025
-33,novels,7525142
-34,teenagers,4979216
-35,rentals,61539717
-36,rowboats,42015
-37,stories,115510308
-38,pets,26155002
-39,soups,2141445
-40,couches,478444
-41,saunas,934002
-42,dahlias,135476
-43,statues,2837498
-44,peaches,1484097
-45,documentaries,1741319
-46,tulips,1149010
-47,rivers,11240148
-48,finches,280095
-49,readings,8678675
-50,wood floors,352083
-51,boots,18970389
-52,sneakers,1435693
-53,electronic devices,631257
-54,rabbits,2987957
-55,plastic bracelets,3294
-56,spaniels,195570
-57,plants,35939932
-58,trucks,13809070
-59,sharks,3302971
+0,elephants,2082778
+1,fruit,22768964
+2,chocolates,3141854
+3,watercolors,567707
+4,roads,15093824
+5,roses,13588663
+6,cats,15738388
+7,soups,2141445
+8,triathlon races,1415
+9,side roads,35379
+10,gliders,653558
+11,juices,1709952
+12,wool,7657323
+13,houses,29896478
+14,jollies,40797
+15,tents,3850460
+16,guitars,7278585
+17,suits,7986526
+18,speedboats,40032
+19,bedboards,2487
+20,woodpeckers,219083
+21,winter days,80466
+22,rowboats,42015
+23,days,305158140
+24,mansions,797050
+25,basketball players,174833
+26,chinese restaurants,373328
+27,pets,26155002
+28,saunas,934002
+29,fish,52768568
+30,tuna,2844261
+31,pencils,2459655
+32,salads,2387032
+33,bonsai trees,154424
+34,tractors,2141187
+35,pork,5973716
+36,oil paints,76465
+37,chicken,20657359
+38,garlic,5884664
+39,monkeys,4144229
+40,cucumbers,463636
+41,cyclists,1228897
+42,buildings,27623285
+43,bracelets,6784458
+44,tomatoes,5924980
+45,wall paints,3469
+46,dogs,28409576
+47,refrigerators,2078580
+48,times of day,99907
+49,sneakers,1435693
+50,freezers,2253962
+51,novels,7525142
+52,oranges,1523633
+53,statues,2837498
+54,blue paints,543
+55,trash cans,205208
+56,chihuahuas,164502
+57,readings,8678675
+58,mangos,100913
+59,concerts,8711738
 60,movies,182764607
-61,bananas,1891241
-62,creeks,862386
-63,mushrooms,3134851
-64,monkeys,4144229
-65,elephants,2082778
-66,boats,15603129
-67,feathers,2297128
-68,redwood trees,27197
-69,rain showers,650392
-70,bronze statues,53960
-71,roosters,328337
-72,metal bracelets,5274
-73,planes,6448506
-74,wine bottles,127578
-75,shoes,80761516
-76,tigers,7002617
-77,rallies,1276149
-78,strip malls,60063
-79,basketball players,174833
-80,moths,804700
-81,winter days,80466
-82,berries,1879643
-83,food,180152837
-84,streams,8883635
-85,sunflowers,653916
-86,tractors,2141187
-87,cheesecakes,267986
-88,mockingbirds,39837
-89,penguins,2550463
-90,sailboats,498658
-91,wall paints,3469
-92,alcoholic drinks,377118
-93,gold bracelets,166222
-94,relay races,15545
-95,bass guitars,445282
-96,podcast episodes,16668
-97,printers,26823567
-98,electric cars,171936
-99,condos,5467369
-100,buildings,27623285
-101,bedboards,2487
-102,pitbulls,100803
-103,cities,59810742
-104,plastic statues,707
-105,spices,2836609
-106,cookware,3617598
-107,raspberries,543159
-108,places,51698261
-109,children,206543771
-110,muffins,1333924
-111,mansions,797050
-112,chocolate cakes,32745
-113,cyclists,1228897
-114,cucumbers,463636
-115,blue paints,543
-116,alpine trees,1447
-117,beers,2634057
-118,plastic,35423760
-119,athletes,7268360
-120,seasons,12035578
-121,rock concerts,67033
-122,black paints,820
-123,juices,1709952
-124,cell phones,24281813
-125,elderly people,534085
-126,blankets,4386506
-127,cars,109722086
-128,speedboats,40032
-129,steaks,1646745
-130,downtown streets,28751
-131,runners,3917217
-132,bushes,1558141
-133,waterways,1843915
-134,sticks,6395033
-135,paints,3617496
-136,fruit,22768964
-137,materials,83903351
-138,ovens,3443150
-139,trash cans,205208
-140,limousines,15896227
-141,villages,6997181
-142,suits,7986526
-143,mangos,100913
-144,japanese restaurants,183928
-145,animals,58179731
-146,towns,13337599
-147,guitars,7278585
-148,choirs,680332
-149,chicken,20657359
-150,motorcycles,5752821
-151,crows,1295877
-152,objects,33848628
-153,woodpeckers,219083
-154,country lanes,51288
-155,ice cream,6277647
-156,chairs,15833441
-157,fish,52768568
-158,concerts,8711738
-159,chinese restaurants,373328
-160,pork,5973716
-161,fall days,12564
-162,alleys,546265
-163,poems,12665322
-164,watercolors,567707
-165,pens,5794539
-166,plums,496751
-167,doorways,374115
-168,snakes,2521893
-169,summer days,229054
-170,powerboats,196244
-171,wool,7657323
-172,chihuahuas,164502
-173,shopping malls,634311
-174,conference centers,227905
-175,dogs,28409576
-176,hurricanes,3785008
-177,floors,7863848
-178,libraries,28105939
-179,hamsters,633540
-180,songs,49286341
-181,tuna,2844261
-182,salads,2387032
-183,entertainment,111395809
-184,boulevards,278244
-185,bikes,10741844
-186,laptops,22190037
-187,oil paints,76465
-188,roads,15093824
-189,aircrafts,237522
-190,spiders,2385796
-191,ukeleles,11454
-192,kumquats,23947
-193,apartments,38568857
-194,operas,812910
-195,vegetables,9067552
-196,panthers,3695915
-197,garlic,5884664
-198,salts,2145134
-199,tents,3850460
-200,ice rinks,65504
-201,audios,313133
-202,drinks,11137329
-203,strawberries,1437661
-204,tile floors,123821
-205,jockeys,875781
-206,ants,2101115
-207,roses,13588663
-208,desserts,3720781
-209,chalks,134762
-210,instruments,48493077
-211,paint,21928120
-212,bear dens,2361
-213,nights,21265731
-214,giraffes,260416
-215,chocolate fondues,1783
-216,storms,3614108
-217,chocolates,3141854
-218,silks,418180
-219,harps,302445
-220,crockpots,11879
-221,days,305158140
-222,jollies,40797
-223,poodles,255182
-224,patio doors,222702
-225,white paints,1447
-226,smartcars,1843
-227,joggers,260504
-228,churches,13467005
-229,back doors,70114
-230,sandals,5022171
-231,venues,9389442
-232,owls,2208765
-233,watermelons,190836
-234,clothes,27039649
-235,saffron,939951
-236,dens,321496
-237,oranges,1523633
-238,cheetahs,217628
-239,refrigerators,2078580
-240,seagulls,329923
-241,bracelets,6784458
-242,babies,13073168
-243,writing utensils,12576
-244,mice,11969407
-245,daisies,807181
-246,triathlon races,1415
-247,jaguars,1285032
-248,great danes,115558
-249,boysenberries,12484
-250,walls,14838230
-251,herrings,137142
-252,melons,1015937
-253,insects,5119814
-254,appliances,23847029
-255,locations,58471896
-256,candies,1298890
-257,fruit cakes,17124
-258,houses,29896478
-259,dusks,3542
-260,turtles,2572647
-261,pencils,2459655
-262,restaurants,58580418
-263,fox dens,1610
-264,milkshakes,99722
-265,rocks,12440121
-266,sedans,665446
-267,vehicles,37254742
-268,parties,52799939
-269,helicopters,2682275
-270,highways,5745573
-271,carpet floors,38431
-272,pillows,3970202
-273,tomatoes,5924980
-274,toasters,882911
-275,apartment buildings,312252
-276,people,480323270
-277,cottons,214521
-278,bassett hounds,4658
-279,kids,96621142
-280,marshmallows,301577
-281,cakes,5565768
-282,wood,51133768
-283,freezers,2253962
-284,frying pans,71800
-285,shirts,34765824
-286,platinum statue,503
+61,smartcars,1843
+62,mushrooms,3134851
+63,marshmallows,301577
+64,vehicles,37254742
+65,plums,496751
+66,documentaries,1741319
+67,birds,19695831
+68,rallies,1276149
+69,panthers,3695915
+70,front gates,16932
+71,metal bracelets,5274
+72,objects,33848628
+73,sedans,665446
+74,runners,3917217
+75,gold bracelets,166222
+76,pantries,105460
+77,liquors,518686
+78,tigers,7002617
+79,trees,27379426
+80,horns,2427037
+81,planes,6448506
+82,tulips,1149010
+83,toasters,882911
+84,daisies,807181
+85,poodles,255182
+86,berries,1879643
+87,couches,478444
+88,cheesecakes,267986
+89,moths,804700
+90,rentals,61539717
+91,strip malls,60063
+92,melons,1015937
+93,roosters,328337
+94,joggers,260504
+95,walkers,1526422
+96,boulevards,278244
+97,restaurants,58580418
+98,trucks,13809070
+99,beers,2634057
+100,country lanes,51288
+101,plastic statues,707
+102,great danes,115558
+103,bananas,1891241
+104,candies,1298890
+105,conference centers,227905
+106,chocolate fondues,1783
+107,children,206543771
+108,thunderstorms,1410569
+109,milkshakes,99722
+110,condos,5467369
+111,podcast episodes,16668
+112,raspberries,543159
+113,relay races,15545
+114,electric cars,171936
+115,dachshunds,116109
+116,storms,3614108
+117,crockpots,11879
+118,food,180152837
+119,smoothies,457222
+120,coffee,42090859
+121,cars,109722086
+122,dahlias,135476
+123,babies,13073168
+124,pillows,3970202
+125,cakes,5565768
+126,drinks,11137329
+127,waterways,1843915
+128,meat,17654214
+129,teenagers,4979216
+130,wine bottles,127578
+131,frying pans,71800
+132,fruit cakes,17124
+133,white paints,1447
+134,shoes,80761516
+135,bikes,10741844
+136,boysenberries,12484
+137,animals,58179731
+138,operas,812910
+139,clothes,27039649
+140,sharks,3302971
+141,feathers,2297128
+142,back doors,70114
+143,downtown streets,28751
+144,churches,13467005
+145,streets,15936688
+146,seagulls,329923
+147,black paints,820
+148,kids,96621142
+149,sandals,5022171
+150,pens,5794539
+151,ice rinks,65504
+152,rabbits,2987957
+153,ovens,3443150
+154,fox dens,1610
+155,snakes,2521893
+156,patio doors,222702
+157,limousines,15896227
+158,wood,51133768
+159,wood floors,352083
+160,adults,32847475
+161,sailboats,498658
+162,chocolate cakes,32745
+163,chalks,134762
+164,hamsters,633540
+165,floors,7863848
+166,rap concerts,1191
+167,boats,15603129
+168,vegetables,9067552
+169,cheetahs,217628
+170,rivers,11240148
+171,muffins,1333924
+172,cottons,214521
+173,seasons,12035578
+174,plastic bracelets,3294
+175,villages,6997181
+176,mice,11969407
+177,flowers,58380229
+178,crows,1295877
+179,bronze statues,53960
+180,motorcycles,5752821
+181,choirs,680332
+182,boots,18970389
+183,bassett hounds,4658
+184,shirts,34765824
+185,poems,12665322
+186,athletes,7268360
+187,locations,58471896
+188,insects,5119814
+189,spices,2836609
+190,sitcoms,479686
+191,shopping malls,634311
+192,apartment buildings,312252
+193,jockeys,875781
+194,cell phones,24281813
+195,mockingbirds,39837
+196,audios,313133
+197,turtles,2572647
+198,carpet floors,38431
+199,herrings,137142
+200,spiders,2385796
+201,paints,3617496
+202,japanese restaurants,183928
+203,alpine trees,1447
+204,printers,26823567
+205,instruments,48493077
+206,silks,418180
+207,spaniels,195570
+208,places,51698261
+209,helicopters,2682275
+210,bear dens,2361
+211,watermelons,190836
+212,plants,35939932
+213,wrestlers,772270
+214,blankets,4386506
+215,highways,5745573
+216,penguins,2550463
+217,harps,302445
+218,pansies,176007
+219,ukeleles,11454
+220,villas,9561875
+221,fall days,12564
+222,venues,9389442
+223,people,480323270
+224,rocks,12440121
+225,bushes,1558141
+226,libraries,28105939
+227,saffron,939951
+228,dusks,3542
+229,plastic,35423760
+230,laptops,22190037
+231,alcoholic drinks,377118
+232,bass guitars,445282
+233,rock concerts,67033
+234,ants,2101115
+235,cookware,3617598
+236,skyscrapers,550406
+237,powerboats,196244
+238,redwood trees,27197
+239,doorways,374115
+240,entertainment,111395809
+241,sticks,6395033
+242,peaches,1484097
+243,walls,14838230
+244,finches,280095
+245,stories,115510308
+246,ice cream,6277647
+247,salts,2145134
+248,nights,21265731
+249,sunflowers,653916
+250,coats,4107452
+251,elderly people,534085
+252,songs,49286341
+253,chairs,15833441
+254,summer days,229054
+255,kumquats,23947
+256,golfers,1664649
+257,hurricanes,3785008
+258,sloths,57052
+259,electronic devices,631257
+260,parties,52799939
+261,creeks,862386
+262,furniture,67400151
+263,pitbulls,100803
+264,parrots,1049654
+265,platinum statue,503
+266,alleys,546265
+267,aircrafts,237522
+268,paint,21928120
+269,jaguars,1285032
+270,dens,321496
+271,streams,8883635
+272,tile floors,123821
+273,materials,83903351
+274,appliances,23847029
+275,towns,13337599
+276,strawberries,1437661
+277,owls,2208765
+278,acoustic guitars,549025
+279,apartments,38568857
+280,scripts,17337654
+281,rain showers,650392
+282,giraffes,260416
+283,steaks,1646745
+284,cities,59810742
+285,korean restaurants,37242
