@@ -1559,7 +1559,7 @@ insert_plural_np = function(np, superordinate) {
   } else if (np %in% c("baby")) {
     np_pl = "babies"
   } else if (np %in% c("platinum")) {
-    np_pl = "platinum statues"
+    np_pl = "platinum statue"
   } else if( np %in% c("bronze")) {
     np_pl = "bronze statues"   
   } else if ((np %in% c("plastic")) & (superordinate == "bracelets")) {
