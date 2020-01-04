@@ -1,4 +1,4 @@
-// adjective endorsement stimuli built from n = 50 NP free production experiment,
+// adjective endorsement stimuli built from n = 50 NP free yourduction experiment,
 // trial viee context created for comparison class expt and adjusted accrodingly
 
 
@@ -7,9 +7,9 @@ const trials = function(domain) {
   for( var x = 0; x < domain.length; x++) {
     trial_list[x] = x
   }
-// take 6 trials of each domain
+// take 5 trials of each domain
 // ------ ADJUST FOR MORE ITEMS ---------
-  var num_trials = 2
+  var num_trials = 5
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
@@ -45,7 +45,7 @@ const create_view = function(domain) {
   const sequence = trials(domain)
   var i;
   const domain_views = []
-  const np_seq = _.shuffle(["positive", "negative", "neutral"])
+  const np_seq = _.shuffle(["high", "low", "medium", "high", "low", "medium"])
   const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
 
   for (i=0; i < sequence.length ; i++) {
@@ -79,7 +79,7 @@ const create_view = function(domain) {
       condition_2: fc_order[1],
       item_cond: current_item,
       item: domain[x][current_item],
-      stim_id: domain[x].worker_id,
+      stim_id: domain[x].stim_id,
       degree: domain[x].degree,
       adj_positive: domain[x].adj_positive,
       adj_negative: domain[x].adj_negative,
@@ -108,8 +108,8 @@ const items = {
           high: "seagull",
           medium: "parrot",
           low: "crow",
-          pronoun: "It",
-          context: "PERSON is going for a walk and notices the color of a PHRASE.",
+          pronoun: "it",
+          context: "You are going for a walk and notice the color of a PHRASE.",
 
       },
       {
@@ -122,8 +122,8 @@ const items = {
           high: "white paint",
           medium: "blue paint",
           low: "black paint",
-          pronoun: "It",
-          context: "PERSON bought a can of PHRASE and is testing it for the first time."
+          pronoun: "it",
+          context: "You bought a can of PHRASE and are testing it for the first time."
       },
       {
           stim_id: "3",
@@ -135,25 +135,10 @@ const items = {
           high: "cheesecake",
           medium: "fruit cake",
           low: "chocolate cake",
-          pronoun: "It",
-          context: "PERSON is at a bakery and looks at the color of a PHRASE."
+          pronoun: "it",
+          context: "You are at a bakery and look at the color of a PHRASE."
       },
-      // {
-      //     stim_id: "4",
-      //     author_id: "6",
-      //     degree: "darkness",
-      //     adj_positive: "light",
-      //     adj_negative: "dark",
-      //     superordinate: "fruit",
-      //     high: "orange",
-      //     medium: "apple",
-      //     low: "plum",
-      //     pre_high: "an",
-      //     pre_low: "a",
-      //     pre_medium: "an",
-      //     pronoun: "It",
-      //     context: "PERSON is at a grocery store and looks at the color of PRE PHRASE."
-      // },
+
       {
           stim_id: "4",
           author_id: "13",
@@ -164,8 +149,8 @@ const items = {
           high: "day",
           medium: "dusk",
           low: "night",
-          pronoun: "It",
-          context: "PERSON steps outside during the PHRASE.",
+          pronoun: "it",
+          context: "You step outside during the PHRASE.",
           environment_mod: "out here"
       },
       {
@@ -174,27 +159,14 @@ const items = {
           degree: "darkness",
           adj_positive: "light",
           adj_negative: "dark",
-          superordinate: "writing utensils",
+          superordinate: "scripts",
           high: "piece of chalk",
           medium: "pen",
           low: "pencil",
-          pronoun: "It",
-          context: "PERSON is writing with a PHRASE and notices the color of the script."
+          pronoun: "it",
+          context: "You are writing with a PHRASE and notice the color of the script."
       },
-      // {
-      //     stim_id: "7",
-      //     author_id: "2",
-      //     degree: "darkness",
-      //     adj_positive: "light",
-      //     adj_negative: "dark",
-      //     superordinate: "roads",
-      //     high: "highway",
-      //     medium: "main road",
-      //     low: "back road",
-      //     pronoun: "It",
-      //     context: "PERSON is driving in the evening on a PHRASE.",
-      //     environment_mod: "out here"
-      // },
+
       {
           stim_id: "6",
           author_id: "9",
@@ -205,8 +177,8 @@ const items = {
           high: "daisy",
           medium: "rose",
           low: "dahlia",
-          pronoun: "It",
-          context: "PERSON is creating a flower bouquet and picks out a PHRASE."
+          pronoun: "it",
+          context: "You are creating a flower bouquet and pick out a PHRASE."
       },
       {
           stim_id: "7",
@@ -218,8 +190,8 @@ const items = {
           high: "poodle",
           medium: "spaniel",
           low: "pitbull",
-          pronoun: "It",
-          context: "PERSON takes a walk and notices the coat of a PHRASE."
+          pronoun: "it",
+          context: "You take a walk and notice the coat of a PHRASE."
       },
       {
           stim_id: "8",
@@ -231,57 +203,16 @@ const items = {
           high: "jaguar",
           medium: "tiger",
           low: "panther",
-          pronoun: "It",
-          context: "PERSON is at a zoo and notices the fur color of a PHRASE."
+          pronoun: "it",
+          context: "You are at a zoo and notice the fur color of a PHRASE."
       },
 
   ],
 
-// --------- HARDNESS : HARD -SOFT (10) -----------
+// --------- HARDNESS : HARD -SOFT (6) -----------
 
     hardness: [
-    //   {
-    //     worker_id: "11",
-    //     stim_id: "3",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "food",
-    //     positive: "cucumber",
-    //     neutral: "tomato",
-    //     negative: "mushroom",
-    //     pronoun: "it",
-    //     context: "You are at a grocery store and pick up a PHRASE."
-    // },
-    // {
-    //     worker_id: "12",
-    //     stim_id: "6",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "fruit",
-    //     positive: "watermelon",
-    //     neutral: "plum",
-    //     negative: "grape",
-    //     pronoun: "it",
-    //     context: "You are at a farmer's market and pick up a PHRASE."
-    // },
-    // {
-    //     worker_id: "13",
-    //     stim_id: "10",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "foods",
-    //     positive: "apple",
-    //     neutral: "bread",
-    //     negative: "ice cream",
-    //     pre_positive: "an",
-    //     pre_neutral: "",
-    //     pre_negative: "",
-    //     pronoun: "it",
-    //     context: "You take a bite of PRE PHRASE."
-    // },
+
     {
         stim_id: "9",
         author_id: "3",
@@ -292,38 +223,10 @@ const items = {
         high: "cucumber",
         medium: "tomato",
         low: "mushroom",
-        pronoun: "It",
-        context: "PERSON is at a vegetable market and picks up a PHRASE."
+        pronoun: "it",
+        context: "You are at a vegetable market and pick up a PHRASE."
     },
-    // {
-    //     stim_id: "12",
-    //     author_id: "6",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "fruit",
-    //     high: "watermelon",
-    //     medium: "plum",
-    //     low: "grape",
-    //     pronoun: "It",
-    //     context: "PERSON is at a farmer's market and picks up a PHRASE."
-    // },
-    // {
-    //     stim_id: "13",
-    //     author_id: "10",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "food",
-    //     high: "apple",
-    //     medium: "bread",
-    //     low: "ice cream",
-    //     pre_high: "an",
-    //     pre_medium: "",
-    //     pre_low: "",
-    //     pronoun: "It",
-    //     context: "PERSON takes a bite of PRE PHRASE."
-    // },
+
     {
         stim_id: "10",
         author_id: "5",
@@ -334,8 +237,8 @@ const items = {
         high: "jolly rancher",
         medium: "piece of chocolate",
         low: "marshmallow",
-        pronoun: "It",
-        context: "PERSON is eating a PHRASE."
+        pronoun: "it",
+        context: "You are eating a PHRASE."
     },
     {
         stim_id: "11",
@@ -347,22 +250,10 @@ const items = {
         high: "tile",
         medium: "wood",
         low: "carpet",
-        pronoun: "It",
-        context: "PERSON steps onto the PHRASE floor of a room."
+        pronoun: "it",
+        context: "You step onto the PHRASE floor of a room."
     },
-    // {
-    //     stim_id: "16",
-    //     author_id: "7",
-    //     degree: "hardness",
-    //     adj_positive: "hard",
-    //     adj_negative: "soft",
-    //     superordinate: "furniture",
-    //     high: "chair",
-    //     medium: "bed",
-    //     low: "sofa",
-    //     pronoun: "It",
-    //     context: "PERSON sits down on a PHRASE."
-    // },
+
     {
         stim_id: "12",
         author_id: "3",
@@ -373,8 +264,8 @@ const items = {
         high: "melon",
         medium: "mango",
         low: "banana",
-        pronoun: "It",
-        context: "PERSON picks up a PHRASE."
+        pronoun: "it",
+        context: "You pick up a PHRASE."
     },
     {
         stim_id: "13",
@@ -386,8 +277,8 @@ const items = {
         high: "wood",
         medium: "plastic",
         low: "cotton",
-        pronoun: "It",
-        context: "PERSON is at a hardware store and picks up a piece of PHRASE."
+        pronoun: "it",
+        context: "You are at a hardware store and pick up a piece of PHRASE."
     },
     {
         stim_id: "14",
@@ -399,12 +290,12 @@ const items = {
         high: "bedboard",
         medium: "blanket",
         low: "pillow",
-        pronoun: "It",
-        context: "PERSON is in PRO bedroom and sits on a PHRASE."
+        pronoun: "it",
+        context: "You are in your bedroom and sit on a PHRASE."
     }
   ],
 
-// -------- HEIGHT : TALL - SHORT (9) -----------
+// -------- HEIGHT : TALL - SHORT (6) -----------
 
 
     height: [
@@ -418,22 +309,10 @@ const items = {
           high: "giraffe",
           medium: "monkey",
           low: "penguin",
-          pronoun: "It",
-          context: "PERSON is at a zoo and looks at a PHRASE."
+          pronoun: "it",
+          context: "You are at a zoo and look at a PHRASE."
       },
-      // {
-      //     stim_id: "22",
-      //     author_id: "2",
-      //     degree: "height",
-      //     adj_positive: "tall",
-      //     adj_negative: "short",
-      //     superordinate: "plants",
-      //     high: "tree",
-      //     medium: "bush",
-      //     low: "flower",
-      //     pronoun: "It",
-      //     context: "PERSON takes a walk in a garden and sees a PHRASE."
-      // },
+
       {
           stim_id: "16",
           author_id: "7",
@@ -447,8 +326,8 @@ const items = {
           pre_high: "a",
           pre_low: "a",
           pre_medium:"an",
-          pronoun: "It",
-          context: "PERSON is looking at PRE PHRASE."
+          pronoun: "it",
+          context: "You are looking at PRE PHRASE."
       },
       { // MH: make sure this works
           stim_id: "17",
@@ -463,8 +342,8 @@ const items = {
           pre_high: "an",
           pre_medium: "a",
           pre_low:"a",
-          pronoun: "They",
-          context: "PERSON sees PRE PHRASE."
+          pronoun: "they",
+          context: "You see PRE PHRASE."
       },
       {
           stim_id: "18",
@@ -476,22 +355,10 @@ const items = {
           high: "sunflower",
           medium: "tulip",
           low: "pansy",
-          pronoun: "It",
-          context: "PERSON is looking at a PHRASE."
+          pronoun: "it",
+          context: "You are looking at a PHRASE."
       },
-      // {
-      //     stim_id: "26",
-      //     author_id: "2",
-      //     degree: "height",
-      //     adj_positive: "tall",
-      //     adj_negative: "short",
-      //     superordinate: "plants",
-      //     high: "pine tree",
-      //     medium: "vine",
-      //     low: "shrub",
-      //     pronoun: "It",
-      //     context: "PERSON is in a park and sees a PHRASE."
-      // },
+
       {
           stim_id: "19",
           author_id: "8",
@@ -502,8 +369,8 @@ const items = {
           high: "basketball player",
           medium: "golfer",
           low: "jockey",
-          pronoun: "They",
-          context: "PERSON sees a PHRASE."
+          pronoun: "they",
+          context: "You see a PHRASE."
       },
       {
         stim_id: "20",
@@ -518,41 +385,16 @@ const items = {
         superordinate: "trees",
         adj_positive: "tall",
         adj_negative: "short",
-        pronoun: "It",
-        context: "PERSON is walking in a botanical garden and sees PRE PHRASE."
+        pronoun: "it",
+        context: "You are walking in a botanical garden and see PRE PHRASE."
       }
   ],
 
 
-// ----------- DURATION / LENGTH : LONG - SHORT (10)----------
+// ----------- DURATION / LENGTH : LONG - SHORT (8)----------
 
     length: [
-    //   {
-    //     worker_id: "30",
-    //     stim_id: "3",
-    //     degree: "length_duration",
-    //     adj_positive: "long",
-    //     adj_negative: "short",
-    //     superordinate: "pants",
-    //     positive: "slacks",
-    //     neutral: "capris",
-    //     negative: "shorts",
-    //     pronoun: "they",
-    //     context: "You are shopping and look at a pair of PHRASE."
-    // },
-    // {
-    //     worker_id: "31",
-    //     stim_id: "3",
-    //     degree: "length_duration",
-    //     adj_positive: "long",
-    //     adj_negative: "short",
-    //     superordinate: "vehicles",
-    //     positive: "train",
-    //     neutral: "bus",
-    //     negative: "car",
-    //     pronoun: "it",
-    //     context: "You live in a city and see a PHRASE pass by."
-    // },
+
     {
         stim_id: "21",
         author_id: "1",
@@ -563,8 +405,8 @@ const items = {
         high: "dachshund",
         medium: "bassett hound",
         low: "chihuahua",
-        pronoun: "It",
-        context: "PERSON is at a pet store and notices the length of a PHRASE."
+        pronoun: "it",
+        context: "You are at a pet store and notice the length of a PHRASE."
     },
     {
         stim_id: "22",
@@ -576,8 +418,8 @@ const items = {
         high: "snake",
         medium: "hamster",
         low: "mouse",
-        pronoun: "It",
-        context: "PERSON is at a friend's house and notices the size of PRO pet PHRASE."
+        pronoun: "it",
+        context: "You are at a friend's house and notice the size of their pet PHRASE."
     },
 
     {
@@ -590,8 +432,8 @@ const items = {
         high: "novel",
         medium: "story",
         low: "poem",
-        pronoun: "It",
-        context: "PERSON thinks about reading PRO favorite PHRASE."
+        pronoun: "it",
+        context: "You think about reading your favorite PHRASE."
     },
     {
         stim_id: "24",
@@ -603,8 +445,8 @@ const items = {
         high: "limousine",
         medium: "pick-up truck",
         low: "smartcar",
-        pronoun:"It",
-        context: "PERSON sees a friend driving a PHRASE."
+        pronoun:"it",
+        context: "You see a friend driving a PHRASE."
     },
     {
         stim_id: "25",
@@ -616,8 +458,8 @@ const items = {
         high: "movie",
         medium: "documentary",
         low: "sitcom",
-        pronoun: "It",
-        context: "PERSON thinks about watching PRO favorite PHRASE."
+        pronoun: "it",
+        context: "You think about watching your favorite PHRASE."
     },
     {
         stim_id: "26",
@@ -632,8 +474,8 @@ const items = {
         pre_medium: "a",
         pre_low: "an",
         pre_high: "a",
-        pronoun: "It",
-        context: "PERSON is looking at PRE PHRASE on Google Maps."
+        pronoun: "it",
+        context: "You are looking at PRE PHRASE on Google Maps."
     },
     {
         stim_id: "27",
@@ -645,8 +487,8 @@ const items = {
         high: "triathlon race",
         medium: "relay race",
         low: "sprinting race",
-        pronoun: "It",
-        context: "PERSON looks up information about an upcoming PHRASE."
+        pronoun: "it",
+        context: "You look up information about an upcoming PHRASE."
     },
     {
       stim_id: "28",
@@ -661,13 +503,13 @@ const items = {
       pre_medium: "a",
       adj_positive: "long",
       adj_negative: "short",
-      pronoun: "It",
-      context: "PERSON is considering listening to PRO favorite PHRASE."
+      pronoun: "it",
+      context: "You are considering listening to your favorite PHRASE."
     }
   ],
 
 
-// ------------ LOUDNESS : LOUD - / NOISY - QUIET (18) ----------
+// ------------ LOUDNESS : LOUD - / NOISY - QUIET (12) ----------
 
     loudness: [
       {
@@ -680,8 +522,8 @@ const items = {
           high: "rock concert",
           medium: "rap concert",
           low: "choral concert",
-          pronoun: "It",
-          context: "PERSON is listening to a PHRASE."
+          pronoun: "it",
+          context: "You are listening to a PHRASE."
       },
       {
           stim_id: "30",
@@ -689,12 +531,12 @@ const items = {
           degree: "loudness_n",
           adj_positive: "noisy",
           adj_negative: "quiet",
-          superordinate: "venue",
+          superordinate: "venues",
           high: "party",
           medium: "conference center",
           low: "church",
-          pronoun: "It",
-          context: "PERSON meets a friend at a PHRASE.",
+          pronoun: "it",
+          context: "You meet a friend at a PHRASE.",
           environment_mod: "in here"
       },
       {
@@ -707,8 +549,8 @@ const items = {
           high: "parrot",
           medium: "cat",
           low: "fish",
-          pronoun: "It",
-          context: "PERSON is at a friend's place and hears PRO pet PHRASE."
+          pronoun: "it",
+          context: "You are at a friend's place and hear their pet PHRASE."
       },
       {
           stim_id: "32",
@@ -720,8 +562,8 @@ const items = {
           high: "concert",
           medium: "restaurant",
           low: "library",
-          pronoun: "It",
-          context: "PERSON is spending PRO Saturday night at a PHRASE.",
+          pronoun: "it",
+          context: "You are spending your Saturday night at a PHRASE.",
           environment_mod: "in here"
       },
       {
@@ -734,8 +576,8 @@ const items = {
           high: "rooster",
           medium: "crow",
           low: "finch",
-          pronoun: "It",
-          context: "PERSON is taking a walk in a park and hears the cry of a PHRASE."
+          pronoun: "it",
+          context: "You are taking a walk in a park and hear the cry of a PHRASE."
       },
       {
           stim_id: "34",
@@ -747,8 +589,8 @@ const items = {
           high: "horn",
           medium: "guitar",
           low: "harp",
-          pronoun: "It",
-          context: "PERSON is listening to a friend playing the PHRASE."
+          pronoun: "it",
+          context: "You are listening to a friend playing the PHRASE."
       },
       {
           stim_id: "35",
@@ -763,8 +605,8 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "an",
-          pronoun: "They",
-          context: "PERSON is in a room with PRE PHRASE."
+          pronoun: "they",
+          context: "You are in a room with PRE PHRASE."
       },
       {
           stim_id: "36",
@@ -776,53 +618,11 @@ const items = {
           high: "city",
           medium: "town",
           low: "village",
-          pronoun: "It",
-          context: "PERSON is planning to move and reads about a nearby PHRASE.",
+          pronoun: "it",
+          context: "You are planning to move and read about a nearby PHRASE.",
           environment_mod: "there"
       },
-      // {
-      //     stim_id: "50",
-      //     author_id: "13",
-      //     degree: "loudness",
-      //     adj_positive: "noisy",
-      //     adj_negative: "quiet",
-      //     superordinate: "rooms",
-      //     high: "auditorium",
-      //     medium: "classroom",
-      //     low: "study hall",
-      //     pronoun: "It",
-      //     context: "PERSON walks into a school PHRASE.",
-      //     environment_mod: "in here"
-      // },
-      // {
-      //     stim_id: "51",
-      //     author_id: "7",
-      //     degree: "loudness",
-      //     adj_positive: "loud",
-      //     adj_negative: "quiet",
-      //     superordinate: "animals",
-      //     high: "elephant",
-      //     medium: "flamingo",
-      //     low: "snake",
-      //     pre_medium: "a",
-      //     pre_low: "a",
-      //     pre_high: "an",
-      //     pronoun: "It",
-      //     context: "PERSON is at the zoo and walks by PRE PHRASE."
-      // },
-      // {
-      //     stim_id: "52",
-      //     author_id: "1",
-      //     degree: "loudness",
-      //     adj_positive: "loud",
-      //     adj_negative: "quiet",
-      //     superordinate: "instruments",
-      //     high: "drum",
-      //     medium: "violin",
-      //     low: "flute",
-      //     pronoun: "It",
-      //     context: "PERSON hears a friend play the PHRASE."
-      // },
+
       {
           stim_id: "37",
           author_id: "14",
@@ -836,36 +636,10 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "an",
-          pronoun: "It",
-          context: "PERSON is on the sidewalk and hears PRE PHRASE drive by."
+          pronoun: "it",
+          context: "You are on the sidewalk and hear PRE PHRASE drive by."
       },
-      // {
-      //     stim_id: "54",
-      //     author_id: "2",
-      //     degree: "loudness_n",
-      //     adj_positive: "loud",
-      //     adj_negative: "quiet",
-      //     superordinate: "appliances",
-      //     high: "vacuum cleaner",
-      //     medium: "fan",
-      //     low: "toaster",
-      //     pronoun: "It",
-      //     context: "PERSON is in PRO apartment and turns on a PHRASE."
-      // },
-      // {
-      //     stim_id: "55",
-      //     author_id: "11",
-      //     degree: "loudness_n",
-      //     adj_positive: "noisy",
-      //     adj_negative: "quiet",
-      //     superordinate: "rooms",
-      //     high: "gymnasium",
-      //     medium: "classroom",
-      //     low: "library",
-      //     pronoun: "It",
-      //     context: "PERSON is sitting in a school PHRASE.",
-      //     environment_mod: "in here"
-      // },
+
       {
           stim_id: "38",
           author_id: "5",
@@ -879,8 +653,8 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "an",
-          pronoun: "It",
-          context: "PERSON is in a forest and hears a PHRASE."
+          pronoun: "it",
+          context: "You are in a forest and hear a PHRASE."
       },
       {
           stim_id: "39",
@@ -892,8 +666,8 @@ const items = {
           high: "powerboat",
           medium: "sailboat",
           low: "rowboat",
-          pronoun: "It",
-          context: "PERSON is at a lake and hears the sound of a PHRASE."
+          pronoun: "it",
+          context: "You are at a lake and hear the sound of a PHRASE."
       },
       {
           stim_id: "40",
@@ -908,8 +682,8 @@ const items = {
           pre_high: "a",
           pre_medium: "an",
           pre_low: "an",
-          pronoun: "It",
-          context: "PERSON wants to play music and tries out PRE PHRASE."
+          pronoun: "it",
+          context: "You want to play music and try out PRE PHRASE."
       }
   ],
 
@@ -927,8 +701,8 @@ const items = {
           high: "platinum",
           medium: "bronze",
           low: "plastic",
-          pronoun: "It",
-          context: "PERSON is at a decoration shop and looks at a statue made of PHRASE."
+          pronoun: "it",
+          context: "You are at a decoration shop and look at a statue made of PHRASE."
       },
       {
           stim_id: "42",
@@ -943,8 +717,8 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "an",
-          pronoun: "It",
-          context: "PERSON is looking to rent a new place and checks out PRE PHRASE."
+          pronoun: "it",
+          context: "You are looking to rent a new place and checks out PRE PHRASE."
       },
       // {
       //     stim_id: "62",
@@ -956,8 +730,8 @@ const items = {
       //     high: "berries",
       //     medium: "nuts",
       //     low: "candies",
-      //     pronoun: "They",
-      //     context: "PERSON is shopping for a snack and checks out some PHRASE."
+      //     pronoun: "they",
+      //     context: "You are shopping for a snack and checks out some PHRASE."
       // },
       {
           stim_id: "43",
@@ -969,8 +743,8 @@ const items = {
           high: "boots",
           medium: "sneakers",
           low: "sandals",
-          pronoun: "They",
-          context: "PERSON is shopping for shoes and looks at a pair of PHRASE."
+          pronoun: "they",
+          context: "You are shopping for shoes and look at a pair of PHRASE."
       },
       {
           stim_id: "44",
@@ -982,8 +756,8 @@ const items = {
           high: "saffron",
           medium: "garlic",
           low: "salt",
-          pronoun: "It",
-          context: "PERSON is shopping for spices and looks at PHRASE."
+          pronoun: "it",
+          context: "You are shopping for spices and look at PHRASE."
       },
       {
           stim_id: "45",
@@ -995,8 +769,8 @@ const items = {
           high: "gold",
           medium: "metal",
           low: "plastic",
-          pronoun: "It",
-          context: "PERSON wants to buy a bracelet and looks at one made of PHRASE."
+          pronoun: "it",
+          context: "You want to buy a bracelet and look at one made of PHRASE."
       },
       {
           stim_id: "46",
@@ -1008,8 +782,8 @@ const items = {
           high: "suit",
           medium: "coat",
           low: "shirt",
-          pronoun: "It",
-          context: "PERSON is clothing shopping and looks at a PHRASE."
+          pronoun: "it",
+          context: "You are clothing shopping and look at a PHRASE."
       },
       {
           stim_id: "47",
@@ -1021,8 +795,8 @@ const items = {
           high: "boysenberries",
           medium: "raspberries",
           low: "strawberries",
-          pronoun: "They",
-          context: "PERSON is shopping for berries and looks at the price of PHRASE."
+          pronoun: "they",
+          context: "You are shopping for berries and look at the price of PHRASE."
       },
       {
           stim_id: "48",
@@ -1034,8 +808,8 @@ const items = {
           superordinate: "meat",
           adj_positive: "expensive",
           adj_negative: "cheap",
-          pronoun: "It",
-          context: "PERSON is at the butchershop and looks at a piece of PHRASE."
+          pronoun: "it",
+          context: "You are at the butchershop and look at a piece of PHRASE."
       },
       {
            stim_id: "49",
@@ -1047,8 +821,8 @@ const items = {
            superordinate: "alcoholic drinks",
            adj_positive: "expensive",
            adj_negative: "cheap",
-           pronoun: "It",
-           context: "PERSON is at a liquor store and wants to buy a PHRASE."
+           pronoun: "it",
+           context: "You are at a liquor store and want to buy a PHRASE."
        },
        {
             stim_id: "50",
@@ -1060,8 +834,8 @@ const items = {
             superordinate: "restaurants",
             adj_positive: "expensive",
             adj_negative: "cheap",
-            pronoun: "It",
-            context: "PERSON is considering different places for dinner and looks at the menu of a PHRASE."
+            pronoun: "it",
+            context: "You are considering different places for dinner and look at the menu of a PHRASE."
         }
 
    ],
@@ -1079,8 +853,8 @@ const items = {
           high: "tree",
           medium: "bush",
           low: "flower",
-          pronoun: "It",
-          context: "PERSON is at a gardening store and looks at a PHRASE."
+          pronoun: "it",
+          context: "You are at a gardening store and look at a PHRASE."
       },
       {
           stim_id: "52",
@@ -1095,8 +869,8 @@ const items = {
           pre_high: "an",
           pre_medium: "a",
           pre_low: "a",
-          pronoun: "It",
-          context: "PERSON is at the zoo and sees PRE PHRASE."
+          pronoun: "it",
+          context: "You are at the zoo and see PRE PHRASE."
       },
       {
           stim_id: "53",
@@ -1111,8 +885,8 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "an",
-          pronoun: "It",
-          context: "PERSON is looking in an insect terrarium and sees PRE PHRASE."
+          pronoun: "it",
+          context: "You are looking in an insect terrarium and see PRE PHRASE."
       },
       // {
       //     stim_id: "74",
@@ -1124,8 +898,8 @@ const items = {
       //     high: "skyscraper",
       //     medium: "townhouse",
       //     low: "doghouse",
-      //     pronoun: "It",
-      //     context: "PERSON is walking down the street and sees a PHRASE."
+      //     pronoun: "it",
+      //     context: "You are walking down the street and see a PHRASE."
       // },
       {
           stim_id: "54",
@@ -1137,8 +911,8 @@ const items = {
           high: "watermelon",
           medium: "peach",
           low: "kumquat",
-          pronoun: "It",
-          context: "PERSON is at a farmer's market and picks up a PHRASE."
+          pronoun: "it",
+          context: "You are at a farmer's market and pick up a PHRASE."
       },
       {
           stim_id: "55",
@@ -1150,8 +924,8 @@ const items = {
           high: "shark",
           medium: "tuna",
           low: "herring",
-          pronoun: "It",
-          context: "PERSON is at an aquarium and sees a PHRASE."
+          pronoun: "it",
+          context: "You are at an aquarium and see a PHRASE."
       },
       {
           stim_id: "56",
@@ -1163,8 +937,8 @@ const items = {
           high: "truck",
           medium: "sedan",
           low: "smartcar",
-          pronoun: "It",
-          context: "PERSON sees PRO friend's new PHRASE."
+          pronoun: "it",
+          context: "You see your friend's new PHRASE."
       },
       {
           stim_id: "57",
@@ -1179,8 +953,8 @@ const items = {
           pre_high: "a",
           pre_medium: "an",
           pre_low: "a",
-          pronoun: "It",
-          context: "PERSON is shopping at an appliances store and looks at PRE PHRASE. "
+          pronoun: "it",
+          context: "You are shopping at an appliances store and look at PRE PHRASE. "
       },
       {
           stim_id: "58",
@@ -1192,12 +966,12 @@ const items = {
           high: "great dane",
           medium: "poodle",
           low: "chihuahua",
-          pronoun: "It",
-          context: "PERSON is taking a walk and sees a PHRASE."
+          pronoun: "it",
+          context: "You are taking a walk and see a PHRASE."
       }
   ],
 
-// --------------- SPEED : QUICK / FAST - SLOW (1) -------------
+// --------------- SPEED : QUICK / FAST - SLOW (8) -------------
 
     speed: [
       {
@@ -1210,8 +984,8 @@ const items = {
           high: "runner",
           medium: "jogger",
           low: "walker",
-          pronoun: "They",
-          context: "PERSON is in the park and sees a PHRASE."
+          pronoun: "they",
+          context: "You are in the park and see a PHRASE."
       },
       {
           stim_id: "60",
@@ -1226,8 +1000,8 @@ const items = {
           pre_high: "a",
           pre_medium: "an",
           pre_low: "a",
-          pronoun: "It",
-          context: "PERSON is at the zoo and watches PRE PHRASE move."
+          pronoun: "it",
+          context: "You are at the zoo and watch PRE PHRASE move."
       },
       {
           stim_id: "61",
@@ -1239,11 +1013,11 @@ const items = {
           high: "instant pot",
           medium: "frying pan",
           low: "crockpot",
-          pronoun: "It",
+          pronoun: "it",
           pre_medium: "a",
           pre_high: "an",
           pre_low: "a",
-          context: "PERSON wants to cook dinner and considers using PRE PHRASE."
+          context: "You want to cook dinner and consider using PRE PHRASE."
       },
       {
           stim_id: "62",
@@ -1255,8 +1029,8 @@ const items = {
           high: "motorcycle",
           medium: "car",
           low: "truck",
-          pronoun: "It",
-          context: "PERSON sees a PHRASE on the highway."
+          pronoun: "it",
+          context: "You see a PHRASE on the highway."
       },
       {
           stim_id: "63",
@@ -1268,8 +1042,8 @@ const items = {
           high: "speedboat",
           medium: "sailboat",
           low: "rowboat",
-          pronoun: "It",
-          context: "PERSON is travelling on PRO friend's new PHRASE."
+          pronoun: "it",
+          context: "You are travelling on your friend's new PHRASE."
       },
       {
           stim_id: "64",
@@ -1281,48 +1055,10 @@ const items = {
           high: "rabbit",
           medium: "cat",
           low: "turtle",
-          pronoun: "It",
-          context: "PERSON is at a friend's house and sees their pet PHRASE come towards them."
+          pronoun: "it",
+          context: "You are at a friend's house and see their pet PHRASE come towards them."
       },
-      // {
-      //     stim_id: "88",
-      //     author_id: "4",
-      //     degree: "speed_f",
-      //     adj_positive: "fast",
-      //     adj_negative: "slow",
-      //     superordinate: "reptiles",
-      //     high: "snake",
-      //     medium: "lizard",
-      //     low: "turtle",
-      //     pronoun: "It",
-      //     context: "PERSON is at the zoo, watching a PHRASE."
-      // },
-      // {
-      //     stim_id: "89",
-      //     author_id: "12",
-      //     degree: "speed_f",
-      //     adj_positive: "fast",
-      //     adj_negative: "slow",
-      //     superordinate: "transportation",
-      //     high: "plane",
-      //     medium: "car",
-      //     low: "bike",
-      //     pronoun: "It",
-      //     context: "PERSON want to go on vacation and thinks about travelling by PHRASE."
-      // },
-      // {
-      //     stim_id: "90",
-      //     author_id: "13",
-      //     degree: "speed_f",
-      //     adj_positive: "fast",
-      //     adj_negative: "slow",
-      //     superordinate: "athletes",
-      //     high: "runner",
-      //     medium: "skier",
-      //     low: "weight lifter",
-      //     pronoun: "They",
-      //     context: "PERSON is watching a PHRASE jogging."
-      // },
+
       {
           stim_id: "65",
           author_id: "14",
@@ -1336,8 +1072,8 @@ const items = {
           pre_high: "an",
           pre_medium: "a",
           pre_low: "a",
-          pronoun: "They",
-          context: "PERSON is taking a walk with PRE PHRASE."
+          pronoun: "they",
+          context: "You are taking a walk with PRE PHRASE."
       },
       {
           stim_id: "66",
@@ -1349,8 +1085,8 @@ const items = {
           high: "plane",
           medium: "helicopter",
           low: "glider",
-          pronoun: "It",
-          context: "PERSON is at an airport and sees a PHRASE in the air."
+          pronoun: "it",
+          context: "You are at an airport and see a PHRASE in the air."
       }
   ],
 
@@ -1370,22 +1106,10 @@ const items = {
           pre_high: "an",
           pre_medium: "a",
           pre_low: "a",
-          pronoun: "They",
-          context: "PERSON watches PRE PHRASE lift up a box."
+          pronoun: "they",
+          context: "You watch PRE PHRASE lift up a box."
       },
-      // {
-      //     stim_id: "94",
-      //     author_id: "10",
-      //     degree: "strength",
-      //     adj_positive: "strong",
-      //     adj_negative: "weak",
-      //     superordinate: "animals",
-      //     high: "lion",
-      //     medium: "dog",
-      //     low: "mouse",
-      //     pronoun: "It",
-      //     context: "PERSON is at the zoo and looks at a PHRASE."
-      // },
+
       {
           stim_id: "68",
           author_id: "3",
@@ -1396,8 +1120,8 @@ const items = {
           high: "hurricane",
           medium: "thunderstorm",
           low: "rain shower",
-          pronoun: "It",
-          context: "PERSON is hearing about the PHRASE that is heading towards them."
+          pronoun: "it",
+          context: "You are hearing about the PHRASE that is heading towards you."
       },
       {
           stim_id: "69",
@@ -1409,22 +1133,10 @@ const items = {
           high: "wrestler",
           medium: "cyclist",
           low: "golfer",
-          pronoun: "They",
-          context: "PERSON is watching a PHRASE lift weights."
+          pronoun: "they",
+          context: "You are watching a PHRASE lift weights."
       },
-      // {
-      //     stim_id: "97",
-      //     author_id: "9",
-      //     degree: "strength",
-      //     adj_positive: "strong",
-      //     adj_negative: "weak",
-      //     superordinate: "tree parts",
-      //     high: "trunk",
-      //     medium: "branch",
-      //     low: "twig",
-      //     pronoun: "It",
-      //     context: "PERSON is in a forest and looks at a tree PHRASE."
-      // },
+
       {
           stim_id:"70",
           author_id: "custom",
@@ -1435,8 +1147,8 @@ const items = {
           high: "oil paint",
           medium: "wall paint",
           low: "watercolor",
-          pronoun: "It",
-          context: "PERSON is painting and tries a new PHRASE."
+          pronoun: "it",
+          context: "You are painting and try a new PHRASE."
       },
       {
           stim_id: "71",
@@ -1448,8 +1160,8 @@ const items = {
           high: "mansion",
           medium: "condo",
           low: "tent",
-          pronoun: "They",
-          context: "PERSON is examining the walls of a friend's new PHRASE."
+          pronoun: "they",
+          context: "You are examining the walls of a friend's new PHRASE."
       }
   ],
 
@@ -1465,8 +1177,8 @@ const items = {
           high: "soup",
           medium: "salad",
           low: "ice cream",
-          pronoun: "It",
-          context: "PERSON takes the first bite of PRO PHRASE."
+          pronoun: "it",
+          context: "You take the first bite of your PHRASE."
       },
       {
           stim_id: "73",
@@ -1478,8 +1190,8 @@ const items = {
           high: "coffee",
           medium: "juice",
           low: "milkshake",
-          pronoun: "It",
-          context: "PERSON takes the first sip from a PHRASE."
+          pronoun: "it",
+          context: "You take the first sip from a PHRASE."
       },
       {
           stim_id: "74",
@@ -1491,8 +1203,8 @@ const items = {
           high: "summer",
           medium: "fall",
           low: "winter",
-          pronoun: "It",
-          context: "PERSON steps outside on a day in PHRASE."
+          pronoun: "it",
+          context: "You step outside on a day in PHRASE."
       },
 
       {
@@ -1505,22 +1217,10 @@ const items = {
           high: "oven",
           medium: "pantry",
           low: "freezer",
-          pronoun: "It",
-          context: "PERSON is in PRO kitchen and puts PRO hand in the PHRASE."
+          pronoun: "it",
+          context: "You are in your kitchen and put your hand in the PHRASE."
       },
-      // {
-      //     stim_id: "105",
-      //     author_id: "15",
-      //     degree: "temperature_h",
-      //     adj_positive: "hot",
-      //     adj_negative: "cold",
-      //     superordinate: "drinks",
-      //     high: "hot chocolate",
-      //     medium: "tea",
-      //     low: "soda",
-      //     pronoun: "It",
-      //     context: "PERSON takes the first sip of a PHRASE."
-      // },
+
       {
           stim_id: "76",
           author_id: "custom",
@@ -1534,8 +1234,8 @@ const items = {
           superordinate: "places",
           adj_positive: "hot",
           adj_negative: "cold",
-          pronoun: "It",
-          context: "PERSON is spending PRO Saturday at PRE PHRASE."
+          pronoun: "it",
+          context: "You are spending your Saturday at PRE PHRASE."
       },
       {
           stim_id: "77",
@@ -1544,15 +1244,15 @@ const items = {
           high: "chocolate fondue",
           medium: "muffin",
           low: "smoothie",
-          superordinate: "desserts",
+          superordinate: "food",
           adj_positive: "hot",
           adj_negative: "cold",
-          pronoun: "It",
-          context: "PERSON is at a restaurant and takes a taste of a PHRASE. "
+          pronoun: "it",
+          context: "You are at a restaurant and take a taste of a PHRASE. "
       }
   ],
 
-// ------ WEIGHT: HEAVY - LIGHT (10)-------------
+// ------ WEIGHT: HEAVY - LIGHT (8)-------------
     weight: [
       {
           stim_id: "78",
@@ -1567,22 +1267,10 @@ const items = {
           pre_medium: "a",
           pre_high: "an",
           pre_low: "a",
-          pronoun: "It",
-          context: "PERSON is at the zoo and watches PRE PHRASE being lifted."
+          pronoun: "it",
+          context: "You are at the zoo and watch PRE PHRASE being lifted."
       },
-      // {
-      //     stim_id: "103",
-      //     author_id: "4",
-      //     degree: "weight",
-      //     adj_positive: "heavy",
-      //     adj_negative: "light",
-      //     superordinate: "clothes",
-      //     high: "sweater",
-      //     medium: "flannel",
-      //     low: "shirt",
-      //     pronoun: "It",
-      //     context: "PERSON is shopping for winter clothing and tries on a PHRASE."
-      // },
+
       {
           stim_id: "79",
           author_id: "7",
@@ -1596,8 +1284,8 @@ const items = {
           pre_high: "an",
           pre_low: "a",
           pre_medium: "a",
-          pronoun: "They",
-          context: "PERSON lifts up PRE PHRASE."
+          pronoun: "they",
+          context: "You lift up PRE PHRASE."
       },
       {
           stim_id: "80",
@@ -1609,8 +1297,8 @@ const items = {
           high: "printer",
           medium: "laptop",
           low: "cell phone",
-          pronoun: "It",
-          context: "PERSON is at an electronics store and picks up a PHRASE."
+          pronoun: "it",
+          context: "You are at an electronics store and pick up a PHRASE."
       },
       {
           stim_id: "81",
@@ -1622,8 +1310,8 @@ const items = {
           high: "couch",
           medium: "chair",
           low: "trash can",
-          pronoun: "It",
-          context: "PERSON is helping a friend move and picks up their PHRASE."
+          pronoun: "it",
+          context: "You are helping a friend move and pick up their PHRASE."
       },
       {
           stim_id: "82",
@@ -1635,35 +1323,10 @@ const items = {
           high: "rock",
           medium: "stick",
           low: "feather",
-          pronoun: "It",
-          context: "PERSON is walking outside and picks up a PHRASE."
+          pronoun: "it",
+          context: "You are walking outside and pick up a PHRASE."
       },
-      // {
-      //     stim_id: "113",
-      //     author_id: "1",
-      //     degree: "weight",
-      //     adj_positive: "heavy",
-      //     adj_negative: "light",
-      //     superordinate: "materials",
-      //     high: "wood",
-      //     medium: "plastic",
-      //     low: "paper",
-      //     pronoun: "It",
-      //     context: "PERSON is at a hardware store and picks up a piece of PHRASE."
-      // },
-      // {
-      //     stim_id: "114",
-      //     author_id: "12",
-      //     degree: "weight",
-      //     adj_positive: "heavy",
-      //     adj_negative: "light",
-      //     superordinate: "exercise equipment",
-      //     high: "weight",
-      //     medium: "kettle ball",
-      //     low: "jump rope",
-      //     pronoun: "It",
-      //     context: "PERSON is at the gym and picks up a PHRASE."
-      // },
+
       {
           stim_id: "83",
           author_id: "7",
@@ -1674,8 +1337,8 @@ const items = {
           high: "wool",
           medium: "cotton",
           low: "silk",
-          pronoun: "It",
-          context: "PERSON is at a craft shop and picks up a piece of PHRASE."
+          pronoun: "it",
+          context: "You are at a craft shop and pick up a piece of PHRASE."
       },
       {
           stim_id: "84",
@@ -1687,8 +1350,8 @@ const items = {
           high: "truck",
           medium: "motorcycle",
           low: "bike",
-          pronoun: "It",
-          context: "PERSON learns about the weight of a friend's new PHRASE."
+          pronoun: "it",
+          context: "You learn about the weight of a friend's new PHRASE."
       },
       {
           stim_id: "85",
@@ -1700,12 +1363,12 @@ const items = {
           high: "watermelon",
           medium: "orange",
           low: "plum",
-          pronoun: "It",
-          context: "PERSON is at a grocery store and picks up a PHRASE."
+          pronoun: "it",
+          context: "You are at a grocery store and pick up a PHRASE."
       }
   ],
 
-// --------- WIDTH: WIDE - NARROW (6)
+// --------- WIDTH: WIDE - NARROW (5)
 
     width: [
       {
@@ -1718,8 +1381,8 @@ const items = {
           high: "bear den",
           medium: "fox den",
           low: "mouse den",
-          pronoun: "It",
-          context: "PERSON is in a forest and sees a PHRASE."
+          pronoun: "it",
+          context: "You are in a forest and see a PHRASE."
       },
       {
           stim_id: "87",
@@ -1731,8 +1394,8 @@ const items = {
           high: "highway",
           medium: "downtown street",
           low: "side road",
-          pronoun: "It",
-          context: "PERSON is driving on a PHRASE."//,
+          pronoun: "it",
+          context: "You are driving on a PHRASE."//,
           // environment_mod: "here"
       },
       {
@@ -1745,8 +1408,8 @@ const items = {
           high: "river",
           medium: "stream",
           low: "creek",
-          pronoun: "It",
-          context: "PERSON is standing at the bank of a PHRASE."
+          pronoun: "it",
+          context: "You are standing at the bank of a PHRASE."
       },
       {
           stim_id: "89",
@@ -1761,23 +1424,11 @@ const items = {
           pre_high: "a",
           pre_medium: "a",
           pre_low: "a",
-          pronoun: "It",
-          context: "PERSON is walking on PRE PHRASE."//,
+          pronoun: "it",
+          context: "You are walking on PRE PHRASE."//,
           // environment_mod: "out here"
       },
-      // {
-      //     stim_id: "122",
-      //     author_id: "2",
-      //     degree: "width",
-      //     adj_positive: "wide",
-      //     adj_negative: "narrow",
-      //     superordinate: "vehicles",
-      //     high: "truck",
-      //     medium: "car",
-      //     low: "golf cart",
-      //     pronoun: "It",
-      //     context: "PERSON sees a PHRASE on the road."
-      // },
+
       {
         stim_id: "90",
         author_id: "custom",
@@ -1788,8 +1439,8 @@ const items = {
         high: "front gate",
         medium: "patio door",
         low: "back door",
-        pronoun: "It",
-        context: "PERSON is attempting to move furniture through the PHRASE of PRO house."
+        pronoun: "it",
+        context: "You are attempting to move furniture through the PHRASE of your house."
       }
   ]
 }
