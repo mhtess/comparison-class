@@ -220,40 +220,30 @@ d.item.count
 d.item.count %>% 
   ungroup() %>% 
   group_by(n) %>% 
-  count()
+  count() %>%
+  ggplot(., aes( x = n,y = nn))+
+  geom_col()+
+  xlab("n responses per item")+
+  ylab("n items")
 
 ```
 
 
-```{r}
-d.item.n50 <- d.item.count %>% 
-  filter(n >= 50) 
- write(
-   jsonlite::toJSON(d.item.n50, pretty = T),
-   file = "../experiments/js/prereg-cce-n50.json"
- )
+```{r eval=F}
+# d.item.n50 <- d.item.count %>% 
+#   filter(n >= 50) 
+#  write(
+#    jsonlite::toJSON(d.item.n50, pretty = T),
+#    file = "../experiments/js/prereg-cce-n50.json"
+#  )
 
 ```
 
 We exclude invalid responses: These are the responses the are just the name of a person or just the adjective.
 After the responses are analysed manually, nonsense responses were added to this list. 
-``` {r excludeInvalidResps}
-# excluding invalid responses 
-d.tidy.resps.catch <- df.trials.filtered %>%  filter((grepl("it's", response, ignore.case = T) |
-                                                      grepl("they're", response, ignore.case = T)  )) 
 
-# get invalid responses which are full sentences without any comparison class 
-d.tidy.resp.valid.resps <- anti_join(df.trials.filtered, d.tidy.resps.catch) %>% rowwise() %>%
-  mutate(stopPhrase = paste("the", np, "is", adj, sep=" "),
-         stopPhrase2 = paste("the", np, "is", paste(adj, ".", sep=""), sep=" "),
-         responseLength = lengths(str_split(response, " "))) %>% filter((tolower(response) != stopPhrase) & 
-                                                                          (tolower(response) != stopPhrase2)) 
-# get the long responses that were not matched above and filter them out manually
-#d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
-
-d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>% rowwise() %>%
-  # exclude responses which excatly match the ones in the following list
-  subset(., !(response %in% c("unsure",
+```{r list of invalid responses}
+invalid.responses <- c("unsure",
                               # all the adjectives
                               "long", "short", "tall", "dark", "light", "fast", "quick", "slow",
                               "hard", "soft", "loud", "noisy", "quiet", "bright", "bruises",
@@ -296,12 +286,42 @@ d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>% rowwise() %>%
                               "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
                               "they are bold", "the blade spinning", "its finished",
                               "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast" , "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount"
-                              )))
-
-# check
-d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
+                              )
 ```
 
+
+
+``` {r excludeInvalidResps}
+# excluding invalid responses 
+d.tidy.resps.catch <- df.trials.filtered %>%  
+  filter((grepl("it's", response, ignore.case = T) |
+            grepl("they're", response, ignore.case = T)  )) 
+
+# get invalid responses which are full sentences without any comparison class 
+d.tidy.resp.valid.resps <- anti_join(
+  df.trials.filtered, 
+  d.tidy.resps.catch
+  ) %>% rowwise() %>%
+  mutate(stopPhrase = paste("the", np, "is", adj, sep=" "),
+         stopPhrase2 = paste("the", np, "is", 
+                             paste(adj, ".", sep=""), sep=" "),
+         responseLength = lengths(str_split(response, " "))) %>%
+  filter((tolower(response) != stopPhrase) &
+           (tolower(response) != stopPhrase2))
+
+# get the long responses that were not matched above and filter them out manually
+#d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
+
+d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>% 
+  rowwise() %>%
+  # exclude responses which excatly match the ones in the following list
+  subset(., !(response %in% invalid.responses))
+
+# check
+d.tidy.resp.valid.resps %>% 
+  filter(responseLength >= 4) %>% 
+  View()
+```
 
 We correct for common misspellings in the responses. 
 
