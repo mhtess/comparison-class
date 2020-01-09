@@ -1493,7 +1493,8 @@ d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>% rowwise() %>%
 d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>% View()
 
 # the superordinate will be substituted for those items where the mode deviates for 6 or more items of a set (set is 12 variations of an item: 3 np_expectations x 2 adj_polarities x 2 CC types, specific and not ) and the deviating modal response is the same for 6 or more items
-d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>% count(stim_id, mode) %>% filter(n >= 6) -> stim.ids.adjust
+d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>% count(stim_id, mode) %>% View()
+#%>% filter(n >= 6) -> stim.ids.adjust
 
 d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>% right_join(., stim.ids.adjust, by = c("stim_id") ) %>% View()
 
@@ -1583,6 +1584,10 @@ insert_plural_np = function(np, superordinate) {
     np_pl = "wine bottles"
   } else if (np %in% c( "bush" )) {
     np_pl = "bushes"
+  } else if (np %in% c( "mouse den" )) {
+    np_pl = "mouse holes"
+  } else if (np %in% c( "sprinting race" )) {
+    np_pl = "sprints"  
   } else if(np %in% c( "child")) {
     np_pl = "children"
   } else if (np %in% c("baby")) {
@@ -1591,6 +1596,8 @@ insert_plural_np = function(np, superordinate) {
     np_pl = "platinum statue"
   } else if( np %in% c("bronze")) {
     np_pl = "bronze statues"   
+  } else if( np %in% c("pick-up truck")) {
+    np_pl = "pick up trucks"     
   } else if ((np %in% c("plastic")) & (superordinate == "bracelets")) {
     np_pl = "plastic bracelets"
   } else if( np %in% c("gold")) {
@@ -1601,7 +1608,7 @@ insert_plural_np = function(np, superordinate) {
     np_pl = "plastic statues"  
   } else if (np %in% c("wool", "wood", "fish", "ice cream", "garlic", "saffron", "coffee", "raspberries",
                        "boysenberries",
-                "strawberries", "sneakers", "chicken", "boots", "tuna", "pork", "sandals", "plastic"))  {
+                "strawberries", "sneakers", "chicken", "boots", "tuna", "pork", "sandals", "plastic", "instant pot"))  {
     np_pl = np # the items left singular
     
   } else {
@@ -1612,7 +1619,7 @@ insert_plural_np = function(np, superordinate) {
 
 d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full.adjust.Super %>% 
   rowwise() %>% 
-  mutate(np_pl = insert_plural_np(np, superordinate))
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
 
 # adjust some superordinates 
 d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
@@ -1625,10 +1632,10 @@ d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
 ```
 
 ``` {r}
-df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_pl_np.csv')
-d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.classified.full.adjust.Super %>%
-  left_join(., df.frequencies, by = c("np_pl" ="Nps")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by=c("superordinate.freq"="Nps"))   # add superordinate frequencies
+df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
+d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
+  left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
 
 df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x.x, Frequencies.y.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x.x, superFreq = Frequencies.y.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
 
