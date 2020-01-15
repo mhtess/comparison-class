@@ -116,9 +116,9 @@ df.comprehension <- df.attention %>%
       containsString(tolower(response), "towe")
       ))
 
-df.comprehension %>%
-  filter(!pass_comp) %>% 
-  View()
+# df.comprehension %>%
+#   filter(!pass_comp) %>% 
+#   View()
 
 df.memory <- df.attention %>%
   filter(condition == "memory_check") %>%
@@ -298,8 +298,10 @@ mispellings_set <- c(
         "&quotechar" = "",
          "basset" = "bassett",
          "bonzai" = "bonsai",
+        "bottles of win" = "bottles of wine",
          "seagul" = "seagull",
          "seagulll" = "seagull",
+        "skyscrapper" = "skycraper",
          "dalia" = "dahlia",
          "pitbul" = "pitbull",
          "panter" = "panther",
@@ -436,6 +438,9 @@ synonym_set = c("6 packs" = "beer",
          "individuals" = "people",
          "automobile" = "car",
          "biking" = "bike",
+          "booze"= "alcoholic drinks",
+        "animal-made structures" = "animal houses",
+        "animal noises." = "animal sound"
          "bicycle" = "bike",
          "car ride" = "drive",
          "brands of beer" = "beer",
@@ -582,9 +587,9 @@ n.valid.responses <- d.tidy.resp.valid.resps %>%
 
 n.total.responses - n.valid.responses
 # check
-d.tidy.resp.valid.resps %>% 
-  filter(responseLength >= 4) %>% 
-  View()
+# d.tidy.resp.valid.resps %>% 
+#   filter(responseLength >= 4) %>% 
+#   View()
 ```
 
 We correct for common misspellings in the responses. 
@@ -606,7 +611,7 @@ d.tidy.resp.valid.resps %>%
   mutate(
     response_spelling = str_replace_all(response, mispellings_set),
     response_synonym = str_replace_all(response_spelling, synonym_set),
-    response_lemma = str_replace_all(response_synonym, lemmatization_set)
+    response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
     ) %>%
   mutate(corrected_spelling = response != response_spelling,
          corrected_synonym = response_spelling != response_synonym,
@@ -621,38 +626,29 @@ sum(d.tidy.resp.valid.resps$corrected_lemma) / n.valid.responses
 
 ```
 
-```{r codeForSubCatTerms}
 
-# clean produced responses to match NPs 
-d.tidy.resp.valid.resps %>% 
-  unnest_tokens(word, response_lemma)  %>%  # break responses into single words (one per line)
-  anti_join(my_stop_words) %>%  # remove stop words
-  group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
-  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
-  spread(wordNumber, word) %>%
-  unite(phrase, starts_with("word_"), sep = " ") %>%
-  mutate(phrase = gsub(" NA", "", phrase)) %>%
-  left_join(
-    df.trials.filtered %>% 
-      select(workerid, trial_num, response)
-    ) %>% 
-  rename(cleanedPhrase = phrase, originalResponse = response) %>% 
-  rowwise() %>%
+This code no longer cleans the responses by removing stop words. That latter method produces issues for the "pick-up truck" (which it doesn't match correctly), times of day, and some responses involved "The + Singular_NP" (which are ambiguous and should be excluded).  
+
+How should "times of day" be coded?
+
+```{r}
+d.tidy.resp.valid.resps %>%
+    rowwise() %>%
   mutate(
-    originalPhrase = as.character(cleanedPhrase),
-    cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    response_lemma = as.character(response_lemma),
+    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
     np_match = as.character(np_match),
     np_match = gsub('\"', "", np_match),
     np_match_us = paste("_", np_match, "_", sep=""), # insert underscores for the matching the other way around 
     super_us = paste("_", superordinate, "_", sep=""),
   # check if response and seed NP match 
-    specific = ifelse(
-      originalPhrase == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
-      ifelse(originalPhrase == "berries", 0, 0), 
+    specific = #ifelse(
+      # response_lemma == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
+      ifelse(response_lemma == "berries", 0, 
       containsString_responses(
         as.character(cleanedPhrase), 
         np_match, 
-        originalPhrase, 
+        response_lemma, 
         np_match_us
         )
       ),
@@ -660,9 +656,54 @@ d.tidy.resp.valid.resps %>%
     matchingSuper = containsString_responses(
       as.character(cleanedPhrase), 
       as.character(superordinate), 
-      originalPhrase, 
+      response_lemma, 
       super_us)
-  ) -> d.tidy.phrase.w.original
+  ) -> d.tidy.phrase.w.original2
+```
+
+
+```{r codeForSubCatTerms}
+
+# clean produced responses to match NPs 
+# d.tidy.resp.valid.resps %>% 
+#   unnest_tokens(word, response_lemma)  %>%  # break responses into single words (one per line)
+#   anti_join(my_stop_words) %>%  # remove stop words
+#   group_by(workerid, trial_num) %>% # next four functions are to put phrases back together again
+#   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+#   spread(wordNumber, word) %>%
+#   unite(phrase, starts_with("word_"), sep = " ") %>%
+#   mutate(phrase = gsub(" NA", "", phrase)) %>%
+#   left_join(
+#     df.trials.filtered %>% 
+#       select(workerid, trial_num, response)
+#     ) %>% 
+#   rename(cleanedPhrase = phrase, originalResponse = response) %>% 
+#   rowwise() %>%
+#   mutate(
+#     originalPhrase = as.character(cleanedPhrase),
+#     cleanedPhrase = paste("_", as.character(cleanedPhrase), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+#     np_match = as.character(np_match),
+#     np_match = gsub('\"', "", np_match),
+#     np_match_us = paste("_", np_match, "_", sep=""), # insert underscores for the matching the other way around 
+#     super_us = paste("_", superordinate, "_", sep=""),
+#   # check if response and seed NP match 
+#     specific = ifelse(
+#       originalPhrase == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
+#       ifelse(originalPhrase == "berries", 0, 0), 
+#       containsString_responses(
+#         as.character(cleanedPhrase), 
+#         np_match, 
+#         originalPhrase, 
+#         np_match_us
+#         )
+#       ),
+#   # check if response and anticipated superordinate match
+#     matchingSuper = containsString_responses(
+#       as.character(cleanedPhrase), 
+#       as.character(superordinate), 
+#       originalPhrase, 
+#       super_us)
+#   ) -> d.tidy.phrase.w.original
  
 # d.tidy.phrase.w.original %>%
 #   group_by(stim_id, np_expectations, adj_polarity) %>%
@@ -672,68 +713,104 @@ d.tidy.resp.valid.resps %>%
 
 ``` {r}
 # remove responses with uncertainty marker "similar" for more restrictive analysis
-d.tidy.phrase.w.original %>% 
-  filter(grepl("similar", originalResponse, ignore.case=T)) -> d.uncertain.resps # 15 responses
+# d.tidy.phrase.w.original %>% 
+#   filter(grepl("similar", originalResponse, ignore.case=T)) -> d.uncertain.resps # 15 responses
+
+d.tidy.phrase.w.original2 %>% 
+  filter(grepl("similar", response_lemma, ignore.case=T)) -> d.uncertain.resps # 15 responses
+
+d.tidy.clean.responses <- anti_join(
+  d.tidy.phrase.w.original2, 
+  d.uncertain.resps)
 
 # extrcat the automatically matched data (out of 26.552 responses (post exclusion) 22.117 are matched )
-d.matchedResponses <- anti_join(
-  d.tidy.phrase.w.original, 
-  d.uncertain.resps) %>% 
+d.matchedResponses <- d.tidy.clean.responses %>% 
   filter((specific == 1) | (matchingSuper == 1))
 
+n.automatic.responses <- d.matchedResponses %>% 
+  ungroup() %>% count() %>% pull(n)
+
+n.automatic.responses / n.valid.responses
+
+# d.tidy.phrase.w.original %>%
+#   select(workerid, trial_num, cleanedPhrase, specific, matchingSuper) %>%
+#   rename(method_1 = specific, method_1_super = matchingSuper, method_1_cleanedPhrase = cleanedPhrase) %>%
+#   right_join(., d.tidy.phrase.w.original2) %>%
+#   mutate(match_specific = method_1 == specific, 
+#          match_super = method_1_super == matchingSuper,
+#          mismatch = match_specific & match_super) -> d.tidy.phrase.w.original.compare
+#   
+# d.tidy.phrase.w.original2
+```
+
+```{r}
 # extract the consistent responses based on automatically classified data
-d.sub.counts <- d.matchedResponses %>%
-  group_by(stim_id, np_expectations, adj_polarity) %>%
-  count(specific)
+# d.sub.counts <- d.matchedResponses %>%
+#   group_by(stim_id, np_expectations, adj_polarity) %>%
+#   count(specific)
+
+# d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>% 
+#   group_by(stim_id, degree, superordinate, 
+#            np_expectations, np, adj_polarity) %>%
+#   count(specific) %>%
+#   mutate(nr = sum(n))
 
 #d.sub.counts
+# 
+# d.consistent.items <- d.sub.counts %>% 
+#   group_by(stim_id, np_expectations, adj_polarity) %>% 
+#   mutate(nr_dp = sum(n)) %>% 
+#   filter(n >= nr_dp-2) # extract the consistent items 
+# 
+# #d.consistent.items
+# d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
+# #d.inconsistent.items
 
-d.consistent.items <- d.sub.counts %>% 
-  group_by(stim_id, np_expectations, adj_polarity) %>% 
-  mutate(nr_dp = sum(n)) %>% 
-  filter(n >= nr_dp-2) # extract the consistent items 
 
-#d.consistent.items
-d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
-#d.inconsistent.items
 
-d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>% 
-  group_by(stim_id, degree, superordinate, 
-           np_expectations, np, adj_polarity) %>%
-  count(specific) %>%
-  mutate(nr = sum(n))
-
-d.confident.phrase.specificMarking.bs.item %>% filter((n == 0) | (n == nr))
+# d.confident.phrase.specificMarking.bs.item %>% 
+#   filter((n == 0) | (n == nr))
 
 # check the matched items where the mean of responses is 1 or 0
 d.matchedResponses %>% 
   group_by(stim_id, np_expectations, adj_polarity) %>% 
   mutate(meanResp = mean(specific)) %>% 
   filter((meanResp == 1) | (meanResp == 0)) %>% 
-  distinct(stim_id, context_sentence, np_expectations, np_match, adj_polarity, originalResponse, meanResp) %>% View()
+  distinct(stim_id, np_expectations, 
+           np_match, adj_polarity, response_lemma, meanResp) %>% 
+  View()
+
 # it happns for some items where the number of matched responses is very low, e.g. for the NP "pick-up truck", positive adjective, only 3 responses out of 44 are matched automatically
 
-d.matchedResponses %>% 
-  group_by(stim_id, np_expectations, adj_polarity) %>% 
-  count() %>% 
-  View()
+# d.matchedResponses %>% 
+#   group_by(stim_id, np_expectations, adj_polarity) %>% 
+#   count() %>% 
+#   View()
 ```
 
 
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
 d.tidy.resp.analysis <- anti_join(
-  d.tidy.phrase.w.original, 
+  d.tidy.phrase.w.original2, 
   d.matchedResponses)
 
+d.tidy.resp.analysis <- d.tidy.phrase.w.original2 %>% 
+  filter(!((specific == 1) | (matchingSuper == 1)))
+
+length(d.tidy.resp.analysis)
+
 d.tidy.resp.analysis %>% 
-  distinct(degree, superordinate, super_us, np, adj, np_match, originalResponse, originalPhrase, specific, matchingSuper) %>% 
+  distinct(np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper) %>% 
   View()
 ```
 
 Here, we look at the responses that were not matched to our anticipated NPs and superordinates and the synonyms of the NPs we already caught. We judge if the deviating responses are synonymous to our seed NPs or our superordinates and match them.
 
-``` {r}
+```{r}
+
+
+
 # categorize the responses upon looking at the reponses not matching the NP nor the superordinate
 
 # this is the more sketchy part of the classification
@@ -747,17 +824,18 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
   # sketchy subordinate synonyms 
   mutate(cat_cleanedPhrase = cleanedPhrase,
          cat_cleanedPhrase = gsub("'", "", cat_cleanedPhrase),
-         cat_cleanedPhrase = ifelse( superordinate == "cookware", gsub("pans", "frying pan", cat_cleanedPhrase),
+         cat_cleanedPhrase = ifelse( superordinate == "cookware", 
+                                     gsub("pans", "frying pan", cat_cleanedPhrase),
                                      cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("computer", "laptop", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("dane", "great dane", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("podcast", "podcast episode", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("illunation", np_match, cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("illumination", np_match, cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("elderlyer adults", "elderly person", cat_cleanedPhrase),
          cat_cleanedPhrase = ifelse(superordinate == "desserts",  gsub("chocolate", "chocolate fondue",
                                                                        cat_cleanedPhrase), cat_cleanedPhrase),
-         cat_cleanedPhrase = ifelse(superordinate == "times of day",  ifelse(cat_cleanedPhrase == "days", np_match,
+         cat_cleanedPhrase = ifelse(superordinate == "times of day",  
+                                    ifelse(cat_cleanedPhrase == "days", np_match,
                                                                              cat_cleanedPhrase), cat_cleanedPhrase),
          cat_cleanedPhrase = ifelse(superordinate == "writing utensils",  gsub("ink", "pen", cat_cleanedPhrase),
                                     cat_cleanedPhrase),
@@ -767,7 +845,6 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          cat_cleanedPhrase = gsub("shower", "rain shower", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("amount", "beer", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("bags of trash", "trash can", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("bottles win", "wine", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("brands", np_match, cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("butchershops", np_match, cat_cleanedPhrase),
          cat_cleanedPhrase = ifelse(superordinate == "places",  gsub("baths", "sauna", cat_cleanedPhrase),
@@ -859,8 +936,7 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
           cat_cleanedPhrase = gsub("hounds", "bassett hound", cat_cleanedPhrase),
           cat_cleanedPhrase = gsub("pages", "novel", cat_cleanedPhrase),
           cat_cleanedPhrase = gsub("water tempertatures", "sauna", cat_cleanedPhrase),
-          cat_cleanedPhrase = gsub("skyscrapper", "skyscraper", cat_cleanedPhrase),
-          cat_cleanedPhrase = gsub("skarks", "shark", cat_cleanedPhrase),
+
       # superordinates and non-matchinf synonyms
          cat_cleanedPhrase = gsub("flying craft", "aircrafts", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("flying things", "aircrafts", cat_cleanedPhrase),
@@ -885,18 +961,17 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          cat_cleanedPhrase = gsub("bodies of water", "waterways", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("places to rent", "rentals", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("ways too cook food", "cookware", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("paint colors", "paints", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("wall supports", "walls", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("things in the air", "aircrafts", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("places to live", "rentals", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("booze", "alcoholic drinks", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("holes", "dens", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("flower arrangements", "bouquet", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("entrances", "doorways", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("entryways", "doorways", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("flower bouquets", "bouquet", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("flower bouquet", "bouquet", cat_cleanedPhrase),
+        cat_cleanedPhrase = gsub("holes", "dens", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("flower arrangements", "bouquet", cat_cleanedPhrase),
+        cat_cleanedPhrase = gsub("entrances", "doorways", cat_cleanedPhrase),
+         cat_cleanedPhrase = gsub("entryways", "doorways", cat_cleanedPhrase),
+
          cat_cleanedPhrase = gsub("door openings", "doorways", cat_cleanedPhrase),
          cat_cleanedPhrase = ifelse(superordinate == "paints",  gsub("color", "paint", cat_cleanedPhrase),
                                     cat_cleanedPhrase),
@@ -918,16 +993,13 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          cat_cleanedPhrase = gsub("competition", "race", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("concert music", "concerts", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("condiments", "spices", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("electronics", "electronic devices", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("activities", "places", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("animal houses openings", "animal houses", cat_cleanedPhrase),
    
    # classification of those responses which were not caught above (looking at d.tidy.resp.analysis.update below): mostly adjusting synonymous responses to get accurate mode estinates
          cat_cleanedPhrase = gsub("air room", "air", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("ambient temperatures", "temperatures", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("animals houses", "animal houses", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("animal structures", "animal houses", cat_cleanedPhrase),
-         cat_cleanedPhrase = gsub("animal noise", "animal sound", cat_cleanedPhrase),
+
          cat_cleanedPhrase = gsub("animals aquiariums", "animals", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("animals forest", "animals", cat_cleanedPhrase),
          cat_cleanedPhrase = gsub("animals forrest", "animals", cat_cleanedPhrase),
@@ -941,7 +1013,6 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
 # check unclassified responses left
 d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) #  %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, originalResponse, cleanedPhrase, cat_cleanedPhrase, specific, matchingSuper)
 ```
-
 
 
 ``` {r}
@@ -1419,22 +1490,87 @@ d.tidy.resps.classified.full %>% group_by(stim_id, np_expectations, adj_polarity
                                                                
 ```
 
-
 fabric . superordinate
 
 ```{r}
-d.tidy.phrase.specificMarking.bs <- d.tidy.phase.classifiedSuper %>% 
-  filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
-  #mutate() %>%
+# d.tidy.phrase.specificMarking.bs <- d.tidy.phase.classifiedSuper %>% 
+#   filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
+#   #mutate() %>%
+  
+d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>% 
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
-d.tidy.phrase.specificMarking.bs.item <- d.tidy.phase.classifiedSuper %>%
-  filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
-  mutate() %>%
+# d.tidy.phrase.specificMarking.bs.item <- d.tidy.phase.classifiedSuper %>%
+#   filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
+#   mutate() %>%
+  
+d.tidy.phrase.specificMarking.bs.item <- d.tidy.clean.responses %>%
   group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
+d.tidy.phrase.specificMarking.bs %>% 
+  ungroup() %>%
+  mutate(np_expectations = gsub('\"', "", np_expectations),
+         adj_polarity = gsub('\"', "", adj_polarity),
+         np_expectations = factor(np_expectations,
+                               levels = c("low", "medium", "high"))) -> d.tidy.phrase.specificMarking.bs
+
+d.tidy.phrase.specificMarking.bs.item %>%
+  ungroup() %>%
+  mutate(unique_id = paste(stim_id, np_expectations, sep = "-")) %>%   mutate(np_expectations = factor(np_expectations,
+                               levels = c("low", "medium", "high"))) ->  d.tidy.phrase.specificMarking.bs.item
+
+
+set.seed(2020)
+
+d.tidy.phrase.specificMarking.bs.item %>%
+  left_join(., 
+  data.frame(
+    unique_id = unique(d.tidy.phrase.specificMarking.bs.item$unique_id),
+    jitterVal = runif(270, min = -0.07, max = 0.07)
+  )) %>%
+  mutate(
+    jitterVal = jitterVal + ifelse(adj_polarity == "positive", 0.2, -0.2)
+    ) %>%
+ggplot(., 
+       aes( x = as.numeric(np_expectations) + jitterVal, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(data = d.tidy.phrase.specificMarking.bs,
+           aes( x = np_expectations, y = mean,
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity),
+           position = position_dodge(0.8), width = 0.8, alpha = 0.6, color = 'black', size = 1)+
+
+  geom_point(#position = position_dodge(0.8),
+             #position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0), 
+             # data = d.tidy.phrase.specificMarking.bs.item,
+             # aes( y = mean, fill = adj_polarity, x = np_expectations),
+             shape = 21, alpha = 0.8)+
+  geom_path(aes(group = unique_id), 
+            #position = position_dodge(0.8),
+            alpha = 0.15)+
+  geom_linerange(data = d.tidy.phrase.specificMarking.bs, 
+           aes( x = np_expectations, y = mean, 
+            ymin = ci_lower, ymax = ci_upper),
+           position = position_dodge(0.8), color = 'black', size = 1.5)+
+  scale_fill_brewer(palette = "Set3")+
+  theme(#axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  guides(fill= guide_legend(title = "Adjective polarity", reverse = T))+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain Specific NP")+
+  xlab("Subordinate Category General Expectations")
+
+ ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf",
+        width = 6, height = 4)
+```
+
+
+```{r}
 # look at data matched automatically by-item
 d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
  # mutate() %>%
@@ -1469,8 +1605,8 @@ d.tidy.phrase.specificMarking.bs %>%
   ylab("Proportion paraphrases that contain Specific NP")+
   xlab("Subordinate Category General Expectations")
 
- ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars.pdf",
-        width = 6, height = 4)
+ # ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars.pdf",
+ #        width = 6, height = 4)
 ```
 
 By-item plot
@@ -1714,30 +1850,33 @@ d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>%
   group_by(np_positiveness,  adj_positiveness) %>%
   tidyboot_mean(column = specific)
 
-d.tidy.phrase.specificMarking.bs %>%
-  ungroup() %>%
-  mutate(np_positiveness = gsub('\"', "", np_positiveness),
-         adj_positiveness = gsub('\"', "", adj_positiveness),
-         np_positiveness = factor(np_positiveness,
-                               levels = c("negative", "neither-nor", "positive"),
-                               labels = c("low", "medium", "high")
-)) %>%
-  rename(adj_polarity = adj_positiveness) %>%
-  ggplot(., 
-       aes( x = np_positiveness, y = mean, 
-            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
-  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
-  geom_linerange(position = position_dodge(0.8), color = 'black')+  
-  scale_fill_brewer(palette = "Set3")+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
-        #axis.title.x = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank(),
-        axis.line = element_line(colour = "black"))+
- # theme_black()+
-  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
-  ylab("Proportion paraphrases that contain NP")+
-  xlab("Subordinate Category Prior Mean")
+# d.tidy.phrase.specificMarking.bs %>%
+#   ungroup() %>%
+#   mutate(np_positiveness = gsub('\"', "", np_positiveness),
+#          adj_positiveness = gsub('\"', "", adj_positiveness),
+#          np_positiveness = factor(np_positiveness,
+#                                levels = c("negative", "neither-nor", "positive"),
+#                                labels = c("low", "medium", "high")
+# )) %>%
+#   rename(adj_polarity = adj_positiveness) %>%
+#   ggplot(., 
+#        aes( x = np_positiveness, y = mean, 
+#             ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+#   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+#   geom_linerange(position = position_dodge(0.8), color = 'black')+  
+#   scale_fill_brewer(palette = "Set3")+
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+#         #axis.title.x = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         panel.grid.major = element_blank(),
+#         axis.line = element_line(colour = "black"))+
+#  # theme_black()+
+#   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+#   ylab("Proportion paraphrases that contain NP")+
+#   xlab("Subordinate Category Prior Mean")
+
+
+
 
 # ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
 #        width = 5, height = 3.6)
@@ -1878,27 +2017,23 @@ print(
 
 
 ```{r}
-d.tidy.phrase.w.original.fac <- d.tidy.phrase.w.original %>%
-  mutate(adj_positiveness = factor(adj_positiveness, 
+d.tidy.clean.responses.fac <- d.tidy.clean.responses %>%
+  mutate(adj_polarity = factor(adj_polarity, 
                                    levels = c("negative", "positive")),
-         np_positiveness = factor(np_positiveness, 
-                                  levels = c("neither-nor", "negative", "positive"))) %>%
-  rowwise() %>%
-  mutate(item_set = paste(degree, "_", superordinate, sep = "")) %>%
-  ungroup() %>%
-  mutate(item_set = factor(item_set),
-         workerid = factor(workerid))
+         np_expectations = factor(np_expectations, 
+                                  levels = c("medium", "low", "high")))
 
+d.tidy.clean.responses.fac$stim_id <- as.factor(d.tidy.clean.responses.fac$stim_id)
+d.tidy.clean.responses.fac$workerid <- as.factor(d.tidy.clean.responses.fac$workerid)
 
-
-contrasts(d.tidy.phrase.w.original.fac$adj_positiveness) <- c(-1/2, 1/2)
+contrasts(d.tidy.clean.responses.fac$adj_polarity) <- c(-1/2, 1/2)
 
 rs.glm.brm <- brm(
-  formula = specific ~ np_positiveness * adj_positiveness + 
-    (1 +  np_positiveness*adj_positiveness | workerid) + 
-    (1 +  np_positiveness*adj_positiveness | item_set),
+  formula = specific ~ np_expectations * adj_polarity + 
+    (1 +  np_expectations*adj_polarity | workerid) + 
+    (1 +  np_expectations*adj_polarity | stim_id),
   family = bernoulli(), chains = 3, cores = 3, iter = 1000,
-  data = d.tidy.phrase.w.original.fac)
+  data = d.tidy.clean.responses.fac)
 
 
 rs.glm.brm.summary <- summary(rs.glm.brm)
