@@ -19,65 +19,55 @@ const custom_memory_check = function(config, startTime) {
 
       <section class="magpie-answer-container">
       <div class="magpie-view-text">
-        <p><label><input type='radio' id='valid1' name='memory1' value='1'/>${config.data[CT].memory1}</label></p>
-        <p><label><input type='radio' id='valid2' name='memory2' value='1'/>${config.data[CT].memory2}</label></p>
-        <p><label><input type='radio' id='valid3' name='memory3' value='1'/>${config.data[CT].memory3}</label></p>
-        <p><label><input type='radio' id='invalid1' name='memory4' value='1'/>${config.data[CT].memory4}</label></p>
-        <p><label><input type='radio' id='invalid2' name='memory5' value='1'/>${config.data[CT].memory5}</label></p>
-        <p><label><input type='radio' id='invalid3' name='memory6' value='1'/>${config.data[CT].memory6}</label></p>
-        <p><label><input type='radio' id='valid4' name='memory7' value='1'/>${config.data[CT].memory7}</label></p>
-        <p><label><input type='radio' id='invalid4' name='memory8' value='1'/>${config.data[CT].memory8}</label></p>
-        <p><label><input type='radio' id='invalid5' name='memory9' value='1'/>${config.data[CT].memory9}</label></p>
-        <p><label><input type='radio' id='valid5' name='memory10' value='1'/>${config.data[CT].memory10}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[0]}'/>${memory_check[0]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[1]}'/>${memory_check[1]}</label></p>
+        <p><label><input type='checkbox' name='memory' value='${memory_check[2]}'/>${memory_check[2]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[3]}'/>${memory_check[3]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[4]}'/>${memory_check[4]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[5]}'/>${memory_check[5]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[6]}'/>${memory_check[6]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[7]}'/>${memory_check[7]}</label></p>
+        <p><label><input type='checkbox'  name='memory' value='${memory_check[8]}'/>${memory_check[8]}</label></p>
+        <p><label><input type='checkbox' name='memory' value='${memory_check[9]}'/>${memory_check[9]}</label></p>
       </div>
-      <p class="text" align="center" id="catch">Please select a response before proceeding.</p>
+
       <button id='next' class='magpie-view-button'>next</button>
       </section>
       </div>
         `)
 
-
-              $("#catch").hide();
               $("#next").on("click", function() {
-                var response1 = $("input[name=memory1]:checked").val();
-                var response2 = $("input[name=memory2]:checked").val();
-                var response3 = $("input[name=memory3]:checked").val();
-                var response4 = $("input[name=memory4]:checked").val();
-                var response5 = $("input[name=memory5]:checked").val();
-                var response6 = $("input[name=memory6]:checked").val();
-                var response7 = $("input[name=memory7]:checked").val();
-                var response8 = $("input[name=memory8]:checked").val();
-                var response9 = $("input[name=memory9]:checked").val();
-                var response10 = $("input[name=memory10]:checked").val();
+                var checked_options = new Array();
+                var unchecked_options = new Array();
 
-                if ((response1 === undefined) & (response2 === undefined) & (response3 === undefined) & (response4 === undefined) & (response5 === undefined)
-                  & (response6 === undefined) & (response7 === undefined) & (response8 === undefined) & (response9 === undefined) & (response10 === undefined)) {
-                  $("#catch").show()
-                } else {
-                const RT = Date.now() - startingTime;
-                const resps = [response1, response2, response3, response4, response5, response6, response7, response8, response9, response10]
-                console.log(resps)
-                const correct_mem = [1,1,1,,,,1,,,1]
-                var num_mem_false = 0
-                for (i = 0; i < 10; i++) {
-                  if (resps[i] != correct_mem[i]) {
-                    num_mem_false = num_mem_false + 1
-                  }
-                }
+                $.each($("input[name='memory']:checked"), function() {
+                  checked_options.push($(this).val());
+                });
+
+                $.each($("input[name='memory']:not(:checked)"), function() {
+                  unchecked_options.push($(this).val());
+                });
+
+                for (i=0;i<memory_check.length;i++){
+                  var p = memory_check[i];
+                  var tested_on = memory_properties.indexOf(p) > -1 ? 1 : 0;
+                  var response = checked_options.indexOf(p) > -1 ? 1 : 0;
+
                   let trial_data = {
                     trial_name: config.name,
-                    trial_number: CT + 1,
-                    response: num_mem_false,
-
-                    // response2: response2,
-                    RT: RT
-                    // response3: response3,
-                    // response4: response4
+                    trial_number: i,
+                    check_index: i,
+                    property: p,
+                    tested_on: tested_on,
+                    response: response,
+                    correct: (tested_on == response) ? 1 : 0,
+                    RT: Date.now() - startingTime
                   }
-                  trial_data = magpieUtils.view.save_config_trial_data(config.data[CT], trial_data);
+
                   magpie.trial_data.push(trial_data);
-                  magpie.findNextView();
                 }
+                  magpie.findNextView();
+
               })
 
     }

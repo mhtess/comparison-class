@@ -17,10 +17,10 @@
     * More about the properties and functions of the wrapping views - https://magpie-ea.github.io/magpie-docs/01_designing_experiments/01_template_views/#wrapping-views
 
 */
-const custom_catch = custom_memory_check({
+const memory_check_catch = custom_memory_check({
   trials: 1,
-  name: "custom_catch",
-  data: memory_check.catch
+  name: "memory_check_catch",
+  
 })
 
 // elicit the trial views

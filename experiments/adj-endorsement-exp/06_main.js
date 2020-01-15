@@ -20,7 +20,7 @@ $("document").ready(function() {
             // // instructions,
             instructions,
             adj_endorsement_both,
-            custom_catch,
+            memory_check_catch,
             custom_postTest,
             thanks,
         ],
