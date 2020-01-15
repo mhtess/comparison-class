@@ -497,7 +497,7 @@ const items = {
       high: "opera",
       low: "song",
       medium: "podcast episode",
-      superordinate: "audios",
+      superordinate: "audio recordings",
       pre_high: "an",
       pre_low: "a",
       pre_medium: "a",
@@ -1377,7 +1377,7 @@ const items = {
           degree: "width",
           adj_positive: "wide",
           adj_negative: "narrow",
-          superordinate: "dens",
+          superordinate: "animal dens",
           high: "bear den",
           medium: "fox den",
           low: "mouse den",
@@ -1440,7 +1440,7 @@ const items = {
         medium: "patio door",
         low: "back door",
         pronoun: "it",
-        context: "You are attempting to move furniture through the PHRASE of your house."
+        context: "You are attempting to move furniture through the PHRASE of a house."
       }
   ]
 }
