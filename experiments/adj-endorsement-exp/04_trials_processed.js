@@ -9,7 +9,7 @@ const trials = function(domain) {
   }
 // take 5 trials of each domain
 // ------ ADJUST FOR MORE ITEMS ---------
-  var num_trials = 5
+  var num_trials = 4
   return _.shuffle(trial_list).slice(0, num_trials)
 }
 
