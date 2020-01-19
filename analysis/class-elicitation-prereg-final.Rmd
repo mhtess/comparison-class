@@ -440,7 +440,7 @@ synonym_set = c("6 packs" = "beer",
          "biking" = "bike",
           "booze"= "alcoholic drinks",
         "animal-made structures" = "animal houses",
-        "animal noises." = "animal sound"
+        "animal noises." = "animal sound",
          "bicycle" = "bike",
          "car ride" = "drive",
          "brands of beer" = "beer",
@@ -1567,6 +1567,8 @@ ggplot(.,
 
  ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf",
         width = 6, height = 4)
+ 
+# save(d.tidy.phrase.specificMarking.bs.item, file = "d_comparisonClass_specific_bs_item.RData")
 ```
 
 
@@ -1574,7 +1576,7 @@ ggplot(.,
 # look at data matched automatically by-item
 d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
  # mutate() %>%
-  group_by( stim_id, degree, superordinate, np_expectations,  np, adj_polarity) %>%
+  group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
   mean(specific)
 
 d.tidy.phrase.specificMarking.bs %>%
@@ -1648,6 +1650,7 @@ d.tidy.resps.classified.full  %>%
         width = 18, height = 18)
 ```
 
+# TO ORGANIZE
 
 ## Look at items with n>=35
 
@@ -1665,8 +1668,6 @@ d.item.n35.bs <- d.tidy.phrase.w.original %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   summarize(n_sum = sum(specific), n = n())
 ```
-
-
 
 
 The data points are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
@@ -2023,6 +2024,9 @@ print(
 ```
 
 
+#### Full model
+
+
 ```{r}
 d.tidy.clean.responses.fac <- d.tidy.clean.responses %>%
   mutate(adj_polarity = factor(adj_polarity, 
@@ -2054,6 +2058,14 @@ write_csv(data.frame(rs.glm.brm.summary[["fixed"]]) %>%
             mutate(Rowname = row.names(.)), 
           path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv")
 ```
+
+
+#### Simple effects
+
+```{r}
+
+```
+
 
 ```{r}
 rs.glm <- glmer(
