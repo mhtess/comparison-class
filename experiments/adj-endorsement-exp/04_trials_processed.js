@@ -1458,18 +1458,17 @@ const trial_info = {
 
 }
 
-const random_adj = _.shuffle(["beautiful", "purple", "wild", "green", "shiny"])
-const mem_check_items = _.shuffle(trial_info.main).slice(0,10)
-const memory_properties = [mem_check_items[0].adj_positive + " " + mem_check_items[0].item,
-                           mem_check_items[1].adj_negative + " " + mem_check_items[1].item,
-                           mem_check_items[2].adj_positive + " " + mem_check_items[2].item,
-                           mem_check_items[6].adj_positive + " " + mem_check_items[6].item,
-                           mem_check_items[9].adj_negative + " " + mem_check_items[9].item]
-const memory_check =  _.shuffle(memory_properties.concat([
-   random_adj[0] + " " + mem_check_items[3].item,
-   random_adj[1] + " " + mem_check_items[4].item,
-   random_adj[2] + " " + mem_check_items[5].item,
-   random_adj[3] + " " + mem_check_items[7].item,
-   random_adj[4] + " " + mem_check_items[8].item]))
+
+const random_adj = _.shuffle(["watch: beautiful/ugly", "shirt: purple/orange", "animal: wild/tame", "guitar: green/blue", "necklace: shiny/dull"])
+
+
+const mem_check_items = _.shuffle(trial_info.main).slice(0,5)
+const memory_properties = [mem_check_items[0].item + ": " + mem_check_items[0].adj_positive + "/" + mem_check_items[0].adj_negative,
+                           mem_check_items[1].item + ": " + mem_check_items[1].adj_positive + "/" + mem_check_items[1].adj_negative,
+                           mem_check_items[2].item + ": " + mem_check_items[2].adj_positive + "/" + mem_check_items[2].adj_negative,
+                           mem_check_items[3].item + ": " + mem_check_items[3].adj_positive + "/" + mem_check_items[3].adj_negative,
+                           mem_check_items[4].item + ": " + mem_check_items[4].adj_positive + "/" + mem_check_items[4].adj_negative]
+
+const memory_check =  _.shuffle(memory_properties.concat(random_adj))
 
 console.log(memory_check);

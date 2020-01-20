@@ -14,7 +14,7 @@ const custom_memory_check = function(config, startTime) {
       const startingTime = Date.now()
       $("main").html(` <div class='magpie-view'>
       <section class="magpie-text-container">
-        <p class="magpie-view-text" style="font-size:20px">Select all of the things you can remember seeing in this experiment.</p>
+        <p class="magpie-view-text" style="font-size:20px">Select all of the adjective noun pairs that you can remember seeing in this experiment.</p>
       </section>
 
       <section class="magpie-answer-container">
