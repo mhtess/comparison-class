@@ -356,7 +356,7 @@ const custom_intro_view = function(config) {
             <img src="${config.picture1}">
           </div>
           <section class="magpie-text-container">
-            <p class="magpie-view-text"> Thank you for taking part in our study. We are studying how people talk about things around them. The study will take about 6-8 minutes.<br /> <br />
+            <p class="magpie-view-text"> Thank you for taking part in our study. We are studying how people talk about things around them. The study will take about 10 minutes.<br /> <br />
             </br>
             <p class="magpie-view-text" style="font-family:Courier New, Courier"> Please note: There will be multiple posted versions of this HIT (name:<b> Adjectives - 505</b>) throughout the next few days.
             Please attempt only one HIT in this series. You will not be allowed to complete multiple HITs in this series. </br> </br>
