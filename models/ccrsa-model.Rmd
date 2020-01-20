@@ -13,7 +13,7 @@ library(ggplot2)
 theme_set(theme_few())
 ```
 
-## RSA modeldefinition (string)
+## RSA model definition (string)
 
 ```{r utils}
 utils <- 'var round = function(x){
@@ -150,6 +150,8 @@ var statePrior = {
 };
 '
 ```
+
+
 
 ```{r cc inference RSA}
 rsa <- '
@@ -750,30 +752,35 @@ mp.both %>%
 ggplot(., aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
   geom_bar(stat= 'identity', 
            position = position_dodge(), 
-           color = 'white', 
+           color = 'black', 
            alpha = 0.8, width = 0.75)+
-  theme_black()+
+  #theme_black()+
   #scale_fill_brewer(palette = "Set3")+
     #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
-  scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
-  geom_hline(yintercept = 0.5, lty = 2, color = 'white')+
-  xlab("Subordinate Category")+
-  ylab("Subordinate comparison class")+
+  #scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
+  #scale_fill_solarized()+
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  geom_hline(yintercept = 0.5, lty = 2, color = 'black')+
+  xlab("Referent Category")+
+  ylab("Probability subordinate comparison class")+
   scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  guides(fill = guide_legend(reverse = T, title = "Utterance heard"))+
   theme(#legend.position = "bottom",
         #legend.direction = "horizontal",
-        legend.title = element_blank(),
+        #legend.title = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank())
 
-ggsave("figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3)
+#ggsave("figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3)
+
+#ggsave("../writing/paper/figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3.75)
 ```
 
 #### Plot: S2
 
 ```{r plot s2}
 make_density_line <- function(mu, sigma){
-  bind_rows(lapply(seq(-2, 2, 0.1), function(b){
+  bind_rows(lapply(unique(mp.s2$s), function(b){
     return(data.frame(s = b, p = dnorm(b, mean = mu, sd = sigma)))
   }))
 }
@@ -796,17 +803,21 @@ mp.s2 %>%
                       levels = c("negative_Adjective", "positive_Adjective",
                                  "silence_silence"),
                       labels = c("short", "tall", "silence"))) %>%
-ggplot(., aes(x = s, y = prob, color = utt, alpha = utt))+
-  geom_line(inherit.aes = F, data = sub_cat_priors, aes(x = s, y = p), 
-            color = 'grey', linetype = 2)+
-  geom_line()+
+  left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  mutate(norm_p = p / max(p)) %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = norm_p))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors, aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_line(size = 1.5)+
   #geom_line(position = position_dodge(width = 0.3))+
-  theme_black()+
-  scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
-  scale_alpha_manual(values  = c(1, 1, 0.4))+
+  #theme_black()+
+  scale_color_manual(values = c("#67a9cf","#ef8a62", "black"))+
+  scale_alpha_continuous(guide = 'none')+
   facet_grid(sub_mu~c)+
   xlab("Height (normalized scale)")+
   ylab("Speaker Production Probability")+
+  #guides(alpha = F) %>%
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
   theme(#legend.position = "bottom",
         #legend.direction = "horizontal",
@@ -829,26 +840,31 @@ mp.s2 %>%
                          levels = c(-1, 0, 1),
                          labels = c("jockey", "soccer player","basketball player")),
          utt = factor(utt,
-                      levels = c("negative_Adjective", "positive_Adjective",
-                                 "silence_silence"),
-                      labels = c("short", "tall", "silence")),
-         c = factor(c, levels = c("sub", "super"),
-                    labels = c("for a basketball player",
-                               "for a person"))) %>%
+                      levels = c( "silence_silence", "negative_Adjective", "positive_Adjective"),
+                      labels = c("silence", "short", "tall")),
+         c = factor(c, levels = c("super", "sub"),
+                    labels = c("people", "basketball players"
+                               ))) %>%
   filter(sub_mu == "basketball player") %>%
-ggplot(., aes(x = s, y = prob, color = utt, alpha = utt))+
-  geom_line(inherit.aes = F, data = sub_cat_priors %>%
-                filter(sub_mu == "basketball player"), 
-            aes(x = s, y = p), 
-            color = 'grey', linetype = 2)+
-  geom_line()+
+    left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  mutate(norm_p = p / max(p)) %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = norm_p))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors %>%
+  #               filter(sub_mu == "basketball player"), 
+  #           aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_line(size = 1.5)+
   #geom_line(position = position_dodge(width = 0.3))+
-  theme_black()+
-  scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
-  scale_alpha_manual(values  = c(1, 1, 0.4))+
-  facet_grid(.~c)+
+  #theme_black()+
+  #scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_color_manual(values = c('black', "#377eb8", "#e41a1c"))+
+  #scale_alpha_manual(values  = c(1, 1, 0.4))+
+  facet_grid(c~.)+
   xlab("Height (normalized scale)")+
   ylab("Speaker Production Probability")+
+  guides(color = guide_legend(reverse = T, title = "Utterance"),
+         alpha = F)+ #guide_legend(reverse = T, title = "Utterance"))+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
   theme(#legend.position = "bottom",
         #legend.direction = "horizontal",
@@ -857,11 +873,587 @@ ggplot(., aes(x = s, y = prob, color = utt, alpha = utt))+
         panel.grid.major = element_blank(),
         strip.text.y = element_text(angle = 0))
 
-ggsave("figs/cc_inference_S2_subPrior_altsNoExpl_bbaler.pdf", width = 6, height = 3)
+#ggsave("figs/cc_inference_S2_subPrior_altsNoExpl_bbaler.pdf", width = 6, height = 3)
+ggsave("../writing/paper/figs/cc_inference_S2_subPrior_altsNoExpl_bbaler_1col.pdf", width = 5, height = 4)
 
 ```
 
-## L0 model predictions
+Marginalizing over basketball player prior
+
+```{r}
+mp.s2 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c( "silence_silence", "negative_Adjective", "positive_Adjective"),
+                      labels = c("silence", "short", "tall")),
+         c = factor(c, levels = c( "sub", "super"),
+                    labels = c("basketball players", "people"
+                               ))) %>%
+  filter(sub_mu == "basketball player") %>%
+    left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  summarize(unnorm_prob =  sum(p *prob)) %>%
+  mutate(marginal_prob = unnorm_prob / sum(unnorm_prob)) %>%
+  ggplot(., aes(x = c, y = marginal_prob, fill = utt))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors %>%
+  #               filter(sub_mu == "basketball player"), 
+  #           aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_col(position = position_dodge(), color = 'black')+
+  #geom_line(position = position_dodge(width = 0.3))+
+  #theme_black()+
+  #scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_fill_manual(values = c('black', "#377eb8", "#e41a1c"))+
+  #scale_alpha_manual(values  = c(1, 1, 0.4))+
+  #facet_grid(c~.)+
+  xlab("\n Comparison Class")+
+  ylab("Speaker Production Probability\ngiven common knowledge of basketball player\n")+
+  guides(fill = guide_legend(reverse = T, title = "Utterance"))+ #guide_legend(reverse = T, title = "Utterance"))+
+  scale_y_continuous(limits = c(0, 0.75), breaks = c(0, 0.25, 0.5, 0.75))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        #legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+ggsave("../writing/paper/figs/cc_inference_S2_subPrior_altsNoExpl_bbaler_marginal.pdf", width = 6, height = 4)
+
+```
+
+
+
+## L0 setup (L1 inference, L0 marginalizes threshold)
+
+```{r rsaLanguage_l0}
+languageForRSA_l0 <- '
+var thresholdBins ={
+  positive: map(function(x){
+    return  x - (1/(binParam*2));
+  }, sort(statePrior.super.support())),
+  negative: map(function(x){
+    return  x + (1/(binParam*2));
+  }, sort(statePrior.super.support()))
+};
+
+var thresholdPrior = cache(function(form){
+  return Infer({
+    model: function() { return uniformDraw(thresholdBins[form]) }
+  });
+});
+
+// var utterances = { positive: ["positive_Adjective", "positive_sub", "positive_super"], negative: ["negative_Adjective", "negative_sub", "negative_super"] };
+
+var utterances = { positive: ["positive_Adjective","negative_Adjective","silence_silence"], negative: ["positive_Adjective","negative_Adjective", "silence_silence"] };
+
+var utteranceProbs = [1, 1, 1];
+var utterancePrior = cache(function(form){
+  return Infer({
+    model: function() {
+      return categorical({
+        vs: utterances[form],
+        ps: utteranceProbs
+      })
+    }
+  })
+});
+
+var meaning = function(utterance, state, threshold) {
+  utterance == "positive" ? state > threshold ? flip(0.9999) : flip(0.0001) :
+  utterance == "negative" ? state < threshold ? flip(0.9999) : flip(0.0001) :
+  true
+}
+
+'
+```
+
+```{r ccRSA_wl0}
+ccrsa_wl0 <- '
+// webppl ccrsa.wppl --require adjectiveRSA
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, comparisonClass) {
+  Infer({model: function(){
+    var adj = u.split("_")[0]
+    var threshold = adj == "silence" ? -99 :  sample(thresholdPrior(adj))
+    // var thresholds = {
+    //  positive: sample(thresholdPrior("positive")),
+    //  negative: sample(thresholdPrior("negative"))
+    // }
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var m = meaning(adj, state, threshold);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, comparisonClass, form) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior(form))
+    var L0 = literalListener(utterance, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var listener1 = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+     // display(comparisonClass)
+
+    var S1 = speaker1(state, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+'
+```
+
+```{r S1 calls for L0 threshold inference}
+s1calls_L0 <-'
+var speakerUtts = ["positive_Adjective",
+"negative_Adjective","silence_silence"]
+
+_.flattenDeep(map(function(comparisonclass){
+  map(function(s){
+    var speakProbs = speaker1(s, comparisonclass, "positive")
+    var uttProbs = _.fromPairs(map(function(u){ 
+      return [u, Math.exp(speakProbs.score(u))]
+    }, speakerUtts))
+    return extend(uttProbs, { s:s, c: comparisonclass })
+    }, stateVals)
+}, ["sub","super"]))
+'
+```
+
+## Run L1 / S1 models (with L0 inference model)
+
+```{r runModel_L1_L0theta, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both <- data.frame()
+mp.s1 <- data.frame()
+fullModel <- paste(utils, priorForRSA, languageForRSA_l0, ccrsa_wl0, 
+                   "listener1(paramsFromR.utt[0])", sep = "\n")
+
+fullModel_s1 = paste(utils, priorForRSA, languageForRSA_l0, ccrsa_wl0, 
+                     s1calls_L0, sep = "\n")
+
+for (p in sub.prior.params){
+  
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]),
+      mp.both)
+  }
+  
+  mp.s1 <- webppl(
+      program_code = fullModel_s1,
+      data = list(priorParams = prior.params),
+      data_var = "paramsFromR"
+  ) %>%
+    mutate(sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]) %>%
+    bind_rows(mp.s1)
+  
+  print(p$mu)
+}
+
+```
+
+#### Plot L1
+
+```{r}
+mp.both %>%
+  mutate(Adjective = factor(u,
+                            levels = c("negative", "positive"),
+                            labels = c("short", 
+                                       "tall")),
+         sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player",
+                                    "basketball player")),
+                           subInterpretation = 1- prob) %>%
+ggplot(., aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  #theme_black()+
+  #scale_fill_brewer(palette = "Set3")+
+    #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  #scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
+  #scale_fill_solarized()+
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  geom_hline(yintercept = 0.5, lty = 2, color = 'black')+
+  xlab("Referent Category")+
+  ylab("Probability subordinate comparison class")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  guides(fill = guide_legend(reverse = T, title = "Utterance heard"))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        #legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+
+#ggsave("figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3)
+
+#ggsave("../writing/paper/figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3.75)
+```
+
+#### Plot: S1
+
+```{r plot s1}
+make_density_line <- function(mu, sigma){
+  bind_rows(lapply(unique(mp.s1$s), function(b){
+    return(data.frame(s = b, p = dnorm(b, mean = mu, sd = sigma)))
+  }))
+}
+
+sub_cat_priors <- bind_rows(
+  make_density_line(-1, 0.5) %>% mutate(sub_mu = "low"),
+  make_density_line(0, 0.5) %>% mutate(sub_mu = "medium"),
+  make_density_line(1, 0.5) %>% mutate(sub_mu = "high")
+) %>% 
+  mutate(sub_mu = factor(sub_mu, levels = c("low", "medium","high"),
+                         labels =  c("jockey", "soccer player","basketball player")))
+
+mp.s1 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c("negative_Adjective", "positive_Adjective",
+                                 "silence_silence"),
+                      labels = c("short", "tall", "silence"))) %>%
+  left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  mutate(norm_p = p / max(p)) %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = norm_p))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors, aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_line(size = 1.5)+
+  #geom_line(position = position_dodge(width = 0.3))+
+  #theme_black()+
+  scale_color_manual(values = c("#67a9cf","#ef8a62", "black"))+
+  scale_alpha_continuous(guide = 'none')+
+  facet_grid(sub_mu~c)+
+  xlab("Height (normalized scale)")+
+  ylab("Speaker Production Probability")+
+  #guides(alpha = F) %>%
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+#ggsave("figs/cc_inference_S2_subPrior_altsNoExpl.pdf", width = 6, height = 5)
+
+```
+
+Only basketball player
+
+```{r}
+mp.s1 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c( "silence_silence", "negative_Adjective", "positive_Adjective"),
+                      labels = c("silence", "short", "tall")),
+         c = factor(c, levels = c("super", "sub"),
+                    labels = c("people", "basketball players"
+                               ))) %>%
+  filter(sub_mu == "basketball player") %>%
+    left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  mutate(norm_p = p / max(p)) %>%
+ggplot(., aes(x = s, y = prob, color = utt, alpha = norm_p))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors %>%
+  #               filter(sub_mu == "basketball player"), 
+  #           aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_line(size = 1.5)+
+  #geom_line(position = position_dodge(width = 0.3))+
+  #theme_black()+
+  #scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_color_manual(values = c('black', "#377eb8", "#e41a1c"))+
+  #scale_alpha_manual(values  = c(1, 1, 0.4))+
+  facet_grid(c~.)+
+  xlab("Height (normalized scale)")+
+  ylab("Speaker Production Probability")+
+  guides(color = guide_legend(reverse = T, title = "Utterance"),
+         alpha = F)+ #guide_legend(reverse = T, title = "Utterance"))+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 1))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+#ggsave("figs/cc_inference_S2_subPrior_altsNoExpl_bbaler.pdf", width = 6, height = 3)
+#ggsave("../writing/paper/figs/cc_inference_S2_subPrior_altsNoExpl_bbaler_1col.pdf", width = 5, height = 4)
+
+```
+
+
+Marginalizing over basketball player prior
+
+```{r}
+mp.s1 %>%
+  gather(utt, prob, 
+         positive_Adjective, negative_Adjective, silence_silence) %>%
+  mutate(sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player","basketball player")),
+         utt = factor(utt,
+                      levels = c( "silence_silence", "negative_Adjective", "positive_Adjective"),
+                      labels = c("silence", "short", "tall")),
+         c = factor(c, levels = c( "sub", "super"),
+                    labels = c("basketball players", "people"
+                               ))) %>%
+  filter(sub_mu == "basketball player") %>%
+    left_join(., sub_cat_priors) %>%
+  group_by(sub_mu, c, utt) %>%
+  summarize(unnorm_prob =  sum(p *prob)) %>%
+  mutate(marginal_prob = unnorm_prob / sum(unnorm_prob)) %>%
+  ggplot(., aes(x = c, y = marginal_prob, fill = utt))+
+  # geom_line(inherit.aes = F, data = sub_cat_priors %>%
+  #               filter(sub_mu == "basketball player"), 
+  #           aes(x = s, y = p), 
+  #           color = 'grey', linetype = 2)+
+  geom_col(position = position_dodge(), color = 'black')+
+  #geom_line(position = position_dodge(width = 0.3))+
+  #theme_black()+
+  #scale_color_manual(values = c("#67a9cf","#ef8a62", "#f7f7f7"))+
+  scale_fill_manual(values = c('black', "#377eb8", "#e41a1c"))+
+  #scale_alpha_manual(values  = c(1, 1, 0.4))+
+  #facet_grid(c~.)+
+  xlab("\n Comparison Class")+
+  ylab("Speaker Production Probability\ngiven common knowledge of basketball player\n")+
+  guides(fill = guide_legend(reverse = T, title = "Utterance"))+ #guide_legend(reverse = T, title = "Utterance"))+
+  scale_y_continuous(limits = c(0, 0.75), breaks = c(0, 0.25, 0.5, 0.75))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        #legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        strip.text.y = element_text(angle = 0))
+
+#ggsave("../writing/paper/figs/cc_inference_S2_subPrior_altsNoExpl_bbaler_marginal.pdf", width = 6, height = 4)
+
+```
+
+
+
+## L2 when S2 represents L1 uncertainty
+
+```{r ccRSA_wl0_ext}
+ccrsa_wl0_extensionL2 <- '
+var alphas = {s1: 3, s2: 1};
+var classPrior = Infer({
+  model: function(){return uniformDraw(["sub", "super"])}
+});
+
+var utteranceProbs = [1, 1, 1];
+var utterancePrior_fixed = Infer({
+    model: function() {
+      return categorical({
+        vs: ["positive_Adjective","negative_Adjective","silence_silence"],
+        ps: utteranceProbs
+      })
+    }
+  })
+
+var alphas = {s1: 3, s2: 1};
+
+var literalListener = cache(function(u, comparisonClass) {
+  Infer({model: function(){
+    var adj = u.split("_")[0]
+    var threshold = adj == "silence" ? -99 :  sample(thresholdPrior(adj))
+    var cc = u.split("_")[1] == "Adjective" ?
+        comparisonClass :
+    u.split("_")[1] == "silence" ?
+        comparisonClass :
+    u.split("_")[1]    
+
+    var state = sample(statePrior[cc]);
+    var m = meaning(adj, state, threshold);
+    condition(m);
+    return state;
+  }})
+}, 10000)
+
+var speaker1 = cache(function(state, comparisonClass) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior_fixed)
+    var L0 = literalListener(utterance, comparisonClass)
+    factor( alphas.s1 * L0.score(state) )
+    return utterance
+  }})
+}, 10000)
+
+var listener1 = function(utterance) {
+  Infer({model: function(){
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+    var S1 = speaker1(state, comparisonClass);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+
+var speaker2 = cache(function(state, comparisonClass) {
+  Infer({model: function(){
+    var utterance = sample(utterancePrior_fixed)
+    var L1 = listener1(utterance)
+    factor( alphas.s2 * L1.score(comparisonClass) )
+    return utterance
+  }})
+}, 10000)
+
+var listener2 = function(form) {
+  Infer({model: function(){
+    var utterance = form + "_Adjective";
+    var comparisonClass = sample(classPrior);
+    var state = sample(statePrior["sub"]);
+     // display(comparisonClass)
+    var S1 = speaker2(state, comparisonClass, form);
+    observe(S1, utterance);
+    return comparisonClass
+  }})
+}
+'
+```
+
+
+```{r runModel_L2_L1_L0theta, cache = T}
+sub.prior.params <- c( 
+  list( sub = data.frame(mu = 1, sigma = 0.5) ),
+   list( sub = data.frame(mu = 0, sigma = 0.5) ),
+   list( sub = data.frame(mu = -1, sigma = 0.5) )
+  )
+
+mp.both.l2 <- data.frame()
+mp.s1 <- data.frame()
+fullModel <- paste(utils, priorForRSA, languageForRSA_l0, ccrsa_wl0_extensionL2,
+                   "listener2(paramsFromR.utt[0])", sep = "\n")
+
+# fullModel_s1 = paste(utils, priorForRSA, languageForRSA_l0, ccrsa_wl0, 
+#                      s1calls_L0, sep = "\n")
+
+for (p in sub.prior.params){
+  
+  prior.params <- list(super = data.frame(mu = 0, sigma = 1), sub = p)
+
+  for (u in c("positive", "negative")){
+  
+    mp <- webppl(
+      program_code = fullModel,
+      data = list(utt = u, 
+                  priorParams = prior.params),
+      data_var = "paramsFromR"
+    )
+
+    mp.both.l2 <- bind_rows(mp %>%
+      filter(support == "super") %>%
+      mutate(u = u, sub_mu = p["mu"][[1]], 
+             sub_sigma = p["sigma"][[1]]),
+      mp.both.l2)
+  }
+  
+  # mp.s1 <- webppl(
+  #     program_code = fullModel_s1,
+  #     data = list(priorParams = prior.params),
+  #     data_var = "paramsFromR"
+  # ) %>%
+  #   mutate(sub_mu = p["mu"][[1]], sub_sigma = p["sigma"][[1]]) %>%
+  #   bind_rows(mp.s1)
+  
+  print(p$mu)
+}
+
+```
+#### Plot L2
+
+```{r}
+mp.both.l2 %>%
+  mutate(Adjective = factor(u,
+                            levels = c("negative", "positive"),
+                            labels = c("short", 
+                                       "tall")),
+         sub_mu = factor(sub_mu, 
+                         levels = c(-1, 0, 1),
+                         labels = c("jockey", "soccer player",
+                                    "basketball player")),
+                           subInterpretation = 1- prob) %>%
+ggplot(., aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
+  geom_bar(stat= 'identity', 
+           position = position_dodge(), 
+           color = 'black', 
+           alpha = 0.8, width = 0.75)+
+  #theme_black()+
+  #scale_fill_brewer(palette = "Set3")+
+    #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  #scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
+  #scale_fill_solarized()+
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  geom_hline(yintercept = 0.5, lty = 2, color = 'black')+
+  xlab("Referent Category")+
+  ylab("Probability subordinate comparison class")+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
+  guides(fill = guide_legend(reverse = T, title = "Utterance heard"))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        #legend.title = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+
+#ggsave("figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3)
+
+#ggsave("../writing/paper/figs/cc_inference_L2_subPrior_altsNoExpl.pdf", width = 6, height = 3.75)
+```
+
+
+
+
+## L0 only model predictions
 
 ```{r l0_alternativemodel}
 cc_l0 <- '
@@ -922,7 +1514,6 @@ for (p in sub.prior.params){
   }
   #print(p$mu)
 }
-
 ```
 
 Plot L0
@@ -930,27 +1521,36 @@ Plot L0
 ```{r L0  model predictions plot}
 ggplot(mp.both.l0 %>%
          mutate(Adjective = factor(u,
-                                      levels = c("negative", "positive")),
+                                      levels = c("negative", "positive"),
+                                   labels = c("short", "tall")),
                            sub_mu = factor(sub_mu, levels = c(-1, 0, 1),
-                                           labels = c("low", "medium",
-                                                      "high")),
+                                           labels =  c("jockey", "soccer player",
+                                    "basketball player")),
                            subInterpretation = 1- prob),
                   aes(x = sub_mu, y = subInterpretation, fill = Adjective))+
   geom_bar(stat= 'identity', 
            position = position_dodge(), 
            color = 'black', 
            alpha = 0.8, width = 0.75)+
-  scale_fill_brewer(palette = "Set3")+
-  geom_hline(yintercept = 0.5, lty = 2)+
-  xlab("Subordinate prior mean")+
-  ylab("Subordinate interpretation")+
+  #theme_black()+
+  #scale_fill_brewer(palette = "Set3")+
+    #scale_color_manual(values = c("#ef8a62","#67a9cf", "#f7f7f7"))+
+  #scale_fill_manual(values = c("#67a9cf", "#ef8a62"))+
+  #scale_fill_solarized()+
+  scale_fill_manual(values = c("#377eb8", "#e41a1c"))+
+  geom_hline(yintercept = 0.5, lty = 2, color = 'black')+
+  xlab("Referent Category")+
+  ylab("Probability subordinate comparison class")+
+  ggtitle("Alternative literal listener model")+
   scale_y_continuous(limits = c(0, 1), breaks = c(0,0.5, 1))+
-  theme(legend.position = "bottom",
-        legend.direction = "horizontal",
-        legend.title = element_blank(),
+  guides(fill = guide_legend(reverse = T, title = "Utterance heard"))+
+  theme(#legend.position = "bottom",
+        #legend.direction = "horizontal",
+        #legend.title = element_blank(),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank())
-  
+
+ggsave("../writing/paper/figs/cc_inference_L0.pdf", width = 6, height = 3.75)
 ```
 
 
