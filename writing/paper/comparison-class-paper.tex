@@ -311,7 +311,8 @@ S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cos
 \end{align}
 %exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} )}
 
-We assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action). 
+For simplicity, we assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action).\footnote{The inferences we model are invariant to reasonable choices of alternative utterances. Most notably, including alternatives that allow the speaker to explicitly communicate the comparison class (e.g., \emph{tall for a basketball player}) do not change the qualitative inferences we describe.
+}
 The listener who updates their beliefs about the temperature given a vague adjectival utterance and a fixed comparison class $L_0(x \mid u, c)$ is model of context-sensitive adjective interpretation, a problem which has garnered a lot of recent attention by formal models of language understanding \cite{Lassiter2013, Qing2014a, Lassiter2017}.
 We use a model of a literal listener which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![tall]\!] = height > \theta\)) that gets combined with the listener's prior knowledge of the comparison class to produce a comparison class-specific interpretation of an adjective (Figure \ref{fig:modelCartoon}B).\footnote{Following standard treatment of antonyms, the
   semantics of \emph{short} are a threshold function on a distinct
@@ -362,15 +363,21 @@ This inference is driven by prior knowledge about the category, and thus, we wou
 Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class (Figure \ref{fig:modelCartoon}E left bars). 
 Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should depend upon the quantitative details of the priors. 
 
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{figs/cc_inference_L0.pdf}
-\caption{\small \label{fig:alternativeModelPredictions}Alternative model predictions for a literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall?
-% speaker production probability distributions are shown with the.
-}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.6\textwidth]{figs/cc_inference_L0.pdf}
+%\caption{\small \label{fig:alternativeModelPredictions}}
+%\end{figure}
+
+\begin{figure}[t!]
+    \centering
+    \subfigure[A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall?]{\label{fig:alternativeModelPredictions}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L0.pdf}}
+    \subfigure[A more sophisticated pragmatic listener model that reasons about which comparison class a speaker believes that the listener would infer. ]{\label{fig:alternativeModelPredictions2}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L2.pdf}}
+    \caption{Alternative model predictions.}
 \end{figure}
 
-\subsection{Alternative model}
+
+\subsection{Literal alternative model}
 
 The inference about the comparison class outlined above involves a listener reasoning about a speaker reasoning about a listener.
 One might wonder whether the inference about the comparison class is necessarily a pragmatic inference.
@@ -384,8 +391,26 @@ L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \
 Similar to the pragmatic listener model (Eq.~\ref{eq:L1}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
 Unlike the pragmatic listener model, however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener knows the referent is a basketball player, but believes the speaker was assuming a \emph{person comparison class}).
 The literal listener version of the model cannot separate these representations.
-In effect, this listener is answering a slightly different question: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
+In effect, this listener is answering a slightly different question from the comparison class inference problem. The question this alternative model is answering is: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
 This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
+
+\subsection{Alternative pragmatic model}
+
+The pragmatic comparison class inference listener model (Eq. \ref{eq:L1}) reasons about which comparison class a speaker is more likely to be assuming.
+That is, the speaker (Eq. \ref{eq:S1}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
+Speakers may be aware, however, that the comparison class is not in the common ground, but may still avoid articulating a comparison class if the listener can reasonably be assumed to infer the comparison class. This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed they the listener would infer, given that the first-order listener inference about the comparison class itself involves a pragmatic inference as shown via counterexample by the literal model above. This higher-order reasoning model is given by the following equations:
+
+\begin{align}
+L_2(x, c \mid u, k) &\propto S_2(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L2} \\
+S_2(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{1}(x, c \mid u) - \text{cost}(u) ))}\label{eq:S2} 
+\end{align}
+
+The primary difference between this model and the model given by Eqs.~\ref{eq:L1} and \ref{eq:S1} is in the speaker $S_2$.
+This speaker chooses their utterance by taking into account the fact that the listener $L_1$ (Eq.~\ref{eq:L1}) is uncertain about the comparison class. 
+As shown in Figure \ref{fig:alternativeModelPredictions2}, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations of about the category and the adjective heard.
+Further, the inferences of this model, like those of the simpler pragmatics model, are resilient to reasonable choices of alternative utterances; most notably, if the set of alternative utterances provides a way to explicitly articulate the comparison class (e.g., the speaker can say \emph{They're tall for a basketball player}), the same inferences result from hearing the utterance without a comparison class.
+
+
 %The utterance which does not reference a class (e.g., It's warm}) inherits the same meaning as the utterance with the explicit class that
 %matches the assumed implicit class (i.e., if \(c_{i} = c_{sub}\), then
 %\(u_i\) has the same meaning as \(u_{sub}\)). Therefore, reasoning about
@@ -1189,7 +1214,6 @@ This analysis confirms that our experimental items bring to mind the kinds of ge
 %{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
 \caption{Experiment 2 results for a subset of the items.}\label{fig:adjEndorseItems}
 \end{figure}
-
 
 %\newpage
 %\section{Appendix}
