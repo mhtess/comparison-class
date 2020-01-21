@@ -93,6 +93,30 @@ const create_view = function(domain) {
   return domain_views
 }
 
+const omitted_stimuli = [
+  {
+    "stim_id": "15",
+    "np_expectations": "high",
+    "n": 39,
+    "neg_adj": 1,
+    "pos_adj": 39
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "high",
+    "n": 37,
+    "neg_adj": 0,
+    "pos_adj": 36
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "low",
+    "n": 36,
+    "neg_adj": 35,
+    "pos_adj": 1
+  }
+]
+
 const items = {
 
   // ---------  DARKNESS: DARK - LIGHT (10) -----------
