@@ -2,16 +2,22 @@
 // trial viee context created for comparison class expt and adjusted accrodingly
 
 
-const trials = function(domain) {
-  var trial_list = []
-  for( var x = 0; x < domain.length; x++) {
-    trial_list[x] = x
-  }
-// take 5 trials of each domain
-// ------ ADJUST FOR MORE ITEMS ---------
-  var num_trials = 4
-  return _.shuffle(trial_list).slice(0, num_trials)
-}
+// const trials = function(domain) {
+//   var trial_list = []
+//   for( var x = 0; x < domain.length; x++) {
+//     trial_list[x] = x
+//   }
+// // take 5 trials of each domain
+// // ------ ADJUST FOR MORE ITEMS ---------
+//   var num_trials = 4
+//   return _.shuffle(trial_list).slice(0, num_trials)
+// }
+
+// ---------------------------------------------------------
+//  ADJUST NUMBER OF TRIALS HERE
+n_trials = 48
+// ---------------------------------------------------------
+
 
 const fc_order = _.shuffle(["adj_positive", "adj_negative"])
 // these functions can be used for trials with randomly sampled adjective and noun phrase conditions
@@ -28,27 +34,37 @@ const fc_order = _.shuffle(["adj_positive", "adj_negative"])
 // create the context sentence for chosen item (positive, neutral or negative example on the relevant scale)
 // insert the correct article if needed
 // insert the item
+// const context_sent = function(item, domain) {
+//   if(domain.context.includes("PRE")) {
+//     var det = "pre_" + item
+//     var context_sent = domain.context.replace("PHRASE", domain[item]).replace("PRE", domain[det])
+//     return context_sent
+//   } else {
+//     var context_sent = domain.context.replace("PHRASE", domain[item])
+//     return context_sent
+//   }
+// }
 const context_sent = function(item, domain) {
-  if(domain.context.includes("PRE")) {
-    var det = "pre_" + item
-    var context_sent = domain.context.replace("PHRASE", domain[item]).replace("PRE", domain[det])
+  if(item.context.includes("PRE")) {
+    var det = "pre_" + domain
+    var context_sent = item.context.replace("PHRASE", item[domain]).replace("PRE", item[det])
     return context_sent
   } else {
-    var context_sent = domain.context.replace("PHRASE", domain[item])
+    var context_sent = item.context.replace("PHRASE", item[domain])
     return context_sent
   }
 }
-
 // create the data for the trial view
 const create_view = function(domain) {
 // get the numbers of the 5 chosen items for the domain (size, temperature etc...)
-  const sequence = trials(domain)
-  var i;
-  const domain_views = []
-  const np_seq = _.shuffle(["high", "low", "medium", "high", "low", "medium"])
-  const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
+  // const sequence = trials(domain)
+  // var i;
+  // const domain_views = []
+  // const np_seq = _.shuffle(["high", "low", "medium", "high", "low", "medium"])
+  // const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
 
-  for (i=0; i < sequence.length ; i++) {
+// iterate over all items
+  for (i=0; i < domain.length ; i++) {
     // in each domain, there are 6 Trials
     // 3 positive adj, 3 negative adj trials
     // 2 trials with each positive, negative and neutral NP
@@ -56,34 +72,35 @@ const create_view = function(domain) {
 
     // sample a positive, neutral or negative item
     // const current_item = item()
-    const current_item = np_seq[i]
+    const current_item = domain[i]
+    const single_item = current_item.np_expectations
     // const questions = ["<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
     //                     "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"]
-    var x = sequence[i]
-    // return the one current domain item of the five
-    const single_item = domain[x]
-    // sample an adjective (positive or negative)
-    // const adjective = adj()
-    const adjective = adj_seq[i]
+    // var x = sequence[i]
+    // // return the one current domain item of the five
+    // const single_item = domain[x]
+    // // sample an adjective (positive or negative)
+    // // const adjective = adj()
+    // const adjective = adj_seq[i]
     // construct condition of first question
     // return the view data
     var text_1 = {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"}
     const view = {
       context: context_sent(current_item, single_item),
-      question: "Do you think " + domain[x].pronoun + " would be:" ,
+      question: "Do you think " + current_item.pronoun + " would be:" ,
       // text_pos:  "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
       // text_neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
-      sentence_1: "<b>" + domain[x][fc_order[0]] + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
-      sentence_2: "<b>" + domain[x][fc_order[1]] + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
+      sentence_1: "<b>" + current_item[fc_order[0]] + "</b> relative to other <b>" + current_item.superordinate + "?</b>",
+      sentence_2: "<b>" + current_item[fc_order[1]] + "</b> relative to other <b>" + current_item.superordinate + "?</b>",
       condition_1: fc_order[0],
       condition_2: fc_order[1],
-      item_cond: current_item,
-      item: domain[x][current_item],
-      stim_id: domain[x].stim_id,
-      degree: domain[x].degree,
-      adj_positive: domain[x].adj_positive,
-      adj_negative: domain[x].adj_negative,
-      superordinate: domain[x].superordinate
+      item_cond: single_item,
+      item: current_item.np,
+      stim_id: current_item.stim_id,
+      degree: current_item.degree,
+      adj: current_item.adj,
+      // adj_negative: current_item.adj_negative,
+      superordinate: current_item.superordinate
     }
 // add view data to list of views for the chosen domain
     domain_views.push(view)
@@ -117,11 +134,11 @@ const omitted_stimuli = [
   }
 ]
 
-const items = {
+const items = [
 
   // ---------  DARKNESS: DARK - LIGHT (10) -----------
 
-    darkness: [
+
       {
           stim_id: "1",
           author_id: "9",
@@ -231,11 +248,10 @@ const items = {
           context: "You are at a zoo and notice the fur color of a PHRASE."
       },
 
-  ],
 
 // --------- HARDNESS : HARD -SOFT (6) -----------
 
-    hardness: [
+
 
     {
         stim_id: "9",
@@ -316,13 +332,13 @@ const items = {
         low: "pillow",
         pronoun: "it",
         context: "You are in your bedroom and sit on a PHRASE."
-    }
-  ],
+    },
+
 
 // -------- HEIGHT : TALL - SHORT (6) -----------
 
 
-    height: [
+
       {
           stim_id: "15",
           author_id: "6",
@@ -411,13 +427,13 @@ const items = {
         adj_negative: "short",
         pronoun: "it",
         context: "You are walking in a botanical garden and see PRE PHRASE."
-      }
-  ],
+      },
+
 
 
 // ----------- DURATION / LENGTH : LONG - SHORT (8)----------
 
-    length: [
+
 
     {
         stim_id: "21",
@@ -529,13 +545,13 @@ const items = {
       adj_negative: "short",
       pronoun: "it",
       context: "You are considering listening to your favorite PHRASE."
-    }
-  ],
+    },
+
 
 
 // ------------ LOUDNESS : LOUD - / NOISY - QUIET (12) ----------
 
-    loudness: [
+
       {
           stim_id: "29",
           author_id: "7",
@@ -708,13 +724,13 @@ const items = {
           pre_low: "an",
           pronoun: "it",
           context: "You want to play music and try out PRE PHRASE."
-      }
-  ],
+      },
+
 
 
 // ------------ PRICE: EXPENSIVE - CHEAP (12) -----------
 
-    price: [
+
       {
           stim_id: "41",
           author_id: "5",
@@ -860,13 +876,13 @@ const items = {
             adj_negative: "cheap",
             pronoun: "it",
             context: "You are considering different places for dinner and look at the menu of a PHRASE."
-        }
+        },
 
-   ],
+
 
 // -------------SIZE : BIG - SMALL (11) -------------
 
-    size: [
+
       {
           stim_id: "51",
           author_id: "5",
@@ -992,12 +1008,12 @@ const items = {
           low: "chihuahua",
           pronoun: "it",
           context: "You are taking a walk and see a PHRASE."
-      }
-  ],
+      },
+
 
 // --------------- SPEED : QUICK / FAST - SLOW (8) -------------
 
-    speed: [
+
       {
           stim_id: "59",
           author_id: "11",
@@ -1111,12 +1127,11 @@ const items = {
           low: "glider",
           pronoun: "it",
           context: "You are at an airport and see a PHRASE in the air."
-      }
-  ],
+      },
+
 
 // -------------- STRENGTH : STRONG -WEAK (7)------------------
 
-    strength: [
       {
           stim_id: "67",
           author_id: "4",
@@ -1186,11 +1201,11 @@ const items = {
           low: "tent",
           pronoun: "they",
           context: "You are examining the walls of a friend's new PHRASE."
-      }
-  ],
+      },
+
 
 // ------------ TEMPERATURE : HOT / WARM - COLD (8) ---------
-    temp: [
+
       {
           stim_id: "72",
           author_id: "3",
@@ -1273,11 +1288,11 @@ const items = {
           adj_negative: "cold",
           pronoun: "it",
           context: "You are at a restaurant and take a taste of a PHRASE. "
-      }
-  ],
+      },
+
 
 // ------ WEIGHT: HEAVY - LIGHT (8)-------------
-    weight: [
+
       {
           stim_id: "78",
           author_id: "4",
@@ -1389,12 +1404,12 @@ const items = {
           low: "plum",
           pronoun: "it",
           context: "You are at a grocery store and pick up a PHRASE."
-      }
-  ],
+      },
+
 
 // --------- WIDTH: WIDE - NARROW (5)
 
-    width: [
+
       {
           stim_id: "86",
           author_id: "9",
@@ -1465,23 +1480,115 @@ const items = {
         low: "back door",
         pronoun: "it",
         context: "You are attempting to move furniture through the PHRASE of a house."
-      }
-  ]
-}
+      },
+
+]
+
 
 // joining the lists of views for single dimensions together into one list of all trial views, shuffled in 05_view.js
-const trial_info = {
-  main:  create_view(items.size).concat(
-    create_view(items.length).concat(create_view(items.price).concat(
-      create_view(items.weight).concat(create_view(items.loudness).concat(
-        create_view(items.darkness).concat(create_view(items.height).concat(
-          create_view(items.temp).concat(create_view(items.speed).concat(
-            create_view(items.hardness).concat(create_view(items.strength).concat(
-              create_view(items.width)
-            )))))))))))
+// const trial_info = {
+//   main:  create_view(items.size).concat(
+//     create_view(items.length).concat(create_view(items.price).concat(
+//       create_view(items.weight).concat(create_view(items.loudness).concat(
+//         create_view(items.darkness).concat(create_view(items.height).concat(
+//           create_view(items.temp).concat(create_view(items.speed).concat(
+//             create_view(items.hardness).concat(create_view(items.strength).concat(
+//               create_view(items.width)
+//             )))))))))))
+//
+// }
 
+var all_trials = [];
+for (var i = 0; i < items.length; i++) {
+  for (var j = 0; j < 3; j++){
+    np_expectations = ["low", "medium", "high"][j]
+    for (var k = 0; k < 2; k++){
+      adj_polarity = ["positive", "negative"][k]
+      all_trials.push({
+        stim_id: items[i].stim_id,
+        context: items[i].context,
+        degree: items[i].degree,
+        np_expectations: np_expectations,
+        np: items[i][np_expectations],
+        superordinate: items[i].superordinate,
+        adj_polarity: adj_polarity,
+        adj: items[i]["adj_" + adj_polarity],
+        pre: items[i]["pre_" + np_expectations],
+        pronoun: items[i].pronoun,
+        environment_mod: items[i].environment_mod
+      });
+    }
+  }
 }
 
+
+
+all_trials_w_context = create_view(all_trials);
+
+function getNounElicitationTrials(examples, n_trials) {
+  var trials = []//, form;
+  // create list of all possible stimuli
+
+	// filter out omitted_stimuli
+	console.log("all possible trials = " + all_trials_w_context.length)
+	var reduced_all_trials = _.reject(all_trials_w_context, function(x){
+		return _.some(_.map(omitted_stimuli, function(y){
+			return x.stim_id == y.stim_id &&
+			// x.adj_polarity == y.adj_polarity &&
+			x.np_expectations == y.np_expectations
+		}))
+	})
+	console.log("after exclusions = " + reduced_all_trials.length)
+    // select stimuli from remainder, but only one stimulus per item_set
+	// sample item sets to be used in this experiment
+	var all_stim_ids = _.uniq(_.pluck(reduced_all_trials, "stim_id"))
+	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
+	// shuffle all trials
+	var shuffled_all_trials = _.shuffle(reduced_all_trials)
+	var all_conditions = [
+		{np_expectations: "high"},
+
+		{np_expectations: "medium"},
+
+		{np_expectations: "low"},
+
+	]
+	var n_trials_per_condition = n_trials / all_conditions.length
+	// loop over 6 conditions
+	for (var i = 0; i < all_conditions.length; i++) {
+		var condition = all_conditions[i]
+		var possible_stims_in_condition = _.where(shuffled_all_trials,
+			{
+				np_expectations: condition.np_expectations
+				// adj_polarity: condition.adj_polarity
+			})
+		var selected_stims = _.shuffle(possible_stims_in_condition).slice(0, n_trials_per_condition)
+        // once stims are selected, remove their "stim_id" from the list of possible stim_ids (to avoid resampling the same stim_id)
+		var condition_stim_ids = _.pluck(selected_stims, "stim_id")
+		var all_stim_ids = _.without(all_stim_ids, condition_stim_ids)
+		for (var j = 0; j < n_trials_per_condition; j++) {
+				trials.push(selected_stims[j])
+		}
+	}
+  // shuffles until all trials do not use the same back-to-back degrees
+  while(1) {
+    for (var i = 0; i < trials.length-1; i++) {
+			console.log(i)
+      if (trials[i]["degree"] == trials[i+1]["degree"]) {
+        trials = _.shuffle(trials);
+        break;
+      }
+      // return once we have reached the end of the trials array without finding adjacent degrees
+      if (i == trials.length-2) { return trials; }
+    }
+  }
+}
+
+var main_trials = getNounElicitationTrials(all_trials_w_context, n_trials);
+
+const trial_info = {
+  main:  main_trials
+}
 
 const random_adj = _.shuffle(["watch: beautiful/ugly", "shirt: purple/orange", "animal: wild/tame", "guitar: green/blue", "necklace: shiny/dull"])
 
