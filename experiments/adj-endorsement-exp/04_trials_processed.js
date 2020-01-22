@@ -1,7 +1,6 @@
 // adjective endorsement stimuli built from n = 50 NP free yourduction experiment,
 // trial viee context created for comparison class expt and adjusted accrodingly
 
-
 // const trials = function(domain) {
 //   var trial_list = []
 //   for( var x = 0; x < domain.length; x++) {
@@ -44,13 +43,14 @@ const fc_order = _.shuffle(["adj_positive", "adj_negative"])
 //     return context_sent
 //   }
 // }
-const context_sent = function(item, domain) {
+const context_sent = function(item) {
+
   if(item.context.includes("PRE")) {
-    var det = "pre_" + domain
-    var context_sent = item.context.replace("PHRASE", item[domain]).replace("PRE", item[det])
+    // var det = "pre_" + domain
+    var context_sent = item.context.replace("PHRASE", item.np).replace("PRE", item.pre)
     return context_sent
   } else {
-    var context_sent = item.context.replace("PHRASE", item[domain])
+    var context_sent = item.context.replace("PHRASE", item.np)
     return context_sent
   }
 }
@@ -59,7 +59,7 @@ const create_view = function(domain) {
 // get the numbers of the 5 chosen items for the domain (size, temperature etc...)
   // const sequence = trials(domain)
   // var i;
-  // const domain_views = []
+  const domain_views = []
   // const np_seq = _.shuffle(["high", "low", "medium", "high", "low", "medium"])
   // const adj_seq = _.shuffle(["adj_positive", "adj_negative", "adj_positive", "adj_negative", "adj_positive", "adj_negative"])
 
@@ -84,9 +84,9 @@ const create_view = function(domain) {
     // const adjective = adj_seq[i]
     // construct condition of first question
     // return the view data
-    var text_1 = {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"}
+    // var text_1 = {pos: "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>", neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>"}
     const view = {
-      context: context_sent(current_item, single_item),
+      context: context_sent(current_item),
       question: "Do you think " + current_item.pronoun + " would be:" ,
       // text_pos:  "<b>" + domain[x].adj_positive + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
       // text_neg: "<b>" + domain[x].adj_negative + "</b> relative to other <b>" + domain[x].superordinate + "?</b>",
@@ -94,12 +94,12 @@ const create_view = function(domain) {
       sentence_2: "<b>" + current_item[fc_order[1]] + "</b> relative to other <b>" + current_item.superordinate + "?</b>",
       condition_1: fc_order[0],
       condition_2: fc_order[1],
-      item_cond: single_item,
+      np_expectations: single_item,
       item: current_item.np,
       stim_id: current_item.stim_id,
       degree: current_item.degree,
-      adj: current_item.adj,
-      // adj_negative: current_item.adj_negative,
+      adj_positive: current_item.adj_positive,
+      adj_negative: current_item.adj_negative,
       superordinate: current_item.superordinate
     }
 // add view data to list of views for the chosen domain
@@ -112,25 +112,25 @@ const create_view = function(domain) {
 
 const omitted_stimuli = [
   {
-    "stim_id": "15",
-    "np_expectations": "high",
-    "n": 39,
-    "neg_adj": 1,
-    "pos_adj": 39
+    stim_id: "15",
+    np_expectations: "high",
+    n: 39,
+    neg_adj: 1,
+    pos_adj: 39
   },
   {
-    "stim_id": "71",
-    "np_expectations": "high",
-    "n": 37,
-    "neg_adj": 0,
-    "pos_adj": 36
+    stim_id: "71",
+    np_expectations: "high",
+    n: 37,
+    neg_adj: 0,
+    pos_adj: 36
   },
   {
-    "stim_id": "72",
-    "np_expectations": "low",
-    "n": 36,
-    "neg_adj": 35,
-    "pos_adj": 1
+    stim_id: "72",
+    np_expectations: "low",
+    n: 36,
+    neg_adj: 35,
+    pos_adj: 1
   }
 ]
 
@@ -1502,8 +1502,8 @@ var all_trials = [];
 for (var i = 0; i < items.length; i++) {
   for (var j = 0; j < 3; j++){
     np_expectations = ["low", "medium", "high"][j]
-    for (var k = 0; k < 2; k++){
-      adj_polarity = ["positive", "negative"][k]
+    // for (var k = 0; k < 2; k++){
+    //   adj_polarity = ["positive", "negative"][k]
       all_trials.push({
         stim_id: items[i].stim_id,
         context: items[i].context,
@@ -1511,13 +1511,15 @@ for (var i = 0; i < items.length; i++) {
         np_expectations: np_expectations,
         np: items[i][np_expectations],
         superordinate: items[i].superordinate,
-        adj_polarity: adj_polarity,
-        adj: items[i]["adj_" + adj_polarity],
+        // adj_polarity: adj_polarity,
+        // adj: items[i]["adj_" + adj_polarity],
+        adj_positive: items[i].adj_positive,
+        adj_negative: items[i].adj_negative,
         pre: items[i]["pre_" + np_expectations],
         pronoun: items[i].pronoun,
         environment_mod: items[i].environment_mod
       });
-    }
+    // }
   }
 }
 
@@ -1525,23 +1527,20 @@ for (var i = 0; i < items.length; i++) {
 
 all_trials_w_context = create_view(all_trials);
 
-function getNounElicitationTrials(examples, n_trials) {
+function getNounElicitationTrials(all_trials_w_context, n_trials) {
   var trials = []//, form;
-  // create list of all possible stimuli
 
 	// filter out omitted_stimuli
 	console.log("all possible trials = " + all_trials_w_context.length)
 	var reduced_all_trials = _.reject(all_trials_w_context, function(x){
 		return _.some(_.map(omitted_stimuli, function(y){
-			return x.stim_id == y.stim_id &&
-			// x.adj_polarity == y.adj_polarity &&
-			x.np_expectations == y.np_expectations
+			return x.stim_id == y.stim_id &&	x.np_expectations == y.np_expectations
 		}))
 	})
 	console.log("after exclusions = " + reduced_all_trials.length)
     // select stimuli from remainder, but only one stimulus per item_set
 	// sample item sets to be used in this experiment
-	var all_stim_ids = _.uniq(_.pluck(reduced_all_trials, "stim_id"))
+	var all_stim_ids = _.uniq( _.map(reduced_all_trials, "stim_id"))
 	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
 	// shuffle all trials
 	var shuffled_all_trials = _.shuffle(reduced_all_trials)
@@ -1554,26 +1553,28 @@ function getNounElicitationTrials(examples, n_trials) {
 
 	]
 	var n_trials_per_condition = n_trials / all_conditions.length
-	// loop over 6 conditions
+	// loop over 3 conditions
 	for (var i = 0; i < all_conditions.length; i++) {
 		var condition = all_conditions[i]
-		var possible_stims_in_condition = _.where(shuffled_all_trials,
+		var possible_stims_in_condition = _.filter(shuffled_all_trials,
 			{
 				np_expectations: condition.np_expectations
 				// adj_polarity: condition.adj_polarity
 			})
+    console.log("nr possible stims in condition:" + possible_stims_in_condition.length)
 		var selected_stims = _.shuffle(possible_stims_in_condition).slice(0, n_trials_per_condition)
         // once stims are selected, remove their "stim_id" from the list of possible stim_ids (to avoid resampling the same stim_id)
-		var condition_stim_ids = _.pluck(selected_stims, "stim_id")
+		var condition_stim_ids = _.map(selected_stims, "stim_id")
 		var all_stim_ids = _.without(all_stim_ids, condition_stim_ids)
 		for (var j = 0; j < n_trials_per_condition; j++) {
 				trials.push(selected_stims[j])
 		}
 	}
+
   // shuffles until all trials do not use the same back-to-back degrees
   while(1) {
     for (var i = 0; i < trials.length-1; i++) {
-			console.log(i)
+			// console.log(i)
       if (trials[i]["degree"] == trials[i+1]["degree"]) {
         trials = _.shuffle(trials);
         break;
@@ -1582,7 +1583,9 @@ function getNounElicitationTrials(examples, n_trials) {
       if (i == trials.length-2) { return trials; }
     }
   }
+  return trials
 }
+
 
 var main_trials = getNounElicitationTrials(all_trials_w_context, n_trials);
 
@@ -1594,6 +1597,7 @@ const random_adj = _.shuffle(["watch: beautiful/ugly", "shirt: purple/orange", "
 
 
 const mem_check_items = _.shuffle(trial_info.main).slice(0,5)
+
 const memory_properties = [mem_check_items[0].item + ": " + mem_check_items[0].adj_positive + "/" + mem_check_items[0].adj_negative,
                            mem_check_items[1].item + ": " + mem_check_items[1].adj_positive + "/" + mem_check_items[1].adj_negative,
                            mem_check_items[2].item + ": " + mem_check_items[2].adj_positive + "/" + mem_check_items[2].adj_negative,
@@ -1601,5 +1605,3 @@ const memory_properties = [mem_check_items[0].item + ": " + mem_check_items[0].a
                            mem_check_items[4].item + ": " + mem_check_items[4].adj_positive + "/" + mem_check_items[4].adj_negative]
 
 const memory_check =  _.shuffle(memory_properties.concat(random_adj))
-
-console.log(memory_check);

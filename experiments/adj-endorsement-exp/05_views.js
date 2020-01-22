@@ -27,7 +27,7 @@ const memory_check_catch = custom_memory_check({
 const adj_endorsement_both = custom_forced_choice({
   trials: trial_info.main.length ,
   name: 'adj_endorsement_both',
-  data: _.shuffle(trial_info.main)
+  data: trial_info.main
 })
 // Every experiment should start with an intro view. Here you can welcome your participants and tell them what the experiment is about
 const custom_intro = custom_intro_view({

@@ -189,7 +189,7 @@ const custom_botcaptcha = function(config){
             <p class="text" id="error" style="color: #7CB637">Error: You failed the comprehension questions too many times.
             You are not permitted to complete the HIT. Please click 'Return HIT' to avoid any impact on your approval rating.
             <br/><br/>
-            If you believe you are receiving thin message in error, please email <a href="mailto:polinats@mit.edu">polinats@mit.edu</a> </p>
+            If you believe you are receiving this message in error, please email <a href="mailto:polina.tsvilodub@gmail.com">polina.tsvilodub@gmail.com</a> </p>
         </section>
         </div>`);
 // don't allow to press enter in the response field
@@ -365,7 +365,7 @@ const custom_intro_view = function(config) {
 
           <section class="magpie-text-container">
           <p class="magpie-view-text">
-            By continuing, you are participating in an experiment being performed by cognitive scientists in the MIT Computational Psycholinguistics Lab. If you have questions about this research, please contact Polina Tsvilodub, at <a href="mailto:polinats@mit.edu">polinats@mit.edu</a>, or MH Tessler, at tessler@mit.edu. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.
+            By continuing, you are participating in an experiment being performed by cognitive scientists in the MIT Computational Psycholinguistics Lab. If you have questions about this research, please contact Polina Tsvilodub, at <a href="mailto:polina.tsvilodub@gmail.com">polina.tsvilodub@gmail.com</a>, or MH Tessler, at tessler@mit.edu. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.
              </p>
           </section>
 
