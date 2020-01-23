@@ -1568,7 +1568,7 @@ function getNounElicitationTrials(all_trials_w_context, n_trials) {
 		var selected_stims = _.shuffle(possible_stims_in_condition).slice(0, n_trials_per_condition)
         // once stims are selected, remove their "stim_id" from the list of possible stim_ids (to avoid resampling the same stim_id)
 		var condition_stim_ids = _.map(selected_stims, "stim_id")
-  
+
 		var delta_stim_ids = _.difference(all_stim_ids, condition_stim_ids)
 
     shuffled_all_trials = checkStimIds(delta_stim_ids, shuffled_all_trials)
@@ -1576,6 +1576,7 @@ function getNounElicitationTrials(all_trials_w_context, n_trials) {
 		for (var j = 0; j < n_trials_per_condition; j++) {
 				trials.push(selected_stims[j])
 		}
+    console.log(_.some(delta_stim_ids, function(x){_.includes(condition_stim_ids, x)}))
 	}
 
   // shuffles until all trials do not use the same back-to-back degrees
