@@ -1539,7 +1539,7 @@ function getNounElicitationTrials(all_trials_w_context, n_trials) {
 	console.log("all possible trials = " + all_trials_w_context.length)
 	var reduced_all_trials = _.reject(all_trials_w_context, function(x){
 		return _.some(_.map(omitted_stimuli, function(y){
-			return x.stim_id == y.stim_id &&	x.np_expectations == y.np_expectations
+			return x.stim_id == y.stim_id && x.np_expectations == y.np_expectations
 		}))
 	})
 	console.log("after exclusions = " + reduced_all_trials.length)
@@ -1548,27 +1548,26 @@ function getNounElicitationTrials(all_trials_w_context, n_trials) {
 	var all_stim_ids = _.uniq( _.map(reduced_all_trials, "stim_id"))
 	var stims_for_this_expt = _.shuffle(all_stim_ids).slice(0, n_trials)
 	// shuffle all trials
-  var shuffled_all_trials = _.shuffle(reduced_all_trials)
-  // console.log("original shuffled trials: " + shuffled_all_trials)
-	var all_conditions = [
+    var shuffled_all_trials = _.shuffle(reduced_all_trials)
+    // console.log("original shuffled trials: " + shuffled_all_trials)
+	var all_conditions = _.shuffle([
 		{np_expectations: "high"},
 		{np_expectations: "medium"},
 		{np_expectations: "low"},
-	]
+	])
 	var n_trials_per_condition = n_trials / all_conditions.length
 	// loop over 3 conditions
-	for (var i = 0; i < all_conditions.length; i++) {
 
+	for (var i = 0; i < all_conditions.length; i++) {
+        // debugger;
 		var condition = all_conditions[i]
-		var possible_stims_in_condition = _.filter(shuffled_all_trials,
-			{
-				np_expectations: condition.np_expectations
-			})
-    console.log("nr possible stims in condition:" + possible_stims_in_condition.length)
+		var possible_stims_in_condition = _.filter(shuffled_all_trials, condition)
+        // console.log(possible_stims_in_condition)
+        console.log("nr possible stims in condition: " + possible_stims_in_condition.length)
 		var selected_stims = _.shuffle(possible_stims_in_condition).slice(0, n_trials_per_condition)
         // once stims are selected, remove their "stim_id" from the list of possible stim_ids (to avoid resampling the same stim_id)
 		var condition_stim_ids = _.map(selected_stims, "stim_id")
-  
+
 		var delta_stim_ids = _.difference(all_stim_ids, condition_stim_ids)
 
     shuffled_all_trials = checkStimIds(delta_stim_ids, shuffled_all_trials)
