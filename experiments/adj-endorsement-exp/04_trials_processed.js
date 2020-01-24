@@ -109,28 +109,77 @@ const create_view = function(domain) {
 // add stimuli to be omitted
 const omitted_stimuli = [
   {
-    stim_id: "15",
-    np_expectations: "high",
-    n: 39,
-    neg_adj: 1,
-    pos_adj: 39
-  },
-
-  {
-    stim_id: "71",
-    np_expectations: "high",
-    n: 37,
-    neg_adj: 0,
-    pos_adj: 36
+    "stim_id": "10",
+    "np_expectations": "high",
+    "n": 39,
+    "neg_adj": 1,
+    "pos_adj": 37
   },
   {
-    stim_id: "72",
-    np_expectations: "low",
-    n: 36,
-    neg_adj: 35,
-    pos_adj: 1
+    "stim_id": "10",
+    "np_expectations": "low",
+    "n": 44,
+    "neg_adj": 42,
+    "pos_adj": 2
+  },
+  {
+    "stim_id": "11",
+    "np_expectations": "high",
+    "n": 35,
+    "neg_adj": 2,
+    "pos_adj": 33
+  },
+  {
+    "stim_id": "15",
+    "np_expectations": "high",
+    "n": 39,
+    "neg_adj": 1,
+    "pos_adj": 39
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "low",
+    "n": 36,
+    "neg_adj": 34,
+    "pos_adj": 2
+  },
+  {
+    "stim_id": "69",
+    "np_expectations": "high",
+    "n": 50,
+    "neg_adj": 4,
+    "pos_adj": 45
+  },
+  {
+    "stim_id": "71",
+    "np_expectations": "high",
+    "n": 38,
+    "neg_adj": 0,
+    "pos_adj": 37
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "low",
+    "n": 37,
+    "neg_adj": 36,
+    "pos_adj": 1
+  },
+  {
+    "stim_id": "88",
+    "np_expectations": "high",
+    "n": 51,
+    "neg_adj": 23,
+    "pos_adj": 28
+  },
+  {
+    "stim_id": "89",
+    "np_expectations": "medium",
+    "n": 50,
+    "neg_adj": 23,
+    "pos_adj": 23
   }
 ]
+
 
 const items = [
 
