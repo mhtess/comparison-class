@@ -111,9 +111,9 @@ const omitted_stimuli = [
   {
     "stim_id": "1",
     "np_expectations": "high",
-    "n": 41,
+    "n": 44,
     "neg_adj": 2,
-    "pos_adj": 40
+    "pos_adj": 43
   },
   {
     "stim_id": "1",
@@ -125,22 +125,22 @@ const omitted_stimuli = [
   {
     "stim_id": "10",
     "np_expectations": "low",
-    "n": 56,
-    "neg_adj": 54,
-    "pos_adj": 4
+    "n": 57,
+    "neg_adj": 55,
+    "pos_adj": 5
   },
   {
     "stim_id": "11",
-    "np_expectations": "low",
-    "n": 42,
-    "neg_adj": 40,
-    "pos_adj": 2
+    "np_expectations": "high",
+    "n": 51,
+    "neg_adj": 4,
+    "pos_adj": 49
   },
   {
     "stim_id": "12",
     "np_expectations": "low",
-    "n": 51,
-    "neg_adj": 42,
+    "n": 53,
+    "neg_adj": 43,
     "pos_adj": 6
   },
   {
@@ -151,6 +151,13 @@ const omitted_stimuli = [
     "pos_adj": 44
   },
   {
+    "stim_id": "14",
+    "np_expectations": "low",
+    "n": 51,
+    "neg_adj": 47,
+    "pos_adj": 5
+  },
+  {
     "stim_id": "15",
     "np_expectations": "high",
     "n": 39,
@@ -158,53 +165,102 @@ const omitted_stimuli = [
     "pos_adj": 39
   },
   {
+    "stim_id": "15",
+    "np_expectations": "low",
+    "n": 51,
+    "neg_adj": 46,
+    "pos_adj": 7
+  },
+  {
     "stim_id": "16",
     "np_expectations": "medium",
-    "n": 51,
+    "n": 53,
     "neg_adj": 10,
-    "pos_adj": 41
+    "pos_adj": 43
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "high",
+    "n": 52,
+    "neg_adj": 9,
+    "pos_adj": 38
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "low",
+    "n": 50,
+    "neg_adj": 47,
+    "pos_adj": 3
+  },
+  {
+    "stim_id": "17",
+    "np_expectations": "medium",
+    "n": 51,
+    "neg_adj": 30,
+    "pos_adj": 12
   },
   {
     "stim_id": "18",
     "np_expectations": "low",
-    "n": 54,
+    "n": 55,
     "neg_adj": 37,
-    "pos_adj": 15
+    "pos_adj": 16
+  },
+  {
+    "stim_id": "19",
+    "np_expectations": "low",
+    "n": 50,
+    "neg_adj": 42,
+    "pos_adj": 11
   },
   {
     "stim_id": "19",
     "np_expectations": "medium",
-    "n": 50,
+    "n": 52,
     "neg_adj": 15,
-    "pos_adj": 26
+    "pos_adj": 27
+  },
+  {
+    "stim_id": "20",
+    "np_expectations": "high",
+    "n": 50,
+    "neg_adj": 8,
+    "pos_adj": 44
   },
   {
     "stim_id": "20",
     "np_expectations": "medium",
-    "n": 57,
-    "neg_adj": 16,
-    "pos_adj": 42
+    "n": 62,
+    "neg_adj": 17,
+    "pos_adj": 47
   },
   {
     "stim_id": "21",
     "np_expectations": "low",
-    "n": 35,
-    "neg_adj": 35,
-    "pos_adj": 0
+    "n": 37,
+    "neg_adj": 36,
+    "pos_adj": 1
   },
   {
     "stim_id": "22",
     "np_expectations": "low",
-    "n": 42,
-    "neg_adj": 41,
-    "pos_adj": 1
+    "n": 43,
+    "neg_adj": 42,
+    "pos_adj": 2
+  },
+  {
+    "stim_id": "25",
+    "np_expectations": "low",
+    "n": 51,
+    "neg_adj": 40,
+    "pos_adj": 11
   },
   {
     "stim_id": "3",
     "np_expectations": "low",
-    "n": 36,
-    "neg_adj": 34,
-    "pos_adj": 1
+    "n": 40,
+    "neg_adj": 38,
+    "pos_adj": 2
   },
   {
     "stim_id": "44",
@@ -216,44 +272,51 @@ const omitted_stimuli = [
   {
     "stim_id": "48",
     "np_expectations": "high",
-    "n": 36,
-    "neg_adj": 1,
-    "pos_adj": 35
+    "n": 40,
+    "neg_adj": 2,
+    "pos_adj": 39
   },
   {
     "stim_id": "58",
     "np_expectations": "high",
-    "n": 42,
+    "n": 45,
     "neg_adj": 2,
-    "pos_adj": 40
+    "pos_adj": 43
   },
   {
     "stim_id": "59",
     "np_expectations": "high",
-    "n": 35,
+    "n": 38,
     "neg_adj": 2,
-    "pos_adj": 34
+    "pos_adj": 36
+  },
+  {
+    "stim_id": "66",
+    "np_expectations": "high",
+    "n": 55,
+    "neg_adj": 6,
+    "pos_adj": 45
   },
   {
     "stim_id": "67",
     "np_expectations": "high",
-    "n": 52,
-    "neg_adj": 4,
-    "pos_adj": 36
+    "n": 53,
+    "neg_adj": 5,
+    "pos_adj": 37
   },
   {
     "stim_id": "67",
     "np_expectations": "low",
-    "n": 59,
-    "neg_adj": 49,
+    "n": 62,
+    "neg_adj": 52,
     "pos_adj": 10
   },
   {
     "stim_id": "67",
     "np_expectations": "medium",
-    "n": 51,
+    "n": 55,
     "neg_adj": 11,
-    "pos_adj": 35
+    "pos_adj": 38
   },
   {
     "stim_id": "68",
@@ -264,10 +327,17 @@ const omitted_stimuli = [
   },
   {
     "stim_id": "68",
+    "np_expectations": "low",
+    "n": 53,
+    "neg_adj": 31,
+    "pos_adj": 19
+  },
+  {
+    "stim_id": "68",
     "np_expectations": "medium",
-    "n": 54,
-    "neg_adj": 6,
-    "pos_adj": 47
+    "n": 56,
+    "neg_adj": 7,
+    "pos_adj": 48
   },
   {
     "stim_id": "69",
@@ -279,51 +349,58 @@ const omitted_stimuli = [
   {
     "stim_id": "69",
     "np_expectations": "low",
-    "n": 52,
-    "neg_adj": 36,
-    "pos_adj": 14
+    "n": 56,
+    "neg_adj": 37,
+    "pos_adj": 17
   },
   {
     "stim_id": "69",
     "np_expectations": "medium",
-    "n": 55,
-    "neg_adj": 20,
-    "pos_adj": 31
+    "n": 62,
+    "neg_adj": 22,
+    "pos_adj": 36
   },
   {
     "stim_id": "70",
     "np_expectations": "low",
-    "n": 64,
-    "neg_adj": 42,
-    "pos_adj": 17
+    "n": 69,
+    "neg_adj": 45,
+    "pos_adj": 20
   },
   {
     "stim_id": "70",
     "np_expectations": "medium",
-    "n": 51,
-    "neg_adj": 9,
-    "pos_adj": 37
+    "n": 57,
+    "neg_adj": 10,
+    "pos_adj": 42
   },
   {
     "stim_id": "71",
     "np_expectations": "high",
-    "n": 38,
-    "neg_adj": 0,
-    "pos_adj": 37
+    "n": 39,
+    "neg_adj": 1,
+    "pos_adj": 38
   },
   {
     "stim_id": "71",
     "np_expectations": "low",
-    "n": 57,
-    "neg_adj": 46,
-    "pos_adj": 12
+    "n": 63,
+    "neg_adj": 50,
+    "pos_adj": 13
   },
   {
     "stim_id": "71",
     "np_expectations": "medium",
-    "n": 54,
-    "neg_adj": 11,
-    "pos_adj": 36
+    "n": 58,
+    "neg_adj": 12,
+    "pos_adj": 39
+  },
+  {
+    "stim_id": "72",
+    "np_expectations": "high",
+    "n": 51,
+    "neg_adj": 3,
+    "pos_adj": 47
   },
   {
     "stim_id": "72",
@@ -335,79 +412,149 @@ const omitted_stimuli = [
   {
     "stim_id": "73",
     "np_expectations": "high",
-    "n": 53,
+    "n": 56,
     "neg_adj": 6,
-    "pos_adj": 50
+    "pos_adj": 53
   },
   {
     "stim_id": "74",
     "np_expectations": "high",
-    "n": 38,
+    "n": 39,
     "neg_adj": 2,
-    "pos_adj": 36
+    "pos_adj": 37
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "low",
+    "n": 51,
+    "neg_adj": 49,
+    "pos_adj": 5
+  },
+  {
+    "stim_id": "74",
+    "np_expectations": "medium",
+    "n": 50,
+    "neg_adj": 44,
+    "pos_adj": 10
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "high",
+    "n": 53,
+    "neg_adj": 4,
+    "pos_adj": 48
   },
   {
     "stim_id": "75",
     "np_expectations": "low",
-    "n": 46,
-    "neg_adj": 45,
+    "n": 48,
+    "neg_adj": 47,
     "pos_adj": 2
+  },
+  {
+    "stim_id": "75",
+    "np_expectations": "medium",
+    "n": 52,
+    "neg_adj": 26,
+    "pos_adj": 23
+  },
+  {
+    "stim_id": "76",
+    "np_expectations": "high",
+    "n": 51,
+    "neg_adj": 5,
+    "pos_adj": 48
+  },
+  {
+    "stim_id": "77",
+    "np_expectations": "low",
+    "n": 50,
+    "neg_adj": 48,
+    "pos_adj": 3
   },
   {
     "stim_id": "77",
     "np_expectations": "medium",
-    "n": 52,
-    "neg_adj": 20,
-    "pos_adj": 24
+    "n": 54,
+    "neg_adj": 21,
+    "pos_adj": 26
   },
   {
-    "stim_id": "79",
-    "np_expectations": "medium",
+    "stim_id": "78",
+    "np_expectations": "high",
     "n": 35,
-    "neg_adj": 35,
-    "pos_adj": 2
+    "neg_adj": 2,
+    "pos_adj": 34
+  },
+  {
+    "stim_id": "8",
+    "np_expectations": "medium",
+    "n": 50,
+    "neg_adj": 15,
+    "pos_adj": 32
+  },
+  {
+    "stim_id": "80",
+    "np_expectations": "low",
+    "n": 50,
+    "neg_adj": 47,
+    "pos_adj": 6
+  },
+  {
+    "stim_id": "81",
+    "np_expectations": "low",
+    "n": 50,
+    "neg_adj": 38,
+    "pos_adj": 15
   },
   {
     "stim_id": "82",
     "np_expectations": "low",
-    "n": 37,
-    "neg_adj": 37,
-    "pos_adj": 0
-  },
-  {
-    "stim_id": "85",
-    "np_expectations": "high",
-    "n": 36,
-    "neg_adj": 2,
-    "pos_adj": 35
+    "n": 40,
+    "neg_adj": 39,
+    "pos_adj": 1
   },
   {
     "stim_id": "86",
     "np_expectations": "high",
-    "n": 54,
+    "n": 55,
     "neg_adj": 4,
-    "pos_adj": 50
+    "pos_adj": 51
   },
   {
     "stim_id": "86",
     "np_expectations": "low",
-    "n": 60,
-    "neg_adj": 53,
+    "n": 62,
+    "neg_adj": 55,
     "pos_adj": 8
   },
   {
     "stim_id": "86",
     "np_expectations": "medium",
-    "n": 55,
-    "neg_adj": 38,
-    "pos_adj": 14
+    "n": 57,
+    "neg_adj": 40,
+    "pos_adj": 15
   },
   {
     "stim_id": "87",
     "np_expectations": "high",
-    "n": 59,
+    "n": 62,
     "neg_adj": 11,
-    "pos_adj": 46
+    "pos_adj": 49
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "low",
+    "n": 51,
+    "neg_adj": 45,
+    "pos_adj": 9
+  },
+  {
+    "stim_id": "87",
+    "np_expectations": "medium",
+    "n": 51,
+    "neg_adj": 32,
+    "pos_adj": 15
   },
   {
     "stim_id": "88",
@@ -419,23 +566,23 @@ const omitted_stimuli = [
   {
     "stim_id": "88",
     "np_expectations": "medium",
-    "n": 53,
-    "neg_adj": 40,
-    "pos_adj": 12
+    "n": 56,
+    "neg_adj": 43,
+    "pos_adj": 13
   },
   {
     "stim_id": "89",
     "np_expectations": "high",
-    "n": 53,
-    "neg_adj": 18,
-    "pos_adj": 38
+    "n": 58,
+    "neg_adj": 19,
+    "pos_adj": 43
   },
   {
     "stim_id": "89",
     "np_expectations": "low",
-    "n": 58,
-    "neg_adj": 46,
-    "pos_adj": 15
+    "n": 63,
+    "neg_adj": 51,
+    "pos_adj": 17
   },
   {
     "stim_id": "89",
@@ -447,27 +594,25 @@ const omitted_stimuli = [
   {
     "stim_id": "9",
     "np_expectations": "medium",
-    "n": 54,
-    "neg_adj": 46,
+    "n": 55,
+    "neg_adj": 47,
     "pos_adj": 9
   },
   {
     "stim_id": "90",
     "np_expectations": "low",
-    "n": 55,
+    "n": 59,
     "neg_adj": 30,
-    "pos_adj": 23
+    "pos_adj": 27
   },
   {
     "stim_id": "90",
     "np_expectations": "medium",
-    "n": 61,
-    "neg_adj": 23,
-    "pos_adj": 35
+    "n": 64,
+    "neg_adj": 26,
+    "pos_adj": 36
   }
 ]
-
-
 
 const items = [
 
