@@ -79,9 +79,17 @@ for (result_file in result.files) {
 }
 
 
-write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+df.trials %>%
+  group_by(workerid) %>%
+  count() %>%
+  group_by(n) %>%
+  count()
+
+
+
+# write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+# write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+# write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
 ```
 
 
@@ -594,14 +602,11 @@ n.total.responses - n.valid.responses
 
 We correct for common misspellings in the responses. 
 
-
-
 We treat certain responses as synonymous with our supplied NPs given the context.
 
 We also replace a few common responses with synonyms, which match our supplied NPs better (e.g., NP =  "car ride", common response = "other drives"). Some replacements are more specific 
 (Based on pilot data, specific mistakes and synonyms are converted to the seed NPs.). 
 All irregular plurals in the set set are converted to singulars to match the seed noun phrase. 
-
 
 
 ```{r}
@@ -625,7 +630,6 @@ sum(d.tidy.resp.valid.resps$corrected_lemma)
 sum(d.tidy.resp.valid.resps$corrected_lemma) / n.valid.responses
 
 ```
-
 
 This code no longer cleans the responses by removing stop words. That latter method produces issues for the "pick-up truck" (which it doesn't match correctly), times of day, and some responses involved "The + Singular_NP" (which are ambiguous and should be excluded).  
 
@@ -808,8 +812,6 @@ d.tidy.resp.analysis %>%
 Here, we look at the responses that were not matched to our anticipated NPs and superordinates and the synonyms of the NPs we already caught. We judge if the deviating responses are synonymous to our seed NPs or our superordinates and match them.
 
 ```{r}
-
-
 
 # categorize the responses upon looking at the reponses not matching the NP nor the superordinate
 
