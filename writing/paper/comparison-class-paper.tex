@@ -434,9 +434,9 @@ We first empirically elicit test stimuli by having participants fill out phrasal
 From this set, we curate a set of experimental stimuli which we use in the other two tasks.
 Task 2 is the main comparison class inference experiment in which participants rephrase a speaker's statement in a way that makes the comparison class explicit.
 The data from Task 2 allow us to test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E.
-Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that allow us to constrain the parameters of the comparison class inference model, in order to test the quantitative predictions of the model. 
+Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that allow us to test the quantitative predictions of the comparison class inference model by constraining model parameters. 
 The quantitative predictions of the model are tested using a joint Bayesian data analytic strategy, where we explicitly model the data from both the Comparison Class Inference and Adjective Endorsement tasks.
-This joint Bayesian data-analytic strategy allows us to infer, rather than stipulate, the world knowledge that guides the inference about the comparison class in the computational model. 
+This joint Bayesian data-analytic strategy allows us to infer from simple linguistic judgments the world knowledge that guides the inference about the comparison class in the computational model. 
 
 %\mht{may want to reverse the order, if we use the modal superordinate comparison class from the Inference experiment as the comparison class in the Adjective Endorsement experiment}
 
@@ -613,7 +613,7 @@ Categories were curated from a set of empirically elicited noun phrases (Experim
 
 We report detailed methods for Task 2 (Comparison Class Inference) here. 
 Methods and results concerning Task 1 (Stimuli Generation) and Task 3 (Adjective Endorsement) are described in brief here, and in full detail in the Supplement.
-Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered for the Comparison Class Inference task: \url{osf.io/XXXX}.
+Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered for the Comparison Class Inference task: \url{osf.io/xuc96}.
 
 
 \subsection{Methods}
@@ -701,11 +701,11 @@ We processed the responses by correcting for misspellings, lemmatizing, and coll
 
 In order to improve alignment across responses, we corrected for misspellings (367; 1.38\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; 318, 1.20\%). 
 
-Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the specific noun phrase by which the referent is introduced (\emph{specific NP}, e.g., a basketball player) or a more general (e.g., basic or superordinate) category. 
-In order to convey a category at least as specific as the specific-NP, one must include the specific-NP in the response. 
-For example, \emph{male basketball players} is more specific than \emph{basketball players}.\footnote{We checked for the presence of negation markers (e.g., ``all kinds of people except basketball players''). but no response contained any.}
-After preprocessing, we checked whether the cleaned response contained the specific-NP as a substring or contained the pre-designated general-NP. \footnote{Some of our pre-desginated general-NPs were incorrect guesses as to what would be the most salient general category in the context. These cases were all very clear, and we simply replace our pre-designated general-NPs with the empirical general-NP.}
-22157 (83.4\%) of valid responses could be automatically categorized as either the specific NP or a basic or superordinate category that was consistent across items in the item set. 
+Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the specific noun phrase by which the referent is introduced (\emph{specific-NP}, e.g., a basketball player) or a more general (e.g., basic or superordinate) category (\emph{general-NP}). 
+We assume that in order to convey a category at least as specific as the specific-NP, one must include the specific-NP in the response. 
+For example, \emph{male basketball players} is more specific than \emph{basketball players}, but includes the substring \emph{basketball player}.\footnote{We checked for the presence of negation markers (e.g., ``all kinds of people except basketball players''), but no response contained any.}
+After preprocessing, we checked whether the cleaned response contained the specific-NP as a substring or contained the pre-designated general-NP. \footnote{Some of our pre-designated general-NPs turned out to be incorrect guesses as to what would be the most salient general category in the context. These cases were all very clear, and we replaced our pre-designated general-NPs with the empirical general-NP.}
+22157 (83.4\%) of valid responses could be automatically categorized as either the specific-NP or a general-NP (a basic or superordinate category that was consistent across items in the item set). 
 %\red{For example, in response to  \{basketball players, golfers, jockeys\} are \{tall, short\}, \textbf{X\%} of participants produced either one of the three specific NPs or the more general \emph{people}}. \mht{[how common is athlete here?]}
 
 Of the remaining 4423 (16.6\%) responses, 1966 were unique. 
@@ -713,10 +713,11 @@ Of the remaining 4423 (16.6\%) responses, 1966 were unique.
 \subsubsection{Regression analysis}
 %Our primary hypothesis was that usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the Specific NP~vs.~not) would be influenced via an interaction between the general expectations about the specific category and the polarity of the adjective. 
 
-As predicted, the usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the Specific NP~vs.~not)  was influenced via an interaction between the general expectations about the specific category and the adjective polarity (Figure \ref{fig:ccInferenceItems}).\footnote{
-	For the regression analysis, we predict subordinate class paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure. The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
+Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E).
+As predicted, the usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the specific NP~vs.~not)  was influenced via an interaction between the general expectations about the specific category and the adjective polarity (Figure \ref{fig:ccInferenceItems}).\footnote{
+	For the regression analysis, we predict specific-NP paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure. The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
 }
-Namely, when the specific category was expected to be near the high-end of the scale (e.g., the height of a basketball player), the positive form adjective (e.g., tall) led to credibly more inferences of a basic/superordinate comparison class than the negative form adjective (e.g., short) in comparison to middle-of-the-scale items (e.g., soccer player):  beta-weight and 95\% Bayesian credible interval: \brmresults{expt3_brm_pilot.csv}{np_expectationshigh:adj_polarity1}.
+Namely, when the specific category was expected to be near the high-end of the scale (e.g., the height of a basketball player), the positive form adjective (e.g., tall) led to credibly more inferences of a basic/superordinate comparison class (e.g., \emph{tall for a person}) than the negative form adjective (e.g., short) in comparison to control, middle-of-the-scale items (e.g., soccer player):  beta-weight and 95\% Bayesian credible interval: \brmresults{expt3_brm_pilot.csv}{np_expectationshigh:adj_polarity1}.
 The opposite interaction was observed for categories that were expected to be near the low-end of the scale (e.g., the height of a gymnast player): Hearing the positive form adjective led to credibly more inferences of a more specific  comparison class than hearing a negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt3_brm_pilot.csv}{np_expectationslow:adj_polarity1}.
  Notably, when the specific category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between subordinate comparison classes for the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): \brmresults{expt3_brm_pilot.csv}{adj_polarity1}.
  There was an overall preference for subordinate comparison classes for the  middle-of-the-scale subordinate categories (\brmresults{expt3_brm_pilot.csv}{Intercept}), and there was no difference in this overall preference when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt3_brm_pilot.csv}{np_expectationshigh}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt3_brm_pilot.csv}{np_expectationslow}).
@@ -726,14 +727,15 @@ This analysis confirms the primary hypothesis.
 
 \section{Quantitative Analysis}
 
-Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E). 
-The model is quantitative in nature, however, and can make quantitative predictions concerning the strength of comparison class inferences given model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
+In addition to making qualitative predictions about the level-of-abstraction of the inferred comparison class, our model makes quantitative predictions concerning the strength of comparison class inference.
+The model's quantitative predictions depend upon model parameters that describe world knowledge $P(x)$ and prior expectations about the comparison class $P(c)$.
 
 Previous modeling papers in the RSA tradition empirically elicit world knowledge $P(x)$ through prior elicitation tasks.
-Such tasks often involve estimating numerical quantities or making probability judgments, for which the participant must have relevant knowledge concerning the units of measure (e.g., prices in dollars) and for which complicated linking functions are often designed to relate latent probabilities to the estimation data \cite{Franke2016}. 
-We take a different approach: We make small modifications to the same core RSA architecture to make predictions about a related language task concerning the same domains used in the Comparison Class Inference task. 
-We then construct a Bayesian data analytic model to infer the world knowledge shared between these two tasks, along with the few other free parameters of the full BDA-RSA model (Figure \ref{fig:bayesnet}). 
-This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to model broader coverage data sets while still constraining model flexibility because the models must predict more distinct data points. 
+Such tasks typically involve estimating numerical quantities or making probability judgments, for which the participant must have relevant knowledge concerning the units of measure (e.g., prices in dollars) and/or for which complicated linking functions are designed to relate latent probabilities to the estimation data \cite{Franke2016}. 
+In order to estimate world knowledge $P(x)$ for our large, heterogeneous set of items, we take a different approach.
+We turn the prior elicitation task simple into a simple natural language experiment (Expt.~3), for which our linking function is an RSA model with a very similar architecture to our comparison class inference model. 
+We then integrate the two data sources (comparison class inference and prior elicitation) using a Bayesian data analytic model that infers the world knowledge shared between these two tasks, along with the few other free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
+This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to predict and explain broader coverage data sets while still constraining flexibility by forcing models to predict more distinct data points. 
 
 \subsection{Data-analysis model}
 
@@ -741,25 +743,25 @@ This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explici
 
 In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
 Comparing interpretations of the same adjective across different comparison classes is an inherently relative judgment; thus, only the relative values for the degrees affect model predictions. 
-Therefore, we fix each general (basic/superordinate) class in each domain to be a standard normal distribution---$P(x \mid c = c_{basic}) = \mathcal{N}(0, 1)$---and assume the specific (subordinate/basic) priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+Therefore, we fix each general (basic/superordinate) class in each domain to be a standard normal distribution---$P(x \mid c = c_{general}) = \mathcal{N}(0, 1)$---and assume the specific (subordinate/basic) priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
 These parameters vary by the category $k = c_{sub}$ as well as the degree scale (e.g., height vs. weight).
 We infer the plausible values of the parameters governing the subordinate priors from the data.
 
-This model with uncertainty around the parameters of the world knowledge priors is overparameretized, however, with respect to the comparison class inference data. The data from the comparison class experiment (Task 2) is insufficient to reliably estimate the model parameters governing the world knowledge priors. 
-To alleviate this, we use the same RSA architecture to predict additional data about a related Adjective Endorsement task. 
-In the Adjective Endorsement task ($n=375$), participants are asked to judge whether a gradable adjective (e.g., \emph{warm} or \emph{cold}) would be true of a hypothetical member of a specific category relative to the basic- or superordinate level category (e.g., \emph{You step outside during the winter. Do you think it would be warm relative to other days of the year? ...cold relative to other days of the year?}; see Supplementary Information for full experimental details).
+%This model with uncertainty around the parameters of the world knowledge priors is overparameretized, however, with respect to the comparison class inference data. The data from the comparison class experiment (Task 2) is insufficient to reliably estimate the model parameters governing the world knowledge priors. 
+To constrain the world knowledge parameters, we use the same RSA architecture to predict additional data about a related Adjective Endorsement task (Expt.~3). 
+In the Adjective Endorsement task ($n=375$), participants are asked to judge whether a gradable adjective (e.g., \emph{warm} or \emph{cold}) would be true of a hypothetical member of a specific category relative to the basic- or superordinate level category (e.g., \emph{You step outside during the winter. Do you think it would be warm relative to other days of the year? ...cold relative to other days of the year?}). 
+That is, we have participants judge the truth or falsity of adjectives when the comparison class is explicit (see Supplementary Information for full experimental details).
 
-To model the adjective endorsement data, we remove comparison class uncertainty from the model (since the task provides the comparison class explicitly) and, following \citeA{Tessler2019psychrev}, model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, where $L_0(x \mid u)$ is given by Eq. \ref{eq:L0}. 
+To model the adjective endorsement data, we modify our comparison class inference RSA model by removing comparison class uncertainty from the model (since the task provides the comparison class explicitly) and, following \citeA{Tessler2019psychrev}, model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, where $L_0(x \mid u)$ is given by Eq. \ref{eq:L0}. 
 The speaker's decision rule marginalizes over their beliefs about the property value of the referent in the category (e.g., the speaker doesn't know the exact height of the referent, but knows that the referent is a basketball player and averages over plausible heights of basketball players: $x\sim P_{k}$).
 
 \subsubsection{Comparison class priors}
 
-The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what classes are likely to be discussed, given that the referent is a member of a particular subordinate category $k$.
+The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what comparison classes are likely to be used, given that the referent is a member of a particular subordinate category $k$.
 We simplify the full comparison class inference problem to deal with reasoning about only a specific~vs.~general class.
 This prior probability of these comparison class plausibly includes a basic-level bias \cite{rosch1975family} but could also reflect how frequently these classes are used in conversation.
 We estimate frequency from the Google WebGram corpus $\hat{f}_k$ and combine it with a basic-level bias encoded as an intercept in a logistic linear model: $P(c) \propto \beta_0 + \beta_1 \cdot \log (\hat{f}_k)$.
 \mht{update with final model: inference about sub--basic vs. basic--super item?}
-
 
 \subsubsection{Implementation details}
 
@@ -884,8 +886,6 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
   \caption{\small Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{adj}$ and $d^{cci}$), respectively. Each of these models relies upon world knowledge $P(x^d_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$), that vary by category (basketball player) and degree (height). The prior on comparison classes $P(c \mid k)$ varies according to the subordinate and superordinate categories, is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with global scale parameter $\beta$. Each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
-
-
 
 \subsection{Quantitative results}
 
@@ -1170,7 +1170,7 @@ We code each of the subordinate categories as to whether they were expected to f
 \subsection{Task 3: Adjective endorsement details} 
 
 This experiment served to generate further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
-Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/XXXX}.
+Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/vdkbp}.
 
 \subsubsection{Participants}
 
