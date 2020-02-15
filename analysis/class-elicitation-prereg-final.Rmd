@@ -1722,6 +1722,19 @@ d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
 #write_csv(d.tidy.resps.classified.full.adjust.Super, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_adjusted_super.csv')
 ``` 
 
+``` {r}
+# TO BE RUN ON ONLY AUTOCATICALLY CLASSIFIED DATA
+d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>% 
+  mutate(
+        # substitutions made based on human modal responses 
+        superordinate = ifelse(stim_id == 5, "scripts", superordinate),
+        superordinate = ifelse(stim_id == 77, "food", superordinate)
+         ) %>% 
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted 
+  mutate(mode_np = ifelse(specific == 1, np, superordinate))
+```
+
+
 ``` {r frequencies}
 # data is prepared for frequency extraction: the freuqncies for plural forms of the NPs and the most superordinatesare pulled, so the plural NPs are added
  
@@ -1837,6 +1850,20 @@ d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
 ```
 
 ``` {r}
+# TO BE RUN ON AUTOMATICALLY CLASSIFIED DATA ONLY  
+d.tidy.auto.classified.w.pl.np <- d.tidy.resps.auto.classified.full.adjust.Super %>% 
+  rowwise() %>% 
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+d.tidy.auto.classified.w.pl <-  d.tidy.auto.classified.w.pl.np %>%
+  mutate(superordinate.freq = superordinate,
+    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq) # avois polysemy
+         )
+```
+
+
+
+``` {r}
 df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
 d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
@@ -1850,6 +1877,16 @@ anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
 
 #write_csv(df.mode.final, '../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv')
+```
+
+``` {r}
+# FOR AUTO CALSSIFIED DATA
+df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
+d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
+  left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
+
+
 ```
 
 # Viz: First prass
