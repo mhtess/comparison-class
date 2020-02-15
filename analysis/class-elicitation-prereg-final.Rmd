@@ -788,7 +788,8 @@ d.matchedResponses %>%
 #   View()
 ```
 
-We extract non-classified responses for manual adjustment to either the subordinate or the superordinate anticipated NP. Some responses which occur often (based on manual analysis) are left unchanged to check if any unexpected response was the modal response for any particular condition. 
+We look at the responses that were not matched to our anticipated NPs and superordinates and the synonyms of the NPs. We judge if the deviating responses are synonymous to our anticipated NPs or our superordinates and adjust them. Some responses which occur often (based on manual analysis) are left unchanged to check if any unexpected response was the modal response for any particular condition. 
+
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
 d.tidy.resp.analysis <- anti_join(
@@ -805,7 +806,7 @@ d.tidy.resp.analysis %>%
   View()
 ```
 
-Here, we look at the responses that were not matched to our anticipated NPs and superordinates and the synonyms of the NPs we already caught. We judge if the deviating responses are synonymous to our anticipated NPs or our superordinates and adjust them.
+
 
 ```{r}
 
@@ -1355,8 +1356,73 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          response_lemma = ifelse(superordinate == "cookware",  gsub("cook", "cookware", response),
                                     response_lemma),
          response_lemma = ifelse(superordinate == "venues",  gsub("auditoriums", "concert", response),
-                                    response_lemma),
+                                    response_lemma ),
         
+   response_lemma = ifelse(degree == "speed", gsub("appliances", "cookware", response), response_lemma),
+    response_lemma = gsub("market", np_match, response),
+    response_lemma = gsub("playing", np_match, response),
+    response_lemma = gsub("saturday nights", np_match, response),
+    response_lemma = ifelse(superordinate == "places", gsub("venues", "places", response), response_lemma),
+    response_lemma = ifelse(superordinate == "concerts", gsub("singing", "concerts", response), response_lemma),
+    response_lemma = ifelse( degree == "strength", gsub("body", "athlete", response), response_lemma),
+    response_lemma = ifelse( superordinate == "materials", gsub("cloth", "fabric", response), response_lemma),
+    response_lemma = ifelse( superordinate == "shoes", gsub("shes", "shoes", response), response_lemma),
+    response_lemma = ifelse( superordinate == "concerts", gsub("show", "concert", response), response_lemma),
+    response_lemma = ifelse( superordinate == "audios", gsub("show", "audio", response), response_lemma),
+    response_lemma = ifelse( superordinate == "statues", gsub("metal", "statue", response), response_lemma),
+    response_lemma = ifelse( superordinate == "cookware", gsub("method", "cookware", response), response_lemma),
+    response_lemma = ifelse( superordinate == "venues", gsub("night", np_match, response), response_lemma),
+    response_lemma = ifelse( superordinate == "doorways", gsub("opening", "doorway", response), response_lemma),
+    response_lemma = ifelse( superordinate == "dens", gsub("opening", "den", response), response_lemma),
+    response_lemma = ifelse( superordinate == "times of day", gsub("area", np_match, response), response_lemma),
+    response_lemma = ifelse( superordinate == "times of day", gsub("places", np_match, response), response_lemma),
+    response_lemma = ifelse( superordinate == "times of day", gsub("area", np_match, response), response_lemma),
+    response_lemma = ifelse( superordinate == "times of day", gsub("street", np_match, response), response_lemma),
+    response_lemma = ifelse( superordinate == "rentals", gsub("places", "rentals", response), response_lemma),
+    response_lemma = ifelse( superordinate == "food", gsub("dishes", "food", response), response_lemma),
+    response_lemma = ifelse( superordinate == "restaurants", gsub("places", "restaurants", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "restaurants", gsub("places dinner", "restaurants", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "alcoholic drinks", gsub("places", np_match, response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "doorways", gsub("path", "doorway", response), response_lemma),
+    response_lemma = ifelse( superordinate == "dens", gsub("passage", "den", response), response_lemma),
+    response_lemma = ifelse( superordinate == "roads", gsub("path", "road", response), response_lemma),
+    response_lemma = ifelse( superordinate == "waterways", gsub("path", "waterways", response), response_lemma),
+    response_lemma = ifelse( superordinate == "audios", gsub("performance", "audio", response), response_lemma),
+    response_lemma = ifelse( superordinate == "audios", gsub("music", "audio", response), response_lemma),
+    response_lemma = ifelse( superordinate == "materials", gsub("hardware", "materials", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "audios", gsub("performance", "venues", response), response_lemma),
+    response_lemma = ifelse( superordinate == "locations", gsub("places house", "locations", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "locations", gsub("places kitchen", "locations", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "locations", gsub("refrigerator", "freezer", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "doorways", gsub("places house", "doorways", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "floors", gsub("surfaces", "floors", response), response_lemma),
+    response_lemma = ifelse( superordinate == "races", gsub("tracks", "races", response), response_lemma),
+    response_lemma = ifelse( superordinate == "restaurants", gsub("menu", "restaurants", response),
+                            response_lemma),
+    response_lemma = ifelse( superordinate == "walls", gsub("building materials", "walls", response),
+                            response_lemma),
+   
+   # response_lemma = ifelse( cleanedPhrase == "_cries_", np_match_us, cleanedPhrase),
+    #response_lemma = ifelse( cleanedPhrase == "_crying_", np_match_us, cleanedPhrase),
+    #response_lemma = ifelse( cleanedPhrase == "_episodes_", np_match_us, cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_car_", "_cars_", cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_map_", "_maps_", cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_pots_", "_cookware_", cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_settings_", super_us, cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
+#    response_lemma = ifelse( cleanedPhrase == "_pieces_", np_match_us, response),
+    response_lemma = ifelse( np == "sauna", gsub("spa", "sauna", response), response_lemma),
+    response_lemma = ifelse( np == "bedboard", gsub("board", "bedboard", response), response_lemma),
+    response_lemma = gsub("shopping", np_match, response),
+    response_lemma = gsub("works of art", superordinate, response)
    
    # classification of those responses which were not caught above (looking at d.tidy.resp.analysis.update below): mostly adjusting synonymous responses to get accurate mode estinates
          
@@ -1376,72 +1442,7 @@ d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific
 # the responses which were not matched above are further classified here
 d.tidy.phase.classifiedSuper <- d.tidy.resp.analysis.update %>%
   mutate(
-    cleanedPhrase = ifelse(degree == "speed", gsub("appliances", "cookware", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = gsub("market", np_match, cleanedPhrase),
-    cleanedPhrase = gsub("playing", np_match, cleanedPhrase),
-    cleanedPhrase = gsub("saturday nights", np_match, cleanedPhrase),
-    cleanedPhrase = ifelse(superordinate == "places", sub("venues", "places", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse(superordinate == "concerts", sub("singing", "concerts", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( degree == "strength", gsub("body", "athlete", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "materials", gsub("cloth", "fabric", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "shoes", gsub("shes", "shoes", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "concerts", gsub("show", "concert", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "audios", gsub("show", "audio", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "statues", gsub("metal", "statue", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "cookware", gsub("method", "cookware", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "venues", gsub("night", np_match, cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "doorways", gsub("opening", "doorway", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "dens", gsub("opening", "den", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "times of day", gsub("area", np_match, cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "times of day", gsub("places", np_match, cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "times of day", gsub("area", np_match, cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "times of day", gsub("street", np_match, cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "rentals", gsub("places", "rentals", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "food", gsub("dishes", "food", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "restaurants", gsub("places", "restaurants", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "restaurants", gsub("places dinner", "restaurants", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "alcoholic drinks", gsub("places", np_match, cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "doorways", gsub("path", "doorway", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "dens", gsub("passage", "den", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "roads", gsub("path", "road", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "waterways", gsub("path", "waterways", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "audios", gsub("performance", "audio", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "audios", gsub("music", "audio", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "materials", gsub("hardware", "materials", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "audios", gsub("performance", "venues", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "locations", gsub("places house", "locations", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "locations", gsub("places kitchen", "locations", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "locations", gsub("refrigerator", "freezer", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "doorways", gsub("places house", "doorways", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "floors", gsub("surfaces", "floors", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "races", gsub("tracks", "races", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "restaurants", gsub("menu", "restaurants", cleanedPhrase),
-                            cleanedPhrase),
-    cleanedPhrase = ifelse( superordinate == "walls", gsub("building materials", "walls", cleanedPhrase),
-                            cleanedPhrase),
-   
-    cleanedPhrase = ifelse( cleanedPhrase == "_cries_", np_match_us, cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_crying_", np_match_us, cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_episodes_", np_match_us, cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_car_", "_cars_", cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_map_", "_maps_", cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_pots_", "_cookware_", cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_settings_", super_us, cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
-    cleanedPhrase = ifelse( cleanedPhrase == "_pieces_", np_match_us, cleanedPhrase),
-    cleanedPhrase = ifelse( np == "sauna", gsub("spa", "sauna", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = ifelse( np == "bedboard", gsub("board", "bedboard", cleanedPhrase), cleanedPhrase),
-    cleanedPhrase = gsub("shopping", np_match, cleanedPhrase),
-    cleanedPhrase = gsub("works of art", superordinate, cleanedPhrase),
-   
+    
          ) %>%
   mutate( cat_cleaned = gsub("_", "", cleanedPhrase),
     specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
