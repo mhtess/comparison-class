@@ -2558,6 +2558,7 @@ function getNounElicitationTrials(all_trials_w_context, n_trials) {
 		for (var j = 0; j < n_trials_per_condition; j++) {
 				trials.push(selected_stims[j])
 		}
+    console.log(_.some(delta_stim_ids, function(x){_.includes(condition_stim_ids, x)}))
 	}
 
   // shuffles until all trials do not use the same back-to-back degrees
