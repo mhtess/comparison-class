@@ -1536,8 +1536,10 @@ fabric . superordinate
 # d.tidy.phrase.specificMarking.bs <- d.tidy.phase.classifiedSuper %>% 
 #   filter(!((specific == 0) & (matchingSuper == 0)))  %>% 
 #   #mutate() %>%
+
+write_csv(d.tidy.clean.responses, path = "../models/data/comparison-class-inf_clean_coded.csv")
   
-d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>% 
+  d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>% 
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
@@ -1655,20 +1657,47 @@ By-item plot
 
 ```{r figIndivItems}
 # does not work
-d.tidy.resps.classified.full  %>% 
-  #mutate() %>%
-  group_by( stim_id, np_expectations,  adj_polarity) %>%
-  mutate(mean = mean( specific)) %>%
-   ungroup() %>%
-   mutate(np_expectations = gsub('\"', "", np_expectations),
+# d.tidy.resps.classified.full  %>% 
+#   #mutate() %>%
+#   group_by( stim_id, np_expectations,  adj_polarity) %>%
+#   mutate(mean = mean( specific)) %>%
+#    ungroup() %>%
+#    mutate(np_expectations = gsub('\"', "", np_expectations),
+#           adj_polarity = gsub('\"', "", adj_polarity),
+#           np_expectations = factor(np_expectations,
+#                                    levels = c("low", "medium", "high")),
+#           np = fct_reorder(np, as.numeric(np_expectations)),
+#           item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = "")) %>%
+
+select.items <- d.tidy.phrase.specificMarking.bs.item %>%
+  select(degree, np, stim_id, superordinate, np_expectations, adj_polarity, mean) %>%
+  spread(adj_polarity, mean) %>%
+  mutate(delta = positive - negative) %>%
+  ungroup() %>%
+  group_by(degree, stim_id, superordinate) %>%
+  summarize(mean_delta = mean(abs(delta)))
+
+select.items %>%
+  group_by(degree) %>%
+  mutate(max_val = max(mean_delta),
+        min_val = min(mean_delta)) %>%
+  ungroup() %>%
+  filter(mean_delta == max_val| mean_delta == min_val) %>%
+  pull(stim_id) -> select.item.ids
+
+#select.items[with(select.items, order(mean_delta)), ][seq(1, 90, 3), ]
+  
+d.tidy.phrase.specificMarking.bs.item %>%
+  filter(stim_id %in% select.item.ids) %>%
+  ungroup() %>%
+     mutate(np_expectations = gsub('\"', "", np_expectations),
           adj_polarity = gsub('\"', "", adj_polarity),
           np_expectations = factor(np_expectations,
                                    levels = c("low", "medium", "high")),
           np = fct_reorder(np, as.numeric(np_expectations)),
           item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = "")) %>%
    ggplot(., 
-          aes( x = np, y = mean, 
-                fill = adj_polarity))+  
+          aes( x = np, y = mean, fill = adj_polarity))+  
    geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
    #geom_linerange(position = position_dodge(0.8), color = 'black')+  
    scale_fill_brewer(palette = "Set3")+
@@ -1685,9 +1714,9 @@ d.tidy.resps.classified.full  %>%
 
  # ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
  #        width = 9, height = 9)
- ggsave(bars_cc_finalExpt_prereg_prelim_byItem, 
-        filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_prelim_byItem3.png",
-        width = 18, height = 18)
+ # ggsave(bars_cc_finalExpt_prereg_prelim_byItem, 
+ #        filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_prelim_byItem3.png",
+ #        width = 18, height = 18)
 ```
 
 # TO ORGANIZE
