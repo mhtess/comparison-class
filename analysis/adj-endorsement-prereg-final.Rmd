@@ -173,7 +173,7 @@ df.trials.filtered %>%
          np_expectations = factor(np_expectations,
                                levels = c("low", "medium", "high")),
          key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive"))) %>%
-  rename(adj_polarity = key, NP_sg = item, superordinate_pl, superordinate) -> df.trials.tidy
+  rename(adj_polarity = key, NP_sg = item, superordinate_pl = superordinate) -> df.trials.tidy
 
 #write_csv(df.trials.tidy, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-tidy.csv")
 
@@ -185,13 +185,13 @@ glimpse(df.trials.tidy)
 
 ```{r figCollapseItems}
 d.tidy.adj.bs <- df.trials.tidy %>% 
-  group_by(np_expectations, key) %>%
+  group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = val)
 
 d.tidy.adj.bs %>%
   ggplot(., 
        aes( x = np_expectations, y = mean, 
-            ymin = ci_lower, ymax = ci_upper, fill = key))+  
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
   geom_linerange(position = position_dodge(0.8), color = 'black')+  
   scale_fill_brewer(palette = "Set3")+
