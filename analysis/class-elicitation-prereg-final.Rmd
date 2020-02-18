@@ -295,7 +295,7 @@ invalid.responses <- c("unsure",
                               "elderly person was too quick", "conference room was too quiet", "instant pot was slow",
                               "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat", 
                               "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
-                              "they are bold", "the blade spinning", "its finished", "not sure",
+                              "they are bold", "the blade spinning", "its finished", "not sure", "too slow",
                               "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast" , "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little"
                               )
 ```
@@ -1252,6 +1252,9 @@ hand_classification <- c("things in the room" = "things",
                          "joggers/ walkers" = "people",
                          "pickup" = "pick-up",
                          "temperatures" = "temperature",
+                         "pick- up" = "pick-up",
+                         "top shelf options" = "liquor",
+                         "teenages" = "teenager",
                          "weights"= "weight",
                          "things in the room" = "things",
                          "types of rain" = "storms",
@@ -1273,8 +1276,7 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
                               response = as.character(response),
                         response_lemma_hand = str_replace_all(response_lemma, hand_classification)) %>% 
   mutate( cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep=""),
-    #response_lemma_cleaned = gsub("_", "", response_lemma),
-    specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), response_lemma_hand,  np_match_us), 
+        specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), response_lemma_hand,  np_match_us), 
          matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), response_lemma_hand, super_us)
          ) 
 d.tidy.phrase.handClassified %>% filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.phrase.handClassified.matched 
@@ -1515,7 +1517,7 @@ d.tidy.phrase.handClassified2 <- d.tidy.phrase.handClassified2 %>%  rbind(., d.t
 
 # the responses that are still classified as neither sub nor super do not match the anticipated responses and are mostly ones which occur fairly often. All of them are definitely not subordinate and will be classified as superordinate responses. 
 
-# here, the responses including the scale are caught  (152 responses)
+# here, the responses including the scale are caught  (172 responses)
 d.scaleResps <- d.tidy.phrase.handClassified2 %>% rowwise() %>% mutate(degree_match = degree,
   degree_match = ifelse(degree == "temperature_h", "temperature", degree_match),
   degree_match = ifelse(degree == "speed_f", "speed", degree_match),
@@ -1530,7 +1532,7 @@ d.scaleResps <- d.tidy.phrase.handClassified2 %>% rowwise() %>% mutate(degree_ma
 #d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
 # exclude the "degree" responses
 d.AutoClassified <- d.matchedResponses  %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
-d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma = response_lemma_hand, specific, matchingSuper)
+d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified2, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma = response_lemma_hand, specific, matchingSuper)
 
 
 # put the whole classified data together to get modal responses
