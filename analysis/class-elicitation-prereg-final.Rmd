@@ -1,5 +1,5 @@
 ---
-title: "Comparison class elicitation (final) pilot"
+title: "Comparison class elicitation (final, preregistered)"
 author: "MH Tessler"
 date: "October 29, 2019"
 ---
@@ -159,7 +159,7 @@ df.attention.summary %>%
 ## Response processing
 
 
-For automated checking of whether or not responses contain the supplied NP, we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (or, including the mentioned NP). However, there are certian patterns that we deem ambiguous (e.g., using the word: "similar"), and we exclude these *($n = 15 $)*. Just to confirm, in addition, we hand-check all responses. 
+For automated checking of whether or not responses contain the supplied NP, we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (i.e., including the mentioned NP). One exception is that we excluded responses that used the word "similar"; we deemed these responses too underspecified/ambiguous (how similar is similar?). Just to confirm, in addition, we hand-check all responses. 
 
 ```{r filtered main trails}
 df.trials.filtered <- df.trials %>%
@@ -436,7 +436,7 @@ mispellings_set <- c(
 ```
 
 
-To further improve the response classification, we also replace some responses which are obviously sinonymous to the provided subordinate or superoridnate NPs given the context.
+To further improve the response classification, we also replace some responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context.
 ```{r list of common synonyms}
 synonym_set = c("6 packs" = "beer",
          "golf player" = "golfer",
@@ -627,7 +627,7 @@ sum(d.tidy.resp.valid.resps$corrected_lemma) / n.valid.responses
 
 ```
 
-This code no longer cleans the responses by removing stop words. That latter method produces issues for the "pick-up truck" (which it doesn't match correctly), times of day, and some responses involved "The + Singular_NP" (which are ambiguous and should be excluded).  
+NB: This code no longer cleans the responses by removing stop words. That latter method produces issues for the "pick-up truck" (which it doesn't match correctly), times of day, and some responses involved "The + Singular_NP" (which are ambiguous and should be excluded).  
 
 
 ```{r}
@@ -1440,14 +1440,13 @@ d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific
 ``` {r}
 # sketchy superordinate classification and non-matchin synonym alignment 
 # the responses which were not matched above are further classified here
-d.tidy.phase.classifiedSuper <- d.tidy.resp.analysis.update %>%
-  mutate(
-    
-         ) %>%
+d.tidy.phase.classifiedSuper <- d.tidy.phrase.w.original2 %>% #d.tidy.resp.analysis.update %>%
+  mutate() %>%
   mutate( cat_cleaned = gsub("_", "", cleanedPhrase),
     specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
          matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), cat_cleaned, super_us)
-         )
+         ) %>%
+  rename(originalResponse = response)
 
 d.tidy.phase.classifiedSuper %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.Super # %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, originalResponse, cleanedPhrase, cat_cleaned, specific, matchingSuper) 
 
@@ -1465,9 +1464,12 @@ d.scaleResps <- d.nonMatching.Super %>% rowwise() %>% mutate(degree_match = degr
   filter(grepl(cat_cleaned, degree_match, ignore.case=T))
 
 d.classified.super.wCC <- anti_join(d.tidy.phase.classifiedSuper, d.scaleResps) %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, originalResponse, cat_cleaned, specific, matchingSuper)
+
 # exclude the "degree" responses
-d.AutoClassified <- d.matchedResponses  %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, originalResponse, cat_cleaned = originalPhrase, specific, matchingSuper)
+d.AutoClassified <- d.matchedResponses  %>% rename(originalResponse = response) %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, originalResponse, cat_cleaned = originalPhrase, specific, matchingSuper)
+
 d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified, d.tidy.resp.analysis.update) %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match,originalResponse, cat_cleaned, specific, matchingSuper)
+
 # put the whole classified data together to get modal responses
 d.tidy.resps.classified.full <- rbind(d.classified.super.wCC, 
                                       rbind(d.AutoClassified, d.HandClassified.subs.wCC))
@@ -1507,7 +1509,7 @@ fabric . superordinate
 
 write_csv(d.tidy.clean.responses, path = "../models/data/comparison-class-inf_clean_coded.csv")
   
-  d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>% 
+d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>% 
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
@@ -1531,6 +1533,8 @@ d.tidy.phrase.specificMarking.bs.item %>%
   mutate(unique_id = paste(stim_id, np_expectations, sep = "-")) %>%   mutate(np_expectations = factor(np_expectations,
                                levels = c("low", "medium", "high"))) ->  d.tidy.phrase.specificMarking.bs.item
 
+#save(d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData")
+load(file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData") #d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file = 
 
 set.seed(2020)
 
@@ -1639,6 +1643,8 @@ By-item plot
 
 select.items <- d.tidy.phrase.specificMarking.bs.item %>%
   select(degree, np, stim_id, superordinate, np_expectations, adj_polarity, mean) %>%
+  rowwise() %>%
+  mutate(degree = first(strsplit(degree, "_")[[1]])) %>%
   spread(adj_polarity, mean) %>%
   mutate(delta = positive - negative) %>%
   ungroup() %>%
@@ -1653,38 +1659,52 @@ select.items %>%
   filter(mean_delta == max_val| mean_delta == min_val) %>%
   pull(stim_id) -> select.item.ids
 
+# swap tall/short people with tall/short flowers
+select.item.ids <- c(select.item.ids[select.item.ids != 17], 18)
+
+#17 for 18
+
 #select.items[with(select.items, order(mean_delta)), ][seq(1, 90, 3), ]
   
 d.tidy.phrase.specificMarking.bs.item %>%
   filter(stim_id %in% select.item.ids) %>%
+  ungroup() %>%
+  rowwise() %>%
+  mutate(degree = first(strsplit(degree, "_")[[1]])) %>%
   ungroup() %>%
      mutate(np_expectations = gsub('\"', "", np_expectations),
           adj_polarity = gsub('\"', "", adj_polarity),
           np_expectations = factor(np_expectations,
                                    levels = c("low", "medium", "high")),
           np = fct_reorder(np, as.numeric(np_expectations)),
-          item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = "")) %>%
+          item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = ""),
+          item_name = paste(superordinate, " (", degree, ")", sep = ""),
+          item_name = factor(item_name),
+          item_set = factor(item_set), 
+          item_name = fct_reorder(item_name, as.numeric(item_set))) %>%
    ggplot(., 
           aes( x = np, y = mean, fill = adj_polarity))+  
    geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
-   #geom_linerange(position = position_dodge(0.8), color = 'black')+  
+   geom_linerange(aes(ymin = ci_lower, ymax = ci_upper), 
+                  position = position_dodge(0.8), color = 'black')+  
    scale_fill_brewer(palette = "Set3")+
-   theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+   theme(axis.text.x = element_text(angle = 30, hjust = 0.8, vjust = 0.85),
          #axis.title.x = element_blank(),
          panel.grid.minor = element_blank(),
          panel.grid.major = element_blank(),
-         axis.line = element_line(colour = "black"))+
-   facet_wrap(~item_set, scales = 'free')+
+         axis.line = element_line(colour = "black"),
+         legend.position = "bottom")+
+   facet_wrap(~item_name, scales = 'free', nrow = 4)+
    # theme_black()+
    scale_y_continuous(limits = c(-0.02, 1.02), breaks = c(0, 0.5, 1))+
-   ylab("Proportion paraphrases that contain NP")+
-   xlab("Subordinate Category Prior Mean") #-> bars_cc_finalExpt_prereg_confident_byItem
+    guides(fill= guide_legend(title = "Adjective polarity", reverse = T))+
+   ylab("Proportion paraphrases that contain Specific NP")+
+   xlab("Specific Category") #-> bars_cc_finalExpt_prereg_confident_byItem
 
  # ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
  #        width = 9, height = 9)
- # ggsave(bars_cc_finalExpt_prereg_prelim_byItem, 
- #        filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_prelim_byItem3.png",
- #        width = 18, height = 18)
+ ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_byItem.pdf",
+        width = 15, height = 10)
 ```
 
 # TO ORGANIZE
