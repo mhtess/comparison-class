@@ -1237,7 +1237,7 @@ hand_classification <- c("'" = "",
                    
 d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
                       mutate( response = as.character(response),
-                        response_lemma = str_replace_all(response, hand_classification) , 
+                        response_lemma = str_replace_all(response, hand_classification),
         
          response_lemma = ifelse( superordinate == "cookware", 
                                      gsub("pans", "frying pan", response),
@@ -1427,66 +1427,24 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
    # classification of those responses which were not caught above (looking at d.tidy.resp.analysis.update below): mostly adjusting synonymous responses to get accurate mode estinates
          
          ) %>%
-  mutate( response_lemma_cleaned = gsub("_", "", response_lemma),
-    specific = containsString_responses(as.character(response_lemma), as.character(np_match), response_lemma_cleaned,  np_match_us), 
-         matchingSuper = containsString_responses(as.character(response_lemma), as.character(superordinate), response_lemma_cleaned, super_us)
+  mutate( cleanedPhrase = paste("_", as.character(response_lemma), "_", sep=""),
+    #response_lemma_cleaned = gsub("_", "", response_lemma),
+    specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), response_lemma,  np_match_us), 
+         matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), response_lemma, super_us)
          ) 
-
-# check unclassified responses left
-d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0))  #%>%  distinct(np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper)
-```
-
-``` {r}
-d.tidy.resp.valid.resps %>%
-    rowwise() %>%
-  mutate(
-    response_lemma = as.character(response_lemma),
-    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
-    np_match = as.character(np_match),
-    np_match = gsub('\"', "", np_match),
-    np_match_us = paste("_", np_match, "_", sep=""), # insert underscores for the matching the other way around 
-    super_us = paste("_", superordinate, "_", sep=""),
-  # check if response and seed NP match 
-    specific = #ifelse(
-      # response_lemma == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
-      ifelse(response_lemma == "berries", 0, 
-      containsString_responses(
-        as.character(cleanedPhrase), 
-        np_match, 
-        response_lemma, 
-        np_match_us
-        )
-      ),
-  # check if response and anticipated superordinate match
-    matchingSuper = containsString_responses(
-      as.character(cleanedPhrase), 
-      as.character(superordinate), 
-      response_lemma, 
-      super_us)
-  ) -> d.tidy.phrase.w.original2
-
 ```
 
 
 
 ``` {r}
-# sketchy superordinate classification and non-matchin synonym alignment 
-# the responses which were not matched above are further classified here
-d.tidy.phase.classifiedSuper <- d.tidy.resp.analysis.update %>%
-  mutate(
-    
-         ) %>%
-  mutate( cat_cleaned = gsub("_", "", cleanedPhrase),
-    specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), cat_cleaned,  np_match_us), 
-         matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), cat_cleaned, super_us)
-         )
 
-d.tidy.phase.classifiedSuper %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.Super # %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, originalResponse, cleanedPhrase, cat_cleaned, specific, matchingSuper) 
+
+d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.resps # %>% distinct(degree, superordinate, super_us, np, adj, np_match, np_match_us, originalResponse, cleanedPhrase, cat_cleaned, specific, matchingSuper) 
 
 # the responses that are still classified as neither sub nor super do not match the anticipated responses and are mostly ones which occur fairly often. All of them are definitely not subordinate and will be classified as superordinate responses. 
 
 # here, the responses including the scale are caught (174 responses)
-d.scaleResps <- d.nonMatching.Super %>% rowwise() %>% mutate(degree_match = degree,
+d.scaleResps <- d.nonMatching.resps %>% rowwise() %>% mutate(degree_match = degree,
   degree_match = ifelse(degree == "temperature_h", "temperature", degree_match),
   degree_match = ifelse(degree == "speed_f", "speed", degree_match),
   degree_match = ifelse(degree == "loudness", "sound, noise", degree_match),
@@ -1494,25 +1452,25 @@ d.scaleResps <- d.nonMatching.Super %>% rowwise() %>% mutate(degree_match = degr
   degree_match = ifelse(degree == "length_duration", "length, duration", degree_match),
   degree_match = ifelse(degree == "strength", "weight", degree_match),
   ) %>% 
-  filter(grepl(cat_cleaned, degree_match, ignore.case=T))
+  filter(grepl(response_lemma, degree_match, ignore.case=T))
 
-d.classified.super.wCC <- anti_join(d.tidy.phase.classifiedSuper, d.scaleResps) %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, originalResponse, cat_cleaned, specific, matchingSuper)
+d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
 # exclude the "degree" responses
-d.AutoClassified <- d.matchedResponses  %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, originalResponse, cat_cleaned = originalPhrase, specific, matchingSuper)
-d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified, d.tidy.resp.analysis.update) %>% select(stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match,originalResponse, cat_cleaned, specific, matchingSuper)
+d.AutoClassified <- d.matchedResponses  %>% select(workerid,stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
+d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified, d.nonMatching.resps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
 # put the whole classified data together to get modal responses
 d.tidy.resps.classified.full <- rbind(d.classified.super.wCC, 
                                       rbind(d.AutoClassified, d.HandClassified.subs.wCC))
 
 # some compounds should only be classified as superordinates
-d.tidy.resps.classified.full <- d.tidy.resps.classified.full %>% mutate(specific = ifelse(originalResponse == "berries", 0, specific),
-                                                                        specific = ifelse(originalResponse == "boat", 0, specific),
-                                                                        specific = ifelse(originalResponse == "bird", 0, specific),
-                                                                        specific = ifelse(originalResponse == "building", 0, specific),
-                                                                        specific = ifelse(originalResponse == "cake", 0, specific),
-                                                                        specific = ifelse(originalResponse == "concert", 0, specific),
-                                                                        specific = ifelse(originalResponse == "flower", 0, specific),
-                                                                        specific = ifelse(originalResponse == "guitar", 0, specific))
+d.tidy.resps.classified.full <- d.tidy.resps.classified.full %>% mutate(specific = ifelse(response == "berries", 0, specific),
+                                                                        specific = ifelse(response == "boat", 0, specific),
+                                                                        specific = ifelse(response == "bird", 0, specific),
+                                                                        specific = ifelse(response == "building", 0, specific),
+                                                                        specific = ifelse(response == "cake", 0, specific),
+                                                                        specific = ifelse(response == "concert", 0, specific),
+                                                                        specific = ifelse(response == "flower", 0, specific),
+                                                                        specific = ifelse(response == "guitar", 0, specific))
 ```
 
 ``` {r}
@@ -1936,7 +1894,7 @@ d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
 
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate_sg, superordinate, adj, adj_positiveness, np, np_for_freq, mode_np, specific, Frequencies.x.x, Frequencies.y.y) %>% mutate(superordinate_sg = superordinate_sg, superordinate_pl = superordinate, NP_sg = np, NP_pl = np_for_freq,  response = mode_np, subFreq = Frequencies.x.x, superFreq = Frequencies.y.y) %>% select(workerid, degree, superordinate_sg, superordinate_pl, adj, adj_positiveness, NP_sg, NP_pl, response, specific, subFreq, superFreq)
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, degree, superordinate, adj, adj_polarity, np, np_pl, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_pl = superordinate, NP_sg = np, NP_pl = np_pl,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, response, specific, subFreq, superFreq)
 
 # check if singular matches original
 df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv')
@@ -1953,7 +1911,9 @@ d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
   left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
 
+df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>% select(workerid, degree, superordinate, adj, adj_polarity, np, np_pl, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_pl = superordinate, NP_sg = np, NP_pl = np_pl,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, response, specific, subFreq, superFreq)
 
+write_csv(df.mode.auto.final, '../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv')
 ```
 
 # Viz: First prass
