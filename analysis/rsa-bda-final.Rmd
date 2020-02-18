@@ -1,0 +1,433 @@
+---
+title: "Comparison class models (RSA + BDA)"
+author: "M. H. Tessler"
+date: "7/21/2017"
+output: github_document
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.crop=F, fig.pos="tb", fig.path='figs/', echo=F, warning=F, cache=F, message=F, sanitize=T)
+theme_set(theme_few())
+```
+
+```{r libraries}
+library(tidyverse)
+library(tidyboot)
+library(coda)
+library(knitr)
+library(ggrepel)
+
+project.path <- "~/projects/comparison-class/"
+options(digits = 7)
+estimate_mode <- function(s) {
+  d <- density(s)
+  return(d$x[which.max(d$y)])
+}
+hdi_upper<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","upper"])
+}
+hdi_lower<- function(s){
+  m <- HPDinterval(mcmc(s))
+  return(m["var1","lower"])
+}
+logistic <- function(x){1 / (1 + exp(-x))}
+```
+
+# Behavioral data
+
+```{r}
+df.adj <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-tidy.csv")
+df.cc <- read_csv("../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+
+bind_rows(
+  df.cc %>% 
+    rename(val = specific) %>%
+    select(workerid, degree, superordinate_pl, NP_sg, adj_polarity, val) %>%
+    mutate(task = "comparisonClass"),
+  df.adj %>%
+    select(workerid, degree, superordinate_pl, NP_sg, adj_polarity, val) %>%
+    mutate(
+      #adj_polarity = ifelse(adj_polarity == "response_pos", "positive", "negative"),
+      superordinate_pl = ifelse(superordinate_pl == "floor materials", "floors", superordinate_pl),
+      task = "adjEndorse"
+      )
+) %>%
+  rename(
+    subordinate = NP_sg, 
+    superordinate = superordinate_pl
+  ) -> df.comb
+```
+
+```{r}
+df.comb %>%
+  group_by(degree, superordinate, subordinate, adj_polarity, task) %>%
+  tidyboot_mean(column = val) -> df.comb.bs
+
+df.comb.wide <- left_join(
+  df.comb.bs %>% ungroup() %>% filter(task == "adjEndorse") %>% 
+    select(-task, -empirical_stat, -n) %>%
+    rename(adj_mean = mean, adj_lower = ci_lower, adj_upper = ci_upper),
+  df.comb.bs %>% ungroup() %>% filter(task == "comparisonClass") %>% 
+    select(-task, -empirical_stat, -n) %>%
+    rename(cc_mean = mean, cc_lower = ci_lower, cc_upper = ci_upper)
+)
+
+df.comb.wide %>% drop_na() -> df.comb.wide
+
+ggplot(df.comb.wide, aes( x = adj_mean, xmin = adj_lower, xmax = adj_upper,
+                          y = cc_mean, ymin = cc_lower, ymax = cc_upper))+
+  geom_point()+
+  geom_errorbarh(alpha = 0.2)+
+  geom_linerange(alpha = 0.2)
+```
+
+```{r}
+with(df.comb.wide, cor.test(adj_mean, cc_mean))
+```
+### Split-half correlations
+
+```{r}
+all_workers <- unique(df.cc$workerid)
+n_workers <- length(all_workers)
+
+split_half <- function(){
+  sampled_half <- sample(all_workers, size = n_workers/2)
+
+  df.cc %>%
+    rename(subordinate = NP_sg, 
+         superordinate = superordinate_pl,
+         val = specific) %>%
+    select(workerid, degree, superordinate, subordinate, adj_polarity, val) %>%
+    mutate(split_half = ifelse(workerid %in% sampled_half, "one", "two")) %>%
+    group_by(degree, superordinate, subordinate, adj_polarity, split_half) %>%
+    summarize(mean_response = mean(val, na.rm = T)) %>%
+    spread(split_half, mean_response) %>%
+    ungroup() %>%
+    summarize(correlation = cor(one, two, use = "pairwise.complete.obs")) %>%
+    pull(correlation)
+}
+
+split.half.corrs <- replicate(100, split_half())
+
+mean(split.half.corrs)
+2* mean(split.half.corrs) / (1 + mean(split.half.corrs))
+```
+
+
+# Model results
+
+### Load main results
+
+```{r load_model_results, cache = T}
+m.samp <- data.frame()
+n.chains = 1
+model.variants = c("global", "intercept_slope")
+n_samples = 5000
+n_burn = 2500
+n_lag = 2
+model.prefix <- "results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic_byItem_"
+
+# intercept_slope-mcmc-5000_burn2500_lag2_chain1.csv
+# results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic_byItem_global-mcmc-5000_burn2500_lag2_chain1.csv
+
+for (m in model.variants){
+  for (i in 1:n.chains){
+    model.result.file <- paste("../models/sherlock/results/", model.prefix, m, "-mcmc-", n_samples, "_burn", n_burn, "_lag", n_lag, "_chain", i, ".csv", sep = "")
+    
+    m.samp.i <- read_csv(model.result.file)
+      # paste("../models/sherlock/results/results-L1-S1-silenceAlt-silenceCost-corpusFreqCC-mcmc-500000_burn250000_lag50_chain", i, ".csv", 
+      #       sep = "")
+      # paste("../models/sherlock/results/results-L1-S1-silenceAlt-silenceCost-subcatWeightBySub-mcmc-250000_burn125000_lag25_chain", i, ".csv",
+      #   sep = "")
+      # paste("../models/sherlock/results/results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic-mcmc-250000_burn125000_lag25_chain", i, ".csv",
+      #   sep = "")
+
+    m.samp <- bind_rows(m.samp, m.samp.i %>% mutate(model_variant = m, chain = i))
+  }
+
+}
+
+m.samp.summary <- m.samp %>%
+  #filter(degree == "parameter") %>%
+  #filter(task == "sub_classprior") %>%
+  group_by(model_variant, degree, superordinate, subordinate, task, adj_polarity) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_upper = hdi_upper(val),
+            cred_lower = hdi_lower(val))
+```
+
+
+### Posterior predictive
+
+```{r}
+
+m.samp.summary.predictive <- m.samp.summary %>%
+#m.samp.summary.predictive <- m.samp.summary %>%
+  filter(task %in% c("adjEndorse", "subordinateCC"))
+
+md.summary <- left_join(
+  df.comb.bs %>% 
+    mutate(task = ifelse(task == "comparisonClass", 
+                         "subordinateCC", 
+                         task)),
+  m.samp.summary.predictive
+)
+
+glimpse(md.summary)
+
+md.summary <- md.summary %>% drop_na()
+```
+
+#### Scatterplots
+
+```{r}
+ggplot(md.summary, aes( x = MAP, xmin = cred_lower, xmax = cred_upper,
+                          y = mean, ymin = ci_lower, ymax = ci_upper))+
+  geom_abline(intercept = 0, slope = 1, lty = 3)+
+  geom_point()+
+  geom_errorbarh(alpha = 0.2)+
+  geom_linerange(alpha = 0.2)+
+  facet_grid(model_variant~task)+
+  scale_x_continuous(limits = c(-0.01, 1.01))+
+  scale_y_continuous(limits = c(-0.01, 1.01))+
+  coord_fixed()
+
+ggsave("~/projects/comparison-class/models/figs/model_scatters_pilot-corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png", width = 6, height = 5)
+```
+
+```{r}
+md.summary %>%
+  group_by(model_variant, task) %>%
+  summarize(corr = cor(mean, MAP)) %>%
+  kable()
+```
+#### Bar plots
+
+```{r}
+md.summary.long <- bind_rows(
+  df.comb.bs %>% mutate(task = ifelse(task == "comparisonClass", "subordinateCC", task),
+                        src = 'data'),
+  m.samp.summary.predictive %>%
+    mutate(src = 'model') %>%
+    rename(mean = MAP, ci_lower = cred_lower, ci_upper = cred_upper)
+)
+
+
+df.adj.items <- df.adj %>%
+  distinct(degree, superordinate_pl, item_sg, item_cond) %>%
+  rename(subordinate = item_sg,
+         superordinate = superordinate_pl)
+
+
+md.summary.long %>%
+  filter(task == "subordinateCC") %>%
+  left_join(., df.adj.items) %>%
+  ungroup() %>%
+  mutate(item_cond = factor(item_cond,
+                               levels = c("negative", "neutral", "positive"),
+                               labels = c("low", "medium", "high")),
+         subordinate = fct_reorder(subordinate, as.numeric(item_cond))) %>%
+  ggplot(., 
+       aes( x = subordinate, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
+  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
+  geom_linerange(position = position_dodge(0.8), color = 'black')+  
+  scale_fill_brewer(palette = "Set3")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
+        #axis.title.x = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.line = element_line(colour = "black"))+
+  facet_wrap(~degree + superordinate + src, scales = 'free', nrow = 4)+
+ # theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  ylab("Proportion paraphrases that contain NP")+
+  xlab("Subordinate Category Prior Mean")
+
+ggsave("../models/figs/bars_cc_finalExpt_pilot_byItem_wModel_corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png",
+       width = 17, height = 9)
+```
+
+
+#### Residual analysis
+
+
+```{r}
+md.sum.sqErr <- md.summary %>% 
+  filter(task == "subordinateCC") %>%
+  group_by(degree, superordinate) %>%
+  summarize(model_sSqErr = sum( (mean-MAP) ^ 2))
+```
+
+
+### Parameter posterior
+
+
+Summarize all parameters
+
+```{r}
+m.samp.summary <- m.samp %>%
+  group_by(model_variant, degree, superordinate, subordinate, task, adj_polarity) %>%
+  summarize(MAP = estimate_mode(val),
+            cred_upper = hdi_upper(val),
+            cred_lower = hdi_lower(val))
+```
+
+
+#### Global parameters 
+
+```{r}
+m.samp.summary %>%
+  filter(degree == "parameter") %>%
+  select(-degree, -adj_polarity) %>%
+  kable()
+```
+
+
+```{r}
+m.samp %>%
+#m.samp.simple %>%
+  filter(degree == "parameter") %>%
+  mutate(param = paste(superordinate, subordinate, task)) %>%
+  ggplot(., aes( x = val, fill = factor(chain) ))+
+  geom_histogram()+
+  facet_grid(model_variant ~ param, 
+             scales = 'free')
+
+ggsave("~/projects/comparison-class/models/figs/model_parameters_pilot-corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png", width = 8, height = 6)
+```
+
+
+
+#### Comparison class priors
+
+item-wise free parameter version: by-item subclass prior  vs. global estimate
+
+
+```{r}
+m.fitted.subclassprior.freq <- m.samp.summary %>%
+  filter(task == "sub_classprior", model_variant != "global") %>% 
+  left_join(., m.samp.summary %>%
+                filter(task == "sub_classprior", model_variant == "global") %>%
+              rename(global_MAP = MAP, global_lower = cred_lower, global_upper = cred_upper) %>%
+              ungroup() %>%
+              select(-model_variant)) %>%
+  mutate(sqErr = (MAP - global_MAP)^2)
+
+
+m.fitted.subclassprior.freq %>%
+  ungroup() %>%
+  select(degree, superordinate, subordinate, MAP, global_MAP, sqErr) %>%
+  View()
+
+m.fitted.subclassprior.freq %>%
+  ggplot(., aes (y = MAP, ymin = cred_lower, ymax = cred_upper,
+                 x = global_MAP, xmin = global_lower, xmax = global_upper))+
+  geom_point()+
+  geom_errorbar(alpha = 0.3) + geom_errorbarh(alpha = 0.3)s
+
+# ggsave("~/projects/comparison-class/models/figs/cc_prior_fitted_vs_freq.png", 
+#        width = 4, height = 5)
+```
+
+Average over subordinates with superordinate
+
+```{r}
+m.fitted.subclassprior.freq %>%
+  ungroup() %>%
+  select(degree, superordinate, subordinate, MAP, global_MAP, sqErr) %>%
+  group_by(degree, superordinate) %>%
+  summarize(fitted = mean(MAP),
+            freq = mean(global_MAP),
+            sse = sum(sqErr)) %>%
+  View()
+
+m.fitted.subclassprior.freq %>%
+  ungroup() %>%
+  select(degree, superordinate, subordinate, MAP, cred_lower, cred_upper, global_MAP, global_lower, global_upper, sqErr) %>%
+  group_by(degree, superordinate) %>%
+  summarize(fitted = mean(MAP), 
+            fitted_lower = mean(cred_lower), 
+            fitted_upper = mean(cred_upper),
+            freq = mean(global_MAP), 
+            freq_lower = mean(global_lower), 
+            freq_upper = mean(global_upper),
+            sse = sum(sqErr)) %>%
+  mutate(item_set = paste(superordinate, '(', degree,  ')', sep ="")) -> m.fitted.subclassprior.itemset.freq
+  
+  
+ggplot(m.fitted.subclassprior.itemset.freq, 
+       aes (y = fitted, ymin = fitted_lower, ymax = fitted_upper,
+                 x = freq, xmin = freq_lower, xmax = freq_upper,
+                 label = item_set))+
+  geom_point()+
+  geom_text_repel(size = 2)+
+  geom_vline(xintercept = 0.5, lty = 3)+
+  geom_errorbar(alpha = 0.3) + geom_errorbarh(alpha = 0.3)+
+  labs(x = "Frequency constrained cc prior", y = "Unconstrained inferred cc prior",
+       title = "point = item set average (3 subordinates w/ superordinate)")
+
+ggsave("~/projects/comparison-class/models/figs/cc_prior_fitted_vs_freq_itemSet.png", 
+       width = 8, height = 5)
+```
+
+
+##### Item_set_hiearchy
+
+```{r}
+m.samp.simple.item_set <- m.samp %>%
+    filter(subordinate == "item_set_heirarchy") %>%
+    group_by(model_variant, degree, superordinate, task) %>%
+    summarize(n = mean(val))
+
+
+m.samp.simple.item_set %>%
+  ungroup() %>%
+  mutate(item = paste(superordinate, degree, sep = "-")) %>%
+  mutate(item = factor(item, levels =  item[order(n)])) %>%
+  ggplot(., aes(x = item, y = n))+
+  geom_col()+
+  labs(y = "probability of subordinate vs. basic relation")+
+  coord_flip()+
+  facet_wrap(~model_variant)
+
+ggsave("~/projects/comparison-class/models/figs/model_pilot-ItemSetHeirarchy.png", width = 5, height = 5)
+```
+
+
+
+
+Relative frequencies
+
+```{r}
+df.cc.freq.ave <- df.cc %>%
+  rename(subordinate = NP, adj_polarity = adj_positiveness, val = specific) %>%
+  #distinct(degree, superordinate, NP,subFreq, superFreq) %>%
+  mutate(norm_freq = 0.1*log(subFreq) / (0.1*log(subFreq) + 0.1*log(superFreq)),
+         exp_ratio = exp(subFreq / superFreq)) %>%
+  group_by(degree, superordinate, subordinate) %>%
+  summarize(mean_sub = mean(val),
+            norm_freq = mean(norm_freq),
+            sqErr = (mean_sub - norm_freq)^2)
+
+df.cc.freq.ave.sum <- df.cc.freq.ave %>%
+  ungroup() %>%
+  group_by(degree, superordinate) %>%
+  summarize(
+    mean_norm_freq = mean(norm_freq),
+    mean_cc_sub = mean(mean_sub),
+    freq_sSqErr = sum(sqErr))
+
+md.sum.sqErr.freq <- left_join(md.sum.sqErr, df.cc.freq.ave.sum) %>%
+  mutate(err = freq_sSqErr - model_sSqErr)
+
+ggplot(md.sum.sqErr.freq, aes( x = freq_sSqErr, y = model_sSqErr))+
+  geom_point()
+```
+
+
+
+
+
+

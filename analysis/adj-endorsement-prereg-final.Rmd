@@ -45,7 +45,8 @@ for (result_file in result.files) {
   df.subject = bind_rows(
     df.subject, 
     data.frame(result_json$answers$trials) %>% 
-      distinct(age, sex, education, languages, enjoyment, problems, fairprice, comments, experiment_id)
+      distinct(age, sex, education, languages, enjoyment, problems, fairprice, comments, experiment_id) %>%
+      mutate(workerid = worker.id)
   )
     
   df.trials = bind_rows(
@@ -59,32 +60,89 @@ df.trials %>%
   mutate(workerid = factor(workerid),
          workerid = paste("worker_", as.character(str_pad(as.numeric(workerid), 3, pad = "0")), sep = "")) -> df.trials
 
-#write_csv(df.trials, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
+df.trials %>%
+  group_by(workerid) %>%
+  count() %>%
+  group_by(n) %>%
+  count()
+
+
+df.trials %>%
+  group_by(workerid) %>%
+  count() %>%
+  filter(n > 58) %>%
+  pull(workerid) -> multiple.submission.workers
+
+df.trials %>%
+  mutate(rownum = row_number()) %>%
+  group_by(trial_name, workerid, trial_number) %>%
+  summarize(rownum = first(rownum)) -> rows.to.keep
+
+df.trials %>%
+  mutate(rownum = row_number()) %>%
+  left_join(., rows.to.keep %>% mutate(keep = c(T))) %>%
+  filter(keep == T)  -> df.trials.first_submit
+
+  # %>%
+  # group_by(workerid) %>%
+  # count() %>%
+  # group_by(n) %>%
+  # count()
+  # 
+
+
+
+df.trials.first_submit %>%
+  distinct(workerid) %>%
+  count()
+
+
+df.attention <- df.trials.first_submit %>% 
+  filter(trial_name == "memory_check_catch") %>%
+  select(workerid, trial_name, trial_number, RT, check_index, property, tested_on, response, correct)
+
+df.trials.main <- df.trials.first_submit %>% 
+  filter(trial_name == "adj_endorsement_both") %>%
+  select(workerid, trial_name, trial_number, RT, context, question, sentence_1, sentence_2, condition_1, condition_2, item_cond, item, stim_id, degree, adj_positive, adj_negative, superordinate,  response1, response2)
+
+write_csv(df.trials.main, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-trials.csv")
+write_csv(df.attention, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-catch_trials.csv")
+write_csv(df.subject, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-subject_information.csv")
 ```
 
 
 ```{r load data from csv}
-# df.trials <- read_csv("../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
-#df.subject <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-subject_information.csv")
-#df.attention <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-pilot-catch_trials.csv")
+df.trials <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-trials.csv")
+df.subject <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-subject_information.csv")
+df.attention <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-catch_trials.csv")
 ```
 
 ### Exclusions
 
 ```{r}
-df.trials.mem_correct <- df.trials %>%
-  filter(trial_name == "memory_check_catch") %>%
+df.trials.mem_correct <- df.attention %>%
   group_by(workerid) %>%
   summarize(n_correct = sum(correct))
+
+df.trials.mem_correct %>%
+  group_by(n_correct) %>%
+  count()
 
 
 df.mem_fail <- df.trials.mem_correct %>%
   filter(n_correct < 7) %>%
   pull(workerid)
 
-df.trials.filtered <- df.trials %>%
+df.trials.filtered <- df.trials.first_submit %>%
   filter(!(workerid %in% df.mem_fail)) %>%
-  filter(trial_name == "adj_endorsement_both")
+  filter(trial_name == "adj_endorsement_both") %>%
+  rowwise() %>%
+  mutate(np_expectations = ifelse(is.na(np_expectations), item_cond, np_expectations))
+
+# write_csv(df.trials.filtered, path = "../models/data/adj-endorsement_filtered.csv")
+
+length(df.mem_fail)
+length(unique(df.trials.filtered$workerid))
 ```
 
 
@@ -108,11 +166,16 @@ df.trials.filtered %>%
   ) %>%
   mutate(degree = ifelse(degree == "length_duration", "length", degree)) %>%
   select(workerid, stim_id, response_pos, response_neg, degree, superordinate, 
-         item, item_cond) %>%
+         item, np_expectations) %>%
   gather(key, val, response_pos, response_neg, -degree, -superordinate, -stim_id, 
-         -item, -item_cond) -> df.trials.tidy
+         -item, -np_expectations)  %>%
+  mutate(key = gsub('response_', "", key),
+         np_expectations = factor(np_expectations,
+                               levels = c("low", "medium", "high")),
+         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive"))) %>%
+  rename(adj_polarity = key, NP_sg = item, superordinate_pl, superordinate) -> df.trials.tidy
 
-# write_csv(df.trials.tidy, "../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials-tidy.csv")
+#write_csv(df.trials.tidy, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-tidy.csv")
 
 glimpse(df.trials.tidy)
 ```
@@ -122,17 +185,12 @@ glimpse(df.trials.tidy)
 
 ```{r figCollapseItems}
 d.tidy.adj.bs <- df.trials.tidy %>% 
-  group_by(item_cond, key) %>%
+  group_by(np_expectations, key) %>%
   tidyboot_mean(column = val)
 
 d.tidy.adj.bs %>%
-  ungroup() %>%
-  mutate(key = gsub('response_', "", key),
-         item_cond = factor(item_cond,
-                               levels = c("low", "medium", "high")),
-         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive"))) %>%
   ggplot(., 
-       aes( x = item_cond, y = mean, 
+       aes( x = np_expectations, y = mean, 
             ymin = ci_lower, ymax = ci_upper, fill = key))+  
   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
   geom_linerange(position = position_dodge(0.8), color = 'black')+  
@@ -150,6 +208,37 @@ d.tidy.adj.bs %>%
 
 # ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
 #        width = 5, height = 3.6)
+```
+## Look at items with n>=35
+
+```{r}
+df.trials.tidy %>%
+  group_by(stim_id, degree, superordinate, item, np_expectations, key) %>%
+  count() -> d.item.count
+
+d.item.n35 <- d.item.count %>%
+  filter(n >= 35) %>%
+  mutate(unique_id = paste(stim_id, np_expectations, key, sep = "_")) %>%
+  pull(unique_id)
+
+
+d.item.n35.bs <- df.trials.tidy %>%
+  mutate(unique_id = paste(stim_id, np_expectations, key, sep = "_")) %>%
+  filter(unique_id %in% d.item.n35) %>%
+  group_by(stim_id, np_expectations, key) %>%
+  summarize(n_sum = sum(val), prop = mean(val), n = n())
+
+d.item.n35.bs %>%
+  ungroup() %>%
+  rowwise() %>%
+  filter(prop > 0.94 || prop < 0.06 || n >= 57) %>%
+  select(-prop) %>%
+  #filter((n - n_sum) > (n - 2) || (n - n_sum) < 2) %>%
+  spread(key, n_sum) %>%
+  drop_na() %>%
+  rename(neg_adj = response_neg, pos_adj = response_pos) %>%
+  jsonlite::toJSON(., pretty = T) %>%
+  write(., file = "../experiments/adj-endorsement-exp/omitted_stims.json")
 ```
 
 error bars computed by item.
@@ -248,8 +337,8 @@ ggplot(.,
   ylab("Proportion Endorsement")+
   xlab("Subordinate Category")
 
-ggsave("../analysis/figs/bars_adj_finalExpt_pilot_byItem.pdf",
-       width = 12.5, height = 8.5)
+# ggsave("../analysis/figs/bars_adj_finalExpt_pilot_byItem.pdf",
+#        width = 12.5, height = 8.5)
 ```
 
 # Regression modeling
