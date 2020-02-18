@@ -883,7 +883,6 @@ hand_classification <- c("'" = "",
                          "animals forest" = "animals",
                          "animals forrest" = "animals",
                          "animals forest" = "animals",
-                    
                          "pieces of"= "",
    "alcohol drinks" = "alcoholic drinks",
    "animal houses" = "dens",
@@ -1053,7 +1052,7 @@ hand_classification <- c("'" = "",
    "weather conditions" = "weather",
    "weight lifter" ="weightlifter",
    "wooffloor"= "wood", 
-   "furnature", "furniture",
+   "furnature"= "furniture",
    "alochols" =  "alcoholic drinks",
    "random wood" = "wood",
    "areas furniture" = "areas", 
@@ -1222,7 +1221,7 @@ hand_classification <- c("'" = "",
    "tings weight"= "things",
    "trucks" = "truck",
    "wheeled transportation" = "transportation",
-   "types of " = "",
+"types of " = "",
    "ways of travel" = "transportation",
    "ways of walking" = "walking",
    "wooffloor" = "wood floor",
@@ -1237,7 +1236,8 @@ hand_classification <- c("'" = "",
                          
                    
 d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
-                      mutate( response_lemma = str_replace_all(response, hand_classification), 
+                      mutate( response = as.character(response),
+                        response_lemma = str_replace_all(response, hand_classification) , 
         
          response_lemma = ifelse( superordinate == "cookware", 
                                      gsub("pans", "frying pan", response),
@@ -1410,15 +1410,15 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
     response_lemma = ifelse( superordinate == "walls", gsub("building materials", "walls", response),
                             response_lemma),
    
-   # response_lemma = ifelse( cleanedPhrase == "_cries_", np_match_us, cleanedPhrase),
-    #response_lemma = ifelse( cleanedPhrase == "_crying_", np_match_us, cleanedPhrase),
-    #response_lemma = ifelse( cleanedPhrase == "_episodes_", np_match_us, cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_car_", "_cars_", cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_map_", "_maps_", cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_pots_", "_cookware_", cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_settings_", super_us, cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
-#    response_lemma = ifelse( cleanedPhrase == "_pieces_", np_match_us, response),
+    response_lemma = ifelse( cleanedPhrase == "_cries_", np_match_us, cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_crying_", np_match_us, cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_episodes_", np_match_us, cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_car_", "_cars_", cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_map_", "_maps_", cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_pots_", "_cookware_", cleanedPhrase),
+   response_lemma = ifelse( cleanedPhrase == "_settings_", super_us, cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
+    response_lemma = ifelse( cleanedPhrase == "_pieces_", np_match_us, response),
     response_lemma = ifelse( np == "sauna", gsub("spa", "sauna", response), response_lemma),
     response_lemma = ifelse( np == "bedboard", gsub("board", "bedboard", response), response_lemma),
     response_lemma = gsub("shopping", np_match, response),
@@ -1433,8 +1433,40 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          ) 
 
 # check unclassified responses left
-d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0))  %>%  distinct(np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper)
+d.tidy.resp.analysis.update <- d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0))  #%>%  distinct(np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper)
 ```
+
+``` {r}
+d.tidy.resp.valid.resps %>%
+    rowwise() %>%
+  mutate(
+    response_lemma = as.character(response_lemma),
+    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    np_match = as.character(np_match),
+    np_match = gsub('\"', "", np_match),
+    np_match_us = paste("_", np_match, "_", sep=""), # insert underscores for the matching the other way around 
+    super_us = paste("_", superordinate, "_", sep=""),
+  # check if response and seed NP match 
+    specific = #ifelse(
+      # response_lemma == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
+      ifelse(response_lemma == "berries", 0, 
+      containsString_responses(
+        as.character(cleanedPhrase), 
+        np_match, 
+        response_lemma, 
+        np_match_us
+        )
+      ),
+  # check if response and anticipated superordinate match
+    matchingSuper = containsString_responses(
+      as.character(cleanedPhrase), 
+      as.character(superordinate), 
+      response_lemma, 
+      super_us)
+  ) -> d.tidy.phrase.w.original2
+
+```
+
 
 
 ``` {r}
