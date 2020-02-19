@@ -1988,9 +1988,12 @@ The frquencies are appended to the cleaned data for the model.
 df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
 d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
+  left_join(., df.frequencies, by=c("superordinate.freq"="NPs")) %>%
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree)
+  )# add superordinate frequencies
 
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, stim_id, degree, superordinate, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_pl = superordinate, NP_sg = np, NP_pl = np_pl,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>% select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
 # check if singular matches original
 df.sg <- read_csv('../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv')

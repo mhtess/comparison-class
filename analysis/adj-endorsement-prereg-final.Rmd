@@ -142,8 +142,16 @@ df.trials.filtered <- df.trials.first_submit %>%
 # some of the item_conds were not recorded; they can be read from the CC elicitation data (df.mode final is the final classified full data set)
 df.trials.filtered <- df.trials.filtered %>% rowwise() %>%
   mutate(
-    np_expectations = ifelse(is.na(np_expectations), df.mode.final[df.mode.final$NP_sg == item, ] %>% 
-                               distinct(np_expectations) %>% .$np_expectations, np_expectations )
+    np_expectations = ifelse(is.na(np_expectations), df.mode.final %>% 
+                               filter((superordinate_pl == superordinate) & (NP_sg == item)) %>% 
+                               distinct(np_expectations) %>% .$np_expectations, np_expectations ))
+df.trials.filtered <- df.trials.filtered %>% mutate(
+    np_expectations = ifelse(item == "opera", "high", np_expectations),
+    np_expectations = ifelse(item == "podcast episode", "medium", np_expectations),
+    np_expectations = ifelse(item == "song", "low", np_expectations),
+    np_expectations = ifelse(item == "sprinting race", "low", np_expectations),
+    np_expectations = ifelse(item == "relay race", "medium", np_expectations),
+    np_expectations = ifelse(item == "triathlon race", "high", np_expectations)
   )
 # write_csv(df.trials.filtered, path = "../models/data/adj-endorsement_filtered.csv")
 
@@ -192,6 +200,7 @@ df.trial.tidy.w.freq <- df.trials.tidy %>% rowwise() %>%
     superordinate_pl = ifelse(superordinate_pl == "races", "rallies", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == "audio recordings", "audios", superordinate_pl)
+   
   ) 
 
 df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
