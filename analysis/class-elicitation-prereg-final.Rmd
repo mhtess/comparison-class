@@ -2008,8 +2008,10 @@ write_csv(df.mode.final, '../data/class-elicitation-prereg-final/full-classified
 df.frequencies <- read_csv('../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv')
 d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
   left_join(., df.frequencies, by = c("np_pl" ="NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by=c("superordinate.freq"="NPs"))   # add superordinate frequencies
-
+  left_join(., df.frequencies, by=c("superordinate.freq"="NPs")) %>%  # add superordinate frequencies
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree)
+  )
 df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>% select(workerid, stim_id, degree, superordinate, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>% mutate(superordinate_pl = superordinate, NP_sg = np, NP_pl = np_pl,  response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
 write_csv(df.mode.auto.final, '../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv')
