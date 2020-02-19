@@ -1,4 +1,18 @@
-// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork/ 2
+// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork by_item by_item 1
+
+// global or by_item
+var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
+var comparison_class_prior_slope = process.argv[process.argv.length - 2]
+var global_cc_parameters = (comparison_class_prior_intercept == "global" && comparison_class_prior_slope == "global")
+var by_item_cc_parameters = (comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "by_item") ? "intercept_slope" :
+	(comparison_class_prior_intercept == "by_item") ? "intercept" :
+	(comparison_class_prior_slope == "by_item") ? "slope" :
+	"global"
+
+	display(comparison_class_prior_intercept)
+	display(comparison_class_prior_slope)
+	display(global_cc_parameters)
+	display(by_item_cc_parameters)
 
 var utterances = ["positiveAdjective", "negativeAdjective", "silence"]
 
@@ -43,17 +57,17 @@ var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
-var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-SG-PL-update.csv";
+var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
-var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-SG-PL.csv"
+var adj_endorse_DataFile = "adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-w-freqs.csv"
 // var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
 
 // var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
 // var vsData = dataFrame(csv.read(dataPath + adj_endorse_DataFile), ["val"])
 // var corpus_frequency_data =  dataFrame(csv.read(dataPath + corpus_frequency_DataFile), ["Frequencies"])
 var ccData = readDataFile(dataPath + cc_inference_DataFile,  ["specific", "subFreq", "superFreq"])
-var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["val"])
+var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["val",  "subFreq", "superFreq"])
 // var corpus_frequency_data = readDataFile(dataPath + corpus_frequency_DataFile, ["Frequencies"])
 
 var logistic = function(x) {1 / (1 + Math.exp(-x))}
@@ -74,34 +88,34 @@ var model = function(){
   // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
-	var globalFrequencyEffect = uniformDrift({a: -3, b: 3, width: 0.5})
-	var globalInterceptEffect =  gaussianDrift({mu:0, sigma: 1, width: 0.5})
+	var frequencyEffect = uniformDrift({a: -3, b: 3, width: 0.5})
+	var interceptEffect =  gaussianDrift({mu:0, sigma: 1, width: 0.5})
 
-  var dummyClassParameters = {
+	var dummyClassParameters = {
 		class_type_1: {
-			intercept: globalInterceptEffect,
-			frequency: globalFrequencyEffect
+			intercept: interceptEffect,
+			frequency: frequencyEffect
 		},
 		class_type_2: {
-			intercept: globalInterceptEffect,
-			frequency: globalFrequencyEffect
+			intercept: comparison_class_prior_intercept == "by_item" ? gaussianDrift({mu:0, sigma: 1, width: 0.5}) : interceptEffect,
+			frequency: comparison_class_prior_slope == "by_item" ? uniformDrift({a: -3, b: 3, width: 0.5}) : frequencyEffect
 		}
-  };
+	}
 
 	// could be made smarter by not conditioning the prior on class_type_2 on the sampled value of class_type_1?
-	var comparison_class_subordiante_prior_prob = {
+	var comparison_class_subordinate_prior_prob = {
 		class_type_1: logistic(dummyClassParameters.class_type_1.intercept),
 		class_type_2: logistic(dummyClassParameters.class_type_2.intercept)
 	}
 
 	var classParameters = {
 			sub_basic: (
-				comparison_class_subordiante_prior_prob.class_type_1 >
-				comparison_class_subordiante_prior_prob.class_type_2
+				comparison_class_subordinate_prior_prob.class_type_1 >
+				comparison_class_subordinate_prior_prob.class_type_2
 			) ? dummyClassParameters.class_type_1 : dummyClassParameters.class_type_2,
 			basic_super: (
-				comparison_class_subordiante_prior_prob.class_type_1 >
-				comparison_class_subordiante_prior_prob.class_type_2
+				comparison_class_subordinate_prior_prob.class_type_1 >
+				comparison_class_subordinate_prior_prob.class_type_2
 			) ? dummyClassParameters.class_type_2 : dummyClassParameters.class_type_1,
 	}
 
@@ -110,15 +124,17 @@ var model = function(){
 	// -- this means that the prior will be > 0.5 for one item_type and < 0.5 for the other_item type
 	// -- we code the higher of the two prior intercepts as the basic_super and the lower as sub_basic
 	// (we don't know which items are sub-basic and which ones are basic-super)
-	//
 
-	// we coiuld also assume just positive vs. negative slope for the two kinds (no diff. intercept)
+	// we could also assume just positive vs. negative slope for the two kinds (no diff. intercept)
 
+
+	// CHANGE TO looping over stim_id?
   foreach(degrees, function(degree){
 		// display(degree)
     var data_within_degree_cc = _.filter(ccData, {degree: degree});
 		var data_within_degree_adj = _.filter(vsData, {degree: degree});
     var superordinate_categories = levels(data_within_degree_cc, "superordinate_pl")
+		// display(superordinate_categories)
 
 		data_within_degree_cc.length == 0 ? display("====EMPTY DEGREE ADJ====" + degree + "_") : null
 		data_within_degree_adj.length == 0 ? display("====EMPTY DEGREE CC====" + degree + "_") : null
@@ -130,8 +146,11 @@ var model = function(){
       var data_within_superordinate_cc = _.filter(data_within_degree_cc, {superordinate_pl: superordinate});
 			var data_within_superordinate_adj = _.filter(data_within_degree_adj, {superordinate_pl: superordinate});
       var subordinate_categories = levels(data_within_superordinate_cc, "NP_sg")
+			// display(subordinate_categories)
 
-			var item_set_heirarchy = "sub_basic"//categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
+			var item_set_heirarchy =  global_cc_parameters ?
+				"sub_basic" :
+				categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
 
 			data_within_superordinate_cc.length == 0 ? display("====EMPTY SUPER ADJ====" + superordinate + "_") : null
 			data_within_superordinate_adj.length == 0 ? display("====EMPTY SUPER CC====" + superordinate + "_") : null
@@ -149,16 +168,17 @@ var model = function(){
           sigma: uniformDrift({a: 0, b: 3, width: 0.3})
         };
 
-        var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {"NP_sg": subordinate});
-				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {"item_sg": subordinate});
+        var data_within_subordinate_cc = _.filter(data_within_superordinate_cc, {NP_sg: subordinate});
+				var data_within_subordinate_adj = _.filter(data_within_superordinate_adj, {NP_sg: subordinate});
 
 				data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB ADJ====" + superordinate + "_" + subordinate) : null
 				data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB CC====" + superordinate + "_" + subordinate) : null
 
-
         var subcatWeight = logistic(
 					classParameters[item_set_heirarchy].intercept +
-					classParameters[item_set_heirarchy].frequency * Math.log(data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq)
+					classParameters[item_set_heirarchy].frequency * Math.log(
+						data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq
+					)
 				)
 
 				// var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
@@ -239,17 +259,17 @@ var model = function(){
       }, 10000)
       ////////////////////////////////////////
 
-      foreach(["positive","negative"], function(form){
+      foreach(["positive","negative"], function(adj_polarity){
 
         var d_subcat_superSpeaker = _.map(
-          _.filter(data_within_subordinate_adj, {key: "response_" + form.slice(0, 3)}),
+          _.filter(data_within_subordinate_adj, {adj_polarity}),
         "val");
 
         var d_subcat_ccInference = _.map(
-            _.filter(data_within_subordinate_cc, {adj_positiveness: form}),
+            _.filter(data_within_subordinate_cc, {adj_polarity}),
         "specific");
 
-        var superSpeakerProbs = speaker1_super(form);
+        var superSpeakerProbs = speaker1_super(adj_polarity);
 
 				d_subcat_superSpeaker.length == 0 ? display("====EMPTY form ADJ====" + superordinate + "_" + subordinate) : null
 				d_subcat_ccInference.length == 0 ? display("====EMPTY form CC====" + superordinate + "_" + subordinate) : null
@@ -259,15 +279,15 @@ var model = function(){
           observe(superSpeakerProbs, d)
         })
 
-        var ccRSA = pragmaticListener(form);
+        var ccRSA = pragmaticListener(adj_polarity);
 
         mapData({data:d_subcat_ccInference}, function(d){
          // console.log("cc = "+ ccRSA.score(d))
           observe(ccRSA, d);
         })
 
-        query.add([degree, superordinate, subordinate,  "adjEndorse", form], Math.exp(superSpeakerProbs.score(1)))
-        query.add([degree, superordinate, subordinate, "subordinateCC", form], Math.exp(ccRSA.score(1)))
+        query.add([degree, superordinate, subordinate,  "adjEndorse", adj_polarity], Math.exp(superSpeakerProbs.score(1)))
+        query.add([degree, superordinate, subordinate, "subordinateCC", adj_polarity], Math.exp(ccRSA.score(1)))
 
       })
 
@@ -277,36 +297,45 @@ var model = function(){
 
       })
 
-			// query.add([degree, superordinate, "item_set_heirarchy", "sub_basic", "NA"], item_set_heirarchy == "sub_basic" ? 1 : 0)
+			if (!global_cc_parameters) {
+				query.add([degree, superordinate, "item_set_heirarchy", "sub_basic", by_item_cc_parameters], item_set_heirarchy == "sub_basic" ? 1 : 0)
+			}
 
     })
 
 	})
 
-  query.add(["parameter", "silenceProb", "NA",  "NA", "NA"], silenceCost)
-  query.add(["parameter", "beta", "frequency",  "global", "NA"], globalFrequencyEffect)
-	query.add(["parameter", "beta", "intercept",  "sub_basic", "NA"], globalInterceptEffect)//classParameters.sub_basic.intercept)
-	// query.add(["parameter", "beta", "frequency",  "basic_super", "NA"], classParameters.basic_super.frequency)
-	// query.add(["parameter", "beta", "intercept",  "basic_super", "NA"], classParameters.basic_super.intercept)
+	if (global_cc_parameters) {
+		query.add(["parameter", "beta", "frequency",  "sub_basic", "global"], frequencyEffect)
+		query.add(["parameter", "beta", "intercept",  "sub_basic", "global"], interceptEffect)
+	} else {
+		query.add(["parameter", "beta", "frequency",  "basic_super", by_item_cc_parameters], classParameters.basic_super.frequency)
+		query.add(["parameter", "beta", "intercept",  "basic_super", by_item_cc_parameters], classParameters.basic_super.intercept)
+		query.add(["parameter", "beta", "frequency",  "sub_basic", by_item_cc_parameters], classParameters.sub_basic.frequency)
+		query.add(["parameter", "beta", "intercept",  "sub_basic", by_item_cc_parameters], classParameters.sub_basic.intercept)
+	}
 
-  query.add(["parameter", "speakerOptimality","adjEndorse", "NA", "NA"], alphas.adj_endorse)
-  query.add(["parameter", "speakerOptimality","subordinateCC", "NA", "NA"], alphas.cc_inference)
+
+	query.add(["parameter", "silenceProb", "NA",  "NA", by_item_cc_parameters], silenceCost)
+  query.add(["parameter", "speakerOptimality","adjEndorse", "NA", by_item_cc_parameters], alphas.adj_endorse)
+  query.add(["parameter", "speakerOptimality","subordinateCC", "NA", by_item_cc_parameters], alphas.cc_inference)
 
   // return _.object(_.flatten(parameters, true));
   return query
 }
 
-// var totalIterations = 50, lag =  1;
+// var totalIterations = 100, lag =  1;
 // var totalIterations = 250000, lag =  25;
-var totalIterations = 125000, lag =  20;
+var totalIterations = 150000, lag =  50;
+// var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogisticTry2-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-silenceAlt-silenceCost-corpusFreqCCLogistic_byItem_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
-var header = "iteration,degree,superordinate,subordinate,task,adjective,val,score"
+var header = "iteration,degree,superordinate,subordinate,task,adj_polarity,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
 
 Infer({model,
-      samples: samples, burn: burn, lag: lag,
+      samples: samples, burn: burn, lag: lag == 1 ? 0 : lag,
        method: 'incrementalMH',
        onlyMAP: true,
        verbose: T,
