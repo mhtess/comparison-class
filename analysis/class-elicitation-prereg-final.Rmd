@@ -272,9 +272,9 @@ invalid.responses <- c("unsure",
                               "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
                               "mika", "natalia",
                               # invalid responses
-                              "barbell snatch", "bank of america",  "easy", "empire building",  "chill", "chinn",
+                              "barbell snatch", "bank of america",  "easy", "empire building",  "chill", "chinn", "webside",
                               "finished", "flexibility", "health", "hot cold",
-                              "lazy", "low", "cliaire", "feelings",
+                              "lazy", "low", "cliaire", "feelings", "too small", "Too small",
                                 "public", "ripe" , "silent", "baked", "burn", "more costly", "exacting", 
                               # filter out the sentences without a CC
                               "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft", 
@@ -284,8 +284,8 @@ invalid.responses <- c("unsure",
                               "the color of the script is light", "the daisy is dark in color", "The first bite of her ice cream was warm", "The first sip of juice was cold", "The furniture was narrow at the back door of his house", "The new place rental rate is expensive", "the pair of sandals are expensive", "	The piece of silk is light.", 
                               "the sound of the shower is strong", "The statue made of plastic was cheap", "the walls of the condo are strong", "While walking heard the cry of a rooster when it was quiet", "Basketball player was tall",
                               "Friend's new rowboat was fast","Friend's new smartcar is big", "his favorite poem was short", "it is not destructive", "it is not loud", "it is not sold expensively", "it s not wide", "its noisy in here",
-                              	"its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", 
-                              "the color is not much","the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud",
+                              	"its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", "large", "lengthy", "Little",
+                              "the color is not much","the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud", "little",
                               "the movie i hope", "all light of off", "sits on a blanket", "try a new water color",
                               "driving on a downtown street", "The spider was small", "The music was Loud",
                               "powerboat sound little quiet", "Horn was too loud", "Villa price was costly", 
@@ -296,7 +296,7 @@ invalid.responses <- c("unsure",
                               "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat", 
                               "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
                               "they are bold", "the blade spinning", "its finished", "not sure", "too slow",
-                              "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast" , "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little"
+                              "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast" , "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little", "outside"
                               )
 ```
 
@@ -310,7 +310,7 @@ mispellings_set <- c(
         "bottles of win" = "bottles of wine",
          "seagul" = "seagull",
          "seagulll" = "seagull",
-        "skyscrapper" = "skycraper",
+        "skyscrapper" = "skyscraper",
          "dalia" = "dahlia",
          "pitbul" = "pitbull",
          "panter" = "panther",
@@ -500,7 +500,7 @@ synonym_set = c("6 packs" = "beer",
          "rock music" = "rock concert",
          "patios" = "patio door",
          "rug" = "carpet",
-         "wooffloor" = "wood",
+         "woof floor" = "wood",
          "pet mouose" = "mouse",
          "fungus" = "mushroom",
          "episodes of this podcast" = "podcast episode",
@@ -823,7 +823,7 @@ hand_classification <- c("things in the room" = "things",
                          "air in the room" = "air",
                          "'" = "",
                          "airplanes" = "aircrafts",
-                         "animals fur color" = "animals",
+                         "animals fur color" = "animal",
                          "animal coat" = "animal",
                          "computers" = "laptop",
                          "danes" = "great dane",
@@ -835,7 +835,7 @@ hand_classification <- c("things in the room" = "things",
                          "baseket ball players" = "basketball player",
                          "basket player" = "basketball player",
                          "big road" = "highway",
-                         "bird" = "birds",
+                         #"bird" = "birds",
                          "cell hone" = "phone",
                          "cry frinch" = "finch",
                          "cites" = "city",
@@ -862,6 +862,18 @@ hand_classification <- c("things in the room" = "things",
                          "other computer equipment" = "electronic devices",
                          "bodies of water" = "waterways",
                          "places to rent" = "rentals",
+                         "cold day" = "day",
+                         "compared to the noise everyone is used to" = "noise",
+                         "cookers" = "cookware",
+                         "cooking devices" = "cookware",
+                         "cooking instruments" = "cookware",
+                         "cooking items" = "cookware",
+                         "cooking options" = "cookware",
+                         "cooking styles" = "cookware",
+                         "cooking tools" = "cookware",
+                         "cooking utensils" = "cookware",
+                         "day outside" = "day",
+                         
                          "ways too cook food" = "cookware",
                          "door openings" = "doorways",
                          "wall supports" = "walls",
@@ -889,21 +901,21 @@ hand_classification <- c("things in the room" = "things",
                          "animal houses openings" = "animal houses",
                          "air in the room" = "air",
                          "ambient temperatures" = "temperatures",
-                         "animals in the  aquiarium" = "animals",
-                         "animals in the forest" = "animals",
-                         "animals in the forrest" = "animals",
-                         "animals in forest" = "animals",
-                         "pieces of"= "",
+                         "animals in the  aquiarium" = "animal",
+                         "animals in the forest" = "animal",
+                         "animals in the forrest" = "animal",
+                         "animals in forest" = "animal",
+                         "pieces of "= "",
                          "alcohol drinks" = "alcoholic drinks",
                          "animal houses" = "dens",
                          "animal noise" = "animal sound",
-                         "aniumals" = "animals",
+                         "aniumals" = "animal",
                          "apartmets" = "apartments",
                          "aquariums" = "aquarium",
                          "athelete" = "athlete",
                          "barries" = "berries",
                          "bird cries" = "bird sound",
-                         "bird species" = "birds",
+                         "bird species" = "bird",
                          "bird loud" = "bird sound", 
                          "bird sounds" = "bird sound",
                          "bodys of water" = "waterways",
@@ -920,14 +932,20 @@ hand_classification <- c("things in the room" = "things",
                          "coats"=  "coat",
                          "cockpots" = "crockpot",
                          "craft supplies" = "materials",
-                         "crafts" = "materials", 
+                         #"crafts" = "materials", 
                          "compared noise" = "noise",
                          "creators" = "creatures", 
                          "car models" = "cars",
                          "cry of finch" = "finch",
                          "crying" = "cries",
                          "days" = "day",
+                         "decorations" = "decor",
+                         "decor for sale" = "decor", 
                          "dinners" = "dinner",
+                         "door of his house" = "doorways",
+                         "doors in his house" = "doorwyas",
+                         "exerciser" = "athlete",
+                         "fabric and material" = "fabric",
                          "distances" = "distance",
                          "documentry" = "documentary",
                          "dog hair" = "dogs",
@@ -989,6 +1007,8 @@ hand_classification <- c("things in the room" = "things",
                          "means of transportation"= "transportation",
                          "meeting rooms"= "meeting hall",
                          "menus"= "menu",
+                         "skycraper" = "skyscraper",             
+                         "routes they could take" = "routes",
                          "bracelet"= "bracelets",
                          "metals"= "metal",
                          "methods of transportation"= "transportation",
@@ -1026,14 +1046,14 @@ hand_classification <- c("things in the room" = "things",
                          "restaraunts" = "restaurants",
                          "restaraunt prices" = "restaurants", 
                          "rooms in the building / venue" = "venues",
-                         "rooms in the house" =  "rooms",
+                         "rooms in the house" =  "room",
                          "satues" = "statues",
                          "script writings"= "script",
                          "prices"= "price",
                          "scripts"= "script",
                          "seacreatures"= "sealife",
                          "selling price"= "price",
-                         "shades that have a stronger characteristic"= "paints",
+                         "shades that give a stronger characteristic"= "paints",
                          "snack foods"= "snacks",
                          "sofas"= "couch",
                          "satues"= "statues",
@@ -1077,7 +1097,7 @@ hand_classification <- c("things in the room" = "things",
                          "areas of space" = "areas",
                          "areas with sound" = "areas",
                          "bird call" = "bird sound", 
-                         "birds zoo" = "birds",
+                         "birds zoo" = "bird",
                          "buildings materials"= "building",
                          "cars on the highway" ="cars",
                          "climates" = "places",
@@ -1089,10 +1109,11 @@ hand_classification <- c("things in the room" = "things",
                          "county lanes" = "country lanes",
                          "creams" = "ice cream",
                          "costs of living" = "rentals",
-                         "crawly animals" = "animals",
+                         "crawly animals" = "animal",
                          "creams" = "ice cream",
                          "crowds" = "concerts",
-                         "decorations" = "decor",
+                         "audiences" = "concerts",
+                         
                          "decors" = "decor",
                          "making other diners by other methods" = "cookware",
                          "dog breeds" = "dogs",
@@ -1136,7 +1157,7 @@ hand_classification <- c("things in the room" = "things",
                          "items for sale" = "items",
                          "items at the craft shop" = "items",
                          "joggers predestrians" = "jogger",
-                         "light object" = "object",
+                         "light object" = "objects",
                          "loud sound" = "sound",
                          "wood choices" = "wood",
                          "meeting hall" = "venue",
@@ -1157,14 +1178,28 @@ hand_classification <- c("things in the room" = "things",
                          "paint coverage" = "paints",
                          "paint odors" = "paint smells", 
                          "paint scents" = "paint smells",
+                         "the doorway" = "doorways",
+                         "the floor" = "floors",
+                         "the forest" = "forest",
+                         "the material" = "material",
+                         "the places" = "place",
+                         "the race" = "race",
+                         "the road" = "road",
+                         "the weather" = "weather",
+                         "weght" = "weight",
+                         "the voice" = "voice",
                          "papers" = "paper",
                          "park sound" = "sound",
-                         "parts of " = "",
                          "parts of a " = "",
                          "parts of his " = "",
                          "parts of the " ="",
+                         "parts of " = "",
+                         "smells"  = "smell", 
+                         "small " = "",
+                         "smells" = "smell",
+                         "snack-food" = "snacks",
                          "pastries" = "desserts",
-                         "pet birds" = "birds", 
+                         "pet bird" = "bird", 
                          "peoples house" = "house",
                          "pet house" = "pets", 
                          "pick up" = "pick-up", 
@@ -1175,6 +1210,9 @@ hand_classification <- c("things in the room" = "things",
                          "places they could have met" = "venue",
                          "places to live" = "rentals",
                          "places to sit" = "furniture",
+                         "places around her" = "places",
+                         "places in kitchen" = "places",
+                         "places in the house." = "places",
                          "plant fibers" = "materials",
                          "plays" = "audios",
                          "pools" = "places",
@@ -1182,13 +1220,21 @@ hand_classification <- c("things in the room" = "things",
                          "predictions" = "weather",
                          "premises" = "walls",
                          "price of fruit" = "price",
-                         "heavy object"=  "objects", 
+                         "heavy object"=  "object", 
                          "primates" ="monkey",
                          "produce" = "food",
                          "programs" = "entertainment",
                          "public areas" = "areas",
                          "public places" = "venue",
+                         "meals hes made" = "meals",
+                         "means of cooking" = "cookware",
+                         "modes of cooking" = "cookware",
+                         "noise around him that hes ever hears" = "noise",
                          "recipe" = "cookware", 
+                         "objects in-store" = "objects",
+                         "objects, in general" = "objects",
+                         "passages" = "doorways",
+                         "noise." = "noise",
                          "restaurant price" = "restaurant",
                          "retail stores"= "stores",
                          "room temperature liquids" = "liquid",
@@ -1202,11 +1248,27 @@ hand_classification <- c("things in the room" = "things",
                          "snack food" = "snacks",
                          "sound in the environment"= "sound",
                          "sound of nature" = "sound",
+                         "sound around them" = "sound",
+                         "sound at a lake" = "sound",
+                         "sound going on in the park" = "sound",
+                         "spiders" = "spider",
+                         "stores" = "store",
+                         "streets" = "street", 
+                         "sound in the place." = "sound",
                          "spirits" = "liquor",
+                         "strom" = "storm",
+                         "surfaces of the bed" = "surfaces",
+                         "surfaces that one may sit on" = "surfaces",
                          "speed in the highway" = "speed",
                          "spots" = "venues",
                          "squirrel coat" = "animal coat",
+                         "areas." = "areas",
+                         "birds at the zoo" = "bird",  
+                        "cookery" = "cookware",
                          "study area" = "area",
+                        "pet in the house" = "pet",
+                        "pets" = "pet",
+                        "place outside" ="places",
                          "substances" = "materials",
                          "surfaces of bed" = "bed",
                          "surrounding" = "places",
@@ -1214,7 +1276,8 @@ hand_classification <- c("things in the room" = "things",
                          "temperatures in the room" = "temperature",
                          "temporary shelters" = "tents",
                          "terrariums" = "terrarium", 
-                         "text" = "script", 
+                         "thingsthat move." = "things",
+                        "thingsto move" = "things",
                          "other " = "",
                          "peunguins" = "penguin",
                          "things at the hardware store" = "things",
@@ -1233,12 +1296,19 @@ hand_classification <- c("things in the room" = "things",
                          "tash cans" = "trash can",
                          "things in the terrarium" =  "things",
                          "things on the table" = "things",
-                         "things at the lake" = "things",
+                         "things on the lake" = "things",
                          "things that are fast"= "things",
                          "things that are short" = "things",
-                         "things to move" = "things",
-                         "things you might pick up" = "things",
-                         "tings that have weight"= "things",
+                         "things to move." = "things",
+                         "things you might pick-up" = "things",
+                         "things." = "things",
+                         "tings which have weight"= "things",
+                         "times of day of days of day" = "times of day",
+                         "things he has lifted"= "things",
+                         
+                        "thingshe has lifted"= "things",
+                        "things in the store"= "things",
+                        "thingsin the store"= "things",
                          "trucks" = "truck",
                          "wheeled transportation" = "transportation",
                          "types of " = "",
@@ -1249,6 +1319,18 @@ hand_classification <- c("things in the room" = "things",
                          "apartmet" = "apartment",
                          "frozen desserts" = "dessert",
                          "computers" = "laptop",
+                         "forest shes been in" = "forest",
+                         "forms of cooking" = "cookware",
+                         "furniture of the same type" = "furniture",
+                         "general " = "",
+                         "his kitchen" = "kitchen",
+                        "instruments he has played before" = "instruments",
+                        "instruments she has heard" = "instruments",
+                        "items in the craft shop" = "items",
+                        "instruments." = "instruments",
+                         "his meal" =  "food",
+                         "friend place" = "place",
+                         "the kitchen" = "kitchen",
                          "joggers/ walkers" = "people",
                          "pickup" = "pick-up",
                          "temperatures" = "temperature",
@@ -1256,14 +1338,32 @@ hand_classification <- c("things in the room" = "things",
                          "top shelf options" = "liquor",
                          "teenages" = "teenager",
                          "weights"= "weight",
+                         "ways of cooking" = "cookware",
+                         "ways to cook" = "cookware",
+                         "ways to cook a meal" = "cookware",
+                         "young adults" = "teenager",
+                         "things eaten" = "things",
+                         "thingshe could use to cook with" = "cookware", 
                          "things in the room" = "things",
                          "types of rain" = "storms",
+                         "two-transportation" = "transportation",
+                         "walking." = "walkers",
                          "parts of the kitchen" = "locations",
                          "parts of the forest" = "forest", 
+                        "large cats" = "big cats",
+                        "lengths" = "length",
+                        "products" = "product",
+                        "restaurants." = "restaurant",
+                        "roads" = "road",
+                        "liquid." = "liquid",
+                        "malls" = "mall",
                          "small things" = "things",
                          "pickup trucks" = "pick-up trucks",
-                         "blwnkets" = "blankets"
-                         
+                         "blwnkets" = "blankets",
+                         "things you pick-up" = "things",
+                        "thingsyou pick-up" = "things", 
+                        "the furniture"= "furniture",
+                         "a bed" = "bedboard"
                      )
 
 ```
@@ -1280,7 +1380,9 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
          matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), response_lemma_hand, super_us)
          ) 
 d.tidy.phrase.handClassified %>% filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.phrase.handClassified.matched 
+```
 
+``` {r}
 d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) %>%
   rowwise() %>%
                 mutate(
@@ -1295,23 +1397,32 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
                          #            response_lemma_hand),
          response_lemma_hand = gsub("illunation", np_match, response_lemma_hand),
          response_lemma_hand = gsub("illumination", np_match, response_lemma_hand),
-         response_lemma_hand = ifelse(superordinate == "desserts",  gsub("chocolate", "chocolate fondue",
-                                                                       response_lemma_hand), response_lemma_hand),
+         response_lemma_hand = ifelse(superordinate == "desserts",  gsub("chocolate", "chocolate fondue", response_lemma_hand), response_lemma_hand),
+         response_lemma_hand = ifelse(superordinate == "furniture",  gsub("beds", "bedboard", response_lemma_hand), response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "entertainment",  gsub("films", "movie",  response_lemma_hand), response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "waterways",  gsub("lake", np_match,
+                                                                       response_lemma_hand), response_lemma_hand ),
          response_lemma_hand = ifelse(superordinate == "vehicles", gsub("trucks", "pick-up", response_lemma_hand), response_lemma_hand),
-         response_lemma_hand = ifelse(superordinate == "times of day",  
-                                    ifelse(response_lemma == "days", np_match,
-                                                                             response_lemma_hand), response_lemma_hand),
+         response_lemma_hand = ifelse(superordinate == "people", gsub("walks", np_match, response_lemma_hand), response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "times of day",  
                                     ifelse(response_lemma == "day", np_match,
                                                                              response_lemma_hand), response_lemma_hand),
+         response_lemma_hand = ifelse(superordinate == "times of day",  
+                                    ifelse(response_lemma == "day", np_match, response_lemma_hand), response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "writing utensils",  gsub("ink", np_match, response_lemma_hand),
+                                    response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "birds",  gsub("day", np_match, response_lemma_hand),
+                                    response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "food",  gsub("day", np_match, response_lemma_hand),
                                     response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "writing utensils",  gsub("color", np_match, response_lemma_hand),
                                     response_lemma_hand),
-        
-                  response_lemma_hand = ifelse(superordinate == "buildings",  gsub("apartments", "apartment building",
+         response_lemma_hand = ifelse(superordinate == "seasons",  gsub("past day", np_match, response_lemma_hand),
+                                    response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "insects",  gsub("terrarium", np_match, response_lemma_hand),
+                                    response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "buildings",  gsub("apartments", "apartment building",
                                                                         response_lemma_hand), response_lemma_hand),
-        
          response_lemma_hand = gsub("brands", np_match, response_lemma_hand),
          response_lemma_hand = gsub("butchershop", np_match, response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "places",  gsub("baths", "sauna", response_lemma_hand),
@@ -1319,6 +1430,8 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
          response_lemma_hand = ifelse(np == "bottle of wine",  gsub("bottles", "wine", response_lemma_hand),
                               response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "furniture",  gsub("cans", "trash cans", response_lemma_hand),
+                                    response_lemma_hand),
+        response_lemma_hand = ifelse(superordinate == "animals",  gsub("zoo", np_match, response_lemma_hand),
                                     response_lemma_hand),
          response_lemma_hand = ifelse(degree == "loudness",  gsub("child", "baby", response_lemma_hand),
                                     response_lemma_hand),
@@ -1345,7 +1458,7 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
                                     response_lemma_hand),
          response_lemma_hand = ifelse(degree == "loudness_n",  gsub("day", np_match, response_lemma_hand),
                                     response_lemma_hand),
-         response_lemma_hand = ifelse(superordinate == "seasons",  gsub("days this month", np_match, response_lemma_hand),
+         response_lemma_hand = ifelse(superordinate == "seasons",  gsub("day this month", np_match, response_lemma_hand),
                                     response_lemma_hand),
          response_lemma_hand = ifelse(degree == "price",  gsub("day", np_match, response_lemma_hand), response_lemma_hand),
          response_lemma_hand = ifelse(degree == "price",  gsub("flats", "apartments", response_lemma_hand),
@@ -1381,6 +1494,8 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
                                   response_lemma_hand),
        response_lemma_hand = ifelse(degree == "speed",  gsub("time", np_match, response_lemma_hand), response_lemma_hand),
        response_lemma_hand = ifelse(degree == "price",  gsub("time", np_match, response_lemma_hand), response_lemma_hand),
+       response_lemma_hand = ifelse(superordinate == "birds",  gsub("times of day", np_match, response_lemma_hand),
+                                  response_lemma_hand),
        response_lemma_hand = ifelse(degree == "darkness",  gsub("time", "times of day", response_lemma_hand),
                                   response_lemma_hand),
        response_lemma_hand = ifelse(degree == "price",  gsub("store", np_match, response_lemma_hand), response_lemma_hand),
@@ -1406,12 +1521,10 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
                                  response_lemma_hand),
        response_lemma_hand = ifelse(superordinate == "birds",  gsub("locations", np_match, response_lemma_hand),
                                  response_lemma_hand),
-          
          response_lemma =ifelse(degree == "darkness",  gsub("times", "times of day", response_lemma_hand),
                                    response_lemma_hand),
          response_lemma_hand = gsub("top shelf options", "liquor", response_lemma_hand),
          response_lemma_hand = ifelse(degree == "price", gsub("rent", "rentals", response_lemma_hand), response_lemma_hand),
-        
          response_lemma_hand = ifelse(superordinate == "paints",  gsub("color", "paint", response_lemma_hand),
                                     response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "seasons",  gsub("day", "seasons", response_lemma_hand),
@@ -1424,8 +1537,7 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
                                     response_lemma_hand),
          response_lemma_hand = ifelse(superordinate == "venues",  gsub("auditoriums", "concert", response_lemma_hand),
                                     response_lemma ),
-        
-   response_lemma_hand = ifelse(degree == "speed", gsub("appliances", "cookware", response_lemma_hand), response_lemma_hand),
+    response_lemma_hand = ifelse(degree == "speed", gsub("appliances", "cookware", response_lemma_hand), response_lemma_hand),
     response_lemma_hand = gsub("market", np_match, response_lemma_hand),
     response_lemma_hand = gsub("playing", np_match, response_lemma_hand),
     response_lemma_hand = gsub("saturday nights", np_match, response_lemma_hand),
@@ -1462,9 +1574,9 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
     response_lemma_hand = ifelse( superordinate == "materials", gsub("hardware", "materials", response_lemma_hand),
                             response_lemma_hand),
     response_lemma_hand = ifelse( superordinate == "audios", gsub("performance", "venues", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse( superordinate == "locations", gsub("places house", "locations", response_lemma_hand),
+    response_lemma_hand = ifelse( superordinate == "locations", gsub("places in the house", "locations", response_lemma_hand),
                             response_lemma_hand),
-    response_lemma_hand = ifelse( superordinate == "locations", gsub("places kitchen", "locations", response_lemma_hand),
+    response_lemma_hand = ifelse( superordinate == "locations", gsub("places in the kitchen", "locations", response_lemma_hand),
                             response_lemma_hand),
     response_lemma_hand = ifelse( superordinate == "locations", gsub("refrigerator", "freezer", response_lemma_hand),
                             response_lemma_hand),
@@ -1503,7 +1615,7 @@ d.tidy.phrase.handClassified %>% filter((specific == 0) & (matchingSuper == 0)) 
 
 ```
 
-To further clean the data set, we exclude the responses which mention the degree which is described by the adjectives since it does not provide a comparison class: e.g. we exclude responses like "It's warm relative to other temperatures".
+To further clean the data set, we exclude the responses which mention the degree (n = 181) which is described by the adjectives (e.g. 'price' or 'temperature' ) since it does not provide a comparison class: e.g. we exclude responses like "It's warm relative to other temperatures".
 
 ``` {r}
 
@@ -1511,13 +1623,13 @@ To further clean the data set, we exclude the responses which mention the degree
 
 
 d.tidy.phrase.handClassified2 %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.resps 
-d.nonMatching.resps %>% distinct(degree, superordinate, np, adj, np_match, response, response_lemma, response_lemma_hand, response_lemma_hand, specific, matchingSuper) %>% View()
+d.nonMatching.resps %>% distinct(degree, superordinate, np, adj, np_match, response, response_lemma, response_lemma_hand, specific, matchingSuper) %>% View()
 
 d.tidy.phrase.handClassified2 <- d.tidy.phrase.handClassified2 %>%  rbind(., d.tidy.phrase.handClassified.matched)
 
 # the responses that are still classified as neither sub nor super do not match the anticipated responses and are mostly ones which occur fairly often. All of them are definitely not subordinate and will be classified as superordinate responses. 
 
-# here, the responses including the scale are caught  (172 responses)
+# here, the responses including the scale are caught  (181 responses)
 d.scaleResps <- d.tidy.phrase.handClassified2 %>% rowwise() %>% mutate(degree_match = degree,
   degree_match = ifelse(degree == "temperature_h", "temperature", degree_match),
   degree_match = ifelse(degree == "speed_f", "speed", degree_match),
@@ -1526,7 +1638,7 @@ d.scaleResps <- d.tidy.phrase.handClassified2 %>% rowwise() %>% mutate(degree_ma
   degree_match = ifelse(degree == "length_duration", "length, duration", degree_match),
   degree_match = ifelse(degree == "strength", "weight", degree_match),
   ) %>% 
-  filter(grepl(response_lemma, degree_match, ignore.case=T))
+  filter(grepl(response_lemma_hand, degree_match, ignore.case=T))
 
 # create full cleaned data set
 #d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
@@ -1823,6 +1935,63 @@ d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id,
 d.tidy.resp.counts.analysis %>% filter(isModeNeither == 0) %>% distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>% right_join(., stim.ids.adjust, by = c("stim_id") ) %>% View()
 
 
+```
+
+## Analysing superordinate responses
+
+For the responses that are not the anticipated suboridnate or superoridnate NPs (n = 4.000), we investigate if there are several distinct salient responses (classified as superordinate: all the data points that remain not matched to a priori subordinates or superordinates after the analyses are tagged as superordinate) within each item. For example, we would like to see if for the item set 'food' (anticipated superordinate) - 'soup' - 'salad' - 'ice cream' more than three participants provided any superordinate responses other than 'food'. We collapse across single NPs and adjective conditions within an item, i.e. we count the response as salient if at least three participants provided the response given any NP of the item (e.g. any of 'soup', 'salad', 'ice cream') and any of the adjective (positive or negative). If the response provided by the participant was provided by at least two other participants, we keep the response, otherwise it is substituted by the a priori superordinate. The corresponding frequencies will be extracted for plurals of these salient responses.     
+
+``` {r}
+d.tidy.super.counts <- d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>% group_by(stim_id, superordinate, response_lemma) %>% count() %>% 
+  mutate(n_unique_resps = n) %>% ungroup()
+  
+d.tidy.super.counts %>% filter(n_unique_resps >= 3) -> d.tidy.super.counts.common
+
+d.tidy.super.counts %>% ungroup() %>% mutate(produced_super = ifelse(n_unique_resps >= 3, response_lemma, superordinate)) -> d.tidy.super.adjust
+d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>% left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma" )) -> d.nonMatch.adjustSuper
+
+# get number of data points which passed the grab-3 criterion
+d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 4888
+
+# get the distinct superordinates for the frequency extraction
+d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
+distinctSuper %>% rowwise() %>% filter(stri_detect(produced_super, regex = '.s$')) %>%
+  c(.$produced_super) -> pluralSuper
+anti_join(distinctSuper, pluralSuper) %>% View()
+super_plural = function(n, pluralSuper) {
+  if(n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
+    n_pl = n 
+  } else if (n %in% pluralSuper) {
+    n_pl = n 
+  } else if (n == "box") {
+    n_pl = "boxes"
+  } else if (n == "city") {
+    n_pl = "cities"
+  } else{
+    n_pl = paste(n, "s", sep="")
+  }
+  return (n_pl)
+}
+
+distinctSuper %>% rowwise() %>% mutate(produced_super_pl = super_plural(produced_super, pluralSuper)) -> allSuper
+write_csv(allSuper, '../data/class-elicitation-prereg-final/cc-prod-distinct-super-pl.csv')
+d.nonMatch.adjustSuper <- d.nonMatch.adjustSuper %>% rowwise() %>%
+  mutate(produced_super_pl = super_plural(produced_super, pluralSuper)) 
+d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
+    rowwise() %>%
+  mutate(degree = ifelse(degree == "length_duration", "length", degree),
+         superordinate_pl = produced_super_pl,
+         superordinate_pl = ifelse(superordinate_pl == "races", "rallies", superordinate_pl),
+         superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
+         NP_pl = insert_plural_np(tolower(np), superordinate)) %>% 
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific )
+df.produced.super.freqs <- read_csv('../data/class-elicitation-prereg-final/cc-prod-produced-super-pl-frequencies.csv')
+d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
+  left_join(., df.frequencies, by = c("NP_pl" = "NPs")) %>%
+  left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs") )
+d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>% 
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+write_csv(d.nonMatch.adjustSuper.filter.w.freqs, '../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv')
 ```
 
 ``` {r}
