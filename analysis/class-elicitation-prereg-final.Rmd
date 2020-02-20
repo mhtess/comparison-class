@@ -1992,6 +1992,7 @@ d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
 d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>% 
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
 write_csv(d.nonMatch.adjustSuper.filter.w.freqs, '../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv')
+
 ```
 
 ``` {r}
@@ -2171,6 +2172,13 @@ anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
 write_csv(df.mode.final, '../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv')
 ```
+
+``` {r}
+# create full df with produced grab-3 superordinates
+d.tidy.phrase.w.original.mode.pl %>% filter((specific == 1 ) | (matchingSuper == 1)) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>% rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
+write_csv(d.full.w.produced.super, '../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv')
+```
+
 
 ``` {r}
 # FOR AUTO CALSSIFIED DATA
