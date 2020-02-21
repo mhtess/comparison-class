@@ -730,6 +730,7 @@ d.matchedResponses <- d.tidy.clean.responses %>%
 n.automatic.responses <- d.matchedResponses %>% 
   ungroup() %>% count() %>% pull(n)
 
+n.automatic.responses
 n.automatic.responses / n.valid.responses
 
 # d.tidy.phrase.w.original %>%
@@ -799,7 +800,7 @@ d.tidy.resp.analysis <- anti_join(
 #d.tidy.resp.analysis <- d.tidy.phrase.w.original2 %>% 
  # filter(!((specific == 1) | (matchingSuper == 1)))
 
-length(d.tidy.resp.analysis)
+length(d.tidy.resp.analysis$response)
 
 d.tidy.resp.analysis %>% 
   distinct(superordinate, np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper) %>% 
