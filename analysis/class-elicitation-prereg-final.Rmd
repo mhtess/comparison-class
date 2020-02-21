@@ -957,8 +957,15 @@ d.scaleResps <- d.tidy.phrase.handClassified2 %>%
 # create full cleaned data set
 # d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
 # exclude the "degree" responses
-d.AutoClassified <- d.matchedResponses %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
-d.HandClassified.subs.wCC <- anti_join(d.tidy.phrase.handClassified2, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma = response_lemma_hand, specific, matchingSuper)
+d.AutoClassified <- d.matchedResponses %>% 
+  select(workerid, stim_id, degree, context_sentence, superordinate, 
+         np, np_expectations, adj, adj_polarity, np_match, response, 
+         response_lemma, specific, matchingSuper)
+d.HandClassified.subs.wCC <- anti_join(
+  d.tidy.phrase.handClassified2, d.scaleResps
+  ) %>% select(workerid, stim_id, degree, context_sentence, superordinate, 
+               np, np_expectations, adj, adj_polarity, np_match, response, 
+               response_lemma = response_lemma_hand, specific, matchingSuper)
 
 
 # put the whole classified data together to get modal responses
@@ -1002,7 +1009,7 @@ fabric . superordinate
 #   filter(!((specific == 0) & (matchingSuper == 0)))  %>%
 #   #mutate() %>%
 
-write_csv(d.tidy.clean.responses, path = "../models/data/comparison-class-inf_clean_coded.csv")
+# write_csv(d.tidy.clean.responses, path = "../models/data/comparison-class-inf_clean_coded.csv")
 
 d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>%
   group_by(np_expectations, adj_polarity) %>%
@@ -1245,25 +1252,6 @@ ggsave(
 )
 ```
 
-# TO ORGANIZE
-
-## Look at items with n>=35
-
-```{r}
-
-d.item.n35 <- d.item.count %>%
-  filter(n >= 35) %>%
-  mutate(unique_id = paste(stim_id, np_expectations, adj_polarity, sep = "_")) %>%
-  pull(unique_id)
-
-
-d.item.n35.bs <- d.tidy.phrase.w.original %>%
-  mutate(unique_id = paste(stim_id, np_expectations, adj_polarity, sep = "_")) %>%
-  filter(unique_id %in% d.item.n35) %>%
-  group_by(stim_id, np_expectations, adj_polarity) %>%
-  summarize(n_sum = sum(specific), n = n())
-```
-
 
 The data points are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
 ``` {r}
@@ -1368,10 +1356,13 @@ super_plural <- function(n, pluralSuper) {
 distinctSuper %>%
   rowwise() %>%
   mutate(produced_super_pl = super_plural(produced_super, pluralSuper)) -> allSuper
+
 write_csv(allSuper, "../data/class-elicitation-prereg-final/cc-prod-distinct-super-pl.csv")
+
 d.nonMatch.adjustSuper <- d.nonMatch.adjustSuper %>%
   rowwise() %>%
   mutate(produced_super_pl = super_plural(produced_super, pluralSuper))
+
 d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
   rowwise() %>%
   mutate(
@@ -1381,13 +1372,19 @@ d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
     superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
     NP_pl = insert_plural_np(tolower(np), superordinate)
   ) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
+         NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
+
 df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/cc-prod-produced-super-pl-frequencies.csv")
+
 d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
   left_join(., df.frequencies, by = c("NP_pl" = "NPs")) %>%
   left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs"))
+
 d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
+         NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+
 write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
 ```
 
@@ -1408,7 +1405,7 @@ d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
 ``` 
 
 ``` {r}
-# TO BE RUN ON ONLY AUTOCATICALLY CLASSIFIED DATA
+# TO BE RUN ON ONLY AUTOMATICALLY CLASSIFIED DATA
 d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>%
   mutate(
     # substitutions made based on human modal responses
@@ -1555,6 +1552,7 @@ The frquencies are appended to the cleaned data for the model.
 
 ``` {r}
 df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
 d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
@@ -1569,8 +1567,8 @@ df.mode.final <- d.tidy.phrase.w.original.mode.pl %>%
 
 # check if singular matches original
 df.sg <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv")
-anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
+#anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
 write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv")
 ```
@@ -1579,24 +1577,31 @@ write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified
 # create full df with produced grab-3 superordinates
 d.tidy.phrase.w.original.mode.pl %>%
   filter((specific == 1) | (matchingSuper == 1)) %>%
-  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
+         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
+         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
   rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
-write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
+
+#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
 ```
 
 
 ``` {r}
 # FOR AUTO CALSSIFIED DATA
 df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
 d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
   mutate(
     degree = ifelse(degree == "length_duration", "length", degree)
   )
+
 df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
-  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
-  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, 
+         np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
+  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, 
+         response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
 write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
@@ -1605,7 +1610,6 @@ write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-class
 ``` {r}
 # adjust adj endorsement data
 adj.endorse <- read_csv("")
-
 
 adj.endorse.np.pl <- adj.endorse %>%
   mutate(
@@ -1621,58 +1625,6 @@ adj.endorse.adjust.super <- adj.endorse.np.pl %>% mutate(
 adj.endorse.w.freq <- adj.endorse.adjust.super %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate" = "NPs"))
-```
-
-# Viz: First prass
-
-```{r figCollapseItems}
-d.tidy.phrase.specificMarking.bs <- d.tidy.phrase.w.original %>%
-  mutate() %>%
-  group_by(np_positiveness, adj_positiveness) %>%
-  tidyboot_mean(column = specific)
-
-# d.tidy.phrase.specificMarking.bs %>%
-#   ungroup() %>%
-#   mutate(np_positiveness = gsub('\"', "", np_positiveness),
-#          adj_positiveness = gsub('\"', "", adj_positiveness),
-#          np_positiveness = factor(np_positiveness,
-#                                levels = c("negative", "neither-nor", "positive"),
-#                                labels = c("low", "medium", "high")
-# )) %>%
-#   rename(adj_polarity = adj_positiveness) %>%
-#   ggplot(.,
-#        aes( x = np_positiveness, y = mean,
-#             ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+
-#   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
-#   geom_linerange(position = position_dodge(0.8), color = 'black')+
-#   scale_fill_brewer(palette = "Set3")+
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
-#         #axis.title.x = element_blank(),
-#         panel.grid.minor = element_blank(),
-#         panel.grid.major = element_blank(),
-#         axis.line = element_line(colour = "black"))+
-#  # theme_black()+
-#   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
-#   ylab("Proportion paraphrases that contain NP")+
-#   xlab("Subordinate Category Prior Mean")
-
-
-
-
-# ggsave("../analysis/figs/bars_cc_finalExpt_pilot.png",
-#        width = 5, height = 3.6)
-```
-
-
-# by item
-
-
-add superordinate labels
-```{r}
-df.adj <- read_csv("../data/pilot-adj-endorsement-1/pilot-adj-endorsement-1-trials.csv")
-
-df.adj %>%
-  distinct(item, superordinate) -> df.super
 ```
 
 
@@ -1842,10 +1794,6 @@ path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv"
 
 #### Simple effects
 
-```{r}
-
-```
-
 
 ```{r}
 rs.glm <- glmer(
@@ -1860,6 +1808,4 @@ contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
 
 summary(rs.glm)
 ```
-
-
 
