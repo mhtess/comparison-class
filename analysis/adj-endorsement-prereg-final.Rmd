@@ -203,7 +203,8 @@ df.attention <- df.trials.first_submit %>%
 
 df.trials.main <- df.trials.first_submit %>% 
   filter(trial_name == "adj_endorsement_both") %>%
-  select(workerid, trial_name, trial_number, RT, context, question, sentence_1, sentence_2, condition_1, condition_2, item_cond, item, stim_id, degree, adj_positive, adj_negative, superordinate,  response1, response2)
+  select(workerid, trial_name, trial_number, RT, context, question, sentence_1, sentence_2, condition_1, condition_2, 
+         item_cond, item, stim_id, degree, adj_positive, adj_negative, superordinate,  response1, response2)
 
 write_csv(df.trials.main, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-trials.csv")
 write_csv(df.attention, "../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-catch_trials.csv")
@@ -212,7 +213,7 @@ write_csv(df.subject, "../data/adjective-endorsement-prereg-final/adjective-endo
 
 
 ```{r load data from csv}
-df.trials <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-trials.csv")
+df.trials.first_submit <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-trials.csv")
 df.subject <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-subject_information.csv")
 df.attention <- read_csv("../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-final-catch_trials.csv")
 ```
@@ -233,22 +234,22 @@ df.mem_fail <- df.trials.mem_correct %>%
   filter(n_correct < 7) %>%
   pull(workerid)
 
-df.trials.filtered <- df.trials.first_submit %>%
-  filter(!(workerid %in% df.mem_fail)) %>%
-  filter(trial_name == "adj_endorsement_both") %>%
-  rowwise() %>%
-  mutate(np_expectations =  item_cond)
-
 # processed CC elicitation data for adding missing np_expectations
 df.mode.final <- read_csv('../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv')
 
-# some of the item_conds were not recorded; they can be read from the CC elicitation data (df.mode final is the final classified full data set)
-df.trials.filtered <- df.trials.filtered %>% rowwise() %>%
+df.trials.filtered <- df.trials.first_submit %>%
+  filter(!(workerid %in% df.mem_fail)) %>%
+  filter(trial_name == "adj_endorsement_both") %>%
+  rename(np_expectations =  item_cond) %>%
+ # some of the item_conds were not recorded; they can be read from the CC elicitation data (df.mode final is the final classified full data set)
+  left_join(., df.mode.final %>% distinct(stim_id, superordinate = superordinate_pl, item = NP_sg, np_exp_cc = np_expectations)) %>%
+  rowwise() %>%
   mutate(
-    np_expectations = ifelse(is.na(np_expectations), df.mode.final %>% 
-                               filter((superordinate_pl == superordinate) & (NP_sg == item)) %>% 
-                               distinct(np_expectations) %>% .$np_expectations, np_expectations ))
-df.trials.filtered <- df.trials.filtered %>% mutate(
+    np_expectations_new = ifelse(is.na(np_expectations), np_exp_cc, np_expectations)
+  ) %>%
+  select(-np_expectations, -np_exp_cc) %>%
+  rename(np_expectations = np_expectations_new) %>% 
+  mutate(
     np_expectations = ifelse(item == "opera", "high", np_expectations),
     np_expectations = ifelse(item == "podcast episode", "medium", np_expectations),
     np_expectations = ifelse(item == "song", "low", np_expectations),
