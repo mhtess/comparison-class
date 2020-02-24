@@ -591,7 +591,9 @@ d.tidy.resp.analysis %>%
 
 
 # sketchy synonyms
-hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv")
+hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv") %>% 
+  rowwise() %>%
+  mutate(V2 = ifelse(is.na(V2), "", V2))
 hand_classification <- pull(hand_classification_df, V2) %>% set_names(pull(hand_classification_df, V1))
 ```
 
@@ -940,19 +942,19 @@ d.tidy.phrase.handClassified2 <- d.tidy.phrase.handClassified2 %>% rbind(., d.ti
 
 # the responses that are still classified as neither sub nor super do not match the anticipated responses and are mostly ones which occur fairly often. All of them are definitely not subordinate and will be classified as superordinate responses.
 
-# here, the responses including the scale are caught  (181 responses)
+# here, the responses including the scale are caught  (229 responses)
 d.scaleResps <- d.tidy.phrase.handClassified2 %>%
   rowwise() %>%
   mutate(
     degree_match = degree,
     degree_match = ifelse(degree == "temperature_h", "temperature", degree_match),
     degree_match = ifelse(degree == "speed_f", "speed", degree_match),
-    degree_match = ifelse(degree == "loudness", "sound, noise", degree_match),
-    degree_match = ifelse(degree == "loudness_n", "sound, noise", degree_match),
-    degree_match = ifelse(degree == "length_duration", "length, duration", degree_match),
+    degree_match = ifelse(degree == "loudness", "sound|noise", degree_match),
+    degree_match = ifelse(degree == "loudness_n", "sound|noise", degree_match),
+    degree_match = ifelse(degree == "length_duration", "length|duration", degree_match),
     degree_match = ifelse(degree == "strength", "weight", degree_match),
   ) %>% 
-  filter(grepl(response_lemma_hand, degree_match, ignore.case = T))
+  filter(grepl(degree_match, response_lemma_hand, ignore.case = T))
 
 # create full cleaned data set
 # d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
@@ -1329,7 +1331,7 @@ d.tidy.resps.classified.full %>%
   left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper
 
 # get number of data points which passed the grab-3 criterion
-d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 4888
+d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2422
 
 # get the distinct superordinates for the frequency extraction
 d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
@@ -1337,7 +1339,7 @@ distinctSuper %>%
   rowwise() %>%
   filter(stri_detect(produced_super, regex = ".s$")) %>%
   c(.$produced_super) -> pluralSuper
-anti_join(distinctSuper, pluralSuper) %>% View()
+#anti_join(distinctSuper, pluralSuper) %>% View()
 super_plural <- function(n, pluralSuper) {
   if (n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
     n_pl <- n
