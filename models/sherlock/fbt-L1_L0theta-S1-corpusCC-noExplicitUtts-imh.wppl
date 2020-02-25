@@ -77,7 +77,7 @@ var logistic = function(x) {1 / (1 + Math.exp(-x))}
 
 var degrees = levels(vsData, "degree");
 var stim_ids = sort(levels(ccData, "stim_id"));
-display(stim_ids)
+// display(stim_ids)
 // var degrees = degrees0.slice(0, degrees0.length - 1);
 
 var model = function(){
@@ -161,11 +161,12 @@ var model = function(){
 			// 	Math.log(data_within_superordinate_cc[0].superFreq)
 			// );
 
-      foreach(subordinate_categories, function(subordinate){
 
-				var item_set_heirarchy =  global_cc_parameters ?
-					"sub_basic" :
-					categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
+			var item_set_heirarchy =  global_cc_parameters ?
+				"sub_basic" :
+				categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
+
+      foreach(subordinate_categories, function(subordinate){
 
 				// display(subordinate)
         var subordinate_parameters = {
@@ -300,11 +301,12 @@ var model = function(){
       query.add(["stim_"+stim_id, subordinate, "sigma", "NA"], subordinate_parameters.sigma);
 			query.add(["stim_"+stim_id, subordinate, "classPrior_sub", "NA"], subcatWeight);
 
-			if (!global_cc_parameters) {
-				query.add(["stim_"+stim_id, subordinate, "item_heirarchy_sub_basic", by_item_cc_parameters], item_set_heirarchy == "sub_basic" ? 1 : 0)
-			}
 
     })
+
+		if (!global_cc_parameters) {
+			query.add(["stim_"+stim_id, subordinate, "item_heirarchy_sub_basic", by_item_cc_parameters], item_set_heirarchy == "sub_basic" ? 1 : 0)
+		}
 
   })
 
@@ -333,7 +335,7 @@ var model = function(){
 var totalIterations = 300000, lag =  100;
 // var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-fullClassified-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-fullClassified-sansSilence-corpusFreqCCLogistic_byItemSet_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,stim_id,subordinate,task,adj_polarity,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
