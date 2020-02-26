@@ -376,7 +376,7 @@ d.tidy.resp.valid.resps %>%
   mutate(response = as.character(response)) %>%
   ungroup() %>%
   mutate(
-    response_spelling = str_replace_all(tolower(response), mispellings_set),
+    response_spelling = str_replace_all(tolower(response), misspellings_set),
     response_synonym = str_replace_all(response_spelling, synonym_set),
     response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
   ) %>%
