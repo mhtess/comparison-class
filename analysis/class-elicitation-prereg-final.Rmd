@@ -214,6 +214,7 @@ df.trials.filtered <- df.trials %>%
     np_match = gsub("side road", "side", np_match),
     np_match = gsub("back door", "back", np_match),
     np_match = gsub("patio door", "patio", np_match),
+    np_match = gsub("front gate", "front", np_match),
     np_match = gsub("chocolate cake", "chocolate", np_match)
   )
 
@@ -1358,7 +1359,7 @@ d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2422
 d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
 distinctSuper %>%
   rowwise() %>%
-  filter(stri_detect(produced_super, regex = ".s$")) %>%
+  filter(str_detect(produced_super, regex = ".s$")) %>%
   c(.$produced_super) -> pluralSuper
 #anti_join(distinctSuper, pluralSuper) %>% View()
 super_plural <- function(n, pluralSuper) {
