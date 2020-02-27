@@ -902,6 +902,12 @@ d.tidy.phrase.handClassified %>%
     response_lemma_hand = ifelse(superordinate == "walls", gsub("building materials", "walls", response_lemma_hand),
       response_lemma_hand
     ),
+     response_lemma_hand = ifelse(superordinate == "birds", gsub("park", np_match, response_lemma_hand),
+      response_lemma_hand
+    ),
+    response_lemma_hand = ifelse(superordinate == "birds", gsub("forest", np_match, response_lemma_hand),
+      response_lemma_hand
+    ),
     response_lemma_hand = ifelse(cleanedPhrase == "_cries_", np_match, response_lemma_hand),
     response_lemma_hand = ifelse(cleanedPhrase == "_crying_", np_match, response_lemma_hand),
     response_lemma_hand = ifelse(cleanedPhrase == "_episodes_", np_match, response_lemma_hand),
