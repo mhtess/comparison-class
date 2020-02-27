@@ -957,7 +957,7 @@ d.scaleResps <- d.tidy.phrase.handClassified2 %>%
   ) %>% 
   filter(grepl( degree_match, response_lemma_hand, ignore.case= T) & !(grepl("bird|animal|strawberries|road|weightlifter" , response_lemma_hand)))  
 # create full cleaned data set
-# d.classified.super.wCC <- anti_join(d.nonMatching.resps, d.scaleResps) %>% select(workerid, stim_id, degree, context_sentence, superordinate, np, np_expectations, adj, adj_polarity, np_match, response, response_lemma, specific, matchingSuper)
+
 # exclude the "degree" responses
 d.AutoClassified <- d.matchedResponses %>% 
   select(workerid, stim_id, degree, context_sentence, superordinate, 
@@ -1284,7 +1284,7 @@ The data points are grouped by stim id, NP expectation, adjective polarity and s
 
 # extract the mode response
 d.tidy.resp.counts <- d.tidy.resps.classified.full %>%
-  group_by(stim_id, superordinate, np_match, np_expectations, adj_polarity, specific, cat_cleaned) %>%
+  group_by(stim_id, superordinate, np_match, np_expectations, adj_polarity, specific, response_lemma) %>%
   count() %>%
   mutate(n_unique_resps = n) %>%
   ungroup()
@@ -1293,7 +1293,7 @@ d.tidy.resp.counts <- d.tidy.resps.classified.full %>%
 # in column mode
 d.tidy.resp.counts <- d.tidy.resp.counts %>%
   group_by(stim_id, superordinate, np_match, adj_polarity, specific) %>%
-  mutate(mode = cat_cleaned[which.max(n)])
+  mutate(mode = response_lemma[which.max(n)])
 
 
 # analysis of modal responses
@@ -1320,7 +1320,7 @@ d.tidy.resp.counts.analysis %>%
 d.tidy.resp.counts.analysis %>%
   filter(isModeNeither == 0) %>%
   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-  count(stim_id, mode) %>%
+  count(stim_id, mode) %>% filter(n >= 6) %>%
   View()
 # %>% filter(n >= 6) -> stim.ids.adjust
 
@@ -1353,14 +1353,13 @@ d.tidy.resps.classified.full %>%
   left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper
 
 # get number of data points which passed the grab-3 criterion
-d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2422
+d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2539
 
 # get the distinct superordinates for the frequency extraction
 d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
 distinctSuper %>%
   rowwise() %>%
-  filter(str_detect(produced_super, regex = ".s$")) %>%
-  c(.$produced_super) -> pluralSuper
+  filter(str_detect(produced_super, ".s$")) %>% as.list() %>% .$produced_super -> pluralSuper
 #anti_join(distinctSuper, pluralSuper) %>% View()
 super_plural <- function(n, pluralSuper) {
   if (n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
@@ -1409,7 +1408,22 @@ d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
          NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
 
-write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
+#write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
+```
+
+``` {r}
+# exclusiopn of responses where reference fails based on non-matching superordinate analysis above
+d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>%
+  filter(
+  ((stim_id == 90) & grepl('furniture', response_lemma)) |
+  ((stim_id == 88) & grepl('bank', response_lemma)) |
+  ((stim_id == 54) & grepl('vegetable', response_lemma)) |
+  ((stim_id == 55) & grepl('bird', response_lemma)) |
+  ((stim_id == 67) & grepl('box', response_lemma)) |  
+  ((stim_id == 26) & grepl('map', response_lemma)) |
+  ((stim_id == 9) & grepl('fruit', response_lemma)) 
+) -> d.tidy.resp.failedRef
+#write_csv(d.tidy.resp.failedRef, '../data/class-elicitation-prereg-final/data-classified-failing-reference.csv')
 ```
 
 ``` {r}
@@ -1417,6 +1431,7 @@ write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prer
 
 # plural noun phrases are adjusted to the frequency queries
 d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
   mutate(
     # substitutions made based on human modal responses
     superordinate = ifelse(stim_id == 5, "scripts", superordinate),
@@ -1428,6 +1443,7 @@ d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
 # write_csv(d.tidy.resps.classified.full.adjust.Super, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_adjusted_super.csv')
 
 d.tidy.resps.full.handClassified.as.super.adjust <- d.tidy.resps.full.handClassified.as.super %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
   mutate(
     # substitutions made based on human modal responses
     superordinate = ifelse(stim_id == 5, "scripts", superordinate),
@@ -1603,7 +1619,7 @@ df.sg <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-
 
 #anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
 
-write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv")
+#write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs-no-filedRef.csv")
 ```
 
 ``` {r}
@@ -1615,10 +1631,11 @@ d.tidy.phrase.w.original.mode.pl %>%
          response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
   rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
 
-#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
+#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super-no-failedRef.csv")
 
 # data frame with hand classified responses being a priori superordinates
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>% rowwise() %>%
+d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%  anti_join(., d.tidy.resp.failedRef)%>% 
+  rowwise() %>%
    mutate(np_pl = insert_plural_np(tolower(np), superordinate))
 d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
   d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>% 
@@ -1635,7 +1652,7 @@ d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
   ) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
          adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
          response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
-#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-data-w-handResps-as-super.csv')
+#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-data-w-handResps-as-super-no-filedRef.csv')
 ```
 
 
@@ -1658,26 +1675,6 @@ df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
 write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
-```
-
-``` {r}
-# adjust adj endorsement data
-adj.endorse <- read_csv("")
-
-adj.endorse.np.pl <- adj.endorse %>%
-  mutate(
-    np_pl = insert_plural_np(tolower(np), superordinate)
-  )
-
-adj.endorse.adjust.super <- adj.endorse.np.pl %>% mutate(
-  superordinate = ifelse(superordinate == "venue", "venues", superordinate),
-  superordinate = ifelse(superordinate == "dens", "animal dens", superordinate),
-  superordinate = ifelse(superordinate == "races", "rallies", superordinate)
-)
-
-adj.endorse.w.freq <- adj.endorse.adjust.super %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate" = "NPs"))
 ```
 
 

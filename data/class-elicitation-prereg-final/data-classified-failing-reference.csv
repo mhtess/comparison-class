@@ -1,0 +1,114 @@
+workerid,stim_id,degree,context_sentence,superordinate,np,np_expectations,adj,adj_polarity,np_match,response,response_lemma,specific,matchingSuper
+workerid_0014,90,width,Mika is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0017,90,width,Alexander is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,narrow,negative,patio,the furniture,furniture,0,0
+workerid_0019,67,strength,Mika watches a child lift up a box.,people,child,low,strong,positive,child,box,box,0,0
+workerid_0033,90,width,Melinda is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0039,90,width,John is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0046,90,width,Angela is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0064,90,width,Jennifer is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0068,90,width,Josh is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,pieces of furnature, furniture,0,0
+workerid_0071,88,width,Stephen is standing at the bank of a stream.,waterways,stream,medium,narrow,negative,stream,bank,bank,0,0
+workerid_0074,67,strength,Michelle watches a child lift up a box.,people,child,low,weak,negative,child,boxes,box,0,0
+workerid_0074,54,size,Angela is at a farmer's market and picks up a kumquat.,fruit,kumquat,low,small,negative,kumquat,vegetables,vegetables,0,0
+workerid_0077,90,width,Robert is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0081,55,size,Alexander is at an aquarium and sees a herring.,fish,herring,low,big,positive,herring,birds,birds,0,0
+workerid_0098,67,strength,Maya watches a teenager lift up a box.,people,teenager,medium,strong,positive,teenager,boxes,box,0,0
+workerid_0104,90,width,Laura is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0119,90,width,Natalia is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0121,90,width,William is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0142,90,width,Alexander is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0177,26,length_duration,Tanya is looking at an alley on Google Maps.,roads,alley,low,long,positive,alley,maps,maps,0,0
+workerid_0177,67,strength,Kim watches an adult lift up a box.,people,adult,high,strong,positive,adult,box,box,0,0
+workerid_0194,67,strength,Julia watches a child lift up a box.,people,child,low,strong,positive,child,boxes,box,0,0
+workerid_0198,88,width,Eric is standing at the bank of a stream.,waterways,stream,medium,wide,positive,stream,bank,bank,0,0
+workerid_0203,90,width,Gary is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0213,67,strength,Charles watches a child lift up a box.,people,child,low,strong,positive,child,boxes,box,0,0
+workerid_0213,88,width,Jasmine is standing at the bank of a stream.,waterways,stream,medium,wide,positive,stream,banks,bank,0,0
+workerid_0214,90,width,Monica is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0217,90,width,Julia is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,pieces of furniture, furniture,0,0
+workerid_0218,90,width,Alexander is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0225,26,length_duration,Angela is looking at a highway on Google Maps.,roads,highway,high,short,negative,highway,map,maps,0,0
+workerid_0234,67,strength,Tom watches an adult lift up a box.,people,adult,high,weak,negative,adult,boxes,box,0,0
+workerid_0240,90,width,Tom is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0243,90,width,Laura is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture sizes,furniture,0,0
+workerid_0244,26,length_duration,Robert is looking at a highway on Google Maps.,roads,highway,high,long,positive,highway,maps,maps,0,0
+workerid_0253,90,width,Kim is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0264,26,length_duration,Laura is looking at a street on Google Maps.,roads,street,medium,long,positive,street,maps,maps,0,0
+workerid_0266,90,width,Mika is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0268,67,strength,Lee watches an adult lift up a box.,people,adult,high,weak,negative,adult,boxes,box,0,0
+workerid_0269,54,size,Monica is at a farmer's market and picks up a kumquat.,fruit,kumquat,low,small,negative,kumquat,vegetables,vegetables,0,0
+workerid_0272,90,width,Lucas is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0272,67,strength,Melinda watches a teenager lift up a box.,people,teenager,medium,strong,positive,teenager,boxes,box,0,0
+workerid_0274,90,width,Claire is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0276,90,width,Stephanie is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,pieces of furniture, furniture,0,0
+workerid_0278,9,hardness,Anthony is at a vegetable market and picks up a tomato.,vegetables,tomato,medium,hard,positive,tomato,fruits,fruit,0,0
+workerid_0293,88,width,Daniel is standing at the bank of a stream.,waterways,stream,medium,wide,positive,stream,banks,bank,0,0
+workerid_0293,55,size,Simon is at an aquarium and sees a herring.,fish,herring,low,big,positive,herring,birds,birds,0,0
+workerid_0294,9,hardness,Mika is at a vegetable market and picks up a tomato.,vegetables,tomato,medium,soft,negative,tomato,fruits,fruit,0,0
+workerid_0306,88,width,Julia is standing at the bank of a stream.,waterways,stream,medium,wide,positive,stream,banks,bank,0,0
+workerid_0311,90,width,Natalia is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furnitures,furniture,0,0
+workerid_0321,90,width,Cameron is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0340,90,width,Simon is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0344,67,strength,Veronica watches an adult lift up a box.,people,adult,high,weak,negative,adult,box,box,0,0
+workerid_0349,90,width,Lee is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0375,9,hardness,Kathleen is at a vegetable market and picks up a cucumber.,vegetables,cucumber,high,soft,negative,cucumber,fruits,fruit,0,0
+workerid_0391,88,width,Alexander is standing at the bank of a creek.,waterways,creek,low,narrow,negative,creek,banks,bank,0,0
+workerid_0396,55,size,Lucas is at an aquarium and sees a herring.,fish,herring,low,small,negative,herring,birds,birds,0,0
+workerid_0410,88,width,Claire is standing at the bank of a stream.,waterways,stream,medium,wide,positive,stream,banks,bank,0,0
+workerid_0415,90,width,Stephen is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,pieces of furniture, furniture,0,0
+workerid_0416,55,size,Monica is at an aquarium and sees a herring.,fish,herring,low,big,positive,herring,birds,birds,0,0
+workerid_0422,90,width,Michelle is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0431,67,strength,Gabriel watches a teenager lift up a box.,people,teenager,medium,strong,positive,teenager,boxes,box,0,0
+workerid_0433,90,width,Mika is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0467,67,strength,Simon watches an adult lift up a box.,people,adult,high,strong,positive,adult,boxes,box,0,0
+workerid_0468,90,width,Gary is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0476,90,width,Stephen is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0479,88,width,David is standing at the bank of a river.,waterways,river,high,narrow,negative,river,banks,bank,0,0
+workerid_0507,67,strength,Sophie watches a child lift up a box.,people,child,low,weak,negative,child,box,box,0,0
+workerid_0507,88,width,Julia is standing at the bank of a creek.,waterways,creek,low,narrow,negative,creek,bank,bank,0,0
+workerid_0521,67,strength,Gary watches a teenager lift up a box.,people,teenager,medium,weak,negative,teenager,BOX,box,0,0
+workerid_0522,67,strength,William watches a teenager lift up a box.,people,teenager,medium,strong,positive,teenager,boxes,box,0,0
+workerid_0522,90,width,Julia is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furnitures,furniture,0,0
+workerid_0528,67,strength,Maya watches a teenager lift up a box.,people,teenager,medium,strong,positive,teenager,boxes,box,0,0
+workerid_0529,90,width,Jennifer is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0532,90,width,Tanya is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0540,90,width,Sophie is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0546,88,width,Mika is standing at the bank of a creek.,waterways,creek,low,narrow,negative,creek,banks,bank,0,0
+workerid_0550,90,width,Mika is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0552,90,width,Michelle is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0556,55,size,Lucas is at an aquarium and sees a herring.,fish,herring,low,small,negative,herring,birds,birds,0,0
+workerid_0562,90,width,Josh is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0579,88,width,Tanya is standing at the bank of a creek.,waterways,creek,low,narrow,negative,creek,banks,bank,0,0
+workerid_0584,90,width,Maya is attempting to move furniture through the back door of her house.,doorways,back door,low,narrow,negative,back,furniture,furniture,0,0
+workerid_0595,90,width,Gabriel is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture pieces,furniture,0,0
+workerid_0599,67,strength,Mika watches a teenager lift up a box.,people,teenager,medium,weak,negative,teenager,boxes,box,0,0
+workerid_0603,90,width,Veronica is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0610,90,width,Stephanie is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0615,67,strength,Tom watches an adult lift up a box.,people,adult,high,weak,negative,adult,box,box,0,0
+workerid_0618,67,strength,Jasmine watches an adult lift up a box.,people,adult,high,strong,positive,adult,boxes,box,0,0
+workerid_0624,90,width,Kim is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,pieces of furniture, furniture,0,0
+workerid_0631,90,width,Gary is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,pieces of furniture, furniture,0,0
+workerid_0640,90,width,Maya is attempting to move furniture through the back door of her house.,doorways,back door,low,wide,positive,back,furniture,furniture,0,0
+workerid_0647,67,strength,Michael watches a teenager lift up a box.,people,teenager,medium,weak,negative,teenager,boxes,box,0,0
+workerid_0663,90,width,Robert is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0685,26,length_duration,William is looking at a street on Google Maps.,roads,street,medium,short,negative,street,maps,maps,0,0
+workerid_0696,67,strength,David watches a child lift up a box.,people,child,low,strong,positive,child,box,box,0,0
+workerid_0700,90,width,Alicia is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0702,67,strength,Lee watches a teenager lift up a box.,people,teenager,medium,weak,negative,teenager,box,box,0,0
+workerid_0704,90,width,Monica is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furnitures,furniture,0,0
+workerid_0717,90,width,Lucas is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0721,67,strength,Anthony watches a child lift up a box.,people,child,low,weak,negative,child,boxs,box,0,0
+workerid_0726,90,width,Charles is attempting to move furniture through the patio door of his house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0731,26,length_duration,David is looking at an alley on Google Maps.,roads,alley,low,long,positive,alley,maps,maps,0,0
+workerid_0740,90,width,Lee is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0746,90,width,Mika is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0747,54,size,Stephanie is at a farmer's market and picks up a kumquat.,fruit,kumquat,low,small,negative,kumquat,vegetables,vegetables,0,0
+workerid_0752,90,width,Anthony is attempting to move furniture through the back door of his house.,doorways,back door,low,wide,positive,back,pieces of furniture, furniture,0,0
+workerid_0758,88,width,Josh is standing at the bank of a creek.,waterways,creek,low,narrow,negative,creek,banks,bank,0,0
+workerid_0776,55,size,Kim is at an aquarium and sees a herring.,fish,herring,low,small,negative,herring,birds,birds,0,0
+workerid_0778,67,strength,Claire watches a child lift up a box.,people,child,low,strong,positive,child,boxes,box,0,0
+workerid_0788,90,width,Julia is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture,furniture,0,0
+workerid_0790,90,width,Natalia is attempting to move furniture through the front gate of her house.,doorways,front gate,high,wide,positive,front,furnitures,furniture,0,0
+workerid_0813,90,width,Stephanie is attempting to move furniture through the patio door of her house.,doorways,patio door,medium,wide,positive,patio,furniture of the same type,furniture,0,0
+workerid_0822,90,width,Simon is attempting to move furniture through the front gate of his house.,doorways,front gate,high,wide,positive,front,furniture,furniture,0,0
+workerid_0836,26,length_duration,Laura is looking at an alley on Google Maps.,roads,alley,low,long,positive,alley,maps,maps,0,0
