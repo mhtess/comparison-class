@@ -763,17 +763,17 @@ Our approach is not completely descriptive, however: The parameters are constrai
 We integrate two data sources (comparison class inference and adjective endorsements) using a Bayesian data analytic model that infers the world knowledge shared between these two tasks, along with the comparison class prior parametes, and the few other free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
 %This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to predict and explain broader coverage data sets while still constraining flexibility by forcing models to predict more distinct data points. 
 
-\subsection{Implementation details}
+\subsection{Model details}
 
 %The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
-We construct a single data-analytic model with both the comparison class inference and adjective endorsement RSA components as sub-models in order to make quantitative predictions about the data from both of our experiments (Figure~\ref{fig:bayesnet}).
-The inference and endorsement sub-models share their prior world knowledge $P(x \mid k)$ (e.g., heights of basketball players).
+We construct data-analytic models with both the comparison class inference and adjective endorsement RSA components as sub-models that make quantitative predictions about the data from both of these experiments (Figure~\ref{fig:bayesnet}).
+The inference and endorsement sub-models share their prior world knowledge $P(x \mid k)$ (e.g., heights of basketball players), which we infer from both data sets.
 We put the same priors over the parameters of each subordinate distribution $k$ for each degree $k$: $\mu^d_k \sim \text{Uniform}(-3, 3)$, $\sigma^d_k \sim \text{Uniform}(0, 5)$, since they have standardized units.
-The comparison class prior $P(c \mid k)$ is a logistic function encoding a basic-level bias with an effect of corpus frequency, with the following parameters on the regression coefficients:  $\beta_0 \sim \text{Gaussian}(0, 1)$, $\beta_1 \sim \text{Uniform}(-3, 3)$. 
+The comparison class prior $P(c \mid k)$ is parameterized by logistic function, which can encode a basic-level bias and an effect of corpus frequency, depending on the model, with the following parameters on the regression coefficients:  $\beta_0 \sim \text{Gaussian}(0, 2)$, $\beta_1 \sim \text{Uniform}(-3, 3)$. 
 Each RSA model has an additional speaker optimality parameter $\alpha_{i}$ not of direct theoretical interest.
 We use priors consistent with the previous literature: $\alpha_i \sim \text{Uniform}(0, 20)$.
-We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl}.
-
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 3 MCMC chains with 450,000 iterations each, discarding the first 150,000 for burn-in. 
+Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently. 
 
 %The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
 %The adjective endorsement model has two speaker optimality parameters: 
@@ -787,29 +787,38 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 
 
   % Y
-  \node[obs]          (d-c)   {$d^{cci}_{i, u, d, k}$}; %
-  \node[obs, left=2.5 of d-c]          (d-a)   {$d^{adj}_{i, u, d, k}$}; %
+  \node[obs]          (d-c)   {$d^{cci}_{d,k,u,i}$}; %
+  \node[obs, left=2.5 of d-c]          (d-a)   {$d^{adj}_{d,k,u,i}$}; %
   \factor[above=of d-a] {da-f} {left:Bern} {} {} ; %
   \factor[above=of d-c] {dc-f} {left:Bern} {} {} ; %
 
-  \node[det, above=of d-c] (L1) {$L_1(c \mid u, d, k)$} ; % 
-  \node[det, above=of d-a] (S2) {$S_1(u \mid d, k)$} ; % 
+  \node[det, above=of d-c] (L1) {$L_1(c \mid u)$} ; % 
+  \node[det, above=of d-a] (S2) {$S_1(u \mid x)$} ; % 
   
-  \node[det, above=of S2]  (x)   {$P(x^d_k)$}; %
-  \node[det, above=2.5 of L1] (c)   {$P(c)$}; %
+  \node[latent, above=of S2]  (x)   {$x_{d, k}$}; %
+  \node[latent, above=of L1] (c)   {$c_{d,k}$}; %
+   \node[det, above= of c]  (phi) {$\phi_{d,k}$} ; %   
 
-   \node[const,  above=1 of c] (fhat) {$\hat{f}_k$} ; %
+   \node[obs,  above=1 of phi, xshift=-0.5cm] (fhat) {$\hat{f}_k$} ; %
+   \node[latent, above=0.9 of phi, xshift=0.5cm] (zi) {$z_{d, k}$} ; %
+%   \edge {zi} {c}; %
 %   \node[const, right=1.3 of c, yshift=1.5cm] (fshat) {$\hat{f}_s$} ; %
-   \node[latent, right=1.2 of c, yshift=1.1cm]  (b) {$\beta$} ; %
-   \factor[above=of c] {c-f} {left:Bern} {fhat,b} {c} ; %
+   \node[latent, right=1.2 of phi, yshift=1.8cm]  (b1) {$\beta^{0}_{0}$} ; %
+   \node[latent, right=1.9 of phi, yshift=1.5cm]  (b2) {$\beta^{0}_{1}$} ; %
+   
+   \node[latent, right=1.2 of phi, yshift=0.2cm]  (b11) {$\beta^{1}_{0}$} ; %
+   \node[latent, right=1.9 of phi, yshift=0.5cm]  (b12) {$\beta^{1}_{1}$} ; %
 
-  \node[latent, left=1.2 of x, yshift=-0.5cm] (mx) {$\mu^d_k$} ; %
-  \node[latent, left=1.2 of x, yshift=0.5cm]  (sx) {$\sigma^d_k$} ; %
+   \factor[above=of phi] {phi-f} {left:logistic} {fhat,b1,b2, b11, b12, zi} {phi}; %
+   \factor[above=of c] {c-f} {left:Bern} {phi} {c}; %
+
+  \node[latent, left=1.2 of x, yshift=0.5cm] (mx) {$\mu_{d, k}$} ; %
+  \node[latent, left=1.2 of x, yshift=-0.5cm]  (sx) {$\sigma_{d, k}$} ; %
   \factor[left=of x] {x-f} {above:$\mathcal{N}$} {mx,sx} {x} ; %
 
   % sopt
    \node[latent, right=0.8cm of L1, yshift=0.0cm]         (a1)   {$\alpha_1$}; %
-   \node[latent, right=0.8cm of L1, yshift=2.5cm]         (cost)   {$cost$}; %
+%   \node[latent, right=0.8cm of L1, yshift=2.5cm]         (cost)   {$cost$}; %
    \node[latent, left=2.2cm of S2]         (aa1)   {$\alpha_2$}; %
 %   \node[latent, left=2.5cm of S2, yshift=-0.6cm]         (aa2)   {$\alpha^{adj}_2$}; %
  % \node[const, above=of t, xshift=-0.5cm] (at)  {$\alpha_\tau$} ; %
@@ -825,15 +834,15 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
   \edge[-] {x} {S2} ;
 %  \edge[-] {L1} {RSA} ;
 %  \edge[-] {S2} {RSA} ;
-  \edge[-] {cost} {L1} ;
-  \edge[-] {cost} {S2} ;
+%  \edge[-] {cost} {L1} ;
+%  \edge[-] {cost} {S2} ;
   \edge[-] {a1} {L1} ;
 %  \edge[-] {a1} {S2} ;
   \edge[-] {aa1} {S2} ;
 %  \edge[-] {aa2} {S2} ;
 
 \gate {RSAgate} {(L1)(S2)(x)(c)(x-f)(c-f)} {} ; %
-\node[text width=1cm] at (-4,7.6) {$RSA$};
+\node[text width=1cm] at (-3.7,5.6) {$RSA$};
   % Plates
     \plate {dataPlate} {
      (d-c)(d-a)
@@ -841,20 +850,22 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
   
   \plate {adjPlate} { %
     (dataPlate)
-     (S2) (L1) 
+%     (S2) (L1)
   } {$u \in  \textsc{adjectives}$} ;
   
-        \plate {degreePlate} { %
- (adjPlate)    (dataPlate)
-  (x)(x-f)(mx)(sx)
-  } {$d \in  \textsc{degree scales}$} ;
-  
-  \plate {subPlate} { %
-  (adjPlate)    (dataPlate)(degreePlate)
-   (fhat) (c-f) (c)%
+    \plate {subPlate} { %
+  (adjPlate)    (dataPlate)
+   (fhat) (c-f) (c)   (x)(x-f)(mx)(sx)(zi)(fhat)
     %(RSA) 
     (S2) (L1) (RSAgate)%%
   } {$k \in  \textsc{categories}$} ;
+  
+        \plate {degreePlate} { %
+ (adjPlate)    (dataPlate)(RSAgate)(subPlate)
+  (x)(x-f)(mx)(sx)(zi)(fhat)
+  } {$d \in  \textsc{degree scales}$} ;
+  
+
 %    \plate {superPlate} { %
 %(adjPlate)  (subPlate)(fshat)    (dataPlate)(degreePlate)
 %  } {$s \in  \textsc{superordinate categories}$} ;
@@ -882,12 +893,27 @@ We implemented the RSA and Bayesian data analysis models in the probabilistic pr
 %  \edge {f} {c} ; %
 %  \edge {f,g} {x} ; %
 
+\node[] at (4,2) {$\beta^0_0, \beta^1_0 \sim \text{Gaussian}(0, 2)$};
+\node[] at (4,1.5) {$\beta^0_1, \beta^1_1 \sim \text{Uniform}(-3, 3)$};
+\node[] at (4,1) {$z_{d, k} \sim \text{Bernoulli(0.5)}$};
+\node[] at (4,0.5) {$\mu_{d, k}\sim \text{Uniform(-3, 3)}$};
+\node[] at (4,0) {$\sigma_{d, k}\sim \text{Uniform(0, 3)}$};
+\node[] at (4,-0.5) {$\alpha_1, \alpha_2 \sim \text{Uniform(0, 20)}$};
+
+\node[] at (5,-1.5) {$\phi_{d,k} = \text{logistic} (\begin{cases} 
+	\beta^0_0 +\beta^0_1\cdot \hat{f}_k  &\mbox{if } z_{k, d} = 0 \\ 
+	\beta^1_0 +\beta^1_1\cdot \hat{f}_k  &\mbox{if } z_{k, d} = 1 
+	\end{cases}$)};
+\node[] at (4,-2.5) {$c_{d,k} \sim \text{Bernoulli}(\phi_{d,k})$};
+\node[] at (4,-3) {$x_{d,k} \sim \text{Gaussian}(\mu_{d,k}, \sigma_{d,k})$};
+%(3n +1)/2 & \mbox{if } n \equiv 1 \end{cases} \pmod{2}.
+
 
 \end{tikzpicture}
 
     \end{tabular}
   \end{center}
-  \caption{\small Joint Bayesian data analytic strategy to infer model parameters and generate model predictions. Two similar RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{adj}$ and $d^{cci}$), respectively. Each of these models relies upon world knowledge $P(x^d_k)$ (e.g., prior expectations about the height of a basketball player), which are assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$), that vary by category (basketball player) and degree (height). The prior on comparison classes $P(c \mid k)$ varies according to the subordinate and superordinate categories, is used only in the $L_1$ model, and is assumed to be a linear function of the log frequency of the noun phrase $\hat{f}_k$, with global scale parameter $\beta$. Each RSA model has its own speaker optimality parameter $\alpha$.}
+  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and $\beta_1$, an effect of frequency of the noun phrase $\hat{f}_k$. Our category stimuli may be either subordinate level categories of basic-level categories determined by parameter $z_{d,k}$, which gates between using two different sets of comparison class prior parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
 
