@@ -12,6 +12,8 @@ This folder contains the raw and analyzed data from the comparison class free pr
 - `full-classified-data-w-produced-super.csv`: the full processed data with superordinates produced by participants (s. above) and corresponding subordinate and superordinate frequencies. (The difference to the previous dataset are the responses (coerced to different superordinates) and the superordinate frequencies).
 - `full-data-w-handResps-as-super.csv`: the full processed dataset where all responses which were not classified automatically as subordinate are marked as superordinate (column `specific`). The responses are coerced to the anticipated superordinates including the two adjusted items. The respective frequencies are included.
 
+## Data subsets
+
 ## Supplementary files
 
 - `cc-prod-distinct-super-pl.csv`: all distinct plural superordinate responses deviating from the anticipated superordinate categories of the experimental items, that were produced by at least three participants (collapsed across adjective condition and NP within item). This data frame was used to extract frequencies.
