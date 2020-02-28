@@ -22,6 +22,7 @@ This folder contains the raw and analyzed data from the comparison class free pr
 - `hand-classified-produced-distinct-super-pl.csv`: all distinct superordinate responses (converted to plural) deviating from the anticipated superordinate categories of the experimental items, that were produced by at least three participants (collapsed across adjective condition and NP within item). This data frame was used to extract frequencies.
 - `hand-classified-produced-super-pl-frequencies.csv`: frequencies of the _plural_ superordinate responses provided by at least three participants.
 - `class-elicitation-final-plural_frequencies.csv`: frequencies of the _plural_ NPs and updated superordinates (some items were adjusted to avoid polysemy, like races --> rallies).
+- `data-classified-failing-reference.csv`: subset of the processed data including all the responses which fail correct reference given the context sentence (e.g. 'furniture' for item 90).
 - `hand_classification_dict.csv`: transformations of the responses that were used to manually classify responses which were not classified automatically.
 - `lemmatization_dict`: lemmatization transformations that were performed on the raw responses in order to improve automatic classification.
 - `misspellings_dict.csv`: misspelling corrections that were performed on the raw responses in order to improve automatic classification.
