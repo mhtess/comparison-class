@@ -22257,6 +22257,7 @@ workerid_0837,31,loudness_n,pets,quiet,negative,parrot,parrots,high,parrot,1,104
 workerid_0837,78,weight,animals,light,negative,fish,fish,low,fish,1,52768568,58179731
 workerid_0001,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0003,2,darkness,paint,dark,negative,blue paint,blue paints,medium,blue paint,1,543,21928120
+workerid_0004,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0007,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0008,4,darkness,times of day,light,positive,night,nights,low,night,1,21265731,99907
 workerid_0008,61,speed,cookware,slow,negative,frying pan,frying pans,medium,cookware,0,71800,3617598
@@ -22286,6 +22287,7 @@ workerid_0024,8,darkness,animals,dark,negative,jaguar,jaguars,high,jaguar,1,1285
 workerid_0024,4,darkness,times of day,light,positive,day,days,high,day,1,305158140,99907
 workerid_0025,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0025,28,length,audios,long,positive,podcast episode,podcast episodes,medium,podcast episode,1,16668,313133
+workerid_0030,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
 workerid_0030,8,darkness,animals,light,positive,jaguar,jaguars,high,jaguar,1,1285032,58179731
 workerid_0031,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0032,42,price,rentals,cheap,negative,house,houses,medium,house,1,29896478,61539717
@@ -22356,6 +22358,7 @@ workerid_0092,28,length,audios,long,positive,podcast episode,podcast episodes,me
 workerid_0092,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
 workerid_0092,66,speed_f,aircrafts,slow,negative,helicopter,helicopters,medium,helicopter,1,2682275,237522
 workerid_0092,35,loudness,people,quiet,negative,adult,adults,low,adult,1,32847475,480323270
+workerid_0093,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0094,79,weight,people,heavy,positive,kid,kids,medium,kid,1,96621142,480323270
 workerid_0095,16,height,buildings,tall,positive,apartment building,apartment buildings,medium,apartment building,1,312252,27623285
 workerid_0096,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
@@ -22368,14 +22371,17 @@ workerid_0100,50,price,restaurants,cheap,negative,Chinese restaurant,chinese res
 workerid_0100,69,strength,athletes,strong,positive,wrestler,wrestlers,high,athletes,0,772270,7268360
 workerid_0100,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
 workerid_0102,4,darkness,times of day,dark,negative,day,days,high,day,1,305158140,99907
+workerid_0102,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
 workerid_0102,44,price,spices,cheap,negative,salt,salts,low,salt,1,2145134,2836609
 workerid_0105,50,price,restaurants,cheap,negative,Korean restaurant,korean restaurants,medium,restaurants,0,37242,58580418
 workerid_0107,19,height,people,tall,positive,basketball player,basketball players,high,basketball player,1,174833,480323270
+workerid_0108,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0108,70,strength,paints,strong,positive,wall paint,wall paints,medium,wall paint,1,3469,3617496
 workerid_0109,79,weight,people,light,negative,kid,kids,medium,kid,1,96621142,480323270
 workerid_0109,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
 workerid_0110,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0111,19,height,people,tall,positive,basketball player,basketball players,high,basketball player,1,174833,480323270
+workerid_0113,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
 workerid_0114,2,darkness,paint,light,positive,blue paint,blue paints,medium,blue paint,1,543,21928120
 workerid_0115,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
 workerid_0115,2,darkness,paint,light,positive,black paint,black paints,low,black paint,1,820,21928120
@@ -22394,11 +22400,13 @@ workerid_0129,61,speed,cookware,quick,positive,instant pot,instant pot,high,cook
 workerid_0130,8,darkness,animals,light,positive,jaguar,jaguars,high,jaguar,1,1285032,58179731
 workerid_0132,7,darkness,dogs,light,positive,poodle,poodles,high,poodle,1,255182,28409576
 workerid_0132,4,darkness,times of day,dark,negative,night,nights,low,night,1,21265731,99907
+workerid_0134,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0134,8,darkness,animals,light,positive,jaguar,jaguars,high,jaguar,1,1285032,58179731
 workerid_0136,47,price,berries,cheap,negative,strawberries,strawberries,low,strawberries,1,1437661,1879643
 workerid_0136,19,height,people,tall,positive,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0137,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
 workerid_0138,79,weight,people,light,negative,kid,kids,medium,kid,1,96621142,480323270
+workerid_0138,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0139,89,width,roads,wide,positive,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0139,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0140,61,speed,cookware,quick,positive,frying pan,frying pans,medium,frying pan,1,71800,3617598
@@ -22416,6 +22424,7 @@ workerid_0155,76,temperature_h,places,hot,positive,shopping mall,shopping malls,
 workerid_0156,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0156,19,height,people,tall,positive,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0157,14,hardness,furniture,hard,positive,bedboard,bedboards,high,bedboard,1,2487,67400151
+workerid_0157,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0157,76,temperature_h,places,hot,positive,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
 workerid_0157,30,loudness_n,venues,noisy,positive,conference center,conference centers,medium,conference center,1,227905,9389442
 workerid_0158,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
@@ -22427,10 +22436,13 @@ workerid_0165,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece
 workerid_0165,43,price,shoes,cheap,negative,sandals,sandals,low,sandals,1,5022171,80761516
 workerid_0166,76,temperature_h,places,cold,negative,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
 workerid_0166,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
+workerid_0166,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0167,7,darkness,dogs,dark,negative,spaniel,spaniels,medium,spaniel,1,195570,28409576
 workerid_0168,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0169,76,temperature_h,places,hot,positive,ice rink,ice rinks,low,ice rink,1,65504,51698261
 workerid_0170,61,speed,cookware,slow,negative,frying pan,frying pans,medium,frying pan,1,71800,3617598
+workerid_0170,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
+workerid_0171,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0172,51,size,plants,big,positive,flower,flowers,low,flower,1,58380229,35939932
 workerid_0172,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0173,61,speed,cookware,slow,negative,frying pan,frying pans,medium,frying pan,1,71800,3617598
@@ -22453,6 +22465,8 @@ workerid_0194,2,darkness,paint,light,positive,white paint,white paints,high,whit
 workerid_0194,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0194,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
 workerid_0196,51,size,plants,big,positive,bush,bushes,medium,bush,1,1558141,35939932
+workerid_0198,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
+workerid_0198,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0198,61,speed,cookware,slow,negative,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0198,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0198,76,temperature_h,places,cold,negative,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
@@ -22467,11 +22481,14 @@ workerid_0207,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,24596
 workerid_0207,2,darkness,paint,light,positive,black paint,black paints,low,black paint,1,820,21928120
 workerid_0208,76,temperature_h,places,cold,negative,sauna,saunas,high,sauna,1,934002,51698261
 workerid_0208,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
+workerid_0209,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
+workerid_0209,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0210,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0210,65,speed,people,quick,positive,adult,adults,high,adult,1,32847475,480323270
 workerid_0213,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0213,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0214,7,darkness,dogs,light,positive,poodle,poodles,high,poodle,1,255182,28409576
+workerid_0216,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0217,7,darkness,dogs,light,positive,poodle,poodles,high,poodle,1,255182,28409576
 workerid_0217,5,darkness,scripts,dark,negative,pen,pens,medium,pen,1,5794539,17337654
 workerid_0217,42,price,rentals,expensive,positive,house,houses,medium,rentals,0,29896478,61539717
@@ -22481,7 +22498,11 @@ workerid_0219,89,width,roads,wide,positive,country lane,country lanes,low,countr
 workerid_0221,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0221,28,length,audios,long,positive,podcast episode,podcast episodes,medium,podcast episode,1,16668,313133
 workerid_0222,66,speed_f,aircrafts,slow,negative,helicopter,helicopters,medium,helicopter,1,2682275,237522
+workerid_0224,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0224,28,length,audios,long,positive,podcast episode,podcast episodes,medium,podcast episode,1,16668,313133
+workerid_0224,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
+workerid_0225,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
+workerid_0225,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0226,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0227,1,darkness,birds,light,positive,parrot,parrots,medium,parrot,1,1049654,19695831
 workerid_0227,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
@@ -22516,10 +22537,13 @@ workerid_0257,2,darkness,paint,light,positive,black paint,black paints,low,black
 workerid_0257,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0257,83,weight,materials,light,negative,silk,silks,low,silk,1,418180,83903351
 workerid_0259,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
+workerid_0260,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
 workerid_0260,47,price,berries,cheap,negative,raspberries,raspberries,medium,raspberries,1,543159,1879643
 workerid_0261,4,darkness,times of day,light,positive,night,nights,low,night,1,21265731,99907
 workerid_0262,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0262,4,darkness,times of day,dark,negative,night,nights,low,times of day,0,21265731,99907
+workerid_0262,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
+workerid_0267,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0268,4,darkness,times of day,dark,negative,dusk,dusks,medium,times of day,0,3542,99907
 workerid_0270,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0270,65,speed,people,quick,positive,child,children,medium,child,1,206543771,480323270
@@ -22552,11 +22576,18 @@ workerid_0293,19,height,people,short,negative,golfer,golfers,medium,golfer,1,166
 workerid_0295,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0296,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0296,30,loudness_n,venues,quiet,negative,conference center,conference centers,medium,conference center,1,227905,9389442
+workerid_0296,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0298,4,darkness,times of day,light,positive,night,nights,low,night,1,21265731,99907
+workerid_0299,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
+workerid_0299,33,loudness_n,birds,loud,positive,finch,finches,low,finch,1,280095,19695831
+workerid_0299,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0299,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
+workerid_0303,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0304,7,darkness,dogs,light,positive,poodle,poodles,high,poodle,1,255182,28409576
+workerid_0305,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0305,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0306,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
+workerid_0307,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0309,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0309,2,darkness,paint,light,positive,blue paint,blue paints,medium,blue paint,1,543,21928120
 workerid_0309,79,weight,people,heavy,positive,kid,kids,medium,kid,1,96621142,480323270
@@ -22568,6 +22599,7 @@ workerid_0311,8,darkness,animals,dark,negative,panther,panthers,low,panther,1,36
 workerid_0311,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0311,2,darkness,paint,light,positive,black paint,black paints,low,black paint,1,820,21928120
 workerid_0311,61,speed,cookware,slow,negative,frying pan,frying pans,medium,cookware,0,71800,3617598
+workerid_0313,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0314,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0314,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,chocolate fondue,1,1783,180152837
 workerid_0314,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,11879,3617598
@@ -22590,8 +22622,10 @@ workerid_0320,41,price,statues,expensive,positive,platinum,platinum statue,high,
 workerid_0323,51,size,plants,small,negative,bush,bushes,medium,bush,1,1558141,35939932
 workerid_0323,57,size,appliances,small,negative,oven,ovens,medium,oven,1,3443150,23847029
 workerid_0324,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
+workerid_0324,33,loudness_n,birds,loud,positive,crow,crows,medium,crow,1,1295877,19695831
 workerid_0324,28,length,audios,long,positive,podcast episode,podcast episodes,medium,podcast episode,1,16668,313133
 workerid_0324,1,darkness,birds,light,positive,parrot,parrots,medium,parrot,1,1049654,19695831
+workerid_0324,38,loudness,birds,loud,positive,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0328,4,darkness,times of day,dark,negative,dusk,dusks,medium,times of day,0,3542,99907
 workerid_0333,76,temperature_h,places,hot,positive,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
 workerid_0335,77,temperature_h,food,cold,negative,chocolate fondue,chocolate fondues,high,chocolate fondue,1,1783,180152837
@@ -22622,6 +22656,7 @@ workerid_0356,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece
 workerid_0357,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0358,48,price,meat,cheap,negative,steak,steaks,high,steak,1,1646745,17654214
 workerid_0359,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
+workerid_0359,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0361,42,price,rentals,cheap,negative,villa,villas,high,rentals,0,9561875,61539717
 workerid_0362,75,temperature_h,locations,warm,positive,oven,ovens,high,oven,1,3443150,58471896
 workerid_0362,3,darkness,cakes,light,positive,fruit cake,fruit cakes,medium,fruit cake,1,17124,5565768
@@ -22666,10 +22701,12 @@ workerid_0393,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,
 workerid_0393,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
 workerid_0394,44,price,spices,expensive,positive,garlic,garlic,medium,garlic,1,5884664,2836609
 workerid_0394,76,temperature_h,places,cold,negative,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
+workerid_0395,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
 workerid_0395,79,weight,people,light,negative,kid,kids,medium,kid,1,96621142,480323270
 workerid_0395,1,darkness,birds,light,positive,parrot,parrots,medium,parrot,1,1049654,19695831
 workerid_0395,5,darkness,scripts,light,positive,pen,pens,medium,pen,1,5794539,17337654
 workerid_0396,49,price,alcoholic drinks,cheap,negative,bottle of wine,wine bottles,medium,bottle of wine,1,127578,377118
+workerid_0397,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0397,1,darkness,birds,light,positive,seagull,seagulls,high,seagull,1,329923,19695831
 workerid_0397,8,darkness,animals,light,positive,panther,panthers,low,panther,1,3695915,58179731
 workerid_0397,3,darkness,cakes,dark,negative,cheesecake,cheesecakes,high,cheesecake,1,267986,5565768
@@ -22680,9 +22717,14 @@ workerid_0404,2,darkness,paint,dark,negative,black paint,black paints,low,black 
 workerid_0404,3,darkness,cakes,light,positive,fruit cake,fruit cakes,medium,fruit cake,1,17124,5565768
 workerid_0406,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0407,61,speed,cookware,quick,positive,frying pan,frying pans,medium,frying pan,1,71800,3617598
+workerid_0407,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0408,19,height,people,tall,positive,golfer,golfers,medium,golfer,1,1664649,480323270
 workerid_0408,54,size,fruit,big,positive,kumquat,kumquats,low,kumquat,1,23947,22768964
+workerid_0410,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0412,54,size,fruit,big,positive,peach,peaches,medium,peach,1,1484097,22768964
+workerid_0413,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
+workerid_0413,33,loudness_n,birds,loud,positive,finch,finches,low,finch,1,280095,19695831
+workerid_0413,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0413,48,price,meat,expensive,positive,steak,steaks,high,steak,1,1646745,17654214
 workerid_0416,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
 workerid_0417,66,speed_f,aircrafts,slow,negative,glider,gliders,low,glider,1,653558,237522
@@ -22695,12 +22737,15 @@ workerid_0421,35,loudness,people,quiet,negative,teenager,teenagers,medium,teenag
 workerid_0423,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0423,7,darkness,dogs,light,positive,spaniel,spaniels,medium,spaniel,1,195570,28409576
 workerid_0424,5,darkness,scripts,light,positive,pen,pens,medium,pen,1,5794539,17337654
+workerid_0425,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
 workerid_0426,8,darkness,animals,light,positive,tiger,tigers,medium,tiger,1,7002617,58179731
 workerid_0426,3,darkness,cakes,dark,negative,fruit cake,fruit cakes,medium,fruit cake,1,17124,5565768
 workerid_0426,5,darkness,scripts,dark,negative,pen,pens,medium,pen,1,5794539,17337654
 workerid_0427,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0427,28,length,audios,long,positive,opera,operas,high,audios,0,812910,313133
+workerid_0428,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0429,89,width,roads,wide,positive,country lane,country lanes,low,country lane,1,51288,15093824
+workerid_0431,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0431,65,speed,people,quick,positive,elderly person,elderly people,low,elderly person,1,534085,480323270
 workerid_0432,76,temperature_h,places,hot,positive,ice rink,ice rinks,low,ice rink,1,65504,51698261
 workerid_0433,76,temperature_h,places,hot,positive,ice rink,ice rinks,low,ice rink,1,65504,51698261
@@ -22741,6 +22786,7 @@ workerid_0466,14,hardness,furniture,soft,negative,bedboard,bedboards,high,bedboa
 workerid_0467,21,length,dogs,long,positive,dachshund,dachshunds,high,dachshund,1,116109,28409576
 workerid_0467,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0468,39,loudness_n,boats,quiet,negative,rowboat,rowboats,low,rowboat,1,42015,15603129
+workerid_0468,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
 workerid_0469,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
 workerid_0469,5,darkness,scripts,dark,negative,pen,pens,medium,pen,1,5794539,17337654
 workerid_0470,53,size,insects,big,positive,ant,ants,low,ant,1,2101115,5119814
@@ -22759,6 +22805,7 @@ workerid_0481,73,temperature_h,drinks,hot,positive,milkshake,milkshakes,low,milk
 workerid_0483,49,price,alcoholic drinks,cheap,negative,bottle of top-shelf liquor,liquors,high,bottle of top-shelf liquor,1,518686,377118
 workerid_0484,26,length,roads,long,positive,street,streets,medium,roads,0,15936688,15093824
 workerid_0486,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
+workerid_0487,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0490,5,darkness,scripts,dark,negative,pen,pens,medium,pen,1,5794539,17337654
 workerid_0491,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0491,76,temperature_h,places,hot,positive,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
@@ -22768,6 +22815,7 @@ workerid_0496,8,darkness,animals,dark,negative,jaguar,jaguars,high,jaguar,1,1285
 workerid_0496,76,temperature_h,places,cold,negative,ice rink,ice rinks,low,ice rink,1,65504,51698261
 workerid_0498,81,weight,furniture,light,negative,trash can,trash cans,low,trash can,1,205208,67400151
 workerid_0498,5,darkness,scripts,light,positive,pen,pens,medium,pen,1,5794539,17337654
+workerid_0499,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0499,77,temperature_h,food,hot,positive,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0499,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0499,53,size,insects,big,positive,ant,ants,low,ant,1,2101115,5119814
@@ -22779,6 +22827,7 @@ workerid_0503,48,price,meat,expensive,positive,steak,steaks,high,steak,1,1646745
 workerid_0504,25,length,entertainment,short,negative,movie,movies,high,movie,1,182764607,111395809
 workerid_0504,16,height,buildings,short,negative,strip mall,strip malls,low,strip mall,1,60063,27623285
 workerid_0504,28,length,audios,short,negative,song,songs,low,audios,0,49286341,313133
+workerid_0505,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0505,14,hardness,furniture,hard,positive,bedboard,bedboards,high,bedboard,1,2487,67400151
 workerid_0505,65,speed,people,quick,positive,adult,adults,high,adult,1,32847475,480323270
 workerid_0505,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
@@ -22882,9 +22931,11 @@ workerid_0583,16,height,buildings,short,negative,apartment building,apartment bu
 workerid_0583,76,temperature_h,places,cold,negative,ice rink,ice rinks,low,ice rink,1,65504,51698261
 workerid_0587,4,darkness,times of day,dark,negative,day,days,high,day,1,305158140,99907
 workerid_0587,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
+workerid_0589,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
 workerid_0589,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0590,6,darkness,flowers,light,positive,rose,roses,medium,rose,1,13588663,58380229
 workerid_0590,17,height,people,short,negative,child,children,low,child,1,206543771,480323270
+workerid_0592,38,loudness,birds,loud,positive,owl,owls,low,owl,1,2208765,19695831
 workerid_0594,51,size,plants,small,negative,bush,bushes,medium,bush,1,1558141,35939932
 workerid_0594,48,price,meat,expensive,positive,chicken,chicken,medium,chicken,1,20657359,17654214
 workerid_0594,5,darkness,scripts,dark,negative,pen,pens,medium,pen,1,5794539,17337654
@@ -22910,12 +22961,14 @@ workerid_0608,7,darkness,dogs,light,positive,pitbull,pitbulls,low,pitbull,1,1008
 workerid_0609,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0609,32,loudness_n,venues,quiet,negative,concert,concerts,high,concert,1,8711738,9389442
 workerid_0609,72,temperature,food,warm,positive,ice cream,ice cream,low,ice cream,1,6277647,180152837
+workerid_0609,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0609,8,darkness,animals,dark,negative,panther,panthers,low,panther,1,3695915,58179731
 workerid_0610,65,speed,people,quick,positive,child,children,medium,child,1,206543771,480323270
 workerid_0611,61,speed,cookware,quick,positive,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0612,66,speed_f,aircrafts,fast,positive,glider,gliders,low,glider,1,653558,237522
 workerid_0613,61,speed,cookware,slow,negative,frying pan,frying pans,medium,frying pan,1,71800,3617598
 workerid_0614,61,speed,cookware,quick,positive,frying pan,frying pans,medium,frying pan,1,71800,3617598
+workerid_0615,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0620,41,price,statues,cheap,negative,plastic,plastic statues,low,plastic,1,707,2837498
 workerid_0622,87,width,roads,narrow,negative,highway,highways,high,highway,1,5745573,15093824
 workerid_0622,5,darkness,scripts,light,positive,piece of chalk,chalks,high,piece of chalk,1,134762,17337654
@@ -22961,6 +23014,7 @@ workerid_0649,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothi
 workerid_0649,79,weight,people,light,negative,baby,babies,low,baby,1,13073168,480323270
 workerid_0649,6,darkness,flowers,light,positive,daisy,daisies,high,daisy,1,807181,58380229
 workerid_0650,66,speed_f,aircrafts,fast,positive,glider,gliders,low,glider,1,653558,237522
+workerid_0651,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0651,48,price,meat,cheap,negative,pork,pork,low,pork,1,5973716,17654214
 workerid_0652,86,width,animal dens,narrow,negative,fox den,fox dens,medium,dens,0,1610,324
 workerid_0652,3,darkness,cakes,light,positive,fruit cake,fruit cakes,medium,fruit cake,1,17124,5565768
@@ -22980,6 +23034,7 @@ workerid_0666,2,darkness,paint,dark,negative,black paint,black paints,low,black 
 workerid_0667,76,temperature_h,places,hot,positive,shopping mall,shopping malls,medium,shopping mall,1,634311,51698261
 workerid_0671,16,height,buildings,short,negative,apartment building,apartment buildings,medium,apartment building,1,312252,27623285
 workerid_0672,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
+workerid_0674,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0676,14,hardness,furniture,hard,positive,bedboard,bedboards,high,bedboard,1,2487,67400151
 workerid_0676,32,loudness_n,venues,quiet,negative,restaurant,restaurants,medium,restaurant,1,58580418,9389442
 workerid_0676,72,temperature,food,warm,positive,salad,salads,medium,food,0,2387032,180152837
@@ -23027,6 +23082,8 @@ workerid_0713,4,darkness,times of day,light,positive,night,nights,low,night,1,21
 workerid_0714,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0715,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0716,61,speed,cookware,quick,positive,frying pan,frying pans,medium,frying pan,1,71800,3617598
+workerid_0717,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
+workerid_0717,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0718,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0718,42,price,rentals,cheap,negative,villa,villas,high,rentals,0,9561875,61539717
 workerid_0718,38,loudness,birds,quiet,negative,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
@@ -23036,6 +23093,7 @@ workerid_0720,19,height,people,tall,positive,golfer,golfers,medium,golfer,1,1664
 workerid_0720,72,temperature,food,cold,negative,soup,soups,high,food,0,2141445,180152837
 workerid_0721,8,darkness,animals,light,positive,tiger,tigers,medium,tiger,1,7002617,58179731
 workerid_0721,65,speed,people,quick,positive,child,children,medium,child,1,206543771,480323270
+workerid_0722,38,loudness,birds,loud,positive,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
 workerid_0722,8,darkness,animals,light,positive,panther,panthers,low,panther,1,3695915,58179731
 workerid_0723,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0724,54,size,fruit,big,positive,kumquat,kumquats,low,kumquat,1,23947,22768964
@@ -23050,6 +23108,7 @@ workerid_0732,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459
 workerid_0732,66,speed_f,aircrafts,fast,positive,glider,gliders,low,glider,1,653558,237522
 workerid_0732,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0733,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
+workerid_0734,38,loudness,birds,quiet,negative,owl,owls,low,owl,1,2208765,19695831
 workerid_0734,30,loudness_n,venues,noisy,positive,conference center,conference centers,medium,conference center,1,227905,9389442
 workerid_0735,61,speed,cookware,slow,negative,frying pan,frying pans,medium,cookware,0,71800,3617598
 workerid_0735,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
@@ -23072,11 +23131,13 @@ workerid_0749,61,speed,cookware,quick,positive,frying pan,frying pans,medium,coo
 workerid_0751,5,darkness,scripts,light,positive,pen,pens,medium,pen,1,5794539,17337654
 workerid_0751,19,height,people,short,negative,basketball player,basketball players,high,basketball player,1,174833,480323270
 workerid_0752,61,speed,cookware,slow,negative,crockpot,crockpots,low,cookware,0,11879,3617598
+workerid_0753,33,loudness_n,birds,quiet,negative,finch,finches,low,finch,1,280095,19695831
 workerid_0753,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0754,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0755,66,speed_f,aircrafts,fast,positive,glider,gliders,low,glider,1,653558,237522
 workerid_0761,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
 workerid_0762,66,speed_f,aircrafts,fast,positive,glider,gliders,low,glider,1,653558,237522
+workerid_0763,38,loudness,birds,loud,positive,owl,owls,low,owl,1,2208765,19695831
 workerid_0764,8,darkness,animals,dark,negative,tiger,tigers,medium,tiger,1,7002617,58179731
 workerid_0764,28,length,audios,long,positive,opera,operas,high,audios,0,812910,313133
 workerid_0768,67,strength,people,strong,positive,child,children,low,child,1,206543771,480323270
@@ -23107,7 +23168,10 @@ workerid_0786,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0
 workerid_0788,89,width,roads,wide,positive,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0788,49,price,alcoholic drinks,cheap,negative,bottle of top-shelf liquor,liquors,high,bottle of top-shelf liquor,1,518686,377118
 workerid_0789,16,height,buildings,tall,positive,apartment building,apartment buildings,medium,apartment building,1,312252,27623285
+workerid_0794,38,loudness,birds,loud,positive,woodpecker,woodpeckers,medium,woodpecker,1,219083,19695831
+workerid_0794,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0797,5,darkness,scripts,dark,negative,pencil,pencils,low,pencil,1,2459655,17337654
+workerid_0798,38,loudness,birds,quiet,negative,mockingbird,mockingbirds,high,mockingbird,1,39837,19695831
 workerid_0799,76,temperature_h,places,cold,negative,ice rink,ice rinks,low,places,0,65504,51698261
 workerid_0799,33,loudness_n,birds,quiet,negative,crow,crows,medium,birds,0,1295877,19695831
 workerid_0799,76,temperature_h,places,cold,negative,shopping mall,shopping malls,medium,places,0,634311,51698261
@@ -23144,6 +23208,7 @@ workerid_0819,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothi
 workerid_0819,4,darkness,times of day,dark,negative,dusk,dusks,medium,dusk,1,3542,99907
 workerid_0819,28,length,audios,long,positive,podcast episode,podcast episodes,medium,podcast episode,1,16668,313133
 workerid_0820,4,darkness,times of day,light,positive,night,nights,low,night,1,21265731,99907
+workerid_0821,33,loudness_n,birds,quiet,negative,crow,crows,medium,crow,1,1295877,19695831
 workerid_0821,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0824,77,temperature_h,food,cold,negative,smoothie,smoothies,low,smoothie,1,457222,180152837
 workerid_0824,89,width,roads,narrow,negative,country lane,country lanes,low,country lane,1,51288,15093824
@@ -23155,6 +23220,7 @@ workerid_0830,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,piece 
 workerid_0831,89,width,roads,wide,positive,country lane,country lanes,low,country lane,1,51288,15093824
 workerid_0833,5,darkness,scripts,light,positive,pen,pens,medium,pen,1,5794539,17337654
 workerid_0834,75,temperature_h,locations,warm,positive,pantry,pantries,medium,locations,0,105460,58471896
+workerid_0835,33,loudness_n,birds,quiet,negative,rooster,roosters,high,rooster,1,328337,19695831
 workerid_0836,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459655,17337654
 workerid_0837,41,price,statues,expensive,positive,platinum,platinum statue,high,platinum,1,503,2837498
 workerid_0837,5,darkness,scripts,light,positive,pencil,pencils,low,pencil,1,2459655,17337654
@@ -23417,7 +23483,6 @@ workerid_0003,33,loudness_n,animals,loud,positive,rooster,roosters,high,animals,
 workerid_0003,38,loudness,animals,loud,positive,owl,owls,low,animals,0,2208765,58179731
 workerid_0003,69,strength,people,weak,negative,golfer,golfers,low,people,0,1664649,480323270
 workerid_0004,75,temperature_h, kitchens,warm,positive,oven,ovens,high, kitchens,0,3443150,NA
-workerid_0004,38,loudness,birds,quiet,negative,owl,owls,low,birds,0,2208765,19695831
 workerid_0006,79,weight,people,heavy,positive,baby,babies,low,people,0,13073168,480323270
 workerid_0007,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0007,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
@@ -23437,7 +23502,6 @@ workerid_0013,74,temperature,days,cold,negative,summer,summer days,high,days,0,2
 workerid_0013,4,darkness,evenings,dark,negative,dusk,dusks,medium,evenings,0,3542,3008865
 workerid_0014,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0014,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0014,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0014,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0015,1,darkness,birds,light,positive,parrot,parrots,medium,birds,0,1049654,19695831
 workerid_0015,78,weight,things,heavy,positive,fish,fish,low,things,0,52768568,147983507
@@ -23445,7 +23509,6 @@ workerid_0015,69,strength,people,weak,negative,golfer,golfers,low,people,0,16646
 workerid_0016,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0016,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0017,66,speed_f,vehicles,fast,positive,helicopter,helicopters,medium,vehicles,0,2682275,37254742
-workerid_0017,90,width,furniture,narrow,negative,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0017,7,darkness,dogs,light,positive,pitbull,pitbulls,low,dogs,0,100803,28409576
 workerid_0017,29,loudness,music,loud,positive,rock concert,rock concerts,high,music,0,67033,414072994
 workerid_0017,83,weight,things,light,negative,cotton,cottons,medium,things,0,214521,147983507
@@ -23457,7 +23520,6 @@ workerid_0018,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,257264
 workerid_0018,90,width,doorways,narrow,negative,back door,back doors,low,doorways,0,70114,374115
 workerid_0018,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0018,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0019,67,strength,boxes,strong,positive,child,children,low,boxes,0,206543771,25790443
 workerid_0020,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0020,50,price,dinners,cheap,negative,Japanese restaurant,japanese restaurants,high,dinners,0,183928,1868829
 workerid_0022,41,price,decor,cheap,negative,platinum,platinum statue,high,decor,0,503,12099181
@@ -23472,7 +23534,6 @@ workerid_0024,24,length,cars,long,positive,limousine,limousines,high,cars,0,1589
 workerid_0025,61,speed,stoves,slow,negative,frying pan,frying pans,medium,stoves,0,71800,2147560
 workerid_0025,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0029,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
-workerid_0030,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0030,30,loudness_n,places,noisy,positive,party,parties,high,places,0,52799939,51698261
 workerid_0030,74,temperature,days,warm,positive,winter,winter days,low,days,0,80466,305158140
 workerid_0031,31,loudness_n,birds,quiet,negative,parrot,parrots,high,birds,0,1049654,19695831
@@ -23491,7 +23552,6 @@ workerid_0032,10,hardness,candies,soft,negative,marshmallow,marshmallows,low,can
 workerid_0032,83,weight,materials,light,negative,silk,silks,low,materials,0,418180,83903351
 workerid_0032,72,temperature,desserts,cold,negative,ice cream,ice cream,low,desserts,0,6277647,3720781
 workerid_0033,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
-workerid_0033,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0033,83,weight,fabrics,light,negative,cotton,cottons,medium,fabrics,0,214521,5153175
 workerid_0033,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0033,30,loudness_n,rooms,noisy,positive,conference center,conference centers,medium,rooms,0,227905,65454304
@@ -23511,7 +23571,6 @@ workerid_0036,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0
 workerid_0037,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0037,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0039,31,loudness_n,birds,loud,positive,parrot,parrots,high,birds,0,1049654,19695831
-workerid_0039,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0040,86,width,forests,narrow,negative,bear den,bear dens,high,forests,0,2361,8729753
 workerid_0040,89,width,walkways,wide,positive,boulevard,boulevards,high,walkways,0,278244,586893
 workerid_0040,81,weight,objects,heavy,positive,chair,chairs,medium,objects,0,15833441,33848628
@@ -23539,7 +23598,6 @@ workerid_0046,31,loudness_n,pets,quiet,negative,cat,cats,medium,pets,0,15738388,
 workerid_0046,29,loudness,concerts,loud,positive,rock concert,rock concerts,high,concerts,0,67033,8711738
 workerid_0046,62,speed_f,cars,slow,negative,truck,trucks,low,cars,0,13809070,109722086
 workerid_0046,59,speed,runners,fast,positive,jogger,joggers,medium,runners,0,260504,3917217
-workerid_0046,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0046,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0046,47,price,fruits,cheap,negative,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0046,38,loudness,places,quiet,negative,woodpecker,woodpeckers,medium,places,0,219083,51698261
@@ -23611,7 +23669,6 @@ workerid_0063,70,strength,colors,strong,positive,wall paint,wall paints,medium,c
 workerid_0063,39,loudness_n,boats,loud,positive,sailboat,sailboats,medium,boats,0,498658,15603129
 workerid_0063,80,weight,electronics,light,negative,printer,printers,high,electronics,0,26823567,104231690
 workerid_0063,72,temperature,desserts,warm,positive,ice cream,ice cream,low,desserts,0,6277647,3720781
-workerid_0064,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0064,47,price,fruits,expensive,positive,raspberries,raspberries,medium,fruits,0,543159,7957960
 workerid_0064,75,temperature_h,rooms,warm,positive,pantry,pantries,medium,rooms,0,105460,65454304
 workerid_0065,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
@@ -23631,11 +23688,9 @@ workerid_0067,83,weight,materials,heavy,positive,wool,wool,high,materials,0,7657
 workerid_0067,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0068,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0,301577,180152837
 workerid_0068,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
-workerid_0068,90,width, furnitures,wide,positive,patio door,patio doors,medium, furnitures,0,222702,NA
 workerid_0070,29,loudness,music,loud,positive,rock concert,rock concerts,high,music,0,67033,414072994
 workerid_0070,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,807181,2237840
 workerid_0070,76,temperature_h,rooms,hot,positive,sauna,saunas,high,rooms,0,934002,65454304
-workerid_0071,88,width,banks,narrow,negative,stream,streams,medium,banks,0,8883635,30584319
 workerid_0071,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,807181,2237840
 workerid_0072,64,speed,animals,slow,negative,rabbit,rabbits,high,animals,0,2987957,58179731
 workerid_0072,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
@@ -23645,8 +23700,6 @@ workerid_0072,37,loudness_n,cars,loud,positive,electric car,electric cars,low,ca
 workerid_0073,83,weight,materials,light,negative,cotton,cottons,medium,materials,0,214521,83903351
 workerid_0073,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0073,75,temperature_h,areas,warm,positive,pantry,pantries,medium,areas,0,105460,121988686
-workerid_0074,67,strength,boxes,weak,negative,child,children,low,boxes,0,206543771,25790443
-workerid_0074,54,size,vegetables,small,negative,kumquat,kumquats,low,vegetables,0,23947,9067552
 workerid_0074,30,loudness_n,places,noisy,positive,conference center,conference centers,medium,places,0,227905,51698261
 workerid_0074,47,price,fruits,expensive,positive,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0074,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
@@ -23662,7 +23715,6 @@ workerid_0076,24,length,trucks,short,negative,pick-up truck,pick up trucks,mediu
 workerid_0076,7,darkness,coats,dark,negative,poodle,poodles,high,coats,0,255182,4107452
 workerid_0076,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0077,83,weight, fabrics,light,negative,cotton,cottons,medium, fabrics,0,214521,NA
-workerid_0077,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0078,56,size,cars,big,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0079,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,32847475,1526422
 workerid_0079,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
@@ -23671,7 +23723,6 @@ workerid_0080,73,temperature_h,liquids,hot,positive,coffee,coffee,high,liquids,0
 workerid_0081,47,price,fruits,expensive,positive,boysenberries,boysenberries,high,fruits,0,12484,7957960
 workerid_0081,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0081,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0081,55,size,birds,big,positive,herring,herrings,low,birds,0,137142,19695831
 workerid_0082,38,loudness,places,quiet,negative,mockingbird,mockingbirds,high,places,0,39837,51698261
 workerid_0082,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0084,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,5153175
@@ -23712,7 +23763,6 @@ workerid_0092,74,temperature,days,warm,positive,summer,summer days,high,days,0,2
 workerid_0093,83,weight,objects,heavy,positive,silk,silks,low,objects,0,418180,33848628
 workerid_0093,11,hardness,floors,hard,positive,wood,wood floors,medium,floors,0,352083,7863848
 workerid_0093,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
-workerid_0093,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0093,40,loudness,guitars,quiet,negative,ukelele,ukeleles,low,guitars,0,11454,7278585
 workerid_0094,63,speed_f,boats,fast,positive,speedboat,speedboats,high,boats,0,40032,15603129
 workerid_0094,30,loudness_n,areas,noisy,positive,conference center,conference centers,medium,areas,0,227905,121988686
@@ -23740,7 +23790,6 @@ workerid_0097,37,loudness_n,vehicles,quiet,negative,electric car,electric cars,l
 workerid_0097,10,hardness,food,hard,positive,piece of chocolate,chocolates,medium,food,0,3141854,180152837
 workerid_0097,33,loudness_n,animals,loud,positive,rooster,roosters,high,animals,0,328337,58179731
 workerid_0097,75,temperature_h,things,warm,positive,oven,ovens,high,things,0,3443150,147983507
-workerid_0098,67,strength,boxes,strong,positive,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0098,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0099,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0099,5,darkness,papers,light,positive,pencil,pencils,low,papers,0,2459655,51025238
@@ -23757,8 +23806,6 @@ workerid_0100,20,height,trees,short,negative,redwood tree,redwood trees,high,tre
 workerid_0101,70,strength,colors,strong,positive,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0101,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0102,19,height,athletes,tall,positive,basketball player,basketball players,high,athletes,0,174833,7268360
-workerid_0102,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
-workerid_0104,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0104,9,hardness,food,soft,negative,mushroom,mushrooms,low,food,0,3134851,180152837
 workerid_0104,47,price,fruits,cheap,negative,boysenberries,boysenberries,high,fruits,0,12484,7957960
 workerid_0104,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
@@ -23774,7 +23821,6 @@ workerid_0107,20,height,plants,short,negative,bonsai tree,bonsai trees,low,plant
 workerid_0107,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0107,70,strength,paint colors,strong,positive,oil paint,oil paints,high,paint colors,0,76465,83964
 workerid_0107,47,price,fruits,cheap,negative,raspberries,raspberries,medium,fruits,0,543159,7957960
-workerid_0108,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0108,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0108,47,price,fruits,expensive,positive,raspberries,raspberries,medium,fruits,0,543159,7957960
 workerid_0109,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
@@ -23791,7 +23837,6 @@ workerid_0109,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,script
 workerid_0110,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0111,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0111,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0113,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0113,5,darkness,scripts,dark,negative,pen,pens,medium,scripts,0,5794539,17337654
 workerid_0113,69,strength,weightlifters,weak,negative,cyclist,cyclists,medium,weightlifters,0,1228897,26692
 workerid_0114,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
@@ -23823,9 +23868,7 @@ workerid_0118,87,width,streets,wide,positive,downtown street,downtown streets,me
 workerid_0118,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0,301577,180152837
 workerid_0118,41,price,decor,expensive,positive,bronze,bronze statues,medium,decor,0,53960,12099181
 workerid_0118,40,loudness,instruments,quiet,negative,acoustic guitar,acoustic guitars,medium,instruments,0,549025,48493077
-workerid_0119,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0120,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
-workerid_0121,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0121,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
 workerid_0122,38,loudness,areas,quiet,negative,woodpecker,woodpeckers,medium,areas,0,219083,121988686
 workerid_0122,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
@@ -23868,7 +23911,6 @@ workerid_0131,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0
 workerid_0132,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0132,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0132,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
-workerid_0134,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0134,88,width,waterways,narrow,negative,creek,creeks,low,waterways,0,862386,1843915
 workerid_0135,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
 workerid_0135,31,loudness_n,animals,quiet,negative,fish,fish,low,animals,0,52768568,58179731
@@ -23894,7 +23936,6 @@ workerid_0137,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0
 workerid_0137,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0137,87,width,streets,wide,positive,highway,highways,high,streets,0,5745573,15936688
 workerid_0138,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0138,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0138,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,food,0,1783,180152837
 workerid_0139,25,length,movies,long,positive,documentary,documentaries,medium,movies,0,1741319,182764607
 workerid_0139,26,length,routes,long,positive,highway,highways,high,routes,0,5745573,9616739
@@ -23909,7 +23950,6 @@ workerid_0141,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,script
 workerid_0142,47,price,fruits,cheap,negative,raspberries,raspberries,medium,fruits,0,543159,7957960
 workerid_0142,15,height,birds,tall,positive,penguin,penguins,low,birds,0,2550463,19695831
 workerid_0142,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
-workerid_0142,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0142,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
 workerid_0144,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0144,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
@@ -23961,7 +24001,6 @@ workerid_0155,73,temperature_h,liquids,hot,positive,coffee,coffee,high,liquids,0
 workerid_0156,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0157,7,darkness,coats,dark,negative,poodle,poodles,high,coats,0,255182,4107452
 workerid_0157,18,height,plants,tall,positive,pansy,pansies,low,plants,0,176007,35939932
-workerid_0157,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0157,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0157,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0158,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
@@ -23979,7 +24018,6 @@ workerid_0165,66,speed_f,transportation,fast,positive,plane,planes,high,transpor
 workerid_0165,38,loudness,animals,loud,positive,owl,owls,low,animals,0,2208765,58179731
 workerid_0165,69,strength,people,strong,positive,golfer,golfers,low,people,0,1664649,480323270
 workerid_0166,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0166,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0166,30,loudness_n,places,noisy,positive,party,parties,high,places,0,52799939,51698261
 workerid_0167,88,width,waterways,narrow,negative,creek,creeks,low,waterways,0,862386,1843915
 workerid_0167,41,price,decor,expensive,positive,bronze,bronze statues,medium,decor,0,53960,12099181
@@ -23997,13 +24035,11 @@ workerid_0169,90,width,gates,wide,positive,front gate,front gates,high,gates,0,1
 workerid_0170,5,darkness,scripts,dark,negative,pencil,pencils,low,scripts,0,2459655,17337654
 workerid_0170,90,width,doors,wide,positive,back door,back doors,low,doors,0,70114,20230179
 workerid_0170,31,loudness_n,places,quiet,negative,fish,fish,low,places,0,52768568,51698261
-workerid_0170,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0170,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0170,35,loudness,rooms,loud,positive,baby,babies,high,rooms,0,13073168,65454304
 workerid_0171,14,hardness,bedboards,hard,positive,blanket,blankets,medium,bedboards,0,4386506,2487
 workerid_0171,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0171,33,loudness_n,bird sounds,quiet,negative,finch,finches,low,bird sounds,0,280095,18961
-workerid_0171,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0172,4,darkness,times of day,dark,negative,night,nights,low,times of day,0,21265731,99907
 workerid_0172,50,price,dinners,cheap,negative,Chinese restaurant,chinese restaurants,low,dinners,0,373328,1868829
 workerid_0172,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
@@ -24026,8 +24062,6 @@ workerid_0175,81,weight,things,heavy,positive,couch,couches,high,things,0,478444
 workerid_0176,7,darkness,coats,light,positive,pitbull,pitbulls,low,coats,0,100803,4107452
 workerid_0176,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0177,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
-workerid_0177,26,length,maps,long,positive,alley,alleys,low,maps,0,546265,63957725
-workerid_0177,67,strength,boxes,strong,positive,adult,adults,high,boxes,0,32847475,25790443
 workerid_0177,11,hardness,rooms,hard,positive,carpet,carpet floors,low,rooms,0,38431,65454304
 workerid_0177,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0177,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
@@ -24095,16 +24129,12 @@ workerid_0193,41,price,decor,expensive,positive,plastic,plastic statues,low,deco
 workerid_0193,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
 workerid_0193,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0194,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
-workerid_0194,67,strength,boxes,strong,positive,child,children,low,boxes,0,206543771,25790443
 workerid_0194,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0194,5,darkness,scripts,dark,negative,pencil,pencils,low,scripts,0,2459655,17337654
 workerid_0194,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0196,57,size,appliances,small,negative,toaster,toasters,low,appliances,0,882911,23847029
 workerid_0196,59,speed,people,fast,positive,jogger,joggers,medium,people,0,260504,480323270
 workerid_0196,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
-workerid_0198,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
-workerid_0198,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
-workerid_0198,88,width,banks,wide,positive,stream,streams,medium,banks,0,8883635,30584319
 workerid_0198,50,price,dinners,cheap,negative,Japanese restaurant,japanese restaurants,high,dinners,0,183928,1868829
 workerid_0198,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0199,61,speed,cookware,slow,negative,frying pan,frying pans,medium,cookware,0,71800,3617598
@@ -24115,7 +24145,6 @@ workerid_0202,90,width,doors,narrow,negative,patio door,patio doors,medium,doors
 workerid_0202,65,speed,walkers,slow,negative,child,children,medium,walkers,0,206543771,1526422
 workerid_0202,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0202,76,temperature_h,venues,hot,positive,ice rink,ice rinks,low,venues,0,65504,9389442
-workerid_0203,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0204,58,size,dogs,small,negative,great dane,great danes,high,dogs,0,115558,28409576
 workerid_0204,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0,301577,180152837
 workerid_0204,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
@@ -24140,8 +24169,6 @@ workerid_0208,30,loudness_n,places,noisy,positive,church,churches,low,places,0,1
 workerid_0208,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0208,62,speed_f,cars,slow,negative,motorcycle,motorcycles,high,cars,0,5752821,109722086
 workerid_0208,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
-workerid_0209,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
-workerid_0209,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0210,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0210,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0211,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
@@ -24154,31 +24181,25 @@ workerid_0212,69,strength,people,strong,positive,wrestler,wrestlers,high,people,
 workerid_0212,69,strength,people,weak,negative,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0212,7,darkness,coats,light,positive,poodle,poodles,high,coats,0,255182,4107452
 workerid_0212,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
-workerid_0213,67,strength,boxes,strong,positive,child,children,low,boxes,0,206543771,25790443
-workerid_0213,88,width,banks,wide,positive,stream,streams,medium,banks,0,8883635,30584319
 workerid_0214,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0214,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0214,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,32847475,1526422
 workerid_0214,32,loudness_n,rooms,quiet,negative,library,libraries,low,rooms,0,28105939,65454304
-workerid_0214,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0214,68,strength,weather,strong,positive,hurricane,hurricanes,high,weather,0,3785008,103332440
 workerid_0214,89,width,streets,narrow,negative,country lane,country lanes,low,streets,0,51288,15936688
 workerid_0214,36,loudness_n,cities,quiet,negative,village,villages,low,cities,0,6997181,59810742
 workerid_0214,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
-workerid_0216,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0216,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0216,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0216,7,darkness,coats,light,positive,poodle,poodles,high,coats,0,255182,4107452
 workerid_0216,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0217,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
-workerid_0217,90,width, furnitures,wide,positive,patio door,patio doors,medium, furnitures,0,222702,NA
 workerid_0217,34,loudness_n,music,quiet,negative,guitar,guitars,medium,music,0,7278585,414072994
 workerid_0217,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0217,59,speed,runners,fast,positive,jogger,joggers,medium,runners,0,260504,3917217
 workerid_0217,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0217,70,strength,paint colors,weak,negative,wall paint,wall paints,medium,paint colors,0,3469,83964
 workerid_0218,69,strength,weightlifters,weak,negative,wrestler,wrestlers,high,weightlifters,0,772270,26692
-workerid_0218,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0218,70,strength,colors,weak,negative,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0219,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0219,5,darkness,scripts,light,positive,pencil,pencils,low,scripts,0,2459655,17337654
@@ -24187,16 +24208,11 @@ workerid_0221,41,price,decor,expensive,positive,plastic,plastic statues,low,deco
 workerid_0221,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0221,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0222,4,darkness,nights,dark,negative,dusk,dusks,medium,nights,0,3542,21265731
-workerid_0224,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0224,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0224,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0224,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0225,39,loudness_n,lakes,quiet,negative,rowboat,rowboats,low,lakes,0,42015,14947783
-workerid_0225,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0225,74,temperature,days,warm,positive,winter,winter days,low,days,0,80466,305158140
-workerid_0225,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0225,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0225,26,length,maps,short,negative,highway,highways,high,maps,0,5745573,63957725
 workerid_0226,36,loudness_n,areas,quiet,negative,village,villages,low,areas,0,6997181,121988686
 workerid_0227,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0227,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
@@ -24231,7 +24247,6 @@ workerid_0233,5,darkness,scripts,light,positive,pen,pens,medium,scripts,0,579453
 workerid_0234,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0234,74,temperature,days,warm,positive,fall,fall days,medium,days,0,12564,305158140
 workerid_0234,47,price,fruits,cheap,negative,raspberries,raspberries,medium,fruits,0,543159,7957960
-workerid_0234,67,strength,boxes,weak,negative,adult,adults,high,boxes,0,32847475,25790443
 workerid_0234,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0234,22,length,animals,short,negative,hamster,hamsters,medium,animals,0,633540,58179731
 workerid_0234,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
@@ -24255,7 +24270,6 @@ workerid_0239,69,strength,people,weak,negative,golfer,golfers,low,people,0,16646
 workerid_0239,86,width,spaces,narrow,negative,fox den,fox dens,medium,spaces,0,1610,15662133
 workerid_0239,30,loudness_n,places,noisy,positive,conference center,conference centers,medium,places,0,227905,51698261
 workerid_0239,77,temperature_h,food,hot,positive,muffin,muffins,medium,food,0,1333924,180152837
-workerid_0240,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0241,65,speed,walkers,slow,negative,adult,adults,high,walkers,0,32847475,1526422
 workerid_0241,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,807181,2237840
 workerid_0241,5,darkness,writing utensils,dark,negative,pencil,pencils,low,writing utensils,0,2459655,12576
@@ -24263,7 +24277,6 @@ workerid_0242,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,script
 workerid_0243,77,temperature_h,desserts,cold,negative,smoothie,smoothies,low,desserts,0,457222,3720781
 workerid_0243,26,length,routes,short,negative,alley,alleys,low,routes,0,546265,9616739
 workerid_0243,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
-workerid_0243,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0244,25,length,movies,short,negative,sitcom,sitcoms,low,movies,0,479686,182764607
 workerid_0244,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0244,6,darkness,flowers,light,positive,dahlia,dahlias,low,flowers,0,135476,58380229
@@ -24271,7 +24284,6 @@ workerid_0244,13,hardness,fabrics,soft,negative,cotton,cottons,low,fabrics,0,214
 workerid_0244,54,size,melons,big,positive,watermelon,watermelons,high,melons,0,190836,1015937
 workerid_0244,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0244,10,hardness,candies,soft,negative,marshmallow,marshmallows,low,candies,0,301577,1298890
-workerid_0244,26,length,maps,long,positive,highway,highways,high,maps,0,5745573,63957725
 workerid_0244,11,hardness,floors,soft,negative,carpet,carpet floors,low,floors,0,38431,7863848
 workerid_0244,90,width,houses,narrow,negative,front gate,front gates,high,houses,0,16932,29896478
 workerid_0244,11,hardness,floors,soft,negative,wood,wood floors,medium,floors,0,352083,7863848
@@ -24298,7 +24310,6 @@ workerid_0253,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,hi
 workerid_0253,38,loudness,birds,loud,positive,owl,owls,low,birds,0,2208765,19695831
 workerid_0253,69,strength,people,weak,negative,golfer,golfers,low,people,0,1664649,480323270
 workerid_0253,13,hardness,objects,hard,positive,wood,wood,high,objects,0,51133768,33848628
-workerid_0253,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0253,77,temperature_h,food,hot,positive,muffin,muffins,medium,food,0,1333924,180152837
 workerid_0253,14,hardness,furniture,soft,negative,pillow,pillows,low,furniture,0,3970202,67400151
 workerid_0254,77,temperature_h,desserts,hot,positive,chocolate fondue,chocolate fondues,high,desserts,0,1783,3720781
@@ -24333,7 +24344,6 @@ workerid_0259,55,size,animals,small,negative,herring,herrings,low,animals,0,1371
 workerid_0259,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0260,74,temperature,days,warm,positive,winter,winter days,low,days,0,80466,305158140
 workerid_0260,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
-workerid_0260,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0260,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0261,69,strength,weightlifters,strong,positive,golfer,golfers,low,weightlifters,0,1664649,26692
 workerid_0261,29,loudness,music,loud,positive,rap concert,rap concerts,medium,music,0,1191,414072994
@@ -24343,8 +24353,6 @@ workerid_0261,13,hardness,fabrics,soft,negative,cotton,cottons,low,fabrics,0,214
 workerid_0261,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0262,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0262,30,loudness_n,rooms,noisy,positive,conference center,conference centers,medium,rooms,0,227905,65454304
-workerid_0262,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
-workerid_0264,26,length,maps,long,positive,street,streets,medium,maps,0,15936688,63957725
 workerid_0264,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0265,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0265,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
@@ -24352,18 +24360,14 @@ workerid_0265,75,temperature_h, kitchens,cold,negative,pantry,pantries,medium, k
 workerid_0265,30,loudness_n,places,noisy,positive,party,parties,high,places,0,52799939,51698261
 workerid_0266,68,strength,storms,weak,negative,rain shower,rain showers,low,storms,0,650392,3614108
 workerid_0266,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
-workerid_0266,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0267,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0267,30,loudness_n,venues,noisy,positive,conference center,conference centers,medium,venues,0,227905,9389442
 workerid_0267,69,strength,people,strong,positive,cyclist,cyclists,medium,people,0,1228897,480323270
-workerid_0267,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0267,29,loudness,music,loud,positive,rock concert,rock concerts,high,music,0,67033,414072994
-workerid_0268,67,strength,boxes,weak,negative,adult,adults,high,boxes,0,32847475,25790443
 workerid_0268,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0269,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0269,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0269,79,weight,objects,heavy,positive,kid,kids,medium,objects,0,96621142,33848628
-workerid_0269,54,size,vegetables,small,negative,kumquat,kumquats,low,vegetables,0,23947,9067552
 workerid_0269,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
 workerid_0269,30,loudness_n,places,quiet,negative,conference center,conference centers,medium,places,0,227905,51698261
 workerid_0269,47,price,fruits,cheap,negative,raspberries,raspberries,medium,fruits,0,543159,7957960
@@ -24389,10 +24393,8 @@ workerid_0271,87,width,streets,narrow,negative,downtown street,downtown streets,
 workerid_0271,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0272,55,size,aquariums,big,positive,shark,sharks,high,aquariums,0,3302971,983409
 workerid_0272,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
-workerid_0272,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0272,11,hardness,floors,soft,negative,wood,wood floors,medium,floors,0,352083,7863848
 workerid_0272,77,temperature_h,food,cold,negative,muffin,muffins,medium,food,0,1333924,180152837
-workerid_0272,67,strength,boxes,strong,positive,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0272,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0272,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0272,34,loudness_n,music,loud,positive,guitar,guitars,medium,music,0,7278585,414072994
@@ -24405,7 +24407,6 @@ workerid_0274,69,strength,people,strong,positive,wrestler,wrestlers,high,people,
 workerid_0274,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0274,39,loudness_n,lakes,quiet,negative,sailboat,sailboats,medium,lakes,0,498658,14947783
 workerid_0274,30,loudness_n,places,noisy,positive,party,parties,high,places,0,52799939,51698261
-workerid_0274,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0274,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0274,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0274,32,loudness_n,places,quiet,negative,library,libraries,low,places,0,28105939,51698261
@@ -24414,7 +24415,6 @@ workerid_0276,30,loudness_n,buildings,quiet,negative,church,churches,low,buildin
 workerid_0276,75,temperature_h,rooms,warm,positive,pantry,pantries,medium,rooms,0,105460,65454304
 workerid_0276,48,price,food,expensive,positive,steak,steaks,high,food,0,1646745,180152837
 workerid_0276,29,loudness,concerts,loud,positive,rock concert,rock concerts,high,concerts,0,67033,8711738
-workerid_0276,90,width, furnitures,wide,positive,back door,back doors,low, furnitures,0,70114,NA
 workerid_0276,41,price,decor,cheap,negative,plastic,plastic statues,low,decor,0,707,12099181
 workerid_0276,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0277,37,loudness_n,streets,quiet,negative,car,cars,medium,streets,0,109722086,15936688
@@ -24423,7 +24423,6 @@ workerid_0277,2,darkness,paints,dark,negative,black paint,black paints,low,paint
 workerid_0277,50,price,dinners,expensive,positive,Chinese restaurant,chinese restaurants,low,dinners,0,373328,1868829
 workerid_0278,32,loudness_n,places,noisy,positive,library,libraries,low,places,0,28105939,51698261
 workerid_0278,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0,11879,3617598
-workerid_0278,9,hardness,fruits,hard,positive,tomato,tomatoes,medium,fruits,0,5924980,7957960
 workerid_0278,35,loudness,rooms,quiet,negative,teenager,teenagers,medium,rooms,0,4979216,65454304
 workerid_0279,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0279,30,loudness_n,places,quiet,negative,church,churches,low,places,0,13467005,51698261
@@ -24469,7 +24468,6 @@ workerid_0290,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,328474
 workerid_0290,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0291,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0292,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0293,88,width,banks,wide,positive,stream,streams,medium,banks,0,8883635,30584319
 workerid_0293,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,32847475,1526422
 workerid_0293,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0293,47,price,fruits,expensive,positive,boysenberries,boysenberries,high,fruits,0,12484,7957960
@@ -24478,9 +24476,7 @@ workerid_0293,25,length,movies,short,negative,documentary,documentaries,medium,m
 workerid_0293,49,price,alcoholic drinks,expensive,positive,bottle of top-shelf liquor,liquors,high,alcoholic drinks,0,518686,377118
 workerid_0293,30,loudness_n,rooms,quiet,negative,conference center,conference centers,medium,rooms,0,227905,65454304
 workerid_0293,59,speed,runners,fast,positive,jogger,joggers,medium,runners,0,260504,3917217
-workerid_0293,55,size,birds,big,positive,herring,herrings,low,birds,0,137142,19695831
 workerid_0294,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
-workerid_0294,9,hardness,fruits,soft,negative,tomato,tomatoes,medium,fruits,0,5924980,7957960
 workerid_0294,37,loudness_n,streets,quiet,negative,car,cars,medium,streets,0,109722086,15936688
 workerid_0294,32,loudness_n,places,quiet,negative,library,libraries,low,places,0,28105939,51698261
 workerid_0294,19,height,athletes,tall,positive,golfer,golfers,medium,athletes,0,1664649,7268360
@@ -24490,14 +24486,10 @@ workerid_0295,90,width,gates,narrow,negative,front gate,front gates,high,gates,0
 workerid_0295,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0296,69,strength,lifters,weak,negative,wrestler,wrestlers,high,lifters,0,772270,297063
 workerid_0296,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
-workerid_0296,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0297,48,price,food,expensive,positive,steak,steaks,high,food,0,1646745,180152837
 workerid_0297,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0298,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0298,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
-workerid_0299,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
-workerid_0299,33,loudness_n,parks,loud,positive,finch,finches,low,parks,0,280095,25975912
-workerid_0299,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0299,39,loudness_n,lakes,quiet,negative,sailboat,sailboats,medium,lakes,0,498658,14947783
 workerid_0299,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0301,69,strength,lifters,weak,negative,wrestler,wrestlers,high,lifters,0,772270,297063
@@ -24507,23 +24499,19 @@ workerid_0301,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,328474
 workerid_0302,16,height,buildings,short,negative,strip mall,strip malls,low,buildings,0,60063,27623285
 workerid_0303,69,strength,weightlifters,strong,positive,wrestler,wrestlers,high,weightlifters,0,772270,26692
 workerid_0303,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0303,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0303,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0304,70,strength,colors,weak,negative,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0304,39,loudness_n,motors,quiet,negative,sailboat,sailboats,medium,motors,0,498658,13564359
 workerid_0304,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0304,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0305,7,darkness,coats,light,positive,poodle,poodles,high,coats,0,255182,4107452
-workerid_0305,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0305,47,price,fruits,expensive,positive,boysenberries,boysenberries,high,fruits,0,12484,7957960
 workerid_0305,69,strength,people,weak,negative,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0305,55,size,fish,big,positive,shark,sharks,high,fish,0,3302971,52768568
-workerid_0306,88,width,banks,wide,positive,stream,streams,medium,banks,0,8883635,30584319
 workerid_0306,62,speed_f,highways,slow,negative,car,cars,medium,highways,0,109722086,5745573
 workerid_0306,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0307,40,loudness,instruments,quiet,negative,acoustic guitar,acoustic guitars,medium,instruments,0,549025,48493077
 workerid_0307,83,weight, fabrics,heavy,positive,silk,silks,low, fabrics,0,418180,NA
-workerid_0307,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0307,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0307,56,size,cars,big,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0308,29,loudness,places,loud,positive,rap concert,rap concerts,medium,places,0,1191,51698261
@@ -24546,11 +24534,9 @@ workerid_0310,77,temperature_h,food,cold,negative,muffin,muffins,medium,food,0,1
 workerid_0310,45,price,jewelry,cheap,negative,plastic,plastic bracelets,low,jewelry,0,3294,72582016
 workerid_0310,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0310,41,price,decor,cheap,negative,plastic,plastic statues,low,decor,0,707,12099181
-workerid_0311,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0313,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0313,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0313,21,length,dogs,long,positive,chihuahua,chihuahuas,low,dogs,0,164502,28409576
-workerid_0313,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0314,83,weight,objects,light,negative,cotton,cottons,medium,objects,0,214521,33848628
 workerid_0314,47,price,fruits,expensive,positive,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0315,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
@@ -24579,17 +24565,14 @@ workerid_0320,87,width,streets,wide,positive,downtown street,downtown streets,me
 workerid_0320,61,speed,cookware,slow,negative,instant pot,instant pot,high,cookware,0,354,3617598
 workerid_0321,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0321,13,hardness,materials,soft,negative,cotton,cottons,low,materials,0,214521,83903351
-workerid_0321,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0321,88,width,rivers,wide,positive,stream,streams,medium,rivers,0,8883635,11240148
 workerid_0321,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0322,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0323,86,width,forests,wide,positive,mouse den,mouse holes,low,forests,0,1789,8729753
 workerid_0324,22,length,pets,long,positive,mouse,mice,low,pets,0,11969407,26155002
 workerid_0324,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0324,33,loudness_n,parks,loud,positive,crow,crows,medium,parks,0,1295877,25975912
 workerid_0324,80,weight,electronic devices,light,negative,printer,printers,high,electronic devices,0,26823567,631257
 workerid_0324,47,price,fruits,cheap,negative,strawberries,strawberries,low,fruits,0,1437661,7957960
-workerid_0324,38,loudness,forests,loud,positive,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0324,41,price,decor,expensive,positive,platinum,platinum statue,high,decor,0,503,12099181
 workerid_0325,75,temperature_h,appliances,cold,negative,freezer,freezers,low,appliances,0,2253962,23847029
 workerid_0325,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
@@ -24627,7 +24610,6 @@ workerid_0338,70,strength,colors,weak,negative,watercolor,watercolors,low,colors
 workerid_0339,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0339,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0340,86,width,animal dens,wide,positive,mouse den,mouse holes,low,dens,0,1789,324
-workerid_0340,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0340,8,darkness,cats,dark,negative,panther,panthers,low,cats,0,3695915,15738388
 workerid_0341,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0342,13,hardness,fabrics,soft,negative,cotton,cottons,low,fabrics,0,214521,5153175
@@ -24644,7 +24626,6 @@ workerid_0344,14,hardness,furniture,hard,positive,pillow,pillows,low,furniture,0
 workerid_0344,90,width,houses,narrow,negative,back door,back doors,low,houses,0,70114,29896478
 workerid_0344,5,darkness,scripts,light,positive,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0344,6,darkness,bouquets,dark,negative,dahlia,dahlias,low,bouquets,0,135476,2237840
-workerid_0344,67,strength,boxes,weak,negative,adult,adults,high,boxes,0,32847475,25790443
 workerid_0345,30,loudness_n,buildings,quiet,negative,church,churches,low,buildings,0,13467005,27623285
 workerid_0345,83,weight, fabrics,light,negative,silk,silks,low, fabrics,0,418180,NA
 workerid_0345,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
@@ -24663,7 +24644,6 @@ workerid_0348,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0
 workerid_0348,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0348,38,loudness,places,quiet,negative,owl,owls,low,places,0,2208765,51698261
 workerid_0348,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0349,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0350,42,price,houses,expensive,positive,villa,villas,high,houses,0,9561875,29896478
 workerid_0350,71,strength,structures,strong,positive,condo,condos,medium,structures,0,5467369,25465400
 workerid_0350,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
@@ -24687,7 +24667,6 @@ workerid_0357,40,loudness,instruments,loud,positive,bass guitar,bass guitars,hig
 workerid_0358,90,width,doorways,narrow,negative,back door,back doors,low,doorways,0,70114,374115
 workerid_0358,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0359,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0359,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0359,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0360,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0360,66,speed_f,vehicles,fast,positive,helicopter,helicopters,medium,vehicles,0,2682275,37254742
@@ -24752,7 +24731,6 @@ workerid_0374,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,10
 workerid_0374,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0375,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0375,88,width,rivers,narrow,negative,creek,creeks,low,rivers,0,862386,11240148
-workerid_0375,9,hardness,fruits,soft,negative,cucumber,cucumbers,high,fruits,0,463636,7957960
 workerid_0375,62,speed_f,highways,slow,negative,car,cars,medium,highways,0,109722086,5745573
 workerid_0375,6,darkness,bouquets,light,positive,dahlia,dahlias,low,bouquets,0,135476,2237840
 workerid_0377,30,loudness_n,places,quiet,negative,church,churches,low,places,0,13467005,51698261
@@ -24789,7 +24767,6 @@ workerid_0388,19,height,people,tall,positive,golfer,golfers,medium,people,0,1664
 workerid_0388,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0389,90,width,doors,wide,positive,back door,back doors,low,doors,0,70114,20230179
 workerid_0390,10,hardness,candies,soft,negative,marshmallow,marshmallows,low,candies,0,301577,1298890
-workerid_0391,88,width,banks,narrow,negative,creek,creeks,low,banks,0,862386,30584319
 workerid_0392,71,strength,houses,strong,positive,mansion,mansions,high,houses,0,797050,29896478
 workerid_0393,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0393,13,hardness,fabrics,hard,positive,cotton,cottons,low,fabrics,0,214521,5153175
@@ -24799,15 +24776,12 @@ workerid_0393,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,
 workerid_0394,64,speed,animals,quick,positive,rabbit,rabbits,high,animals,0,2987957,58179731
 workerid_0394,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0,301577,180152837
 workerid_0394,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
-workerid_0395,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0396,41,price,decor,cheap,negative,platinum,platinum statue,high,decor,0,503,12099181
-workerid_0396,55,size,birds,small,negative,herring,herrings,low,birds,0,137142,19695831
 workerid_0396,36,loudness_n,towns,noisy,positive,village,villages,low,towns,0,6997181,13337599
 workerid_0396,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,food,0,1783,180152837
 workerid_0396,45,price,bracelets,expensive,positive,plastic,plastic bracelets,low,bracelets,0,3294,6784458
 workerid_0397,20,height,trees,tall,positive,alpine tree,alpine trees,medium,trees,0,1447,27379426
 workerid_0397,8,darkness,animals,dark,negative,panther,panthers,low,animals,0,3695915,58179731
-workerid_0397,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0397,86,width,animal dens,wide,positive,fox den,fox dens,medium,dens,0,1610,324
 workerid_0397,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0397,33,loudness_n,birds,loud,positive,rooster,roosters,high,birds,0,328337,19695831
@@ -24840,7 +24814,6 @@ workerid_0406,14,hardness,surfaces,hard,positive,blanket,blankets,medium,surface
 workerid_0406,65,speed,walkers,quick,positive,adult,adults,high,walkers,0,32847475,1526422
 workerid_0407,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0407,70,strength,colors,weak,negative,watercolor,watercolors,low,colors,0,567707,27913613
-workerid_0407,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0407,70,strength,colors,weak,negative,wall paint,wall paints,medium,colors,0,3469,27913613
 workerid_0408,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0408,66,speed_f,aircrafts,fast,positive,glider,gliders,low,aircrafts,0,653558,237522
@@ -24851,20 +24824,15 @@ workerid_0408,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,c
 workerid_0408,40,loudness,music,quiet,negative,bass guitar,bass guitars,high,music,0,445282,414072994
 workerid_0409,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0410,69,strength,weightlifters,weak,negative,wrestler,wrestlers,high,weightlifters,0,772270,26692
-workerid_0410,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0410,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0410,69,strength,weightlifters,strong,positive,wrestler,wrestlers,high,weightlifters,0,772270,26692
 workerid_0410,38,loudness,places,quiet,negative,woodpecker,woodpeckers,medium,places,0,219083,51698261
 workerid_0410,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0410,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0410,88,width,banks,wide,positive,stream,streams,medium,banks,0,8883635,30584319
 workerid_0412,10,hardness,candies,soft,negative,jolly rancher,jollies,high,candies,0,40797,1298890
 workerid_0412,70,strength,paints,weak,negative,wall paint,wall paints,medium,paints,0,3469,3617496
 workerid_0413,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0413,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0413,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0413,33,loudness_n,parks,loud,positive,finch,finches,low,parks,0,280095,25975912
-workerid_0413,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0413,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0413,31,loudness_n,places,loud,positive,fish,fish,low,places,0,52768568,51698261
 workerid_0413,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
@@ -24875,11 +24843,9 @@ workerid_0415,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,10
 workerid_0415,30,loudness_n,places,quiet,negative,church,churches,low,places,0,13467005,51698261
 workerid_0415,48,price,food,expensive,positive,steak,steaks,high,food,0,1646745,180152837
 workerid_0415,5,darkness,scripts,light,positive,pen,pens,medium,scripts,0,5794539,17337654
-workerid_0415,90,width, furnitures,wide,positive,back door,back doors,low, furnitures,0,70114,NA
 workerid_0415,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0415,76,temperature_h,venues,cold,negative,ice rink,ice rinks,low,venues,0,65504,9389442
 workerid_0416,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
-workerid_0416,55,size,birds,big,positive,herring,herrings,low,birds,0,137142,19695831
 workerid_0416,61,speed,stoves,slow,negative,frying pan,frying pans,medium,stoves,0,71800,2147560
 workerid_0417,45,price,jewelry,expensive,positive,metal,metal bracelets,medium,jewelry,0,5274,72582016
 workerid_0417,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
@@ -24892,27 +24858,22 @@ workerid_0421,47,price,fruits,expensive,positive,strawberries,strawberries,low,f
 workerid_0421,14,hardness,furniture,soft,negative,pillow,pillows,low,furniture,0,3970202,67400151
 workerid_0421,75,temperature_h,locations,cold,negative,pantry,pantries,medium,locations,0,105460,58471896
 workerid_0422,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,807181,2237840
-workerid_0422,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0423,83,weight, woods,light,negative,wool,wool,high, woods,0,7657323,NA
 workerid_0423,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
 workerid_0424,62,speed_f,highways,slow,negative,car,cars,medium,highways,0,109722086,5745573
 workerid_0424,4,darkness,evenings,light,positive,dusk,dusks,medium,evenings,0,3542,3008865
 workerid_0425,88,width,waterways,wide,positive,stream,streams,medium,waterways,0,8883635,1843915
 workerid_0425,37,loudness_n,vehicles,quiet,negative,car,cars,medium,vehicles,0,109722086,37254742
-workerid_0425,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0427,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0427,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0428,74,temperature,weather,cold,negative,winter,winter days,low,weather,0,80466,103332440
-workerid_0428,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0428,5,darkness,scripts,light,positive,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0429,81,weight,objects,heavy,positive,chair,chairs,medium,objects,0,15833441,33848628
 workerid_0429,30,loudness_n,buildings,quiet,negative,church,churches,low,buildings,0,13467005,27623285
 workerid_0429,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
 workerid_0429,42,price,houses,cheap,negative,villa,villas,high,houses,0,9561875,29896478
 workerid_0429,9,hardness,vegetables,soft,negative,mushroom,mushrooms,low,vegetables,0,3134851,9067552
-workerid_0431,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0431,31,loudness_n,places,quiet,negative,cat,cats,medium,places,0,15738388,51698261
-workerid_0431,67,strength,boxes,strong,positive,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0431,14,hardness,bedboards,hard,positive,blanket,blankets,medium,bedboards,0,4386506,2487
 workerid_0431,31,loudness_n,birds,loud,positive,parrot,parrots,high,birds,0,1049654,19695831
 workerid_0431,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
@@ -24920,7 +24881,6 @@ workerid_0431,89,width,streets,narrow,negative,boulevard,boulevards,high,streets
 workerid_0432,73,temperature_h,liquids,hot,positive,coffee,coffee,high,liquids,0,42090859,2327187
 workerid_0432,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0432,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
-workerid_0433,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0433,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0434,69,strength,people,strong,positive,cyclist,cyclists,medium,people,0,1228897,480323270
 workerid_0434,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
@@ -25032,12 +24992,9 @@ workerid_0463,41,price,decor,expensive,positive,plastic,plastic statues,low,deco
 workerid_0466,82,weight,objects,light,negative,feather,feathers,low,objects,0,2297128,33848628
 workerid_0466,64,speed,animals,slow,negative,rabbit,rabbits,high,animals,0,2987957,58179731
 workerid_0466,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
-workerid_0467,67,strength,boxes,strong,positive,adult,adults,high,boxes,0,32847475,25790443
 workerid_0467,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0467,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
 workerid_0468,3,darkness,cakes,light,positive,cheesecake,cheesecakes,high,cakes,0,267986,5565768
-workerid_0468,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
-workerid_0468,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0468,4,darkness,times of day,light,positive,dusk,dusks,medium,times of day,0,3542,99907
 workerid_0469,25,length,movies,long,positive,documentary,documentaries,medium,movies,0,1741319,182764607
 workerid_0469,41,price,decor,expensive,positive,plastic,plastic statues,low,decor,0,707,12099181
@@ -25060,7 +25017,6 @@ workerid_0475,70,strength,colors,weak,negative,watercolor,watercolors,low,colors
 workerid_0475,31,loudness_n,animals,quiet,negative,fish,fish,low,animals,0,52768568,58179731
 workerid_0475,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0476,70,strength,colors,strong,positive,watercolor,watercolors,low,colors,0,567707,27913613
-workerid_0476,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0476,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0477,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0477,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
@@ -25078,7 +25034,6 @@ workerid_0478,34,loudness_n,music,quiet,negative,guitar,guitars,medium,music,0,7
 workerid_0478,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0478,33,loudness_n,animals,loud,positive,rooster,roosters,high,animals,0,328337,58179731
 workerid_0479,30,loudness_n,areas,noisy,positive,conference center,conference centers,medium,areas,0,227905,121988686
-workerid_0479,88,width,banks,narrow,negative,river,rivers,high,banks,0,11240148,30584319
 workerid_0479,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,food,0,1783,180152837
 workerid_0480,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0480,30,loudness_n,places,noisy,positive,conference center,conference centers,medium,places,0,227905,51698261
@@ -25109,7 +25064,6 @@ workerid_0486,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722
 workerid_0487,59,speed,people,slow,negative,jogger,joggers,medium,people,0,260504,480323270
 workerid_0487,68,strength,storms,strong,positive,thunderstorm,thunderstorms,medium,storms,0,1410569,3614108
 workerid_0487,30,loudness_n,places,quiet,negative,church,churches,low,places,0,13467005,51698261
-workerid_0487,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0488,74,temperature,days,warm,positive,winter,winter days,low,days,0,80466,305158140
 workerid_0490,77,temperature_h,food,hot,positive,muffin,muffins,medium,food,0,1333924,180152837
 workerid_0490,30,loudness_n,rooms,noisy,positive,conference center,conference centers,medium,rooms,0,227905,65454304
@@ -25147,7 +25101,6 @@ workerid_0497,38,loudness,birds,loud,positive,mockingbird,mockingbirds,high,bird
 workerid_0497,71,strength,walls,weak,negative,tent,tents,low,walls,0,3850460,14838230
 workerid_0497,6,darkness,flowers,light,positive,daisy,daisies,high,flowers,0,807181,58380229
 workerid_0497,9,hardness,vegetables,soft,negative,mushroom,mushrooms,low,vegetables,0,3134851,9067552
-workerid_0499,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0499,10,hardness,food,soft,negative,marshmallow,marshmallows,low,food,0,301577,180152837
 workerid_0499,3,darkness,desserts,light,positive,cheesecake,cheesecakes,high,desserts,0,267986,3720781
 workerid_0499,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
@@ -25174,15 +25127,12 @@ workerid_0504,74,temperature,days,cold,negative,summer,summer days,high,days,0,2
 workerid_0504,78,weight,animals,heavy,positive,fish,fish,low,animals,0,52768568,58179731
 workerid_0504,8,darkness,cats,light,positive,jaguar,jaguars,high,cats,0,1285032,15738388
 workerid_0505,50,price,food,cheap,negative,Korean restaurant,korean restaurants,medium,food,0,37242,180152837
-workerid_0505,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0505,90,width,doors,wide,positive,back door,back doors,low,doors,0,70114,20230179
 workerid_0505,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0506,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0506,32,loudness_n,places,quiet,negative,library,libraries,low,places,0,28105939,51698261
 workerid_0506,40,loudness,instruments,loud,positive,acoustic guitar,acoustic guitars,medium,instruments,0,549025,48493077
-workerid_0507,67,strength,boxes,weak,negative,child,children,low,boxes,0,206543771,25790443
 workerid_0507,7,darkness,coats,dark,negative,poodle,poodles,high,coats,0,255182,4107452
-workerid_0507,88,width,banks,narrow,negative,creek,creeks,low,banks,0,862386,30584319
 workerid_0507,55,size,fish,small,negative,tuna,tuna,medium,fish,0,2844261,52768568
 workerid_0509,46,price,clothes,expensive,positive,coat,coats,medium,clothes,0,4107452,27039649
 workerid_0509,38,loudness,places,loud,positive,mockingbird,mockingbirds,high,places,0,39837,51698261
@@ -25221,11 +25171,8 @@ workerid_0519,90,width,houses,wide,positive,back door,back doors,low,houses,0,70
 workerid_0519,86,width,forests,narrow,negative,mouse den,mouse holes,low,forests,0,1789,8729753
 workerid_0521,47,price,berries,cheap,negative,raspberries,raspberries,medium,berries,0,543159,1879643
 workerid_0521,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
-workerid_0521,67,strength,boxes,weak,negative,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0521,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
 workerid_0522,51,size,plants,big,positive,tree,trees,high,plants,0,27379426,35939932
-workerid_0522,67,strength,boxes,strong,positive,teenager,teenagers,medium,boxes,0,4979216,25790443
-workerid_0522,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0522,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0523,74,temperature,days,warm,positive,fall,fall days,medium,days,0,12564,305158140
 workerid_0523,5,darkness,scripts,dark,negative,pencil,pencils,low,scripts,0,2459655,17337654
@@ -25239,20 +25186,17 @@ workerid_0526,77,temperature_h,food,hot,positive,muffin,muffins,medium,food,0,13
 workerid_0526,53,size,insects,small,negative,moth,moths,medium,insects,0,804700,5119814
 workerid_0526,3,darkness,cakes,dark,negative,cheesecake,cheesecakes,high,cakes,0,267986,5565768
 workerid_0526,85,weight,fruits,light,negative,plum,plums,low,fruits,0,496751,7957960
-workerid_0528,67,strength,boxes,strong,positive,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0528,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0528,6,darkness,bouquets,light,positive,dahlia,dahlias,low,bouquets,0,135476,2237840
 workerid_0528,31,loudness_n,birds,loud,positive,parrot,parrots,high,birds,0,1049654,19695831
 workerid_0528,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0528,39,loudness_n,motors,quiet,negative,rowboat,rowboats,low,motors,0,42015,13564359
 workerid_0529,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,food,0,1783,180152837
-workerid_0529,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0529,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0532,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0532,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0532,44,price,spices,expensive,positive,garlic,garlic,medium,spices,0,5884664,2836609
 workerid_0532,75,temperature_h,objects,warm,positive,oven,ovens,high,objects,0,3443150,33848628
-workerid_0532,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0532,39,loudness_n,boats,loud,positive,sailboat,sailboats,medium,boats,0,498658,15603129
 workerid_0532,71,strength,buildings,weak,negative,condo,condos,medium,buildings,0,5467369,27623285
 workerid_0533,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
@@ -25287,7 +25231,6 @@ workerid_0539,13,hardness,fabrics,hard,positive,cotton,cottons,low,fabrics,0,214
 workerid_0539,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0539,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0539,47,price,fruits,expensive,positive,raspberries,raspberries,medium,fruits,0,543159,7957960
-workerid_0540,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0540,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0540,49,price,alcoholic drinks,expensive,positive,bottle of wine,wine bottles,medium,alcoholic drinks,0,127578,377118
 workerid_0540,5,darkness,scripts,dark,negative,pencil,pencils,low,scripts,0,2459655,17337654
@@ -25311,13 +25254,11 @@ workerid_0544,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fond
 workerid_0544,69,strength,weightlifters,weak,negative,cyclist,cyclists,medium,weightlifters,0,1228897,26692
 workerid_0545,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
 workerid_0545,30,loudness_n,rooms,quiet,negative,conference center,conference centers,medium,rooms,0,227905,65454304
-workerid_0546,88,width,banks,narrow,negative,creek,creeks,low,banks,0,862386,30584319
 workerid_0548,29,loudness,music,quiet,negative,choral concert,choirs,low,music,0,680332,414072994
 workerid_0548,88,width,rivers,narrow,negative,stream,streams,medium,rivers,0,8883635,11240148
 workerid_0548,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0548,5,darkness,scripts,dark,negative,pen,pens,medium,scripts,0,5794539,17337654
 workerid_0550,69,strength,people,strong,positive,wrestler,wrestlers,high,people,0,772270,480323270
-workerid_0550,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0550,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
 workerid_0551,62,speed_f,traffic,slow,negative,truck,trucks,low,traffic,0,13809070,57242495
 workerid_0551,29,loudness,music,loud,positive,rock concert,rock concerts,high,music,0,67033,414072994
@@ -25329,7 +25270,6 @@ workerid_0551,36,loudness_n,towns,noisy,positive,village,villages,low,towns,0,69
 workerid_0551,80,weight,objects,heavy,positive,laptop,laptops,medium,objects,0,22190037,33848628
 workerid_0551,69,strength,people,weak,negative,cyclist,cyclists,medium,people,0,1228897,480323270
 workerid_0552,24,length,trucks,short,negative,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0552,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0552,6,darkness,bouquets,light,positive,rose,roses,medium,bouquets,0,13588663,2237840
 workerid_0552,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0552,30,loudness_n,venues,noisy,positive,conference center,conference centers,medium,venues,0,227905,9389442
@@ -25338,7 +25278,6 @@ workerid_0552,48,price,food,expensive,positive,chicken,chicken,medium,food,0,206
 workerid_0553,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0553,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0555,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
-workerid_0556,55,size,birds,small,negative,herring,herrings,low,birds,0,137142,19695831
 workerid_0557,80,weight,objects,heavy,positive,printer,printers,high,objects,0,26823567,33848628
 workerid_0557,5,darkness,scripts,light,positive,pen,pens,medium,scripts,0,5794539,17337654
 workerid_0557,61,speed,cookware,quick,positive,instant pot,instant pot,high,cookware,0,354,3617598
@@ -25351,7 +25290,6 @@ workerid_0558,69,strength,weightlifters,weak,negative,golfer,golfers,low,weightl
 workerid_0558,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0559,5,darkness,writing utensils,light,positive,pen,pens,medium,writing utensils,0,5794539,12576
 workerid_0560,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,109722086
-workerid_0562,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0562,74,temperature,days,warm,positive,fall,fall days,medium,days,0,12564,305158140
 workerid_0562,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
 workerid_0563,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
@@ -25402,7 +25340,6 @@ workerid_0578,81,weight,objects,light,negative,trash can,trash cans,low,objects,
 workerid_0578,66,speed_f,aircrafts,fast,positive,helicopter,helicopters,medium,aircrafts,0,2682275,237522
 workerid_0578,2,darkness,paints,light,positive,black paint,black paints,low,paints,0,820,3617496
 workerid_0579,5,darkness,scripts,dark,negative,pen,pens,medium,scripts,0,5794539,17337654
-workerid_0579,88,width,banks,narrow,negative,creek,creeks,low,banks,0,862386,30584319
 workerid_0579,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0580,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0580,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
@@ -25418,7 +25355,6 @@ workerid_0581,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instrum
 workerid_0582,90,width,doors,wide,positive,back door,back doors,low,doors,0,70114,20230179
 workerid_0582,64,speed,pets,slow,negative,turtle,turtles,low,pets,0,2572647,26155002
 workerid_0583,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
-workerid_0584,90,width,furniture,narrow,negative,back door,back doors,low,furniture,0,70114,67400151
 workerid_0586,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0586,83,weight,fabrics,heavy,positive,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0586,32,loudness_n,places,quiet,negative,library,libraries,low,places,0,28105939,51698261
@@ -25438,14 +25374,12 @@ workerid_0588,87,width,streets,wide,positive,downtown street,downtown streets,me
 workerid_0588,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0589,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
 workerid_0589,5,darkness,scripts,light,positive,pencil,pencils,low,scripts,0,2459655,17337654
-workerid_0589,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0590,73,temperature_h,liquids,cold,negative,juice,juices,medium,liquids,0,1709952,2327187
 workerid_0590,5,darkness,papers,light,positive,pencil,pencils,low,papers,0,2459655,51025238
 workerid_0590,27,length,rallies,short,negative,sprinting race,sprints,low,races,0,444674,1276149
 workerid_0591,56,size,cars,big,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0591,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0591,38,loudness,animals,loud,positive,owl,owls,low,animals,0,2208765,58179731
-workerid_0592,38,loudness,birds,loud,positive,owl,owls,low,birds,0,2208765,19695831
 workerid_0592,79,weight,objects,heavy,positive,kid,kids,medium,objects,0,96621142,33848628
 workerid_0592,47,price,fruits,expensive,positive,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0592,55,size,fish,big,positive,shark,sharks,high,fish,0,3302971,52768568
@@ -25461,7 +25395,6 @@ workerid_0595,26,length,streets,long,positive,alley,alleys,low,streets,0,546265,
 workerid_0595,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,807181,2237840
 workerid_0595,13,hardness,things,soft,negative,cotton,cottons,low,things,0,214521,147983507
 workerid_0595,42,price,houses,cheap,negative,villa,villas,high,houses,0,9561875,29896478
-workerid_0595,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0595,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0596,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0596,30,loudness_n,areas,quiet,negative,conference center,conference centers,medium,areas,0,227905,121988686
@@ -25470,7 +25403,6 @@ workerid_0598,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,1097
 workerid_0598,41,price,decor,expensive,positive,platinum,platinum statue,high,decor,0,503,12099181
 workerid_0598,19,height,people,tall,positive,basketball player,basketball players,high,people,0,174833,480323270
 workerid_0598,45,price,jewelry,expensive,positive,plastic,plastic bracelets,low,jewelry,0,3294,72582016
-workerid_0599,67,strength,boxes,weak,negative,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0599,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
 workerid_0599,42,price,houses,expensive,positive,villa,villas,high,houses,0,9561875,29896478
 workerid_0599,39,loudness_n,lakes,quiet,negative,rowboat,rowboats,low,lakes,0,42015,14947783
@@ -25479,7 +25411,6 @@ workerid_0599,40,loudness,instruments,loud,positive,acoustic guitar,acoustic gui
 workerid_0599,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0603,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0603,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
-workerid_0603,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0604,41,price,decor,cheap,negative,bronze,bronze statues,medium,decor,0,53960,12099181
 workerid_0604,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0605,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
@@ -25496,7 +25427,6 @@ workerid_0608,33,loudness_n,bird sounds,loud,positive,crow,crows,medium,bird sou
 workerid_0609,70,strength,colors,strong,positive,wall paint,wall paints,medium,colors,0,3469,27913613
 workerid_0609,40,loudness,string instruments,loud,positive,ukelele,ukeleles,low,string instruments,0,11454,123928
 workerid_0609,52,size,animals,big,positive,mouse,mice,low,animals,0,11969407,58179731
-workerid_0609,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0609,75,temperature_h,rooms,warm,positive,pantry,pantries,medium,rooms,0,105460,65454304
 workerid_0609,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0609,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
@@ -25505,7 +25435,6 @@ workerid_0610,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instrum
 workerid_0610,70,strength,colors,strong,positive,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0610,37,loudness_n,machines,quiet,negative,tractor,tractors,high,machines,0,2141187,37791829
 workerid_0610,75,temperature_h,rooms,cold,negative,pantry,pantries,medium,rooms,0,105460,65454304
-workerid_0610,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0611,22,length,animals,short,negative,mouse,mice,low,animals,0,11969407,58179731
 workerid_0611,32,loudness_n,places,noisy,positive,concert,concerts,high,places,0,8711738,51698261
 workerid_0611,75,temperature_h,locations,warm,positive,oven,ovens,high,locations,0,3443150,58471896
@@ -25526,9 +25455,7 @@ workerid_0614,74,temperature,days,warm,positive,winter,winter days,low,days,0,80
 workerid_0614,7,darkness,dogs,dark,negative,spaniel,spaniels,medium,dogs,0,195570,28409576
 workerid_0614,4,darkness,evenings,light,positive,dusk,dusks,medium,evenings,0,3542,3008865
 workerid_0614,38,loudness,places,quiet,negative,woodpecker,woodpeckers,medium,places,0,219083,51698261
-workerid_0615,67,strength,boxes,weak,negative,adult,adults,high,boxes,0,32847475,25790443
 workerid_0615,75,temperature_h,kitchens,cold,negative,pantry,pantries,medium,kitchens,0,105460,2897588
-workerid_0615,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0616,37,loudness_n,vehicles,quiet,negative,car,cars,medium,vehicles,0,109722086,37254742
 workerid_0616,90,width,doors,narrow,negative,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0617,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,109722086
@@ -25536,7 +25463,6 @@ workerid_0617,62,speed_f,traffic,fast,positive,car,cars,medium,traffic,0,1097220
 workerid_0617,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0617,15,height,birds,tall,positive,penguin,penguins,low,birds,0,2550463,19695831
 workerid_0618,40,loudness,music,loud,positive,ukelele,ukeleles,low,music,0,11454,414072994
-workerid_0618,67,strength,boxes,strong,positive,adult,adults,high,boxes,0,32847475,25790443
 workerid_0619,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
 workerid_0619,63,speed_f,boats,slow,negative,sailboat,sailboats,medium,boats,0,498658,15603129
 workerid_0619,86,width,habitats,narrow,negative,mouse den,mouse holes,low,habitats,0,1789,3505167
@@ -25561,7 +25487,6 @@ workerid_0623,75,temperature_h,places,warm,positive,freezer,freezers,low,places,
 workerid_0623,74,temperature,days,warm,positive,fall,fall days,medium,days,0,12564,305158140
 workerid_0623,55,size,animals,small,negative,shark,sharks,high,animals,0,3302971,58179731
 workerid_0624,30,loudness_n,places,noisy,positive,church,churches,low,places,0,13467005,51698261
-workerid_0624,90,width, furnitures,wide,positive,patio door,patio doors,medium, furnitures,0,222702,NA
 workerid_0626,30,loudness_n,places,noisy,positive,party,parties,high,places,0,52799939,51698261
 workerid_0626,5,darkness,scripts,dark,negative,piece of chalk,chalks,high,scripts,0,134762,17337654
 workerid_0626,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
@@ -25583,7 +25508,6 @@ workerid_0630,22,length,rodents,long,positive,mouse,mice,low,rodents,0,11969407,
 workerid_0630,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
 workerid_0630,34,loudness_n,music,loud,positive,guitar,guitars,medium,music,0,7278585,414072994
 workerid_0630,75,temperature_h,rooms,warm,positive,pantry,pantries,medium,rooms,0,105460,65454304
-workerid_0631,90,width, furnitures,wide,positive,patio door,patio doors,medium, furnitures,0,222702,NA
 workerid_0631,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0631,14,hardness,furniture,hard,positive,bedboard,bedboards,high,furniture,0,2487,67400151
 workerid_0634,31,loudness_n,birds,loud,positive,parrot,parrots,high,birds,0,1049654,19695831
@@ -25619,7 +25543,6 @@ workerid_0639,53,size,insects,small,negative,moth,moths,medium,insects,0,804700,
 workerid_0639,29,loudness,music,loud,positive,rock concert,rock concerts,high,music,0,67033,414072994
 workerid_0639,68,strength,storms,strong,positive,hurricane,hurricanes,high,storms,0,3785008,3614108
 workerid_0639,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
-workerid_0640,90,width,furniture,wide,positive,back door,back doors,low,furniture,0,70114,67400151
 workerid_0640,9,hardness,vegetables,soft,negative,mushroom,mushrooms,low,vegetables,0,3134851,9067552
 workerid_0640,75,temperature_h,areas,warm,positive,pantry,pantries,medium,areas,0,105460,121988686
 workerid_0640,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
@@ -25655,7 +25578,6 @@ workerid_0645,74,temperature,days,cold,negative,fall,fall days,medium,days,0,125
 workerid_0646,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0646,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0646,90,width,doorways,narrow,negative,back door,back doors,low,doorways,0,70114,374115
-workerid_0647,67,strength,boxes,weak,negative,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0649,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0649,69,strength,athletes,strong,positive,wrestler,wrestlers,high,athletes,0,772270,7268360
 workerid_0649,77,temperature_h,food,hot,positive,muffin,muffins,medium,food,0,1333924,180152837
@@ -25666,7 +25588,6 @@ workerid_0650,6,darkness,bouquets,light,positive,daisy,daisies,high,bouquets,0,8
 workerid_0650,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0650,7,darkness,dogs,light,positive,pitbull,pitbulls,low,dogs,0,100803,28409576
 workerid_0650,67,strength,people,weak,negative,adult,adults,high,people,0,32847475,480323270
-workerid_0651,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0651,39,loudness_n,lakes,quiet,negative,sailboat,sailboats,medium,lakes,0,498658,14947783
 workerid_0651,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0651,75,temperature_h,kitchens,warm,positive,pantry,pantries,medium,kitchens,0,105460,2897588
@@ -25702,7 +25623,6 @@ workerid_0663,39,loudness_n,boats,quiet,negative,rowboat,rowboats,low,boats,0,42
 workerid_0663,73,temperature_h,drinks,hot,positive,milkshake,milkshakes,low,drinks,0,99722,11137329
 workerid_0663,32,loudness_n,places,noisy,positive,library,libraries,low,places,0,28105939,51698261
 workerid_0663,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
-workerid_0663,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0663,31,loudness_n,animals,loud,positive,cat,cats,medium,animals,0,15738388,58179731
 workerid_0663,22,length,animals,short,negative,mouse,mice,low,animals,0,11969407,58179731
 workerid_0663,33,loudness_n,places,quiet,negative,crow,crows,medium,places,0,1295877,51698261
@@ -25740,7 +25660,6 @@ workerid_0672,77,temperature_h,desserts,cold,negative,smoothie,smoothies,low,des
 workerid_0672,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0672,76,temperature_h,venues,cold,negative,ice rink,ice rinks,low,venues,0,65504,9389442
 workerid_0674,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
-workerid_0674,38,loudness,birds,quiet,negative,owl,owls,low,birds,0,2208765,19695831
 workerid_0675,79,weight,people,light,negative,baby,babies,low,people,0,13073168,480323270
 workerid_0675,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0675,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
@@ -25782,7 +25701,6 @@ workerid_0684,61,speed,cookware,quick,positive,crockpot,crockpots,low,cookware,0
 workerid_0684,75,temperature_h,kitchens,warm,positive,pantry,pantries,medium,kitchens,0,105460,2897588
 workerid_0685,62,speed_f,roads,slow,negative,car,cars,medium,roads,0,109722086,15093824
 workerid_0685,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
-workerid_0685,26,length,maps,short,negative,street,streets,medium,maps,0,15936688,63957725
 workerid_0686,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0686,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0686,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
@@ -25815,7 +25733,6 @@ workerid_0696,90,width,houses,wide,positive,front gate,front gates,high,houses,0
 workerid_0696,11,hardness,rooms,hard,positive,carpet,carpet floors,low,rooms,0,38431,65454304
 workerid_0696,11,hardness,rooms,hard,positive,tile,tile floors,high,rooms,0,123821,65454304
 workerid_0696,90,width,houses,narrow,negative,patio door,patio doors,medium,houses,0,222702,29896478
-workerid_0696,67,strength,boxes,strong,positive,child,children,low,boxes,0,206543771,25790443
 workerid_0698,32,loudness_n,locations,noisy,positive,library,libraries,low,locations,0,28105939,58471896
 workerid_0698,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0698,30,loudness_n,locations,noisy,positive,party,parties,high,locations,0,52799939,58471896
@@ -25834,7 +25751,6 @@ workerid_0700,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instrum
 workerid_0700,22,length,animals,short,negative,hamster,hamsters,medium,animals,0,633540,58179731
 workerid_0700,10,hardness,food,soft,negative,piece of chocolate,chocolates,medium,food,0,3141854,180152837
 workerid_0700,31,loudness_n,birds,quiet,negative,parrot,parrots,high,birds,0,1049654,19695831
-workerid_0700,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0701,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0701,75,temperature_h,locations,cold,negative,freezer,freezers,low,locations,0,2253962,58471896
 workerid_0701,31,loudness_n,animals,quiet,negative,fish,fish,low,animals,0,52768568,58179731
@@ -25844,13 +25760,11 @@ workerid_0701,32,loudness_n,places,noisy,positive,concert,concerts,high,places,0
 workerid_0702,6,darkness,bouquets,dark,negative,daisy,daisies,high,bouquets,0,807181,2237840
 workerid_0702,40,loudness,music,loud,positive,ukelele,ukeleles,low,music,0,11454,414072994
 workerid_0702,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
-workerid_0702,67,strength,boxes,weak,negative,teenager,teenagers,medium,boxes,0,4979216,25790443
 workerid_0702,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
 workerid_0702,2,darkness,paints,light,positive,white paint,white paints,high,paints,0,1447,3617496
 workerid_0703,32,loudness_n,places,noisy,positive,concert,concerts,high,places,0,8711738,51698261
 workerid_0704,6,darkness,bouquets,light,positive,dahlia,dahlias,low,bouquets,0,135476,2237840
 workerid_0704,70,strength,paintings,weak,negative,wall paint,wall paints,medium,paintings,0,3469,10907227
-workerid_0704,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0704,7,darkness,coats,dark,negative,poodle,poodles,high,coats,0,255182,4107452
 workerid_0705,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0705,75,temperature_h,areas,cold,negative,pantry,pantries,medium,areas,0,105460,121988686
@@ -25899,13 +25813,10 @@ workerid_0715,25,length,movies,short,negative,documentary,documentaries,medium,m
 workerid_0715,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0716,70,strength,colors,strong,positive,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0716,37,loudness_n,cars,quiet,negative,electric car,electric cars,low,cars,0,171936,109722086
-workerid_0717,38,loudness,forests,quiet,negative,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0717,82,weight,objects,light,negative,feather,feathers,low,objects,0,2297128,33848628
 workerid_0717,37,loudness_n,streets,quiet,negative,car,cars,medium,streets,0,109722086,15936688
 workerid_0717,28,length,songs,long,positive,opera,operas,high,songs,0,812910,49286341
-workerid_0717,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0717,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0717,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0718,30,loudness_n,rooms,quiet,negative,conference center,conference centers,medium,rooms,0,227905,65454304
 workerid_0718,87,width,streets,narrow,negative,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0718,90,width,gates,wide,positive,front gate,front gates,high,gates,0,16932,NA
@@ -25922,14 +25833,12 @@ workerid_0720,55,size,fish,small,negative,shark,sharks,high,fish,0,3302971,52768
 workerid_0720,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0721,77,temperature_h,food,cold,negative,muffin,muffins,medium,food,0,1333924,180152837
 workerid_0721,90,width,doors,narrow,negative,back door,back doors,low,doors,0,70114,20230179
-workerid_0721,67,strength,boxes,weak,negative,child,children,low,boxes,0,206543771,25790443
 workerid_0721,26,length,distances,short,negative,highway,highways,high,distances,0,5745573,5296572
 workerid_0721,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0721,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0721,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0722,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0722,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
-workerid_0722,38,loudness,forests,loud,positive,woodpecker,woodpeckers,medium,forests,0,219083,8729753
 workerid_0723,77,temperature_h,desserts,hot,positive,smoothie,smoothies,low,desserts,0,457222,3720781
 workerid_0723,40,loudness,instruments,quiet,negative,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0723,55,size,animals,small,negative,herring,herrings,low,animals,0,137142,58179731
@@ -25944,7 +25853,6 @@ workerid_0725,24,length,cars,short,negative,smartcar,smartcars,low,cars,0,1843,1
 workerid_0725,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0725,30,loudness_n,buildings,noisy,positive,church,churches,low,buildings,0,13467005,27623285
 workerid_0725,90,width,doors,wide,positive,patio door,patio doors,medium,doors,0,222702,20230179
-workerid_0726,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0726,77,temperature_h,food,hot,positive,chocolate fondue,chocolate fondues,high,food,0,1783,180152837
 workerid_0726,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0726,38,loudness,places,quiet,negative,mockingbird,mockingbirds,high,places,0,39837,51698261
@@ -25964,7 +25872,6 @@ workerid_0731,41,price,materials,cheap,negative,platinum,platinum statue,high,ma
 workerid_0731,89,width,streets,narrow,negative,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0731,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0731,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
-workerid_0731,26,length,maps,long,positive,alley,alleys,low,maps,0,546265,63957725
 workerid_0732,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
 workerid_0732,24,length,cars,long,positive,limousine,limousines,high,cars,0,15896227,109722086
 workerid_0732,41,price,statues,expensive,positive,platinum,platinum statue,high,statues,0,503,2837498
@@ -25973,7 +25880,6 @@ workerid_0732,89,width,streets,narrow,negative,boulevard,boulevards,high,streets
 workerid_0732,20,height,plants,short,negative,bonsai tree,bonsai trees,low,plants,0,154424,35939932
 workerid_0732,83,weight,fabrics,light,negative,wool,wool,high,fabrics,0,7657323,5153175
 workerid_0734,32,loudness_n,places,noisy,positive,library,libraries,low,places,0,28105939,51698261
-workerid_0734,38,loudness,forests,quiet,negative,owl,owls,low,forests,0,2208765,8729753
 workerid_0734,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0735,75,temperature_h,locations,warm,positive,oven,ovens,high,locations,0,3443150,58471896
 workerid_0735,83,weight,fabrics,heavy,positive,cotton,cottons,medium,fabrics,0,214521,5153175
@@ -25988,7 +25894,6 @@ workerid_0738,76,temperature_h,locations,cold,negative,shopping mall,shopping ma
 workerid_0740,2,darkness,paints,dark,negative,blue paint,blue paints,medium,paints,0,543,3617496
 workerid_0740,44,price,food,expensive,positive,garlic,garlic,medium,food,0,5884664,180152837
 workerid_0740,40,loudness,instruments,loud,positive,acoustic guitar,acoustic guitars,medium,instruments,0,549025,48493077
-workerid_0740,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0740,40,loudness,instruments,loud,positive,bass guitar,bass guitars,high,instruments,0,445282,48493077
 workerid_0740,31,loudness_n,animals,loud,positive,parrot,parrots,high,animals,0,1049654,58179731
 workerid_0740,26,length,streets,short,negative,alley,alleys,low,streets,0,546265,15936688
@@ -26026,7 +25931,6 @@ workerid_0745,39,loudness_n,boats,quiet,negative,rowboat,rowboats,low,boats,0,42
 workerid_0745,24,length,cars,long,positive,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0745,32,loudness_n,venues,quiet,negative,library,libraries,low,venues,0,28105939,9389442
 workerid_0745,62,speed_f,highways,slow,negative,car,cars,medium,highways,0,109722086,5745573
-workerid_0746,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0746,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0746,74,temperature,days,cold,negative,winter,winter days,low,days,0,80466,305158140
 workerid_0746,36,loudness_n,areas,noisy,positive,village,villages,low,areas,0,6997181,121988686
@@ -26037,7 +25941,6 @@ workerid_0746,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5
 workerid_0746,38,loudness,areas,quiet,negative,mockingbird,mockingbirds,high,areas,0,39837,121988686
 workerid_0746,10,hardness,food,soft,negative,jolly rancher,jollies,high,food,0,40797,180152837
 workerid_0746,30,loudness_n,places,quiet,negative,church,churches,low,places,0,13467005,51698261
-workerid_0747,54,size,vegetables,small,negative,kumquat,kumquats,low,vegetables,0,23947,9067552
 workerid_0747,47,price,fruits,cheap,negative,raspberries,raspberries,medium,fruits,0,543159,7957960
 workerid_0747,47,price,fruits,cheap,negative,boysenberries,boysenberries,high,fruits,0,12484,7957960
 workerid_0748,34,loudness_n,music,loud,positive,guitar,guitars,medium,music,0,7278585,414072994
@@ -26054,12 +25957,10 @@ workerid_0751,40,loudness,instruments,loud,positive,acoustic guitar,acoustic gui
 workerid_0751,28,length,audios,short,negative,opera,operas,high,audios,0,812910,313133
 workerid_0752,69,strength,weightlifters,weak,negative,wrestler,wrestlers,high,weightlifters,0,772270,26692
 workerid_0752,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
-workerid_0752,90,width, furnitures,wide,positive,back door,back doors,low, furnitures,0,70114,NA
 workerid_0752,80,weight,electronic devices,heavy,positive,printer,printers,high,electronic devices,0,26823567,631257
 workerid_0752,4,darkness,evenings,light,positive,dusk,dusks,medium,evenings,0,3542,3008865
 workerid_0752,26,length,routes,short,negative,highway,highways,high,routes,0,5745573,9616739
 workerid_0753,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
-workerid_0753,33,loudness_n,parks,quiet,negative,finch,finches,low,parks,0,280095,25975912
 workerid_0754,83,weight,fabrics,light,negative,silk,silks,low,fabrics,0,418180,5153175
 workerid_0754,56,size,cars,small,negative,sedan,sedans,medium,cars,0,665446,109722086
 workerid_0755,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
@@ -26075,7 +25976,6 @@ workerid_0758,39,loudness_n,boats,quiet,negative,rowboat,rowboats,low,boats,0,42
 workerid_0758,87,width,streets,wide,positive,highway,highways,high,streets,0,5745573,15936688
 workerid_0758,77,temperature_h,food,cold,negative,muffin,muffins,medium,food,0,1333924,180152837
 workerid_0758,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0758,88,width,banks,narrow,negative,creek,creeks,low,banks,0,862386,30584319
 workerid_0759,64,speed,animals,quick,positive,rabbit,rabbits,high,animals,0,2987957,58179731
 workerid_0759,8,darkness,cats,dark,negative,panther,panthers,low,cats,0,3695915,15738388
 workerid_0759,8,darkness,cats,dark,negative,jaguar,jaguars,high,cats,0,1285032,15738388
@@ -26099,7 +25999,6 @@ workerid_0762,87,width,streets,wide,positive,downtown street,downtown streets,me
 workerid_0762,83,weight,fabrics,light,negative,cotton,cottons,medium,fabrics,0,214521,5153175
 workerid_0762,5,darkness,scripts,dark,negative,pen,pens,medium,scripts,0,5794539,17337654
 workerid_0763,75,temperature_h,appliances,cold,negative,freezer,freezers,low,appliances,0,2253962,23847029
-workerid_0763,38,loudness,forests,loud,positive,owl,owls,low,forests,0,2208765,8729753
 workerid_0763,75,temperature_h,rooms,cold,negative,pantry,pantries,medium,rooms,0,105460,65454304
 workerid_0763,24,length,trucks,long,positive,pick-up truck,pick up trucks,medium,trucks,0,21984,13809070
 workerid_0764,81,weight,objects,heavy,positive,couch,couches,high,objects,0,478444,33848628
@@ -26133,13 +26032,11 @@ workerid_0775,72,temperature,food,cold,negative,ice cream,ice cream,low,food,0,6
 workerid_0775,40,loudness,instruments,quiet,negative,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0776,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
 workerid_0776,86,width,habitats,wide,positive,bear den,bear dens,high,habitats,0,2361,3505167
-workerid_0776,55,size,birds,small,negative,herring,herrings,low,birds,0,137142,19695831
 workerid_0776,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0776,75,temperature_h,appliances,warm,positive,oven,ovens,high,appliances,0,3443150,23847029
 workerid_0776,74,temperature,days,warm,positive,winter,winter days,low,days,0,80466,305158140
 workerid_0778,70,strength,colors,weak,negative,watercolor,watercolors,low,colors,0,567707,27913613
 workerid_0778,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
-workerid_0778,67,strength,boxes,strong,positive,child,children,low,boxes,0,206543771,25790443
 workerid_0778,7,darkness,coats,light,positive,spaniel,spaniels,medium,coats,0,195570,4107452
 workerid_0778,47,price,fruits,expensive,positive,raspberries,raspberries,medium,fruits,0,543159,7957960
 workerid_0778,40,loudness,instruments,loud,positive,acoustic guitar,acoustic guitars,medium,instruments,0,549025,48493077
@@ -26173,7 +26070,6 @@ workerid_0787,71,strength,walls,weak,negative,condo,condos,medium,walls,0,546736
 workerid_0788,45,price,jewelry,expensive,positive,metal,metal bracelets,medium,jewelry,0,5274,72582016
 workerid_0788,74,temperature,days,warm,positive,summer,summer days,high,days,0,229054,305158140
 workerid_0788,75,temperature_h,kitchens,warm,positive,pantry,pantries,medium,kitchens,0,105460,2897588
-workerid_0788,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0788,39,loudness_n,lakes,loud,positive,rowboat,rowboats,low,lakes,0,42015,14947783
 workerid_0788,83,weight,fabrics,heavy,positive,silk,silks,low,fabrics,0,418180,5153175
 workerid_0789,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
@@ -26181,7 +26077,6 @@ workerid_0789,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722
 workerid_0789,55,size,animals,small,negative,herring,herrings,low,animals,0,137142,58179731
 workerid_0790,6,darkness,bouquets,light,positive,dahlia,dahlias,low,bouquets,0,135476,2237840
 workerid_0790,56,size,cars,big,positive,sedan,sedans,medium,cars,0,665446,109722086
-workerid_0790,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0791,37,loudness_n,cars,loud,positive,electric car,electric cars,low,cars,0,171936,109722086
 workerid_0791,64,speed,animals,slow,negative,turtle,turtles,low,animals,0,2572647,58179731
 workerid_0792,12,hardness,fruits,hard,positive,mango,mangos,medium,fruits,0,100913,7957960
@@ -26200,8 +26095,6 @@ workerid_0794,86,width,forests,narrow,negative,bear den,bear dens,high,forests,0
 workerid_0794,53,size,insects,big,positive,spider,spiders,high,insects,0,2385796,5119814
 workerid_0794,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
 workerid_0794,88,width,waterways,narrow,negative,stream,streams,medium,waterways,0,8883635,1843915
-workerid_0794,38,loudness,forests,loud,positive,woodpecker,woodpeckers,medium,forests,0,219083,8729753
-workerid_0794,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0794,7,darkness,coats,dark,negative,poodle,poodles,high,coats,0,255182,4107452
 workerid_0794,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0794,7,darkness,coats,light,positive,poodle,poodles,high,coats,0,255182,4107452
@@ -26210,7 +26103,6 @@ workerid_0797,24,length,trucks,short,negative,pick-up truck,pick up trucks,mediu
 workerid_0797,75,temperature_h,rooms,cold,negative,pantry,pantries,medium,rooms,0,105460,65454304
 workerid_0798,30,loudness_n,rooms,quiet,negative,conference center,conference centers,medium,rooms,0,227905,65454304
 workerid_0798,77,temperature_h,food,cold,negative,smoothie,smoothies,low,food,0,457222,180152837
-workerid_0798,38,loudness,forests,quiet,negative,mockingbird,mockingbirds,high,forests,0,39837,8729753
 workerid_0798,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
 workerid_0799,69,strength,weightlifters,strong,positive,wrestler,wrestlers,high,weightlifters,0,772270,26692
 workerid_0799,82,weight,objects,light,negative,feather,feathers,low,objects,0,2297128,33848628
@@ -26262,7 +26154,6 @@ workerid_0811,89,width,walkways,narrow,negative,boulevard,boulevards,high,walkwa
 workerid_0811,47,price,fruits,expensive,positive,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0811,28,length,songs,short,negative,opera,operas,high,songs,0,812910,49286341
 workerid_0811,84,weight,bikes,heavy,positive,motorcycle,motorcycles,medium,bikes,0,5752821,10741844
-workerid_0813,90,width,furniture,wide,positive,patio door,patio doors,medium,furniture,0,222702,67400151
 workerid_0813,72,temperature,desserts,cold,negative,ice cream,ice cream,low,desserts,0,6277647,3720781
 workerid_0814,16,height,buildings,short,negative,apartment building,apartment buildings,medium,buildings,0,312252,27623285
 workerid_0814,76,temperature_h,rooms,hot,positive,sauna,saunas,high,rooms,0,934002,65454304
@@ -26289,9 +26180,7 @@ workerid_0820,74,temperature,days,warm,positive,summer,summer days,high,days,0,2
 workerid_0820,74,temperature,days,cold,negative,fall,fall days,medium,days,0,12564,305158140
 workerid_0821,8,darkness,animals,light,positive,panther,panthers,low,animals,0,3695915,58179731
 workerid_0821,70,strength,paintings,weak,negative,watercolor,watercolors,low,paintings,0,567707,10907227
-workerid_0821,33,loudness_n,parks,quiet,negative,crow,crows,medium,parks,0,1295877,25975912
 workerid_0821,74,temperature,days,cold,negative,summer,summer days,high,days,0,229054,305158140
-workerid_0822,90,width,furniture,wide,positive,front gate,front gates,high,furniture,0,16932,67400151
 workerid_0822,90,width,gates,narrow,negative,front gate,front gates,high,gates,0,16932,NA
 workerid_0823,37,loudness_n,vehicles,quiet,negative,tractor,tractors,high,vehicles,0,2141187,37254742
 workerid_0823,7,darkness,coats,dark,negative,spaniel,spaniels,medium,coats,0,195570,4107452
@@ -26336,11 +26225,9 @@ workerid_0834,41,price,statues,expensive,positive,platinum,platinum statue,high,
 workerid_0834,37,loudness_n,machines,loud,positive,tractor,tractors,high,machines,0,2141187,37791829
 workerid_0834,8,darkness,animals,light,positive,jaguar,jaguars,high,animals,0,1285032,58179731
 workerid_0835,76,temperature_h,locations,cold,negative,ice rink,ice rinks,low,locations,0,65504,58471896
-workerid_0835,33,loudness_n,parks,quiet,negative,rooster,roosters,high,parks,0,328337,25975912
 workerid_0835,40,loudness,instruments,loud,positive,ukelele,ukeleles,low,instruments,0,11454,48493077
 workerid_0835,47,price,fruits,expensive,positive,strawberries,strawberries,low,fruits,0,1437661,7957960
 workerid_0836,87,width,streets,wide,positive,downtown street,downtown streets,medium,streets,0,28751,15936688
-workerid_0836,26,length,maps,long,positive,alley,alleys,low,maps,0,546265,63957725
 workerid_0836,89,width,streets,wide,positive,boulevard,boulevards,high,streets,0,278244,15936688
 workerid_0837,38,loudness,animals,quiet,negative,owl,owls,low,animals,0,2208765,58179731
 workerid_0837,56,size,cars,small,negative,smartcar,smartcars,low,cars,0,1843,109722086
