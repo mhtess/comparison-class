@@ -60,7 +60,7 @@ var dataPath = "../../data/";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
-var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-produced-super.csv";
+var cc_inference_DataFile = "class-elicitation-prereg-final/full-data-w-handResps-as-super-no-filedRef.csv";
 
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
@@ -334,7 +334,7 @@ var model = function(){
 var totalIterations = 300000, lag =  150;
 // var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-fullClassified-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-fullClassifiedNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,stim_id,subordinate,task,adj_polarity,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
