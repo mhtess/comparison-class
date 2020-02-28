@@ -1032,7 +1032,410 @@ d.tidy.resps.classified.full %>%
   View()
 ```
 
-fabric . superordinate
+
+
+The data points are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
+``` {r}
+
+# the superordinate for the NPs where the modal responses did not match the anticipated one are substituted to the modal participant response
+
+# extract the mode response
+d.tidy.resp.counts <- d.tidy.resps.classified.full %>%
+  group_by(stim_id, superordinate, np_match, np_expectations, adj_polarity, specific, response_lemma) %>%
+  count() %>%
+  mutate(n_unique_resps = n) %>%
+  ungroup()
+
+# insert the mode NP (modal subordinate where participants gave subordinate response, modal superordinate where they gave superordinate response)
+# in column mode
+d.tidy.resp.counts <- d.tidy.resp.counts %>%
+  group_by(stim_id, superordinate, np_match, adj_polarity, specific) %>%
+  mutate(mode = response_lemma[which.max(n)])
+
+
+# analysis of modal responses
+d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>%
+  rowwise() %>%
+  mutate(
+    isModeNP = containsString_responses(
+      as.character(paste("_", np_match, "_", sep = "")), as.character(mode),
+      np_match, as.character(paste("_", mode, "_", sep = ""))
+    ),
+    isModeSuper = containsString_responses(
+      as.character(paste("_", superordinate, "_", sep = "")), as.character(mode),
+      superordinate, as.character(paste("_", mode, "_", sep = ""))
+    ),
+    isModeNeither = sum(isModeNP, isModeSuper),
+    mode = gsub("_", "", mode)
+  ) # isModeNeither = 0 means that the mode response is different from anticipated NPs
+
+# d.tidy.resp.counts.analysis %>%
+#   filter(isModeNeither == 0) %>%
+#   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+#   View()
+
+# the superordinate will be substituted for those items where the mode deviates for 6 or more items of a set (set is 12 variations of an item: 3 np_expectations x 2 adj_polarities x 2 CC types, specific and not ) and the deviating modal response is the same for 6 or more items
+# d.tidy.resp.counts.analysis %>%
+#   filter(isModeNeither == 0) %>%
+#   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+#   count(stim_id, mode) %>% filter(n >= 6) %>%
+#   View()
+# %>% filter(n >= 6) -> stim.ids.adjust
+
+# d.tidy.resp.counts.analysis %>%
+#   filter(isModeNeither == 0) %>%
+#   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+#   right_join(., stim.ids.adjust, by = c("stim_id")) %>%
+#   View()
+```
+
+## Analysing superordinate responses
+
+For the responses that are not the anticipated suboridnate or superoridnate NPs (n = 4.000), we investigate if there are several distinct salient responses (classified as superordinate: all the data points that remain not matched to a priori subordinates or superordinates after the analyses are tagged as superordinate) within each item. For example, we would like to see if for the item set 'food' (anticipated superordinate) - 'soup' - 'salad' - 'ice cream' more than three participants provided any superordinate responses other than 'food'. We collapse across single NPs and adjective conditions within an item, i.e. we count the response as salient if at least three participants provided the response given any NP of the item (e.g. any of 'soup', 'salad', 'ice cream') and any of the adjective (positive or negative). If the response provided by the participant was provided by at least two other participants, we keep the response, otherwise it is substituted by the a priori superordinate. The corresponding frequencies will be extracted for plurals of these salient responses.     
+
+```{r}
+d.tidy.super.counts <- d.tidy.resps.classified.full %>%
+  filter((specific == 0) & (matchingSuper == 0)) %>%
+  group_by(stim_id, superordinate, response_lemma) %>%
+  count() %>%
+  mutate(n_unique_resps = n) %>%
+  ungroup()
+
+d.tidy.super.counts %>% filter(n_unique_resps >= 3) -> d.tidy.super.counts.common
+
+d.tidy.super.counts %>%
+  ungroup() %>%
+  mutate(produced_super = ifelse(n_unique_resps >= 3, response_lemma, superordinate)) -> d.tidy.super.adjust
+d.tidy.resps.classified.full %>%
+  filter((specific == 0) & (matchingSuper == 0)) %>%
+  left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper
+
+# get number of data points which passed the grab-3 criterion
+d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2539
+
+# get the distinct superordinates for the frequency extraction
+d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
+distinctSuper %>%
+  rowwise() %>%
+  filter(str_detect(produced_super, ".s$")) %>% as.list() %>% .$produced_super -> pluralSuper
+#anti_join(distinctSuper, pluralSuper) %>% View()
+super_plural <- function(n, pluralSuper) {
+  if (n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
+    n_pl <- n
+  } else if (n %in% pluralSuper) {
+    n_pl <- n
+  } else if (n == "box") {
+    n_pl <- "boxes"
+  } else if (n == "city") {
+    n_pl <- "cities"
+  } else {
+    n_pl <- paste(n, "s", sep = "")
+  }
+  return(n_pl)
+}
+
+distinctSuper %>%
+  rowwise() %>%
+  mutate(produced_super_pl = super_plural(produced_super, pluralSuper)) -> allSuper
+
+# write_csv(allSuper, "../data/class-elicitation-prereg-final/cc-prod-distinct-super-pl.csv")
+
+d.nonMatch.adjustSuper <- d.nonMatch.adjustSuper %>%
+  rowwise() %>%
+  mutate(produced_super_pl = super_plural(produced_super, pluralSuper))
+
+d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
+  rowwise() %>%
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree),
+    superordinate_pl = produced_super_pl,
+    superordinate_pl = ifelse(superordinate_pl == "races", "rallies", superordinate_pl),
+    superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
+    NP_pl = insert_plural_np(tolower(np), superordinate)
+  ) %>%
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
+         NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
+
+df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/cc-prod-produced-super-pl-frequencies.csv")
+
+d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
+  left_join(., df.frequencies, by = c("NP_pl" = "NPs")) %>%
+  left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs"))
+
+d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>%
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
+         NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+
+#write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
+```
+
+``` {r}
+# exclusiopn of responses where reference fails based on non-matching superordinate analysis above
+d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>%
+  filter(
+  ((stim_id == 90) & grepl('furniture', response_lemma)) |
+  ((stim_id == 88) & grepl('bank', response_lemma)) |
+  ((stim_id == 54) & grepl('vegetable', response_lemma)) |
+  ((stim_id == 55) & grepl('bird', response_lemma)) |
+  ((stim_id == 67) & grepl('box', response_lemma)) |  
+  ((stim_id == 26) & grepl('map', response_lemma)) |
+  ((stim_id == 9) & grepl('fruit', response_lemma)) 
+) -> d.tidy.resp.failedRef
+#write_csv(d.tidy.resp.failedRef, '../data/class-elicitation-prereg-final/data-classified-failing-reference.csv')
+```
+
+``` {r}
+# the data is adjusted to the human modal responses for stim_ids 5 and 77
+
+# plural noun phrases are adjusted to the frequency queries
+d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
+  mutate(
+    # substitutions made based on human modal responses
+    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
+    superordinate = ifelse(stim_id == 77, "food", superordinate)
+  ) %>%
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
+  mutate(mode_np = ifelse(specific == 1, np, superordinate))
+
+# write_csv(d.tidy.resps.classified.full.adjust.Super, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_adjusted_super.csv')
+
+d.tidy.resps.full.handClassified.as.super.adjust <- d.tidy.resps.full.handClassified.as.super %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
+  mutate(
+    # substitutions made based on human modal responses
+    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
+    superordinate = ifelse(stim_id == 77, "food", superordinate)
+  ) %>%
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
+  mutate(mode_np = ifelse(specific == 1, np, superordinate))
+``` 
+
+``` {r}
+# TO BE RUN ON ONLY AUTOMATICALLY CLASSIFIED DATA
+d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>%
+  mutate(
+    # substitutions made based on human modal responses
+    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
+    superordinate = ifelse(stim_id == 77, "food", superordinate)
+  ) %>%
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
+  mutate(mode_np = ifelse(specific == 1, np, superordinate))
+```
+
+
+```{r frequencies}
+# data is prepared for frequency extraction: the freuqncies for plural forms of the NPs and the most superordinatesare pulled, so the plural NPs are added
+
+# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
+insert_plural_np <- function(np, superordinate) {
+  if (np %in% c("piece of chocolate")) {
+    np_pl <- "chocolates"
+  } else if (np %in% c("piece of chalk")) {
+    np_pl <- "chalks"
+  } else if (np %in% c("story")) {
+    np_pl <- "stories"
+  } else if (np %in% c("daisy")) {
+    np_pl <- "daisies"
+  } else if (np %in% c("library")) {
+    np_pl <- "libraries"
+  } else if (np %in% c("party")) {
+    np_pl <- "parties"
+  } else if (np %in% c("bush")) {
+    np_pl <- "bushes"
+  } else if (np %in% c("finch")) {
+    np_pl <- "finches"
+  } else if (np %in% c("pansy")) {
+    np_pl <- "pansies"
+  } else if (np %in% c("documentary")) {
+    np_pl <- "documentaries"
+  } else if (np %in% c("pantry")) {
+    np_pl <- "pantries"
+  } else if (np %in% c("choral concert")) {
+    np_pl <- "choirs"
+  } else if (np %in% c("elderly person")) {
+    np_pl <- "elderly people"
+  } else if (np %in% c("mouse")) {
+    np_pl <- "mice"
+  } else if (np %in% c("church")) {
+    np_pl <- "churches"
+  } else if (np %in% c("tile")) {
+    np_pl <- "tile floors"
+  } else if (np %in% c("wood") & (superordinate == "floors")) {
+    np_pl <- "wood floors"
+  } else if (np %in% c("carpet") & (superordinate == "floors")) {
+    np_pl <- "carpet floors"
+  } else if (np %in% c("summer")) {
+    np_pl <- "summer days"
+  } else if (np %in% c("fall")) {
+    np_pl <- "fall days"
+  } else if (np %in% c("winter")) {
+    np_pl <- "winter days"
+  } else if (np %in% c("couch")) {
+    np_pl <- "couches"
+  } else if (np %in% c("tomato")) {
+    np_pl <- "tomatoes"
+  } else if (np %in% c("jolly rancher")) {
+    np_pl <- "jollies"
+  } else if (np %in% c("peach")) {
+    np_pl <- "peaches"
+  } else if (np %in% c("city")) {
+    np_pl <- "cities"
+  } else if (np %in% c("auditorium")) {
+    np_pl <- "auditoria"
+  } else if (np %in% c("bottle of top-shelf liquor")) {
+    np_pl <- "liquors"
+  } else if (np %in% c("six-pack of beer")) {
+    np_pl <- "beers"
+  } else if (np %in% c("bottle of wine")) {
+    np_pl <- "wine bottles"
+  } else if (np %in% c("bush")) {
+    np_pl <- "bushes"
+  } else if (np %in% c("mouse den")) {
+    np_pl <- "mouse holes"
+  } else if (np %in% c("sprinting race")) {
+    np_pl <- "sprints"
+  } else if (np %in% c("child")) {
+    np_pl <- "children"
+  } else if (np %in% c("baby")) {
+    np_pl <- "babies"
+  } else if (np %in% c("platinum")) {
+    np_pl <- "platinum statue"
+  } else if (np %in% c("bronze")) {
+    np_pl <- "bronze statues"
+  } else if (np %in% c("pick-up truck")) {
+    np_pl <- "pick up trucks"
+  } else if ((np %in% c("plastic")) & (superordinate == "bracelets")) {
+    np_pl <- "plastic bracelets"
+  } else if (np %in% c("gold")) {
+    np_pl <- "gold bracelets"
+  } else if (np %in% c("metal")) {
+    np_pl <- "metal bracelets"
+  } else if ((np %in% c("plastic")) & (superordinate == "statues")) {
+    np_pl <- "plastic statues"
+  } else if (np %in% c(
+    "wool", "wood", "fish", "ice cream", "garlic", "saffron", "coffee", "raspberries",
+    "boysenberries",
+    "strawberries", "sneakers", "chicken", "boots", "tuna", "pork", "sandals", "plastic", "instant pot"
+  )) {
+    np_pl <- np # the items left singular
+  } else {
+    np_pl <- paste(np, "s", sep = "")
+  }
+  return(np_pl)
+}
+
+d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full.adjust.Super %>%
+  rowwise() %>%
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+
+# adjust some superordinates
+d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
+  mutate(
+    superordinate.freq = superordinate,
+    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
+  )
+# this data can be fed into python frequency extractor
+# write_csv(d.tidy.resps.w.pl.np, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_pl_np.csv'
+```
+
+``` {r}
+# TO BE RUN ON AUTOMATICALLY CLASSIFIED DATA ONLY
+d.tidy.auto.classified.w.pl.np <- d.tidy.resps.auto.classified.full.adjust.Super %>%
+  rowwise() %>%
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+d.tidy.auto.classified.w.pl <- d.tidy.auto.classified.w.pl.np %>%
+  mutate(
+    superordinate.freq = superordinate,
+    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
+  )
+```
+
+The frquencies are appended to the cleaned data for the model. 
+
+``` {r}
+df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
+d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
+  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree)
+  ) # add superordinate frequencies
+
+df.mode.final <- d.tidy.phrase.w.original.mode.pl %>%
+  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
+  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
+
+# check if singular matches original
+df.sg <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv")
+
+#anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
+
+#write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs-no-filedRef.csv")
+```
+
+``` {r}
+# create full df with produced grab-3 superordinates
+d.tidy.phrase.w.original.mode.pl %>%
+  filter((specific == 1) | (matchingSuper == 1)) %>%
+  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
+         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
+         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
+
+#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super-no-failedRef.csv")
+
+# data frame with hand classified responses being a priori superordinates
+d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%  anti_join(., d.tidy.resp.failedRef)%>% 
+  rowwise() %>%
+   mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
+  d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>% 
+  mutate(
+    superordinate.freq = superordinate,
+    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
+    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
+  ) %>%
+  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree)
+  ) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
+         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
+         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-data-w-handResps-as-super-no-filedRef.csv')
+```
+
+
+``` {r}
+# FOR AUTO CALSSIFIED DATA
+df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
+d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
+  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
+  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
+  mutate(
+    degree = ifelse(degree == "length_duration", "length", degree)
+  )
+
+df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
+  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, 
+         np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
+  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, 
+         response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
+
+write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+```
+
+# VIZ
 
 ```{r}
 # d.tidy.phrase.specificMarking.bs <- d.tidy.phase.classifiedSuper %>%
@@ -1280,407 +1683,6 @@ ggsave(
   filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_byItem.pdf",
   width = 15, height = 10
 )
-```
-
-
-The data points are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. The most common responses (both subordinate and superordinate) will be used for the adjective endorsement task. 
-``` {r}
-
-# the superordinate for the NPs where the modal responses did not match the anticipated one are substituted to the modal participant response
-
-# extract the mode response
-d.tidy.resp.counts <- d.tidy.resps.classified.full %>%
-  group_by(stim_id, superordinate, np_match, np_expectations, adj_polarity, specific, response_lemma) %>%
-  count() %>%
-  mutate(n_unique_resps = n) %>%
-  ungroup()
-
-# insert the mode NP (modal subordinate where participants gave subordinate response, modal superordinate where they gave superordinate response)
-# in column mode
-d.tidy.resp.counts <- d.tidy.resp.counts %>%
-  group_by(stim_id, superordinate, np_match, adj_polarity, specific) %>%
-  mutate(mode = response_lemma[which.max(n)])
-
-
-# analysis of modal responses
-d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>%
-  rowwise() %>%
-  mutate(
-    isModeNP = containsString_responses(
-      as.character(paste("_", np_match, "_", sep = "")), as.character(mode),
-      np_match, as.character(paste("_", mode, "_", sep = ""))
-    ),
-    isModeSuper = containsString_responses(
-      as.character(paste("_", superordinate, "_", sep = "")), as.character(mode),
-      superordinate, as.character(paste("_", mode, "_", sep = ""))
-    ),
-    isModeNeither = sum(isModeNP, isModeSuper),
-    mode = gsub("_", "", mode)
-  ) # isModeNeither = 0 means that the mode response is different from anticipated NPs
-d.tidy.resp.counts.analysis %>%
-  filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-  View()
-
-# the superordinate will be substituted for those items where the mode deviates for 6 or more items of a set (set is 12 variations of an item: 3 np_expectations x 2 adj_polarities x 2 CC types, specific and not ) and the deviating modal response is the same for 6 or more items
-d.tidy.resp.counts.analysis %>%
-  filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-  count(stim_id, mode) %>% filter(n >= 6) %>%
-  View()
-# %>% filter(n >= 6) -> stim.ids.adjust
-
-d.tidy.resp.counts.analysis %>%
-  filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-  right_join(., stim.ids.adjust, by = c("stim_id")) %>%
-  View()
-```
-
-## Analysing superordinate responses
-
-For the responses that are not the anticipated suboridnate or superoridnate NPs (n = 4.000), we investigate if there are several distinct salient responses (classified as superordinate: all the data points that remain not matched to a priori subordinates or superordinates after the analyses are tagged as superordinate) within each item. For example, we would like to see if for the item set 'food' (anticipated superordinate) - 'soup' - 'salad' - 'ice cream' more than three participants provided any superordinate responses other than 'food'. We collapse across single NPs and adjective conditions within an item, i.e. we count the response as salient if at least three participants provided the response given any NP of the item (e.g. any of 'soup', 'salad', 'ice cream') and any of the adjective (positive or negative). If the response provided by the participant was provided by at least two other participants, we keep the response, otherwise it is substituted by the a priori superordinate. The corresponding frequencies will be extracted for plurals of these salient responses.     
-
-``` {r}
-d.tidy.super.counts <- d.tidy.resps.classified.full %>%
-  filter((specific == 0) & (matchingSuper == 0)) %>%
-  group_by(stim_id, superordinate, response_lemma) %>%
-  count() %>%
-  mutate(n_unique_resps = n) %>%
-  ungroup()
-
-d.tidy.super.counts %>% filter(n_unique_resps >= 3) -> d.tidy.super.counts.common
-
-d.tidy.super.counts %>%
-  ungroup() %>%
-  mutate(produced_super = ifelse(n_unique_resps >= 3, response_lemma, superordinate)) -> d.tidy.super.adjust
-d.tidy.resps.classified.full %>%
-  filter((specific == 0) & (matchingSuper == 0)) %>%
-  left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper
-
-# get number of data points which passed the grab-3 criterion
-d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2539
-
-# get the distinct superordinates for the frequency extraction
-d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
-distinctSuper %>%
-  rowwise() %>%
-  filter(str_detect(produced_super, ".s$")) %>% as.list() %>% .$produced_super -> pluralSuper
-#anti_join(distinctSuper, pluralSuper) %>% View()
-super_plural <- function(n, pluralSuper) {
-  if (n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
-    n_pl <- n
-  } else if (n %in% pluralSuper) {
-    n_pl <- n
-  } else if (n == "box") {
-    n_pl <- "boxes"
-  } else if (n == "city") {
-    n_pl <- "cities"
-  } else {
-    n_pl <- paste(n, "s", sep = "")
-  }
-  return(n_pl)
-}
-
-distinctSuper %>%
-  rowwise() %>%
-  mutate(produced_super_pl = super_plural(produced_super, pluralSuper)) -> allSuper
-
-write_csv(allSuper, "../data/class-elicitation-prereg-final/cc-prod-distinct-super-pl.csv")
-
-d.nonMatch.adjustSuper <- d.nonMatch.adjustSuper %>%
-  rowwise() %>%
-  mutate(produced_super_pl = super_plural(produced_super, pluralSuper))
-
-d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
-  rowwise() %>%
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree),
-    superordinate_pl = produced_super_pl,
-    superordinate_pl = ifelse(superordinate_pl == "races", "rallies", superordinate_pl),
-    superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
-    NP_pl = insert_plural_np(tolower(np), superordinate)
-  ) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
-         NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
-
-df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/cc-prod-produced-super-pl-frequencies.csv")
-
-d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
-  left_join(., df.frequencies, by = c("NP_pl" = "NPs")) %>%
-  left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs"))
-
-d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
-         NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
-
-#write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
-```
-
-``` {r}
-# exclusiopn of responses where reference fails based on non-matching superordinate analysis above
-d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>%
-  filter(
-  ((stim_id == 90) & grepl('furniture', response_lemma)) |
-  ((stim_id == 88) & grepl('bank', response_lemma)) |
-  ((stim_id == 54) & grepl('vegetable', response_lemma)) |
-  ((stim_id == 55) & grepl('bird', response_lemma)) |
-  ((stim_id == 67) & grepl('box', response_lemma)) |  
-  ((stim_id == 26) & grepl('map', response_lemma)) |
-  ((stim_id == 9) & grepl('fruit', response_lemma)) 
-) -> d.tidy.resp.failedRef
-#write_csv(d.tidy.resp.failedRef, '../data/class-elicitation-prereg-final/data-classified-failing-reference.csv')
-```
-
-``` {r}
-# the data is adjusted to the human modal responses for stim_ids 5 and 77
-
-# plural noun phrases are adjusted to the frequency queries
-d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
-  anti_join(., d.tidy.resp.failedRef) %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-
-# write_csv(d.tidy.resps.classified.full.adjust.Super, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_adjusted_super.csv')
-
-d.tidy.resps.full.handClassified.as.super.adjust <- d.tidy.resps.full.handClassified.as.super %>%
-  anti_join(., d.tidy.resp.failedRef) %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-``` 
-
-``` {r}
-# TO BE RUN ON ONLY AUTOMATICALLY CLASSIFIED DATA
-d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 5, "scripts", superordinate),
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-```
-
-
-``` {r frequencies}
-# data is prepared for frequency extraction: the freuqncies for plural forms of the NPs and the most superordinatesare pulled, so the plural NPs are added
-
-# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED ONES
-insert_plural_np <- function(np, superordinate) {
-  if (np %in% c("piece of chocolate")) {
-    np_pl <- "chocolates"
-  } else if (np %in% c("piece of chalk")) {
-    np_pl <- "chalks"
-  } else if (np %in% c("story")) {
-    np_pl <- "stories"
-  } else if (np %in% c("daisy")) {
-    np_pl <- "daisies"
-  } else if (np %in% c("library")) {
-    np_pl <- "libraries"
-  } else if (np %in% c("party")) {
-    np_pl <- "parties"
-  } else if (np %in% c("bush")) {
-    np_pl <- "bushes"
-  } else if (np %in% c("finch")) {
-    np_pl <- "finches"
-  } else if (np %in% c("pansy")) {
-    np_pl <- "pansies"
-  } else if (np %in% c("documentary")) {
-    np_pl <- "documentaries"
-  } else if (np %in% c("pantry")) {
-    np_pl <- "pantries"
-  } else if (np %in% c("choral concert")) {
-    np_pl <- "choirs"
-  } else if (np %in% c("elderly person")) {
-    np_pl <- "elderly people"
-  } else if (np %in% c("mouse")) {
-    np_pl <- "mice"
-  } else if (np %in% c("church")) {
-    np_pl <- "churches"
-  } else if (np %in% c("tile")) {
-    np_pl <- "tile floors"
-  } else if (np %in% c("wood") & (superordinate == "floors")) {
-    np_pl <- "wood floors"
-  } else if (np %in% c("carpet") & (superordinate == "floors")) {
-    np_pl <- "carpet floors"
-  } else if (np %in% c("summer")) {
-    np_pl <- "summer days"
-  } else if (np %in% c("fall")) {
-    np_pl <- "fall days"
-  } else if (np %in% c("winter")) {
-    np_pl <- "winter days"
-  } else if (np %in% c("couch")) {
-    np_pl <- "couches"
-  } else if (np %in% c("tomato")) {
-    np_pl <- "tomatoes"
-  } else if (np %in% c("jolly rancher")) {
-    np_pl <- "jollies"
-  } else if (np %in% c("peach")) {
-    np_pl <- "peaches"
-  } else if (np %in% c("city")) {
-    np_pl <- "cities"
-  } else if (np %in% c("auditorium")) {
-    np_pl <- "auditoria"
-  } else if (np %in% c("bottle of top-shelf liquor")) {
-    np_pl <- "liquors"
-  } else if (np %in% c("six-pack of beer")) {
-    np_pl <- "beers"
-  } else if (np %in% c("bottle of wine")) {
-    np_pl <- "wine bottles"
-  } else if (np %in% c("bush")) {
-    np_pl <- "bushes"
-  } else if (np %in% c("mouse den")) {
-    np_pl <- "mouse holes"
-  } else if (np %in% c("sprinting race")) {
-    np_pl <- "sprints"
-  } else if (np %in% c("child")) {
-    np_pl <- "children"
-  } else if (np %in% c("baby")) {
-    np_pl <- "babies"
-  } else if (np %in% c("platinum")) {
-    np_pl <- "platinum statue"
-  } else if (np %in% c("bronze")) {
-    np_pl <- "bronze statues"
-  } else if (np %in% c("pick-up truck")) {
-    np_pl <- "pick up trucks"
-  } else if ((np %in% c("plastic")) & (superordinate == "bracelets")) {
-    np_pl <- "plastic bracelets"
-  } else if (np %in% c("gold")) {
-    np_pl <- "gold bracelets"
-  } else if (np %in% c("metal")) {
-    np_pl <- "metal bracelets"
-  } else if ((np %in% c("plastic")) & (superordinate == "statues")) {
-    np_pl <- "plastic statues"
-  } else if (np %in% c(
-    "wool", "wood", "fish", "ice cream", "garlic", "saffron", "coffee", "raspberries",
-    "boysenberries",
-    "strawberries", "sneakers", "chicken", "boots", "tuna", "pork", "sandals", "plastic", "instant pot"
-  )) {
-    np_pl <- np # the items left singular
-  } else {
-    np_pl <- paste(np, "s", sep = "")
-  }
-  return(np_pl)
-}
-
-d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full.adjust.Super %>%
-  rowwise() %>%
-  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-
-# adjust some superordinates
-d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
-  mutate(
-    superordinate.freq = superordinate,
-    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
-  )
-# this data can be fed into python frequency extractor
-# write_csv(d.tidy.resps.w.pl.np, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_pl_np.csv'
-```
-
-``` {r}
-# TO BE RUN ON AUTOMATICALLY CLASSIFIED DATA ONLY
-d.tidy.auto.classified.w.pl.np <- d.tidy.resps.auto.classified.full.adjust.Super %>%
-  rowwise() %>%
-  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-d.tidy.auto.classified.w.pl <- d.tidy.auto.classified.w.pl.np %>%
-  mutate(
-    superordinate.freq = superordinate,
-    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
-  )
-```
-
-The frquencies are appended to the cleaned data for the model. 
-
-``` {r}
-df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
-d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree)
-  ) # add superordinate frequencies
-
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>%
-  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
-  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
-
-# check if singular matches original
-df.sg <- read_csv("../data/pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv")
-
-#anti_join(df.mode.final, df.sg, by = c("specific" = "specific")) %>% View()
-
-#write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs-no-filedRef.csv")
-```
-
-``` {r}
-# create full df with produced grab-3 superordinates
-d.tidy.phrase.w.original.mode.pl %>%
-  filter((specific == 1) | (matchingSuper == 1)) %>%
-  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
-
-#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super-no-failedRef.csv")
-
-# data frame with hand classified responses being a priori superordinates
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%  anti_join(., d.tidy.resp.failedRef)%>% 
-  rowwise() %>%
-   mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
-  d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>% 
-  mutate(
-    superordinate.freq = superordinate,
-    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "races", "rallies", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
-  ) %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree)
-  ) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
-#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-data-w-handResps-as-super-no-filedRef.csv')
-```
-
-
-``` {r}
-# FOR AUTO CALSSIFIED DATA
-df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
-d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree)
-  )
-
-df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
-  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, 
-         np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
-  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, 
-         response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
-
-write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
 ```
 
 
