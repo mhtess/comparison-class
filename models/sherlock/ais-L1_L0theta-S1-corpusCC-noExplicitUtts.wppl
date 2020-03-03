@@ -66,7 +66,7 @@ var dataPath = "../../data/";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-produced-super.csv";
-var cc_inference_DataFile = "class-elicitation-prereg-final/full-data-w-handResps-as-super-no-filedRef.csv";
+var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedRef.csv";
 
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
@@ -377,14 +377,14 @@ var model = function() {
 }
 
 
-var steps = 50000
+var steps = 30000
 var samples = 1
 var mll = AIS(model, {
   steps: steps,
   samples: samples
 })
 
-var resultsOutFile = 'results/marginal-likelihood/ais-L1-S1-fullClassified-sansSilence-corpusFreqCCLogistic_byNP_' +
+var resultsOutFile = 'results/marginal-likelihood/ais-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_' +
   by_item_cc_parameters + '-steps-' + steps + '_iter' + chain + '.csv'
 // // postOut
 
