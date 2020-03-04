@@ -226,10 +226,6 @@ df.comprehension <- df.attention %>%
       containsString(tolower(response), "towe")
   ))
 
-# df.comprehension %>%
-#   filter(!pass_comp) %>%
-#   View()
-
 df.memory <- df.attention %>%
   filter(condition == "memory_check") %>%
   group_by(workerid) %>%
@@ -340,15 +336,6 @@ d.item.count %>%
   ylab("n items")
 ```
 
-```{r eval=F}
-# d.item.n50 <- d.item.count %>%
-#   filter(n >= 50)
-#  write(
-#    jsonlite::toJSON(d.item.n50, pretty = T),
-#    file = "../experiments/js/prereg-cce-n50.json"
-#  )
-```
-
 ### Invalid Responses
 
 We exclude invalid responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
@@ -440,10 +427,7 @@ n.valid.responses <- d.tidy.resp.valid.resps %>%
   pull(n)
 
 n.total.responses - n.valid.responses
-# check
-# d.tidy.resp.valid.resps %>%
-#   filter(responseLength >= 4) %>%
-#   View()
+
 ```
 
 ### Misspelling Correction
@@ -509,7 +493,7 @@ d.tidy.resp.valid.resps %>%
     super_us = paste("_", superordinate, "_", sep = ""),
     # check if response and seed NP match
     specific = # ifelse(
-    # response_lemma == "times of day", # catch these responses because otherwise classified as subordinate for "day" / "strawberries" etc
+   # catch these responses because otherwise classified as subordinate for "strawberries" etc
     ifelse(response_lemma == "berries", 0,
       containsString_responses(
         as.character(cleanedPhrase),
@@ -553,45 +537,10 @@ n.automatic.responses <- d.matchedResponses %>%
 n.automatic.responses
 n.automatic.responses / n.valid.responses
 
-# d.tidy.phrase.w.original %>%
-#   select(workerid, trial_num, cleanedPhrase, specific, matchingSuper) %>%
-#   rename(method_1 = specific, method_1_super = matchingSuper, method_1_cleanedPhrase = cleanedPhrase) %>%
-#   right_join(., d.tidy.phrase.w.original2) %>%
-#   mutate(match_specific = method_1 == specific,
-#          match_super = method_1_super == matchingSuper,
-#          mismatch = match_specific & match_super) -> d.tidy.phrase.w.original.compare
-#
-# d.tidy.phrase.w.original2
 ```
 
 The items which are classified as subordinate or superordinate only (mean = 0 or 1) are double-checked.
 ```{r}
-# extract the consistent responses based on automatically classified data
-# d.sub.counts <- d.matchedResponses %>%
-#   group_by(stim_id, np_expectations, adj_polarity) %>%
-#   count(specific)
-
-# d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
-#   group_by(stim_id, degree, superordinate,
-#            np_expectations, np, adj_polarity) %>%
-#   count(specific) %>%
-#   mutate(nr = sum(n))
-
-# d.sub.counts
-#
-# d.consistent.items <- d.sub.counts %>%
-#   group_by(stim_id, np_expectations, adj_polarity) %>%
-#   mutate(nr_dp = sum(n)) %>%
-#   filter(n >= nr_dp-2) # extract the consistent items
-#
-# #d.consistent.items
-# d.inconsistent.items <- anti_join(d.sub.counts, d.consistent.items)
-# #d.inconsistent.items
-
-
-
-# d.confident.phrase.specificMarking.bs.item %>%
-#   filter((n == 0) | (n == nr))
 
 # check the matched items where the mean of responses is 1 or 0
 d.matchedResponses %>%
@@ -604,12 +553,6 @@ d.matchedResponses %>%
   ) %>%
   View()
 
-# it happns for some items where the number of matched responses is very low, e.g. for the NP "pick-up truck", positive adjective, only 3 responses out of 44 are matched automatically
-
-# d.matchedResponses %>%
-#   group_by(stim_id, np_expectations, adj_polarity) %>%
-#   count() %>%
-#   View()
 ```
 
 ### Post-processing of Automatically Classified Data
@@ -631,7 +574,7 @@ d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>%
 
 We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
 ``` {r}
-# TO BE RUN ON AUTOMATICALLY CLASSIFIED DATA ONLY
+
 d.tidy.auto.classified.w.pl.np <- d.tidy.resps.auto.classified.full.adjust.Super %>%
   rowwise() %>%
   mutate(np_pl = insert_plural_np(tolower(np), superordinate))
@@ -1011,7 +954,6 @@ d.tidy.phrase.handClassified %>%
     response_lemma_hand = ifelse(cleanedPhrase == "_map_", "maps", response_lemma_hand),
     response_lemma_hand = ifelse(cleanedPhrase == "_pots_", "cookware", response_lemma_hand),
     response_lemma_hand = ifelse(cleanedPhrase == "_settings_", superordinate, response_lemma_hand),
-    # response_lemma_hand = ifelse( cleanedPhrase == "_price_", np_match_us, cleanedPhrase),
     response_lemma_hand = ifelse(cleanedPhrase == "_pieces_", np_match, response_lemma_hand),
     response_lemma_hand = ifelse(np == "sauna", gsub("spa", "sauna", response_lemma_hand), response_lemma_hand),
     response_lemma_hand = ifelse(np == "bedboard", gsub("board", "bedboard", response_lemma_hand), response_lemma_hand),
@@ -1022,7 +964,6 @@ d.tidy.phrase.handClassified %>%
   ) %>%
   mutate(
     cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep = ""),
-    # response_lemma_cleaned = gsub("_", "", response_lemma),
     specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), response_lemma_hand, np_match_us),
     matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), response_lemma_hand, super_us)
   ) -> d.tidy.phrase.handClassified2
@@ -1037,10 +978,6 @@ To further clean the data set, we exclude the responses which mention the degree
 ``` {r}
 
 d.tidy.phrase.handClassified2 %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.resps
-
-# d.nonMatching.resps %>%
-#   distinct(degree, superordinate, np, adj, np_match, response, response_lemma, response_lemma_hand, specific, matchingSuper) %>%
-#   View()
 
 # create the full dataset of hand-classified responses
 d.tidy.phrase.handClassified2 <- d.tidy.phrase.handClassified2 %>% rbind(., d.tidy.phrase.handClassified.matched)
@@ -1556,19 +1493,10 @@ write_csv(d.full.w.produced.super.nfR, "../data/class-elicitation-prereg-final/f
 # Visualisations
 
 ```{r}
-# d.tidy.phrase.specificMarking.bs <- d.tidy.phase.classifiedSuper %>%
-#   filter(!((specific == 0) & (matchingSuper == 0)))  %>%
-#   #mutate() %>%
-
-# write_csv(d.tidy.clean.responses, path = "../models/data/comparison-class-inf_clean_coded.csv")
 
 d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>%
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
-
-# d.tidy.phrase.specificMarking.bs.item <- d.tidy.phase.classifiedSuper %>%
-#   filter(!((specific == 0) & (matchingSuper == 0)))  %>%
-#   mutate() %>%
 
 d.tidy.phrase.specificMarking.bs.item <- d.tidy.clean.responses %>%
   group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
@@ -1712,19 +1640,6 @@ d.tidy.phrase.specificMarking.bs %>%
 ## By-item plots
 
 ```{r figIndivItems}
-# does not work
-# d.tidy.resps.classified.full  %>%
-#   #mutate() %>%
-#   group_by( stim_id, np_expectations,  adj_polarity) %>%
-#   mutate(mean = mean( specific)) %>%
-#    ungroup() %>%
-#    mutate(np_expectations = gsub('\"', "", np_expectations),
-#           adj_polarity = gsub('\"', "", adj_polarity),
-#           np_expectations = factor(np_expectations,
-#                                    levels = c("low", "medium", "high")),
-#           np = fct_reorder(np, as.numeric(np_expectations)),
-#           item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = "")) %>%
-
 select.items <- d.tidy.phrase.specificMarking.bs.item %>%
   select(degree, np, stim_id, superordinate, np_expectations, adj_polarity, mean) %>%
   rowwise() %>%
