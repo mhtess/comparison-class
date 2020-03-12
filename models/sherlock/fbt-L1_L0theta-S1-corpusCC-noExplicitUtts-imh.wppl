@@ -302,7 +302,7 @@ var model = function(){
 			query.add(["stim_"+stim_id, subordinate, "classPrior_sub", "NA"], subcatWeight);
 
 			if (!flat_cc_parameters) {
-				query.add(["stim_"+stim_id, "NA", "item_heirarchy_sub_basic", by_item_cc_parameters], item_set_heirarchy == "sub_basic" ? 1 : 0)
+				query.add(["stim_"+stim_id, subordinate, "item_heirarchy_sub_basic", by_item_cc_parameters], item_set_heirarchy == "sub_basic" ? 1 : 0)
 			}
 
     })
