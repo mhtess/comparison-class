@@ -1,4 +1,4 @@
-// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork by_item by_item 1
+// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork by_item fixed 1
 
 // global or by_item
 var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
@@ -6,6 +6,9 @@ var comparison_class_prior_slope = process.argv[process.argv.length - 2]
 
 var flat_cc_parameters = (comparison_class_prior_intercept == "flat" && comparison_class_prior_slope == "flat")
 var by_item_cc_parameters = (comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "by_item") ? "intercept_slope" :
+ 	(comparison_class_prior_intercept == "fixed" && comparison_class_prior_slope == "fixed") ? "single-intercept_slope" :
+	(comparison_class_prior_intercept == "fixed") ? "single-intercept_byItem-slope" :
+	(comparison_class_prior_slope == "fixed") ? "byItem-intercept_single-slope" :
 	(comparison_class_prior_intercept == "by_item") ? "intercept" :
 	(comparison_class_prior_slope == "by_item") ? "slope" :
 	"flat"
