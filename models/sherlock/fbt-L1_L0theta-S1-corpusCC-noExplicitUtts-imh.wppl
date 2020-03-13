@@ -1,4 +1,4 @@
-// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork by_item fixed 1
+// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork fixed fixed 1
 
 // global or by_item
 var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
@@ -107,7 +107,7 @@ var model = function(){
 			frequency: frequencyEffect
 		},
 		class_type_2: {
-			intercept: comparison_class_prior_intercept == "by_item" ? gaussianDrift({mu: 0, sigma: 2, width: 0.5}) : interceptEffect,
+			intercept: comparison_class_prior_intercept == "by_item" ? gaussianDrift({mu: 0, sigma: 2, width: 0.5}) : -interceptEffect,
 			frequency: comparison_class_prior_slope == "by_item" ? uniformDrift({a: -3, b: 3, width: 0.5}) : frequencyEffect
 		}
 	}
