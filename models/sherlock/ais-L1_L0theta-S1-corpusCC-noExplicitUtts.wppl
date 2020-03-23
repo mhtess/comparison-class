@@ -1,4 +1,4 @@
-// time webppl ais-L1_L0theta-S1-corpusCC-noExplicitUtts.wppl --require utils --require webppl-json by_item by_item 1
+// time webppl ais-L1_L0theta-S1-corpusCC-noExplicitUtts.wppl --require utils --require webppl-json fixed fixed 1
 
 // global or by_item
 var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
@@ -6,6 +6,9 @@ var comparison_class_prior_slope = process.argv[process.argv.length - 2]
 
 var flat_cc_parameters = (comparison_class_prior_intercept == "flat" && comparison_class_prior_slope == "flat")
 var by_item_cc_parameters = (comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "by_item") ? "intercept_slope" :
+  (comparison_class_prior_intercept == "fixed" && comparison_class_prior_slope == "fixed") ? "single-intercept_slope" :
+  (comparison_class_prior_intercept == "fixed") ? "single-intercept_byItem-slope" :
+  (comparison_class_prior_slope == "fixed") ? "byItem-intercept_single-slope" :
   (comparison_class_prior_intercept == "by_item") ? "intercept" :
   (comparison_class_prior_slope == "by_item") ? "slope" :
   "flat"
@@ -65,13 +68,15 @@ var dataPath = "../../data/";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
-// var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-produced-super.csv";
 var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedRef.csv";
 
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
 var adj_endorse_DataFile = "adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-w-freqs.csv"
 // var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
+
+
+
 
 // var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
 // var vsData = dataFrame(csv.read(dataPath + adj_endorse_DataFile), ["val"])
@@ -135,7 +140,7 @@ var model = function() {
         mu: 0,
         sigma: 2,
         width: 0.5
-      }) : interceptEffect,
+      }) : -interceptEffect,
       frequency: comparison_class_prior_slope == "by_item" ? uniformDrift({
         a: -3,
         b: 3,
@@ -374,10 +379,27 @@ var model = function() {
 
   })
 
+  // if (!flat_cc_parameters) {
+  // 	query.add(["beta", "frequency",  "sub_basic", "global"], frequencyEffect)
+  // 	query.add(["beta", "intercept",  "sub_basic", "global"], interceptEffect)
+  // } else {
+  if (!flat_cc_parameters) {
+    query.add(["beta", "frequency", "basic_super", by_item_cc_parameters], classParameters.basic_super.frequency)
+    query.add(["beta", "intercept", "basic_super", by_item_cc_parameters], classParameters.basic_super.intercept)
+    query.add(["beta", "frequency", "sub_basic", by_item_cc_parameters], classParameters.sub_basic.frequency)
+    query.add(["beta", "intercept", "sub_basic", by_item_cc_parameters], classParameters.sub_basic.intercept)
+  }
+
+  // query.add(["parameter", "silenceProb", "NA",  "NA", by_item_cc_parameters], silenceCost)
+  query.add(["speakerOptimality", "adjEndorse", "NA", by_item_cc_parameters], alphas.adj_endorse)
+  query.add(["speakerOptimality", "subordinateCC", "NA", by_item_cc_parameters], alphas.cc_inference)
+
+  // return _.object(_.flatten(parameters, true));
+  return query
 }
 
 
-var steps = 30000
+var steps = 30 //000
 var samples = 1
 var mll = AIS(model, {
   steps: steps,
