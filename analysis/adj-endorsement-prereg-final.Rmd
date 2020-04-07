@@ -242,6 +242,12 @@ df.trials.filtered <- df.trials.first_submit %>%
   filter(trial_name == "adj_endorsement_both") %>%
   rename(np_expectations =  item_cond) %>%
  # some of the item_conds were not recorded; they can be read from the CC elicitation data (df.mode final is the final classified full data set)
+  rowwise() %>%
+  mutate(
+    superordinate = ifelse(superordinate == "scripts", "writing tools", superordinate),
+     superordinate = ifelse(superordinate == "doorways", "doors", superordinate)
+  )
+df.trials.filtered1 <- df.trials.filtered %>%  
   left_join(., df.mode.final %>% distinct(stim_id, superordinate = superordinate_pl, item = NP_sg, np_exp_cc = np_expectations)) %>%
   rowwise() %>%
   mutate(
@@ -257,22 +263,22 @@ df.trials.filtered <- df.trials.first_submit %>%
     np_expectations = ifelse(item == "relay race", "medium", np_expectations),
     np_expectations = ifelse(item == "triathlon race", "high", np_expectations)
   )
-# write_csv(df.trials.filtered, path = "../models/data/adj-endorsement_filtered.csv")
+# write_csv(df.trials.filtered1, path = "../models/data/adj-endorsement_filtered.csv")
 
 length(df.mem_fail)
-length(unique(df.trials.filtered$workerid))
+length(unique(df.trials.filtered1$workerid))
 ```
 
 
 ```{r}
-df.trials.filtered %>%
+df.trials.filtered1 %>%
   group_by(degree, superordinate, item) %>%
   count()
 ```
 
 
 ```{r}
-df.trials.filtered %>%
+df.trials.filtered1 %>%
   rowwise() %>%
   mutate(
     response_pos = as.numeric(
@@ -300,8 +306,8 @@ glimpse(df.trials.tidy)
 df.trial.tidy.w.freq <- df.trials.tidy %>% rowwise() %>%
   mutate(
     NP_pl = insert_plural_np(tolower(NP_sg), superordinate_pl),
+     
     superordinate_pl = ifelse(superordinate_pl == "venue", "venues", superordinate_pl),
-    superordinate_pl = ifelse(superordinate_pl == "races", "rallies", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == "dens", "animal dens", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == "audio recordings", "audios", superordinate_pl)
    
@@ -314,7 +320,7 @@ df.trial.tidy.w.freq <- df.trial.tidy.w.freq %>%
   left_join(., df.frequencies, by=c("superordinate_pl"="NPs")) %>%  # add superordinate frequencies
   select(workerid, stim_id, degree, superordinate_pl, NP_sg, NP_pl, np_expectations, adj_polarity, val, subFreq = Frequencies.x, superFreq = Frequencies.y)
 
-write_csv(df.trial.tidy.w.freq, '../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-w-freqs.csv')
+#write_csv(df.trial.tidy.w.freq, '../data/adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-w-freqs.csv')
 ```
 
 
