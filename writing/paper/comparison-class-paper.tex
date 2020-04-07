@@ -95,6 +95,7 @@
 
 \newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\) (\rlgetnum{#1}{Rowname}{#2}{l.95..CI}{3}, \rlgetnum{#1}{Rowname}{#2}{u.95..CI}{3})}
 
+\newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2} (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2})}
 
 \authornote{Correspondence concerning this article should be addressed to Michael
 Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
@@ -735,50 +736,22 @@ Our model is not only useful for making qualitative predictions about the compar
 The model's primary capacity to predict gradience in comparison class inference is as a function of distributional knowledge about scalar properties of categories $P(x)$ (e.g., the heights of basketball players, temperatures in Winter, ...).
 Thus, the model provides a strong baseline hypothesis for evaluating comparison class inferences by the influence of world knowledge $P(x)$.
 Variance in inferences that cannot be explained by world knowledge can be captured in the model via the comparison class prior $P(c \mid k$), which encodes baseline expectations about the comparison class given the category membership of the referent.
+We explore each of these components of the model to elucidate the cognitive representations that underly comparison class inferences.
 
 \subsection{Model overview}
 
-To better understand the variance in comparison class inferences, we formalize a set of models which differ in the number of free parameters afforded the comparison class prior. 
+To better understand the representations that underly comparison class inferences, we formalize a baseline model that makes inferences based only on distributional knowledge about scalar properties of categories $P(x)$ and a set of alternative models which differ in how the comparison class prior $P(c \mid k)$ is parameterized. 
+We estimate the distributional knowledge about properties $P(x)$ with a \emph{descriptive Bayesian approach} where we infer, rather than stipulate, the relevant model parameters \cite{tauber2017}.
+These parameters are not totally free, however; we constrain the parameters governing distributional knowledge about properties by using those parameters to predict an independent set of linguistic judgments about the felicity of the same adjectives applying to the same categories (Expt.~3; n=375, see SI for details). The judgments are predicted from the world knowledge parameters which are fed into a second RSA model that shares much of the same structure as the comparison class inference model.
+
+The variability across items in comparison class inferences that cannot be explained by distributional knowledge about properties could be attributed to baseline expectations about what comparison classes are likely to be used: the comparison class prior $P(c \mid k)$. 
+Baseline expectations about conceptual comparison class could be a function of the level of abstraction of the categories in question as well as the usage frequency of the noun phrases used to describe those categories. 
+For example, basic-level categories may be more probable conceptual comparison classes because of their utility in everyday reasoning \cite{rosch1975family}; additionally, we might expect the relative probability of basic-level~vs.~subordinate level categories to differ from basic~vs.~superordinate categories.
+To investigate these possibilities, we construct and compare models which differ in how the comparison class prior is parameterized.
+% one in which the inference is influenced by the frequency of the noun phrase, and one in which both frequency and a basic-level bias have an influence (maximal model). 
+We infer all model parameters using a Bayesian data analytic model that infers the world knowledge shared between these two tasks (comparison class inference and adjective endorsements) along with the comparison class prior parameters (which depend on the model variant) and the speaker optimality free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
+
 % bThe comparison class prior is   a construct of theoretical interest in its own right, and we take the first steps to understand this construct in this analysis. 
-We surmise that the comparison class prior plausibly encodes a basic-level bias \cite{rosch1975family}, and we further posit that the frequency of usage of a noun phrase also plays in a role in determining if a comparison class is likely. 
-We thus construct and compare four models: one in which the item variability is purely a function of distributional knowledge about scalar properties of categories, one in which the comparison class inference includes a bias for basic-level categories, one in which the inference is influenced by the frequency of the noun phrase, and one in which both frequency and a basic-level bias have an influence (maximal model). 
-
-
-In the maximal model, basic-level bias and frequency are combined to  determine the comparison class prior in a logistic linear model: $P(c) = \text{logistic}(\beta_0 + \beta_1 \cdot \log (\frac{\hat{f}_{specific}}{\hat{f}_{general}}) )$, where $\hat{f}_k$  represents the frequency of the comparison class NP $k$ estimated from the Google WebGram corpus, $\beta_1$ is the sensitivity of the comparison class prior to relative frequency, and $\beta_0$ is the basic-level bias.
-We do not know \emph{a priori}, however, if the nouns we use to introduce the referents (Referent NPs) are basic-level categories or subordinate level categories, and hence, whether the basic-level bias should increase or decrease the probability of producing a referent NP comparison class.
-Thus, we endow our data-analytic model with two sets of regression coefficient parameters, and introduce a Bernoulli variable for each NP to indicate whether each it is a subordinate-level term or basic-level term (Figure \ref{fig:bayesnet}).\footnote{
-	The reader may wonder why we introduce a Bernoulli variable for each NP rather than for each set of 3 NPs (e.g., \emph{basketball players}, \emph{soccer players}, \emph{gymnasts}~vs.~\emph{people}) since that is the format in which we elicited our NPs from participants. We noticed that not all of our item sets were consistent in how salient a common \emph{general} category would be, possibly due to typicality effects (e.g., marshmallows, chocolate, and jolly ranchers are not equally good examples of the general category \emph{candy}).  In addition, since we do not introduce participants to our General NPs (e.g., \emph{people}), it is plausible that different General NPs come to mind given different Specific NPs in the same item set. 
-}
-
-%We nd combine it with a basic-level bias encoded as an intercept in a logistic linear model: $P(c) \propto \beta_0 + \beta_1 \cdot \log (\hat{f}_k)$.
-
-
-%The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what comparison classes are likely to be used, given that the referent is a member of a particular subordinate category $k$.
-%We simplify the full comparison class inference problem to deal with reasoning about only a specific~vs.~general class.
-%This prior probability of these comparison class plausibly includes a basic-level bias \cite{rosch1975family} but could also reflect how frequently these classes are used in conversation.
-%\mht{update with final model: inference about sub--basic vs. basic--super item?}
-
-Finally, to estimate the distributional knowledge about scalar properties of categories $P(x)$, we take a \emph{descriptive Bayesian approach}  where we infer, rather than stipulate, the relevant model parameters \cite{tauber2017}.
-Our approach is not completely descriptive, however: The parameters are constrained to predict linguistic judgments about the felicity of the adjectives applying to the same categories (Expt.~3; n=375), via a second RSA model which shares much of the same structure as the comparison class inference model.
-We integrate two data sources (comparison class inference and adjective endorsements) using a Bayesian data analytic model that infers the world knowledge shared between these two tasks, along with the comparison class prior parametes, and the few other free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
-%This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to predict and explain broader coverage data sets while still constraining flexibility by forcing models to predict more distinct data points. 
-
-\subsection{Model details}
-
-%The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
-We construct data-analytic models with both the comparison class inference and adjective endorsement RSA components as sub-models that make quantitative predictions about the data from both of these experiments (Figure~\ref{fig:bayesnet}).
-The inference and endorsement sub-models share their prior world knowledge $P(x \mid k)$ (e.g., heights of basketball players), which we infer from both data sets.
-We put the same priors over the parameters of each subordinate distribution $k$ for each degree $k$: $\mu^d_k \sim \text{Uniform}(-3, 3)$, $\sigma^d_k \sim \text{Uniform}(0, 5)$, since they have standardized units.
-The comparison class prior $P(c \mid k)$ is parameterized by logistic function, which can encode a basic-level bias and an effect of corpus frequency, depending on the model, with the following parameters on the regression coefficients:  $\beta_0 \sim \text{Gaussian}(0, 2)$, $\beta_1 \sim \text{Uniform}(-3, 3)$. 
-Each RSA model has an additional speaker optimality parameter $\alpha_{i}$ not of direct theoretical interest.
-We use priors consistent with the previous literature: $\alpha_i \sim \text{Uniform}(0, 20)$.
-We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 3 MCMC chains with 450,000 iterations each, discarding the first 150,000 for burn-in. 
-Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently. 
-
-%The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
-%The adjective endorsement model has two speaker optimality parameters: 
-%$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
-
 
 \begin{figure}[ht!]
   \begin{center}
@@ -803,13 +776,20 @@ Convergence was checked through visual inspection of the different chains to ens
    \node[latent, above=0.9 of phi, xshift=0.5cm] (zi) {$z_{d, k}$} ; %
 %   \edge {zi} {c}; %
 %   \node[const, right=1.3 of c, yshift=1.5cm] (fshat) {$\hat{f}_s$} ; %
-   \node[latent, right=1.2 of phi, yshift=1.8cm]  (b1) {$\beta^{0}_{0}$} ; %
-   \node[latent, right=1.9 of phi, yshift=1.5cm]  (b2) {$\beta^{0}_{1}$} ; %
-   
-   \node[latent, right=1.2 of phi, yshift=0.2cm]  (b11) {$\beta^{1}_{0}$} ; %
-   \node[latent, right=1.9 of phi, yshift=0.5cm]  (b12) {$\beta^{1}_{1}$} ; %
+%   \node[latent, right=1.2 of phi, yshift=1.8cm]  (b1) {$\beta^{0}_{0}$} ; %
+%   \node[latent, right=1.9 of phi, yshift=1.5cm]  (b2) {$\beta^{0}_{1}$} ; %
+%   
+%   \node[latent, right=1.2 of phi, yshift=0.2cm]  (b11) {$\beta^{1}_{0}$} ; %
+%   \node[latent, right=1.9 of phi, yshift=0.5cm]  (b12) {$\beta^{1}_{1}$} ; %
 
-   \factor[above=of phi] {phi-f} {left:logistic} {fhat,b1,b2, b11, b12, zi} {phi}; %
+
+   \node[latent, right=1.2 of phi, yshift=1.8cm]  (b1) {$\beta^{0}_{0}$} ; %   
+   \node[latent, right=1.9 of phi, yshift=1cm]  (b12) {$\beta_{1}$} ; %
+   \node[latent, right=1.2 of phi, yshift=0.2cm]  (b11) {$\beta^{1}_{0}$} ; %
+
+
+%   \factor[above=of phi] {phi-f} {left:logistic} {fhat,b1,b2, b11, b12, zi} {phi}; %
+   \factor[above=of phi] {phi-f} {left:logistic} {fhat,b1, b11, b12, zi} {phi}; %
    \factor[above=of c] {c-f} {left:Bern} {phi} {c}; %
 
   \node[latent, left=1.2 of x, yshift=0.5cm] (mx) {$\mu_{d, k}$} ; %
@@ -893,19 +873,20 @@ Convergence was checked through visual inspection of the different chains to ens
 %  \edge {f} {c} ; %
 %  \edge {f,g} {x} ; %
 
-\node[] at (4,2) {$\beta^0_0, \beta^1_0 \sim \text{Gaussian}(0, 2)$};
-\node[] at (4,1.5) {$\beta^0_1, \beta^1_1 \sim \text{Uniform}(-3, 3)$};
-\node[] at (4,1) {$z_{d, k} \sim \text{Bernoulli(0.5)}$};
-\node[] at (4,0.5) {$\mu_{d, k}\sim \text{Uniform(-3, 3)}$};
-\node[] at (4,0) {$\sigma_{d, k}\sim \text{Uniform(0, 3)}$};
-\node[] at (4,-0.5) {$\alpha_1, \alpha_2 \sim \text{Uniform(0, 20)}$};
+\node[] at (4,6) {$\beta^0_0, \beta^1_0 \sim \text{Gaussian}(0, 2)$};
+%\node[] at (4,5.5) {$\beta^0_1, \beta^1_1 \sim \text{Uniform}(-3, 3)$};
+\node[] at (4,5.5) {$\beta_1 \sim \text{Uniform}(-3, 3)$};
+\node[] at (4,5) {$z_{d, k} \sim \text{Bernoulli(0.5)}$};
+\node[] at (4,4.5) {$\mu_{d, k}\sim \text{Uniform(-3, 3)}$};
+\node[] at (4,4) {$\sigma_{d, k}\sim \text{Uniform(0, 3)}$};
+\node[] at (4,3.5) {$\alpha_1, \alpha_2 \sim \text{Uniform(0, 20)}$};
 
-\node[] at (5,-1.5) {$\phi_{d,k} = \text{logistic} (\begin{cases} 
+\node[] at (5,0) {$\phi_{d,k} = \text{logistic} (\begin{cases} 
 	\beta^0_0 +\beta^0_1\cdot \hat{f}_k  &\mbox{if } z_{k, d} = 0 \\ 
 	\beta^1_0 +\beta^1_1\cdot \hat{f}_k  &\mbox{if } z_{k, d} = 1 
 	\end{cases}$)};
-\node[] at (4,-2.5) {$c_{d,k} \sim \text{Bernoulli}(\phi_{d,k})$};
-\node[] at (4,-3) {$x_{d,k} \sim \text{Gaussian}(\mu_{d,k}, \sigma_{d,k})$};
+\node[] at (4,-1) {$c_{d,k} \sim \text{Bernoulli}(\phi_{d,k})$};
+\node[] at (4,-1.5) {$x_{d,k} \sim \text{Gaussian}(\mu_{d,k}, \sigma_{d,k})$};
 %(3n +1)/2 & \mbox{if } n \equiv 1 \end{cases} \pmod{2}.
 
 
@@ -913,19 +894,164 @@ Convergence was checked through visual inspection of the different chains to ens
 
     \end{tabular}
   \end{center}
-  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and $\beta_1$, an effect of frequency of the noun phrase $\hat{f}_k$. Our category stimuli may be either subordinate level categories of basic-level categories determined by parameter $z_{d,k}$, which gates between using two different sets of comparison class prior parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
+  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and $\beta_1$, an effect of frequency of the noun phrase $\hat{f}_k$. Our category stimuli may be either subordinate level categories of basic-level categories determined by parameter $z_{d,k}$, which gates between using two different basic-level bias comparison class parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
+
+
+
+%We nd combine it with a basic-level bias encoded as an intercept in a logistic linear model: $P(c) \propto \beta_0 + \beta_1 \cdot \log (\hat{f}_k)$.
+
+
+%The prior distribution over comparison classes $P(c \mid k)$ reflects listeners' expectations of what comparison classes are likely to be used, given that the referent is a member of a particular subordinate category $k$.
+%We simplify the full comparison class inference problem to deal with reasoning about only a specific~vs.~general class.
+%This prior probability of these comparison class plausibly includes a basic-level bias \cite{rosch1975family} but could also reflect how frequently these classes are used in conversation.
+%\mht{update with final model: inference about sub--basic vs. basic--super item?}
+
+
+%This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to predict and explain broader coverage data sets while still constraining flexibility by forcing models to predict more distinct data points. 
+
+\subsection{Model details}
+
+
+In the baseline model, the comparison class prior is uninformed and does not provide an \emph{a priori} preference for the Specific NP or the General NP; thus, all of the by-item variability in comparison class inferences in this model must be a function of the distributional knowledge about properties.
+We assume this distributional knowledge about properties $P(x \mid k)$ (e.g., heights of basketball players) takes the form of Gaussian distributions. Since the judgments we model are binary (Expt.~2: Specific NP vs. General NP; Expt.~3: binary felicity judgments), we assign relativized units to the world knowledge distributions. We fix the General category distribution to be a unit-normal distribution and infer the parameters of the Specific category distribution. 
+We put the same priors over the parameters of each Specific category distribution $k$ for each degree $d$: $\mu^d_k \sim \text{Uniform}(-3, 3)$, $\sigma^d_k \sim \text{Uniform}(0, 3)$.
+
+
+For the alternative models that assign some \emph{a priori} preference the Specific or General NPs, we parameterize the comparison class prior via a logistic linear model, where a basic-level bias and an effect of usage frequency can play a part: $P(c) = \text{logistic}(\beta_0 + \beta_1 \cdot \log (\frac{\hat{f}_{specific}}{\hat{f}_{general}}) )$, where $\hat{f}_k$  represents the frequency of the comparison class  $k$ NP estimated from the Google WebGram corpus, $\beta_1$ is the sensitivity of the comparison class prior to relative frequency, and $\beta_0$ is a basic-level bias.
+Our crowd-sourced stimuli generation procedure (Expt.~1) presents interesting challenges and opportunities in this analysis. 
+\emph{A priori}, we do not know if the NPs we use to introduce the referents (Referent NPs; those generated by participants in Expt.~1) are basic-level categories or subordinate level categories, and hence, whether the more general comparison class would correspond to a superordinate-level category or a basic-level category.
+A basic-level bias could plausibly operate differently for a subordinate~vs.~basic-level inference than for a basic~vs.~superordinate level inference. 
+Specifically, superordinate comparison classes might be the most implausible, because superordinate categories are more heterogenous in comparison to basic-level or subordinate-level categories.
+Thus, we endow our data-analytic model with two regression coefficient parameters corresponding to the intercept term (i.e., the basic-level bias term), and introduce a Bernoulli random variable $z$ for each NP to indicate whether it is a subordinate-level term or basic-level term (Figure \ref{fig:bayesnet}).
+The alternative models that do not have both basic-level bias terms or frequency effect terms follow the same parameterization with the parameters of the various lesioned components set to 0. %\footnote{
+%	The reader may wonder why we introduce a Bernoulli variable for each NP rather than for each set of 3 NPs (e.g., \emph{basketball players}, \emph{soccer players}, \emph{gymnasts}~vs.~\emph{people}) since that is the format in which we elicited our NPs from participants. We noticed that not all of our item sets were consistent in how salient a common \emph{general} category would be, possibly due to typicality effects (e.g., marshmallows, chocolate, and jolly ranchers are not equally good examples of the general category \emph{candy}).  In addition, since we do not introduce participants to our General NPs (e.g., \emph{people}), it is plausible that different General NPs come to mind given different Specific NPs in the same item set. 
+%}
+
+%The RSA listener (Eq. \ref{eq:L1a}) and speaker (Eq. \ref{eq:S2}) models make quantitative predictions about comparison class interpretation and adjective endorsement, respectively.
+We construct data-analytic models with both the comparison class inference and adjective endorsement RSA components as sub-models that make quantitative predictions about the data from both of these experiments (Figure~\ref{fig:bayesnet}).
+The inference and endorsement sub-models share their prior world knowledge $P(x \mid k)$ (e.g., heights of basketball players), which we infer from both data sets.
+The comparison class prior $P(c \mid k)$ is parameterized by logistic function, which can encode a basic-level bias and an effect of corpus frequency, depending on the model, with the following parameters on the regression coefficients:  $\beta_0 \sim \text{Gaussian}(0, 2)$, $\beta_1 \sim \text{Uniform}(-3, 3)$. 
+Each RSA model has an additional speaker optimality parameter $\alpha_{i}$ which determines the degree to which speakers are assumed to be informative and which is not of direct theoretical interest.
+We use priors consistent with the previous literature: $\alpha_i \sim \text{Uniform}(0, 20)$.
+We ran four different models, corresponding to the different ways of parameterizing the comparison class prior: (1) flat prior model (assumes the comparison class prior is always 50/50 between specific and general class); (2) intercept only model (assumes a basic-level bias), (3) slope only model (assumes an effect of corpus frequency, but no basic-level bias), (4) slope and intercept.
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 3 MCMC chains with 450,000 iterations each, discarding the first 150,000 for burn-in. 
+Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently. 
+
+%The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
+%The adjective endorsement model has two speaker optimality parameters: 
+%$\{\alpha^\text{2}_{1}, \alpha^\text{2}_{2}\}$.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{figs/model_scatters_modelVariants.pdf}
+\caption{Model fits for Expt.~2 (Comparison Class Inference) and Expt.~3 (Adjective Endorsement) for four models that differ in their parameterization of the comparison class prior. Flat prior model assumes all comparison classes are equally likely a priori. Basic-level bias model assumes that there is a preference for a basic-level comparison class. Frequency effect assumes the prior probability of a comparison class tracks the frequency of the NP in a corpus. Basis-level and frequency effect assumes that the prior probability of a comparison class is a function of a basic-level bias and frequency. Dots represents means of the human judgments (proportion Specific-NP for Expt.~2; proportion endorsement for Expt.~3) and the maximum a-posteriori estimate of the model's predictions. Lines represents bootstrapped 95\% confidence intervals for the data and 95\% Bayesian credible intervals for the models.}
+\label{fig:scatters}
+\end{figure}
+
 
 \subsection{Model results}
 
 We examined the posterior distributions over parameters and posterior predictive distributions separately by chain to confirm that the model results were consistent across runs of MCMC chains, which they were. 
+Our BDA model returns posterior distributions over the parameters of the RSA models, governing world knowledge, the comparison class prior, and the speaker optimality parameters. We first determine which parameterization of the comparison class prior (flat, basic-level bias, frequency, basic-level bias and frequency) is the best for our comparison class inference RSA model to predict the comparison class inference data. 
+We do so by examining the model's posterior predictive distribution over comparison class inference choices.
+The posterior predictive distribution marginalizes over the inferred values of the parameters to show what data the model would expect to see, given the parameters it has learned from the data. 
+Posterior predictive checks are an important step in model validation and provide a window into the model's strengths and shortcomings. 
+%and (2) comparing the marginal likelihood of the data under each model to compute a Bayes Factor (BF) as a measure of formal model comparison. BFs quantify how well the model predicts the data, averaging over the prior distribution over parameters; by taking the average over the model's prior distribution over parameters, the measure explicitly takes into account model complexity because higher complexity models have wider prior distributions over the parameter \cite{lee2014bayesian}.
 
-Our BDA model returns posterior distributions over the parameters of the RSA models -- world knowledge parameters, comparison class prior scaling parameters, 
 
-The full model's posterior over the RSA and data-analytic parameters were consistent with prior literature and intuition. The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) intervals for model parameters specific to the \(L_1\) model used for comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\), \(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\) model used for adjective endorsement: \(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\), \(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions corresponding to subordinate class priors were consistent with the \emph{a priori} ordering of these subordinate classes (low, medium, high) used in these tasks (Figure \ref{fig:modelParameters} top).
 
-Finally, the full model's posterior predictive distribution does an excellent job at capturing the quantitative variability in comparison class inferences: \(r^2(30) = 0.96\), and adjective endorsements: \(r^2(30) = 0.98\) (Figure \ref{fig:posteriorPredictiveScatters}). Because of the overall preference for the subordinate comparison class, many of the data points are distributed above 0.5. Even for these fine-grained differences, the model does a good job at explaining the quantitative variability in participants' data (Figure \ref{fig:posteriorPredictiveScatters} right). Thus, the variability in comparison class inferences we observe in our behavioral data can be accounted for the constructs posited in our model (namely, the comparison class prior and degree priors).
+
+All models do a good job at accommodating the Adjective Endorsement data (Figure \ref{fig:scatters}, bottom row).
+The BDA models adjust the parameters of the world knowledge priors used in RSA in such a way as to make the adjectives felicitous for the categories in question; in this way, the adjective endorsement task (Expt.~3) serves as a norming data set. 
+This result is a good sanity check; it shows that the adjective endorsement data is directly constraining the parameters of the world knowledge priors. 
+We see this reflected in the imputed world knowledge priors, which reflect intuitively accurate general expectations about the categories (Figure \ref{fig:worldPriors}). 
+
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}
+%%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+%\caption{xxx.}\label{fig:worldPriors}
+%\end{figure}
+
+
+\begin{figure}[t!]
+    \centering
+    \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference (Expt.~2) and Adjective Endorsement (Expt.~3)  data sets. See Figure \ref{fig:bayesnet} for full data-analytic model.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} \\
+    \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4). ]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}}
+    \caption{Quantitative modeling results.}
+\end{figure}
+
+
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}
+%%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+%\caption{Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4).}\label{fig:residuals}
+%\end{figure}
+
+
+The predictions of the different model variants come apart for the Comparison Class Inference data (Expt.~2; Figure \ref{fig:scatters}). 
+The baseline Flat Prior model predicts variability in comparison class inferences only as a function of world knowledge about the properties, assuming all comparison classes are equally likely \emph{a priori}; this model explains roughly 17\% of the variance.
+The Frequency effect model assumes NPs with higher usage frequency will more likely be used as comparison classes and is able to explain roughly 52\% of the variance.
+The Basic-level bias model explains roughly 73\% of the variance by assuming that basic-level comparison classes may be more likely \emph{a priori} and segregates the set of stimuli into those for which it believes the basic-level category is the Specific NP or those for which the basic-level category is the unmentioned, more general category. 
+Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- a combination of the two alternative models -- gives rise to the best model predictions in terms of variance explained (78\%) and mean squared error (Table \ref{tab:r2bf}), suggesting that the structure of the comparison class reflects both a basic-level bias and an effect of the frequency of the NP, in addition to other possible factors. 
+
+
+
+%The parameterization of the comparison class prior does not directly affect the model's predictions for the Adjective Endorsement (Expt.~3) data; these predictions are purely a function of the RSA model (see Supplement) and the distributional world knowledge used for both experiments (e.g., the distributions of heights for people). Thus, it is no surprise that all model variants do a good job at explaining the Adjective Endorsement data, and it is a good sanity check that the adjective endorsement RSA model is of the right form to accommodate the Adjective Endorsement data. 
+%Our full model does a quite good job at accounting for the gradability of these inferences ($r = 0.88; r^2 = 0.77$)
+
+\begin{center}
+  \begin{table}[h]
+    \centering
+    \pgfplotstabletypeset[sci zerofill,
+    col sep = comma,
+    every head row/.style={before row = \toprule, after row = \midrule},
+    every last row/.style={after row = \bottomrule},
+    columns/model_variant/.style={string type, column name={Model}, column type = l},
+    columns/subordinateCC_r2/.style={string type, column name={$r^2$ Expt.~2}, column type = l,  sci sep align, precision=3},
+   columns/subordinateCC_mse/.style={fixed, column name={$MSE$ Expt.~2}, column type = l, dec sep align, precision=4},
+    columns/adjEndorse_r2/.style={string type, column name={$r^2$ Expt.~3}, column type = l, sci sep align, precision=3},
+     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ Expt.~3}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
+    \label{tab:r2bf}
+  \end{table}
+\end{center}
+
+
+
+
+To gain further insight into the comparison class inference results, we examine the full model's posterior distribution over parameters.
+We start with the global parameters. As a sanity check, the speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}$, $\alpha_2 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}$.
+We also find a positive effect of frequency of the noun phrase -- $\beta_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}$.
+
+The full model infers on a by-item basis whether the basic-level category is the supplied NP or whether the basic-level category is an unmentioned, more superordinate category, because we expect the basic-level bias to operate differently for these different regimes of items.
+As expected, the comparison class prior NPs that were categorized as basic-level categories strongly favored those mentioned categories -- $\beta^1_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_basic_super}$.
+For NPs that were categorized as subordinate categories (i.e., the basic-level category was an unmentioned, more superordinate category), the comparison class prior showed no appreciable basic-level bias -- $\beta^0_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_sub_basic}$.
+From these parameters values, we can compute the overall imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming a constant effect of usage frequency), which reflect the finding that basic and subordinate comparison classes are highly accessible and superordinate comparison classes less so (Figure \ref{fig:parameters}).
+%and a positive effect of frequency of the noun phrase -- $\beta^0_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_sub_basic}$.
+
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/model_comparisonClassPriorParameters.pdf}
+\caption{Imputed distributions over the prior probabilities of comparison classes at different levels of abstraction. Basic- and subordinate-level categories comprise \emph{a priori} likely comparison classes, while superordinate categories are less likely to serve as comparison classes.}\label{fig:parameters}
+\end{figure}
+
+Though our fully parameterized model does the best job at accounting for the variability in comparison class inferences, the data set exhibits even more variability than our model can account for. Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals). 
+
+ 
+
+
+
+
+
+
+%The full model's posterior over the RSA and data-analytic parameters were consistent with prior literature and intuition. The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) intervals for model parameters specific to the \(L_1\) model used for comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\), \(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\) model used for adjective endorsement: \(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\), \(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions corresponding to subordinate class priors were consistent with the \emph{a priori} ordering of these subordinate classes (low, medium, high) used in these tasks (Figure \ref{fig:modelParameters} top).
+
+%Finally, the full model's posterior predictive distribution does an excellent job at capturing the quantitative variability in comparison class inferences: \(r^2(30) = 0.96\), and adjective endorsements: \(r^2(30) = 0.98\) (Figure \ref{fig:posteriorPredictiveScatters}). Because of the overall preference for the subordinate comparison class, many of the data points are distributed above 0.5. Even for these fine-grained differences, the model does a good job at explaining the quantitative variability in participants' data (Figure \ref{fig:posteriorPredictiveScatters} right). Thus, the variability in comparison class inferences we observe in our behavioral data can be accounted for the constructs posited in our model (namely, the comparison class prior and degree priors).
 
 \section{General Discussion}
 
@@ -997,7 +1123,7 @@ The inference about the comparison class we model here is similar.
 The speaker utters an adjectival sentence without a strong cue to the comparison class: \emph{He [a basketball player] is tall}. 
 A speaker would only utter such a sentence if they believed either (i) the comparison class was already in the common ground or (ii) the listener can reasonably be assumed to infer the comparison class.
 The utterance makes sense either if the comparison class is \emph{people} or \emph{basketball players}, but it is comparatively more likely to be true if the comparison class is \emph{people}. 
-\mht{to do: In the Computational Model section, we showed how the inference about the comparison class goes through regardless of whether the listener assumes the speaker was presupposing the comparison class or if they assumed the listener could reconstruct the intended comparison class.}
+In the Computational Model section, we showed how the inference about the comparison class goes through regardless of whether the listener assumes the speaker was presupposing the comparison class or if they assumed the listener could reconstruct the intended comparison class.
 Thus, whereas standard linguistic theories of presupposition accommodation are used in order to make an otherwise infelicitous or incomprehensible utterance into a felicitous or comprehensible utterance, our model adjusts the comparison class in a graded manner in order to raise the probability that utterance would be true.
  
 %The situation we model is one of asymmetric knowledge: The listener is uncertain about the comparison class, but assumes that the speaker does not represent their uncertainty. 
@@ -1025,19 +1151,22 @@ In a similar way, inferring that the speaker meant the basketball player is shor
 This potential symmetry between comparison classes and representations of referents could have implications for theories of alternative utterances: For example, the speaker said ``cat'' and not ``drawing of a cat'' because they believed the listener would not be confused, given the context, that the referent is not an actual cat. 
 
 We have addressed a particular aspect of comparison class inference: deciding among multiple possible conceptually-based comparison classes. 
-Other kinds of comparison classes exist and are understood by even very young children \cite<e.g., perceptually-based comparisons and functional comparisons as in ``big for the doll'';>{Ebeling1994}.
+Other kinds of comparison classes are possible (e.g., perceptually-based comparisons and functional comparisons as in ``big for the doll'') and are understood by even very young children \cite{Ebeling1994}.
 The inferential machinery we present in our model of comparison class inference is general and should apply equally well to these other kinds of comparison classes, once a hypothesis space of comparison class is determined.
-Determining this hypothesis space of comparison classes is an 
-We also do not present a general theory for where the hypothesis space of comparison classes come from. 
+Determining this hypothesis space of comparison classes is an important future direction for this approach. 
 For example, how do we know to even consider the comparison classes of basketball players vs. people, and not all objects in general? 
-It is possible that \emph{objects} are a comparison class that listeners would consider given the right context and our assumption of constructing comparison classes out of a taxonomic hierarchy is consistent with \emph{objects} being a possible comparison class.
-However, just because a comparison class is in the hypothesis space does not entail that is a likely comparison class: Indeed, we observe in our quantitative modeling results that a uniform prior distribution over comparison classes is unlikely. 
-Our solution at present is just to say that \emph{objects} is a comparison class with low probability, but why it has low prior probability, we have less to say about.
-\mht{Show simulations of comparison class inference with classes that have same mean but increase in variance?}
-%For example, the comparison class of ``people'' for heights of individuals is relatively more salient than the class of ``produce'' (or, ``fruits and vegetables'') for the weights of particular fruits and vegetables. 
-As a proxy for the prior probability of a comparison class, we used a (logistic) linear function with an intercept to reflect a basic-level bias \cite{rosch1975family} and a slope of the frequency of the noun phrase in a corpus. 
+\emph{Objects} may be a comparison class that listeners would consider given the right context and our assumption of constructing comparison classes out of a taxonomic hierarchy is consistent with \emph{objects} being a candidate comparison class.
+However, just because a comparison class is in the hypothesis space does not entail that is a likely comparison class: Indeed, we observe in our quantitative modeling results that a uniform prior distribution over comparison classes is unlikely, and in fact, superordinate categories have the lowest probability of providing the comparison class. 
+The fact that superordinate categories are dispreferred may be a product of the fact that superordinate categories tend to have higher variability across members than basic-level or subordinate level categories. 
+Our modeling work also shows that usage frequency of the noun phrase contributes to the comparison class prior. 
 Corpus frequency is a composite measurement of factors relevant for speech production. 
-Its utility in this model suggests that utterances without an explicit comparison class (e.g., ``It's warm outside'') may in fact be incomplete sentences, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension \cite{bergen2015strategic}. 
+Its utility in this model suggests that utterances without an explicit comparison class (e.g., ``It's warm outside'') may in fact be elliptical sentences, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension \cite{bergen2015strategic}. 
+
+%Our solution at present is to say that \emph{objects} is a comparison class with low probability, but why should it have low prior probability?
+%From our modeling work, we found that the \emph{superordinate} level was the least likely to give rise to a comparison class, and that may result from superordinate categories having a 
+%\mht{Show simulations of comparison class inference with classes that have same mean but increase in variance?}
+%For example, the comparison class of ``people'' for heights of individuals is relatively more salient than the class of ``produce'' (or, ``fruits and vegetables'') for the weights of particular fruits and vegetables. 
+%As a proxy for the prior probability of a comparison class, we used a (logistic) linear function with an intercept to reflect a basic-level bias \cite{rosch1975family} and a slope of the frequency of the noun phrase in a corpus. 
 
 
 
@@ -1246,7 +1375,7 @@ This analysis confirms that our experimental items bring to mind the kinds of ge
 \centering
 \includegraphics[width=\textwidth]{figs/bars_adj_finalExpt_pilot_byItem.pdf}
 %{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Experiment 2 results for a subset of the items.}\label{fig:adjEndorseItems}
+\caption{Experiment 3 (Adjective Endorsement) results for a subset of the items.}\label{fig:adjEndorseItems}
 \end{figure}
 
 \subsection{Bayesian data analysis model supplementary details}

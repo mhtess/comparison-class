@@ -1,11 +1,15 @@
-// time webppl ais-L1_L0theta-S1-corpusCC-noExplicitUtts.wppl --require utils --require webppl-json by_item by_item 1
+// time webppl ais-L1_L0theta-S1-corpusCC-noExplicitUtts.wppl --require utils --require webppl-json fixed fixed single-intercept_slope 1
 
 // global or by_item
-var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
-var comparison_class_prior_slope = process.argv[process.argv.length - 2]
+var comparison_class_prior_intercept = process.argv[process.argv.length - 4]
+var comparison_class_prior_slope = process.argv[process.argv.length - 3]
+var degree_prior_param_file = process.argv[process.argv.length - 2]
 
 var flat_cc_parameters = (comparison_class_prior_intercept == "flat" && comparison_class_prior_slope == "flat")
 var by_item_cc_parameters = (comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "by_item") ? "intercept_slope" :
+  (comparison_class_prior_intercept == "fixed" && comparison_class_prior_slope == "fixed") ? "single-intercept_slope" :
+  (comparison_class_prior_intercept == "fixed") ? "single-intercept_byItem-slope" :
+  (comparison_class_prior_slope == "fixed") ? "byItem-intercept_single-slope" :
   (comparison_class_prior_intercept == "by_item") ? "intercept" :
   (comparison_class_prior_slope == "by_item") ? "slope" :
   "flat"
@@ -61,43 +65,23 @@ var thresholdPrior = cache(function(form) {
 
 
 var dataPath = "../../data/";
-// var dataPath = "/home/mtessler/projects/comparison-class/data/"
-// var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
-// var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
-// var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
-// var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-produced-super.csv";
 var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedRef.csv";
-
-// var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
-// var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
-var adj_endorse_DataFile = "adjective-endorsement-prereg-final/adjective-endorsement-prereg-trials-w-freqs.csv"
-// var corpus_frequency_DataFile = "webgram-freqs-unique-nps.csv";
-
-// var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
-// var vsData = dataFrame(csv.read(dataPath + adj_endorse_DataFile), ["val"])
-// var corpus_frequency_data =  dataFrame(csv.read(dataPath + corpus_frequency_DataFile), ["Frequencies"])
 var ccData = readDataFile(dataPath + cc_inference_DataFile, ["stim_id", "specific", "subFreq", "superFreq"])
-var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["stim_id", "val", "subFreq", "superFreq"])
-// var corpus_frequency_data = readDataFile(dataPath + corpus_frequency_DataFile, ["Frequencies"])
+
+var itemParamData = readDataFile("worldKnowledge_paramMAP_" + degree_prior_param_file + ".csv", ["mu", "sigma"])
 
 var logistic = function(x) {
   1 / (1 + Math.exp(-x))
 }
 
-var degrees = levels(vsData, "degree");
+var degrees = levels(ccData, "degree");
 var stim_ids = sort(levels(ccData, "stim_id"));
 // display(stim_ids)
 // var degrees = degrees0.slice(0, degrees0.length - 1);
 
 var model = function() {
 
-  // separate speakerOptimality for each task
   var alphas = {
-    adj_endorse: uniformDrift({
-      a: 0,
-      b: 20,
-      width: 2
-    }),
     cc_inference: uniformDrift({
       a: 0,
       b: 20,
@@ -135,7 +119,7 @@ var model = function() {
         mu: 0,
         sigma: 2,
         width: 0.5
-      }) : interceptEffect,
+      }) : -interceptEffect,
       frequency: comparison_class_prior_slope == "by_item" ? uniformDrift({
         a: -3,
         b: 3,
@@ -177,16 +161,15 @@ var model = function() {
     var data_within_stim_id_cc = _.filter(ccData, {
       stim_id: stim_id
     });
-    var data_within_stim_id_adj = _.filter(vsData, {
-      stim_id: stim_id
+    var itemParamData_stimID = _.filter(itemParamData, {
+      stim_id: "stim_" + stim_id
     });
     // var superordinate_categories = levels(data_within_degree_cc, "superordinate_pl")
     var subordinate_categories = levels(data_within_stim_id_cc, "NP_sg");
 
     // display(superordinate_categories)
-
-    data_within_stim_id_cc.length == 0 ? display("====EMPTY stim_id ADJ====" + stim_id + "_") : null
-    data_within_stim_id_adj.length == 0 ? display("====EMPTY stim_id CC====" + stim_id + "_") : null
+    itemParamData_stimID.length == 0 ? display("====EMPTY stim_id property params====" + stim_id + "_") : null
+    data_within_stim_id_cc.length == 0 ? display("====EMPTY stim_id CC====" + stim_id + "_") : null
 
     // foreach(superordinate_categories, function(superordinate){
     // display(superordinate)
@@ -211,28 +194,19 @@ var model = function() {
         })
 
       // display(subordinate)
+      var subParams = _.filter(itemParamData_stimID, {subordinate})[0]
+      // display(subParams)
       var subordinate_parameters = {
-        mu: uniformDrift({
-          a: -3,
-          b: 3,
-          width: 0.5
-        }),
-        sigma: uniformDrift({
-          a: 0,
-          b: 3,
-          width: 0.3
-        })
+        mu: subParams.mu,
+        sigma: subParams.sigma
       };
+
 
       var data_within_subordinate_cc = _.filter(data_within_stim_id_cc, {
         NP_sg: subordinate
       });
-      var data_within_subordinate_adj = _.filter(data_within_stim_id_adj, {
-        NP_sg: subordinate
-      });
 
-      data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB ADJ====" + stim_id + "_" + subordinate) : null
-      data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB CC====" + stim_id + "_" + subordinate) : null
+      data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB CC====" + stim_id + "_" + subordinate) : null
 
       var subcatWeight = logistic(
         classParameters[item_set_heirarchy].intercept +
@@ -315,31 +289,8 @@ var model = function() {
       }
       /////////////////////////////////////////////////
 
-      /////////////////////////////////////////////////
-      // for Adjective Endorsement task
-      var speaker1_super = cache(function(form) {
-        Infer({
-          model: function() {
-            var utterance = uniformDraw([form + "Adjective", "silence"])
-            var speakerBeliefs = statePrior.subordinate;
-            var L0 = literalListener(utterance, "superordinate")
-
-            var _kl = KL(speakerBeliefs, L0, speakerBeliefs.support());
-            factor(-1 * alphas.adj_endorse * _kl)
-
-            return utterance == (form + "Adjective") ? 1 : 0
-          }
-        })
-      }, 10000)
-      ////////////////////////////////////////
-
       foreach(["positive", "negative"], function(adj_polarity) {
 
-        var d_subcat_superSpeaker = _.map(
-          _.filter(data_within_subordinate_adj, {
-            adj_polarity
-          }),
-          "val");
 
         var d_subcat_ccInference = _.map(
           _.filter(data_within_subordinate_cc, {
@@ -347,17 +298,8 @@ var model = function() {
           }),
           "specific");
 
-        var superSpeakerProbs = speaker1_super(adj_polarity);
 
-        d_subcat_superSpeaker.length == 0 ? display("====EMPTY form ADJ====" + stim_id + "_" + subordinate + "_" + adj_polarity) : null
         d_subcat_ccInference.length == 0 ? display("====EMPTY form CC====" + stim_id + "_" + subordinate + "_" + adj_polarity) : null
-
-        mapData({
-          data: d_subcat_superSpeaker
-        }, function(d) {
-          // console.log("superSpeaker = " + superSpeakerProbs.score(d))
-          observe(superSpeakerProbs, d)
-        })
 
         var ccRSA = pragmaticListener(adj_polarity);
 
@@ -377,14 +319,14 @@ var model = function() {
 }
 
 
-var steps = 30000
+var steps = 100000
 var samples = 1
 var mll = AIS(model, {
   steps: steps,
   samples: samples
 })
 
-var resultsOutFile = 'results/marginal-likelihood/ais-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_' +
+var resultsOutFile = 'results/marginal-likelihood/ais-L1-fixedDegreeParams'+degree_prior_param_file+'-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_' +
   by_item_cc_parameters + '-steps-' + steps + '_iter' + chain + '.csv'
 // // postOut
 
