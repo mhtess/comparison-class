@@ -184,6 +184,46 @@ scatterFig
  #      file = paste(talk.fig.path, "model-scatters.pdf"), width = 7, height = 5)
 
 ```
+Error analysis
+
+```{r}
+md.pp.err <- md.pp %>% 
+  mutate(sqErr = (MAP - MAP_h)^2) %>%
+  group_by(degree, adjective, form, cat) %>%
+  summarize(sum_sqErr = sum(sqErr))
+
+md.pp %>%
+  #filter(super_category %in% c("people", "kitchen appliances")) %>%
+  filter(super_category %in% c("kitchen appliances")) %>%
+  #filter(cat %in% c("soccer player", "toaster")) %>%
+  select(-low, -high, -cred_lower, -cred_upper) %>%
+  gather(key, val, MAP, MAP_h) %>%
+  mutate(key = factor(key, levels = c("MAP_h", "MAP"),
+                      labels = c("Human", "Model")),
+         form = factor(form, levels = c("negative", "positive")),
+         np_level = ifelse(cat %in% c("basketball player", "dishwasher"),
+                           "high",
+                    ifelse(cat %in% c("gymnast", "toaster"), "low", "medium")),
+         np_level = factor(np_level, levels = c("low", "medium", "high")),
+         cat = factor(cat, levels = c("bottle opener", "toaster", "dishwasher")),
+         #cat = factor(cat, levels = c("gymnast", "soccer player", "basketball player"))
+         ) %>%  
+  ggplot(., aes( x = cat, fill = form, y = val))+
+  geom_col(position = position_dodge(), color = 'white', alpha = 0.6)+
+  scale_fill_brewer(palette = 'Set3')+
+  theme_black()+
+  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
+  facet_grid(expt~key, scales = 'free')+
+  theme(strip.text.y = element_text(angle = 0),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust =1),
+        legend.position = 'bottom')+
+  ggtitle("Kitchen appliances")+
+  ylab("")
+
+ggsave("../writing/adj_workshop_2019/figs/bda_model_appliances.pdf", 
+       width = 7, height = 5)
+```
+
 
 ### L0 model
 
