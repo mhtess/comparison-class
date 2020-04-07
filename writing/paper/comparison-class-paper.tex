@@ -963,58 +963,91 @@ Posterior predictive checks are an important step in model validation and provid
 
 
 
-All models do a good job at accommodating the Adjective Endorsement data.
+All models do a good job at accommodating the Adjective Endorsement data (Figure \ref{fig:scatters}, bottom row).
+The BDA models adjust the parameters of the world knowledge priors used in RSA in such a way as to make the adjectives felicitous for the categories in question; in this way, the adjective endorsement task (Expt.~3) serves as a norming data set. 
+This result is a good sanity check; it shows that the adjective endorsement data is directly constraining the parameters of the world knowledge priors. 
+We see this reflected in the imputed world knowledge priors, which reflect intuitively accurate general expectations about the categories (Figure \ref{fig:worldPriors}). 
 
-The fully parameterized \emph{Basic-level and Frequency effect} comparison class prior model gives rise to the best model predictions in terms of both variance explained and marginal likelihood (Table \ref{tab:r2bf}). The parameterization of the comparison class prior does not directly affect the model's predictions for the Adjective Endorsement (Expt.~3) data; these predictions are purely a function of the RSA model (see Supplement) and the distributional world knowledge used for both experiments (e.g., the distributions of heights for people). Thus, it is no surprise that all model variants do a good job at explaining the Adjective Endorsement data, and it is a good sanity check that the adjective endorsement RSA model is of the right form to accommodate the Adjective Endorsement data. 
-The predictions of the different model variants come part in the Comparison Class Inference data (Expt.~2), which is a much more heterogeneous and difficult data set to predict (Figure \ref{fig:scatters}). 
-Our full model does a quite good job at accounting for the gradability of these inferences ($r = 0.88; r^2 = 0.77$), suggesting that the structure of the comparison class reflects both a basic-level bias and an effect of the frequency of the NP, in addition to other possible factors. 
-
-
-%\begin{center}
-%  \begin{table}[h]
-%    \centering
-%    \pgfplotstabletypeset[sci zerofill,
-%    col sep = comma,
-%    every head row/.style={before row = \toprule, after row = \midrule},
-%    every last row/.style={after row = \bottomrule},
-%    columns/model_variant/.style={string type, column name={Model}, column type = l},
-%        columns/subordinateCC/.style={string type, column name={$r^2$ Expt.~2}, column type = l,  sci sep align, precision=3},
-%    columns/adjEndorse/.style={string type, column name={$r^2$ Expt.~3}, column type = l, sci sep align, precision=3},
-%    columns/log_bf/.style={column name={log BF}, sci sep align, precision=0}]
-%    {csv_data_4_tex/bf_r2_table.csv}
-%    \caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and marginal likelihood, as shown by the log Bayes Factor. Log BF column displays BFs in terms of the model in comparison to the full basic-level and frequency effect model.}
-%    \label{tab:r2bf}
-%  \end{table}
-%\end{center}
-
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}
+%%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+%\caption{xxx.}\label{fig:worldPriors}
+%\end{figure}
 
 
 \begin{figure}[t!]
-\centering
-\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}
-%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Human data and model predictions for items with largest residuals.}\label{fig:marginals}
+    \centering
+    \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference (Expt.~2) and Adjective Endorsement (Expt.~3)  data sets. See Figure \ref{fig:bayesnet} for full data-analytic model.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} \\
+    \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4). ]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}}
+    \caption{Quantitative modeling results.}
 \end{figure}
+
+
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}
+%%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+%\caption{Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4).}\label{fig:residuals}
+%\end{figure}
+
+
+The predictions of the different model variants come apart for the Comparison Class Inference data (Expt.~2; Figure \ref{fig:scatters}). 
+The baseline Flat Prior model predicts variability in comparison class inferences only as a function of world knowledge about the properties, assuming all comparison classes are equally likely \emph{a priori}; this model explains roughly 17\% of the variance.
+The Frequency effect model assumes NPs with higher usage frequency will more likely be used as comparison classes and is able to explain roughly 52\% of the variance.
+The Basic-level bias model explains roughly 73\% of the variance by assuming that basic-level comparison classes may be more likely \emph{a priori} and segregates the set of stimuli into those for which it believes the basic-level category is the Specific NP or those for which the basic-level category is the unmentioned, more general category. 
+Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- a combination of the two alternative models -- gives rise to the best model predictions in terms of variance explained (78\%) and mean squared error (Table \ref{tab:r2bf}), suggesting that the structure of the comparison class reflects both a basic-level bias and an effect of the frequency of the NP, in addition to other possible factors. 
+
+
+
+%The parameterization of the comparison class prior does not directly affect the model's predictions for the Adjective Endorsement (Expt.~3) data; these predictions are purely a function of the RSA model (see Supplement) and the distributional world knowledge used for both experiments (e.g., the distributions of heights for people). Thus, it is no surprise that all model variants do a good job at explaining the Adjective Endorsement data, and it is a good sanity check that the adjective endorsement RSA model is of the right form to accommodate the Adjective Endorsement data. 
+%Our full model does a quite good job at accounting for the gradability of these inferences ($r = 0.88; r^2 = 0.77$)
+
+\begin{center}
+  \begin{table}[h]
+    \centering
+    \pgfplotstabletypeset[sci zerofill,
+    col sep = comma,
+    every head row/.style={before row = \toprule, after row = \midrule},
+    every last row/.style={after row = \bottomrule},
+    columns/model_variant/.style={string type, column name={Model}, column type = l},
+    columns/subordinateCC_r2/.style={string type, column name={$r^2$ Expt.~2}, column type = l,  sci sep align, precision=3},
+   columns/subordinateCC_mse/.style={fixed, column name={$MSE$ Expt.~2}, column type = l, dec sep align, precision=4},
+    columns/adjEndorse_r2/.style={string type, column name={$r^2$ Expt.~3}, column type = l, sci sep align, precision=3},
+     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ Expt.~3}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
+    \label{tab:r2bf}
+  \end{table}
+\end{center}
+
+
 
 
 To gain further insight into the comparison class inference results, we examine the full model's posterior distribution over parameters.
 We start with the global parameters. As a sanity check, the speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}$, $\alpha_2 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}$.
 We also find a positive effect of frequency of the noun phrase -- $\beta_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}$.
 
-Recall that we inferred on a by-item basis whether each NP indicated a subordinate or basic level category, because we expect the basic-level bias to operate differently for these different regimes of items.
-For NPs that were categorized as subordinate categories, the comparison class prior showed no appreciable basic-level bias -- $\beta^0_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_sub_basic}$, whereas for NPs that were categorized as basic-level categories, the comparison class prior showed a strong basic-level bias -- $\beta^1_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_basic_super}$.
-From these parameters values, we can compute the overall imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming no effect of usage frequency), which reflect the finding that basic and subordinate comparison classes are highly accessible and superordinate comparison classes less so (Figure \ref{fig:parameters}).
+The full model infers on a by-item basis whether the basic-level category is the supplied NP or whether the basic-level category is an unmentioned, more superordinate category, because we expect the basic-level bias to operate differently for these different regimes of items.
+As expected, the comparison class prior NPs that were categorized as basic-level categories strongly favored those mentioned categories -- $\beta^1_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_basic_super}$.
+For NPs that were categorized as subordinate categories (i.e., the basic-level category was an unmentioned, more superordinate category), the comparison class prior showed no appreciable basic-level bias -- $\beta^0_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_sub_basic}$.
+From these parameters values, we can compute the overall imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming a constant effect of usage frequency), which reflect the finding that basic and subordinate comparison classes are highly accessible and superordinate comparison classes less so (Figure \ref{fig:parameters}).
 %and a positive effect of frequency of the noun phrase -- $\beta^0_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_sub_basic}$.
+
+
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/model_comparisonClassPriorParameters.pdf}
-\caption{Imputed distributions over the prior probabilities of comparison classes at different levels of abstraction.}\label{fig:parameters}
+\caption{Imputed distributions over the prior probabilities of comparison classes at different levels of abstraction. Basic- and subordinate-level categories comprise \emph{a priori} likely comparison classes, while superordinate categories are less likely to serve as comparison classes.}\label{fig:parameters}
 \end{figure}
 
-
+Though our fully parameterized model does the best job at accounting for the variability in comparison class inferences, the data set exhibits even more variability than our model can account for. Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals). 
 
  
+
+
+
+
+
 
 %The full model's posterior over the RSA and data-analytic parameters were consistent with prior literature and intuition. The maximum a-posteriori (MAP) estimate and 95\% highest probability density (HPD) intervals for model parameters specific to the \(L_1\) model used for comparison class inference were \(\alpha^{1}_{1} = 1.60 [1.10, 2.50]\), \(\beta = 0.13 [0.11, 0.19]\). Model parameters specific to the \(S_2\) model used for adjective endorsement: \(\alpha^{2}_{1} = 3.50 [0.60, 13.20]\), \(\alpha^{2}_{2} = 3.20 [2.60, 3.80]\). The inferred distributions corresponding to subordinate class priors were consistent with the \emph{a priori} ordering of these subordinate classes (low, medium, high) used in these tasks (Figure \ref{fig:modelParameters} top).
 
@@ -1342,7 +1375,7 @@ This analysis confirms that our experimental items bring to mind the kinds of ge
 \centering
 \includegraphics[width=\textwidth]{figs/bars_adj_finalExpt_pilot_byItem.pdf}
 %{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Experiment 2 results for a subset of the items.}\label{fig:adjEndorseItems}
+\caption{Experiment 3 (Adjective Endorsement) results for a subset of the items.}\label{fig:adjEndorseItems}
 \end{figure}
 
 \subsection{Bayesian data analysis model supplementary details}
