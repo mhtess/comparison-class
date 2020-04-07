@@ -73,7 +73,7 @@ df.cc %>%
 ```
 
 
-```{r}
+```{r bootstrap human data, eval = F}
 df.comb %>%
   filter(task == "comparisonClass") %>%
   group_by(stim_id, subordinate, adj_polarity) %>%
@@ -102,8 +102,12 @@ df.comb.wide <- left_join(
     rename(cc_mean = mean, cc_lower = ci_lower, cc_upper = ci_upper)
 )
 
-# save(df.comb, df.comb.wide, file = "cached_results/cc-adj-combined-bootstrapped.RData")
-# load("cached_results/cc-adj-combined-bootstrapped.RData") # df.comb, df.comb.wide
+ #save(df.comb, df.comb.bs, df.comb.wide, file = "cached_results/cc-adj-combined-bootstrapped.RData")
+```
+
+
+```{r load bootstrapped human data}
+load("cached_results/cc-adj-combined-bootstrapped.RData") # df.comb, df.comb.bs, df.comb.wide
 
 ggplot(df.comb.wide, aes( x = adj_mean, xmin = adj_lower, xmax = adj_upper,
                           y = cc_mean, ymin = cc_lower, ymax = cc_upper))+
@@ -118,7 +122,7 @@ with(df.comb.wide, cor.test(adj_mean, cc_mean))
 ```
 ### Split-half correlations
 
-```{r}
+```{r, eval = F}
 all_workers <- unique(df.cc$workerid)
 n_workers <- length(all_workers)
 
@@ -155,7 +159,9 @@ m.samp <- data.frame()
 n.chains = 3
 # model.variants = c("global", "intercept", "intercept_slope", "slope")
 # model.variants = c("slope", "intercept_slope")
- model.variants = c("flat", "intercept", "intercept_slope", "slope")
+ model.variants = c("flat", "intercept", "intercept_slope", "slope",
+                    "single-intercept_slope",
+                    "byItem-intercept_single-slope")
 # model.variants <- c("byItemSet_intercept_slope", "byNP_intercept_slope")
 n_samples = 300000
 n_burn = n_samples / 2
@@ -238,9 +244,24 @@ glimpse(md.summary)
 
 ```{r}
 md.summary %>%
+  filter(model_variant %in% c("flat", "intercept", "slope", 
+                              #"single-intercept_slope", 
+                                           "byItem-intercept_single-slope")) %>%
   ungroup() %>%
-  mutate(model_variant = factor(model_variant, levels = c("flat", "intercept", "slope", "intercept_slope"),
-                                labels = c("Flat Prior", "Basic-level bias", "Frequency effect", "Basic-level bias\n and Frequency effect")),
+  mutate(model_variant = factor(model_variant, 
+                                levels = c("flat", 
+                                           "intercept", 
+                                           "slope", 
+                                           #"single-intercept_slope", 
+                                           "byItem-intercept_single-slope"
+                                           #"intercept_slope"
+                                           ),
+                                labels = c("Flat Prior", 
+                                           "Basic-level bias", 
+                                           "Frequency effect", 
+                                           #"Fixed basic-level bias \and Frequency effect",
+                                            #"Basic-level bias \and w. fixed Frequency effect",
+                                           "Basic-level bias\n and Frequency effect")),
          task = factor(task, levels = c("subordinateCC", "adjEndorse"),
                        labels = c("Comparison Class Inference\n(Experiment 2)",
                                   "Adjective Endorsement\n(Experiment 3)"))) %>%
@@ -258,7 +279,7 @@ ggplot(., aes( x = MAP, xmin = cred_lower, xmax = cred_upper,
   labs(y = "Human Judgment", x = "Model Prediction")
 
 #ggsave("~/projects/comparison-class/models/figs/model_scatters_pilot-corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png", width = 6, height = 5)
-ggsave("../writing/paper/figs/model_scatters_modelVariants.pdf", width = 8, height = 5)
+#ggsave("../writing/paper/figs/model_scatters_modelVariants.pdf", width = 8, height = 5)
 ```
 
 ```{r}
@@ -266,11 +287,38 @@ md.summary %>%
   group_by(model_variant, task, chain) %>%
   summarize(
     r = cor(mean, MAP),
-    r2 = cor(mean, MAP) ^ 2
+    r2 = cor(mean, MAP) ^ 2,
+    mse = mean((mean - MAP)^2),
     ) -> md.predictive.stats
 
 md.predictive.stats %>%
   kable()
+
+md.predictive.stats %>%
+  ungroup() %>%
+  select(-chain, -r) %>%
+  gather(key, val, r2, mse) %>%
+  mutate(task_measure = paste(task, key, sep = "_")) %>%
+  select(-task, -key) %>%
+  spread(task_measure, val) %>%
+  filter(model_variant %in% 
+           c("flat", "intercept", "slope", 
+              #"single-intercept_slope", 
+            "byItem-intercept_single-slope")) -> md.predictive.stats.for.table
+
+
+md.predictive.stats.for.table[with(md.predictive.stats.for.table, order(subordinateCC_r2)), ] %>%
+  mutate(model_variant = factor(model_variant, levels = c("flat", "slope", "intercept", "byItem-intercept_single-slope"),
+                                labels = c("Flat Prior", "Frequency effect", "Basic-level bias",
+                                           "Basic-level and Frequency"))) %>%
+  select(model_variant, subordinateCC_r2, subordinateCC_mse, 
+         adjEndorse_r2, adjEndorse_mse) %>%
+  # rename(Model = model_variant, 
+  #        "$r^2$ Comparison Class Inference\n(Experiment 2)" = subordinateCC_r2,
+  #        "$MSE$ Comparison Class Inference\n(Experiment 2)" = subordinateCC_mse,
+  #        "$r^2$ Adjective Endorsement\n(Experiment 3)" = adjEndorse_r2,
+  #        "$MSE$ Adjective Endorsement\n(Experiment 3)" = adjEndorse_mse) %>%
+  write_csv(., path = "../writing/paper/csv_data_4_tex/mse_r2_table.csv")
 ```
 #### Bar plots
 
@@ -315,8 +363,8 @@ md.summary.long %>%
   ylab("Proportion paraphrases that contain NP")+
   xlab("Subordinate Category Prior Mean")
 
-ggsave("../models/figs/bars_cc_finalExpt_pilot_byItem_wModel_corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png",
-       width = 17, height = 9)
+# ggsave("../models/figs/bars_cc_finalExpt_pilot_byItem_wModel_corpusFreqCCLogisticSameSlopeByItemSetHeirarchy.png",
+#        width = 17, height = 9)
 ```
 
 
@@ -325,18 +373,20 @@ ggsave("../models/figs/bars_cc_finalExpt_pilot_byItem_wModel_corpusFreqCCLogisti
 
 ```{r}
 md.sum.sqErr <- md.summary %>% 
-  filter(task == "subordinateCC", model_variant == "intercept_slope") %>%
+  filter(task == "subordinateCC", model_variant == "byItem-intercept_single-slope") %>%
   group_by(stim_id, degree, superordinate) %>%
   summarize(model_sSqErr = sum( (mean-MAP) ^ 2))
 
 
 bind_rows(
   md.sum.sqErr[with(md.sum.sqErr, order(-model_sSqErr)),] %>% 
-  head(6),
-  # md.sum.sqErr[with(md.sum.sqErr, order(-model_sSqErr)),] %>% 
-  # tail(5)
+  head(4) %>% 
+    mutate(item_sort = "mb"),
+  md.sum.sqErr[with(md.sum.sqErr, order(-model_sSqErr)),] %>%
+  tail(4) %>% 
+    mutate(item_sort = "ma")
 ) %>%
-  distinct(stim_id, degree, superordinate) -> df.max.err
+  distinct(stim_id, degree, superordinate, item_sort) -> df.max.min.err
 ```
 
 ```{r}
@@ -348,7 +398,7 @@ md.summary.long <- bind_rows(
                         src = 'data') %>%
     select(-n, -empirical_stat),
   md.summary %>%
-    filter(model_variant == "intercept_slope") %>%
+    filter(model_variant == "byItem-intercept_single-slope") %>%
     rename(src = model_variant) %>%
     select(stim_id, src, subordinate, adj_polarity, cred_lower, cred_upper, MAP, task, degree, superordinate, np_expectations, subFreq, superFreq) %>%
     # mutate(src = 'model') %>%
@@ -361,25 +411,31 @@ md.summary.long <- bind_rows(
 #   rename(subordinate = item_sg,
 #          superordinate = superordinate_pl)
 
-
-fig.residuals <- md.summary.long %>%
-  inner_join(., df.max.err) %>%
+md.summary.long %>%
+  inner_join(., df.max.min.err) %>%
   ungroup() %>%
   filter(task == "subordinateCC") %>%
   # left_join(., df.adj.items) %>%
   # ungroup() %>%
-  mutate(np_expectations = factor(np_expectations,
+  mutate(
+    degree = ifelse(degree == "loudness_n", "loudness", degree),
+    np_expectations = factor(np_expectations,
                                levels = c("low", "medium", "high"),
                                labels = c("low", "medium", "high")),
          log_ratio = log(subFreq / superFreq),
          unique_id = paste(superordinate, " (", degree,")", sep = ""),
          subordinate_freq = paste(subordinate, "\n[", as.character(round(log_ratio, 1)), "]", sep = ""),
-         src = factor(src, levels = c("intercept_slope", "data"),
-                      labels = c("Model Prediction \n(w/ basic-level and  \nfrequency effects)",
-                                 "Human Data"))) %>%
+         src = factor(src, levels = c( "data", "byItem-intercept_single-slope"),
+                      labels = c("Human", "Model"# Prediction \n(w/ basic-level and  \nfrequency effects)",
+                                 )),#" Data")),
+         unique_sort = paste(item_sort, unique_id, sep = "_")) %>%
   mutate(subordinate_freq = factor(subordinate_freq)) %>%
-  mutate(subordinate_freq = fct_reorder(subordinate_freq, as.numeric(np_expectations))) %>%
-  ggplot(., 
+  mutate(subordinate_freq = fct_reorder(subordinate_freq, as.numeric(np_expectations))) -> md.summary.long.subset
+
+unique.sort <- unique(md.summary.long.subset$unique_id)
+names(unique.sort) <- unique(md.summary.long.subset$unique_sort)
+
+fig.residuals <- ggplot(md.summary.long.subset, 
        aes( x = subordinate_freq, y = mean, 
             ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
@@ -392,20 +448,23 @@ fig.residuals <- md.summary.long %>%
         axis.line = element_line(colour = "black"),
         strip.text.y = element_text(angle = 0),
         legend.position = 'bottom')+
-  facet_grid(src ~ unique_id, scales = 'free')+
+  facet_grid(src ~ unique_sort, scales = 'free',
+             labeller = labeller(unique_sort = unique.sort))+
  # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   ylab("Proportion Specific-NP Comparison Class")+
   xlab("Specific NP Category")+
   guides(fill = guide_legend(title = "Adjective polarity", reverse = T))
 
-ggsave(fig.residuals, 
+fig.residuals
+ggsave(fig.residuals,
        filename = "../writing/paper/figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf",
-       width = 10, height = 4.6)
+       width = 12, height = 4.6)
 ```
 
 ```{r}
-fig.residuals
+md.summary.long %>%
+  filter(superordinate == "doorways") %>% View()
 ```
 
 
@@ -429,7 +488,14 @@ m.samp.summary <- m.samp %>%
 ```{r}
 m.samp.summary %>%
   #filter(degree == "parameter") %>%
-  filter(stim_id %in% c("beta", "speakerOptimality")) %>%
+  filter(stim_id %in% c("beta", "speakerOptimality")) -> m.samp.param.summary
+
+
+m.samp.param.summary %>%
+  mutate(param_name = paste(model_variant, stim_id, subordinate, task, sep = "_")) %>%
+  write_csv(., "../writing/paper/csv_data_4_tex/model_params_cis.csv")
+
+m.samp.param.summary %>%
   #select(-degree, -adj_polarity) %>%
   kable()
 ```
@@ -468,6 +534,63 @@ Notes
 - from the "full-classified-data-w-freqs-no-failedRef.csv"
   - the inferred beta weight for frequency looks to be the same for the two sets of items
     - TO RUN: model with single beta_freq and two beta_ints
+    
+    
+```{r}
+impute_probs_from_weights_sub = function(p1, p2){
+  B =  (p2 - p1*p2) / (1 - p1 + p1*p2)
+  A = (p1*B) / ( 1 - p1)
+  C_term = (B* (1 - p2) ) / p2
+  return(A)
+}
+
+impute_probs_from_weights_basic = function(p1, p2){
+  B =  (p2 - p1*p2) / (1 - p1 + p1*p2)
+  A = (p1*B) / ( 1 - p1)
+  C_term = (B* (1 - p2) ) / p2
+  return(B)
+}
+
+impute_probs_from_weights_super = function(p1, p2){
+  B =  (p2 - p1*p2) / (1 - p1 + p1*p2)
+  A = (p1*B) / ( 1 - p1)
+  C_term = (B* (1 - p2) ) / p2
+  return(C_term)
+}
+
+
+m.samp.ints <- m.samp %>%
+  filter(stim_id == "beta", adj_polarity == "byItem-intercept_single-slope",
+         subordinate == "intercept") %>%
+  mutate(logistic_val = 1 / (1 + exp(-val))) %>%
+  select(-score, -val) %>%
+  spread(task, logistic_val) %>%
+  rowwise() %>%
+  mutate(
+    sub_prob = impute_probs_from_weights_sub(sub_basic, basic_super),
+    basic_prob = impute_probs_from_weights_basic(sub_basic, basic_super),
+    super_prob = impute_probs_from_weights_super(sub_basic, basic_super),
+  )
+
+
+m.samp.ints %>%
+  ungroup() %>%
+  select(-basic_super, -sub_basic) %>%
+  gather(key, val, sub_prob, basic_prob, super_prob) %>%
+  mutate(key = factor(key, levels = c("sub_prob", "basic_prob", "super_prob"),
+                      labels = c("Subordinate", "Basic", "Superordinate"))) %>%
+  ggplot(., aes(x = val, fill = key))+
+  geom_density(alpha = 0.4, adjust = 10, size = 1)+
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(x = "Imputed Prior Probability", y = "Probability Density",
+       fill = "Comparison Class\nLevel-of-Abstraction")+
+  scale_fill_brewer(palette = "Set1")+
+  scale_x_continuous(limits = c(0, 0.6),
+                     breaks = c(0, 0.25, 0.5))
+
+ggsave("../writing/paper/figs/model_comparisonClassPriorParameters.pdf", width = 6, height = 3.5)
+
+```
 
 
 Check to see if parameters that should have the same value are indeed the same.
@@ -485,12 +608,13 @@ m.samp %>%
 
 item-wise free parameter version: by-item subclass prior  vs. global estimate
 
+-- THIS DOESN'T MAKE SENSE ANYMORE? --
 
 ```{r}
 m.fitted.subclassprior.freq <- m.samp.summary %>%
-  filter(task == "sub_classprior", model_variant != "global") %>% 
+  filter(task == "classPrior_sub", model_variant != "flat") %>% 
   left_join(., m.samp.summary %>%
-                filter(task == "sub_classprior", model_variant == "global") %>%
+                filter(task == "classPrior_sub", model_variant == "flat") %>%
               rename(global_MAP = MAP, global_lower = cred_lower, global_upper = cred_upper) %>%
               ungroup() %>%
               select(-model_variant)) %>%
@@ -516,6 +640,10 @@ m.fitted.subclassprior.freq %>%
 Average over subordinates with superordinate
 
 ```{r}
+
+m.fitted.subclassprior.freq <- m.samp.summary %>%
+  filter(task == "classPrior_sub")
+
 m.fitted.subclassprior.freq %>%
   ungroup() %>%
   select(degree, superordinate, subordinate, MAP, global_MAP, sqErr) %>%
@@ -547,7 +675,8 @@ ggplot(m.fitted.subclassprior.itemset.freq,
   geom_text_repel(size = 2)+
   geom_vline(xintercept = 0.5, lty = 3)+
   geom_errorbar(alpha = 0.3) + geom_errorbarh(alpha = 0.3)+
-  labs(x = "Frequency constrained cc prior", y = "Unconstrained inferred cc prior",
+  labs(x = "Frequency constrained cc prior", 
+       y = "Unconstrained inferred cc prior",
        title = "point = item set average (3 subordinates w/ superordinate)")
 
 ggsave("~/projects/comparison-class/models/figs/cc_prior_fitted_vs_freq_itemSet.png", 
@@ -608,6 +737,136 @@ ggplot(md.sum.sqErr.freq, aes( x = freq_sSqErr, y = model_sSqErr))+
   geom_point()
 ```
 
+## Item degree prior paramters
+
+
+### Comparison across different model variants
+
+```{r}
+library(GGally)
+
+
+m.samp.summary %>%
+  filter(task %in% c("mu", "sigma")) %>% select(-adj_polarity, -cred_upper, -cred_lower) %>%
+  spread(model_variant, MAP) %>% 
+  GGally::ggscatmat(., columns = 4:9, color = 'task')
+```
+- correlations between means is very strong
+- correlations among sigmas is weaker, but "flat" (and to a lesser extent, "slope") seem most different from the others
+- conclusion, use parameters inferred from "single-intercept_slope"
+```{r}
+m.samp.summary %>%
+  filter(task %in% c("mu", "sigma"), model_variant == "single-intercept_slope") %>%
+  select(-adj_polarity, -cred_upper, -cred_lower) %>%
+  spread(task, MAP) %>%
+  write_csv(., path = "../models/sherlock/worldKnowledge_paramMAP_single-intercept_slope.csv")
+
+
+m.samp.summary %>%
+  filter(task %in% c("mu", "sigma"), model_variant == "intercept_slope") %>%
+  select(-adj_polarity, -cred_upper, -cred_lower) %>%
+  spread(task, MAP) %>%
+  write_csv(., path = "../models/sherlock/worldKnowledge_paramMAP_intercept_slope.csv")
+
+
+m.samp.summary %>%
+  filter(task %in% c("mu", "sigma"), model_variant == "flat") %>%
+  select(-adj_polarity, -cred_upper, -cred_lower) %>%
+  spread(task, MAP) %>%
+  write_csv(., path = "../models/sherlock/worldKnowledge_paramMAP_flat.csv")
+```
+
+### Reconstruct degree priors
+
+```{r}
+m.samp.summary %>%
+  filter(task %in% c("mu", "sigma"), model_variant == "byItem-intercept_single-slope") %>%
+  select(-adj_polarity, -cred_upper, -cred_lower) %>%
+  spread(task, MAP) -> m.samp.degree.params.wide 
+
+#subset_ids <- sample(unique(m.samp.degree.params.wide$stim_id), 10)
+#subset_ids <- df.max.min.err$stim_id
+param_to_norm <- function(...){
+  current <- tibble(...)
+  data.frame(
+    stim_id = current$stim_id,
+    item_sort = current$item_sort,
+    subordinate = current$subordinate,
+    x = seq(-3, 3, 0.1),
+    y = dnorm(
+      x = seq(-3, 3, 0.1),
+      mean = current$mu,
+      sd = current$sigma
+    )
+  )
+}
+
+# ) %>%
+#   mutate(subordinate_freq = factor(subordinate_freq)) %>%
+#   mutate(subordinate_freq = fct_reorder(subordinate_freq, as.numeric(np_expectations))) -> md.summary.long.subset
+# 
+# unique.sort <- unique(md.summary.long.subset$unique_id)
+# names(unique.sort) <- unique(md.summary.long.subset$unique_sort)
+
+m.samp.degree.dnorm <- m.samp.degree.params.wide %>%
+    inner_join(., df.max.min.err) %>%
+  #filter(stim_id %in% subset_ids) %>%
+  pmap_dfr(param_to_norm) %>%
+  left_join(.,
+    df.comb.wide %>%
+      distinct(subordinate, stim_id, np_expectations, superordinate, degree) %>%
+      mutate(stim_id = paste("stim_", as.character(stim_id), sep = ""))
+  ) %>%
+  mutate(
+    degree = ifelse(degree == "loudness_n", "loudness", degree),
+    unique_id = paste(superordinate, " (", degree,")", sep = ""),
+    unique_sort = paste(item_sort, unique_id, sep = "_"),
+  )
+
+
+unique.sort.priors <- unique(m.samp.degree.dnorm$unique_id)
+names(unique.sort.priors) <- unique(m.samp.degree.dnorm$unique_sort)
+
+
+m.samp.degree.dnorm %>%
+  group_by(unique_sort, subordinate, np_expectations) %>%
+  mutate(subordinate_label = ifelse( y == max(y), subordinate, "")) -> m.samp.degree.dnorm.labels
+  # filter(y == max(y)) %>%
+  # mutate(position_y =  case_when(
+  #   np_expectations == "low" ~ 2.5,
+  #   np_expectations == "medium" ~ 3,
+  #   np_expectations == "high" ~ 3.5
+  # ))
+
+
+m.samp.degree.dnorm %>%
+  group_by(stim_id, subordinate, np_expectations) %>%
+  mutate(subordinate_label = ifelse( y == max(y), subordinate, "")) %>%
+  ungroup() %>%
+  mutate(np_expectations = factor(np_expectations, levels = c("low", "medium", "high"))) %>%
+  ggplot(., aes(x = x, y = y, group = subordinate, color = np_expectations))+
+  geom_line(size = 1)+
+  geom_label_repel(force = 10, segment.alpha = 0, aes(label = subordinate_label), nudge_y = 0.3)+
+  # geom_text_repel(data = m.samp.degree.dnorm.labels,
+  #       # group_by(stim_id, subordinate, np_expectations) %>%
+  #       # filter(y == max(y)) %>%
+  #       #     mutate(position_y =  case_when(
+  #       #     np_expectations == "low" ~ 2.5,
+  #       #     np_expectations == "medium" ~ 3,
+  #       #     np_expectations == "high" ~ 3.5
+  #       #   )), 
+  #            # aes(label = subordinate_label, color = np_expectations, x = x, y = y + 0.2),
+  #       force = 10, segment.alpha = 0)+
+  facet_wrap(~unique_sort, nrow = 1, labeller = labeller(unique_sort = unique.sort.priors))+
+  theme(legend.position = "bottom")+
+  scale_color_brewer(type = "qual", palette = 2)+
+  labs(x = "Degree value", y = "Probabilty density", color = "General expectations about category")+
+  guides(color = guide_legend(reverse = F))
+
+ggsave("../writing/paper/figs/reconstructed_world_priors.pdf", width = 14, height = 3.7)
+```
+
+
 
 
 
@@ -616,12 +875,14 @@ ggplot(md.sum.sqErr.freq, aes( x = freq_sSqErr, y = model_sSqErr))+
 ```{r}
 m.ais <- data.frame()
 ais.n.chains = 3
-model.variants = c("flat", "intercept", "intercept_slope", "slope")
-n_steps = 30000
-ais.model.prefix <- "ais-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_"
+#model.variants = c("flat", "intercept", "intercept_slope", "slope")
+model.variants = c("byItem-intercept_single-slope", "intercept_slope", "intercept", "slope")
+n_steps = 200000
+#ais.model.prefix <- "ais-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_"
+ais.model.prefix <- "ais-L1-fixedDegreeParamssingle-intercept_slope-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_"
 
 for (m in model.variants){
-  for (i in 1:n.chains){
+  for (i in 1:ais.n.chains){
     model.result.file <- paste("../models/sherlock/results/marginal-likelihood/", ais.model.prefix, m, "-steps-", 
                                format(n_steps, scientific = F), "_iter", i, ".csv", sep = "")
     
