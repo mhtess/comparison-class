@@ -52,6 +52,18 @@
 \usepackage{csvsimple}
 \usepackage{siunitx}
 
+\definecolor{Red}{RGB}{255,0,0}
+\definecolor{Green}{RGB}{10,200,100}
+\definecolor{Blue}{RGB}{10,100,200}
+\definecolor{Orange}{RGB}{255,153,0}
+
+\newcommand{\denote}[1]{\mbox{ $[\![ #1 ]\!]$}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand{\red}[1]{\textcolor{Red}{#1}}  
+\newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
+\newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
+\newcommand{\mlb}[1]{\textcolor{Orange}{[mlb: #1]}}
+
 % set the name of the folder in which the CSV files with 
 % information from R is stored
 \newcommand{\datafoldername}{csv_data_4_tex}
@@ -107,7 +119,7 @@ what counts as context is often only implicit in everyday
 conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}: other days of the year, other weeks, other seasons, etc... 
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener decides upon a comparison class.
 We extend a Bayesian model of pragmatic reasoning to be able to reason flexibly about the comparison class intended by the speaker and test the qualitative predictions of this model using a large-scale free-production experiment.
-We test the quantitative predictions by independently modeling and measuring a related set of linguistic judgments about the same domains, which we incorporate into a joint Bayesian data analytic model.
+\ndg{awk:}We test the quantitative predictions by independently modeling and measuring a related set of linguistic judgments about the same domains, which we incorporate into a joint Bayesian data analytic model.
 %We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
 %The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding. 
 The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
@@ -120,17 +132,7 @@ The methods and results we present open the door to studying richer aspects of c
 \begin{document}
 \maketitle
 
-\definecolor{Red}{RGB}{255,0,0}
-\definecolor{Green}{RGB}{10,200,100}
-\definecolor{Blue}{RGB}{10,100,200}
-\definecolor{Orange}{RGB}{255,153,0}
 
-\newcommand{\denote}[1]{\mbox{ $[\![ #1 ]\!]$}}
-\newcommand*\diff{\mathop{}\!\mathrm{d}}
-\newcommand{\red}[1]{\textcolor{Red}{#1}}  
-\newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
-\newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
-\newcommand{\mlb}[1]{\textcolor{Orange}{[mlb: #1]}}
 
 \section{Introduction}
 
@@ -152,7 +154,7 @@ Once a hypothesis space is determined, however, a listener still must decide whi
 %It is this aspect of the problem---lying between a theory of concepts (which generates possible comparison classes) and natural language (how relative statements are interpreted)---that we bring light to in this paper. 
 
 The problem of how listeners determine the comparison class has received surprisingly little attention, both formally and empirically. 
-Theoretical work in semantics has instead focused on how information from an already determined comparison class gets integrated with a compositional semantics and the representations that might be preferred \cite{Bale2011, Solt2009}.
+Theoretical work in semantics has instead focused on how information from an already determined comparison class is integrated with a compositional semantics and which representations might be preferred \cite{Bale2011, Solt2009}.
 Empirical work with adults and children has interrogated how judgments and interpretations for relative adjectives like \emph{dark} or \emph{tall} depend upon fine-grained statistical details of the comparison class  \cite{Barner2008, Qing2014, Schmidt2009, Solt2012}:  A jockey can be short (for a person) but still tall for a jockey.
 The empirical work that comes closest to addressing the problems of comparison class inference has shown that young children can use cues such as a predicate noun phrase to constrain what goes into the comparison class: What counts as a \emph{tall pimwit} (a novel category) depends on the distribution of heights of \emph{pimwits} and not the heights of other categories like \emph{daxes} \cite{Barner2008}. 
 Further, given strong cues to the intended comparison class, children as young as 2-and-a-half appreciate that comparison classes can change  \cite<e.g., an objectively small mitten can be \emph{big} relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
@@ -172,6 +174,7 @@ The model we propose is quantitative in nature and thus, can predict graded infe
 Background knowledge for language understanding models is often measured empirically by having participants estimate relevant quantities and probabilities \cite<e.g., plausible temperatures of days in winter, summer, etc...;>{Franke2016}.
 These direct prior elicitation techniques are limited, however, to domains where people have an accurate representation of the underlying scale (e.g., temperature); many domains can be reasoned about intuitively (e.g., the loudness of a diesel engine~vs.~an electric car) without a clear representation of the underlying scale (e.g., how many decibels is the typical sound of a diesel engine?).
 For this reason, we take a different approach: 
+\ndg{the following is hard to follow. i'd suggest moving diascussion of 'descriptive bayesian' to discussion and here say more intuitively what we do..}
 We embed our model of pragmatic reasoning in a Bayesian data-analytic model where the parameters that govern background knowledge in the pragmatics model are inferred from the experimental data, a kind of \emph{descriptive Bayesian} modeling \cite{tauber2017}.
 We go further, however, than merely asking what background knowledge would account for comparison class inferences; we harness the productivity of natural language and the Rational Speech Act modeling framework to predict data from a related language experiment (truth judgments about adjectives) that relies upon the same background knowledge. 
 This joint data modeling provides a way to pin-down model parameters governing background knowledge by asking participants only simple, natural language questions, while also holding the cognitive models to the high standard of predicting data from multiple experiments using the same parameters.
