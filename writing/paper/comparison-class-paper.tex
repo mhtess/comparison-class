@@ -362,14 +362,16 @@ To understand the model behavior, consider the speaker model \(S_1\) under diffe
 Figure \ref{fig:modelCartoon}C shows the speaker production probabilities of the three possible utterances for each value along the degree scale (e.g., each height) for the two different comparison classes.  If the comparison class is \emph{people}, the speaker will produce \emph{tall} when the height of the referent is substantially greater than the average height for people, with the speaker more likely to say \emph{tall} as the height of the referent increases.
   If the comparison class is \emph{basketball players}, the speaker's criterion shifts to the right and she becomes more reluctant to produce \emph{tall} until the height of the referent is much greater. 
 
-The listener inverts this generative model of the utterance (i.e., the speaker model) to infer the implicit comparison class .
- They combine the speaker model with their prior knowledge about the height of the referent: The listener knows the referent is a basketball player and thus their height is sampled from the basketball player distribution (Figure \ref{fig:modelCartoon}B, bottom, black; this distribution is superimposed as an opacity on Figure \ref{fig:modelCartoon}C).
-  When the listener marginalizes over their beliefs about the height of the referent, they believe the speaker is more likely to produce \emph{tall} if the comparison class were \emph{people} (Figure \ref{fig:modelCartoon}D).  
+The listener uses Bayes' rule to `invert' this generative model of the utterance (i.e., the speaker model), inferring the implicit comparison class.
+ They combine the speaker model with their prior knowledge about the height of the referent: The listener knows the referent is a basketball player and thus their height is distributed according to the basketball player distribution (Figure \ref{fig:modelCartoon}B, bottom, black; this distribution is superimposed as an opacity on Figure \ref{fig:modelCartoon}C).
+  If the listener marginalizes out the height of the referent, to focus on the comparison class, they believe the speaker is more likely to produce \emph{tall} if the comparison class were \emph{people} (Figure \ref{fig:modelCartoon}D).  
  Therefore,  a speaker who says \emph{tall} probably was assuming a more general comparison class (i.e., that the comparison class is \emph{people}; Figure \ref{fig:modelCartoon}E). 
 If, however, the listener hears of the basketball player that he is \emph{short}, the more likely comparison class is the subordinate class of \emph{basketball players}.
 This inference is driven by prior knowledge about the category, and thus, we would expect the inferences to change if the prior knowledge changes.
-Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to short people) will result in the opposite inferences about the comparison class (Figure \ref{fig:modelCartoon}E left bars). 
+Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to be short people) will result in the opposite inferences about the comparison class (Figure \ref{fig:modelCartoon}E left bars). 
 Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should depend upon the quantitative details of the priors. 
+
+\ndg{this basic pattern is very intuitive, so we should explain a bit more why we need this fancy model. (not sure if that should be here or elsewhere, but i felt it here and at the intro to this section.}
 
 %\begin{figure}
 %\centering
@@ -406,7 +408,7 @@ This alternative model predicts the exact opposite pattern of results from the p
 
 The pragmatic comparison class inference listener model (Eq. \ref{eq:L1}) reasons about which comparison class a speaker is more likely to be assuming.
 That is, the speaker (Eq. \ref{eq:S1}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
-Speakers may be aware, however, that the comparison class is not in the common ground, but may still avoid articulating a comparison class if the listener can reasonably be assumed to infer the comparison class. This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed they the listener would infer, given that the first-order listener inference about the comparison class itself involves a pragmatic inference as shown via counterexample by the literal model above. This higher-order reasoning model is given by the following equations:
+Speakers may be aware, however, that the comparison class is not in the common ground, but may still avoid articulating a comparison class if the listener can reasonably be assumed to infer the comparison class. This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed  the listener would infer, given that the first-order listener inference about the comparison class itself involves a pragmatic inference \ndg{??:  as shown via counterexample by the literal model above}. This higher-order reasoning model is given by the following equations:
 
 \begin{align}
 L_2(x, c \mid u, k) &\propto S_2(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L2} \\
@@ -418,6 +420,9 @@ This speaker chooses their utterance by taking into account the fact that the li
 As shown in Figure \ref{fig:alternativeModelPredictions2}, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations of about the category and the adjective heard.
 Further, the inferences of this model, like those of the simpler pragmatics model, are resilient to reasonable choices of alternative utterances; most notably, if the set of alternative utterances provides a way to explicitly articulate the comparison class (e.g., the speaker can say \emph{They're tall for a basketball player}), the same inferences result from hearing the utterance without a comparison class.
 
+\ndg{suggest situations where these two models might come apart?}
+
+\ndg{nts: do we compare to this in results? or is it so similar it's not worth it?}
 
 %The utterance which does not reference a class (e.g., It's warm}) inherits the same meaning as the utterance with the explicit class that
 %matches the assumed implicit class (i.e., if \(c_{i} = c_{sub}\), then
