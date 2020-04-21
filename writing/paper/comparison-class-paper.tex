@@ -447,9 +447,11 @@ We first empirically elicit test stimuli by having participants fill out phrasal
 From this set, we curate a set of experimental stimuli which we use in the other two tasks.
 Task 2 is the main comparison class inference experiment in which participants rephrase a speaker's statement in a way that makes the comparison class explicit.
 The data from Task 2 allow us to test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E.
-Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that allow us to test the quantitative predictions of the comparison class inference model by constraining model parameters. 
-The quantitative predictions of the model are tested using a joint Bayesian data analytic strategy, where we explicitly model the data from both the Comparison Class Inference and Adjective Endorsement tasks.
-This joint Bayesian data-analytic strategy allows us to infer from simple linguistic judgments the world knowledge that guides the inference about the comparison class in the computational model. 
+Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that constrain model parameters enough to test the quantitative predictions of the comparison class inference model. 
+We use Bayesian data analysis to jointly model data from the Comparison Class Inference and Adjective Endorsement tasks, based on latent world knowledge that affects both tasks.
+
+%The quantitative predictions of the model are tested using a joint Bayesian data analytic strategy, where we explicitly model the data from both the Comparison Class Inference and Adjective Endorsement tasks.
+%This joint Bayesian data-analytic strategy allows us to infer from simple linguistic judgments the world knowledge that guides the inference about the comparison class in the computational model. 
 
 %\mht{may want to reverse the order, if we use the modal superordinate comparison class from the Inference experiment as the comparison class in the Adjective Endorsement experiment}
 
@@ -653,15 +655,17 @@ In that task, participants ($n=50$) filled out phrasal templates for adjective p
 Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table \ref{tab:1}). 
 From the full set of 750 responses, we selected 90 item sets -- (X, Y, Z)  triples -- whose categories were at the same level of abstraction  (e.g., they were all subordinate categories of the same basic-level category) and that made sense in the kinds of minimal contexts we use in the Comparison Class Inference experiment.
 Two examples from each adjective pair are shown in Table \ref{tab:1}. 
+\ndg{it's confusing to have task 1 materials and methods embedded here in the task 2 methods section. have a small section above instead?}
 
 Each of the 90 item sets contains 3 specific categories, which vary in their general expectations (low, medium, high) about some degree (e.g., height), within the same general category (e.g., basketball player [high], soccer player [medium], jockey [low]; general category: people). 
 The categories within each item set are paired with either a positive-form or negative-form adjective (e.g., tall or short). 
 Thus, this experiment had 270 unique categories (90 sets $\times$ 3 levels of general expectations) described with 2 adjectives each (e.g., tall and short), for a total of 540 unique items.
 
-We used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
+In this large set of items, we expected many judgements to have small variance, requiring relatively fewer data points to estimate reliably.
+We thus used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
 We then analyzed the partial data set on a by-item basis to see which (if any) items had received exceedingly consistent responses, which we defined to be at least 33 out of 35  ($>94\%$ agreement) of the same response. 
-For those items that received exceedingly consistent responses, we stopped data collected at 35 responses in order to focus resources to provide lower-variance estimates for the items with more variability in responses. 
-This sampling procedure was decided ahead of time and is documented in the pre-registration report. 
+For those items that received exceedingly consistent responses we stopped data collection at 35 responses. This allowed us to focus resources on providing better estimates for the items with more variability in responses. 
+This adaptive procedure was decided ahead of time and is documented in the pre-registration report. 
 
 
 \subsubsection{Procedure}
@@ -675,7 +679,7 @@ Responses to this warm-up trial were used as a basis for exclusion (any response
 
 Participants then completed 36 main trials. Each main trial began with a \emph{context sentence} that introduced the referent as a member of a specific category and provided an appropriate but minimal context in which the adjective could be uttered (e.g., \emph{John sees a \{basketball player, golfer, jockey\}}); the same context sentence was used for all 3 categories in an item set.
 Then, a speaker utters an adjectival utterance predicating the adjective of a pronoun used to refer to the referent (e.g., \emph{John says: ``They're tall''}). 
-We had the speaker use a pronoun so as to not provide a strong linguistic cue as to the intended comparison class. If the referent was a person, we used to the singular ``they'' to refer to them; otherwise, we used either ``it'' or ``they'' depending on the plurality of the referent. 
+We had the speaker use a pronoun so as to not provide a strong linguistic cue as to the intended comparison class. If the referent was a person, we used  the singular ``they'' to refer to them; otherwise, we used either ``it'' or ``they'' depending on the plurality of the referent. 
 Finally, the participant was asked what they thought the speaker meant (e.g., \emph{What do you think John meant?}). Participants responded by freely filling in a sentence that required an explicit comparison class. 
 
 \begin{quote}
@@ -700,7 +704,7 @@ This memory check trial was also used as a basis for exclusion.
 
 \subsection{Results}
 
-Participants were excluded if they either responded incorrectly to the warm-up trial (answering something other than \emph{buildings}, \emph{skyscrapers}, \emph{structures} or the like) or answered fewer than 7 out of 10 memory check questions accurately.\footnote{Incorrect responses to the warm-up trial were most often indicative of copying some part of the text on the screen and pasting it into the responses box (e.g., responding with the name of the speaker, just putting the adjective ``tall'', or responding with a whole sentence without a comparison class ``that is tall'')}
+Participants were excluded if they either responded incorrectly to the warm-up trial (answering something other than \emph{buildings}, \emph{skyscrapers}, \emph{structures} or the like) or answered fewer than 7 out of 10 memory check questions accurately.\footnote{Incorrect responses to the warm-up trial were most often indicative of copying some part of the text on the screen and pasting it into the response box (e.g., responding with the name of the speaker, just putting the adjective ``tall'', or responding with a whole sentence without a comparison class ``that is tall'').}
 750 participants (89.6\%) remained after these exclusion criteria, for a total of 27,000 responses.
 We additionally excluded nonsensical responses: these were primarily responses that just listed the name of the speaker, the adjective alone, or restated the full adjectival sentence (e.g., ``It is tall'') and numbered 420 (1.56\%) in total, leaving 26,580 codeable responses. 
 We processed the responses by correcting for misspellings, lemmatizing, and collapsing across synonyms. 
@@ -730,7 +734,7 @@ We manually confirmed that these were cases of categories superordinate to the s
 %Our primary hypothesis was that usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the Specific NP~vs.~not) would be influenced via an interaction between the general expectations about the specific category and the polarity of the adjective. 
 
 Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E).
-As predicted, the usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the specific NP~vs.~not)  was influenced via an interaction between the general expectations about the specific category and the adjective polarity (Figure \ref{fig:ccInferenceItems}).\footnote{
+As predicted, \ndg{incomprehensible:} the usage of a specific~vs.~general comparison class (i.e., paraphrases that mentioned the specific NP~vs.~not)  was influenced via an interaction between the general expectations about the specific category and the adjective polarity (Figure \ref{fig:ccInferenceItems}).\footnote{
 	For the regression analysis, we predict specific-NP paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure. The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
 }
 Namely, when the specific category was expected to be near the high-end of the scale (e.g., the height of a basketball player), the positive form adjective (e.g., tall) led to credibly more inferences of a basic/superordinate comparison class (e.g., \emph{tall for a person}) than the negative form adjective (e.g., short) in comparison to control, middle-of-the-scale items (e.g., soccer player):  beta-weight and 95\% Bayesian credible interval: \brmresults{expt3_brm_pilot.csv}{np_expectationshigh:adj_polarity1}.
@@ -738,12 +742,14 @@ The opposite interaction was observed for categories that were expected to be ne
  Notably, when the specific category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between subordinate comparison classes for the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): \brmresults{expt3_brm_pilot.csv}{adj_polarity1}.
  There was an overall preference for subordinate comparison classes for the  middle-of-the-scale subordinate categories (\brmresults{expt3_brm_pilot.csv}{Intercept}), and there was no difference in this overall preference when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt3_brm_pilot.csv}{np_expectationshigh}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt3_brm_pilot.csv}{np_expectationslow}).
 This analysis confirms the primary hypothesis.
+\ndg{these results are hard to understand. partly because the terms are hard to process (specific, subordinate, etc), also because you jump into the most complex analysis. maybe lay it out like a standard behavioral analysis, describing the regression model and then walking through main effects before interactions? then say connection to model...}
 
 %We then test the simple effects. For items low on the degree scale (e.g., temperatures in winter), positive form adjectives were significantly more likely to imply subordinate comparison classes (\(\beta = 1.41\); \(SE = 0.15;\) \(z = 9.43\)), while the opposite is true for items high on the scale (e.g., summer days; \(\beta = -2.50\); \(SE = 0.19;\) \(z = -13.15\)). Participants reason pragmatically to flexibly adjust the comparison class, combining world knowledge with informativity as predicted by our model.
 
 \section{Quantitative Analysis}
 
 %In addition to making qualitative predictions about the level-of-abstraction of the inferred comparison class, 
+\ndg{awk. the whole several layer intro to the bda is confusing and a bit redundant.}
 Our model is not only useful for making qualitative predictions about the comparison class, but it is also a tool for understanding the subtleties of comparison class inference by way of the gradience in the model's predictions.
 The model's primary capacity to predict gradience in comparison class inference is as a function of distributional knowledge about scalar properties of categories $P(x)$ (e.g., the heights of basketball players, temperatures in Winter, ...).
 Thus, the model provides a strong baseline hypothesis for evaluating comparison class inferences by the influence of world knowledge $P(x)$.
