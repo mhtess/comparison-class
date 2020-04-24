@@ -5,12 +5,15 @@ date: "October 29, 2019"
 ---
 # Comparison Class Elicitation Experiment 
 
-The comparison class elicitation experiment is a free prduction experiment where participants read a context sentence about a target object (NP) and paraphrase an utterance including a positive or a negative gradable adjective providing excplicit comparison classes of the gradable adjectives; we analyse the produced comparison classes and categorize them into subordinate and superordinate comparison classes of the target object.
+The comparison class elicitation experiment is a free prduction experiment where participants read a context sentence about a target object (NP) and paraphrase an utterance involving a gradable adjective by providing an explicit comparison class for the gradable adjective; we analyse the produced comparison classes and categorize them into "subordinate" and "superordinate" comparison classes.
 
 ## Analysis Outline
-First, the raw responses are processed automatically. This is done by matching raw responses to key words providing the essence of the respective comparison class: mostly, we match against the NPs of the sentence and the anticipated superordinate of the item. In order to improve the automatic classification we lemmatize and correct for misspellings of the raw responses. Second, the responses which were not processed automatically are processed manually. The responses not matching the NPs or the anticipated superordinates are further analysed in order to identify provided responses which systematically differed from the NPs or the superordinates. We collected differing responses produced by at least three participants. 
 
-The analysis proceedes from simplest processing steps which were always applied to more sophisitcated processing steps, leading to the output of dataframes containing data passing these different processing steps. At the end, data visualisations and regression models can be found.
+First, the raw responses are processed automatically by matching responses to keywords providing the essence of the respective comparison class: mostly, we match against the NPs of the sentence (referent NPs) and the anticipated superordinate of the item. In order to improve the automatic classification we lemmatize and correct for misspellings of the raw responses. 
+
+Second, the responses which were not processed automatically are processed manually. From these responses, we looked for responses thatwere produced by at least three participants and noted these as consistent comparison classes that were different from the referent NP and the anticiapted superordinate. 
+
+The analysis proceedes from simplest processing steps to more sophisticated processing steps, leading to the output of dataframes containing data passing these different processing steps. At the end, data visualisations and regression models can be found.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load libraries.
@@ -36,9 +39,450 @@ containsString <- function(strng, substrng) {
     ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
   ))
 }
+```
 
-# function to create plural NPs for frequency extraction
-# THE ORIGINAL NPs ARE USED, NOT THE SUBSTITUTED KEYWORDS
+### Load data
+
+```{r load data from json, eval = F}
+data.path <- "../mturk/class-elicitation-prereg-final/production-results/"
+result.files <- list.files(data.path, pattern = "json")
+
+df.subject <- data.frame()
+df.trials <- data.frame()
+df.attention <- data.frame()
+for (result_file in result.files) {
+  result_json <- fromJSON(paste(data.path, result_file, sep = "/"))
+  worker.id <- paste("workerid_", str_pad(match(result_file, result.files), 4, pad = "0"), sep = "")
+  #  result_json$WorkerId
+  condition <- result_json$answers$condition
+
+  df.attention <- bind_rows(
+    df.attention,
+    data.frame(result_json$answers$catch_trials) %>%
+      mutate(workerid = worker.id)
+  )
+
+  df.subject <- bind_rows(
+    df.subject,
+    data.frame(result_json$answers$subject_information) %>%
+      mutate(
+        workerid = worker.id,
+        language = gsub("\"", "", language),
+        enjoyment = gsub("\"", "", enjoyment),
+        age = gsub("\"", "", age),
+        gender = gsub("\"", "", gender),
+        problems = gsub("\"", "", problems),
+        comments = gsub("\"", "", comments)
+      )
+  )
+
+  df.trials <- bind_rows(
+    df.trials,
+    data.frame(result_json$answers$trials) %>%
+      mutate(workerid = worker.id)
+  )
+}
+
+
+df.trials %>%
+  group_by(workerid) %>%
+  count() %>%
+  group_by(n) %>%
+  count()
+
+
+# write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+# write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+# write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+```
+
+```{r load data from csv, warnings=F}
+df.trials <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+df.subject <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+df.attention <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+```
+
+## Participant Exclusion 
+
+Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials). After the main trials, they completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
+
+```{r}
+df.botcaptcha <- df.attention %>%
+  filter(condition == "botcaptcha")
+
+df.comprehension <- df.attention %>%
+  filter(condition == "warm_up") %>%
+  rowwise() %>%
+  mutate(pass_comp = (
+    containsString(tolower(response), "build") |
+      containsString(tolower(response), "bulid") |
+      containsString(tolower(response), "buid") |
+      containsString(tolower(response), "skyscraper") |
+      containsString(tolower(response), "skyscaper") |
+      containsString(tolower(response), "structure") |
+      containsString(tolower(response), "bulding") |
+      containsString(tolower(response), "builing") |
+      containsString(tolower(response), "bildin") |
+      containsString(tolower(response), "towe")
+  ))
+
+df.memory <- df.attention %>%
+  filter(condition == "memory_check") %>%
+  group_by(workerid) %>%
+  summarize(
+    n_correct = sum(correct),
+    pass_memory = n_correct >= 7
+  )
+```
+
+```{r}
+df.memory %>%
+  group_by(n_correct) %>%
+  count()
+```
+
+```{r summarize catch trials}
+df.attention.summary <- left_join(
+  df.comprehension %>% select(workerid, pass_comp),
+  df.memory %>% select(workerid, pass_memory)
+) %>%
+  mutate(pass_both = pass_comp & pass_memory)
+
+
+df.attention.summary %>%
+  group_by(pass_comp, pass_memory, pass_both) %>%
+  count()
+```
+
+
+```{r apply exclusion critera}
+df.trials.filtered <- df.trials %>%
+  left_join(., df.attention.summary) %>%
+  filter(pass_both)
+
+n.total.responses <- df.trials.filtered %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+paste("total number of responses =", n.total.responses)
+```
+
+```{r item counts}
+d.item.count <- df.trials.filtered %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  count()
+
+d.item.count %>%
+  ungroup() %>%
+  group_by(n) %>%
+  count() %>%
+  ggplot(., aes(x = n, y = nn)) +
+  geom_col() +
+  xlab("n responses per item") +
+  ylab("n items")
+```
+
+
+
+
+
+## Response Preprocessing
+
+### Invalid Responses
+
+We exclude invalid responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
+
+```{r list of invalid responses}
+invalid.responses <- c(
+  "unsure",
+  # all the adjectives
+  "long", "short", "tall", "dark", "light", "fast", "quick", "slow",
+  "hard", "soft", "loud", "noisy", "quiet", "bright", "bruises",
+  "expensive", "cheap", "big", "small", "strong", "weak", "warm", "hot", "cold",
+  "heavy", "wide", "narrow",
+  # all the actor names
+  "alexander", "alicia", "cheep", "daniel", "darker",
+  "david",
+  "eric", "gabriel", "anthony", "william", "john", "tom", "lucas",
+  "michael", "cameron", "stephen",
+  "lee", "greg", "robert", "chrales", "gary", "josh", "simon",
+  # female names
+  "angela", "jennifer", "monica", "melinda", "veronica", "alicia",
+  "maya", "sophie", "kim", "laura", "julia",
+  "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
+  "mika", "natalia",
+  # invalid responses
+  "barbell snatch", "bank of america", "easy", "empire building", "chill", "chinn", "webside",
+  "finished", "flexibility", "health", "hot cold",
+  "lazy", "low", "cliaire", "feelings", "too small", "Too small",
+  "public", "ripe", "silent", "baked", "burn", "more costly", "exacting",
+  # filter out the sentences without a CC
+  "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft",
+  "A spider in an insect terrarium was big", "At the butchershop the chicken was expensive", "At the conference center it was noisy when she met her friend", "during the night its light out there",
+  "hears the cry of a crow", "In Aquarium a tuna was big", "In botanical garden an alpine tree was short.", "In summer that day was cold", "In the freezer michelle hand was cold", "it has a lot of stuff",
+  "It was noisy in the nearby city", "its not a hot and cold", "move furniture through the front gate of her house", "picks up a piece of silk.", "the coat is light in weight", "	The coat of poodle was dark",
+  "the color of the script is light", "the daisy is dark in color", "The first bite of her ice cream was warm", "The first sip of juice was cold", "The furniture was narrow at the back door of his house", "The new place rental rate is expensive", "the pair of sandals are expensive", "	The piece of silk is light.",
+  "the sound of the shower is strong", "The statue made of plastic was cheap", "the walls of the condo are strong", "While walking heard the cry of a rooster when it was quiet", "Basketball player was tall",
+  "Friend's new rowboat was fast", "Friend's new smartcar is big", "his favorite poem was short", "it is not destructive", "it is not loud", "it is not sold expensively", "it s not wide", "its noisy in here",
+  "its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", "large", "lengthy", "Little",
+  "the color is not much", "the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud", "little",
+  "the movie i hope", "all light of off", "sits on a blanket", "try a new water color",
+  "driving on a downtown street", "The spider was small", "The music was Loud",
+  "powerboat sound little quiet", "Horn was too loud", "Villa price was costly",
+  "choral consert was too loud", "milkshake was so hot", "strip mall was tall",
+  "plastic was so soft", "pork was too expensive", "price of raspberries expensive",
+  "coat of a spaniel was little light", "village area was too quit to read",
+  "elderly person was too quick", "conference room was too quiet", "instant pot was slow",
+  "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat",
+  "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
+  "they are bold", "the blade spinning", "its finished", "not sure", "too slow",
+  "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast", "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little", "outside"
+)
+```
+
+Simple (invalid) copular sentences including no comparison classes are constructed and excluded together with the invalid responses above.
+``` {r excludeInvalidResps}
+
+# excluding invalid responses
+d.tidy.resps.catch <- df.trials.filtered %>%
+  filter((grepl("it's", response, ignore.case = T) |
+    grepl("they're", response, ignore.case = T)))
+
+# get invalid responses which are full sentences without any comparison class
+d.tidy.resp.valid <- anti_join(
+  df.trials.filtered,
+  d.tidy.resps.catch
+) %>%
+  rowwise() %>%
+  mutate(
+    stopPhrase = paste("the", np, "is", adj, sep = " "),
+    stopPhrase2 = paste("the", np, "is",
+      paste(adj, ".", sep = ""),
+      sep = " "
+    ),
+    responseLength = lengths(str_split(response, " "))
+  ) %>%
+  filter((tolower(response) != stopPhrase) &
+    (tolower(response) != stopPhrase2))
+
+# get the long responses that were not matched above and filter them out manually
+# d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
+
+d.tidy.resp.valid <- d.tidy.resp.valid %>%
+  rowwise() %>%
+  # exclude responses which excatly match the ones in the following list
+  subset(., !(response %in% invalid.responses))
+
+n.valid.responses <- d.tidy.resp.valid %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+n.total.responses - n.valid.responses
+
+```
+
+### Misspelling Correction
+
+In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
+```{r list of commong mispellings}
+misspellings_df <- read_csv("../data/class-elicitation-prereg-final/misspellings_dict.csv")
+misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
+```
+
+### Synonym Extraction
+
+To further improve the response classification, we also replace some raw responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context (e.g. 'automobile' is converted to 'car') .
+```{r list of common synonyms}
+synonym_df <- read_csv("../data/class-elicitation-prereg-final/synonym_dict.csv")
+synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
+```
+
+### Lemmatization 
+
+To further improve the response classification, we lemmatize the plural responses (specifically, the irregular nouns and misspellings) to match the NPs and superordinates (e.g. 'libraries' is converted to 'library').
+
+```{r list of lemmatizations}
+# mostly Plural --> singulars
+lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/lemmatization_dict.csv")
+lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization_df, V1))
+```
+
+```{r}
+d.tidy.resp.valid %>%
+  mutate(response = as.character(response)) %>%
+  ungroup() %>%
+  mutate(
+    response_spelling = str_replace_all(tolower(response), misspellings_set),
+    response_synonym = str_replace_all(response_spelling, synonym_set),
+    response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
+  ) %>%
+  mutate(
+    corrected_spelling = response != response_spelling,
+    corrected_synonym = response_spelling != response_synonym,
+    corrected_lemma = response_synonym != response_lemma
+  ) -> d.tidy.resp.valid.lemmatized
+
+sum(d.tidy.resp.valid.lemmatized$corrected_spelling)
+sum(d.tidy.resp.valid.lemmatized$corrected_spelling) / n.valid.responses
+sum(d.tidy.resp.valid.lemmatized$corrected_synonym)
+sum(d.tidy.resp.valid.lemmatized$corrected_synonym) / n.valid.responses
+sum(d.tidy.resp.valid.lemmatized$corrected_lemma)
+sum(d.tidy.resp.valid.lemmatized$corrected_lemma) / n.valid.responses
+```
+
+
+### Keyword in NP
+
+For automated checking of whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (i.e., including the mentioned NP). 
+
+```{r np match}
+d.tidy.resp.valid.lemmatized.np_match <- d.tidy.resp.valid.lemmatized %>%
+  rowwise() %>%
+  mutate(
+    np_match = tolower(np), # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
+    np_match = gsub("bottle of top-shelf liquor", "liquor", np_match),
+    np_match = gsub("piece of chocolate", "chocolate", np_match),
+    np_match = gsub("piece of chalk", "chalk", np_match),
+    np_match = gsub("six-pack of beer", "beer", np_match),
+    np_match = gsub("bottle of wine", "wine", np_match),
+    np_match = gsub("pine tree", "pine", np_match),
+    np_match = gsub("redwood tree", "redwood", np_match),
+    np_match = gsub("alpine tree", "alpine", np_match),
+    np_match = gsub("bonsai tree", "bonsai", np_match),
+    np_match = gsub("pick-up truck", "pick-up", np_match),
+    np_match = gsub("relay race", "relay", np_match),
+    np_match = gsub("triathlon race", "triathlon", np_match),
+    np_match = gsub("sprinting race", "sprint", np_match),
+    np_match = gsub("kettle ball", "ball", np_match),
+    np_match = gsub("study hall", "study", np_match),
+    np_match = gsub("electric car", "electric", np_match),
+    np_match = gsub("bass guitar", "bass", np_match),
+    np_match = gsub("choral concert", "choral", np_match),
+    np_match = gsub("rap concert", "rap", np_match),
+    np_match = gsub("white paint", "white", np_match),
+    np_match = gsub("blue paint", "blue", np_match),
+    np_match = gsub("black paint", "black", np_match),
+    np_match = gsub("limousine", "limo", np_match),
+    np_match = gsub("smartcar", "smart", np_match),
+    np_match = gsub("japanese restaurant", "japanese", np_match),
+    np_match = gsub("chinese restaurant", "chinese", np_match),
+    np_match = gsub("korean restaurant", "korean", np_match),
+    np_match = gsub("elderly person", "elder", np_match),
+    np_match = gsub("oil paint", "oil", np_match),
+    np_match = gsub("wall paint", "wall", np_match),
+    np_match = gsub("shopping mall", "mall", np_match),
+    np_match = gsub("chocolate fondue", "fondue", np_match),
+    np_match = gsub("cell phone", "phone", np_match),
+    np_match = gsub("bear den", "bear", np_match),
+    np_match = gsub("fox den", "fox", np_match),
+    np_match = gsub("mouse den", "mouse", np_match),
+    np_match = gsub("downtown street", "downtown", np_match),
+    np_match = gsub("side road", "side", np_match),
+    np_match = gsub("back door", "back", np_match),
+    np_match = gsub("patio door", "patio", np_match),
+    np_match = gsub("front gate", "front", np_match),
+    np_match = gsub("chocolate cake", "chocolate", np_match)
+  )
+```
+
+
+## Automatic Classification
+
+The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
+
+```{r check if response contains sub/super and visa versa}
+d.tidy.resp.valid.lemmatized.np_match %>%
+  rowwise() %>%
+  mutate(
+    response_lemma = as.character(response_lemma),
+    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
+    np_match = as.character(np_match),
+    np_match = gsub('\"', "", np_match),
+    np_match_us = paste("_", np_match, "_", sep = ""), # insert underscores for the matching the other way around
+    super_us = paste("_", superordinate, "_", sep = ""),
+    # check if response and seed NP match
+    specific = # ifelse(
+   # catch these responses because otherwise classified as subordinate for "strawberries" etc
+    ifelse(response_lemma == "berries", 0,
+      containsString_responses(
+        as.character(cleanedPhrase),
+        np_match,
+        response_lemma,
+        np_match_us
+      )
+    ),
+    # check if response and anticipated superordinate match
+    matchingSuper = containsString_responses(
+      as.character(cleanedPhrase),
+      as.character(superordinate),
+      response_lemma,
+      super_us
+    )
+  ) -> d.tidy.auto
+```
+
+We further exclude responses that used the word "similar"; we deemed these responses too underspecified/ambiguous (how similar is similar?).
+
+```{r remove similar}
+d.tidy.auto %>%
+  filter(grepl("similar", response_lemma, ignore.case = T)) -> d.uncertain.resps # 15 responses
+
+d.tidy.auto.no_similar <- anti_join(
+  d.tidy.auto,
+  d.uncertain.resps
+)
+
+# extract the automatically matched data (out of 26.552 responses (post exclusion) 22.117 are matched )
+d.tidy.auto.no_similar.match <- d.tidy.auto.no_similar %>%
+  filter((specific == 1) | (matchingSuper == 1))
+
+
+n.automatic.responses <- d.tidy.auto.no_similar.match %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+n.automatic.responses
+n.automatic.responses / n.valid.responses
+
+```
+
+Responses for items that were classified as all subordinate or superordinate (mean = 0 or 1) are double-checked.
+
+```{r check ceiling/floor responses}
+# check the matched items where the mean of responses is 1 or 0
+d.tidy.auto.no_similar.match %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  mutate(meanResp = mean(specific)) %>%
+  filter((meanResp == 1) | (meanResp == 0)) %>%
+  distinct(
+    stim_id, np_expectations,
+    np_match, adj_polarity, response_lemma, meanResp
+  ) %>%
+  View()
+```
+
+### Post-processing of Automatically Classified Data
+
+After we manually inspected the data with respect to superordinate responses that systematically deviated from the anticipated ones, we modified one item (77 "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the frequency extraction and the adjective endorsement task. 
+If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP, otherwise it is turned into the corresponding superordinate.
+
+``` {r}
+d.tidy.auto.no_similar.match.adjust_super <- d.tidy.auto.no_similar.match %>%
+  mutate(
+    # substitutions made based on human modal responses
+    superordinate = ifelse(stim_id == 77, "food", superordinate)
+  ) %>%
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
+  mutate(mode_np = ifelse(specific == 1, np, superordinate))
+```
+
+### Frequencies
+
+```{r plural np for freq}
+# this function takes the raw NPs that we use in the experiment, e.g. 'six-pack of beer' (not the substituted key-words, e.g.,  beer, that we used for automatic categorization) to create the respective plural NPs we use for frequencies
 insert_plural_np <- function(np, superordinate) {
   if (np %in% c("piece of chocolate")) {
     np_pl <- "chocolates"
@@ -138,459 +582,27 @@ insert_plural_np <- function(np, superordinate) {
 
 ```
 
-### Load data
-
-```{r load data from json, eval = F}
-data.path <- "../mturk/class-elicitation-prereg-final/production-results/"
-result.files <- list.files(data.path, pattern = "json")
-
-df.subject <- data.frame()
-df.trials <- data.frame()
-df.attention <- data.frame()
-for (result_file in result.files) {
-  result_json <- fromJSON(paste(data.path, result_file, sep = "/"))
-  worker.id <- paste("workerid_", str_pad(match(result_file, result.files), 4, pad = "0"), sep = "")
-  #  result_json$WorkerId
-  condition <- result_json$answers$condition
-
-  df.attention <- bind_rows(
-    df.attention,
-    data.frame(result_json$answers$catch_trials) %>%
-      mutate(workerid = worker.id)
-  )
-
-  df.subject <- bind_rows(
-    df.subject,
-    data.frame(result_json$answers$subject_information) %>%
-      mutate(
-        workerid = worker.id,
-        language = gsub("\"", "", language),
-        enjoyment = gsub("\"", "", enjoyment),
-        age = gsub("\"", "", age),
-        gender = gsub("\"", "", gender),
-        problems = gsub("\"", "", problems),
-        comments = gsub("\"", "", comments)
-      )
-  )
-
-  df.trials <- bind_rows(
-    df.trials,
-    data.frame(result_json$answers$trials) %>%
-      mutate(workerid = worker.id)
-  )
-}
-
-
-df.trials %>%
-  group_by(workerid) %>%
-  count() %>%
-  group_by(n) %>%
-  count()
-
-
-# write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-# write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-# write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
-```
-
-```{r load data from csv, warnings=F}
-df.trials <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-df.subject <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-df.attention <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
-
-```
-## Response Preprocessing
-
-### Data Exclusion 
-
-Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials). After the main trials, they completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
-
-```{r}
-
-df.botcaptcha <- df.attention %>%
-  filter(condition == "botcaptcha")
-
-df.comprehension <- df.attention %>%
-  filter(condition == "warm_up") %>%
-  rowwise() %>%
-  mutate(pass_comp = (
-    containsString(tolower(response), "build") |
-      containsString(tolower(response), "bulid") |
-      containsString(tolower(response), "buid") |
-      containsString(tolower(response), "skyscraper") |
-      containsString(tolower(response), "skyscaper") |
-      containsString(tolower(response), "structure") |
-      containsString(tolower(response), "bulding") |
-      containsString(tolower(response), "builing") |
-      containsString(tolower(response), "bildin") |
-      containsString(tolower(response), "towe")
-  ))
-
-df.memory <- df.attention %>%
-  filter(condition == "memory_check") %>%
-  group_by(workerid) %>%
-  summarize(
-    n_correct = sum(correct),
-    pass_memory = n_correct >= 7
-  )
-```
-
-```{r}
-df.memory %>%
-  group_by(n_correct) %>%
-  count()
-```
-
-```{r summarize catch trials}
-df.attention.summary <- left_join(
-  df.comprehension %>% select(workerid, pass_comp),
-  df.memory %>% select(workerid, pass_memory)
-) %>%
-  mutate(pass_both = pass_comp & pass_memory)
-
-
-df.attention.summary %>%
-  group_by(pass_comp, pass_memory, pass_both) %>%
-  count()
-```
-
-### Keyword Preprocessing
-
-For automated checking of whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (i.e., including the mentioned NP). 
-
-```{r filtered main trails}
-df.trials.filtered <- df.trials %>%
-  left_join(., df.attention.summary) %>%
-  filter(pass_both) %>%
-  rowwise() %>%
-  mutate(
-    np_match = tolower(np), # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
-    np_match = gsub("bottle of top-shelf liquor", "liquor", np_match),
-    np_match = gsub("piece of chocolate", "chocolate", np_match),
-    np_match = gsub("piece of chalk", "chalk", np_match),
-    np_match = gsub("six-pack of beer", "beer", np_match),
-    np_match = gsub("bottle of wine", "wine", np_match),
-    np_match = gsub("pine tree", "pine", np_match),
-    np_match = gsub("redwood tree", "redwood", np_match),
-    np_match = gsub("alpine tree", "alpine", np_match),
-    np_match = gsub("bonsai tree", "bonsai", np_match),
-    np_match = gsub("pick-up truck", "pick-up", np_match),
-    np_match = gsub("relay race", "relay", np_match),
-    np_match = gsub("triathlon race", "triathlon", np_match),
-    np_match = gsub("sprinting race", "sprint", np_match),
-    np_match = gsub("kettle ball", "ball", np_match),
-    np_match = gsub("study hall", "study", np_match),
-    np_match = gsub("electric car", "electric", np_match),
-    np_match = gsub("bass guitar", "bass", np_match),
-    np_match = gsub("choral concert", "choral", np_match),
-    np_match = gsub("rap concert", "rap", np_match),
-    np_match = gsub("white paint", "white", np_match),
-    np_match = gsub("blue paint", "blue", np_match),
-    np_match = gsub("black paint", "black", np_match),
-    np_match = gsub("limousine", "limo", np_match),
-    np_match = gsub("smartcar", "smart", np_match),
-    np_match = gsub("japanese restaurant", "japanese", np_match),
-    np_match = gsub("chinese restaurant", "chinese", np_match),
-    np_match = gsub("korean restaurant", "korean", np_match),
-    np_match = gsub("elderly person", "elder", np_match),
-    np_match = gsub("oil paint", "oil", np_match),
-    np_match = gsub("wall paint", "wall", np_match),
-    np_match = gsub("shopping mall", "mall", np_match),
-    np_match = gsub("chocolate fondue", "fondue", np_match),
-    np_match = gsub("cell phone", "phone", np_match),
-    np_match = gsub("bear den", "bear", np_match),
-    np_match = gsub("fox den", "fox", np_match),
-    np_match = gsub("mouse den", "mouse", np_match),
-    np_match = gsub("downtown street", "downtown", np_match),
-    np_match = gsub("side road", "side", np_match),
-    np_match = gsub("back door", "back", np_match),
-    np_match = gsub("patio door", "patio", np_match),
-    np_match = gsub("front gate", "front", np_match),
-    np_match = gsub("chocolate cake", "chocolate", np_match)
-  )
-
-
-n.total.responses <- df.trials.filtered %>%
-  ungroup() %>%
-  count() %>%
-  pull(n)
-
-df.trials.filtered %>%
-  group_by(degree, np) %>%
-  count()
-```
-
-```{r}
-d.item.count <- df.trials.filtered %>%
-  group_by(stim_id, np_expectations, adj_polarity) %>%
-  count()
-d.item.count
-
-d.item.count %>%
-  ungroup() %>%
-  group_by(n) %>%
-  count() %>%
-  ggplot(., aes(x = n, y = nn)) +
-  geom_col() +
-  xlab("n responses per item") +
-  ylab("n items")
-```
-
-### Invalid Responses
-
-We exclude invalid responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
-
-```{r list of invalid responses}
-invalid.responses <- c(
-  "unsure",
-  # all the adjectives
-  "long", "short", "tall", "dark", "light", "fast", "quick", "slow",
-  "hard", "soft", "loud", "noisy", "quiet", "bright", "bruises",
-  "expensive", "cheap", "big", "small", "strong", "weak", "warm", "hot", "cold",
-  "heavy", "wide", "narrow",
-  # all the actor names
-  "alexander", "alicia", "cheep", "daniel", "darker",
-  "david",
-  "eric", "gabriel", "anthony", "william", "john", "tom", "lucas",
-  "michael", "cameron", "stephen",
-  "lee", "greg", "robert", "chrales", "gary", "josh", "simon",
-  # female names
-  "angela", "jennifer", "monica", "melinda", "veronica", "alicia",
-  "maya", "sophie", "kim", "laura", "julia",
-  "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
-  "mika", "natalia",
-  # invalid responses
-  "barbell snatch", "bank of america", "easy", "empire building", "chill", "chinn", "webside",
-  "finished", "flexibility", "health", "hot cold",
-  "lazy", "low", "cliaire", "feelings", "too small", "Too small",
-  "public", "ripe", "silent", "baked", "burn", "more costly", "exacting",
-  # filter out the sentences without a CC
-  "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft",
-  "A spider in an insect terrarium was big", "At the butchershop the chicken was expensive", "At the conference center it was noisy when she met her friend", "during the night its light out there",
-  "hears the cry of a crow", "In Aquarium a tuna was big", "In botanical garden an alpine tree was short.", "In summer that day was cold", "In the freezer michelle hand was cold", "it has a lot of stuff",
-  "It was noisy in the nearby city", "its not a hot and cold", "move furniture through the front gate of her house", "picks up a piece of silk.", "the coat is light in weight", "	The coat of poodle was dark",
-  "the color of the script is light", "the daisy is dark in color", "The first bite of her ice cream was warm", "The first sip of juice was cold", "The furniture was narrow at the back door of his house", "The new place rental rate is expensive", "the pair of sandals are expensive", "	The piece of silk is light.",
-  "the sound of the shower is strong", "The statue made of plastic was cheap", "the walls of the condo are strong", "While walking heard the cry of a rooster when it was quiet", "Basketball player was tall",
-  "Friend's new rowboat was fast", "Friend's new smartcar is big", "his favorite poem was short", "it is not destructive", "it is not loud", "it is not sold expensively", "it s not wide", "its noisy in here",
-  "its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", "large", "lengthy", "Little",
-  "the color is not much", "the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud", "little",
-  "the movie i hope", "all light of off", "sits on a blanket", "try a new water color",
-  "driving on a downtown street", "The spider was small", "The music was Loud",
-  "powerboat sound little quiet", "Horn was too loud", "Villa price was costly",
-  "choral consert was too loud", "milkshake was so hot", "strip mall was tall",
-  "plastic was so soft", "pork was too expensive", "price of raspberries expensive",
-  "coat of a spaniel was little light", "village area was too quit to read",
-  "elderly person was too quick", "conference room was too quiet", "instant pot was slow",
-  "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat",
-  "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
-  "they are bold", "the blade spinning", "its finished", "not sure", "too slow",
-  "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast", "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little", "outside"
-)
-```
-
-Simple (invalid) copular sentences including no comparison classes are constructed and excluded together with the invalid responses above.
-``` {r excludeInvalidResps}
-
-# excluding invalid responses
-d.tidy.resps.catch <- df.trials.filtered %>%
-  filter((grepl("it's", response, ignore.case = T) |
-    grepl("they're", response, ignore.case = T)))
-
-# get invalid responses which are full sentences without any comparison class
-d.tidy.resp.valid.resps <- anti_join(
-  df.trials.filtered,
-  d.tidy.resps.catch
-) %>%
-  rowwise() %>%
-  mutate(
-    stopPhrase = paste("the", np, "is", adj, sep = " "),
-    stopPhrase2 = paste("the", np, "is",
-      paste(adj, ".", sep = ""),
-      sep = " "
-    ),
-    responseLength = lengths(str_split(response, " "))
-  ) %>%
-  filter((tolower(response) != stopPhrase) &
-    (tolower(response) != stopPhrase2))
-
-# get the long responses that were not matched above and filter them out manually
-# d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
-
-d.tidy.resp.valid.resps <- d.tidy.resp.valid.resps %>%
-  rowwise() %>%
-  # exclude responses which excatly match the ones in the following list
-  subset(., !(response %in% invalid.responses))
-
-n.valid.responses <- d.tidy.resp.valid.resps %>%
-  ungroup() %>%
-  count() %>%
-  pull(n)
-
-n.total.responses - n.valid.responses
-
-```
-
-### Misspelling Correction
-
-In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
-```{r list of commong mispellings}
-misspellings_df <- read_csv("../data/class-elicitation-prereg-final/misspellings_dict.csv")
-misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
-```
-
-### Synonym Extraction
-
-To further improve the response classification, we also replace some raw responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context (e.g. 'automobile' is converted to 'car') .
-```{r list of common synonyms}
-synonym_df <- read_csv("../data/class-elicitation-prereg-final/synonym_dict.csv")
-synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
-```
-
-### Lemmatization 
-
-To further improve the response classification, we lemmatize the plural responses (specifically, the irregular nouns and misspellings) to match the NPs and superordinates (e.g. 'libraries' is converted to 'library').
-```{r list of lemmatizations}
-# mostly Plural --> singulars
-lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/lemmatization_dict.csv")
-lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization_df, V1))
-```
-
-```{r}
-d.tidy.resp.valid.resps %>%
-  mutate(response = as.character(response)) %>%
-  ungroup() %>%
-  mutate(
-    response_spelling = str_replace_all(tolower(response), misspellings_set),
-    response_synonym = str_replace_all(response_spelling, synonym_set),
-    response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
-  ) %>%
-  mutate(
-    corrected_spelling = response != response_spelling,
-    corrected_synonym = response_spelling != response_synonym,
-    corrected_lemma = response_synonym != response_lemma
-  ) -> d.tidy.resp.valid.resps
-
-sum(d.tidy.resp.valid.resps$corrected_spelling)
-sum(d.tidy.resp.valid.resps$corrected_spelling) / n.valid.responses
-sum(d.tidy.resp.valid.resps$corrected_synonym)
-sum(d.tidy.resp.valid.resps$corrected_synonym) / n.valid.responses
-sum(d.tidy.resp.valid.resps$corrected_lemma)
-sum(d.tidy.resp.valid.resps$corrected_lemma) / n.valid.responses
-```
-
-## Automatic Response Classification
-
-The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
-```{r}
-d.tidy.resp.valid.resps %>%
-  rowwise() %>%
-  mutate(
-    response_lemma = as.character(response_lemma),
-    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
-    np_match = as.character(np_match),
-    np_match = gsub('\"', "", np_match),
-    np_match_us = paste("_", np_match, "_", sep = ""), # insert underscores for the matching the other way around
-    super_us = paste("_", superordinate, "_", sep = ""),
-    # check if response and seed NP match
-    specific = # ifelse(
-   # catch these responses because otherwise classified as subordinate for "strawberries" etc
-    ifelse(response_lemma == "berries", 0,
-      containsString_responses(
-        as.character(cleanedPhrase),
-        np_match,
-        response_lemma,
-        np_match_us
-      )
-    ),
-    # check if response and anticipated superordinate match
-    matchingSuper = containsString_responses(
-      as.character(cleanedPhrase),
-      as.character(superordinate),
-      response_lemma,
-      super_us
-    )
-  ) -> d.tidy.phrase.w.original2
-```
-
-We further exclude responses that used the word "similar"; we deemed these responses too underspecified/ambiguous (how similar is similar?).
-
-``` {r}
-
-d.tidy.phrase.w.original2 %>%
-  filter(grepl("similar", response_lemma, ignore.case = T)) -> d.uncertain.resps # 15 responses
-
-d.tidy.clean.responses <- anti_join(
-  d.tidy.phrase.w.original2,
-  d.uncertain.resps
-)
-
-# extract the automatically matched data (out of 26.552 responses (post exclusion) 22.117 are matched )
-d.matchedResponses <- d.tidy.clean.responses %>%
-  filter((specific == 1) | (matchingSuper == 1))
-
-
-n.automatic.responses <- d.matchedResponses %>%
-  ungroup() %>%
-  count() %>%
-  pull(n)
-
-n.automatic.responses
-n.automatic.responses / n.valid.responses
-
-```
-
-The items which are classified as subordinate or superordinate only (mean = 0 or 1) are double-checked.
-```{r}
-
-# check the matched items where the mean of responses is 1 or 0
-d.matchedResponses %>%
-  group_by(stim_id, np_expectations, adj_polarity) %>%
-  mutate(meanResp = mean(specific)) %>%
-  filter((meanResp == 1) | (meanResp == 0)) %>%
-  distinct(
-    stim_id, np_expectations,
-    np_match, adj_polarity, response_lemma, meanResp
-  ) %>%
-  View()
-
-```
-
-### Post-processing of Automatically Classified Data
-
-After we manually inspected the data with respect to responses systematically deviating from the aticipated ones we extracted two items (5 and 77) for which the superordinates deviated. We adjust these superordinates to the empirical modal responses and use this adjusted set of superordinates for the frequency extraction and the adjective endorsement task. 
-If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP, otherwise it is turned into the corresponding superordinate from this adjusted superordinates set.  
-``` {r}
-d.tidy.resps.auto.classified.full.adjust.Super <- d.matchedResponses %>%
-  mutate(
-    # substitutions made based on human modal responses
-    
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-```
-
-### Frequencies
 
 We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
-``` {r}
 
-d.tidy.auto.classified.w.pl.np <- d.tidy.resps.auto.classified.full.adjust.Super %>%
+```{r}
+
+d.tidy.auto.classified.w.pl.np <- d.tidy.auto.no_similar.match.adjust_super %>%
   rowwise() %>%
-  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-d.tidy.auto.classified.w.pl <- d.tidy.auto.classified.w.pl.np %>%
   mutate(
+    np_pl = insert_plural_np(tolower(np), superordinate),
     superordinate.freq = superordinate,
     superordinate.freq = ifelse(stim_id == 90, "doors", superordinate.freq),
     superordinate.freq = ifelse(stim_id == 5, "writing tools", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avoid polysemy
   )
+
 ```
 
 The corresponding subordinate and superordinate frequencies are added to each data point. 
-``` {r}
 
+```{r}
 df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
 
 d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
@@ -605,10 +617,12 @@ df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
          np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
   mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, 
          response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
+         NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
 #write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
 ```
+
 
 ## Manual Response Processing 
 
@@ -616,30 +630,29 @@ We look at the responses that were not automatically classified (about 4000). We
 
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
-d.tidy.resp.analysis <- anti_join(d.tidy.clean.responses, d.matchedResponses)
+d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.no_similar.match)
 
-length(d.tidy.resp.analysis$response)
+length(d.tidy.auto.non_match$response)
 
-d.tidy.resp.analysis %>%
-  distinct(superordinate, np, adj, np_match, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
+d.tidy.auto.non_match %>%
+  distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
   View()
 ```
 
 The adjustments are read from the data frame and converted to a named list ot be used in str_replace_all.
 ```{r}
-
 hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv") %>% 
   rowwise() %>%
   mutate(V2 = ifelse(is.na(V2), "", V2))
+
 hand_classification <- pull(hand_classification_df, V2) %>% set_names(pull(hand_classification_df, V1))
 ```
 
 The hand-classified responses are then checked if they include the NP or the anticipated superordinate or vice versa. 
 
 ``` {r}
-
 # replace the sketchy synonyms
-d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
+d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match %>%
   mutate(
     response_lemma = as.character(response_lemma),
     response = as.character(response),
@@ -661,14 +674,15 @@ d.tidy.phrase.handClassified <- d.tidy.resp.analysis %>%
     )
   )
 
-d.tidy.phrase.handClassified %>%
-  filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.phrase.handClassified.matched
+d.tidy.auto.non_match.hand_classified %>%
+  filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.auto.non_match.hand_classified_match
 ```
 
-The responses which were still not classified are processed further. Some of the manual adjustments are made dependending on the specific items. For example, we take paraphrases including the place or the time mentioned in the context sentence to mean the subordinate in e.g. cases like 'He heard an owl cry in the forest' and '..compared to other forests' to mean 'owls in other forests'. Then, we again checked if the responses include the NP or the anticipated superordinate or if those include the response. 
+The responses which were still not classified are processed further. Some of the manual adjustments are made on an item-by-item basis. For example, we take paraphrases including the place or the time mentioned in the context sentence to mean the subordinate in e.g. cases like 'He heard an owl cry in the forest': The response "it's loud...compared to other forests' to mean 'owls in other forests'. 
+Then, we again checked if the responses include the NP or the anticipated superordinate or if those include the response. 
 
 ``` {r}
-d.tidy.phrase.handClassified %>%
+d.tidy.auto.non_match.hand_classified %>%
   filter((specific == 0) & (matchingSuper == 0)) %>%
   rowwise() %>%
   mutate(
