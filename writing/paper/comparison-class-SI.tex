@@ -9,11 +9,12 @@
 \usepackage{url}
 \usepackage{tikz}
 \usetikzlibrary{bayesnet}
+\usepackage{subfigure}
 
 %\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
 %\DeclareLanguageMapping{american}{american-apa}
 
-  \title{Supplemental Information: Big \emph{for a what}? Inferring comparison classes for relative adjectives}
+  \title{Supplemental Information: Warm (for Winter): Inferring comparison classes for scalar adjectives}
     \author{Michael Henry Tessler and Noah D. Goodman}
     \date{}
   
@@ -46,6 +47,100 @@
 \newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
 \newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
 \newcommand{\mlb}[1]{\textcolor{Orange}{[mlb: #1]}}
+
+\section{Alternative Models}
+
+
+\begin{figure}[t]
+    \centering
+    \subfigure[A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall?]{\label{fig:alternativeModelPredictions}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L0.pdf}}
+    \subfigure[A more sophisticated pragmatic listener model that reasons about which comparison class a speaker believes that the listener would infer. ]{\label{fig:alternativeModelPredictions2}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L2.pdf}}
+    \caption{Alternative model predictions.}
+\end{figure}
+
+
+\subsection{Literal alternative model}
+
+The inference about the comparison class outlined above involves a listener reasoning about a speaker reasoning about a listener.
+One might wonder whether the inference about the comparison class is necessarily a pragmatic inference.
+We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
+This literal comparison class inference model is given by:
+%
+  \begin{align}
+L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c) \cdot P(c \mid k) \cdot P(\theta) \label{eq:L0alt}
+\end{align}
+%
+Similar to the pragmatic listener model (Eq.~\ref{eq:L1}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
+Unlike the pragmatic listener model, however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener knows the referent is a basketball player, but believes the speaker was assuming a \emph{person comparison class}).
+The literal listener version of the model cannot separate these representations.
+In effect, this listener is answering a slightly different question from the comparison class inference problem. The question this alternative model is answering is: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
+This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
+
+\subsection{Alternative pragmatic model}
+
+The pragmatic comparison class inference listener model (Eq. \ref{eq:L1}) reasons about which comparison class a speaker is more likely to be assuming.
+That is, the speaker (Eq. \ref{eq:S1}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
+Speakers may be aware, however, that the comparison class is not in the common ground, but may still avoid articulating a comparison class if the listener can reasonably be assumed to infer the comparison class. This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed  the listener would infer, given that the first-order listener inference about the comparison class itself involves a pragmatic inference. %\ndg{??:  as shown via counterexample by the literal model above}. 
+This higher-order reasoning model is given by the following equations:
+
+\begin{align}
+L_2(x, c \mid u, k) &\propto S_2(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L2} \\
+S_2(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{1}(x, c \mid u) - \text{cost}(u) ))}\label{eq:S2} 
+\end{align}
+
+The primary difference between this model and the model given by Eqs.~\ref{eq:L1} and \ref{eq:S1} is in the speaker $S_2$.
+This speaker chooses their utterance by taking into account the fact that the listener $L_1$ (Eq.~\ref{eq:L1}) is uncertain about the comparison class. 
+As shown in Figure \ref{fig:alternativeModelPredictions2}, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations of about the category and the adjective heard.
+Further, the inferences of this model, like those of the simpler pragmatics model, are resilient to reasonable choices of alternative utterances; most notably, if the set of alternative utterances provides a way to explicitly articulate the comparison class (e.g., the speaker could have said \emph{They're tall for a basketball player}), the same inferences result from hearing the utterance without a comparison class.
+
+\ndg{suggest situations where these two models might come apart?}
+
+\ndg{nts: do we compare to this in results? or is it so similar it's not worth it?}
+
+\section{Overview of Tasks}
+
+We first empirically elicit test stimuli by having participants fill out phrasal templates that elicit sets of categories at the same level of abstraction, which differ in general expectations (e.g., basketball players [generally tall], jockeys [generally short], soccer players [sometimes tall and sometimes short]; Task~1). 
+From this set, we curate a set of experimental stimuli which we use in the other two tasks.
+The data from Task 2 allow us to test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E.
+Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that constrain model parameters enough to test the quantitative predictions of the comparison class inference model. 
+We use Bayesian data analysis to jointly model data from the Comparison Class Inference and Adjective Endorsement tasks, based on latent world knowledge that affects both tasks.
+
+\section{Experimental Methods}
+
+\subsection{Exclusion criteria}
+
+Participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants (see SI). 
+The test involved a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. 
+Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
+Speaker and listener names were randomized in a way that could not be read off the source .html file.
+Participants were given three attempts to correctly identify the listener. 
+If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
+
+\subsection{Stimuli Generation Task (Task 1)}
+
+In this task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing subjects were described as either generally having one adjective apply to them (e.g., \emph{Xs are generally big}; \emph{Ys are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{Zs are sometimes big and sometimes small}; see Appendix for more details). 
+Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table \ref{tab:1}). 
+
+
+\begin{figure*}[htb]
+{\centering \includegraphics[width=0.9\textwidth]{figs/expt_overview} }
+\caption{\small Overview of Experimental Tasks. Task 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Task 2: Free-production task to elicit the comparison class. Task 3: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to provide additional data to constrain the parameters of the comparison class inference model. }\label{fig:exptOverview}
+\end{figure*}
+
+
+\subsection{Comparison Class Inference (Task 2)}
+
+\subsubsection{Adaptive data collection procedure}
+
+In this large set of items, we expected many items to have small variance in their judgments, requiring relatively fewer data points to estimate the probability of a subordinate~vs.~superordinate comparison class reliably.
+We thus used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
+We then analyzed the partial data set on a by-item basis to see which (if any) items had received exceedingly consistent responses, which we defined to be at least 33 out of 35  ($>94\%$ agreement) of the same response. 
+For those items that received exceedingly consistent responses, we stopped data collection at 35 responses. This procedure allowed us to focus resources on providing better estimates for the items with more variability in responses. 
+This adaptive procedure was decided ahead of time and is documented in the pre-registration report. 
+
+
+
+
 
 \section{Bayesian Data Analysis}
 
