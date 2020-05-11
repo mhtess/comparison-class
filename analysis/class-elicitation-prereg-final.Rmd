@@ -602,7 +602,7 @@ The corresponding subordinate and superordinate frequencies are added to each da
 ```{r}
 df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
 
-d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl %>%
+d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
   mutate(
@@ -635,6 +635,178 @@ d.tidy.auto.non_match %>%
   distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
   View()
 ```
+First, we further lemmatize the non-matching responses and correct for misspellings to extract the responses which were produced by at least 3 participants for the respective stimulus. 
+The responses are lower-cased. The lemmatization and misspeling correction is read into a dataframe and converted into a named list to use with `str_replace_all`. 
+``` {r nonMatchedResps-lemmatize}
+d.tidy.auto.non_match <- d.tidy.auto.non_match %>% 
+  mutate(response = tolower(response))
+# this will be removed after the classification is finalised 
+hand_class_lemmatization <- c("colour", "colors", "\\.", ",", "other\\s", "furs", "forrest", "apartmet", "aquariums", "athelete", "banks", "bird's", "bodys", "bouqet", "bouquets", "boxes", "boxs", "butchershop","building\\b", "car's", "car\\b", "chacolate", "childern", "chocholate", "chocolates", "cloths", "can\\b", "coffe", "crying", "day's", "day\\b", "decor\\b", "decors", "den's", "deserts", "desswerts", "dinners", "distances", "dog's", "environments","envrionments", "fabrics", "foods", "forests", "friends", "fruits", "furnitures", "gates", "map\\b", "highways", "houses", "human beings", "illunation", "inatruments", "\\binks", "terrariums", "instruents", "instuments", "store", "jewelery", "jewlery", "kitchens", "lakes", "mall's", "malls", "mattresses", "menus", "metals", "movies", "music instrument", "instrument\b", "nights", "noises", "papers", "parks", "furnature", "place\\b", "prices", "products", "restaraunts", "roads", "rooms", "runnres", "saturday's", "saturdays", "scipts", "script\\b", "script's", "scripts'", "sound\\b", "street\\b", "stringed", "\\bthe\\s", "temperatures", "terrarium's", "weght", "of the day", "tkime", "truck\\b", "weights")
+
+hand_class_replacements <- c("color", "color","", "", "", "fur", "forest", "apartment", "aquarium", "athlete", "bank", "birds", "bodies", "bouquet", "bouquet", "box", "box", "butcher shop", "buildings", "cars", "cars", "chocolate", "children", "chocolate", "chocolate", "clothes", "cans", "coffee", "cries", "days"," days", "decoration", "decoration", "dens", "desserts", "desserts", "dinner", "distance", "dog", "environment", "environment", "fabric", "food", "forest", "friend", "fruit", "furniture", "gate", "maps", "highway", "house", "humans", "illumination", "instruments", "ink", "terrarium", "instruments", "instruments", "shop", "jewelry", "jewelry", "kitchen", "lake", "mall", "mall", "mattress", "menu", "metal", "movie", "musical instrument", "instruments", "night", "noise", "paper", "park", "furniture", "places", "price", "product", "restaurants", "road", "room", "runners", "saturday", "saturday", "scripts", "scripts", "scripts", "scripts", "sounds", "streets", "string", "", "temperature", "terrarium", "weight", "of day", "time", "trucks", "weight")
+#cbind(hand_class_lemmatization, hand_class_replacements) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv')
+
+# apply lematizations
+hand_class_lemmatization_df <- read_csv('../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv') %>% 
+  rowwise() %>%
+  mutate(
+    hand_class_replacements = ifelse(is.na(hand_class_replacements), "",
+                                     hand_class_replacements))
+
+hand_lemmatization <- pull(hand_class_lemmatization_df,
+                           hand_class_replacements) %>%
+  set_names(pull(hand_class_lemmatization_df, hand_class_lemmatization))
+
+d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
+  mutate(response_lemma = as.character(response_lemma),
+         response = as.character(response),
+         response_hand_lemma = str_replace_all(response, hand_lemmatization)
+         )
+```
+
+The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 890 non-matched responses (20.7%) were produced less than 3 times and are dropped. 
+
+``` {r nonMatchedResps-grab3}
+d.tidy.auto.non_match.lemma.counts <- d.tidy.auto.non_match %>% count(stim_id, response_hand_lemma) 
+
+d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match.lemma.counts %>%
+  right_join(., d.tidy.auto.non_match, by=c("stim_id", "response_hand_lemma")) %>% filter(n >= 3)
+
+nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)
+(nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3))/nrow(d.tidy.auto.non_match)
+```
+
+Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John seea an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for content words from the contexts. 
+We manually keep some responses grabbed by this approach on an item-by-item basis (e.g. 'color' referring to the fur of a specific dog).
+
+``` {r}
+# remove stop words from context sentences
+d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
+  mutate(clean_context_sentence = as.character(context_sentence)) %>%
+  unnest_tokens(word, clean_context_sentence) %>%
+  anti_join(., stop_words, by=("word")) %>%
+  group_by(workerid, trial_num) %>%
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(clean_context_sentence, starts_with("word_"), sep = " ") %>%
+  mutate(clean_context_sentence = gsub(" NA", "", clean_context_sentence))
+
+# check if response is in the cleaned context sentence
+
+d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopWords %>%
+  mutate(resps_matching_context = as.character(response_hand_lemma)) %>%
+  unnest_tokens(word, resps_matching_context) %>%
+  filter(grepl(word, clean_context_sentence, fixed = T )) %>%
+  group_by(workerid, trial_num) %>%
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  spread(wordNumber, word) %>%
+  unite(resps_matching_context, starts_with("word_"), sep = " ") %>%
+  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>%
+   # filter out manually responses not be dropped
+  filter(!( 
+           (resps_matching_context == "color") | 
+           (resps_matching_context == "coat") |
+           (response_hand_lemma == "mall") |
+           (response_hand_lemma == "fur") |
+           (response_hand_lemma == "fur color") |
+           (response_hand_lemma == "restaurant") |  
+           (response_hand_lemma == "person") |  
+           (response_hand_lemma == "paint color") |   
+           (response_hand_lemma == "places to live") |      
+           (response_hand_lemma == "places for dinner") |      
+           (response_hand_lemma == "parts of kitchen") |      
+           (response_hand_lemma == "chocolate") |         
+           (response_hand_lemma == "electronics")       
+             ))
+
+```
+
+The failing-reference responses are excluded (404 responses). Other responses are classified using a dictionary of manual classification read from a dataframe:
+
+``` {r nonMatched-dropFailedRef}
+d.tidy.auto.non_match.grab3.noFailedRef <- d.tidy.auto.non_match.grab3 %>%
+  anti_join(., d.tidy.auto.non_match.grab3.failedRef, by=c("stim_id", "response_hand_lemma"))
+
+nrow(d.tidy.auto.non_match.grab3) - nrow(d.tidy.auto.non_match.grab3.noFailedRef)
+
+```
+The data without failed-reference responses is manually classified into the following types of comparison classes:
+- subordinate ('sub')
+- superordinate ('super')
+- super-superordinate ('supersuper'): comparison classes that are more general than the anticipated superordinate categories (e.g. 'things' relative to the anticipated 'musical instruments')
+- different hierarchy ('diff'): the comparison class is outside of the anticipated hierarchy (e.g. more specific than the anticipated superordinate: "cats" instead of animals for stim 8)
+- "NA" for invalid responses 
+
+The by-response hand-classifications are put into the column 'hand_cc'.
+
+Most classifications are read from a dataframe; the classifications which are item-specific are performed on after reading the dataframe with `case_when`. 
+``` {r manualCC}
+# look at distinct responses 
+d.tidy.auto.non_match.grab3.noFailedRef %>% distinct(stim_id, superordinate, np, adj, response_hand_lemma) %>% View()
+
+# here the data frame of the dictionary with the classifications for `str_replace_all` is created for those responses which are classified individually
+# it will be removed when classification is set
+# responses where the calssification depends on the specific item are post-processed with `case_when`
+hand_cc_lemma <- c(
+  "animals", "apartments", "areas", "athletes", "beds", "beverages", "bikes", "bird sounds", "birds", "bodies of water", "bottles", "buildings", "cans", "cars", "cats", "centers", "children", "chocolate", "cities", "cloth", "clothes", "coat", "coat color", "coats", "color", "color of scripts", "condiments", "cooking appliances", "cooking methods", "days", "decorations", "desserts", "dishes", "distance", "dog coats", "doors", "drinks", "electronics", "environment", "episodes", "evenings", "fabric", "films", "food", "fruit", "fur", "fur color", "habitats", "holes", "homes", "house", "indoor spaces", "ink", "ink color", "instruments", "items", "jewelry", "kids", "lanes", "lifters", "liquids", "locations", "mall", "materials", "mattress", "meals", "melons", "metal", "methods", "methods of cooking", "motors", "movie", "music", "musical instruments", "night", "noise", "objects", "openings", "paint color", "paintings", "pans", "paper", "parts of kitchen", "people", "performances", "person", "places", "places for dinner", "places to live", "planes", "plants", "players", "pots", "price", "product", "programs", "restaurants", "rinks", "rivers", "road", "rodents", "room", "routes", "runners", "scripts", "scripts color", "seats", "shades", "shops", "shows", "smells", "songs", "sounds", "spaces", "stoves", "streets", "string instruments", "structures", "temperature", "things", "things in sky", "towns", "traffic", "trucks", "tv shows", "vegetables", "vehicles", "venues", "walkers", "walks", "walkways", "weather", "weightlifters"
+)
+hand_cc <- c(
+  "supersuper", "sub", "sub", "diff", "sub", "diff", "sub", "super", "diff", "super", "sub", "super", "diff", "super", "diff", "super", "sub", "diff", "diff", "diff", "diff", "sub", "sub", "sub", "sub", "sub", "supersuper", "super", "super", "super", "supersuper", "diff", "super", "NA", "super", "super", "diff", "super", "supersuper", "super", "diff", "super", "super", "supersuper", "supersuper", "sub", "sub", "supersuper", "super", "sub", "sub", "supersuper", "sub", "sub", "supersuper", "supersuper", "supersuper", "sub", "sub", "NA", "supersuper", "super", "super", "super", "sub", "NA", "super", "diff", "super", "super", "diff", "super", "diff", "supersuper", "super", "supersuper", "supersuper", "supersuper", "sub", "diff", "super", "diff", "super", "supersuper", "supersuper", "super", "super", "supersuper", "super", "super", "supersuper", "diff", "super", "NA", "supersuper", "super", "NA", "sub", "super", "NA", "diff", "diff", "diff", "sub", "diff", "sub", "diff", "sub", "NA", "super", "diff", "diff", "diff", "supersuper", "diff", "super", "supersuper", "supersuper", "diff", "supersuper", "supersuper", "super", "diff", "super", "super", "NA", "supersuper", "super", "diff", "super", "diff", "NA")
+#cbind(hand_cc_lemma, hand_cc) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv')
+
+hand_cc_dict <- read_csv('../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv') %>% 
+  rowwise() %>%
+  mutate(
+    hand_cc = ifelse(is.na(hand_cc), "NA", hand_cc)) 
+
+hand_cc_df <- pull(hand_cc_dict,
+                           hand_cc) %>%
+  set_names(pull(hand_cc_dict, hand_cc_lemma))
+
+d.auto.non_match.hand_cc <- d.tidy.auto.non_match.grab3.noFailedRef %>%
+  mutate(
+    hand_cc = str_replace_all(response_hand_lemma, hand_cc_df)
+  ) %>%
+  #rowwise() %>%
+  mutate(
+  hand_cc = 
+    case_when(
+      response_hand_lemma == "appliances" & stim_id == 61 ~ "supersuper",
+      response_hand_lemma == "appliances" & stim_id == 75 ~ "diff",
+      response_hand_lemma == "cans" & stim_id == 81 ~ "sub",
+      response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
+      response_hand_lemma == "color" & stim_id == 70 ~ "diff",
+      response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
+      response_hand_lemma == "days" & stim_id == 76 ~ "diff",
+      response_hand_lemma == "days" & stim_id == 77 ~ "diff",
+      response_hand_lemma == "days" & stim_id == 72 ~ "diff",
+      response_hand_lemma == "days" & stim_id == 73 ~ "diff",
+      response_hand_lemma == "desserts" & stim_id == 3 ~ "supersuper",
+      response_hand_lemma == "fabric" & stim_id == 13 ~ "diff",
+      response_hand_lemma == "food" & stim_id == 50 ~ "diff",
+      response_hand_lemma == "fruit" & stim_id == 9 ~ "NA",
+      response_hand_lemma == "locations" & stim_id == 38 ~ "NA",
+      response_hand_lemma == "person" & stim_id == 69 ~ "supersuper",
+      response_hand_lemma == "places" & stim_id == 4 ~ "diff",
+      response_hand_lemma == "places" & stim_id == 38 ~ "NA",
+      response_hand_lemma == "places" & stim_id == 29 ~ "supersuper",
+      response_hand_lemma == "places" & stim_id == 39 ~ "NA",
+      response_hand_lemma == "places" & stim_id == 31 ~ "NA",
+      response_hand_lemma == "places" & stim_id == 42 ~ "supersuper",
+      response_hand_lemma == "room" & stim_id == 75 ~ "NA",
+      response_hand_lemma == "room" & stim_id == 35 ~ "NA",
+      response_hand_lemma == "room" & stim_id == 11 ~ "NA",
+      response_hand_lemma == "streets" & stim_id == 37 ~ "NA",
+      response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
+      response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
+      TRUE ~ hand_cc
+      )
+  )
+
+# drop the invalid responses classified as "NA"
+d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc == "NA"))
+```
+
 
 The adjustments are read from the data frame and converted to a named list ot be used in str_replace_all.
 ```{r}
@@ -649,11 +821,12 @@ The hand-classified responses are then checked if they include the NP or the ant
 
 ``` {r}
 # replace the sketchy synonyms
-d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match %>%
+d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match.grab3.noFailedRef %>%
   mutate(
-    response_lemma = as.character(response_lemma),
+    response_hand_lemma = as.character(response_hand_lemma),
     response = as.character(response),
-    response_lemma_hand = str_replace_all(response_lemma, hand_classification)
+    response_lemma_hand = str_replace_all(response_hand_lemma,
+                                          hand_classification)
   ) %>%
   mutate(
     cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep = ""),
@@ -671,8 +844,14 @@ d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match %>%
     )
   )
 
+# none were classified as specific or super
 d.tidy.auto.non_match.hand_classified %>%
   filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.auto.non_match.hand_classified_match
+
+# look at distinct responses for more detailed classification
+d.tidy.auto.non_match.hand_classified %>%
+  filter((specific == 0) & (matchingSuper == 0)) %>%
+  distinct(stim_id, superordinate, np, adj, response_hand_lemma, response_lemma_hand) %>% View()
 ```
 
 The responses which were still not classified are processed further. Some of the manual adjustments are made on an item-by-item basis. For example, we take paraphrases including the place or the time mentioned in the context sentence to mean the subordinate in e.g. cases like 'He heard an owl cry in the forest': The response "it's loud...compared to other forests' to mean 'owls in other forests'. 

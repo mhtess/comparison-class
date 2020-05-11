@@ -1,0 +1,134 @@
+hand_cc_lemma,hand_cc
+animals,supersuper
+apartments,sub
+areas,sub
+athletes,diff
+beds,sub
+beverages,diff
+bikes,sub
+bird sounds,super
+birds,diff
+bodies of water,super
+bottles,sub
+buildings,super
+cans,diff
+cars,super
+cats,diff
+centers,super
+children,sub
+chocolate,diff
+cities,diff
+cloth,diff
+clothes,diff
+coat,sub
+coat color,sub
+coats,sub
+color,sub
+color of scripts,sub
+condiments,supersuper
+cooking appliances,super
+cooking methods,super
+days,super
+decorations,supersuper
+desserts,diff
+dishes,super
+distance,"NA"
+dog coats,super
+doors,super
+drinks,diff
+electronics,super
+environment,supersuper
+episodes,super
+evenings,diff
+fabric,super
+films,super
+food,supersuper
+fruit,supersuper
+fur,sub
+fur color,sub
+habitats,supersuper
+holes,super
+homes,sub
+house,sub
+indoor spaces,supersuper
+ink,sub
+ink color,sub
+instruments,supersuper
+items,supersuper
+jewelry,supersuper
+kids,sub
+lanes,sub
+lifters,"NA"
+liquids,supersuper
+locations,super
+mall,super
+materials,super
+mattress,sub
+meals,"NA"
+melons,super
+metal,diff
+methods,super
+methods of cooking,super
+motors,diff
+movie,super
+music,diff
+musical instruments,supersuper
+night,super
+noise,supersuper
+objects,supersuper
+openings,supersuper
+paint color,sub
+paintings,diff
+pans,super
+paper,diff
+parts of kitchen,super
+people,supersuper
+performances,supersuper
+person,super
+places,super
+places for dinner,supersuper
+places to live,super
+planes,super
+plants,supersuper
+players,diff
+pots,super
+price,"NA"
+product,supersuper
+programs,super
+restaurants,"NA"
+rinks,sub
+rivers,super
+road,"NA"
+rodents,diff
+room,diff
+routes,diff
+runners,sub
+scripts,diff
+scripts color,sub
+seats,diff
+shades,sub
+shops,"NA"
+shows,super
+smells,diff
+songs,diff
+sounds,diff
+spaces,supersuper
+stoves,diff
+streets,super
+string instruments,supersuper
+structures,supersuper
+temperature,diff
+things,supersuper
+things in sky,supersuper
+towns,super
+traffic,diff
+trucks,super
+tv shows,super
+vegetables,"NA"
+vehicles,supersuper
+venues,super
+walkers,diff
+walks,super
+walkways,diff
+weather,"NA"
+weightlifters,supersuper
