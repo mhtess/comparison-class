@@ -154,7 +154,6 @@ df.attention.summary %>%
   count()
 ```
 
-
 ```{r apply exclusion critera}
 df.trials.filtered <- df.trials %>%
   left_join(., df.attention.summary) %>%
@@ -182,10 +181,6 @@ d.item.count %>%
   xlab("n responses per item") +
   ylab("n items")
 ```
-
-
-
-
 
 ## Response Preprocessing
 
@@ -291,13 +286,6 @@ misspellings_df <- read_csv("../data/class-elicitation-prereg-final/misspellings
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
 
-### Synonym Extraction
-
-To further improve the response classification, we also replace some raw responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context (e.g. 'automobile' is converted to 'car') .
-```{r list of common synonyms}
-synonym_df <- read_csv("../data/class-elicitation-prereg-final/synonym_dict.csv")
-synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
-```
 
 ### Lemmatization 
 
@@ -309,7 +297,16 @@ lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/lemmatizati
 lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization_df, V1))
 ```
 
-```{r}
+### Synonym Extraction
+
+To further improve the response classification, we also replace some raw responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context (e.g. 'automobile' is converted to 'car') .
+```{r list of common synonyms}
+synonym_df <- read_csv("../data/class-elicitation-prereg-final/synonym_dict.csv")
+synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
+```
+
+
+```{r apply corrections}
 d.tidy.resp.valid %>%
   mutate(response = as.character(response)) %>%
   ungroup() %>%
