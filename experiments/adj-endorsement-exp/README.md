@@ -1,8 +1,8 @@
 # Adjective endorsement Experiment
 
-This directory holds the adjective endorsement experiment of the comparison class project. To run the experiment locally, clone the repository, navigate to the respective directory and run `npm install` on the command line (requires node.js). To post this experiment, host the `index.html` on the server of your choice. The experiment was created from the magpie template (https://github.com/magpie-ea/magpie-departure-point).
+This directory holds the adjective endorsement experiment of the comparison class project. To run the experiment **locally**, clone the repository, navigate to the respective directory and run `npm install` on the command line to get the necessary dependencies (requires node.js), and then open the `index.html` file in your favourite browser. The experiment can also be hosted on a server of your choice. The experiment was created from the magpie framework template (https://github.com/magpie-ea/magpie-departure-point).
 
-The experiment consists of an introduction view, instructions, 60 main trials and a memory check. By default, the experiment is in debug mode and displays a results table after completion.
+The experiment consists of an introduction view, instructions, 60 main trials and a memory check. Make sure to choose the appropriate `deployMethod` in the file `06_main.js` (see below) to collect the results.
 
 ## File structure
 The following files need to be adjusted if the comparison class elicitation data is updated or the experiment structure needs to be updated.
