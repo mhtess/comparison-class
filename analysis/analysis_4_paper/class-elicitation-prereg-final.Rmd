@@ -266,7 +266,13 @@ d.tidy.resp.valid.no_similar <- anti_join(
 In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
 
 ```{r list of commong mispellings}
-misspellings_df <- read_csv("text_processing/misspellings_dict.csv")
+misspellings_df <- read_csv("text_processing/misspellings_dict_w_handLemma.csv") %>%
+  rowwise() %>%
+  mutate(
+    V2 = ifelse(is.na(V2), "",
+      V2
+    )
+  )
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
 
@@ -604,7 +610,7 @@ d.tidy.auto.classified.w.pl.np <- d.tidy.auto.no_similar.match.adjust_super %>%
 The corresponding subordinate and superordinate frequencies are added to each data point. 
 
 ```{r}
-df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
 
 d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl.np %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
@@ -657,35 +663,6 @@ MH: Why can't we do the misspelling replacement (and lemmatization) with the oth
 d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
   mutate(response = tolower(response))
 
-# this will be removed after the classification is finalised
-hand_class_lemmatization <- c("colour", "colors", "\\.", ",", "other\\s", "furs", "forrest", "apartmet", "aquariums", "athelete", "banks", "bird's", "bodys", "bouqet", "bouquets", "boxes", "boxs", "butchershop", "building\\b", "car's", "car\\b", "chacolate", "childern", "chocholate", "chocolates", "cloths", "can\\b", "coffe", "crying", "day's", "day\\b", "decor\\b", "decors", "den's", "deserts", "desswerts", "dinners", "distances", "dog's", "environments", "envrionments", "fabrics", "foods", "forests", "friends", "fruits", "furnitures", "gates", "map\\b", "highways", "houses", "human beings", "illunation", "inatruments", "\\binks", "terrariums", "instruents", "instuments", "store", "jewelery", "jewlery", "kitchens", "lakes", "mall's", "malls", "mattresses", "menus", "metals", "movies", "music instrument", "instrument\b", "nights", "noises", "papers", "parks", "furnature", "place\\b", "prices", "products", "restaraunts", "roads", "rooms", "runnres", "saturday's", "saturdays", "scipts", "script\\b", "script's", "scripts'", "sound\\b", "street\\b", "stringed", "\\bthe\\s", "temperatures", "terrarium's", "weght", "of the day", "tkime", "truck\\b", "weights")
-
-hand_class_replacements <- c("color", "color", "", "", "", "fur", "forest", "apartment", "aquarium", "athlete", "bank", "birds", "bodies", "bouquet", "bouquet", "box", "box", "butcher shop", "buildings", "cars", "cars", "chocolate", "children", "chocolate", "chocolate", "clothes", "cans", "coffee", "cries", "days", " days", "decoration", "decoration", "dens", "desserts", "desserts", "dinner", "distance", "dog", "environment", "environment", "fabric", "food", "forest", "friend", "fruit", "furniture", "gate", "maps", "highway", "house", "humans", "illumination", "instruments", "ink", "terrarium", "instruments", "instruments", "shop", "jewelry", "jewelry", "kitchen", "lake", "mall", "mall", "mattress", "menu", "metal", "movie", "musical instrument", "instruments", "night", "noise", "paper", "park", "furniture", "places", "price", "product", "restaurants", "road", "room", "runners", "saturday", "saturday", "scripts", "scripts", "scripts", "scripts", "sounds", "streets", "string", "", "temperature", "terrarium", "weight", "of day", "time", "trucks", "weight")
-# cbind(hand_class_lemmatization, hand_class_replacements) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv')
-
-# apply lematizations
-hand_class_lemmatization_df <- read_csv("text_processing/hand_classification_lemmatization_dict.csv") %>%
-  rowwise() %>%
-  mutate(
-    hand_class_replacements = ifelse(is.na(hand_class_replacements), "",
-      hand_class_replacements
-    )
-  )
-
-hand_lemmatization <- pull(
-  hand_class_lemmatization_df,
-  hand_class_replacements
-) %>%
-  set_names(pull(hand_class_lemmatization_df, hand_class_lemmatization))
-
-# MH: I would write hand_lemmatization to a file and just read it in here...
-
-d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
-  mutate(
-    response_lemma = as.character(response_lemma),
-    response = as.character(response),
-    response_hand_lemma = str_replace_all(response, hand_lemmatization)
-  )
 ```
 
 The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 890 non-matched responses (20.7%) were produced less than 3 times and are dropped. 
@@ -740,7 +717,8 @@ d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopW
   mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>% # MH: I examined responses at this point..
   # filter out manually responses not be dropped
   filter(!(
-    (resps_matching_context == "color") |
+      (resps_matching_context == "color") |
+      (resps_matching_context == "podcast") |
       (resps_matching_context == "coat") |
       (response_hand_lemma == "mall") |
       (response_hand_lemma == "fur") |
@@ -752,7 +730,10 @@ d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopW
       (response_hand_lemma == "places for dinner") |
       (response_hand_lemma == "parts of kitchen") |
       (response_hand_lemma == "chocolate") |
-      (response_hand_lemma == "electronics")
+      (response_hand_lemma == "electronics") |
+      (response_hand_lemma == "gate") |
+      (response_hand_lemma == "menu") |
+      (response_hand_lemma == "music") 
   ))
 ```
 
