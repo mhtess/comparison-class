@@ -364,7 +364,8 @@ d.tidy.resp.valid.lemmatized.np_match <- d.tidy.resp.valid.lemmatized %>%
     np_match = gsub("back door", "back", np_match),
     np_match = gsub("patio door", "patio", np_match),
     np_match = gsub("front gate", "front", np_match),
-    np_match = gsub("chocolate cake", "chocolate", np_match)
+    np_match = gsub("chocolate cake", "chocolate", np_match),
+    np_match = gsub("podcast episode", "podcast", np_match)
   )
 ```
 
@@ -421,24 +422,58 @@ Responses for items that were classified as all subordinate or superordinate (me
 
 ```{r check ceiling/floor responses}
 # check the matched items where the mean of responses is 1 or 0
-d.tidy.auto.no_similar.match %>%
+d.tidy.auto.match %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   mutate(meanResp = mean(specific)) %>%
   filter((meanResp == 1) | (meanResp == 0)) %>%
   distinct(
     stim_id, np_expectations,
-    np_match, adj_polarity, response_lemma, meanResp
+    np_match, adj_polarity, adj,
+    response_lemma, # showing response_lemma will show the individual (lemmatized) responses that were all categorized as either sub or super
+    meanResp
+  ) -> d.match.ceiling
+  
+d.match.ceiling %>%
+  distinct(stim_id, np_expectations, adj_polarity, meanResp) %>%
+  group_by(meanResp) %>%
+  count()
+
+d.match.ceiling %>%
+  ungroup() %>%
+  distinct(
+    stim_id, np_expectations,  
+    np_match, adj,
+    meanResp
   ) %>%
-  View()
+  sample_n(20) %>%
+  kable()
+  #View()
+
+d.match.ceiling %>%
+  ungroup() %>%
+  filter(meanResp == 1) %>%
+  distinct(
+    stim_id, np_expectations,  
+    np_match, adj_polarity,
+    meanResp
+  ) %>%
+  group_by(np_expectations, adj_polarity) %>%
+  count() %>%
+  ungroup() %>%
+  mutate(np_expectations = factor(np_expectations, levels = c("low", "medium", "high"))) %>%
+  rename(adjpol = adj_polarity) %>%
+  spread(np_expectations, n) %>% 
+  kable()
+  # write_csv(., "../../writing/paper/csv_data_4_tex/itemCounts_ceil_floor.csv")
 ```
 
 ## Post-processing of Automatically Classified Data
 
 After we manually inspected the data with respect to superordinate responses that systematically deviated from the anticipated ones, we modified one item (77 "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the frequency extraction and the adjective endorsement task. 
-If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP, otherwise it is turned into the corresponding superordinate.
+If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP (represented by the variable `mode_np`), otherwise it is turned into the corresponding superordinate.
 
 ``` {r}
-d.tidy.auto.no_similar.match.adjust_super <- d.tidy.auto.no_similar.match %>%
+d.tidy.auto.no_similar.match.adjust_super <- d.tidy.auto.match %>%
   mutate(
     # substitutions made based on human modal responses
     superordinate = ifelse(stim_id == 77, "food", superordinate)
@@ -547,7 +582,6 @@ insert_plural_np <- function(np, superordinate) {
   }
   return(np_pl)
 }
-
 ```
 
 
@@ -597,6 +631,7 @@ df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
 ```
 
 
+
 ## Manual Response Processing 
 
 We look at the responses that were not automatically classified (about 4000). We judge if the deviating responses are synonymous to our experimentally-supplied NPs or anticipated superordinates and adjust them in order to match to those NPs or superordinates. Deviant responses which occur frequently are left unchanged to check if any deviating response was the modal response for any particular NP-adj pair.
@@ -607,9 +642,9 @@ d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.no_similar.match)
 
 length(d.tidy.auto.non_match$response)
 
-d.tidy.auto.non_match %>%
-  distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
-  View()
+# d.tidy.auto.non_match %>%
+#   distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
+#   View()
 ```
 
 First, we further lemmatize the non-matching responses and correct for misspellings to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). 
@@ -629,7 +664,7 @@ hand_class_replacements <- c("color", "color", "", "", "", "fur", "forest", "apa
 # cbind(hand_class_lemmatization, hand_class_replacements) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv')
 
 # apply lematizations
-hand_class_lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv") %>%
+hand_class_lemmatization_df <- read_csv("text_processing/hand_classification_lemmatization_dict.csv") %>%
   rowwise() %>%
   mutate(
     hand_class_replacements = ifelse(is.na(hand_class_replacements), "",
@@ -675,7 +710,7 @@ nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)
 (nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)) / nrow(d.tidy.auto.non_match)
 ```
 
-Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John seea an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for content words from the contexts. 
+Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John sees an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to, some subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for content words from the contexts. 
 
 Simply mentioning another noun in the context sentence is not tantamount to 'reference failure'. For example, some items mention the dimension that the adjective describes (e.g., "the color of a dog"), which would still make appropriate comparison classes (e.g., "dark relative to other fur colors").
 We thus keep some responses grabbed by this approach on an item-by-item basis.
@@ -697,12 +732,12 @@ d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
 d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopWords %>%
   mutate(resps_matching_context = as.character(response_hand_lemma)) %>%
   unnest_tokens(word, resps_matching_context) %>%
-  filter(grepl(word, clean_context_sentence, fixed = T)) %>%
+  filter(grepl(word, clean_context_sentence, fixed = T)) %>% # MH: I THINK THIS IS MISSING PLURALS (e.g., the first row of this df is about "scripts", but the context sentence only has the word "script" in it)
   group_by(workerid, trial_num) %>%
-  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
+  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>% # MH: What is the purpose of this? It looks like you matching sometimes multiple words in a sentence (e.g., "google maps"). Is this to keep that straight so you don't double count?
   spread(wordNumber, word) %>%
   unite(resps_matching_context, starts_with("word_"), sep = " ") %>%
-  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>%
+  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>% # MH: I examined responses at this point..
   # filter out manually responses not be dropped
   filter(!(
     (resps_matching_context == "color") |
