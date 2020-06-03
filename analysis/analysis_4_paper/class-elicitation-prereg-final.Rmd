@@ -1,25 +1,25 @@
 ---
-title: "Comparison class elicitation (final, preregistered)"
+title: "Comparison Class Elicitation Experiment "
 author: "MH Tessler"
 date: "October 29, 2019"
 ---
-# Comparison Class Elicitation Experiment 
 
 The comparison class elicitation experiment is a free prduction experiment where participants read a context sentence about a target object (NP) and paraphrase an utterance involving a gradable adjective by providing an explicit comparison class for the gradable adjective; we analyse the produced comparison classes and categorize them into "subordinate" and "superordinate" comparison classes.
 
-## Analysis Outline
+# Analysis Outline
 
 First, the raw responses are processed automatically by matching responses to keywords providing the essence of the respective comparison class: mostly, we match against the NPs of the sentence (referent NPs) and the anticipated superordinate of the item. In order to improve the automatic classification we lemmatize and correct for misspellings of the raw responses. 
 
 Second, the responses which were not processed automatically are processed manually. From these responses, we looked for responses thatwere produced by at least three participants and noted these as consistent comparison classes that were different from the referent NP and the anticiapted superordinate. 
 
-The analysis proceedes from simplest processing steps to more sophisticated processing steps, leading to the output of dataframes containing data passing these different processing steps. At the end, data visualisations and regression models can be found.
+The analysis proceedes from simplest processing steps to more sophisticated processing steps, leading to the output of dataframes containing data passing these different processing steps. 
+
+At the end, data visualisations and regression models can be found.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load libraries.
 library(knitr)
 library(tidyverse)
-library(jsonlite)
 library(tidyboot)
 library(tidytext)
 library(lme4)
@@ -28,12 +28,13 @@ library(brms)
 library(stringr)
 theme_set(theme_few())
 
-# extended function to check matching between strings either way
+# check matching between strings
 containsString_responses <- function(strng, substrng, clean_str, us_substr) {
   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
     ifelse(length(strsplit(us_substr, clean_str)[[1]]) > 1, 1, 0)
   ))
 }
+
 containsString <- function(strng, substrng) {
   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
     ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
@@ -41,72 +42,19 @@ containsString <- function(strng, substrng) {
 }
 ```
 
-### Load data
-
-```{r load data from json, eval = F}
-data.path <- "../mturk/class-elicitation-prereg-final/production-results/"
-result.files <- list.files(data.path, pattern = "json")
-
-df.subject <- data.frame()
-df.trials <- data.frame()
-df.attention <- data.frame()
-for (result_file in result.files) {
-  result_json <- fromJSON(paste(data.path, result_file, sep = "/"))
-  worker.id <- paste("workerid_", str_pad(match(result_file, result.files), 4, pad = "0"), sep = "")
-  #  result_json$WorkerId
-  condition <- result_json$answers$condition
-
-  df.attention <- bind_rows(
-    df.attention,
-    data.frame(result_json$answers$catch_trials) %>%
-      mutate(workerid = worker.id)
-  )
-
-  df.subject <- bind_rows(
-    df.subject,
-    data.frame(result_json$answers$subject_information) %>%
-      mutate(
-        workerid = worker.id,
-        language = gsub("\"", "", language),
-        enjoyment = gsub("\"", "", enjoyment),
-        age = gsub("\"", "", age),
-        gender = gsub("\"", "", gender),
-        problems = gsub("\"", "", problems),
-        comments = gsub("\"", "", comments)
-      )
-  )
-
-  df.trials <- bind_rows(
-    df.trials,
-    data.frame(result_json$answers$trials) %>%
-      mutate(workerid = worker.id)
-  )
-}
-
-
-df.trials %>%
-  group_by(workerid) %>%
-  count() %>%
-  group_by(n) %>%
-  count()
-
-
-# write_csv(df.trials, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-# write_csv(df.subject, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-# write_csv(df.attention, "../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
-```
+## Load data
 
 ```{r load data from csv, warnings=F}
-df.trials <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
-df.subject <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
-df.attention <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
+df.trials <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-trials.csv")
+df.subject <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
+df.attention <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
 ```
 
 ## Participant Exclusion 
 
-Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials). After the main trials, they completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
+Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials). 
 
-```{r}
+```{r comprehension check}
 df.botcaptcha <- df.attention %>%
   filter(condition == "botcaptcha")
 
@@ -126,6 +74,20 @@ df.comprehension <- df.attention %>%
       containsString(tolower(response), "towe")
   ))
 
+df.comprehension %>% 
+  group_by(pass_comp) %>%
+  count() %>%
+  kable()
+
+# What did people write-in that was incorrect?
+df.comprehension %>% 
+  filter(!pass_comp) %>%
+  View()
+```
+
+After the main trials, they completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
+
+```{r memory check}
 df.memory <- df.attention %>%
   filter(condition == "memory_check") %>%
   group_by(workerid) %>%
@@ -133,13 +95,14 @@ df.memory <- df.attention %>%
     n_correct = sum(correct),
     pass_memory = n_correct >= 7
   )
-```
 
-```{r}
 df.memory %>%
   group_by(n_correct) %>%
-  count()
+  count() %>%
+  kable()
 ```
+
+
 
 ```{r summarize catch trials}
 df.attention.summary <- left_join(
@@ -182,11 +145,13 @@ d.item.count %>%
   ylab("n items")
 ```
 
-## Response Preprocessing
+# Text preprocessing
 
-### Invalid Responses
+## Invalid Responses: Nonsense + "similar"
 
-We exclude invalid responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
+### Nonsense
+
+We exclude nonsense responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
 
 ```{r list of invalid responses}
 invalid.responses <- c(
@@ -237,8 +202,8 @@ invalid.responses <- c(
 ```
 
 Simple (invalid) copular sentences including no comparison classes are constructed and excluded together with the invalid responses above.
-``` {r excludeInvalidResps}
 
+``` {r excludeInvalidResps}
 # excluding invalid responses
 d.tidy.resps.catch <- df.trials.filtered %>%
   filter((grepl("it's", response, ignore.case = T) |
@@ -278,11 +243,30 @@ n.total.responses - n.valid.responses
 
 ```
 
+### "Similar"
+
+We further exclude responses that used the word "similar"; we deemed these responses too underspecified (how similar is similar?). These numbered only 15 in total.
+
+
+```{r remove similar}
+d.tidy.auto %>%
+  filter(grepl("similar", response_lemma, ignore.case = T)) -> d.uncertain.resps # 15 responses
+
+d.tidy.resp.valid.no_similar <- anti_join(
+  d.tidy.resp.valid,
+  d.uncertain.resps
+)
+```
+
+
+## Basic Corrections: Misspellings, Lemmatization, Synonyms
+
 ### Misspelling Correction
 
 In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
+
 ```{r list of commong mispellings}
-misspellings_df <- read_csv("../data/class-elicitation-prereg-final/misspellings_dict.csv")
+misspellings_df <- read_csv("text_processing/misspellings_dict.csv")
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
 
@@ -293,7 +277,7 @@ To further improve the response classification, we lemmatize the plural response
 
 ```{r list of lemmatizations}
 # mostly Plural --> singulars
-lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/lemmatization_dict.csv")
+lemmatization_df <- read_csv("text_processing/lemmatization_dict.csv")
 lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization_df, V1))
 ```
 
@@ -301,13 +285,13 @@ lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization
 
 To further improve the response classification, we also replace some raw responses which are obviously synonymous to the provided subordinate or superoridnate NPs given the context (e.g. 'automobile' is converted to 'car') .
 ```{r list of common synonyms}
-synonym_df <- read_csv("../data/class-elicitation-prereg-final/synonym_dict.csv")
+synonym_df <- read_csv("text_processing/synonym_dict.csv")
 synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
 ```
 
 
 ```{r apply corrections}
-d.tidy.resp.valid %>%
+d.tidy.resp.valid.no_similar %>%
   mutate(response = as.character(response)) %>%
   ungroup() %>%
   mutate(
@@ -330,7 +314,7 @@ sum(d.tidy.resp.valid.lemmatized$corrected_lemma) / n.valid.responses
 ```
 
 
-### Keyword in NP
+## Match keyword(s) in Responses
 
 For automated checking of whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (i.e., including the mentioned NP). 
 
@@ -385,7 +369,7 @@ d.tidy.resp.valid.lemmatized.np_match <- d.tidy.resp.valid.lemmatized %>%
 ```
 
 
-## Automatic Classification
+# Automatic Classification
 
 The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
 
@@ -401,7 +385,7 @@ d.tidy.resp.valid.lemmatized.np_match %>%
     super_us = paste("_", superordinate, "_", sep = ""),
     # check if response and seed NP match
     specific = # ifelse(
-   # catch these responses because otherwise classified as subordinate for "strawberries" etc
+    # catch these responses because otherwise classified as subordinate for "strawberries" etc
     ifelse(response_lemma == "berries", 0,
       containsString_responses(
         as.character(cleanedPhrase),
@@ -418,32 +402,19 @@ d.tidy.resp.valid.lemmatized.np_match %>%
       super_us
     )
   ) -> d.tidy.auto
-```
-
-We further exclude responses that used the word "similar"; we deemed these responses too underspecified/ambiguous (how similar is similar?).
-
-```{r remove similar}
-d.tidy.auto %>%
-  filter(grepl("similar", response_lemma, ignore.case = T)) -> d.uncertain.resps # 15 responses
-
-d.tidy.auto.no_similar <- anti_join(
-  d.tidy.auto,
-  d.uncertain.resps
-)
 
 # extract the automatically matched data (out of 26.552 responses (post exclusion) 22.117 are matched )
-d.tidy.auto.no_similar.match <- d.tidy.auto.no_similar %>%
+d.tidy.auto.match <- d.tidy.auto %>%
   filter((specific == 1) | (matchingSuper == 1))
 
 
-n.automatic.responses <- d.tidy.auto.no_similar.match %>%
+n.automatic.responses <- d.tidy.auto.match %>%
   ungroup() %>%
   count() %>%
   pull(n)
 
 n.automatic.responses
 n.automatic.responses / n.valid.responses
-
 ```
 
 Responses for items that were classified as all subordinate or superordinate (mean = 0 or 1) are double-checked.
@@ -461,7 +432,7 @@ d.tidy.auto.no_similar.match %>%
   View()
 ```
 
-### Post-processing of Automatically Classified Data
+## Post-processing of Automatically Classified Data
 
 After we manually inspected the data with respect to superordinate responses that systematically deviated from the anticipated ones, we modified one item (77 "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the frequency extraction and the adjective endorsement task. 
 If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP, otherwise it is turned into the corresponding superordinate.
@@ -583,7 +554,6 @@ insert_plural_np <- function(np, superordinate) {
 We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
 
 ```{r}
-
 d.tidy.auto.classified.w.pl.np <- d.tidy.auto.no_similar.match.adjust_super %>%
   rowwise() %>%
   mutate(
@@ -610,20 +580,26 @@ d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl.np %>%
   )
 
 df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
-  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, 
-         np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
-  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, 
-         response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
-         NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
+  select(
+    workerid, stim_id, degree, superordinate.freq, adj, adj_polarity,
+    np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y
+  ) %>%
+  mutate(
+    superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl,
+    response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y
+  ) %>%
+  select(
+    workerid, stim_id, degree, superordinate_pl, adj, adj_polarity,
+    NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq
+  )
 
-#write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+# write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
 ```
 
 
 ## Manual Response Processing 
 
-We look at the responses that were not automatically classified (about 4000). We judge if the deviating responses are synonymous to our anticipated NPs or superordinates and adjust them in order to match to those NPs or superordinates. Some responses which occur often (based on manual analysis) are left unchanged and adjusted to each other to check if any deviating response was the modal response for any particular condition.
+We look at the responses that were not automatically classified (about 4000). We judge if the deviating responses are synonymous to our experimentally-supplied NPs or anticipated superordinates and adjust them in order to match to those NPs or superordinates. Deviant responses which occur frequently are left unchanged to check if any deviating response was the modal response for any particular NP-adj pair.
 
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
@@ -635,56 +611,81 @@ d.tidy.auto.non_match %>%
   distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
   View()
 ```
-First, we further lemmatize the non-matching responses and correct for misspellings to extract the responses which were produced by at least 3 participants for the respective stimulus. 
-The responses are lower-cased. The lemmatization and misspeling correction is read into a dataframe and converted into a named list to use with `str_replace_all`. 
-``` {r nonMatchedResps-lemmatize}
-d.tidy.auto.non_match <- d.tidy.auto.non_match %>% 
-  mutate(response = tolower(response))
-# this will be removed after the classification is finalised 
-hand_class_lemmatization <- c("colour", "colors", "\\.", ",", "other\\s", "furs", "forrest", "apartmet", "aquariums", "athelete", "banks", "bird's", "bodys", "bouqet", "bouquets", "boxes", "boxs", "butchershop","building\\b", "car's", "car\\b", "chacolate", "childern", "chocholate", "chocolates", "cloths", "can\\b", "coffe", "crying", "day's", "day\\b", "decor\\b", "decors", "den's", "deserts", "desswerts", "dinners", "distances", "dog's", "environments","envrionments", "fabrics", "foods", "forests", "friends", "fruits", "furnitures", "gates", "map\\b", "highways", "houses", "human beings", "illunation", "inatruments", "\\binks", "terrariums", "instruents", "instuments", "store", "jewelery", "jewlery", "kitchens", "lakes", "mall's", "malls", "mattresses", "menus", "metals", "movies", "music instrument", "instrument\b", "nights", "noises", "papers", "parks", "furnature", "place\\b", "prices", "products", "restaraunts", "roads", "rooms", "runnres", "saturday's", "saturdays", "scipts", "script\\b", "script's", "scripts'", "sound\\b", "street\\b", "stringed", "\\bthe\\s", "temperatures", "terrarium's", "weght", "of the day", "tkime", "truck\\b", "weights")
 
-hand_class_replacements <- c("color", "color","", "", "", "fur", "forest", "apartment", "aquarium", "athlete", "bank", "birds", "bodies", "bouquet", "bouquet", "box", "box", "butcher shop", "buildings", "cars", "cars", "chocolate", "children", "chocolate", "chocolate", "clothes", "cans", "coffee", "cries", "days"," days", "decoration", "decoration", "dens", "desserts", "desserts", "dinner", "distance", "dog", "environment", "environment", "fabric", "food", "forest", "friend", "fruit", "furniture", "gate", "maps", "highway", "house", "humans", "illumination", "instruments", "ink", "terrarium", "instruments", "instruments", "shop", "jewelry", "jewelry", "kitchen", "lake", "mall", "mall", "mattress", "menu", "metal", "movie", "musical instrument", "instruments", "night", "noise", "paper", "park", "furniture", "places", "price", "product", "restaurants", "road", "room", "runners", "saturday", "saturday", "scripts", "scripts", "scripts", "scripts", "sounds", "streets", "string", "", "temperature", "terrarium", "weight", "of day", "time", "trucks", "weight")
-#cbind(hand_class_lemmatization, hand_class_replacements) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv')
+First, we further lemmatize the non-matching responses and correct for misspellings to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). 
+
+The responses are lower-cased. The lemmatization and misspelling correction is read into a dataframe and converted into a named list to use with `str_replace_all`. 
+
+MH: Why can't we do the misspelling replacement (and lemmatization) with the other misspellings and lemmatizations above?
+
+``` {r nonMatchedResps-lemmatize}
+d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
+  mutate(response = tolower(response))
+
+# this will be removed after the classification is finalised
+hand_class_lemmatization <- c("colour", "colors", "\\.", ",", "other\\s", "furs", "forrest", "apartmet", "aquariums", "athelete", "banks", "bird's", "bodys", "bouqet", "bouquets", "boxes", "boxs", "butchershop", "building\\b", "car's", "car\\b", "chacolate", "childern", "chocholate", "chocolates", "cloths", "can\\b", "coffe", "crying", "day's", "day\\b", "decor\\b", "decors", "den's", "deserts", "desswerts", "dinners", "distances", "dog's", "environments", "envrionments", "fabrics", "foods", "forests", "friends", "fruits", "furnitures", "gates", "map\\b", "highways", "houses", "human beings", "illunation", "inatruments", "\\binks", "terrariums", "instruents", "instuments", "store", "jewelery", "jewlery", "kitchens", "lakes", "mall's", "malls", "mattresses", "menus", "metals", "movies", "music instrument", "instrument\b", "nights", "noises", "papers", "parks", "furnature", "place\\b", "prices", "products", "restaraunts", "roads", "rooms", "runnres", "saturday's", "saturdays", "scipts", "script\\b", "script's", "scripts'", "sound\\b", "street\\b", "stringed", "\\bthe\\s", "temperatures", "terrarium's", "weght", "of the day", "tkime", "truck\\b", "weights")
+
+hand_class_replacements <- c("color", "color", "", "", "", "fur", "forest", "apartment", "aquarium", "athlete", "bank", "birds", "bodies", "bouquet", "bouquet", "box", "box", "butcher shop", "buildings", "cars", "cars", "chocolate", "children", "chocolate", "chocolate", "clothes", "cans", "coffee", "cries", "days", " days", "decoration", "decoration", "dens", "desserts", "desserts", "dinner", "distance", "dog", "environment", "environment", "fabric", "food", "forest", "friend", "fruit", "furniture", "gate", "maps", "highway", "house", "humans", "illumination", "instruments", "ink", "terrarium", "instruments", "instruments", "shop", "jewelry", "jewelry", "kitchen", "lake", "mall", "mall", "mattress", "menu", "metal", "movie", "musical instrument", "instruments", "night", "noise", "paper", "park", "furniture", "places", "price", "product", "restaurants", "road", "room", "runners", "saturday", "saturday", "scripts", "scripts", "scripts", "scripts", "sounds", "streets", "string", "", "temperature", "terrarium", "weight", "of day", "time", "trucks", "weight")
+# cbind(hand_class_lemmatization, hand_class_replacements) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv')
 
 # apply lematizations
-hand_class_lemmatization_df <- read_csv('../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv') %>% 
+hand_class_lemmatization_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_lemmatization_dict.csv") %>%
   rowwise() %>%
   mutate(
     hand_class_replacements = ifelse(is.na(hand_class_replacements), "",
-                                     hand_class_replacements))
+      hand_class_replacements
+    )
+  )
 
-hand_lemmatization <- pull(hand_class_lemmatization_df,
-                           hand_class_replacements) %>%
+hand_lemmatization <- pull(
+  hand_class_lemmatization_df,
+  hand_class_replacements
+) %>%
   set_names(pull(hand_class_lemmatization_df, hand_class_lemmatization))
 
+# MH: I would write hand_lemmatization to a file and just read it in here...
+
 d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
-  mutate(response_lemma = as.character(response_lemma),
-         response = as.character(response),
-         response_hand_lemma = str_replace_all(response, hand_lemmatization)
-         )
+  mutate(
+    response_lemma = as.character(response_lemma),
+    response = as.character(response),
+    response_hand_lemma = str_replace_all(response, hand_lemmatization)
+  )
 ```
 
 The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 890 non-matched responses (20.7%) were produced less than 3 times and are dropped. 
 
 ``` {r nonMatchedResps-grab3}
-d.tidy.auto.non_match.lemma.counts <- d.tidy.auto.non_match %>% count(stim_id, response_hand_lemma) 
+# d.tidy.auto.non_match.lemma.counts <- d.tidy.auto.non_match %>% count(stim_id, response_hand_lemma)
 
-d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match.lemma.counts %>%
-  right_join(., d.tidy.auto.non_match, by=c("stim_id", "response_hand_lemma")) %>% filter(n >= 3)
+# MH, I found it illuminating to look at: d.tidy.auto.non_match %>% count(response_hand_lemma) %>% View()
+# you can see if there are more misspellings or lemmatizations required easily by sorting by response_hand_lemma 
+
+# d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match.lemma.counts %>%
+#   right_join(., d.tidy.auto.non_match, by = c("stim_id", "response_hand_lemma")) %>%
+#   filter(n >= 3)
+# MH: this code replaces the need for the other two lines above this
+
+d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match %>% 
+  group_by(stim_id, response_hand_lemma) %>% 
+  mutate(n = n()) %>% 
+  filter(n >= 3)
 
 nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)
-(nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3))/nrow(d.tidy.auto.non_match)
+(nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)) / nrow(d.tidy.auto.non_match)
 ```
 
 Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John seea an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for content words from the contexts. 
-We manually keep some responses grabbed by this approach on an item-by-item basis (e.g. 'color' referring to the fur of a specific dog).
+
+Simply mentioning another noun in the context sentence is not tantamount to 'reference failure'. For example, some items mention the dimension that the adjective describes (e.g., "the color of a dog"), which would still make appropriate comparison classes (e.g., "dark relative to other fur colors").
+We thus keep some responses grabbed by this approach on an item-by-item basis.
 
 ``` {r}
 # remove stop words from context sentences
 d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
   mutate(clean_context_sentence = as.character(context_sentence)) %>%
   unnest_tokens(word, clean_context_sentence) %>%
-  anti_join(., stop_words, by=("word")) %>%
+  anti_join(., stop_words, by = ("word")) %>%
   group_by(workerid, trial_num) %>%
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
   spread(wordNumber, word) %>%
@@ -696,41 +697,39 @@ d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
 d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopWords %>%
   mutate(resps_matching_context = as.character(response_hand_lemma)) %>%
   unnest_tokens(word, resps_matching_context) %>%
-  filter(grepl(word, clean_context_sentence, fixed = T )) %>%
+  filter(grepl(word, clean_context_sentence, fixed = T)) %>%
   group_by(workerid, trial_num) %>%
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
   spread(wordNumber, word) %>%
   unite(resps_matching_context, starts_with("word_"), sep = " ") %>%
   mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>%
-   # filter out manually responses not be dropped
-  filter(!( 
-           (resps_matching_context == "color") | 
-           (resps_matching_context == "coat") |
-           (response_hand_lemma == "mall") |
-           (response_hand_lemma == "fur") |
-           (response_hand_lemma == "fur color") |
-           (response_hand_lemma == "restaurant") |  
-           (response_hand_lemma == "person") |  
-           (response_hand_lemma == "paint color") |   
-           (response_hand_lemma == "places to live") |      
-           (response_hand_lemma == "places for dinner") |      
-           (response_hand_lemma == "parts of kitchen") |      
-           (response_hand_lemma == "chocolate") |         
-           (response_hand_lemma == "electronics")       
-             ))
-
+  # filter out manually responses not be dropped
+  filter(!(
+    (resps_matching_context == "color") |
+      (resps_matching_context == "coat") |
+      (response_hand_lemma == "mall") |
+      (response_hand_lemma == "fur") |
+      (response_hand_lemma == "fur color") |
+      (response_hand_lemma == "restaurant") |
+      (response_hand_lemma == "person") |
+      (response_hand_lemma == "paint color") |
+      (response_hand_lemma == "places to live") |
+      (response_hand_lemma == "places for dinner") |
+      (response_hand_lemma == "parts of kitchen") |
+      (response_hand_lemma == "chocolate") |
+      (response_hand_lemma == "electronics")
+  ))
 ```
 
-The failing-reference responses are excluded (404 responses). Other responses are classified using a dictionary of manual classification read from a dataframe:
+The reference-failing responses are excluded (404 responses). Other responses are classified using a dictionary of manual classification read from a dataframe:
 
 ``` {r nonMatched-dropFailedRef}
 d.tidy.auto.non_match.grab3.noFailedRef <- d.tidy.auto.non_match.grab3 %>%
-  anti_join(., d.tidy.auto.non_match.grab3.failedRef, by=c("stim_id", "response_hand_lemma"))
+  anti_join(., d.tidy.auto.non_match.grab3.failedRef, by = c("stim_id", "response_hand_lemma"))
 
 nrow(d.tidy.auto.non_match.grab3) - nrow(d.tidy.auto.non_match.grab3.noFailedRef)
-
 ```
-The data without failed-reference responses is manually classified into the following types of comparison classes:
+The data without reference-failed responses is manually classified into the following types of comparison classes:
 - subordinate ('sub')
 - superordinate ('super')
 - super-superordinate ('supersuper'): comparison classes that are more general than the anticipated superordinate categories (e.g. 'things' relative to the anticipated 'musical instruments')
@@ -739,10 +738,13 @@ The data without failed-reference responses is manually classified into the foll
 
 The by-response hand-classifications are put into the column 'hand_cc'.
 
-Most classifications are read from a dataframe; the classifications which are item-specific are performed on after reading the dataframe with `case_when`. 
+Most classifications are read from a dataframe and are classifications from a produced response (a string) to a categorization. Some of these judgments are adjective-NP (item) specific, and these are performed after reading the dataframe with `case_when`. 
+
 ``` {r manualCC}
-# look at distinct responses 
-d.tidy.auto.non_match.grab3.noFailedRef %>% distinct(stim_id, superordinate, np, adj, response_hand_lemma) %>% View()
+# look at distinct responses
+d.tidy.auto.non_match.grab3.noFailedRef %>%
+  distinct(stim_id, superordinate, np, adj, response_hand_lemma) %>%
+  View()
 
 # here the data frame of the dictionary with the classifications for `str_replace_all` is created for those responses which are classified individually
 # it will be removed when classification is set
@@ -751,55 +753,59 @@ hand_cc_lemma <- c(
   "animals", "apartments", "areas", "athletes", "beds", "beverages", "bikes", "bird sounds", "birds", "bodies of water", "bottles", "buildings", "cans", "cars", "cats", "centers", "children", "chocolate", "cities", "cloth", "clothes", "coat", "coat color", "coats", "color", "color of scripts", "condiments", "cooking appliances", "cooking methods", "days", "decorations", "desserts", "dishes", "distance", "dog coats", "doors", "drinks", "electronics", "environment", "episodes", "evenings", "fabric", "films", "food", "fruit", "fur", "fur color", "habitats", "holes", "homes", "house", "indoor spaces", "ink", "ink color", "instruments", "items", "jewelry", "kids", "lanes", "lifters", "liquids", "locations", "mall", "materials", "mattress", "meals", "melons", "metal", "methods", "methods of cooking", "motors", "movie", "music", "musical instruments", "night", "noise", "objects", "openings", "paint color", "paintings", "pans", "paper", "parts of kitchen", "people", "performances", "person", "places", "places for dinner", "places to live", "planes", "plants", "players", "pots", "price", "product", "programs", "restaurants", "rinks", "rivers", "road", "rodents", "room", "routes", "runners", "scripts", "scripts color", "seats", "shades", "shops", "shows", "smells", "songs", "sounds", "spaces", "stoves", "streets", "string instruments", "structures", "temperature", "things", "things in sky", "towns", "traffic", "trucks", "tv shows", "vegetables", "vehicles", "venues", "walkers", "walks", "walkways", "weather", "weightlifters"
 )
 hand_cc <- c(
-  "supersuper", "sub", "sub", "diff", "sub", "diff", "sub", "super", "diff", "super", "sub", "super", "diff", "super", "diff", "super", "sub", "diff", "diff", "diff", "diff", "sub", "sub", "sub", "sub", "sub", "supersuper", "super", "super", "super", "supersuper", "diff", "super", "NA", "super", "super", "diff", "super", "supersuper", "super", "diff", "super", "super", "supersuper", "supersuper", "sub", "sub", "supersuper", "super", "sub", "sub", "supersuper", "sub", "sub", "supersuper", "supersuper", "supersuper", "sub", "sub", "NA", "supersuper", "super", "super", "super", "sub", "NA", "super", "diff", "super", "super", "diff", "super", "diff", "supersuper", "super", "supersuper", "supersuper", "supersuper", "sub", "diff", "super", "diff", "super", "supersuper", "supersuper", "super", "super", "supersuper", "super", "super", "supersuper", "diff", "super", "NA", "supersuper", "super", "NA", "sub", "super", "NA", "diff", "diff", "diff", "sub", "diff", "sub", "diff", "sub", "NA", "super", "diff", "diff", "diff", "supersuper", "diff", "super", "supersuper", "supersuper", "diff", "supersuper", "supersuper", "super", "diff", "super", "super", "NA", "supersuper", "super", "diff", "super", "diff", "NA")
-#cbind(hand_cc_lemma, hand_cc) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv')
+  "supersuper", "sub", "sub", "diff", "sub", "diff", "sub", "super", "diff", "super", "sub", "super", "diff", "super", "diff", "super", "sub", "diff", "diff", "diff", "diff", "sub", "sub", "sub", "sub", "sub", "supersuper", "super", "super", "super", "supersuper", "diff", "super", "NA", "super", "super", "diff", "super", "supersuper", "super", "diff", "super", "super", "supersuper", "supersuper", "sub", "sub", "supersuper", "super", "sub", "sub", "supersuper", "sub", "sub", "supersuper", "supersuper", "supersuper", "sub", "sub", "NA", "supersuper", "super", "super", "super", "sub", "NA", "super", "diff", "super", "super", "diff", "super", "diff", "supersuper", "super", "supersuper", "supersuper", "supersuper", "sub", "diff", "super", "diff", "super", "supersuper", "supersuper", "super", "super", "supersuper", "super", "super", "supersuper", "diff", "super", "NA", "supersuper", "super", "NA", "sub", "super", "NA", "diff", "diff", "diff", "sub", "diff", "sub", "diff", "sub", "NA", "super", "diff", "diff", "diff", "supersuper", "diff", "super", "supersuper", "supersuper", "diff", "supersuper", "supersuper", "super", "diff", "super", "super", "NA", "supersuper", "super", "diff", "super", "diff", "NA"
+)
+# cbind(hand_cc_lemma, hand_cc) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv')
 
-hand_cc_dict <- read_csv('../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv') %>% 
+hand_cc_dict <- read_csv("../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv") %>%
   rowwise() %>%
   mutate(
-    hand_cc = ifelse(is.na(hand_cc), "NA", hand_cc)) 
+    hand_cc = ifelse(is.na(hand_cc), "NA", hand_cc)
+  )
 
-hand_cc_df <- pull(hand_cc_dict,
-                           hand_cc) %>%
+hand_cc_df <- pull(
+  hand_cc_dict,
+  hand_cc
+) %>%
   set_names(pull(hand_cc_dict, hand_cc_lemma))
 
 d.auto.non_match.hand_cc <- d.tidy.auto.non_match.grab3.noFailedRef %>%
   mutate(
-    hand_cc = str_replace_all(response_hand_lemma, hand_cc_df)
+    hand_cc = str_replace_allll(response_hand_lemma, hand_cc_df)
   ) %>%
-  #rowwise() %>%
+  # rowwise() %>%
   mutate(
-  hand_cc = 
-    case_when(
-      response_hand_lemma == "appliances" & stim_id == 61 ~ "supersuper",
-      response_hand_lemma == "appliances" & stim_id == 75 ~ "diff",
-      response_hand_lemma == "cans" & stim_id == 81 ~ "sub",
-      response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
-      response_hand_lemma == "color" & stim_id == 70 ~ "diff",
-      response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
-      response_hand_lemma == "days" & stim_id == 76 ~ "diff",
-      response_hand_lemma == "days" & stim_id == 77 ~ "diff",
-      response_hand_lemma == "days" & stim_id == 72 ~ "diff",
-      response_hand_lemma == "days" & stim_id == 73 ~ "diff",
-      response_hand_lemma == "desserts" & stim_id == 3 ~ "supersuper",
-      response_hand_lemma == "fabric" & stim_id == 13 ~ "diff",
-      response_hand_lemma == "food" & stim_id == 50 ~ "diff",
-      response_hand_lemma == "fruit" & stim_id == 9 ~ "NA",
-      response_hand_lemma == "locations" & stim_id == 38 ~ "NA",
-      response_hand_lemma == "person" & stim_id == 69 ~ "supersuper",
-      response_hand_lemma == "places" & stim_id == 4 ~ "diff",
-      response_hand_lemma == "places" & stim_id == 38 ~ "NA",
-      response_hand_lemma == "places" & stim_id == 29 ~ "supersuper",
-      response_hand_lemma == "places" & stim_id == 39 ~ "NA",
-      response_hand_lemma == "places" & stim_id == 31 ~ "NA",
-      response_hand_lemma == "places" & stim_id == 42 ~ "supersuper",
-      response_hand_lemma == "room" & stim_id == 75 ~ "NA",
-      response_hand_lemma == "room" & stim_id == 35 ~ "NA",
-      response_hand_lemma == "room" & stim_id == 11 ~ "NA",
-      response_hand_lemma == "streets" & stim_id == 37 ~ "NA",
-      response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
-      response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
-      TRUE ~ hand_cc
+    hand_cc =
+      65(
+        response_hand_lemma == "appliances" & stim_id == 61 ~ "supersuper",
+        response_hand_lemma == "appliances" & stim_id == 75 ~ "diff",
+        response_hand_lemma == "cans" & stim_id == 81 ~ "sub",
+        response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
+        response_hand_lemma == "color" & stim_id == 70 ~ "diff",
+        response_hand_lemma == "color" & stim_id == 2 ~ "supersuper",
+        response_hand_lemma == "days" & stim_id == 76 ~ "diff",
+        response_hand_lemma == "days" & stim_id == 77 ~ "diff",
+        response_hand_lemma == "days" & stim_id == 72 ~ "diff",
+        response_hand_lemma == "days" & stim_id == 73 ~ "diff",
+        response_hand_lemma == "desserts" & stim_id == 3 ~ "supersuper",
+        response_hand_lemma == "fabric" & stim_id == 13 ~ "diff",
+        response_hand_lemma == "food" & stim_id == 50 ~ "diff",
+        response_hand_lemma == "fruit" & stim_id == 9 ~ "NA",
+        response_hand_lemma == "locations" & stim_id == 38 ~ "NA",
+        response_hand_lemma == "person" & stim_id == 69 ~ "supersuper",
+        response_hand_lemma == "places" & stim_id == 4 ~ "diff",
+        response_hand_lemma == "places" & stim_id == 38 ~ "NA",
+        response_hand_lemma == "places" & stim_id == 29 ~ "supersuper",
+        response_hand_lemma == "places" & stim_id == 39 ~ "NA",
+        response_hand_lemma == "places" & stim_id == 31 ~ "NA",
+        response_hand_lemma == "places" & stim_id == 42 ~ "supersuper",
+        response_hand_lemma == "room" & stim_id == 75 ~ "NA",
+        response_hand_lemma == "room" & stim_id == 35 ~ "NA",
+        response_hand_lemma == "room" & stim_id == 11 ~ "NA",
+        response_hand_lemma == "streets" & stim_id == 37 ~ "NA",
+        response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
+        response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
+        TRUE ~ hand_cc
       )
   )
 
@@ -810,7 +816,7 @@ d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc 
 
 The adjustments are read from the data frame and converted to a named list ot be used in str_replace_all.
 ```{r}
-hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv") %>% 
+hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv") %>%
   rowwise() %>%
   mutate(V2 = ifelse(is.na(V2), "", V2))
 
@@ -825,8 +831,10 @@ d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match.grab3.noFailedRef
   mutate(
     response_hand_lemma = as.character(response_hand_lemma),
     response = as.character(response),
-    response_lemma_hand = str_replace_all(response_hand_lemma,
-                                          hand_classification)
+    response_lemma_hand = str_replace_all(
+      response_hand_lemma,
+      hand_classification
+    )
   ) %>%
   mutate(
     cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep = ""),
@@ -851,7 +859,8 @@ d.tidy.auto.non_match.hand_classified %>%
 # look at distinct responses for more detailed classification
 d.tidy.auto.non_match.hand_classified %>%
   filter((specific == 0) & (matchingSuper == 0)) %>%
-  distinct(stim_id, superordinate, np, adj, response_hand_lemma, response_lemma_hand) %>% View()
+  distinct(stim_id, superordinate, np, adj, response_hand_lemma, response_lemma_hand) %>%
+  View()
 ```
 
 The responses which were still not classified are processed further. Some of the manual adjustments are made on an item-by-item basis. For example, we take paraphrases including the place or the time mentioned in the context sentence to mean the subordinate in e.g. cases like 'He heard an owl cry in the forest': The response "it's loud...compared to other forests' to mean 'owls in other forests'. 
@@ -1132,7 +1141,7 @@ d.tidy.auto.non_match.hand_classified %>%
     response_lemma_hand = ifelse(superordinate == "walls", gsub("building materials", "walls", response_lemma_hand),
       response_lemma_hand
     ),
-     response_lemma_hand = ifelse(superordinate == "birds", gsub("park", np_match, response_lemma_hand),
+    response_lemma_hand = ifelse(superordinate == "birds", gsub("park", np_match, response_lemma_hand),
       response_lemma_hand
     ),
     response_lemma_hand = ifelse(superordinate == "birds", gsub("forest", np_match, response_lemma_hand),
@@ -1184,9 +1193,8 @@ d.scaleResps <- d.tidy.phrase.handClassified2 %>%
     degree_match = ifelse(degree == "loudness_n", "sound|noise", degree_match),
     degree_match = ifelse(degree == "length_duration", "length|duration", degree_match),
     degree_match = ifelse(degree == "strength", "weight", degree_match),
-  ) %>% 
-  filter(grepl( degree_match, response_lemma_hand, ignore.case= T) & !(grepl("bird|animal|strawberries|road|weightlifter" , response_lemma_hand)))  
-
+  ) %>%
+  filter(grepl(degree_match, response_lemma_hand, ignore.case = T) & !(grepl("bird|animal|strawberries|road|weightlifter", response_lemma_hand)))
 ```
 
 ### Full Dataframe
@@ -1195,15 +1203,18 @@ We create the full processed dataframe by joining the automatically classified d
 We further correct the classification of some items where the superordinate (e.g. boat) occurs in the composite subordinate (e.g. rowing boat) and hence was automatically classified as both specific and superordinate (because we match responses to NPs and vice versa). If the response is superordinate, we correct the classification. 
 ``` {r}
 # exclude the "degree" responses
-d.AutoClassified <- d.matchedResponses %>% 
-  select(workerid, stim_id, degree, context_sentence, superordinate, 
-         np, np_expectations, adj, adj_polarity, np_match, response, 
-         response_lemma, specific, matchingSuper)
+d.AutoClassified <- d.matchedResponses %>%
+  select(
+    workerid, stim_id, degree, context_sentence, superordinate,
+    np, np_expectations, adj, adj_polarity, np_match, response,
+    response_lemma, specific, matchingSuper
+  )
 d.HandClassified.subs.wCC <- anti_join(
   d.tidy.phrase.handClassified2, d.scaleResps
-  ) %>% select(workerid, stim_id, degree, context_sentence, superordinate, 
-               np, np_expectations, adj, adj_polarity, np_match, response, 
-               response_lemma = response_lemma_hand, specific, matchingSuper)
+) %>% select(workerid, stim_id, degree, context_sentence, superordinate,
+  np, np_expectations, adj, adj_polarity, np_match, response,
+  response_lemma = response_lemma_hand, specific, matchingSuper
+)
 
 # put the whole classified data together to get modal responses
 d.tidy.resps.classified.full <- rbind(d.AutoClassified, d.HandClassified.subs.wCC)
@@ -1220,7 +1231,6 @@ d.tidy.resps.classified.full <- d.tidy.resps.classified.full %>% mutate(
   specific = ifelse(response == "flower", 0, specific),
   specific = ifelse(response == "guitar", 0, specific)
 )
- 
 ```
 
 
@@ -1259,7 +1269,6 @@ d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
     superordinate = ifelse(stim_id == 5, "writing tools", superordinate),
     superordinate = ifelse(stim_id == 77, "food", superordinate)
   ) %>%
- 
   mutate(mode_np = ifelse(specific == 1, np, superordinate))
 
 d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full.adjust.Super %>%
@@ -1290,7 +1299,7 @@ df.mode.final <- d.tidy.phrase.w.original.mode.pl %>%
   select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
   mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
-#write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv")
+# write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv")
 ```
 
 ## Hand-classified Responses as Superordinates
@@ -1299,10 +1308,12 @@ Here, a dataframe including the full processed data is created, but all hand-cla
 ``` {r}
 d.HandClassified.marked.as.Super <- anti_join(
   d.tidy.phrase.handClassified2, d.scaleResps
-  ) %>% mutate(specific = 0) %>%
-  select(workerid, stim_id, degree, context_sentence, superordinate, 
-               np, np_expectations, adj, adj_polarity, np_match, response, 
-               response_lemma = response_lemma_hand, specific, matchingSuper)
+) %>%
+  mutate(specific = 0) %>%
+  select(workerid, stim_id, degree, context_sentence, superordinate,
+    np, np_expectations, adj, adj_polarity, np_match, response,
+    response_lemma = response_lemma_hand, specific, matchingSuper
+  )
 
 # create a df where all hand-calssified items are treated as superordinates
 d.tidy.resps.full.handClassified.as.super <- rbind(d.AutoClassified, d.HandClassified.marked.as.Super)
@@ -1334,12 +1345,12 @@ d.tidy.resps.full.handClassified.as.super.adjust <- d.tidy.resps.full.handClassi
   # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
   mutate(mode_np = ifelse(specific == 1, np, superordinate))
 # data frame with hand classified responses being a priori superordinates
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%  
+d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%
   rowwise() %>%
-   mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
 
 d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
-  d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>% 
+  d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>%
   mutate(
     superordinate.freq = superordinate,
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
@@ -1349,10 +1360,13 @@ d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
   mutate(
     degree = ifelse(degree == "length_duration", "length", degree)
-  ) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
-#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-classified-data-w-handResps-as-super.csv')
+  ) %>%
+  select(workerid, stim_id, degree,
+    superordinate_pl = superordinate.freq,
+    adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
+    response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y
+  )
+# write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-classified-data-w-handResps-as-super.csv')
 ```
 
 ## Modal Superordinate Responses
@@ -1393,22 +1407,21 @@ d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>%
   ) # isModeNeither = 0 means that the mode response is different from anticipated NPs
 
 d.tidy.resp.counts.analysis %>%
-   filter(isModeNeither == 0) %>%
- distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
- View()
+  filter(isModeNeither == 0) %>%
+  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  View()
 
- d.tidy.resp.counts.analysis %>%
-   filter(isModeNeither == 0) %>%
-   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-   count(stim_id, mode) %>% filter(n >= 6) %>%
-   View()
- %>% filter(n >= 6) -> stim.ids.adjust
+d.tidy.resp.counts.analysis %>%
+  filter(isModeNeither == 0) %>%
+  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  count(stim_id, mode) %>%
+  filter(n >= 6) -> stim.ids.adjust
 
- d.tidy.resp.counts.analysis %>%
-   filter(isModeNeither == 0) %>%
-   distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
-   right_join(., stim.ids.adjust, by = c("stim_id")) %>%
-   View()
+d.tidy.resp.counts.analysis %>%
+  filter(isModeNeither == 0) %>%
+  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  right_join(., stim.ids.adjust, by = c("stim_id")) %>%
+  View()
 ```
 
 ### Common Superordinate Responses
@@ -1440,8 +1453,10 @@ d.nonMatch.adjustSuper %>% filter(produced_super != superordinate) # n = 2885
 d.nonMatch.adjustSuper %>% distinct(produced_super) -> distinctSuper
 distinctSuper %>%
   rowwise() %>%
-  filter(str_detect(produced_super, ".s$")) %>% as.list() %>% .$produced_super -> pluralSuper
-#anti_join(distinctSuper, pluralSuper) %>% View()
+  filter(str_detect(produced_super, ".s$")) %>%
+  as.list() %>%
+  .$produced_super -> pluralSuper
+# anti_join(distinctSuper, pluralSuper) %>% View()
 super_plural <- function(n, pluralSuper) {
   if (n %in% c("music", "people", "food", "furniture", "decor", "jewelry", "wood", "weather", "fish", "transportation", "times of day", "cookware", "traffic")) {
     n_pl <- n
@@ -1476,11 +1491,12 @@ d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
     superordinate_pl = ifelse(superordinate_pl == " kitchens", "kitchens", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == " furnitures", "furniture", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == " fabrics", "fabrics", superordinate_pl),
-     superordinate_pl = ifelse(superordinate_pl == " woods", "wood", superordinate_pl),
+    superordinate_pl = ifelse(superordinate_pl == " woods", "wood", superordinate_pl),
     NP_pl = insert_plural_np(tolower(np), superordinate)
   ) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
-         NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity,
+    NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific
+  )
 
 df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/hand-classified-produced-super-pl-frequencies.csv")
 
@@ -1489,10 +1505,12 @@ d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
   left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs"))
 
 d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
-         NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg,
+    NP_pl, np_expectations, response, specific,
+    subFreq = Frequencies.x, superFreq = Frequencies.y
+  )
 
-#write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/hand-classified-supers-w-produced-super-w-freqs.csv")
+# write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/hand-classified-supers-w-produced-super-w-freqs.csv")
 ```
 
 ## Full Data with Common Superordinates
@@ -1502,12 +1520,14 @@ Here, a dataframe containing the full processed data where the superordinates ar
 # create full df with produced grab-3 superordinates
 d.tidy.phrase.w.original.mode.pl %>%
   filter((specific == 1) | (matchingSuper == 1)) %>%
-  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree,
+    superordinate_pl = superordinate.freq,
+    adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
+    response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y
+  ) %>%
   rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
 
-#write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
+# write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
 ```
 
 ### Responses Failing Reference  
@@ -1515,17 +1535,18 @@ d.tidy.phrase.w.original.mode.pl %>%
 Among the common superordinate responses extracted above we found some which fail to establish correct reference for the given context. For example, for item 90 ('Lisa is considering moving her furniture through the {front gate, patio door, back door}. She says: It's {wide, narrow}'.) the response 'furniture' does not refer to the NPs. We manually extracted these cases of failed reference.
 ``` {r}
 # exclusiopn of responses where reference fails based on non-matching superordinate analysis above
-d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) %>%
+d.tidy.resps.classified.full %>%
+  filter((specific == 0) & (matchingSuper == 0)) %>%
   filter(
-  ((stim_id == 90) & grepl('furniture', response_lemma)) |
-  ((stim_id == 88) & grepl('bank', response_lemma)) |
-  ((stim_id == 54) & grepl('vegetable', response_lemma)) |
-  ((stim_id == 55) & grepl('bird', response_lemma)) |
-  ((stim_id == 67) & grepl('box', response_lemma)) |  
-  ((stim_id == 26) & grepl('map', response_lemma)) |
-  ((stim_id == 9) & grepl('fruit', response_lemma)) 
-) -> d.tidy.resp.failedRef
-#write_csv(d.tidy.resp.failedRef, '../data/class-elicitation-prereg-final/data-classified-failing-reference.csv')
+    ((stim_id == 90) & grepl("furniture", response_lemma)) |
+      ((stim_id == 88) & grepl("bank", response_lemma)) |
+      ((stim_id == 54) & grepl("vegetable", response_lemma)) |
+      ((stim_id == 55) & grepl("bird", response_lemma)) |
+      ((stim_id == 67) & grepl("box", response_lemma)) |
+      ((stim_id == 26) & grepl("map", response_lemma)) |
+      ((stim_id == 9) & grepl("fruit", response_lemma))
+  ) -> d.tidy.resp.failedRef
+# write_csv(d.tidy.resp.failedRef, '../data/class-elicitation-prereg-final/data-classified-failing-reference.csv')
 ```
 
 ### Common Superordinate Responses without Failing Reference
@@ -1533,7 +1554,8 @@ d.tidy.resps.classified.full %>% filter((specific == 0) & (matchingSuper == 0)) 
 Here, common superordinate responses are extracted from data where the responses failing reference are removed. The procedure mirrors the one above: We collapse across single NPs and adjective conditions within an item, i.e. we count the response as salient if at least three participants provided the response given any NP of the item (e.g. any of 'soup', 'salad', 'ice cream') and any of the adjective (positive or negative, 'hot' or 'cold'). If the response provided by the participant was provided by at least two other participants, the response is kept, otherwise it is substituted by the a priori superordinate. The corresponding frequencies are extracted for plurals of these salient responses. 
 ```{r}
 # without failed reference
-d.tidy.super.counts.nfR <- d.tidy.resps.classified.full %>% anti_join(., d.tidy.resp.failedRef) %>%
+d.tidy.super.counts.nfR <- d.tidy.resps.classified.full %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
   filter((specific == 0) & (matchingSuper == 0)) %>%
   group_by(stim_id, superordinate, response_lemma) %>%
   count() %>%
@@ -1545,7 +1567,8 @@ d.tidy.super.counts.nfR %>% filter(n_unique_resps >= 3) -> d.tidy.super.counts.c
 d.tidy.super.counts.nfR %>%
   ungroup() %>%
   mutate(produced_super = ifelse(n_unique_resps >= 3, response_lemma, superordinate)) -> d.tidy.super.adjust.nfR
-d.tidy.resps.classified.full %>% anti_join(., d.tidy.resp.failedRef) %>%
+d.tidy.resps.classified.full %>%
+  anti_join(., d.tidy.resp.failedRef) %>%
   filter((specific == 0) & (matchingSuper == 0)) %>%
   left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper.nfR
 
@@ -1556,7 +1579,9 @@ d.nonMatch.adjustSuper.nfR %>% filter(produced_super != superordinate) # n = 253
 d.nonMatch.adjustSuper.nfR %>% distinct(produced_super) -> distinctSuper.nfR
 distinctSuper.nfR %>%
   rowwise() %>%
-  filter(str_detect(produced_super, ".s$")) %>% as.list() %>% .$produced_super -> pluralSuper.nfR
+  filter(str_detect(produced_super, ".s$")) %>%
+  as.list() %>%
+  .$produced_super -> pluralSuper.nfR
 d.nonMatch.adjustSuper.nfR <- d.nonMatch.adjustSuper.nfR %>%
   rowwise() %>%
   mutate(produced_super_pl = super_plural(produced_super, pluralSuper))
@@ -1570,11 +1595,12 @@ d.nonMatch.adjustSuper.filter.nfR <- d.nonMatch.adjustSuper %>%
     superordinate_pl = ifelse(superordinate_pl == " kitchens", "kitchens", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == " furnitures", "furniture", superordinate_pl),
     superordinate_pl = ifelse(superordinate_pl == " fabrics", "fabrics", superordinate_pl),
-     superordinate_pl = ifelse(superordinate_pl == " woods", "wood", superordinate_pl),
+    superordinate_pl = ifelse(superordinate_pl == " woods", "wood", superordinate_pl),
     NP_pl = insert_plural_np(tolower(np), superordinate)
   ) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, 
-         NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity,
+    NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific
+  )
 
 df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/hand-classified-produced-super-pl-frequencies.csv")
 
@@ -1583,10 +1609,12 @@ d.nonMatch.adjustSuper.filter.w.freqs.nfR <- d.nonMatch.adjustSuper.filter.nfR %
   left_join(., df.produced.super.freqs, by = c("superordinate_pl" = "NPs"))
 
 d.nonMatch.adjustSuper.filter.w.freqs.nfR <- d.nonMatch.adjustSuper.filter.w.freqs.nfR %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, 
-         NP_pl, np_expectations, response, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
+  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg,
+    NP_pl, np_expectations, response, specific,
+    subFreq = Frequencies.x, superFreq = Frequencies.y
+  )
 
-#write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
+# write_csv(d.nonMatch.adjustSuper.filter.w.freqs, "../data/class-elicitation-prereg-final/nonmatched-produced-super-w-freqs.csv")
 ```
 
 ## Full Data without Failed Reference
@@ -1629,7 +1657,7 @@ df.mode.final.nfR <- d.tidy.phrase.w.original.mode.pl.nfR %>%
   mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
   select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
 
-#write_csv(df.mode.final.nfR, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedeRef.csv")
+# write_csv(df.mode.final.nfR, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedeRef.csv")
 ```
 
 ## Hand-classified Responses as Superopridnates without failing Reference
@@ -1652,11 +1680,11 @@ d.tidy.resps.full.handClassified.as.super.adjust.nfR <- d.tidy.resps.full.handCl
 
 # nfR
 # data frame with hand classified responses being a priori superordinates
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR <- d.tidy.resps.full.handClassified.as.super.adjust.nfR %>%  
+d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR <- d.tidy.resps.full.handClassified.as.super.adjust.nfR %>%
   rowwise() %>%
-   mutate(np_pl = insert_plural_np(tolower(np), superordinate))
+  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
 d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR <-
-  d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR %>% 
+  d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR %>%
   mutate(
     superordinate.freq = superordinate,
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
@@ -1666,10 +1694,13 @@ d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR <-
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
   mutate(
     degree = ifelse(degree == "length_duration", "length", degree)
-  ) %>% select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y)
-#write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR, '../data/class-elicitation-prereg-final/full-classified-data-w-handResps-as-super-no-failedRef.csv')
+  ) %>%
+  select(workerid, stim_id, degree,
+    superordinate_pl = superordinate.freq,
+    adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
+    response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y
+  )
+# write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq.nfR, '../data/class-elicitation-prereg-final/full-classified-data-w-handResps-as-super-no-failedRef.csv')
 ``` 
 
 ## Full Data with Common Superordinates without failing Reference
@@ -1679,12 +1710,14 @@ Here, a dataframe containing the full processed data from which the responses fa
 # nfR
 d.tidy.phrase.w.original.mode.pl %>%
   filter((specific == 1) | (matchingSuper == 1)) %>%
-  select(workerid, stim_id, degree, superordinate_pl = superordinate.freq, 
-         adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations, 
-         response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
+  select(workerid, stim_id, degree,
+    superordinate_pl = superordinate.freq,
+    adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
+    response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y
+  ) %>%
   rbind(., d.nonMatch.adjustSuper.filter.w.freqs.nfR) -> d.full.w.produced.super.nfR
 
-#write_csv(d.full.w.produced.super.nfR, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super-no-failedRef.csv")
+# write_csv(d.full.w.produced.super.nfR, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super-no-failedRef.csv")
 ```
 
 # Visualisations
@@ -2094,4 +2127,3 @@ contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
 
 summary(rs.glm)
 ```
-
