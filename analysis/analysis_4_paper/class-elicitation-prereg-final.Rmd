@@ -266,13 +266,8 @@ d.tidy.resp.valid.no_similar <- anti_join(
 In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
 
 ```{r list of commong mispellings}
-misspellings_df <- read_csv("text_processing/misspellings_dict_w_handLemma.csv") %>%
-  rowwise() %>%
-  mutate(
-    V2 = ifelse(is.na(V2), "",
-      V2
-    )
-  )
+misspellings_df <- read_csv("text_processing/misspellings_dict.csv") 
+
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
 
@@ -283,7 +278,13 @@ To further improve the response classification, we lemmatize the plural response
 
 ```{r list of lemmatizations}
 # mostly Plural --> singulars
-lemmatization_df <- read_csv("text_processing/lemmatization_dict.csv")
+lemmatization_df <- read_csv("text_processing/lemmatization_dict.csv") %>%
+  rowwise() %>%
+  mutate(
+    V2 = ifelse(is.na(V2), "",
+      V2
+    )
+  )
 lemmatization_set <- pull(lemmatization_df, V2) %>% set_names(pull(lemmatization_df, V1))
 ```
 
@@ -644,7 +645,7 @@ We look at the responses that were not automatically classified (about 4000). We
 
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
-d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.no_similar.match)
+d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.match)
 
 length(d.tidy.auto.non_match$response)
 
@@ -657,12 +658,14 @@ First, we further lemmatize the non-matching responses and correct for misspelli
 
 The responses are lower-cased. The lemmatization and misspelling correction is read into a dataframe and converted into a named list to use with `str_replace_all`. 
 
-MH: Why can't we do the misspelling replacement (and lemmatization) with the other misspellings and lemmatizations above?
-
 ``` {r nonMatchedResps-lemmatize}
 d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
   mutate(response = tolower(response))
 
+d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
+  mutate(
+    response_hand_lemma = response_lemma
+  )
 ```
 
 The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 890 non-matched responses (20.7%) were produced less than 3 times and are dropped. 
@@ -773,7 +776,7 @@ hand_cc <- c(
 )
 # cbind(hand_cc_lemma, hand_cc) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv')
 
-hand_cc_dict <- read_csv("../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv") %>%
+hand_cc_dict <- read_csv("text_processing/hand_comp_classes_dict.csv") %>%
   rowwise() %>%
   mutate(
     hand_cc = ifelse(is.na(hand_cc), "NA", hand_cc)
@@ -787,12 +790,12 @@ hand_cc_df <- pull(
 
 d.auto.non_match.hand_cc <- d.tidy.auto.non_match.grab3.noFailedRef %>%
   mutate(
-    hand_cc = str_replace_allll(response_hand_lemma, hand_cc_df)
+    hand_cc = str_replace_all(response_hand_lemma, hand_cc_df)
   ) %>%
   # rowwise() %>%
   mutate(
     hand_cc =
-      65(
+      case_when(
         response_hand_lemma == "appliances" & stim_id == 61 ~ "supersuper",
         response_hand_lemma == "appliances" & stim_id == 75 ~ "diff",
         response_hand_lemma == "cans" & stim_id == 81 ~ "sub",
