@@ -32,10 +32,6 @@ Furthermore, in some datasets invalid responses which fail to establish correct 
 - `hand-classified-produced-super-pl-frequencies.csv`: frequencies of the _plural_ superordinate responses provided by at least three participants.
 - `class-elicitation-final-plural_frequencies.csv`: frequencies of the _plural_ NPs and updated superordinates (some items were adjusted to avoid polysemy, like races --> rallies).
 - `data-classified-failing-reference.csv`: subset of the processed data including all the responses which fail correct reference given the context sentence (e.g. 'furniture' for item 90) (113 entries).
-- `hand_classification_dict.csv`: transformations of the responses that were used to manually classify responses which were not classified automatically.
-- `lemmatization_dict`: lemmatization transformations that were performed on the raw responses in order to improve automatic classification.
-- `misspellings_dict.csv`: misspelling corrections that were performed on the raw responses in order to improve automatic classification.
-- `synonym_dict.csv`: transformations of raw responses which are obvious synonyms of anticipated NPs and superordinates to those phrases to improve automatic classification.
 
 ## Raw data
 
