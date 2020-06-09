@@ -638,9 +638,7 @@ length(d.tidy.auto.non_match$response)
 #   View()
 ```
 
-First, we further lemmatize the non-matching responses and correct for misspellings to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). 
-
-The responses are lower-cased. The lemmatization and misspelling correction is read into a dataframe and converted into a named list to use with `str_replace_all`. 
+The goal is to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). The responses are lower-cased. 
 
 ``` {r nonMatchedResps-lemmatize}
 d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
