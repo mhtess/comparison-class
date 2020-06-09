@@ -243,22 +243,6 @@ n.total.responses - n.valid.responses
 
 ```
 
-### "Similar"
-
-We further exclude responses that used the word "similar"; we deemed these responses too underspecified (how similar is similar?). These numbered only 15 in total.
-
-
-```{r remove similar}
-d.tidy.auto %>%
-  filter(grepl("similar", response_lemma, ignore.case = T)) -> d.uncertain.resps # 15 responses
-
-d.tidy.resp.valid.no_similar <- anti_join(
-  d.tidy.resp.valid,
-  d.uncertain.resps
-)
-```
-
-
 ## Basic Corrections: Misspellings, Lemmatization, Synonyms
 
 ### Misspelling Correction
@@ -298,7 +282,7 @@ synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
 
 
 ```{r apply corrections}
-d.tidy.resp.valid.no_similar %>%
+d.tidy.resp.valid %>%
   mutate(response = as.character(response)) %>%
   ungroup() %>%
   mutate(
@@ -739,6 +723,60 @@ d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopW
       (response_hand_lemma == "music") 
   ))
 ```
+
+
+MH: valild superordinate responses
+- music
+- houses
+- places to sit
+- items in the shop
+- colors
+- dinner
+- menu
+- places for dinner
+- restaurant prices
+- chocolate
+- dinner
+- weights
+- weight lifter
+- bouquets / flower bouquets
+- person (should be automatic)
+- gates (should be automatic)
+- house
+- furs
+- parts of the kitchen
+- coat colors
+- coat
+- electronics (should be automatic)
+- malls (should be automatic)
+- places to live
+- paint colors (should be automatic)
+
+MH valid subordinate:
+- colors of the script
+- ink colors
+- podcast (should be automatic)
+- podcast episode (should be automatic)
+
+ref failures
+- boxes
+- google maps
+- maps
+- terrariums
+- furniture
+- highways
+- butcher shop
+- banks
+- night
+- saturday night
+- parks
+- weights (stim_id 69)
+- nights 
+- forests
+- kitchen
+- lakes
+- aquarium
+- 
 
 The reference-failing responses are excluded (404 responses). Other responses are classified using a dictionary of manual classification read from a dataframe:
 
