@@ -887,7 +887,7 @@ d.tidy.super.counts %>% filter(n_unique_resps >= 3) -> d.tidy.super.counts.commo
 d.tidy.super.counts %>%
   ungroup() %>%
   mutate(produced_super = ifelse(n_unique_resps >= 3, response_lemma, superordinate)) -> d.tidy.super.adjust
-d.tidy.resps.classified.full %>%
+d.auto.non_match.hand_cc %>%
   filter((specific == 0) & (matchingSuper == 0)) %>%
   left_join(., d.tidy.super.adjust, by = c("stim_id", "superordinate", "response_lemma")) -> d.nonMatch.adjustSuper
 
@@ -943,7 +943,7 @@ d.nonMatch.adjustSuper.filter <- d.nonMatch.adjustSuper %>%
     NP_sg = np, NP_pl, np_expectations, response = produced_super_pl, specific
   )
 
-df.produced.super.freqs <- read_csv("../data/class-elicitation-prereg-final/hand-classified-produced-super-pl-frequencies.csv")
+df.produced.super.freqs <- read_csv("../../data/class-elicitation-prereg-final/hand-classified-produced-super-pl-frequencies.csv")
 
 d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter %>%
   left_join(., df.frequencies, by = c("NP_pl" = "NPs")) %>%
@@ -963,8 +963,9 @@ d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %
 Here, a dataframe containing the full processed data where the superordinates are the common superordinates extracted above by the 3-participants rule is created. Hence, the subordinate responses are coerced to the NPs and the superordinate responses are either unchanged if at least three such responses were produced for the respective item or coerced to the anticipated superordinate. The respective subordinate and superordiunate frequencies are added to each data point.
 ``` {r}
 # create full df with produced grab-3 superordinates
-d.tidy.phrase.w.original.mode.pl %>% # this is called differently now 
-  filter((specific == 1) | (matchingSuper == 1)) %>%
+
+d.tidy.auto.classified.w.frequency %>% 
+ filter((specific == 1) | (matchingSuper == 1)) %>%
   select(workerid, stim_id, degree,
     superordinate_pl = superordinate.freq,
     adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
