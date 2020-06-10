@@ -147,7 +147,7 @@ d.item.count %>%
 
 # Text preprocessing
 
-## Invalid Responses: Nonsense + "similar"
+## Invalid Responses: Nonsense 
 
 ### Nonsense
 
@@ -395,7 +395,7 @@ d.tidy.resp.valid.lemmatized.np_match %>%
     )
   ) -> d.tidy.auto
 
-# extract the automatically matched data (out of 26.552 responses (post exclusion) 22.117 are matched )
+# extract the automatically matched data (out of 26.552 responses (post exclusion) 22.339 are matched )
 d.tidy.auto.match <- d.tidy.auto %>%
   filter((specific == 1) | (matchingSuper == 1))
 
@@ -464,7 +464,7 @@ After we manually inspected the data with respect to superordinate responses tha
 If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP (represented by the variable `mode_np`), otherwise it is turned into the corresponding superordinate.
 
 ``` {r}
-d.tidy.auto.no_similar.match.adjust_super <- d.tidy.auto.match %>%
+d.tidy.auto.match.adjust_super <- d.tidy.auto.match %>%
   mutate(
     # substitutions made based on human modal responses
     superordinate = ifelse(stim_id == 77, "food", superordinate)
@@ -579,7 +579,7 @@ insert_plural_np <- function(np, superordinate) {
 We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
 
 ```{r}
-d.tidy.auto.classified.w.pl.np <- d.tidy.auto.no_similar.match.adjust_super %>%
+d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
   rowwise() %>%
   mutate(
     np_pl = insert_plural_np(tolower(np), superordinate),
@@ -650,7 +650,7 @@ d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
   )
 ```
 
-The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 890 non-matched responses (20.7%) were produced less than 3 times and are dropped. 
+The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 869 non-matched responses (20.6%) were produced less than 3 times and are dropped. 
 
 ``` {r nonMatchedResps-grab3}
 # d.tidy.auto.non_match.lemma.counts <- d.tidy.auto.non_match %>% count(stim_id, response_hand_lemma)
@@ -694,18 +694,26 @@ d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
 d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopWords %>%
   mutate(resps_matching_context = as.character(response_hand_lemma)) %>%
   unnest_tokens(word, resps_matching_context) %>%
-  filter(grepl(word, clean_context_sentence, fixed = T)) %>% # MH: I THINK THIS IS MISSING PLURALS (e.g., the first row of this df is about "scripts", but the context sentence only has the word "script" in it)
+  filter(grepl(word, clean_context_sentence)) %>% # MH: I THINK THIS IS MISSING PLURALS (e.g., the first row of this df is about "scripts", but the context sentence only has the word "script" in it)
   group_by(workerid, trial_num) %>%
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>% # MH: What is the purpose of this? It looks like you matching sometimes multiple words in a sentence (e.g., "google maps"). Is this to keep that straight so you don't double count?
   spread(wordNumber, word) %>%
   unite(resps_matching_context, starts_with("word_"), sep = " ") %>%
-  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>% # MH: I examined responses at this point..
+  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>% 
   # filter out manually responses not be dropped
   filter(!(
       (resps_matching_context == "color") |
       (resps_matching_context == "podcast") |
       (resps_matching_context == "coat") |
+      (response_hand_lemma == "bouquet") |
+      (response_hand_lemma == "flower bouquet") |
       (response_hand_lemma == "mall") |
+      (response_hand_lemma == "house") |  
+      (response_hand_lemma == "places to sit") |
+      (response_hand_lemma == "parts of the kitchen") |  
+      (response_hand_lemma == "items in the shop") |
+      (response_hand_lemma == "dinner") |
+      (response_hand_lemma == "restaurant price") |  
       (response_hand_lemma == "fur") |
       (response_hand_lemma == "fur color") |
       (response_hand_lemma == "restaurant") |
@@ -718,65 +726,13 @@ d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopW
       (response_hand_lemma == "electronics") |
       (response_hand_lemma == "gate") |
       (response_hand_lemma == "menu") |
+      (response_hand_lemma == "weight lifters") |  
       (response_hand_lemma == "music") 
   ))
 ```
 
 
-MH: valild superordinate responses
-- music
-- houses
-- places to sit
-- items in the shop
-- colors
-- dinner
-- menu
-- places for dinner
-- restaurant prices
-- chocolate
-- dinner
-- weights
-- weight lifter
-- bouquets / flower bouquets
-- person (should be automatic)
-- gates (should be automatic)
-- house
-- furs
-- parts of the kitchen
-- coat colors
-- coat
-- electronics (should be automatic)
-- malls (should be automatic)
-- places to live
-- paint colors (should be automatic)
-
-MH valid subordinate:
-- colors of the script
-- ink colors
-- podcast (should be automatic)
-- podcast episode (should be automatic)
-
-ref failures
-- boxes
-- google maps
-- maps
-- terrariums
-- furniture
-- highways
-- butcher shop
-- banks
-- night
-- saturday night
-- parks
-- weights (stim_id 69)
-- nights 
-- forests
-- kitchen
-- lakes
-- aquarium
-- 
-
-The reference-failing responses are excluded (404 responses). Other responses are classified using a dictionary of manual classification read from a dataframe:
+The reference-failing responses are excluded (288 responses). Remaining responses are classified using a dictionary of manual classification read from a dataframe:
 
 ``` {r nonMatched-dropFailedRef}
 d.tidy.auto.non_match.grab3.noFailedRef <- d.tidy.auto.non_match.grab3 %>%
@@ -800,17 +756,6 @@ Most classifications are read from a dataframe and are classifications from a pr
 d.tidy.auto.non_match.grab3.noFailedRef %>%
   distinct(stim_id, superordinate, np, adj, response_hand_lemma) %>%
   View()
-
-# here the data frame of the dictionary with the classifications for `str_replace_all` is created for those responses which are classified individually
-# it will be removed when classification is set
-# responses where the calssification depends on the specific item are post-processed with `case_when`
-hand_cc_lemma <- c(
-  "animals", "apartments", "areas", "athletes", "beds", "beverages", "bikes", "bird sounds", "birds", "bodies of water", "bottles", "buildings", "cans", "cars", "cats", "centers", "children", "chocolate", "cities", "cloth", "clothes", "coat", "coat color", "coats", "color", "color of scripts", "condiments", "cooking appliances", "cooking methods", "days", "decorations", "desserts", "dishes", "distance", "dog coats", "doors", "drinks", "electronics", "environment", "episodes", "evenings", "fabric", "films", "food", "fruit", "fur", "fur color", "habitats", "holes", "homes", "house", "indoor spaces", "ink", "ink color", "instruments", "items", "jewelry", "kids", "lanes", "lifters", "liquids", "locations", "mall", "materials", "mattress", "meals", "melons", "metal", "methods", "methods of cooking", "motors", "movie", "music", "musical instruments", "night", "noise", "objects", "openings", "paint color", "paintings", "pans", "paper", "parts of kitchen", "people", "performances", "person", "places", "places for dinner", "places to live", "planes", "plants", "players", "pots", "price", "product", "programs", "restaurants", "rinks", "rivers", "road", "rodents", "room", "routes", "runners", "scripts", "scripts color", "seats", "shades", "shops", "shows", "smells", "songs", "sounds", "spaces", "stoves", "streets", "string instruments", "structures", "temperature", "things", "things in sky", "towns", "traffic", "trucks", "tv shows", "vegetables", "vehicles", "venues", "walkers", "walks", "walkways", "weather", "weightlifters"
-)
-hand_cc <- c(
-  "supersuper", "sub", "sub", "diff", "sub", "diff", "sub", "super", "diff", "super", "sub", "super", "diff", "super", "diff", "super", "sub", "diff", "diff", "diff", "diff", "sub", "sub", "sub", "sub", "sub", "supersuper", "super", "super", "super", "supersuper", "diff", "super", "NA", "super", "super", "diff", "super", "supersuper", "super", "diff", "super", "super", "supersuper", "supersuper", "sub", "sub", "supersuper", "super", "sub", "sub", "supersuper", "sub", "sub", "supersuper", "supersuper", "supersuper", "sub", "sub", "NA", "supersuper", "super", "super", "super", "sub", "NA", "super", "diff", "super", "super", "diff", "super", "diff", "supersuper", "super", "supersuper", "supersuper", "supersuper", "sub", "diff", "super", "diff", "super", "supersuper", "supersuper", "super", "super", "supersuper", "super", "super", "supersuper", "diff", "super", "NA", "supersuper", "super", "NA", "sub", "super", "NA", "diff", "diff", "diff", "sub", "diff", "sub", "diff", "sub", "NA", "super", "diff", "diff", "diff", "supersuper", "diff", "super", "supersuper", "supersuper", "diff", "supersuper", "supersuper", "super", "diff", "super", "super", "NA", "supersuper", "super", "diff", "super", "diff", "NA"
-)
-# cbind(hand_cc_lemma, hand_cc) %>% as.data.frame() %>% write_csv(., '../data/class-elicitation-prereg-final/hand_comp_classes_dict.csv')
 
 hand_cc_dict <- read_csv("text_processing/hand_comp_classes_dict.csv") %>%
   rowwise() %>%
@@ -868,561 +813,6 @@ d.auto.non_match.hand_cc <- d.tidy.auto.non_match.grab3.noFailedRef %>%
 d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc == "NA"))
 ```
 
-
-The adjustments are read from the data frame and converted to a named list ot be used in str_replace_all.
-```{r}
-hand_classification_df <- read_csv("../data/class-elicitation-prereg-final/hand_classification_dict.csv") %>%
-  rowwise() %>%
-  mutate(V2 = ifelse(is.na(V2), "", V2))
-
-hand_classification <- pull(hand_classification_df, V2) %>% set_names(pull(hand_classification_df, V1))
-```
-
-The hand-classified responses are then checked if they include the NP or the anticipated superordinate or vice versa. 
-
-``` {r}
-# replace the sketchy synonyms
-d.tidy.auto.non_match.hand_classified <- d.tidy.auto.non_match.grab3.noFailedRef %>%
-  mutate(
-    response_hand_lemma = as.character(response_hand_lemma),
-    response = as.character(response),
-    response_lemma_hand = str_replace_all(
-      response_hand_lemma,
-      hand_classification
-    )
-  ) %>%
-  mutate(
-    cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep = ""),
-    specific = containsString_responses(
-      as.character(cleanedPhrase),
-      as.character(np_match),
-      response_lemma_hand,
-      np_match_us
-    ),
-    matchingSuper = containsString_responses(
-      as.character(cleanedPhrase),
-      as.character(superordinate),
-      response_lemma_hand,
-      super_us
-    )
-  )
-
-# none were classified as specific or super
-d.tidy.auto.non_match.hand_classified %>%
-  filter((specific == 1) | (matchingSuper == 1)) -> d.tidy.auto.non_match.hand_classified_match
-
-# look at distinct responses for more detailed classification
-d.tidy.auto.non_match.hand_classified %>%
-  filter((specific == 0) & (matchingSuper == 0)) %>%
-  distinct(stim_id, superordinate, np, adj, response_hand_lemma, response_lemma_hand) %>%
-  View()
-```
-
-The responses which were still not classified are processed further. Some of the manual adjustments are made on an item-by-item basis. For example, we take paraphrases including the place or the time mentioned in the context sentence to mean the subordinate in e.g. cases like 'He heard an owl cry in the forest': The response "it's loud...compared to other forests' to mean 'owls in other forests'. 
-Then, we again checked if the responses include the NP or the anticipated superordinate or if those include the response. 
-
-``` {r}
-d.tidy.auto.non_match.hand_classified %>%
-  filter((specific == 0) & (matchingSuper == 0)) %>%
-  rowwise() %>%
-  mutate(
-    response_lemma_hand = ifelse(superordinate == "cookware",
-      gsub("pans", "frying pan", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "cookware",
-      gsub("dinner", "cookware", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = gsub("illunation", np_match, response_lemma_hand),
-    response_lemma_hand = gsub("illumination", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "desserts", gsub("chocolate", "chocolate fondue", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "furniture", gsub("beds", "bedboard", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "entertainment", gsub("films", "movie", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "waterways", gsub(
-      "lake", np_match,
-      response_lemma_hand
-    ), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "vehicles", gsub("trucks", "pick-up", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "people", gsub("walks", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "times of day",
-      ifelse(response_lemma == "day", np_match,
-        response_lemma_hand
-      ), response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "times of day",
-      ifelse(response_lemma == "day", np_match, response_lemma_hand), response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "writing utensils", gsub("ink", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "food", gsub("day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "writing utensils", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "seasons", gsub("past day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "insects", gsub("terrarium", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "buildings", gsub(
-      "apartments", "apartment building",
-      response_lemma_hand
-    ), response_lemma_hand),
-    response_lemma_hand = gsub("brands", np_match, response_lemma_hand),
-    response_lemma_hand = gsub("butchershop", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "places", gsub("baths", "sauna", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(np == "bottle of wine", gsub("bottles", "wine", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "furniture", gsub("cans", "trash cans", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "animals", gsub("zoo", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "loudness", gsub("child", "baby", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "weight", gsub("children", "kid", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(np_match == "conference center", gsub("centers", "conference center", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "weight", gsub("childern", "kid", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "cakes", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub(
-      "chocolate", "chocolate fondue",
-      response_lemma_hand
-    ), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("duck", "dusk", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = gsub("compared store", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("fur color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("fur", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub("day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "loudness_n", gsub("day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "seasons", gsub("day this month", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "price", gsub("day", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "price", gsub("flats", "apartments", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "speed", gsub("kid", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "height", gsub("kid", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "loudness", gsub("kid", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "strength", gsub("kid", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "weight", gsub("kid", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "people", gsub("kid", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "width", gsub("lane", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("light", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    # response_lemma_hand = ifelse(degree == "height",  gsub("mall", np_match, response_lemma_hand),
-    #                          response_lemma_hand),
-    response_lemma_hand = ifelse(np_match == "strip malls", gsub("mall", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "speed_f", gsub("planes", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "height", gsub("player", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub("rinks", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub("saturday", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "animals", gsub("shade", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "loudness_n", gsub("time", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub("time", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "speed", gsub("time", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "price", gsub("time", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("times of day", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "darkness", gsub("time", "times of day", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "price", gsub("store", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "price", gsub("shop", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "size", gsub("store", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "loudness_n", gsub("store", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "length_duration", gsub("store", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(degree == "temperature_h", gsub("sip", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "animals", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "cakes", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "flowers", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "materials", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("color", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("locations", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma = ifelse(degree == "darkness", gsub("times", "times of day", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = gsub("top shelf options", "liquor", response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "price", gsub("rent", "rentals", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "paints", gsub("color", "paint", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "seasons", gsub("day", "seasons", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "statues", gsub("material", "statues", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "insects", gsub("bug", "insect", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "cookware", gsub("cook", "cookware", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "venues", gsub("auditoriums", "concert", response_lemma_hand),
-      response_lemma
-    ),
-    response_lemma_hand = ifelse(degree == "speed", gsub("appliances", "cookware", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = gsub("market", np_match, response_lemma_hand),
-    response_lemma_hand = gsub("playing", np_match, response_lemma_hand),
-    response_lemma_hand = gsub("saturday nights", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "places", gsub("venues", "places", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "concerts", gsub("singing", "concerts", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(degree == "strength", gsub("body", "athlete", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "materials", gsub("cloth", "fabric", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "shoes", gsub("shes", "shoes", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "concerts", gsub("show", "concert", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "audios", gsub("show", "audio", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "statues", gsub("metal", "statue", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "cookware", gsub("method", "cookware", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "venues", gsub("night", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "doorways", gsub("opening", "doorway", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "dens", gsub("opening", "den", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "times of day", gsub("area", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "times of day", gsub("places", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "times of day", gsub("area", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "times of day", gsub("street", np_match, response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "rentals", gsub("places", "rentals", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "food", gsub("dishes", "food", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "restaurants", gsub("places", "restaurants", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "restaurants", gsub("places dinner", "restaurants", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "alcoholic drinks", gsub("places", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "doorways", gsub("path", "doorway", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "dens", gsub("passage", "den", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "roads", gsub("path", "road", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "waterways", gsub("path", "waterways", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "audios", gsub("performance", "audio", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "audios", gsub("music", "audio", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "materials", gsub("hardware", "materials", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "audios", gsub("performance", "venues", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "locations", gsub("places in the house", "locations", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "locations", gsub("places in the kitchen", "locations", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "locations", gsub("refrigerator", "freezer", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "doorways", gsub("places house", "doorways", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "floors", gsub("surfaces", "floors", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "races", gsub("tracks", "races", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(superordinate == "restaurants", gsub("menu", "restaurants", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "walls", gsub("building materials", "walls", response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("park", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(superordinate == "birds", gsub("forest", np_match, response_lemma_hand),
-      response_lemma_hand
-    ),
-    response_lemma_hand = ifelse(cleanedPhrase == "_cries_", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_crying_", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_episodes_", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_car_", "cars", response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_map_", "maps", response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_pots_", "cookware", response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_settings_", superordinate, response_lemma_hand),
-    response_lemma_hand = ifelse(cleanedPhrase == "_pieces_", np_match, response_lemma_hand),
-    response_lemma_hand = ifelse(np == "sauna", gsub("spa", "sauna", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = ifelse(np == "bedboard", gsub("board", "bedboard", response_lemma_hand), response_lemma_hand),
-    response_lemma_hand = gsub("shopping", np_match, response_lemma_hand),
-    response_lemma_hand = gsub("works of art", superordinate, response_lemma_hand)
-
-    # classification of those responses which were not caught above (looking at d.tidy.resp.analysis.update below): mostly adjusting synonymous responses to get accurate mode estinates
-  ) %>%
-  mutate(
-    cleanedPhrase = paste("_", as.character(response_lemma_hand), "_", sep = ""),
-    specific = containsString_responses(as.character(cleanedPhrase), as.character(np_match), response_lemma_hand, np_match_us),
-    matchingSuper = containsString_responses(as.character(cleanedPhrase), as.character(superordinate), response_lemma_hand, super_us)
-  ) -> d.tidy.phrase.handClassified2
-```
-
-The responses which hereafter have no explicit marking as being subordinate or superordinate (i.e. matching the anticipated superordinate ) are all superordinate (i.e. more general than the NP) but deviate from our anticipated superordinates.
-
-### Hand-categorized Responses Post-processing 
-
-To further clean the data set, we exclude the responses which mention the degree which is described by the adjectives (e.g. 'price' for 'expensive' or 'cheap' ) since it does not provide a comparison class: e.g. we exclude responses like "It's warm relative to other temperatures".
-
-``` {r}
-
-d.tidy.phrase.handClassified2 %>% filter((specific == 0) & (matchingSuper == 0)) -> d.nonMatching.resps
-
-# create the full dataset of hand-classified responses
-d.tidy.phrase.handClassified2 <- d.tidy.phrase.handClassified2 %>% rbind(., d.tidy.phrase.handClassified.matched)
-
-# here, the responses including the scale are caught  (229 responses)
-d.scaleResps <- d.tidy.phrase.handClassified2 %>%
-  rowwise() %>%
-  mutate(
-    degree_match = degree,
-    degree_match = ifelse(degree == "temperature_h", "temperature", degree_match),
-    degree_match = ifelse(degree == "speed_f", "speed", degree_match),
-    degree_match = ifelse(degree == "loudness", "sound|noise", degree_match),
-    degree_match = ifelse(degree == "loudness_n", "sound|noise", degree_match),
-    degree_match = ifelse(degree == "length_duration", "length|duration", degree_match),
-    degree_match = ifelse(degree == "strength", "weight", degree_match),
-  ) %>%
-  filter(grepl(degree_match, response_lemma_hand, ignore.case = T) & !(grepl("bird|animal|strawberries|road|weightlifter", response_lemma_hand)))
-```
-
-### Full Dataframe
-
-We create the full processed dataframe by joining the automatically classified data and the hand-classified data. 
-We further correct the classification of some items where the superordinate (e.g. boat) occurs in the composite subordinate (e.g. rowing boat) and hence was automatically classified as both specific and superordinate (because we match responses to NPs and vice versa). If the response is superordinate, we correct the classification. 
-``` {r}
-# exclude the "degree" responses
-d.AutoClassified <- d.matchedResponses %>%
-  select(
-    workerid, stim_id, degree, context_sentence, superordinate,
-    np, np_expectations, adj, adj_polarity, np_match, response,
-    response_lemma, specific, matchingSuper
-  )
-d.HandClassified.subs.wCC <- anti_join(
-  d.tidy.phrase.handClassified2, d.scaleResps
-) %>% select(workerid, stim_id, degree, context_sentence, superordinate,
-  np, np_expectations, adj, adj_polarity, np_match, response,
-  response_lemma = response_lemma_hand, specific, matchingSuper
-)
-
-# put the whole classified data together to get modal responses
-d.tidy.resps.classified.full <- rbind(d.AutoClassified, d.HandClassified.subs.wCC)
-
-
-# some compounds should only be classified as superordinates
-d.tidy.resps.classified.full <- d.tidy.resps.classified.full %>% mutate(
-  specific = ifelse(response == "berries", 0, specific),
-  specific = ifelse(response == "boat", 0, specific),
-  specific = ifelse(response == "bird", 0, specific),
-  specific = ifelse(response == "building", 0, specific),
-  specific = ifelse(response == "cake", 0, specific),
-  specific = ifelse(response == "concert", 0, specific),
-  specific = ifelse(response == "flower", 0, specific),
-  specific = ifelse(response == "guitar", 0, specific)
-)
-```
-
-
-``` {r}
-# check
-d.tidy.resps.classified.full %>%
-  filter((specific == 1) & (matchingSuper == 1)) %>%
-  View()
-# all the responses that are classified as both are composite subordinates
-
-# check the full data set items which have mean 1 or 0
-
-d.tidy.resps.classified.full %>%
-  group_by(stim_id, np_expectations, adj_polarity) %>%
-  mutate(meanSub = mean(specific), ) %>%
-  filter((meanSub == 0) | (meanSub == 1)) %>%
-  select(stim_id, degree, np_match, adj_polarity, np_expectations, originalResponse, cat_cleaned, meanSub) %>%
-  distinct() %>%
-  View()
-```
-
-### Frequencies
-
-After we manually inspected the data with respect to responses systematically deviating from the anticipated ones we extracted two items (5 and 77) for which the superordinates deviated. We adjust the superordinates to the empirical modal responses and use this adjusted set of superordinates for the frequency extraction and the adjective endorsement task. 
-If the response was classified as subordinate (i.e. _specific_), it is turned to be the corresponding NP, otherwise it is turned to the corresponding superordinate from this adjusted superordinates set. 
-Plural NPs are created for the frequency extraction, some superordinates are adjusted in order to avoid polysemy and get more accurate frequency estimates. The corresponding subordinate and superordinate frequencies are added to each data point. 
-The result of these processing steps is a dataframe containing the full processed data, where the specific responses are coerced to the NPs and the superordinate responses are coerced to the updated anticipated superordinates set.  
-``` {r}
-# the data is adjusted to the human modal responses for stim_ids 5 and 77
-
-# plural noun phrases are adjusted to the frequency queries
-d.tidy.resps.classified.full.adjust.Super <- d.tidy.resps.classified.full %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 90, "doors", superordinate),
-    superordinate = ifelse(stim_id == 5, "writing tools", superordinate),
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-
-d.tidy.resps.w.pl.np <- d.tidy.resps.classified.full.adjust.Super %>%
-  rowwise() %>%
-  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-
-# adjust some superordinates
-d.tidy.resps.w.pl.np <- d.tidy.resps.w.pl.np %>%
-  mutate(
-    superordinate.freq = superordinate,
-    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avoid polysemy
-  )
-# this data can be fed into python frequency extractor
-# write_csv(d.tidy.resps.w.pl.np, '../data/class-elicitation-prereg-final/class-elicitation-final-full_analysis_w_pl_np.csv'
-
-
-df.frequencies <- read_csv("../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
-d.tidy.phrase.w.original.mode.pl <- d.tidy.resps.w.pl.np %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree)
-  ) # add superordinate frequencies
-
-df.mode.final <- d.tidy.phrase.w.original.mode.pl %>%
-  select(workerid, stim_id, degree, superordinate.freq, adj, adj_polarity, np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y) %>%
-  mutate(superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl, response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y) %>%
-  select(workerid, stim_id, degree, superordinate_pl, adj, adj_polarity, NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq)
-# write_csv(df.mode.final, "../data/class-elicitation-prereg-final/full-classified-data-w-freqs.csv")
-```
-
-## Hand-classified Responses as Superordinates
-
-Here, a dataframe including the full processed data is created, but all hand-classified responses are marked as superordinate (i.e. speicific = 0). The classification of some items where the superordinate (e.g. boat) occurs in the composite subordinate (e.g. rowing boat) and hence was automatically classified as both specific and superordinate (because we match responses to NPs and vice versa) is also corrected. 
-``` {r}
-d.HandClassified.marked.as.Super <- anti_join(
-  d.tidy.phrase.handClassified2, d.scaleResps
-) %>%
-  mutate(specific = 0) %>%
-  select(workerid, stim_id, degree, context_sentence, superordinate,
-    np, np_expectations, adj, adj_polarity, np_match, response,
-    response_lemma = response_lemma_hand, specific, matchingSuper
-  )
-
-# create a df where all hand-calssified items are treated as superordinates
-d.tidy.resps.full.handClassified.as.super <- rbind(d.AutoClassified, d.HandClassified.marked.as.Super)
-
-d.tidy.resps.full.handClassified.as.super <- d.tidy.resps.full.handClassified.as.super %>% mutate(
-  specific = ifelse(response == "berries", 0, specific),
-  specific = ifelse(response == "boat", 0, specific),
-  specific = ifelse(response == "bird", 0, specific),
-  specific = ifelse(response == "building", 0, specific),
-  specific = ifelse(response == "cake", 0, specific),
-  specific = ifelse(response == "concert", 0, specific),
-  specific = ifelse(response == "flower", 0, specific),
-  specific = ifelse(response == "guitar", 0, specific)
-)
-```
-
-### Frequencies 
-Some of the superordinates (for item 5 and 77) are corrected according to the empirical modal responses that were manually extracted and used in the adjective endorsement task.
-The responses that still are marked as specific were all matched automatically and are coerced to the NPs, all the superordinate responses are coerced to the updated superordinates. Plural NPs are created and some superordinates are adjusted to avoid polysemy in order to extract frequencies. The corresponding subordinate and superordinate frequencies are appendes to each data point. 
-The result of these processing steps is a dataframe containing the full processed data, where the responses automatically classified as specific are marked so, and all the other responses are marked as superordinate. Each response is coerced to either the NP or the superordinate, respectively.  
-``` {r}
-d.tidy.resps.full.handClassified.as.super.adjust <- d.tidy.resps.full.handClassified.as.super %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 90, "doors", superordinate),
-    superordinate = ifelse(stim_id == 5, "writing tools", superordinate),
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-# data frame with hand classified responses being a priori superordinates
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <- d.tidy.resps.full.handClassified.as.super.adjust %>%
-  rowwise() %>%
-  mutate(np_pl = insert_plural_np(tolower(np), superordinate))
-
-d.tidy.resps.full.handClassified.as.super.adjust.w.freq <-
-  d.tidy.resps.full.handClassified.as.super.adjust.w.freq %>%
-  mutate(
-    superordinate.freq = superordinate,
-    superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
-    superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avois polysemy
-  ) %>%
-  left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
-  left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>%
-  mutate(
-    degree = ifelse(degree == "length_duration", "length", degree)
-  ) %>%
-  select(workerid, stim_id, degree,
-    superordinate_pl = superordinate.freq,
-    adj, adj_polarity, NP_sg = np, NP_pl = np_pl, np_expectations,
-    response = mode_np, specific, subFreq = Frequencies.x, superFreq = Frequencies.y
-  )
-# write_csv(d.tidy.resps.full.handClassified.as.super.adjust.w.freq, '../data/class-elicitation-prereg-final/full-classified-data-w-handResps-as-super.csv')
-```
 
 ## Modal Superordinate Responses
 The responses that were not processed automatically are inspected in detail to find responses systematically deviating from the anticipated ones. 
