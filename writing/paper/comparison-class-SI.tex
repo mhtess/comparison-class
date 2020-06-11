@@ -197,9 +197,15 @@ We then continued collecting data on the items that received variable responses,
 This procedure allowed us to focus resources on providing better estimates for the items with more intra-item variability in responses. 
 This adaptive procedure was decided ahead of time and is documented in the pre-registration report. 
 
-\subsubsection{Text Processing}
+\subsubsection{Response preprocessing}
 
 In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
+We excluded responses that did not make sense given the context.
+These included but were not limited to responses that were the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 440 in total (1.6\%). 
+
+\subsubsection{Response analysis}
+
+We preformed an automatic analysis of the comparison class responses by checking whether or not the preprocessed responses  contained the subordinate NP presented in the experiment (e.g., \emph{basketball player}) as a substring or whether the subordinate NP presented in the experiment contained the response as a substring. 
 
 \subsubsection{Supplementary data analysis}
 
