@@ -28,18 +28,7 @@ library(brms)
 library(stringr)
 theme_set(theme_few())
 
-# check matching between strings
-containsString_responses <- function(strng, substrng, clean_str, us_substr) {
-  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
-    ifelse(length(strsplit(us_substr, clean_str)[[1]]) > 1, 1, 0)
-  ))
-}
 
-containsString <- function(strng, substrng) {
-  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
-    ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
-  ))
-}
 ```
 
 ## Load data
@@ -100,6 +89,11 @@ df.memory %>%
   group_by(n_correct) %>%
   count() %>%
   kable()
+
+df.memory %>%
+  group_by(pass_memory) %>%
+  count() %>%
+  kable()
 ```
 
 
@@ -147,7 +141,7 @@ d.item.count %>%
 
 # Text preprocessing
 
-## Invalid Responses: Nonsense 
+## Exclusions
 
 ### Nonsense
 
@@ -167,7 +161,6 @@ invalid.responses <- c(
   "eric", "gabriel", "anthony", "william", "john", "tom", "lucas",
   "michael", "cameron", "stephen",
   "lee", "greg", "robert", "chrales", "gary", "josh", "simon",
-  # female names
   "angela", "jennifer", "monica", "melinda", "veronica", "alicia",
   "maya", "sophie", "kim", "laura", "julia",
   "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
@@ -240,10 +233,15 @@ n.valid.responses <- d.tidy.resp.valid %>%
   pull(n)
 
 n.total.responses - n.valid.responses
-
+(n.total.responses - n.valid.responses) / n.total.responses
 ```
 
-## Basic Corrections: Misspellings, Lemmatization, Synonyms
+
+### Reference failure
+
+INSERT REF FAILURE EXCLUSIONS HERE
+
+## Corrections: Misspellings, Lemmatization, Synonyms
 
 ### Misspelling Correction
 
@@ -281,6 +279,7 @@ synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
 ```
 
 
+
 ```{r apply corrections}
 d.tidy.resp.valid %>%
   mutate(response = as.character(response)) %>%
@@ -288,6 +287,14 @@ d.tidy.resp.valid %>%
   mutate(
     response_spelling = str_replace_all(tolower(response), misspellings_set),
     response_synonym = str_replace_all(response_spelling, synonym_set),
+    # ITEM-SPECIFIC SYNONYMS
+    response_synonym = case_when(
+        (stim_id == 25 && response_synonym == "episode") ~ "sitcom",
+        (stim_id == 28 && response_synonym == "episode") ~ "podcast episode",
+        (stim_id == 29 && response_synonym == "rock") ~ "rock concert",
+        (stim_id == 81 && response_synonym == "cans") ~ "trash can",
+        TRUE ~ response_synonym
+      ),
     response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
   ) %>%
   mutate(
@@ -296,6 +303,7 @@ d.tidy.resp.valid %>%
     corrected_lemma = response_synonym != response_lemma
   ) -> d.tidy.resp.valid.lemmatized
 
+
 sum(d.tidy.resp.valid.lemmatized$corrected_spelling)
 sum(d.tidy.resp.valid.lemmatized$corrected_spelling) / n.valid.responses
 sum(d.tidy.resp.valid.lemmatized$corrected_synonym)
@@ -303,6 +311,15 @@ sum(d.tidy.resp.valid.lemmatized$corrected_synonym) / n.valid.responses
 sum(d.tidy.resp.valid.lemmatized$corrected_lemma)
 sum(d.tidy.resp.valid.lemmatized$corrected_lemma) / n.valid.responses
 ```
+
+
+
+testing out item-specific replacements
+```{r}
+# d.tidy.resp.valid %>% filter(response %in% c("episode", "episodes")) %>% View()
+# d.tidy.resp.valid %>% filter(response %in% c("weather")) %>% View()
+```
+
 
 
 ## Match keyword(s) in Responses
@@ -356,9 +373,11 @@ d.tidy.resp.valid.lemmatized.np_match <- d.tidy.resp.valid.lemmatized %>%
     np_match = gsub("patio door", "patio", np_match),
     np_match = gsub("front gate", "front", np_match),
     np_match = gsub("chocolate cake", "chocolate", np_match),
-    np_match = gsub("podcast episode", "podcast", np_match)
+    np_match = gsub("podcast episode", "podcast", np_match)#,
+    #superordinate = ifelse(stim_id == 77, "food", superordinate)
   )
 ```
+
 
 
 # Automatic Classification
@@ -369,36 +388,22 @@ The preprocessed responses are automatically classified into subordinate and sup
 d.tidy.resp.valid.lemmatized.np_match %>%
   rowwise() %>%
   mutate(
-    response_lemma = as.character(response_lemma),
-    cleanedPhrase = paste("_", as.character(response_lemma), "_", sep = ""), # add buffer to allow for split to occur at beginning or end
-    np_match = as.character(np_match),
-    np_match = gsub('\"', "", np_match),
-    np_match_us = paste("_", np_match, "_", sep = ""), # insert underscores for the matching the other way around
-    super_us = paste("_", superordinate, "_", sep = ""),
-    # check if response and seed NP match
-    specific = # ifelse(
-    # catch these responses because otherwise classified as subordinate for "strawberries" etc
-    ifelse(response_lemma == "berries", 0,
-      containsString_responses(
-        as.character(cleanedPhrase),
-        np_match,
-        response_lemma,
-        np_match_us
-      )
-    ),
-    # check if response and anticipated superordinate match
-    matchingSuper = containsString_responses(
-      as.character(cleanedPhrase),
-      as.character(superordinate),
-      response_lemma,
-      super_us
-    )
+    specific = grepl(np_match, response_lemma, fixed = TRUE),
+    super_in_resp = grepl(superordinate, response_lemma, fixed = TRUE),
+    resp_in_super = grepl(response_lemma, superordinate, fixed = TRUE),
+    matchingSuper = ifelse(!specific, super_in_resp || resp_in_super, FALSE)
   ) -> d.tidy.auto
 
-# extract the automatically matched data (out of 26.552 responses (post exclusion) 22.339 are matched )
-d.tidy.auto.match <- d.tidy.auto %>%
-  filter((specific == 1) | (matchingSuper == 1))
+with(d.tidy.auto, table(specific, matchingSuper)) %>% 
+  kable()
 
+# d.tidy.auto %>% 
+#   select(response, response_lemma_us, np_match,  specific, superordinate, super_in_resp, response_lemma, super_us, resp_in_super, matchingSuper) %>%
+#   View()
+
+# extract the automatically classified data
+d.tidy.auto.match <- d.tidy.auto %>%
+  filter(matchingSuper || specific)
 
 n.automatic.responses <- d.tidy.auto.match %>%
   ungroup() %>%
@@ -679,9 +684,10 @@ We thus keep some responses grabbed by this approach on an item-by-item basis.
 
 ``` {r}
 # remove stop words from context sentences
+library(tidytext)
 d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
   mutate(clean_context_sentence = as.character(context_sentence)) %>%
-  unnest_tokens(word, clean_context_sentence) %>%
+  tidytext::unnest_tokens(word, clean_context_sentence) %>%
   anti_join(., stop_words, by = ("word")) %>%
   group_by(workerid, trial_num) %>%
   mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
@@ -740,6 +746,7 @@ d.tidy.auto.non_match.grab3.noFailedRef <- d.tidy.auto.non_match.grab3 %>%
 
 nrow(d.tidy.auto.non_match.grab3) - nrow(d.tidy.auto.non_match.grab3.noFailedRef)
 ```
+
 The data without reference-failed responses is manually classified into the following types of comparison classes:
 - subordinate ('sub')
 - superordinate ('super')
@@ -961,6 +968,7 @@ d.nonMatch.adjustSuper.filter.w.freqs <- d.nonMatch.adjustSuper.filter.w.freqs %
 ## Full Data with Common Superordinates
 
 Here, a dataframe containing the full processed data where the superordinates are the common superordinates extracted above by the 3-participants rule is created. Hence, the subordinate responses are coerced to the NPs and the superordinate responses are either unchanged if at least three such responses were produced for the respective item or coerced to the anticipated superordinate. The respective subordinate and superordiunate frequencies are added to each data point.
+
 ``` {r}
 # create full df with produced grab-3 superordinates
 
@@ -974,413 +982,4 @@ d.tidy.auto.classified.w.frequency %>%
   rbind(., d.nonMatch.adjustSuper.filter.w.freqs) -> d.full.w.produced.super
 
 # write_csv(d.full.w.produced.super, "../data/class-elicitation-prereg-final/full-classified-data-w-produced-super.csv")
-```
-
-
-# Visualisations
-
-```{r}
-
-d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>%
-  group_by(np_expectations, adj_polarity) %>%
-  tidyboot_mean(column = specific)
-
-d.tidy.phrase.specificMarking.bs.item <- d.tidy.clean.responses %>%
-  group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
-  tidyboot_mean(column = specific)
-
-d.tidy.phrase.specificMarking.bs %>%
-  ungroup() %>%
-  mutate(
-    np_expectations = gsub('\"', "", np_expectations),
-    adj_polarity = gsub('\"', "", adj_polarity),
-    np_expectations = factor(np_expectations,
-      levels = c("low", "medium", "high")
-    )
-  ) -> d.tidy.phrase.specificMarking.bs
-
-d.tidy.phrase.specificMarking.bs.item %>%
-  ungroup() %>%
-  mutate(unique_id = paste(stim_id, np_expectations, sep = "-")) %>%
-  mutate(np_expectations = factor(np_expectations,
-    levels = c("low", "medium", "high")
-  )) -> d.tidy.phrase.specificMarking.bs.item
-
-# save(d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData")
-load(file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData") # d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file =
-
-set.seed(2020)
-
-d.tidy.phrase.specificMarking.bs.item %>%
-  left_join(
-    .,
-    data.frame(
-      unique_id = unique(d.tidy.phrase.specificMarking.bs.item$unique_id),
-      jitterVal = runif(270, min = -0.07, max = 0.07)
-    )
-  ) %>%
-  mutate(
-    jitterVal = jitterVal + ifelse(adj_polarity == "positive", 0.2, -0.2)
-  ) %>%
-  ggplot(
-    .,
-    aes(
-      x = as.numeric(np_expectations) + jitterVal, y = mean,
-      ymin = ci_lower, ymax = ci_upper, fill = adj_polarity
-    )
-  ) +
-  geom_col(
-    data = d.tidy.phrase.specificMarking.bs,
-    aes(
-      x = np_expectations, y = mean,
-      ymin = ci_lower, ymax = ci_upper, fill = adj_polarity
-    ),
-    position = position_dodge(0.8), width = 0.8, alpha = 0.6, color = "black", size = 1
-  ) +
-  geom_point( # position = position_dodge(0.8),
-    # position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-    # data = d.tidy.phrase.specificMarking.bs.item,
-    # aes( y = mean, fill = adj_polarity, x = np_expectations),
-    shape = 21, alpha = 0.8
-  ) +
-  geom_path(aes(group = unique_id),
-    # position = position_dodge(0.8),
-    alpha = 0.15
-  ) +
-  geom_linerange(
-    data = d.tidy.phrase.specificMarking.bs,
-    aes(
-      x = np_expectations, y = mean,
-      ymin = ci_lower, ymax = ci_upper
-    ),
-    position = position_dodge(0.8), color = "black", size = 1.5
-  ) +
-  scale_fill_brewer(palette = "Set3") +
-  theme( # axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
-    # axis.title.x = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
-    axis.line = element_line(colour = "black")
-  ) +
-  guides(fill = guide_legend(title = "Adjective polarity", reverse = T)) +
-  # theme_black()+
-  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1)) +
-  ylab("Proportion paraphrases that contain Specific NP") +
-  xlab("Subordinate Category General Expectations")
-
-ggsave(
-  filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf",
-  width = 6, height = 4
-)
-
-# save(d.tidy.phrase.specificMarking.bs.item, file = "d_comparisonClass_specific_bs_item.RData")
-```
-
-
-```{r}
-# look at data matched automatically by-item
-d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
-  # mutate() %>%
-  group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
-  mean(specific)
-
-d.tidy.phrase.specificMarking.bs %>%
-  ungroup() %>%
-  mutate(
-    np_expectations = gsub('\"', "", np_expectations),
-    adj_polarity = gsub('\"', "", adj_polarity),
-    np_expectations = factor(np_expectations,
-      levels = c("low", "medium", "high")
-    )
-  ) %>%
-  ggplot(
-    .,
-    aes(
-      x = np_expectations, y = mean,
-      ymin = ci_lower, ymax = ci_upper, fill = adj_polarity
-    )
-  ) +
-  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.6, color = "black", size = 1) +
-  geom_point(
-    position = position_jitterdodge(jitter.width = 0.2, jitter.height = 0),
-    data = d.tidy.phrase.specificMarking.bs.item,
-    aes(y = mean, fill = adj_polarity, x = np_expectations),
-    shape = 21, alpha = 0.8
-  ) +
-  geom_linerange(position = position_dodge(0.8), color = "black", size = 1) +
-  scale_fill_brewer(palette = "Set3") +
-  theme( # axis.text.x = element_text(angle = 45, hjust = 1.0, vjust = 1),
-    # axis.title.x = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
-    axis.line = element_line(colour = "black")
-  ) +
-  # theme_black()+
-  scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1)) +
-  ylab("Proportion paraphrases that contain Specific NP") +
-  xlab("Subordinate Category General Expectations")
-
-# ggsave(filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars.pdf",
-#        width = 6, height = 4)
-```
-
-## By-item plots
-
-```{r figIndivItems}
-select.items <- d.tidy.phrase.specificMarking.bs.item %>%
-  select(degree, np, stim_id, superordinate, np_expectations, adj_polarity, mean) %>%
-  rowwise() %>%
-  mutate(degree = first(strsplit(degree, "_")[[1]])) %>%
-  spread(adj_polarity, mean) %>%
-  mutate(delta = positive - negative) %>%
-  ungroup() %>%
-  group_by(degree, stim_id, superordinate) %>%
-  summarize(mean_delta = mean(abs(delta)))
-
-select.items %>%
-  group_by(degree) %>%
-  mutate(
-    max_val = max(mean_delta),
-    min_val = min(mean_delta)
-  ) %>%
-  ungroup() %>%
-  filter(mean_delta == max_val | mean_delta == min_val) %>%
-  pull(stim_id) -> select.item.ids
-
-# swap tall/short people with tall/short flowers
-select.item.ids <- c(select.item.ids[select.item.ids != 17], 18)
-
-# 17 for 18
-
-# select.items[with(select.items, order(mean_delta)), ][seq(1, 90, 3), ]
-
-d.tidy.phrase.specificMarking.bs.item %>%
-  filter(stim_id %in% select.item.ids) %>%
-  ungroup() %>%
-  rowwise() %>%
-  mutate(degree = first(strsplit(degree, "_")[[1]])) %>%
-  ungroup() %>%
-  mutate(
-    np_expectations = gsub('\"', "", np_expectations),
-    adj_polarity = gsub('\"', "", adj_polarity),
-    np_expectations = factor(np_expectations,
-      levels = c("low", "medium", "high")
-    ),
-    np = fct_reorder(np, as.numeric(np_expectations)),
-    item_set = paste(degree, " - ", superordinate, "-", stim_id, sep = ""),
-    item_name = paste(superordinate, " (", degree, ")", sep = ""),
-    item_name = factor(item_name),
-    item_set = factor(item_set),
-    item_name = fct_reorder(item_name, as.numeric(item_set))
-  ) %>%
-  ggplot(
-    .,
-    aes(x = np, y = mean, fill = adj_polarity)
-  ) +
-  geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = "black") +
-  geom_linerange(aes(ymin = ci_lower, ymax = ci_upper),
-    position = position_dodge(0.8), color = "black"
-  ) +
-  scale_fill_brewer(palette = "Set3") +
-  theme(
-    axis.text.x = element_text(angle = 30, hjust = 0.8, vjust = 0.85),
-    # axis.title.x = element_blank(),
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
-    axis.line = element_line(colour = "black"),
-    legend.position = "bottom"
-  ) +
-  facet_wrap(~item_name, scales = "free", nrow = 4) +
-  # theme_black()+
-  scale_y_continuous(limits = c(-0.02, 1.02), breaks = c(0, 0.5, 1)) +
-  guides(fill = guide_legend(title = "Adjective polarity", reverse = T)) +
-  ylab("Proportion paraphrases that contain Specific NP") +
-  xlab("Specific Category") #-> bars_cc_finalExpt_prereg_confident_byItem
-
-# ggsave("../analysis/figs/bars_cc_finalExpt_pilot_byItem.png",
-#        width = 9, height = 9)
-ggsave(
-  filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_byItem.pdf",
-  width = 15, height = 10
-)
-```
-
-# Regression modeling
-
-### Simulate data to get contrast coding right
-
-```{r}
-simulated.data <- bind_rows(
-  data.frame(
-    np = "mid",
-    adj = "short",
-    x = rnorm(n = 20, mean = 1, sd = 0.5)
-  ),
-  data.frame(
-    np = "mid",
-    adj = "tall",
-    x = rnorm(n = 20, mean = 1, sd = 0.5)
-  ),
-  data.frame(
-    np = "low",
-    adj = "short",
-    x = rnorm(n = 20, mean = 0.5, sd = 0.5)
-  ),
-  data.frame(
-    np = "low",
-    adj = "tall",
-    x = rnorm(n = 20, mean = 1.5, sd = 0.5)
-  ),
-  data.frame(
-    np = "high",
-    adj = "short",
-    x = rnorm(n = 20, mean = 1.5, sd = 0.5)
-  ),
-  data.frame(
-    np = "high",
-    adj = "tall",
-    x = rnorm(n = 20, mean = 0.5, sd = 0.5)
-  )
-) %>%
-  mutate(
-    np = factor(np, levels = c("mid", "low", "high")),
-    adj = factor(adj, levels = c("short", "tall"))
-  )
-
-simulated.data.means <- simulated.data %>%
-  group_by(np, adj) %>%
-  summarize(m = mean(x))
-
-simulated.data.means %>%
-  ggplot(., aes(x = np, y = m, fill = adj)) +
-  geom_col(position = position_dodge())
-
-
-contrasts(simulated.data$adj) <- c(-0.5, 0.5)
-
-contrasts(simulated.data$np)
-
-lm.sim <- lm(x ~ np * adj, data = simulated.data)
-
-lm.sim.summ <- summary(lm.sim)
-
-sim.int <- lm.sim.summ$coefficients[["(Intercept)", "Estimate"]]
-sim.beta_adj <- lm.sim.summ$coefficients[["adj1", "Estimate"]]
-sim.beta_npLow <- lm.sim.summ$coefficients[["nplow", "Estimate"]]
-sim.beta_npHigh <- lm.sim.summ$coefficients[["nphigh", "Estimate"]]
-sim.beta_npLow_adj <- lm.sim.summ$coefficients[["nplow:adj1", "Estimate"]]
-sim.beta_npHigh_adj <- lm.sim.summ$coefficients[["nphigh:adj1", "Estimate"]]
-
-print(
-  paste(
-    "actual mean of MID tall",
-    simulated.data.means %>% filter(np == "mid", adj == "tall") %>% pull(m),
-    "model prediction",
-    sim.int + 0.5 * sim.beta_adj
-  )
-)
-
-print(
-  paste(
-    "actual mean of MID short",
-    simulated.data.means %>% filter(np == "mid", adj == "short") %>% pull(m),
-    "model prediction",
-    sim.int - 0.5 * sim.beta_adj
-  )
-)
-
-print(
-  paste(
-    "actual mean of HIGH tall",
-    simulated.data.means %>% filter(np == "high", adj == "tall") %>% pull(m),
-    "model prediction",
-    sim.int + 0.5 * sim.beta_adj + sim.beta_npHigh + 0.5 * sim.beta_npHigh_adj
-  )
-)
-
-print(
-  paste(
-    "actual mean of HIGH short",
-    simulated.data.means %>% filter(np == "high", adj == "short") %>% pull(m),
-    "model prediction",
-    sim.int - 0.5 * sim.beta_adj + sim.beta_npHigh - 0.5 * sim.beta_npHigh_adj
-  )
-)
-
-print(
-  paste(
-    "actual mean of LOW tall",
-    simulated.data.means %>% filter(np == "low", adj == "tall") %>% pull(m),
-    "model prediction",
-    sim.int + 0.5 * sim.beta_adj + sim.beta_npLow + 0.5 * sim.beta_npLow_adj
-  )
-)
-
-print(
-  paste(
-    "actual mean of LOW short",
-    simulated.data.means %>% filter(np == "low", adj == "short") %>% pull(m),
-    "model prediction",
-    sim.int - 0.5 * sim.beta_adj + sim.beta_npLow - 0.5 * sim.beta_npLow_adj
-  )
-)
-```
-
-
-#### Full model
-
-
-```{r}
-d.tidy.clean.responses.fac <- d.tidy.clean.responses %>%
-  mutate(
-    adj_polarity = factor(adj_polarity,
-      levels = c("negative", "positive")
-    ),
-    np_expectations = factor(np_expectations,
-      levels = c("medium", "low", "high")
-    )
-  )
-
-d.tidy.clean.responses.fac$stim_id <- as.factor(d.tidy.clean.responses.fac$stim_id)
-d.tidy.clean.responses.fac$workerid <- as.factor(d.tidy.clean.responses.fac$workerid)
-
-contrasts(d.tidy.clean.responses.fac$adj_polarity) <- c(-1 / 2, 1 / 2)
-
-rs.glm.brm <- brm(
-  formula = specific ~ np_expectations * adj_polarity +
-    (1 + np_expectations * adj_polarity | workerid) +
-    (1 + np_expectations * adj_polarity | stim_id),
-  family = bernoulli(), chains = 3, cores = 3, iter = 1000,
-  data = d.tidy.clean.responses.fac
-)
-
-
-rs.glm.brm.summary <- summary(rs.glm.brm)
-
-rs.glm.brm.summary
-```
-
-```{r}
-write_csv(data.frame(rs.glm.brm.summary[["fixed"]]) %>%
-  mutate(Rowname = row.names(.)),
-path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv"
-)
-```
-
-
-#### Simple effects
-
-
-```{r}
-rs.glm <- glmer(
-  formula = specific ~ np_positiveness * adj_positiveness +
-    (1 | workerid) +
-    (1 | superordinate),
-  family = "binomial",
-  data = d.tidy.phrase.w.original.fac
-)
-
-contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
-
-summary(rs.glm)
 ```
