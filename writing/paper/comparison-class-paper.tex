@@ -430,7 +430,7 @@ Though an intuitive pattern, this reasoning requires a listener separating the c
 We test the model prediction that the comparison class can be flexibly adjusted based on world knowledge and pragmatic principles in a large-scale, web-based free-production experiment.
 In the experiment, participants rephrase a speaker's statement which involves a scalar adjective in a way that makes the comparison class explicit.
 We measure comparison class inferences using a free-production measure to provide further ecological validity to our measurements of comparison classes: We wish to see if listeners spontaneously adjust their comparison class depending on world knowledge and pragmatic reasoning.
-A smaller-scale, forced-choice version of this task was reported in \citeA{tessler2017warm}.%; here, we conduct a free-production version of this task in order test whether the comparison classes are spontaneously inferred by participants.
+A smaller-scale, forced-choice version of this task was reported in \citeA{tessler2017warm}. %; here, we conduct a free-production version of this task in order test whether the comparison classes are spontaneously inferred by participants.
 Additionally, we measure truth judgments for statements involving scalar adjectives and an explicit comparison class as a norming measure of world knowledge that we use in our quantitative modeling (see SI).
 %We model both data sets using the same RSA architecture.
 Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered for the Comparison Class Inference task: \url{osf.io/xuc96}.
@@ -574,7 +574,7 @@ Participants were restricted to those with U.S. IP addresses with at least a 95\
 In addition, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants (see SI). 
 Participants who fail this check are required to exit the experiment before completing the task, and so we do not have an estimate for how many participants fail this check. 
 
-\red{describe other exclusion criteria}
+%\red{describe other exclusion criteria}
 
 \subsubsection{Materials}
 
@@ -642,8 +642,11 @@ Categories were curated from a set of empirically elicited noun phrases (Experim
 \subsubsection{Procedure}
 
 %Following the language comprehension test (described above), participants read instructions about the task. 
-In a warm-up trial, participants were told they they would be asked to rephrase something a person said:  the person said a word that is relative and their task was to figure out what the word was relative to. They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked to fill-in a sentence with the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). Participants were told to fill in the blank with a group or category that makes the most sense and to use their common sense.
-Responses to this warm-up trial were used as a basis for exclusion (any response other than buildings, structures, towers, skyscrapers, etc.). 
+The experiment began with a warm-up trial that was designed to convey the idea of comparison class inference. 
+%Participants were told they they would be asked to rephrase a relative statement that somebody made and the their task was to figure out what the speaker meant  was relative to. 
+They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked \emph{What do you think John meant?}; participants responded by filling-in a sentence with the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). 
+%Participants were told to fill in the blank with a group or category that makes the most sense and to use their common sense.
+Invalid responses to this warm-up trial were used as a basis for exclusion (see SI).
 
 %On each trial, participants were given a context sentence to introduce
 %the subordinate category (e.g., \emph{Tanya lives in Maryland and
@@ -661,8 +664,8 @@ They're tall relative to other \_\_\_\_\_\_.
 
 We used the word ``other'' to invoke the presupposition that the referent is a member of the comparison class. Pilot testing suggesting that omitting this word invoked many direct comparisons to singular entities (e.g., \emph{They're tall relative to their short friend}), which were wildly heterogeneous in nature. 
 
-At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
-This memory check trial was also used as a basis for exclusion. 
+%At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
+%This memory check trial was also used as a basis for exclusion. 
 
 \begin{figure}[t!]
 \centering
@@ -673,17 +676,17 @@ This memory check trial was also used as a basis for exclusion.
 
 \subsection{Results}
 
-Participants were excluded if they either responded incorrectly to the warm-up trial (answering something other than \emph{buildings}, \emph{skyscrapers}, \emph{structures} or the like) or answered fewer than 7 out of 10 memory check questions accurately.\footnote{Incorrect responses to the warm-up trial were most often indicative of copying some part of the text on the screen and pasting it into the response box (e.g., responding with the name of the speaker, just putting the adjective ``tall'', or responding with a whole sentence without a comparison class ``that is tall'').}
+Participants were excluded if they either responded incorrectly to the warm-up trial (answering something other than \emph{buildings}, \emph{skyscrapers}, \emph{structures} or the like) or answered fewer than 7 out of 10 memory check questions accurately (see SI for details).
 750 participants (89.6\%) remained after these exclusion criteria, for a total of 27,000 responses.
 We additionally excluded nonsensical responses: these were primarily responses that just listed the name of the speaker, the adjective alone, or restated the full adjectival sentence (e.g., ``It is tall'') and numbered 420 (1.56\%) in total, leaving 26,580 codeable responses. 
-We processed the responses by correcting for misspellings, lemmatizing, and collapsing across synonyms. 
+We processed the responses by correcting for misspellings  (569; 2.14\%), lemmatizing (867, 3.28\%), and collapsing across synonyms (323, 1.22\%; see SI for details). 
 
-\subsubsection{Preprocessing}
+%\subsubsection{Preprocessing}
 
-In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
+%In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
 
 Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate noun phrase by which the referent is introduced (\emph{subordinate-NP}, e.g., a basketball player) or a more superordinate category (\emph{superordinate-NP}). 
-We automatically categorize responses as either subordinate or superordinate by checking whether the preprocessed response contains the subordinate-NP or superordinate-NP\footnote{Some of our pre-designated superordinate-NPs turned out to be incorrect guesses as to what would be the most salient superordinate category in the context. These cases were all very clear, and we replaced our pre-designated superordinate-NPs with the empirical superordinate-NP for purposes of analysis.} as a substring, respectively. \footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response. 
+We automatically categorize responses as either subordinate or superordinate by checking whether the preprocessed response contains the subordinate-NP or superordinate-NP\footnote{Some of our pre-designated superordinate-NPs turned out to be incorrect guesses as to what would be the most salient superordinate category in the context. These cases were all very clear, and we replaced our pre-designated superordinate-NPs with the empirical superordinate-NP for purposes of analysis.} as a substring, respectively.\footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response. 
 For example, \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}. Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses contained any.}
 22161 (83.4\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set. 
 %\red{For example, in response to  \{basketball players, golfers, jockeys\} are \{tall, short\}, \textbf{X\%} of participants produced either one of the three specific NPs or the more general \emph{people}}. \mht{[how common is athlete here?]}
@@ -692,11 +695,10 @@ Of the remaining 4394 (16.6\%) responses, 1966 were unique.
 We hand-annotated these remaining responses; the main results and conclusions are consistent when analyzing the full data set (see SI).
 
 
-
-
 \subsubsection{Regression analysis}
+
 Our primary hypothesis was that usage of a subordinate~vs.~superordinate comparison class would be influenced via an interaction between the general expectations about the category and the polarity of the adjective (Figure \ref{fig:ccInferenceItems}), which we tested with a maximal Bayesian mixed-effects model.\footnote{
-	For the regression analysis, we predict subrodinate-NP paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure. The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
+	For the regression analysis, we predict subordinate-NP paraphrases as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure. The model is subordinate\_inference $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
 } 
 %As predicted by the comparison class inference model, listener inferences about the comparison class were influenced via an interaction between the general expectations about the subordinate category and the adjective polarity , which 
 %We confirmed 

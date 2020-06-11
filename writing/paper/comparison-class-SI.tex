@@ -14,12 +14,16 @@
 %\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
 %\DeclareLanguageMapping{american}{american-apa}
 
-  \title{Supplemental Information: Warm (for Winter): Inferring comparison classes for scalar adjectives}
-    \author{Michael Henry Tessler and Noah D. Goodman}
-    \date{}
+  \title{Supplemental Information\\ 
+  Warm (for Winter): Inferring comparison classes for scalar adjectives}
+    \author{Michael Henry Tessler\textsuperscript{1,2} and Noah D. Goodman\textsuperscript{2}}    \date{}
   
 \shorttitle{ SI: Inferring comparison classes}
-\affiliation{Stanford University}
+\affiliation{
+\vspace{0.5cm}
+
+\textsuperscript{1}Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology \\\textsuperscript{2}Department of Psychology, Stanford University}
+
 \keywords{comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: X}
 \makeatletter
 \newcommand\LastLTentrywidth{1em}
@@ -32,6 +36,54 @@
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{booktabs}
+\usepackage{pgfplotstable}
+\usepackage{csvsimple}
+\usepackage{siunitx}
+
+% set the name of the folder in which the CSV files with 
+% information from R is stored
+\newcommand{\datafoldername}{csv_data_4_tex}
+
+% the following code defines the convenience functions
+% as described in the main text below
+
+% rlgetvalue returns whatever is the in cell of the CSV file
+% be it string or number; it does not format anything
+\newcommand{\rlgetvalue}[4]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\myvalue}}
+
+% rlgetvariable is a shortcut for a specific CSV file (myvars.csv) in which
+% individual variables that do not belong to a larger chunk can be stored
+\newcommand{\rlgetvariable}[1]{\csvreader[]{\datafoldername/myvars.csv}{#1=\myvar}{\myvar}\xspace}
+
+% rlnum format a decimal number
+\newcommand{\rlnum}[2]{\num[output-decimal-marker={.},
+                             exponent-product = \cdot,
+                             round-mode=places,
+                             round-precision=#2,
+                             group-digits=false]{#1}}
+
+\newcommand{\rlnumsci}[2]{\num[output-decimal-marker={.},
+                          scientific-notation = true,
+                             exponent-product = \cdot,
+                             round-mode=places,
+                             round-precision=#2,
+                             group-digits=false]{#1}}
+
+\newcommand{\rlgetnum}[5]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnum{\myvalue}{#5}}}
+
+\newcommand{\rlgetnumsci}[5]{\csvreader[filter strcmp={\mykey}{#3},
+             late after line = {{,}\ }, late after last line = {{}}]
+            {\datafoldername/#1}{#2=\mykey,#4=\myvalue}{\rlnumsci{\myvalue}{#5}}}
+
+\newcommand{\lmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\), t\((\rlgetnum{#1}{Rowname}{#2}{df}{0}) = \rlgetnum{#1}{Rowname}{#2}{t.value}{2}, p = \rlgetnum{#1}{Rowname}{#2}{Pr...t..}{3}\)}
+
+\newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\) (\rlgetnum{#1}{Rowname}{#2}{l.95..CI}{3}, \rlgetnum{#1}{Rowname}{#2}{u.95..CI}{3})}
+
+\newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2} (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2})}
 
 \begin{document}
 \maketitle
@@ -47,6 +99,136 @@
 \newcommand{\ndg}[1]{\textcolor{Green}{[ndg: #1]}}  
 \newcommand{\mht}[1]{\textcolor{Blue}{[mht: #1]}}  
 \newcommand{\mlb}[1]{\textcolor{Orange}{[mlb: #1]}}
+
+%\appendix
+%\renewcommand\thefigure{\thesection.\arabic{figure}}  
+
+%\section{Document Overview}
+%\renewcommand{\thepage}{S\arabic{page}}  
+%\renewcommand{\thesection}{S\arabic{section}}   
+\renewcommand{\thetable}{S\arabic{table}}   
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+Here we present additional information about methods, results, and cognitive models. Readers who are interested in the model code and analysis code are encouraged to consult the associated online repository: \url{https://github.com/mhtess/comparison-class}.
+
+
+%The following sections present details on the analyses used to evaluate whether the different experimental manipulations produced different responses. 
+%For all generalized linear mixed models (GLMM) we used the maximally converging random effects structure.
+
+
+
+
+\section{Overview of Tasks}
+
+Our experimental procedures involve three coordinated experiments to (1) elicit test stimuli, (2) measure comparison class inferences and (3) measure adjective endorsements to facilitate model comparison (Figure \ref{fig:exptOverview}). 
+In Task 1, we empirically elicit test stimuli by having participants fill out phrasal templates that elicit sets of categories at the same level of abstraction, which differ in the general expectations participants have about those categories (e.g., basketball players [generally tall], jockeys [generally short], soccer players [sometimes tall and sometimes short]). 
+From this set, we curate a set of experimental stimuli which we use in the other two tasks.
+Task 2 is the comparison class inference experiment described in the main text; this task is designed to test the qualitative predictions shown in Figure 1E.
+Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that constrain model parameters to test the quantitative predictions of the comparison class inference model and quantitatively arbitrate between alternative models. 
+%We use Bayesian data analysis to jointly model data from the Comparison Class Inference and Adjective Endorsement tasks, based on latent world knowledge that affects both tasks.
+
+\section{Experimental Methods}
+
+\subsection{Bot check}
+
+In all tasks, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants. 
+The test involved a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. 
+Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
+Speaker and listener names were randomized in a way that could not be read off the source .html file.
+Participants were given three attempts to correctly identify the listener. 
+If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
+Since participants who fail this test are not allowed to proceed with the experiment, we do not have a count of how many participants fail this check.
+
+\subsection{Stimuli Generation Task (Task 1)}
+
+In this task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing noun phrases which appeared in the grammatical subject of the sentence were described as either generally having one adjective apply to them (e.g., \emph{\_\_\_ are generally big}; \emph{\_\_\_ are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{\_\_\_ are sometimes big and sometimes small}). 
+Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table 1). 
+
+From this set of 750 responses, we curated a collection of 90 ``item sets'', each of which consists of 3 relatively subordinate level categories that differ in their general expectations about the degree (e.g., Winter, Spring, and Summer, which differ in their general expectations about the typical temperature). In addition, each of these item sets is associated with a common, relatively superordinate level categories (e.g., days of the year).
+
+\begin{figure*}[htb]
+{\centering \includegraphics[width=0.9\textwidth]{figs/expt_overview} }
+\caption{\small Overview of Experimental Tasks. Task 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Task 2: Free-production task to elicit the comparison class. Task 3: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to provide additional data to constrain the parameters of the comparison class inference model. }\label{fig:exptOverview}
+\end{figure*}
+
+
+\subsection{Comparison Class Inference (Task 2)}
+
+In this experiment, we measure comparison class inferences by having participants rephrase a speaker's statement which involves a scalar adjective in a way that makes the comparison class explicit.
+We measure comparison class inferences using a free-production measure to provide further ecological validity to our measurements of comparison classes: We wish to see if listeners spontaneously adjust their comparison class depending on world knowledge and pragmatic reasoning.
+A smaller-scale, forced-choice version of this task was reported in \citeA{tessler2017warm}.  
+Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered: \url{osf.io/xuc96}.
+
+\subsubsection{Participant restrictions and exclusion criteria}
+
+We recruited 837 participants from Amazon's Mechanical Turk. 
+Participants were restricted to those with U.S. IP addresses with at least a 95\% work approval rating. 
+In addition, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants. 
+The test involved reading a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. 
+Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
+Speaker and listener names were randomized in a way that could not be read off the source .html file.
+Participants were given three attempts to correctly identify the listener. 
+If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
+Since participants who fail this check are required to exit the experiment before completing the task, we do not have an estimate for how many participants fail this check. 
+
+In addition to the above restrictions, we excluded participants based on both a task comprehension question appearing before the main trials and a memory check trial appearing after the main trials. 
+In the task comprehension / warm-up trial, participants were told they they would be asked to rephrase something a person said:  the person said a word that is relative and their task was to figure out what the word was relative to. They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked to fill-in a sentence with the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). Participants were told to fill in the blank with a group or category that makes the most sense and to use their common sense.
+Responses to this warm-up trial were used as a basis for exclusion (any response other than buildings, structures, towers, skyscrapers, or any misspellings thereof). 
+Invalid responses to the warm-up trial were most often indicative of copying some part of the text on the screen and pasting it into the response box (e.g., responding with the name of the speaker, just putting the adjective ``tall'', or responding with a whole sentence without a comparison class ``that is tall'').
+55 participants were excluded for providing an invalid response to this task comprehension question. 
+
+After the main comparison class inference trials, participants completed a memory check trial asking which adjective--NP combinations appeared on the main trials. 
+At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
+Participants were excluded if they answered fewer than 7 out of 10 memory check questions correctly.
+A total of 59 participants failed this check, though 27 of these also failed the task comprehension check. 
+
+A total of 87 participants were excluded for meeting at least one of these exclusion criteria, leaving a sample of 750 participants for the primary analyses.
+
+\subsubsection{Adaptive data collection procedure}
+
+Our experiment contains 540 unique items (adjective -- NP pairs), which are highly heterogeneous.
+In addition to testing the main qualitative predictions of our models (adjective polarity X category expectations interactions), this experiment was designed to elicit high inter-item variability in comparison class inferneces.
+As a result, we expect some items to exhibit low intra-item variability  (i.e., all or almost all participants respond with the same comparison class); for these items, we would require relatively fewer data points to estimate the parameter of interest -- the probability of a subordinate~vs.~superordinate comparison class -- since it would either be close to ceiling or close to floor. 
+
+We thus used a sequential sampling method that we deployed on an item-wise basis, wherein we paused data collection after collecting 35 responses for each of the 540 items.
+We then analyzed the partial data set on a by-item basis to see which (if any) items had received exceedingly consistent responses, which we defined to be at least 33 out of 35  ($>94\%$ agreement) of the same response. 
+For those items that received exceedingly consistent responses, we stopped data collection at these 35 responses. 
+We then continued collecting data on the items that received variable responses, until we had data from 750 participants after exclusion criteria were applied.
+This procedure allowed us to focus resources on providing better estimates for the items with more intra-item variability in responses. 
+This adaptive procedure was decided ahead of time and is documented in the pre-registration report. 
+
+\subsubsection{Text Processing}
+
+In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
+
+\subsubsection{Supplementary data analysis}
+
+93 of our 540 items (adjective -- noun pairs) had universally consistent lemmatized responses. 
+Of these 93, all but one were cases where 100\% of participants gave a subordinate-NP response. 
+For example, 100\% of valid responses for a ``loud church'' all concerned the subordinate category \emph{church}. 
+The one NP-adj pair that led to all superordinate responses was the ``cheap plastic bracelet'', which all participants said was cheap relative to other \emph{bracelets}. 
+The numeric counts of items that received 100\% subordinate-NP responses mirrors the overall pattern of responses collapsed across items shown in the main text: adjectives that conflict with the general expectations about the category (e.g., a short basketball player) are more likely to receive subordinate-NP comparison class responses (Table \ref{tab:counts}). 
+
+
+
+
+\begin{center}
+  \begin{table}[h]
+    \centering
+    \pgfplotstabletypeset[sci zerofill,
+    col sep = comma,
+    every head row/.style={before row = \toprule, after row = \midrule},
+    every last row/.style={after row = \bottomrule},
+    columns/adjpol/.style={string type, column name={Adjective Polarity}, column type = l},
+    columns/low/.style={string type, column name={low}, column type = l,  sci sep align, precision=3},
+   columns/medium/.style={fixed, column name={medium}, column type = l, dec sep align, precision=4},
+    columns/high/.style={string type, column name={high}, column type = l, sci sep align, precision=3}]{csv_data_4_tex/itemCounts_ceil_floor.csv}\caption{Counts of items that had 100\% subordinate-NP comparison class responses, as a function of the adjective polarity (positive~vs.~negative) and general expectations about the category (low, medium, high).}
+    \label{tab:counts}
+  \end{table}
+\end{center}
+
+
+
 
 \section{Alternative Models}
 
@@ -96,48 +278,6 @@ Further, the inferences of this model, like those of the simpler pragmatics mode
 \ndg{suggest situations where these two models might come apart?}
 
 \ndg{nts: do we compare to this in results? or is it so similar it's not worth it?}
-
-\section{Overview of Tasks}
-
-We first empirically elicit test stimuli by having participants fill out phrasal templates that elicit sets of categories at the same level of abstraction, which differ in general expectations (e.g., basketball players [generally tall], jockeys [generally short], soccer players [sometimes tall and sometimes short]; Task~1). 
-From this set, we curate a set of experimental stimuli which we use in the other two tasks.
-The data from Task 2 allow us to test the qualitative predictions shown in Figure \ref{fig:modelCartoon}E.
-Finally, Task 3 (an adjective endorsement, or truth judgment task) provides additional linguistic judgments that constrain model parameters enough to test the quantitative predictions of the comparison class inference model. 
-We use Bayesian data analysis to jointly model data from the Comparison Class Inference and Adjective Endorsement tasks, based on latent world knowledge that affects both tasks.
-
-\section{Experimental Methods}
-
-\subsection{Exclusion criteria}
-
-Participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants (see SI). 
-The test involved a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. 
-Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
-Speaker and listener names were randomized in a way that could not be read off the source .html file.
-Participants were given three attempts to correctly identify the listener. 
-If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
-
-\subsection{Stimuli Generation Task (Task 1)}
-
-In this task, participants ($n=50$) filled out phrasal templates for adjective pairs (e.g., \emph{big} and \emph{small}), in which three missing subjects were described as either generally having one adjective apply to them (e.g., \emph{Xs are generally big}; \emph{Ys are generally small}) or as sometimes having either adjective apply to them (e.g., \emph{Zs are sometimes big and sometimes small}; see Appendix for more details). 
-Participants filled out one template for each of 15 pairs of adjectives that describe physical dimensions (Table \ref{tab:1}). 
-
-
-\begin{figure*}[htb]
-{\centering \includegraphics[width=0.9\textwidth]{figs/expt_overview} }
-\caption{\small Overview of Experimental Tasks. Task 1: Using a structured production task, we elicit sets of stimuli that all share the feature of containing categories generally judged as having either a positive or negative adjective  (\emph{X, Y}; e.g., big or small) applied to them as well as a control category (\emph{Z}; e.g., sometimes big and sometimes small). The task is designed in a way to elicit three categories of the same basic- or superordinate-level category (\emph{W}). Task 2: Free-production task to elicit the comparison class. Task 3: Forced-choice task where participants judge whether a member of the subordinate level category would be judged as a having the adjective applied explicitly relative to the basic/superordinate level category. This task serves to provide additional data to constrain the parameters of the comparison class inference model. }\label{fig:exptOverview}
-\end{figure*}
-
-
-\subsection{Comparison Class Inference (Task 2)}
-
-\subsubsection{Adaptive data collection procedure}
-
-In this large set of items, we expected many items to have small variance in their judgments, requiring relatively fewer data points to estimate the probability of a subordinate~vs.~superordinate comparison class reliably.
-We thus used a sequential sampling method on an item-wise basis, wherein we paused data collection after collecting 35 responses on each item.
-We then analyzed the partial data set on a by-item basis to see which (if any) items had received exceedingly consistent responses, which we defined to be at least 33 out of 35  ($>94\%$ agreement) of the same response. 
-For those items that received exceedingly consistent responses, we stopped data collection at 35 responses. This procedure allowed us to focus resources on providing better estimates for the items with more variability in responses. 
-This adaptive procedure was decided ahead of time and is documented in the pre-registration report. 
-
 
 
 
