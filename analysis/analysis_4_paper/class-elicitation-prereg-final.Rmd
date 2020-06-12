@@ -239,7 +239,8 @@ n.total.responses - n.valid.responses
 
 ### Reference failure
 
-INSERT REF FAILURE EXCLUSIONS HERE
+Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John sees an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to, some subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for specific words from the contexts. 
+
 ``` {r}
 # remove responses failig to establish correct reference 
 d.tidy.resp.valid.FailedRef <- d.tidy.resp.valid %>%
@@ -746,14 +747,8 @@ nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)
 (nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)) / nrow(d.tidy.auto.non_match)
 ```
 
-Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John sees an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to, some subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for content words from the contexts. 
 
-Simply mentioning another noun in the context sentence is not tantamount to 'reference failure'. For example, some items mention the dimension that the adjective describes (e.g., "the color of a dog"), which would still make appropriate comparison classes (e.g., "dark relative to other fur colors").
-We thus keep some responses grabbed by this approach on an item-by-item basis.
-
---------
-
-The data without reference-failed responses is manually classified into the following types of comparison classes:
+The data is manually classified into the following types of comparison classes:
 - subordinate ('sub')
 - superordinate ('super')
 - super-superordinate ('supersuper'): comparison classes that are more general than the anticipated superordinate categories (e.g. 'things' relative to the anticipated 'musical instruments')
@@ -816,14 +811,15 @@ d.auto.non_match.hand_cc <- d.tidy.auto.non_match.grab3.noFailedRef %>%
         response_hand_lemma == "room" & stim_id == 35 ~ "NA",
         response_hand_lemma == "room" & stim_id == 11 ~ "NA",
         response_hand_lemma == "streets" & stim_id == 37 ~ "NA",
-        response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
-        response_hand_lemma == "weather" & stim_id == 76 ~ "NA",
+        response_hand_lemma == "weather" & stim_id == 76 ~ "NA"
         TRUE ~ hand_cc
       )
   )
 
 # drop the invalid responses classified as "NA"
 d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc == "NA"))
+
+# write_csv(d.auto.non_match.hand_cc.valid, "../data/class-elicitation-prereg-final/full-classified-data-w-hand-class.csv")
 ```
 
 

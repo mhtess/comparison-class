@@ -6,16 +6,28 @@ output: html_document
 ---
 
 
+``` {r}
+# read data
+
+# whatever data needs to go into the regression model
+# uncomment below for automatically classified data only
+# data <- read_csv("../../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+# uncomment below for full classified data
+# data <- read_csv("../data/class-elicitation-prereg-final/full-classified-data-w-hand-class.csv")
+
+# automatically classified data, for viz
+auto_data <- read_csv("../../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+```
 
 # Visualisations
 
 ```{r}
 
-d.tidy.phrase.specificMarking.bs <- d.tidy.clean.responses %>%
+d.tidy.phrase.specificMarking.bs <- data %>%
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
-d.tidy.phrase.specificMarking.bs.item <- d.tidy.clean.responses %>%
+d.tidy.phrase.specificMarking.bs.item <- data %>%
   group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
@@ -109,7 +121,7 @@ ggsave(
 
 ```{r}
 # look at data matched automatically by-item
-d.confident.phrase.specificMarking.bs.item <- d.matchedResponses %>%
+d.confident.phrase.specificMarking.bs.item <- auto_data %>%
   # mutate() %>%
   group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
   mean(specific)
@@ -361,7 +373,7 @@ print(
 
 
 ```{r}
-d.tidy.clean.responses.fac <- d.tidy.clean.responses %>%
+d.tidy.clean.responses.fac <- data %>%
   mutate(
     adj_polarity = factor(adj_polarity,
       levels = c("negative", "positive")
