@@ -240,6 +240,75 @@ n.total.responses - n.valid.responses
 ### Reference failure
 
 INSERT REF FAILURE EXCLUSIONS HERE
+``` {r}
+# remove responses failig to establish correct reference 
+d.tidy.resp.valid.FailedRef <- d.tidy.resp.valid %>%
+  mutate(response = tolower(response)) %>%
+  rowwise() %>%
+  mutate(failed_ref = FALSE,
+         failed_ref = ifelse(grepl("aquarium", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("bank", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("box", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("butchershops", response, fixed = T), TRUE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("butcher shops", response, fixed = T), TRUE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("butchershops' chickens", response, fixed = T),
+                             FALSE, failed_ref),
+         failed_ref = ifelse(grepl("bank", response, fixed = T), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("banks", response, fixed = T), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("creek banks", response, fixed = T), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("river banks", response, fixed = T), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("stream banks", response, fixed = T), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("forest", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("pieces of furniture", response), TRUE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("sounds in the forest", response), TRUE,
+                             failed_ref),
+         failed_ref = ifelse((grepl("furniture", response) & (stim_id == 90)),
+                             TRUE, failed_ref),
+         failed_ref = ifelse((grepl("night", response)& (stim_id == 32)),
+                             TRUE, failed_ref),
+         failed_ref = ifelse(grepl("saturday", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("terrarium", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("google maps", response), TRUE, failed_ref),
+         failed_ref = ifelse((grepl("highway", response) & (stim_id == 62)),
+                             TRUE, failed_ref),
+         failed_ref = ifelse(grepl("kitchen", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("items in the kitchen", response), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("kitchen appliances", response), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("kitchen cooking appliances", response), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("kitchenware", response), FALSE, failed_ref),
+         failed_ref = ifelse(grepl("lake", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("map", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("park", response), TRUE, failed_ref),
+         failed_ref = ifelse(grepl("sound", response), FALSE, failed_ref),
+         failed_ref = ifelse((grepl("weight", response)& (stim_id == 69)), TRUE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("weight lifters", response), FALSE,
+                             failed_ref),
+         failed_ref = ifelse(grepl("weightlifters", response), FALSE,
+                             failed_ref),
+  ) %>% filter((responseLength < 3) & # longer responses contain the target N
+               (failed_ref == TRUE) & 
+               (response != "pieces of furniture")
+               )
+```
+
+``` {r}
+# remove reference failure
+d.tidy.resp.valid.noFailedRef <- anti_join(
+  d.tidy.resp.valid,
+  d.tidy.resp.valid.FailedRef,
+  by = c("stim_id", "response")    ) 
+```
+
 
 ## Corrections: Misspellings, Lemmatization, Synonyms
 
@@ -281,7 +350,7 @@ synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
 
 
 ```{r apply corrections}
-d.tidy.resp.valid %>%
+d.tidy.resp.valid.noFailedRef %>%
   mutate(response = as.character(response)) %>%
   ungroup() %>%
   mutate(
@@ -682,70 +751,7 @@ Some responses fail to establish correct reference, e.g. participants referred t
 Simply mentioning another noun in the context sentence is not tantamount to 'reference failure'. For example, some items mention the dimension that the adjective describes (e.g., "the color of a dog"), which would still make appropriate comparison classes (e.g., "dark relative to other fur colors").
 We thus keep some responses grabbed by this approach on an item-by-item basis.
 
-``` {r}
-# remove stop words from context sentences
-library(tidytext)
-d.tidy.auto.non_match.grab3.removeStopWords <- d.tidy.auto.non_match.grab3 %>%
-  mutate(clean_context_sentence = as.character(context_sentence)) %>%
-  tidytext::unnest_tokens(word, clean_context_sentence) %>%
-  anti_join(., stop_words, by = ("word")) %>%
-  group_by(workerid, trial_num) %>%
-  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>%
-  spread(wordNumber, word) %>%
-  unite(clean_context_sentence, starts_with("word_"), sep = " ") %>%
-  mutate(clean_context_sentence = gsub(" NA", "", clean_context_sentence))
-
-# check if response is in the cleaned context sentence
-
-d.tidy.auto.non_match.grab3.failedRef <- d.tidy.auto.non_match.grab3.removeStopWords %>%
-  mutate(resps_matching_context = as.character(response_hand_lemma)) %>%
-  unnest_tokens(word, resps_matching_context) %>%
-  filter(grepl(word, clean_context_sentence)) %>% # MH: I THINK THIS IS MISSING PLURALS (e.g., the first row of this df is about "scripts", but the context sentence only has the word "script" in it)
-  group_by(workerid, trial_num) %>%
-  mutate(wordNumber = paste("word_", row_number(), sep = "")) %>% # MH: What is the purpose of this? It looks like you matching sometimes multiple words in a sentence (e.g., "google maps"). Is this to keep that straight so you don't double count?
-  spread(wordNumber, word) %>%
-  unite(resps_matching_context, starts_with("word_"), sep = " ") %>%
-  mutate(resps_matching_context = gsub(" NA", "", resps_matching_context)) %>% 
-  # filter out manually responses not be dropped
-  filter(!(
-      (resps_matching_context == "color") |
-      (resps_matching_context == "podcast") |
-      (resps_matching_context == "coat") |
-      (response_hand_lemma == "bouquet") |
-      (response_hand_lemma == "flower bouquet") |
-      (response_hand_lemma == "mall") |
-      (response_hand_lemma == "house") |  
-      (response_hand_lemma == "places to sit") |
-      (response_hand_lemma == "parts of the kitchen") |  
-      (response_hand_lemma == "items in the shop") |
-      (response_hand_lemma == "dinner") |
-      (response_hand_lemma == "restaurant price") |  
-      (response_hand_lemma == "fur") |
-      (response_hand_lemma == "fur color") |
-      (response_hand_lemma == "restaurant") |
-      (response_hand_lemma == "person") |
-      (response_hand_lemma == "paint color") |
-      (response_hand_lemma == "places to live") |
-      (response_hand_lemma == "places for dinner") |
-      (response_hand_lemma == "parts of kitchen") |
-      (response_hand_lemma == "chocolate") |
-      (response_hand_lemma == "electronics") |
-      (response_hand_lemma == "gate") |
-      (response_hand_lemma == "menu") |
-      (response_hand_lemma == "weight lifters") |  
-      (response_hand_lemma == "music") 
-  ))
-```
-
-
-The reference-failing responses are excluded (288 responses). Remaining responses are classified using a dictionary of manual classification read from a dataframe:
-
-``` {r nonMatched-dropFailedRef}
-d.tidy.auto.non_match.grab3.noFailedRef <- d.tidy.auto.non_match.grab3 %>%
-  anti_join(., d.tidy.auto.non_match.grab3.failedRef, by = c("stim_id", "response_hand_lemma"))
-
-nrow(d.tidy.auto.non_match.grab3) - nrow(d.tidy.auto.non_match.grab3.noFailedRef)
-```
+--------
 
 The data without reference-failed responses is manually classified into the following types of comparison classes:
 - subordinate ('sub')
