@@ -119,8 +119,7 @@ what counts as context is often only implicit in everyday
 conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}: other days of the year, other weeks, other seasons, etc... 
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener decides upon a comparison class.
 We extend a Bayesian model of pragmatic reasoning to be able to reason flexibly about the comparison class intended by the speaker and test the qualitative predictions of this model using a large-scale free-production experiment.
-%\ndg{awk:}
-We introduce a hybrid experimental-Bayesian data analytic approach to examine the quantitative predictions of model, finding that usage frequency and a preference for basic-level categories are two main contributors to comparison class inference.
+\ndg{whatsa hybrid blah blah?} We introduce a hybrid experimental-Bayesian data analytic approach to examine the quantitative predictions of the model, finding that usage frequency and a preference for basic-level categories are two main contributors to comparison class inference.
 %We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
 %The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding. 
 The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
@@ -155,8 +154,8 @@ Furthermore, the connection between inferring the comparison class and theories 
 
 On the empirical side, the question of how listeners decide upon the comparison class has also received little systematic attention.
 Instead, empirical work with adults and children has primarily interrogated how judgments and interpretations for relative adjectives like \emph{dark} or \emph{tall} depend upon statistical details of a pre-determined comparison class  \cite{Barner2008, Qing2014, Schmidt2009, Solt2012}.
-Indirect evidence that the comparison class can be flexibly adjusted comes from studies with young children, which find that a directly-modified noun phrase (\emph{big pimwit}) can be used to constrain what objects goes go into the comparison class: What counts as a \emph{tall pimwit} (a novel category) depends on the distribution of heights of \emph{pimwits} and not the heights of other categories like \emph{daxes} \cite{Barner2008}. 
-Additionally, strong linguistic and perceptual cues can also provide a signal to children as young as 2-and-a-half that the comparison class can change \cite<e.g., an objectively small mitten can be \emph{big} relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
+Indirect evidence that the comparison class can be flexibly adjusted comes from studies with young children, which find that a directly-modified noun phrase can be used to constrain what objects goes go into the comparison class: What counts as a \emph{tall pimwit} (a novel category) depends on the distribution of heights of \emph{pimwits} and not the heights of other categories like \emph{daxes} \cite{Barner2008}. 
+Additionally, strong linguistic and perceptual cues can provide a signal to children as young as 2-and-a-half that the comparison class can change \cite<e.g., an objectively small mitten can be \emph{big} relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
 But, direct evidence that the comparison class can be flexibly adjusted based on systematic principles and the parameters that guide and constrain these inferences has yet to be uncovered.
 
 %Thus, comparison classes are central to human understanding of relative statements and from the point at which children acquire the meaning for a relative adjective like ``big'', they already understand that the meaning can change with the comparison class.
@@ -166,13 +165,13 @@ But, direct evidence that the comparison class can be flexibly adjusted based on
 %It is this aspect of the problem---lying between a theory of concepts (which generates possible comparison classes) and natural language (how relative statements are interpreted)---that we bring light to in this paper. 
 
 In this paper, we demonstrate one systematic aspect of comparison class inference: dependence on background knowledge about categories and properties.
-We show that the problem of comparison class inference is one of pragmatic inference, which we 
+We argue that the problem of comparison class inference is one of pragmatic inference, which we 
 %by weighting the prior probability of a comparison class with the likelihood that a speaker would use the adjective heard to describe the referent given that comparison class.
 demonstrate in a computational model of pragmatic reasoning \cite<a Rational Speech Act model;> {Frank2012, Goodman2016, scontras2017probabilistic}. 
 The model derives an intuitive interaction between a listener's general expectations about the referent (e.g., winter days are cold; summer days are warm) and the polarity of the adjective heard (e.g., \emph{warm}, \emph{cold}).
 When the adjective is inconsistent with the listener's general expectations (e.g., the day in winter is warm), listeners should prefer a relatively subordinate comparison class (e.g., \emph{warm for winter}), whereas when the adjective is consistent with general expectations (e.g., the day in winter is cold), listeners should prefer a relatively superordinate comparison classes (e.g., \emph{cold for the year}). 
 We show formally that this inference relies upon a sophisticated pragmatic mechanism: A listener uses their knowledge of the specific category (e.g., winter) to guide their expectations of what is likely to be true in the world, while simultaneously imagining how a speaker would behave given a different comparison class (e.g., what a speaker would say given the comparison class of \emph{days of the year}). 
-We test this hypothesis in a large-scale, pre-registered, free-production experiment in which participants are free to come up with a preferred comparison class of their choosing. 
+We test this hypothesis in a large-scale, pre-registered, free-production experiment in which participants are free to describe a comparison class of their choosing. 
 
 %Intuitively, the comparison class is not a fixed property of the referent nor the referent--predicate pair. 
 %A ``tall basketball player'' might be tall for a basketball player or just tall for a person. 
@@ -254,8 +253,8 @@ We test this hypothesis in a large-scale, pre-registered, free-production experi
 Here we articulate the computations that underly comparison class inference and how that inference interfaces with standard semantic theories of adjective meaning.
 %We develop a computational model that integrates general purposes reasoning capabilities with a semantic model of adjective meaning. 
 When interpreting an adjective utterance $u$ without an explicit comparison class (e.g., \emph{he's tall}), a listener is faced with the joint inference problem of determining the degree being described by the adjective $x$ (e.g., the height of the referent) and the comparison class $c$ assumed by the speaker when producing their utterance.
-We assume the listener $L_1$  uses their knowledge of the referent $k$ (e.g., the category membership of the referent such as the referent is the basketball player) to both guide their expectations about the degree $x$ (e.g., the plausible height of the referent) as well as the hypothesis space of comparison classes $c$. 
-With a Bayesian formulation, a listener combines these prior expectations with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker.}
+We assume the listener $L_1$  uses their other knowledge of the referent $k$ (e.g., the category membership of the referent such as the referent is the basketball player) to guide both their expectations about the degree $x$ (e.g., the plausible height of the referent) as well as the hypothesis space of comparison classes $c$. 
+With a Bayesian formulation, a listener combines these prior expectations with the likelihood that a speaker would use an adjective to describe a member of a particular category.\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker, for clarity of exposition. \ndg{funny place for this footnote -- no pronouns used yet?}}
 
 %To explicate our model, we use the running example of hearing a basketball player described as either \emph{tall} or \emph{short} (Figure \ref{fig:modelCartoon}). 
 
@@ -286,9 +285,9 @@ L_1(x, c \mid u, k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k
 
 Eq. \ref{eq:L1a} describes a pragmatic listener $L_1$ updating his beliefs about the degree $x$ and the comparison class $c$ by assuming that the speaker $S_1$ intentionally produced an adjectival utterance $u$ so that she could communicate about the degree (e.g., height).
 %The lis in this case is assuming , assuming the comparison class, 
-The hypothesis space of comparison classes $P(c \mid k)$ is assumed to be in common ground, constrained by prior knowledge and common knowledge about the situation (e.g.,~that the referent is a basketball player).
+The hypothesis space \ndg{prior?} of comparison classes $P(c \mid k)$ is assumed to be in common ground, constrained by prior knowledge and common knowledge about the situation (e.g.,~that the referent is a basketball player).
 Though comparison classes can be constructed in various ways, including sets of objects in the perceptual environment (e.g.,~\emph{big relative to these other things}) or from hypothetical functions of an object \cite<e.g., \emph{the shirt is big for the doll;}>{Ebeling1994}, we restrict our analysis to a hypothesis space of comparison classes constructed out of a taxonomic hierarchy of the subordinate category to which the referent belongs (i.e., \emph{conceptual comparison classes}, e.g., a basketball player is a person; Figure \ref{fig:modelCartoon}A). The hypothesis space of degrees (e.g., heights) is given by the semantics of the adjectives (e.g., \emph{tall} $\rightarrow$ height) and is also informed by the category membership of the referent $k$ (e.g., that the referent is a basketball player).\footnote{
-More generally, the hypothesis space of comparison classes is constrained by the shared beliefs of the speaker and listener: A listener will not assume the speaker is using a comparison class about which the speaker is ignorant, and a listener cannot construct a comparison class from information about which they are ignorant. By contrast, expectations about the degree value for the referent (e.g., the referent's height) will be guided by the totality of the listener's beliefs --- both those shared with the speaker and the listener's private beliefs. For example, if the listener had private knowledge that the person in question was taking a growth-stunting medication, they would use that knowledge to guide their predictions about that person's height, though if the listener knew that the speaker did not know about the growth-stunting medication, that information would not enter in the hypothesis space of comparison classes. Formally, this more general model would be given by: \begin{align}
+More generally, it is possible to distinguish common beliefs from private beliefs. The hypothesis space of comparison classes is constrained by the shared beliefs of the speaker and listener: A listener will not assume the speaker is using a comparison class about which the speaker is ignorant, and a listener cannot construct a comparison class from information about which they are ignorant. By contrast, expectations about the degree value for the referent (e.g., the referent's height) will be guided by the totality of the listener's beliefs --- both those shared with the speaker and the listener's private beliefs. For example, if the listener had private knowledge that the person in question was taking a growth-stunting medication, they would use that knowledge to guide their predictions about that person's height, though if the listener knew that the speaker did not know about the growth-stunting medication, that information would not enter in the hypothesis space of comparison classes. Formally, this more general model would be given by: \begin{align}
 L_1(x, c \mid u, f, g) &\propto S_1(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c \mid f) \label{eq:L1} 
 \end{align}
 \noindent where $f$ denotes the beliefs shared between speaker and listener, and $g$ denotes the listener's private beliefs. Since our paradigm does not distinguish between these kinds of beliefs, we use a reduced-form of the model, where beliefs are represented by a single variable $k$ and can be thought of as the most specific relevant category information about the referent (e.g., the referent is a basketball player).
@@ -342,10 +341,10 @@ S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cos
 
 
 %
-For simplicity, we assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action).\footnote{The inferences we model are invariant to reasonable choices of alternative utterances. Most notably, including alternatives that allow the speaker to explicitly communicate the comparison class (e.g., \emph{tall for a basketball player}) do not change the qualitative inferences we describe.
+For simplicity, we assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action).\footnote{The inferences we model are invariant to reasonable choices of alternative utterances. Most notably, including alternatives that allow the speaker to explicitly communicate the comparison class (e.g., \emph{tall for a basketball player}) do not change the qualitative results we describe.
 }
 The listener who updates his beliefs about the temperature given a vague adjectival utterance and a fixed comparison class, $L_0(x \mid u, c)$, is model of context-sensitive adjective interpretation, a problem which has garnered recent attention by those modeling language understanding \cite{Lassiter2013, Qing2014a, Lassiter2017}.
-We use a model of a literal listener which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![tall]\!] = x > \theta\)) that is combined with the listener's prior knowledge of the degree in the comparison class to produce a comparison class-specific interpretation of an adjective (Figure \ref{fig:modelCartoon}B).\footnote{Following standard treatment of antonyms, the
+We use a model of a literal listener which, following standard treatment in formal semantics \cite<e.g.,>{Kennedy2007}, takes the literal meaning of a gradable adjective to be simply a threshold function on the degree (e.g., \([\![tall]\!] = {x>\theta}\)) that is combined with the listener's prior knowledge of the degree in the comparison class to produce a comparison class-specific interpretation of an adjective (Figure \ref{fig:modelCartoon}B).\footnote{Following standard treatment of antonyms, the
   semantics of \emph{short} are a threshold function on a distinct
   threshold variable: \([\![u_{short}]\!] = height < \theta_{short}\)), which
   is also inferred via the pragmatic listener (i.e., the listener infers
@@ -353,7 +352,7 @@ We use a model of a literal listener which, following standard treatment in form
   inferences about the comparison class that are the focus of this paper
   are invariant to whether or not the antonym is included in the
   alternative set. The comparison class inferences are also invariant to
-  whether or not the antonym gets assigned its own unique threshold
+  whether or not the antonym is assigned its own unique threshold
   (\(\theta_{short}\)).}
   %
  \begin{align}
@@ -383,7 +382,7 @@ Finally, we assume the communicative goal of using an adjective like \emph{tall}
   
 %\subsection{Model behavior}
 
-We consider an idealized case where the comparison class can be either a relatively subordinate-level category ($c_{sub}$) or a relatively superordinate-level category ($c_{super}$) categorization (e.g., tall relative to \emph{basketball players} or relative to \emph{people}): \(c \in \{c_{sub}, c_{super}\}\).
+We consider an idealized case where the comparison class can be either a relatively subordinate-level category ($c_{sub}$) or a relatively superordinate-level category ($c_{super}$) (e.g., tall relative to \emph{basketball players} or relative to \emph{people}): \(c \in \{c_{sub}, c_{super}\}\).
 Figure \ref{fig:modelCartoon}C shows the speaker production probabilities of the three possible utterances (\emph{tall}, \emph{short}, silence) for each value along the degree scale (e.g., each height) for each of the two different comparison classes (facets). 
 If the comparison class is \emph{basketball players}, the speaker will be reluctant to produce \emph{tall} until the height is substantially greater than average (red line shifted to the right with respect to the \emph{person} comparison class). 
 The listener uses Bayes' rule to ``invert'' this generative model of the utterance (i.e., the speaker model), inferring the implicit comparison class.
@@ -401,7 +400,6 @@ Though an intuitive pattern, this reasoning requires a listener separating the c
 %Indeed, the same adjectives used to describe a member of a subordinate category that tends to fall low on the degree scale (e.g., jockeys, who tend to be short people) will result in the opposite inferences about the comparison class (Figure \ref{fig:modelCartoon}E left bars). 
 %Thus, our model predicts that the comparison class can be flexibly adjusted and it provides a precise quantitative formulation in how this inference should depend upon the quantitative details of the priors. 
 
-\ndg{this basic pattern is very intuitive, so we should explain a bit more why we need this fancy model. (not sure if that should be here or elsewhere, but i felt it here and at the intro to this section.}
 
 %\begin{figure}
 %\centering
