@@ -678,21 +678,24 @@ We used the word ``other'' to invoke the presupposition that the referent is a m
 
 Participants were excluded if they either responded incorrectly to the warm-up trial (answering something other than \emph{buildings}, \emph{skyscrapers}, \emph{structures} or the like) or answered fewer than 7 out of 10 memory check questions accurately (see SI for details).
 750 participants (89.6\%) remained after these exclusion criteria, for a total of 27,000 responses.
-We additionally excluded nonsensical responses: these were primarily responses that just listed the name of the speaker, the adjective alone, or restated the full adjectival sentence (e.g., ``It is tall'') and numbered 420 (1.56\%) in total, leaving 26,580 codeable responses. 
-We processed the responses by correcting for misspellings  (569; 2.14\%), lemmatizing (867, 3.28\%), and collapsing across synonyms (323, 1.22\%; see SI for details). 
+We additionally excluded nonsensical responses (440 in total, or 1.6\%)  and responses that resulted from the participant inferring the wrong referent for the pronoun in the target sentence (e.g., given ``Alex is in a forest and hears a woodpecker. He says,\emph{It is loud}'', the participant infers \emph{it} refers to the forest; 249 in total, or, 0.9\%).
+% : these were primarily responses that just listed the name of the speaker, the adjective alone, or restated the full adjectival sentence (e.g., ``It is tall'') and numbered 420 (1.56\%) in total, leaving 26,580 codeable responses. \
+We preprocessed the remaining 26,320 responses by correcting for misspellings  (633; 2.4\%), lemmatizing (3154, 11.9\%), and collapsing across synonyms (787, 2.96\%; see SI for details). 
 
 %\subsubsection{Preprocessing}
 
 %In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
 
-Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate noun phrase by which the referent is introduced (\emph{subordinate-NP}, e.g., a basketball player) or a more superordinate category (\emph{superordinate-NP}). 
-We automatically categorize responses as either subordinate or superordinate by checking whether the preprocessed response contains the subordinate-NP or superordinate-NP\footnote{Some of our pre-designated superordinate-NPs turned out to be incorrect guesses as to what would be the most salient superordinate category in the context. These cases were all very clear, and we replaced our pre-designated superordinate-NPs with the empirical superordinate-NP for purposes of analysis.} as a substring, respectively.\footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response. 
-For example, \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}. Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses contained any.}
-22161 (83.4\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set. 
+We analyze the responses in terms of the level of abstractness of the response: relatively subordinate vs. relatively superordinate. 
+In order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response (e.g., \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}).
+Thus, we automatically categorized preprocessed responses as either subordinate or superordinate by checking whether the preprocessed response contained the subordinate-NP as a substring.
+
+
+%22161 (83.4\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set. 
 %\red{For example, in response to  \{basketball players, golfers, jockeys\} are \{tall, short\}, \textbf{X\%} of participants produced either one of the three specific NPs or the more general \emph{people}}. \mht{[how common is athlete here?]}
-We use only these data for the main analyses.
-Of the remaining 4394 (16.6\%) responses, 1966 were unique.
-We hand-annotated these remaining responses; the main results and conclusions are consistent when analyzing the full data set (see SI).
+%We use only these data for the main analyses.
+%Of the remaining 4394 (16.6\%) responses, 1966 were unique.
+%We hand-annotated these remaining responses; the main results and conclusions are consistent when analyzing the full data set (see SI).
 
 
 \subsubsection{Regression analysis}
