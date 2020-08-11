@@ -1,4 +1,4 @@
-// webppl fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require utils --require ~/tools/webppl-sample-writer-fork fixed fixed 1
+// webppl bda_models/fbt-L1_L0theta-S1-corpusCC-noExplicitUtts-imh.wppl --require ./node_modules/utils --require ~/tools/webppl-sample-writer-fork by_item fixed 1
 
 // global or by_item
 var comparison_class_prior_intercept = process.argv[process.argv.length - 3]
@@ -18,8 +18,8 @@ display(comparison_class_prior_slope)
 display(flat_cc_parameters)
 display(by_item_cc_parameters)
 
-// var utterances = ["positiveAdjective", "negativeAdjective", "silence"]
-var utterances = ["positiveAdjective", "negativeAdjective"]
+var utterances = ["positiveAdjective", "negativeAdjective", "silence"]
+// var utterances = ["positiveAdjective", "negativeAdjective"]
 
 var chain = last(process.argv) // load index as last command line index
 
@@ -57,13 +57,12 @@ var thresholdPrior = cache(function(form){
 	});
 });
 
-
 var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv";
-var cc_inference_DataFile = "class-elicitation-prereg-final/full-classified-data-w-freqs-no-failedRef.csv";
+var cc_inference_DataFile = "class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv";
 
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-SG-subset.csv";
 // var adj_endorse_DataFile = "pilot-adj-endorsement-1/pilot-adj-endorsement-1-super-PL.csv";
@@ -73,8 +72,10 @@ var adj_endorse_DataFile = "adjective-endorsement-prereg-final/adjective-endorse
 // var ccData = dataFrame(csv.read(dataPath + cc_inference_DataFile), ["specific"])
 // var vsData = dataFrame(csv.read(dataPath + adj_endorse_DataFile), ["val"])
 // var corpus_frequency_data =  dataFrame(csv.read(dataPath + corpus_frequency_DataFile), ["Frequencies"])
-var ccData = readDataFile(dataPath + cc_inference_DataFile,  ["stim_id", "specific", "subFreq", "superFreq"])
-var vsData = readDataFile(dataPath + adj_endorse_DataFile, ["stim_id", "val",  "subFreq", "superFreq"])
+var ccData = readDataFile(dataPath + cc_inference_DataFile,
+	["stim_id", "specific", "subordinate_freq", "superordinate_freq"])
+var vsData = readDataFile(dataPath + adj_endorse_DataFile,
+	["stim_id", "val",  "subordinate_freq", "superordinate_freq"])
 // var corpus_frequency_data = readDataFile(dataPath + corpus_frequency_DataFile, ["Frequencies"])
 
 var logistic = function(x) {1 / (1 + Math.exp(-x))}
@@ -94,7 +95,7 @@ var model = function(){
 
   // var silenceCost = uniformDrift({a: 0, b: 10, width : 0.5})
   // var utteranceProbs = [1, 1, silenceCost];
-	var utteranceProbs = [1, 1];
+	var utteranceProbs = [1, 1, 1];
   // var utteranceProbs = map(function(c) {return exp(-c)}, utteranceCosts);
   var UtterancePrior = Categorical({ vs: utterances, ps: utteranceProbs })
 
@@ -145,7 +146,7 @@ var model = function(){
 			var data_within_stim_id_cc = _.filter(ccData, {stim_id: stim_id});
 			var data_within_stim_id_adj = _.filter(vsData, {stim_id: stim_id});
 			// var superordinate_categories = levels(data_within_degree_cc, "superordinate_pl")
-			var subordinate_categories = levels(data_within_stim_id_cc, "NP_sg");
+			var subordinate_categories = levels(data_within_stim_id_cc, "subordinate_sg");
 
 			// display(superordinate_categories)
 
@@ -166,7 +167,7 @@ var model = function(){
 			// );
 
       foreach(subordinate_categories, function(subordinate){
-
+				// display(JSON.stringify(data_within_stim_id_cc))
 				var item_set_heirarchy =  flat_cc_parameters ?
 					"sub_basic" :
 					categorical({ps: [0.5, 0.5], vs: ["sub_basic", "basic_super"]})
@@ -176,17 +177,19 @@ var model = function(){
           mu: uniformDrift({a: -3, b: 3, width: 0.5}),
           sigma: uniformDrift({a: 0, b: 3, width: 0.3})
         };
-
-        var data_within_subordinate_cc = _.filter(data_within_stim_id_cc, {NP_sg: subordinate});
+				// display(JSON.stringify(data_within_stim_id_cc.slice(0, 5)))
+				// display(subordinate)
+        var data_within_subordinate_cc = _.filter(data_within_stim_id_cc, {subordinate_sg: subordinate});
 				var data_within_subordinate_adj = _.filter(data_within_stim_id_adj, {NP_sg: subordinate});
-
-				data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB ADJ====" + stim_id + "_" + subordinate) : null
-				data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB CC====" + stim_id + "_" + subordinate) : null
+				// display(JSON.stringify(data_within_subordinate_cc))
+				data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB ADJ====" + stim_id + "_" + subordinate) : null
+				data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB CC====" + stim_id + "_" + subordinate) : null
 
         var subcatWeight = logistic(
 					classParameters[item_set_heirarchy].intercept +
 					classParameters[item_set_heirarchy].frequency * Math.log(
-						data_within_subordinate_cc[0].subFreq / data_within_subordinate_cc[0].superFreq
+						data_within_subordinate_cc[0].subordinate_freq /
+						data_within_subordinate_cc[0].superordinate_freq
 					)
 				)
 
@@ -291,8 +294,8 @@ var model = function(){
         var ccRSA = pragmaticListener(adj_polarity);
 
         mapData({data:d_subcat_ccInference}, function(d){
-         // console.log("cc = "+ ccRSA.score(d))
-          observe(ccRSA, d);
+         // console.log("cc = "+ ccRSA.score(d ? 1: 0))
+          observe(ccRSA, d ? 1 : 0);
         })
 
         query.add(["stim_"+stim_id, subordinate,  "adjEndorse", adj_polarity], Math.exp(superSpeakerProbs.score(1)))
@@ -334,10 +337,12 @@ var model = function(){
 // var totalIterations = 100, lag =  1;
 // var totalIterations = 250000, lag =  25;
 // var totalIterations = 150000, lag =  50;
-var totalIterations = 300000, lag =  150;
-// var totalIterations = 5000, lag = 2
+// var totalIterations = 300000, lag =  150;
+var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
-var outfile = 'results-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+// var outfile = 'results-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
+var outfile = 'results-L1-S1-fulldata_autoclass_corpusFreqCCLogistic_byNP_'+
+	by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,stim_id,subordinate,task,adj_polarity,val,score"
 var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
