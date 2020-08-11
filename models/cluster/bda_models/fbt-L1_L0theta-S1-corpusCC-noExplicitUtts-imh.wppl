@@ -7,10 +7,10 @@ var comparison_class_prior_slope = process.argv[process.argv.length - 2]
 var flat_cc_parameters = (comparison_class_prior_intercept == "flat" && comparison_class_prior_slope == "flat")
 var by_item_cc_parameters = (comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "by_item") ? "intercept_slope" :
  	(comparison_class_prior_intercept == "fixed" && comparison_class_prior_slope == "fixed") ? "single-intercept_slope" :
-	(comparison_class_prior_intercept == "fixed") ? "single-intercept_byItem-slope" :
-	(comparison_class_prior_slope == "fixed") ? "byItem-intercept_single-slope" :
-	(comparison_class_prior_intercept == "by_item") ? "intercept" :
-	(comparison_class_prior_slope == "by_item") ? "slope" :
+	(comparison_class_prior_intercept == "fixed" && comparison_class_prior_slope == "by_item") ? "single-intercept_byItem-slope" :
+	(comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "fixed") ? "byItem-intercept_single-slope" :
+	(comparison_class_prior_intercept == "by_item" && comparison_class_prior_slope == "flat") ? "intercept" :
+	(comparison_class_prior_intercept == "flat" && comparison_class_prior_slope == "fixed") ? "slope" :
 	"flat"
 
 display(comparison_class_prior_intercept)
@@ -57,7 +57,7 @@ var thresholdPrior = cache(function(form){
 	});
 });
 
-var dataPath = "../../data/";
+var dataPath = "data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
@@ -337,15 +337,15 @@ var model = function(){
 // var totalIterations = 100, lag =  1;
 // var totalIterations = 250000, lag =  25;
 // var totalIterations = 150000, lag =  50;
-// var totalIterations = 300000, lag =  150;
-var totalIterations = 5000, lag = 2
+var totalIterations = 500000, lag =  250;
+// var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
 // var outfile = 'results-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 var outfile = 'results-L1-S1-fulldata_autoclass_corpusFreqCCLogistic_byNP_'+
 	by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
 
 var header = "iteration,stim_id,subordinate,task,adj_polarity,val,score"
-var callback = webpplSampleWriter.streamQueryCSV("results/" + outfile, header);
+var callback = webpplSampleWriter.streamQueryCSV("models/cluster/results/" + outfile, header);
 
 Infer({model,
       samples: samples, burn: burn, lag: lag == 1 ? 0 : lag,
