@@ -433,25 +433,22 @@ d.tidy.adj.bs.itemCI %>%
 
 # by item
 
-```{r figCollapseItems}
+```{r figByItem}
+
+
+
 d.tidy.adj.bs.item <- df.trials.tidy %>% 
-  mutate(full_item = paste(degree, superordinate, item, sep = "_")) %>%
-  group_by(degree, full_item, stim_id, superordinate, item, item_cond, key) %>%
+  mutate(full_item = paste(degree, superordinate_pl, NP_sg, sep = "_")) %>%
+  group_by(degree, full_item, stim_id, superordinate_pl, NP_sg, np_expectations, adj_polarity) %>%
   tidyboot_mean(column = val)
 
 d.tidy.adj.bs.item %>%
   ungroup() %>%
-  mutate(key = gsub('response_', "", key),
-         key = factor(key, levels = c("neg", "pos"), labels = c("negative", "positive")),
-         item_cond = factor(item_cond,
-                               levels = c("low", "medium", "high")),
-         
-         item_set = paste(degree, " (", superordinate, ")", sep = ""),
-         stim_id = as.numeric(stim_id),
-         degree = factor(degree), 
-         item_set = fct_reorder(item_set, as.numeric(degree))) %>%
+  mutate(#item_set = paste(degree, " (", superordinate, ")", sep = ""),
+         stim_id = paste("stim_", as.character(stim_id), sep = ""),
+         degree = factor(degree)) %>%
   #group_by(item_set) %>%
-  mutate(item = fct_reorder(item, as.numeric(item_cond))) -> d.tidy.adj.bs.item.reordered
+  mutate(NP_sg = fct_reorder(NP_sg, as.numeric(np_expectations))) -> d.tidy.adj.bs.item.reordered
 
 fac.levels <- levels(d.tidy.adj.bs.item.reordered$item)
 el.num <- which(fac.levels == "elephant")
@@ -459,11 +456,16 @@ ch.num <- which(fac.levels == "cheetah")
 fac.levels[el.num] <- "cheetah"
 fac.levels[ch.num] <- "elephant"
 
-d.tidy.adj.bs.item.reordered %>%
-  mutate(item = factor(item, levels = fac.levels)) %>%
+df.max.min.err <- read_csv(file = "../writing/paper/csv_data_4_tex/max_min_residiual_items.csv")
+
+inner_join(d.tidy.adj.bs.item.reordered, df.max.min.err) %>%
+  mutate(stim_id = fct_reorder(stim_id, as.numeric(degree))) %>%
+#   
+# d.tidy.adj.bs.item.reordered %>%
+#   mutate(item = factor(item, levels = fac.levels)) %>%
 ggplot(., 
-       aes( x = item, y = mean, 
-            ymin = ci_lower, ymax = ci_upper, fill = key))+  
+       aes( x = NP_sg, y = mean, 
+            ymin = ci_lower, ymax = ci_upper, fill = adj_polarity))+  
   geom_col(position = position_dodge(0.8), width = 0.8, alpha = 0.7, color = 'black')+
   geom_linerange(position = position_dodge(0.8), color = 'black')+  
   scale_fill_brewer(palette = "Set3")+
@@ -473,7 +475,7 @@ ggplot(.,
         panel.grid.major = element_blank(),
         axis.line = element_line(colour = "black"),
         legend.position = 'bottom', legend.direction = 'horizontal')+
-  facet_wrap(~item_set, scales = 'free', nrow = 4)+
+  facet_wrap(~stim_id, scales = 'free', nrow = 1)+
  # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1))+
   guides(fill = guide_legend(reverse = F, title = "Adjective polarity"))+

@@ -27,8 +27,6 @@ library(ggthemes)
 library(brms)
 library(stringr)
 theme_set(theme_few())
-
-
 ```
 
 ## Load data
@@ -71,10 +69,11 @@ df.comprehension %>%
 # What did people write-in that was incorrect?
 df.comprehension %>% 
   filter(!pass_comp) %>%
-  View()
+  select(response) %>%
+  kable()
 ```
 
-After the main trials, they completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
+After the main trials, participants completed a memory check trial asking which adjective-NP combinations appeared on the main trials. Participants are excluded if they answer less than 7 out of 10 memory check questions correctly or if they respond incorrectly on the warm-up trials.
 
 ```{r memory check}
 df.memory <- df.attention %>%
@@ -104,7 +103,6 @@ df.attention.summary <- left_join(
   df.memory %>% select(workerid, pass_memory)
 ) %>%
   mutate(pass_both = pass_comp & pass_memory)
-
 
 df.attention.summary %>%
   group_by(pass_comp, pass_memory, pass_both) %>%
@@ -139,62 +137,15 @@ d.item.count %>%
   ylab("n items")
 ```
 
-# Text preprocessing
+# Text Preprocessing
 
 ## Exclusions
 
 ### Nonsense
 
-We exclude nonsense responses: These are the responses the are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
+We exclude nonsense responses. Some responses were simply copular sentences including no comparison class ("It's tall"). We check for these programatically. We also exclude a set of manually determined invalid responses including responses that are just the name of the speaker, just the adjective, an adjectival sentence without a comparison class or non-sense words. These invalid responses were extracted manually.
 
-```{r list of invalid responses}
-invalid.responses <- c(
-  "unsure",
-  # all the adjectives
-  "long", "short", "tall", "dark", "light", "fast", "quick", "slow",
-  "hard", "soft", "loud", "noisy", "quiet", "bright", "bruises",
-  "expensive", "cheap", "big", "small", "strong", "weak", "warm", "hot", "cold",
-  "heavy", "wide", "narrow",
-  # all the actor names
-  "alexander", "alicia", "cheep", "daniel", "darker",
-  "david",
-  "eric", "gabriel", "anthony", "william", "john", "tom", "lucas",
-  "michael", "cameron", "stephen",
-  "lee", "greg", "robert", "chrales", "gary", "josh", "simon",
-  "angela", "jennifer", "monica", "melinda", "veronica", "alicia",
-  "maya", "sophie", "kim", "laura", "julia",
-  "michelle", "stephanie", "claire", "kathleen", "jasmine", "tanya",
-  "mika", "natalia",
-  # invalid responses
-  "barbell snatch", "bank of america", "easy", "empire building", "chill", "chinn", "webside",
-  "finished", "flexibility", "health", "hot cold",
-  "lazy", "low", "cliaire", "feelings", "too small", "Too small",
-  "public", "ripe", "silent", "baked", "burn", "more costly", "exacting",
-  # filter out the sentences without a CC
-  "A bottle of wine at a liquor store was expensive", "A piece of cotton in craft shop was light", "A piece of plastic in hardware store was soft",
-  "A spider in an insect terrarium was big", "At the butchershop the chicken was expensive", "At the conference center it was noisy when she met her friend", "during the night its light out there",
-  "hears the cry of a crow", "In Aquarium a tuna was big", "In botanical garden an alpine tree was short.", "In summer that day was cold", "In the freezer michelle hand was cold", "it has a lot of stuff",
-  "It was noisy in the nearby city", "its not a hot and cold", "move furniture through the front gate of her house", "picks up a piece of silk.", "the coat is light in weight", "	The coat of poodle was dark",
-  "the color of the script is light", "the daisy is dark in color", "The first bite of her ice cream was warm", "The first sip of juice was cold", "The furniture was narrow at the back door of his house", "The new place rental rate is expensive", "the pair of sandals are expensive", "	The piece of silk is light.",
-  "the sound of the shower is strong", "The statue made of plastic was cheap", "the walls of the condo are strong", "While walking heard the cry of a rooster when it was quiet", "Basketball player was tall",
-  "Friend's new rowboat was fast", "Friend's new smartcar is big", "his favorite poem was short", "it is not destructive", "it is not loud", "it is not sold expensively", "it s not wide", "its noisy in here",
-  "its not a soft", "On Saturday it was cold", "STRIP MALL IS SHORT", "summer days are warm", "That baby was loud", "the adult walk quickly", "The airplane is slow.", "The bird is loud.", "the car drives by quietly", "the car is quite", "the child is not fussy", "The child walks slow.", "The coat of poodle was dark", "large", "lengthy", "Little",
-  "the color is not much", "the day is cold", "the dog's body is long", "The environment is quiet.", "the floor is soft", "The flower is short.", "the food is expensive", "the fruit cake was light", "the information is  long", "The mall is short.", "The mattress s firm", "the melon was soft", "the mouse is small", "the pages are not many", "the pencil color is light", "The piece of silk is light.", "The country lane was narrow", "The new place rental rate is expensive.", "The poodle's coat is light.", "the powerboat makes no noise", "the rabbit is fast", "the sneakers are costly", "the statue is cheap", "the street is wide", "The weather is cold today.", "The suit was expensive", "The trash is light.", "The watermelon was light", "A rock concert was loud", "little",
-  "the movie i hope", "all light of off", "sits on a blanket", "try a new water color",
-  "driving on a downtown street", "The spider was small", "The music was Loud",
-  "powerboat sound little quiet", "Horn was too loud", "Villa price was costly",
-  "choral consert was too loud", "milkshake was so hot", "strip mall was tall",
-  "plastic was so soft", "pork was too expensive", "price of raspberries expensive",
-  "coat of a spaniel was little light", "village area was too quit to read",
-  "elderly person was too quick", "conference room was too quiet", "instant pot was slow",
-  "tile floor was soft", "chocolate cake color was too dark", "marshmallow was soft for eat",
-  "Blue paint is dark", "pick-ip truck was long", "sits on a bedboard.", "tails on mice",
-  "they are bold", "the blade spinning", "its finished", "not sure", "too slow",
-  "black", "boiling", "coat of paints", "Empire State Building", "glare", "indvidual experience", "information", "It is not loud", "It was night", "It was strong", "itrs warm", "its hot", "its low", "its low cost", "its not hard", "its not mute", "its not slow", "its not soft", "its not speed", "its too sound", "its wide", "lengthy", "less wide", "melting", "More costly", "move", "muscles", "pcks", "Relationship", "sexy", "Silent", "the duration", "the distance", "the have muscles", "they are fit", "they run fast", "thrill", "though", "Very slow", "walking outside", "walking assistance tools", "word", "worthy", "tough", "picks up their trash can.", "all lights off", "amount", "high", "its long", "it cooks quickly", "little", "outside"
-)
-```
 
-Simple (invalid) copular sentences including no comparison classes are constructed and excluded together with the invalid responses above.
 
 ``` {r excludeInvalidResps}
 # excluding invalid responses
@@ -222,10 +173,12 @@ d.tidy.resp.valid <- anti_join(
 # get the long responses that were not matched above and filter them out manually
 # d.tidy.resp.valid.resps %>% filter(responseLength >= 4) %>% View()
 
+invalid.responses <- read_csv("text_processing/invalid_responses.csv")
+
 d.tidy.resp.valid <- d.tidy.resp.valid %>%
   rowwise() %>%
   # exclude responses which excatly match the ones in the following list
-  subset(., !(response %in% invalid.responses))
+  subset(., !(response %in% invalid.responses$response))
 
 n.valid.responses <- d.tidy.resp.valid %>%
   ungroup() %>%
@@ -308,6 +261,19 @@ d.tidy.resp.valid.noFailedRef <- anti_join(
   d.tidy.resp.valid,
   d.tidy.resp.valid.FailedRef,
   by = c("stim_id", "response")    ) 
+
+
+n.ref.fail <- d.tidy.resp.valid.FailedRef %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+n.after.ref.fail <- d.tidy.resp.valid.noFailedRef %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+(n.ref.fail) / n.total.responses
 ```
 
 
@@ -318,7 +284,8 @@ d.tidy.resp.valid.noFailedRef <- anti_join(
 In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
 
 ```{r list of commong mispellings}
-misspellings_df <- read_csv("text_processing/misspellings_dict.csv") 
+misspellings_df <- read_delim("text_processing/misspellings_dict.csv",
+                            delim = ";") 
 
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
@@ -330,7 +297,8 @@ To further improve the response classification, we lemmatize the plural response
 
 ```{r list of lemmatizations}
 # mostly Plural --> singulars
-lemmatization_df <- read_csv("text_processing/lemmatization_dict.csv") %>%
+lemmatization_df <-  read_delim("text_processing/lemmatization_dict.csv",
+                                delim = ";") %>%
   rowwise() %>%
   mutate(
     V2 = ifelse(is.na(V2), "",
@@ -348,7 +316,7 @@ synonym_df <- read_csv("text_processing/synonym_dict.csv")
 synonym_set <- pull(synonym_df, V2) %>% set_names(pull(synonym_df, V1))
 ```
 
-
+### Apply Text Corrections
 
 ```{r apply corrections}
 d.tidy.resp.valid.noFailedRef %>%
@@ -392,83 +360,94 @@ testing out item-specific replacements
 
 
 
-## Match keyword(s) in Responses
+## Extract keywords for Subordinate NP match
 
-For automated checking of whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *specific* (i.e., including the mentioned NP). 
+To programatically check whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *subordinate* (i.e., including the mentioned NP). 
 
-```{r np match}
-d.tidy.resp.valid.lemmatized.np_match <- d.tidy.resp.valid.lemmatized %>%
+```{r keyword match}
+d.tidy.resp.valid.lemmatized.keyword <- d.tidy.resp.valid.lemmatized %>%
   rowwise() %>%
   mutate(
-    np_match = tolower(np), # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
-    np_match = gsub("bottle of top-shelf liquor", "liquor", np_match),
-    np_match = gsub("piece of chocolate", "chocolate", np_match),
-    np_match = gsub("piece of chalk", "chalk", np_match),
-    np_match = gsub("six-pack of beer", "beer", np_match),
-    np_match = gsub("bottle of wine", "wine", np_match),
-    np_match = gsub("pine tree", "pine", np_match),
-    np_match = gsub("redwood tree", "redwood", np_match),
-    np_match = gsub("alpine tree", "alpine", np_match),
-    np_match = gsub("bonsai tree", "bonsai", np_match),
-    np_match = gsub("pick-up truck", "pick-up", np_match),
-    np_match = gsub("relay race", "relay", np_match),
-    np_match = gsub("triathlon race", "triathlon", np_match),
-    np_match = gsub("sprinting race", "sprint", np_match),
-    np_match = gsub("kettle ball", "ball", np_match),
-    np_match = gsub("study hall", "study", np_match),
-    np_match = gsub("electric car", "electric", np_match),
-    np_match = gsub("bass guitar", "bass", np_match),
-    np_match = gsub("choral concert", "choral", np_match),
-    np_match = gsub("rap concert", "rap", np_match),
-    np_match = gsub("white paint", "white", np_match),
-    np_match = gsub("blue paint", "blue", np_match),
-    np_match = gsub("black paint", "black", np_match),
-    np_match = gsub("limousine", "limo", np_match),
-    np_match = gsub("smartcar", "smart", np_match),
-    np_match = gsub("japanese restaurant", "japanese", np_match),
-    np_match = gsub("chinese restaurant", "chinese", np_match),
-    np_match = gsub("korean restaurant", "korean", np_match),
-    np_match = gsub("elderly person", "elder", np_match),
-    np_match = gsub("oil paint", "oil", np_match),
-    np_match = gsub("wall paint", "wall", np_match),
-    np_match = gsub("shopping mall", "mall", np_match),
-    np_match = gsub("chocolate fondue", "fondue", np_match),
-    np_match = gsub("cell phone", "phone", np_match),
-    np_match = gsub("bear den", "bear", np_match),
-    np_match = gsub("fox den", "fox", np_match),
-    np_match = gsub("mouse den", "mouse", np_match),
-    np_match = gsub("downtown street", "downtown", np_match),
-    np_match = gsub("side road", "side", np_match),
-    np_match = gsub("back door", "back", np_match),
-    np_match = gsub("patio door", "patio", np_match),
-    np_match = gsub("front gate", "front", np_match),
-    np_match = gsub("chocolate cake", "chocolate", np_match),
-    np_match = gsub("podcast episode", "podcast", np_match)#,
-    #superordinate = ifelse(stim_id == 77, "food", superordinate)
+    keyword = tolower(np), # additional column where we put the NP to be matched against, such that the original NPs can be accessed if necessary
+    keyword = gsub("bottle of top-shelf liquor", "liquor", keyword),
+    keyword = gsub("piece of chocolate", "chocolate", keyword),
+    keyword = gsub("piece of chalk", "chalk", keyword),
+    keyword = gsub("six-pack of beer", "beer", keyword),
+    keyword = gsub("bottle of wine", "wine", keyword),
+    keyword = gsub("pine tree", "pine", keyword),
+    keyword = gsub("redwood tree", "redwood", keyword),
+    keyword = gsub("alpine tree", "alpine", keyword),
+    keyword = gsub("bonsai tree", "bonsai", keyword),
+    keyword = gsub("pick-up truck", "pick-up", keyword),
+    keyword = gsub("relay race", "relay", keyword),
+    keyword = gsub("triathlon race", "triathlon", keyword),
+    keyword = gsub("sprinting race", "sprint", keyword),
+    keyword = gsub("kettle ball", "ball", keyword),
+    keyword = gsub("study hall", "study", keyword),
+    keyword = gsub("electric car", "electric", keyword),
+    keyword = gsub("bass guitar", "bass", keyword),
+    keyword = gsub("choral concert", "choral", keyword),
+    keyword = gsub("rap concert", "rap", keyword),
+    keyword = gsub("white paint", "white", keyword),
+    keyword = gsub("blue paint", "blue", keyword),
+    keyword = gsub("black paint", "black", keyword),
+    keyword = gsub("limousine", "limo", keyword),
+    keyword = gsub("smartcar", "smart", keyword),
+    keyword = gsub("japanese restaurant", "japanese", keyword),
+    keyword = gsub("chinese restaurant", "chinese", keyword),
+    keyword = gsub("korean restaurant", "korean", keyword),
+    keyword = gsub("elderly person", "elder", keyword),
+    keyword = gsub("oil paint", "oil", keyword),
+    keyword = gsub("wall paint", "wall", keyword),
+    keyword = gsub("shopping mall", "mall", keyword),
+    keyword = gsub("chocolate fondue", "fondue", keyword),
+    keyword = gsub("cell phone", "phone", keyword),
+    keyword = gsub("bear den", "bear", keyword),
+    keyword = gsub("fox den", "fox", keyword),
+    keyword = gsub("mouse den", "mouse", keyword),
+    keyword = gsub("downtown street", "downtown", keyword),
+    keyword = gsub("side road", "side", keyword),
+    keyword = gsub("back door", "back", keyword),
+    keyword = gsub("patio door", "patio", keyword),
+    keyword = gsub("front gate", "front", keyword),
+    keyword = gsub("chocolate cake", "chocolate", keyword),
+    keyword = gsub("podcast episode", "podcast", keyword)#,
   )
 ```
 
 
 
-# Automatic Classification
+# Main Analysis
 
-The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
+## Automatic Classification
+
+The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword (for subordinate) or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
+
+We modified one item (77: "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the NP matching (as well as for frequency extraction and adjective endorsement task). 
+
+If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP (represented by the variable `mode_np`), otherwise it is turned into the corresponding superordinate.
 
 ```{r check if response contains sub/super and visa versa}
-d.tidy.resp.valid.lemmatized.np_match %>%
+d.tidy.resp.valid.lemmatized.keyword %>%
+  mutate(
+    # substitutions made based on human modal responses
+    superordinate = ifelse(stim_id == 77, "food", superordinate)
+  ) %>%
   rowwise() %>%
   mutate(
-    specific = grepl(np_match, response_lemma, fixed = TRUE),
+    specific = grepl(keyword, response_lemma, fixed = TRUE),
     super_in_resp = grepl(superordinate, response_lemma, fixed = TRUE),
     resp_in_super = grepl(response_lemma, superordinate, fixed = TRUE),
     matchingSuper = ifelse(!specific, super_in_resp || resp_in_super, FALSE)
-  ) -> d.tidy.auto
+  ) %>%
+  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
+  mutate(mode_np = ifelse(specific == 1, np, superordinate)) -> d.tidy.auto
 
 with(d.tidy.auto, table(specific, matchingSuper)) %>% 
   kable()
 
 # d.tidy.auto %>% 
-#   select(response, response_lemma_us, np_match,  specific, superordinate, super_in_resp, response_lemma, super_us, resp_in_super, matchingSuper) %>%
+#   select(response, response_lemma_us, keyword,  specific, superordinate, super_in_resp, response_lemma, super_us, resp_in_super, matchingSuper) %>%
 #   View()
 
 # extract the automatically classified data
@@ -488,13 +467,13 @@ Responses for items that were classified as all subordinate or superordinate (me
 
 ```{r check ceiling/floor responses}
 # check the matched items where the mean of responses is 1 or 0
-d.tidy.auto.match %>%
+d.tidy.auto %>%
   group_by(stim_id, np_expectations, adj_polarity) %>%
   mutate(meanResp = mean(specific)) %>%
   filter((meanResp == 1) | (meanResp == 0)) %>%
   distinct(
     stim_id, np_expectations,
-    np_match, adj_polarity, adj,
+    keyword, adj_polarity, adj,
     response_lemma, # showing response_lemma will show the individual (lemmatized) responses that were all categorized as either sub or super
     meanResp
   ) -> d.match.ceiling
@@ -508,10 +487,10 @@ d.match.ceiling %>%
   ungroup() %>%
   distinct(
     stim_id, np_expectations,  
-    np_match, adj,
+    keyword, adj,
     meanResp
   ) %>%
-  sample_n(20) %>%
+  #sample_n(20) %>%
   kable()
   #View()
 
@@ -520,7 +499,7 @@ d.match.ceiling %>%
   filter(meanResp == 1) %>%
   distinct(
     stim_id, np_expectations,  
-    np_match, adj_polarity,
+    keyword, adj_polarity,
     meanResp
   ) %>%
   group_by(np_expectations, adj_polarity) %>%
@@ -533,22 +512,7 @@ d.match.ceiling %>%
   # write_csv(., "../../writing/paper/csv_data_4_tex/itemCounts_ceil_floor.csv")
 ```
 
-## Post-processing of Automatically Classified Data
-
-After we manually inspected the data with respect to superordinate responses that systematically deviated from the anticipated ones, we modified one item (77 "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the frequency extraction and the adjective endorsement task. 
-If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP (represented by the variable `mode_np`), otherwise it is turned into the corresponding superordinate.
-
-``` {r}
-d.tidy.auto.match.adjust_super <- d.tidy.auto.match %>%
-  mutate(
-    # substitutions made based on human modal responses
-    superordinate = ifelse(stim_id == 77, "food", superordinate)
-  ) %>%
-  # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
-  mutate(mode_np = ifelse(specific == 1, np, superordinate))
-```
-
-### Frequencies
+## Add Frequencies
 
 ```{r plural np for freq}
 # this function takes the raw NPs that we use in the experiment, e.g. 'six-pack of beer' (not the substituted key-words, e.g.,  beer, that we used for automatic categorization) to create the respective plural NPs we use for frequencies
@@ -652,9 +616,13 @@ insert_plural_np <- function(np, superordinate) {
 
 
 We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
+The corresponding subordinate and superordinate frequencies are added to each data point. 
 
 ```{r}
-d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
+df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
+# d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
+d.tidy.auto.freq <- d.tidy.auto %>%
   rowwise() %>%
   mutate(
     np_pl = insert_plural_np(tolower(np), superordinate),
@@ -663,67 +631,69 @@ d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
     superordinate.freq = ifelse(stim_id == 5, "writing tools", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avoid polysemy
-  )
-
-```
-
-The corresponding subordinate and superordinate frequencies are added to each data point. 
-
-```{r}
-df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
-d.tidy.auto.classified.w.frequency <- d.tidy.auto.classified.w.pl.np %>%
+  )  %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
   mutate(
     degree = ifelse(degree == "length_duration", "length", degree)
-  )
-
-df.mode.auto.final <- d.tidy.auto.classified.w.frequency %>%
-  select(
-    workerid, stim_id, degree, superordinate.freq, adj, adj_polarity,
-    np, np_pl, np_expectations, mode_np, specific, Frequencies.x, Frequencies.y
   ) %>%
+  rename(subordinate_freq = Frequencies.x, 
+         superordinate_freq = Frequencies.y,
+    superordinate_pl = superordinate.freq, 
+    subordinate_sg = np, 
+    subordinate_pl = np_pl) %>%
+  select(-X1.x, -X1.y) 
+
+
+d.tidy.auto.freq.clean <- d.tidy.auto.freq %>%
   mutate(
-    superordinate_pl = superordinate.freq, NP_sg = np, NP_pl = np_pl,
-    response = mode_np, subFreq = Frequencies.x, superFreq = Frequencies.y
+    response = mode_np,
   ) %>%
   select(
     workerid, stim_id, degree, superordinate_pl, adj, adj_polarity,
-    NP_sg, NP_pl, np_expectations, response, specific, subFreq, superFreq
+    subordinate_sg, subordinate_pl, np_expectations, response, specific,
+    subordinate_freq, superordinate_freq
   )
 
-# write_csv(df.mode.auto.final, "../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+
+
+
+# write_csv(df.mode.auto.final, path =  "../../data/class-elicitation-prereg-final/auto-classified-data-full-w-freqs-final.csv")
+
+# df.mode.auto.final
+```
+
+
+## Output CSVs
+
+```{r}
+write_csv(d.tidy.auto.freq, 
+          path =  "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
 ```
 
 
 
-## Manual Response Processing 
+# Further Data Exploration
 
 We look at the responses that were not automatically classified (about 4000). We judge if the deviating responses are synonymous to our experimentally-supplied NPs or anticipated superordinates and adjust them in order to match to those NPs or superordinates. Deviant responses which occur frequently are left unchanged to check if any deviating response was the modal response for any particular NP-adj pair.
 
 ``` {r nonMatchedResps}
 # look at the unique non-matched responses
-d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.match)
+d.tidy.auto.non_match <- anti_join(d.tidy.auto, d.tidy.auto.match) %>%
+  mutate(
+    response = tolower(response),
+    response_hand_lemma = response_lemma
+    )
 
 length(d.tidy.auto.non_match$response)
 
 # d.tidy.auto.non_match %>%
-#   distinct(superordinate, np, context_sentence, adj, np_match, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
+#   distinct(superordinate, np, context_sentence, adj, keyword, response, response_lemma, cleanedPhrase, specific, matchingSuper) %>%
 #   View()
 ```
 
 The goal is to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). The responses are lower-cased. 
 
-``` {r nonMatchedResps-lemmatize}
-d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
-  mutate(response = tolower(response))
-
-d.tidy.auto.non_match <- d.tidy.auto.non_match %>%
-  mutate(
-    response_hand_lemma = response_lemma
-  )
-```
 
 The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 869 non-matched responses (20.6%) were produced less than 3 times and are dropped. 
 
@@ -824,23 +794,26 @@ d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc 
 
 
 ## Modal Superordinate Responses
+
 The responses that were not processed automatically are inspected in detail to find responses systematically deviating from the anticipated ones. 
 
-### Superordinates for the Adjective Endorsement
+### Superordinates for the Adjective Endorsement Task
+
 Here, superordinate responses were extracted which deviated from the anticipated superordinates in all conditions (i.e. NPs and adejctives: 3x2). The superordinates for the item 5 and 77 were adjusted to the modal response extracted here in all data sets and were used in the adjective endorsement experiment. 
 
-The data points form the full data set are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. Then, the modal response is extracted. The responses are then coerced to the respective modal response (i.e. the modal response of the respective NP and adjective condition). Then those superordinates where the modal response deviates for all 6 items of a set (set is 6 variations of an item: 3 np_expectations x 2 adj_polarities) and the deviating modal response is the same for all the 6 are extracted .
+The data points form the full data set are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. Then, the modal response is extracted. The responses are then coerced to the respective modal response (i.e. the modal response of the respective NP and adjective condition). Then those superordinates where the modal response deviates for all 6 items of a set (set is 6 variations of an item: 3 np_expectations x 2 adj_polarities) and the deviating modal response is the same for all the 6 are extracted.
+
 ``` {r}
 # extract the mode response
 d.tidy.resp.counts <- d.auto.non_match.hand_cc %>%
-  group_by(stim_id, superordinate, np_match, np_expectations, adj_polarity, specific, response_lemma) %>%
+  group_by(stim_id, superordinate, keyword, np_expectations, adj_polarity, specific, response_lemma) %>%
   count() %>%
   mutate(n_unique_resps = n) %>%
   ungroup()
 
 # insert the NP  where participants gave subordinate response, modal superordinate where they gave superordinate response in column 'mode'
 d.tidy.resp.counts <- d.tidy.resp.counts %>%
-  group_by(stim_id, superordinate, np_match, adj_polarity, specific) %>%
+  group_by(stim_id, superordinate, keyword, adj_polarity, specific) %>%
   mutate(mode = response_lemma[which.max(n)])
 
 
@@ -849,8 +822,8 @@ d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>%
   rowwise() %>%
   mutate(
     isModeNP = containsString_responses(
-      as.character(paste("_", np_match, "_", sep = "")), as.character(mode),
-      np_match, as.character(paste("_", mode, "_", sep = ""))
+      as.character(paste("_", keyword, "_", sep = "")), as.character(mode),
+      keyword, as.character(paste("_", mode, "_", sep = ""))
     ),
     isModeSuper = containsString_responses(
       as.character(paste("_", superordinate, "_", sep = "")), as.character(mode),
@@ -862,18 +835,18 @@ d.tidy.resp.counts.analysis <- d.tidy.resp.counts %>%
 
 d.tidy.resp.counts.analysis %>%
   filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  distinct(stim_id, degree, superordinate, keyword, specific, adj_polarity, mode) %>%
   View()
 
 d.tidy.resp.counts.analysis %>%
   filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  distinct(stim_id, degree, superordinate, keyword, specific, adj_polarity, mode) %>%
   count(stim_id, mode) %>%
   filter(n >= 6) -> stim.ids.adjust
 
 d.tidy.resp.counts.analysis %>%
   filter(isModeNeither == 0) %>%
-  distinct(stim_id, degree, superordinate, np_match, specific, adj_polarity, mode) %>%
+  distinct(stim_id, degree, superordinate, keyword, specific, adj_polarity, mode) %>%
   right_join(., stim.ids.adjust, by = c("stim_id")) %>%
   View()
 ```

@@ -5,6 +5,13 @@ date: "6/11/2020"
 output: html_document
 ---
 
+```{r}
+library(tidyverse)
+library(tidyboot)
+library(ggplot2)
+library(brms)
+library(knitr)
+```
 
 ``` {r}
 # read data
@@ -16,19 +23,41 @@ output: html_document
 # data <- read_csv("../data/class-elicitation-prereg-final/full-classified-data-w-hand-class.csv")
 
 # automatically classified data, for viz
-auto_data <- read_csv("../../data/class-elicitation-prereg-final/auto-classified-data-w-freqs-final.csv")
+# df.auto <- read_csv("../../data/class-elicitation-prereg-final/auto-classified-data-full-w-freqs-final.csv")
+df.auto <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
+
+with(df.auto, table(specific, matchingSuper)) %>% 
+  kable()
+
 ```
+
+```{r}
+d.tidy.auto.match <- df.auto %>%
+  filter(matchingSuper | specific)
+
+n.automatic.responses <- d.tidy.auto.match %>%
+  ungroup() %>%
+  count() %>%
+  pull(n)
+
+n.automatic.responses
+n.automatic.responses / length(df.auto$response)
+
+write_csv(d.tidy.auto.match, "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_mexact-match_frequencies.csv")
+```
+
 
 # Visualisations
 
 ```{r}
 
-d.tidy.phrase.specificMarking.bs <- data %>%
+d.tidy.phrase.specificMarking.bs <- df.auto %>%
   group_by(np_expectations, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
-d.tidy.phrase.specificMarking.bs.item <- data %>%
-  group_by(stim_id, degree, superordinate, np_expectations, np, adj_polarity) %>%
+d.tidy.phrase.specificMarking.bs.item <- df.auto %>%
+  group_by(stim_id, degree, superordinate_pl, np_expectations, 
+           subordinate_sg, adj_polarity) %>%
   tidyboot_mean(column = specific)
 
 d.tidy.phrase.specificMarking.bs %>%
@@ -49,7 +78,7 @@ d.tidy.phrase.specificMarking.bs.item %>%
   )) -> d.tidy.phrase.specificMarking.bs.item
 
 # save(d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData")
-load(file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData") # d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file =
+#load(file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData") # d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file =
 
 set.seed(2020)
 
@@ -107,13 +136,13 @@ d.tidy.phrase.specificMarking.bs.item %>%
   guides(fill = guide_legend(title = "Adjective polarity", reverse = T)) +
   # theme_black()+
   scale_y_continuous(limits = c(0, 1), breaks = c(0, 0.5, 1)) +
-  ylab("Proportion paraphrases that contain Specific NP") +
-  xlab("Subordinate Category General Expectations")
+  ylab("Proportion of Subordinate Comparison Class Inferences") +
+  xlab("General Expectations of Subordinate Category")
 
-ggsave(
-  filename = "../writing/paper/figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf",
-  width = 6, height = 4
-)
+# ggsave(
+#   filename = "../../writing/paper/figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf",
+#   width = 6, height = 4
+# )
 
 # save(d.tidy.phrase.specificMarking.bs.item, file = "d_comparisonClass_specific_bs_item.RData")
 ```
