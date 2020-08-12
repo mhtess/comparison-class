@@ -58,6 +58,7 @@ var thresholdPrior = cache(function(form){
 });
 
 var dataPath = "data/";
+// var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
@@ -185,6 +186,11 @@ var model = function(){
 				data_within_subordinate_adj.length == 0 ? display("====EMPTY SUB ADJ====" + stim_id + "_" + subordinate) : null
 				data_within_subordinate_cc.length == 0 ? display("====EMPTY SUB CC====" + stim_id + "_" + subordinate) : null
 
+				// display(JSON.stringify(classParameters[item_set_heirarchy]))
+				//
+				// display(data_within_subordinate_cc[0].subordinate_freq)
+				// display(data_within_subordinate_cc[0].superordinate_freq)
+
         var subcatWeight = logistic(
 					classParameters[item_set_heirarchy].intercept +
 					classParameters[item_set_heirarchy].frequency * Math.log(
@@ -281,6 +287,9 @@ var model = function(){
             _.filter(data_within_subordinate_cc, {adj_polarity}),
         "specific");
 
+				// console.log(JSON.stringify(_.filter(data_within_subordinate_cc, {adj_polarity})))
+				// console.log(d_subcat_ccInference)
+
         var superSpeakerProbs = speaker1_super(adj_polarity);
 
 				d_subcat_superSpeaker.length == 0 ? display("====EMPTY form ADJ====" + stim_id + "_" + subordinate + "_" + adj_polarity) : null
@@ -294,8 +303,8 @@ var model = function(){
         var ccRSA = pragmaticListener(adj_polarity);
 
         mapData({data:d_subcat_ccInference}, function(d){
-         // console.log("cc = "+ ccRSA.score(d ? 1: 0))
-          observe(ccRSA, d ? 1 : 0);
+         // console.log("cc = "+ ccRSA.score(d))
+          observe(ccRSA, d);
         })
 
         query.add(["stim_"+stim_id, subordinate,  "adjEndorse", adj_polarity], Math.exp(superSpeakerProbs.score(1)))
@@ -338,6 +347,7 @@ var model = function(){
 // var totalIterations = 250000, lag =  25;
 // var totalIterations = 150000, lag =  50;
 var totalIterations = 500000, lag =  250;
+// var totalIterations = 1, lag =  1;
 // var totalIterations = 5000, lag = 2
 var samples = totalIterations/lag, burn = totalIterations / 2;
 // var outfile = 'results-L1-S1-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_'+by_item_cc_parameters+'-mcmc-'+ totalIterations+'_burn'+burn+'_lag'+lag+'_chain'+chain+'.csv'
@@ -353,6 +363,7 @@ Infer({model,
        onlyMAP: true,
        verbose: T,
        verboseLag: totalIterations / 20,
-       callbacks: [callback]});
+       callbacks: [callback]
+		 });
 
  "written to " + outfile;
