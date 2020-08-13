@@ -106,6 +106,7 @@
 %\section{Document Overview}
 %\renewcommand{\thepage}{S\arabic{page}}  
 %\renewcommand{\thesection}{S\arabic{section}}   
+\renewcommand{\theequation}{S\arabic{equation}}
 \renewcommand{\thetable}{S\arabic{table}}   
 \renewcommand{\thefigure}{S\arabic{figure}}
 
@@ -199,24 +200,40 @@ This adaptive procedure was decided ahead of time and is documented in the pre-r
 
 \subsubsection{Response preprocessing}
 
-In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%). 
+Our text preprocessing procedure was divided into two stages: Exclusions and Corrections. 
+
+\paragraph{Exclusions}
+
 We excluded responses that did not make sense given the context.
 These included but were not limited to responses that were the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 440 in total (1.6\%). 
 
+We additionally removed from the data set responses that seemed to be the result of a failure of the participant to grasp the intended referent of the utterance. For example, in the context sentence: ``Alexander is in the forest and hears a woodpecker. Alexander says, \emph{It is loud}'', the intended referent of the pronoun \emph{it} is the woodpecker; however, some participants responded \emph{it is loud relative to other forests}, which suggests they understood the referent to which \emph{it} refers to be the forest. This kind of ``reference failure'' responses numbered 249 in total (or, 0.9\% of the remaining responses). 
+
+\paragraph{Corrections}
+
+In order to improve alignment across responses, we corrected for misspellings (633; 2.38\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 3154, 11.9\%), and replaced some responses with obvious synonyms given the context (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}/\emph{individuals}--\emph{people}; 787, 2.96\%). 
+
+
 \subsubsection{Response analysis}
 
-We preformed an automatic analysis of the comparison class responses by checking whether or not the preprocessed responses  contained the subordinate NP presented in the experiment (e.g., \emph{basketball player}) as a substring or whether the subordinate NP presented in the experiment contained the response as a substring. 
+After preprocessing the raw text responses, we preformed an automatic analysis of the comparison class responses by checking whether or not the preprocessed responses contained the subordinate NP presented in the experiment (e.g., \emph{basketball player}) as a substring. 
+
+Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate noun phrase by which the referent is introduced (\emph{subordinate-NP}, e.g., a basketball player) or a more superordinate category (\emph{superordinate-NP}). 
+In order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response (e.g., \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}).
+One exception to this generality is utterances involving negation markers (e.g., ``all kinds of people except basketball players''), but no responses in our data set involved negation in this way.
+Thus, we automatically categorized preprocessed responses as either subordinate or superordinate by checking whether the preprocessed response contained the subordinate-NP as a substring.
+
+%\footnote{Some of our pre-designated superordinate-NPs turned out to be incorrect guesses as to what would be the most salient superordinate category in the context. These cases were all very clear, and we replaced our pre-designated superordinate-NPs with the empirical superordinate-NP for purposes of analysis.}
+
 
 \subsubsection{Supplementary data analysis}
 
-93 of our 540 items (adjective -- noun pairs) had universally consistent lemmatized responses. 
-Of these 93, all but one were cases where 100\% of participants gave a subordinate-NP response. 
+\paragraph{Universally consistent responses}
+93 of our 540 items (adjective -- noun pairs) had universally consistent lemmatized responses wherein all participants gave the same response. 
+Of these 93, all but one were cases where 100\% of participants gave a subordinate-NP response (i.e., a response that was the same as the NP with which the referent was introduced). 
 For example, 100\% of valid responses for a ``loud church'' all concerned the subordinate category \emph{church}. 
-The one NP-adj pair that led to all superordinate responses was the ``cheap plastic bracelet'', which all participants said was cheap relative to other \emph{bracelets}. 
+The lone NP-adj pair that led to all superordinate responses was the ``cheap plastic bracelet'', which all participants said was cheap relative to other \emph{bracelets}. 
 The numeric counts of items that received 100\% subordinate-NP responses mirrors the overall pattern of responses collapsed across items shown in the main text: adjectives that conflict with the general expectations about the category (e.g., a short basketball player) are more likely to receive subordinate-NP comparison class responses (Table \ref{tab:counts}). 
-
-
-
 
 \begin{center}
   \begin{table}[h]
@@ -233,52 +250,75 @@ The numeric counts of items that received 100\% subordinate-NP responses mirrors
   \end{table}
 \end{center}
 
-
+\paragraph{Regression on subset of responses that explicitly mention subordinate or superordinate-NP}
+%
+In the main text, we analyze the full data set of preprocessed responses. Here, we report statistics on a subset of the data set in which the participants preprocessed responses explicitly mention either the subordinate-NP (the NP by which the referent was introduced) or the superordinate-NP (an NP that the authors pre-specified as the superordinate-NP for a set of three subordinate-NPs). 
+4007 responses (15.2\%) are thus excluded from this analysis. 
 
 
 \section{Alternative Models}
 
 
-\begin{figure}[t]
-    \centering
-    \subfigure[A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall?]{\label{fig:alternativeModelPredictions}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L0.pdf}}
-    \subfigure[A more sophisticated pragmatic listener model that reasons about which comparison class a speaker believes that the listener would infer. ]{\label{fig:alternativeModelPredictions2}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L2.pdf}}
-    \caption{Alternative model predictions.}
-\end{figure}
+
+
+The inference about the comparison class outlined in the main text involves a listener reasoning about a speaker reasoning about a listener. The full Rational Speech Act model is given by these equations (reproduced from the main text): 
+%
+\begin{align}
+L_1(x, c \mid u, k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k)  \label{eq:L1a} \\ 
+S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S1} \\
+L_{0}(x \mid u, c) &= \int_{\theta} L_{0}(x, \theta \mid u, c) \diff\theta \label{eq:L0_marg} \\ 
+L_{0}(x, \theta \mid u, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(\theta) \label{eq:L0}
+\end{align}
+
 
 
 \subsection{Literal alternative model}
 
-The inference about the comparison class outlined above involves a listener reasoning about a speaker reasoning about a listener.
-One might wonder whether the inference about the comparison class is necessarily a pragmatic inference.
-We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
+
+
+One might question whether the inference about the comparison class is necessarily a pragmatic inference which requires recursive reasoning. 
+We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1a} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
 This literal comparison class inference model is given by:
 %
   \begin{align}
-L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c) \cdot P(c \mid k) \cdot P(\theta) \label{eq:L0alt}
+L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)\cdot P(\theta) \cdot P(c \mid k)  \label{eq:L0alt}
 \end{align}
 %
-Similar to the pragmatic listener model (Eq.~\ref{eq:L1}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
-Unlike the pragmatic listener model, however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener knows the referent is a basketball player, but believes the speaker was assuming a \emph{person comparison class}).
-The literal listener version of the model cannot separate these representations.
+Similar to the pragmatic listener model (Eq.~\ref{eq:L1a}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
+Unlike the pragmatic listener model (Eq.~\ref{eq:L1a}), however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S_1(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener may know the referent is a basketball player -- $k = \emph{basketball players}$ -- but believes the speaker was assuming a \emph{person} comparison class -- $c = \emph{people}$).
+The literal listener version of the model has no way of separating these representations.
 In effect, this listener is answering a slightly different question from the comparison class inference problem. The question this alternative model is answering is: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
-This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:alternativeModelPredictions}). 
+This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:altModels}A). 
+
+
+\begin{figure}[t]
+    \centering
+    \subfigure{\label{fig:alternativeModelPredictions}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L0.pdf}}
+    \subfigure{\label{fig:alternativeModelPredictions2}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L2.pdf}}
+    \caption{Alternative model predictions. A: A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall? B: A more sophisticated pragmatic listener model that reasons about which comparison class a speaker believes that the listener would infer.}
+    \label{fig:altModels}
+\end{figure}
+
 
 \subsection{Alternative pragmatic model}
 
-The pragmatic comparison class inference listener model (Eq. \ref{eq:L1}) reasons about which comparison class a speaker is more likely to be assuming.
+The pragmatic comparison class inference listener model (Eq. \ref{eq:L1a}) reasons about which comparison class a speaker is more likely to be assuming.
 That is, the speaker (Eq. \ref{eq:S1}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
-Speakers may be aware, however, that the comparison class is not in the common ground, but may still avoid articulating a comparison class if the listener can reasonably be assumed to infer the comparison class. This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed  the listener would infer, given that the first-order listener inference about the comparison class itself involves a pragmatic inference. %\ndg{??:  as shown via counterexample by the literal model above}. 
-This higher-order reasoning model is given by the following equations:
+Speakers may be aware, however, that the comparison class is not in the common ground; still, they may still avoid articulating a comparison class  (e.g., uttering ``He's short for a basketball player'') if the listener can reasonably be assumed to infer the comparison class. 
+
+This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed the listener would infer.
+As demonstrated above with the Literal Alternative model, this first-order listener inference about the comparison class itself involves pragmatic reasoning. 
+This higher-order pragmatic reasoning model is given by the following equations:
 
 \begin{align}
 L_2(x, c \mid u, k) &\propto S_2(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k) \label{eq:L2} \\
 S_2(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{1}(x, c \mid u) - \text{cost}(u) ))}\label{eq:S2} 
 \end{align}
-
-The primary difference between this model and the model given by Eqs.~\ref{eq:L1} and \ref{eq:S1} is in the speaker $S_2$.
-This speaker chooses their utterance by taking into account the fact that the listener $L_1$ (Eq.~\ref{eq:L1}) is uncertain about the comparison class. 
-As shown in Figure \ref{fig:alternativeModelPredictions2}, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations of about the category and the adjective heard.
+%
+where $L_1$ is the pragmatic inference model defined above and in the main text (Eq.~\ref{eq:L1A}).
+The primary difference between this model and the model given by Eqs.~\ref{eq:L1a} and \ref{eq:S1} is in the speaker $S_2$ (Eq.~\ref{eq:S2}) (vs. the $S_1$ shown in Eq.~\ref{eq:S1}).
+$S_2$ chooses their utterance by taking into account the fact that the listener $L_1$ (Eq.~\ref{eq:L1a}) is uncertain about the comparison class. 
+As shown in Figure \ref{fig:altModels}B, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations of about the category and the adjective heard.
 Further, the inferences of this model, like those of the simpler pragmatics model, are resilient to reasonable choices of alternative utterances; most notably, if the set of alternative utterances provides a way to explicitly articulate the comparison class (e.g., the speaker could have said \emph{They're tall for a basketball player}), the same inferences result from hearing the utterance without a comparison class.
 
 \ndg{suggest situations where these two models might come apart?}
@@ -287,16 +327,7 @@ Further, the inferences of this model, like those of the simpler pragmatics mode
 
 
 
-\subsection{Model overview}
 
-To better understand the representations that underly comparison class inferences, we formalize a baseline model that makes inferences based only on distributional knowledge about scalar properties of categories $P(x)$ and a set of alternative models which differ in how the comparison class prior $P(c \mid k)$ is parameterized. 
-
-The variability across items in comparison class inferences that cannot be explained by distributional knowledge about properties could be attributed to baseline expectations about what comparison classes are likely to be used: the comparison class prior $P(c \mid k)$. 
-Baseline expectations about conceptual comparison class could be a function of the level of abstraction of the categories in question as well as the usage frequency of the noun phrases used to describe those categories. 
-For example, basic-level categories may be more probable conceptual comparison classes because of their utility in everyday reasoning \cite{rosch1975family}; additionally, we might expect the relative probability of basic-level~vs.~subordinate level categories to differ from basic~vs.~superordinate categories.
-To investigate these possibilities, we construct and compare models which differ in how the comparison class prior is parameterized.
-% one in which the inference is influenced by the frequency of the noun phrase, and one in which both frequency and a basic-level bias have an influence (maximal model). 
-We infer all model parameters using a Bayesian data analytic model that infers the world knowledge shared between these two tasks (comparison class inference and adjective endorsements) along with the comparison class prior parameters (which depend on the model variant) and the speaker optimality free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
 
 % bThe comparison class prior is   a construct of theoretical interest in its own right, and we take the first steps to understand this construct in this analysis. 
 
@@ -459,6 +490,18 @@ We infer all model parameters using a Bayesian data analytic model that infers t
 %This \emph{descriptive Bayesian approach} \cite{tauber2017} coupled with explicit models of language understanding allow us to predict and explain broader coverage data sets while still constraining flexibility by forcing models to predict more distinct data points. 
 
 \section{Bayesian Data Analysis}
+
+
+\subsection{Model overview}
+
+To better understand the representations that underly comparison class inferences, we formalize a baseline model that makes inferences based only on distributional knowledge about scalar properties of categories $P(x)$ and a set of alternative models which differ in how the comparison class prior $P(c \mid k)$ is parameterized. 
+
+The variability across items in comparison class inferences that cannot be explained by distributional knowledge about properties could be attributed to baseline expectations about what comparison classes are likely to be used: the comparison class prior $P(c \mid k)$. 
+Baseline expectations about conceptual comparison class could be a function of the level of abstraction of the categories in question as well as the usage frequency of the noun phrases used to describe those categories. 
+For example, basic-level categories may be more probable conceptual comparison classes because of their utility in everyday reasoning \cite{rosch1975family}; additionally, we might expect the relative probability of basic-level~vs.~subordinate level categories to differ from basic~vs.~superordinate categories.
+To investigate these possibilities, we construct and compare models which differ in how the comparison class prior is parameterized.
+% one in which the inference is influenced by the frequency of the noun phrase, and one in which both frequency and a basic-level bias have an influence (maximal model). 
+We infer all model parameters using a Bayesian data analytic model that infers the world knowledge shared between these two tasks (comparison class inference and adjective endorsements) along with the comparison class prior parameters (which depend on the model variant) and the speaker optimality free parameters of the RSA models (Figure \ref{fig:bayesnet}). 
 
 
 \subsection{Model details}

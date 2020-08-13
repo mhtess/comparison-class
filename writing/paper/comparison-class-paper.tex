@@ -105,7 +105,7 @@
 
 \newcommand{\lmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\), t\((\rlgetnum{#1}{Rowname}{#2}{df}{0}) = \rlgetnum{#1}{Rowname}{#2}{t.value}{2}, p = \rlgetnum{#1}{Rowname}{#2}{Pr...t..}{3}\)}
 
-\newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{Rowname}{#2}{Estimate}{3}\) (\rlgetnum{#1}{Rowname}{#2}{l.95..CI}{3}, \rlgetnum{#1}{Rowname}{#2}{u.95..CI}{3})}
+\newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{key}{#2}{mean}{2}\) [\rlgetnum{#1}{key}{#2}{l95}{2}, \rlgetnum{#1}{key}{#2}{u95}{2}]}
 
 \newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2} (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2})}
 
@@ -682,9 +682,16 @@ We preprocessed the remaining 26,320 responses by correcting for misspellings  (
 %In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%).
 
 Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate noun phrase by which the referent is introduced (\emph{subordinate-NP}, e.g., a basketball player) or a more superordinate category (\emph{superordinate-NP}).
-We automatically categorize responses as either subordinate or superordinate by checking whether the preprocessed response contains the subordinate-NP or superordinate-NP\footnote{Out of our 90 pre-designated superordinate-NPs, one (``deserts'') turned out to be an incorrect guess as to what would be the most salient superordinate category for the subordinate categories (``smoothies'', ``muffins'', ``chocolate fondue'') in the context. We replaced this pre-designated superordinate-NP with the empirically most popular superordinate-NP (``foods'') for purposes of analysis.} as a substring, respectively.\footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response.
-For example, \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}. Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses contained any.}
-22161 (83.4\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set.
+We automatically categorize responses as \emph{subordinate} if the preprocessed response contains the subordinate-NP as a substring; all other responses are coded as \emph{superordinate}.\footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response. For example, \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}. Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses contained any.}
+For a finer-grained analysis, we further categorize the \emph{superordinate} responses as to whether or not they contain the pre-conceived superordinate-NP.\footnote{Out of our 90 pre-conceived superordinate-NPs, one (``deserts'') turned out to be an incorrect guess as to what would be the most salient superordinate category for the subordinate categories (``smoothies'', ``muffins'', ``chocolate fondue'') in the context. We replaced this pre-designated superordinate-NP with the empirically most popular superordinate-NP (``foods'') for purposes of analysis.}
+15637 (59.4\%) of the responses were categorized as \emph{subordinate}; of the remaining 10683 (41.6\%) responses, 6676 (25.3\% of the total) explicitly mention the pre-conceived superordinate-NP.
+In the subsequent analyses, we treat the responses that do mention neither the subordinate or superordinate-NP as \emph{superordinate}, as these responses in general either referenced superordinate categories along other hierarchies (e.g., a sauna is cold \emph{relative to other days} [as opposed to other saunas or locations]) or categories that were superordinate relative to our pre-designated superordinate categories (e.g., a wrestler is strong \emph{relative to other people} [as opposed to other wrestlers or athletes]).
+%; we present analyses that exclude these responses in the SI. 
+%That is, 22313 (84.7\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set.
+
+
+
+
 %\red{For example, in response to  \{basketball players, golfers, jockeys\} are \{tall, short\}, \textbf{X\%} of participants produced either one of the three specific NPs or the more general \emph{people}}. \mht{[how common is athlete here?]}
 %We use only these data for the main analyses.
 %Of the remaining 4394 (16.6\%) responses, 1966 were unique.
@@ -699,12 +706,18 @@ Our primary hypothesis was that usage of a subordinate~vs.~superordinate compari
 %As predicted by the comparison class inference model, listener inferences about the comparison class were influenced via an interaction between the general expectations about the subordinate category and the adjective polarity , which
 %We confirmed
 %Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E).
-We observe an overall preference for subordinate comparison classes for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}; \brmresults{expt3_brm_pilot.csv}{Intercept}) and no credible difference in this overall preference when the subordinate category was either near the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt3_brm_pilot.csv}{np_expectationshigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt3_brm_pilot.csv}{np_expectationslow}).
- In addition, there was no credible difference in comparison class inferences for the positive form adjective (e.g., tall) and the negative form adjective (e.g., short) for the middle-of-the-scale, control items (e.g., \emph{soccer players}; \brmresults{expt3_brm_pilot.csv}{adj_polarity1}). 
- 
+
 As predicted by the comparison class inference model, we observe a pair of two-way interactions (Figure \ref{fig:ccInferenceMain}):
-When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the negative-form adjective (e.g., short) led to more subordinate comparison classes than the positive-form adjective (e.g., tall) in comparison to the control, middle-of-the-scale items (e.g., soccer player):  beta-weight and 95\% Bayesian credible interval: \brmresults{expt3_brm_pilot.csv}{np_expectationshigh:adj_polarity1}.
-The opposite interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): Hearing the positive-form adjective led to credibly more subordinate inferences than hearing a negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt3_brm_pilot.csv}{np_expectationslow:adj_polarity1}.
+When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the negative-form adjective (e.g., short) led to more subordinate comparison classes than the positive-form adjective (e.g., tall) in comparison to the control, middle-of-the-scale items (e.g., soccer player): posterior mean beta-weight and 95\% Bayesian credible interval: \brmresults{expt_brm_contrasts_10k.csv}{adjpol_nphigh}.
+This interaction was the result of the high-end-of-the-scale subordinate categories showing more subordinate comparison class inferences for the negative adjective (e.g., short) than for the positive adjective (e.g., tall): \brmresults{expt_brm_contrasts_10k.csv}{highneg_highpos}.
+The same preference was not observed for the middle-of-the-scale, control items (e.g., \emph{soccer players}; \brmresults{expt_brm_contrasts_10k.csv}{adjpol}). 
+A comparable interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): Hearing the positive-form adjective led to credibly more subordinate inferences than hearing a negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt_brm_contrasts_10k.csv}{adjpol_nplow}.
+Again, this was driven by the behavior of the low-end-of-the-scale subordinate categories, which showed a stronger preference for the superordinate comparison classes for negative than for positive adjectives (\brmresults{expt_brm_contrasts_10k.csv}{lowneg_lowpos}).
+
+Our results are highly symmetric across the low-end~vs.~high-end of the scale subordinate categories.
+%We observe an overall preference for subordinate comparison classes for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}; \brmresults{expt_brm_contrasts_10k.csv}{intercept}) and no  
+%We observe no credible difference in the overall preference for subordinate~vs.~superordinate comparison class inferences when the subordinate category was either near the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_contrasts_10k.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_contrasts_10k.csv}{nplow}).
+The inferences that result from adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_contrasts_10k.csv}{lowpos_highneg}), nor were the inferences about categories from adjectives that were consistent with general expectations (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_contrasts_10k.csv}{lowneg_highpos}).
 Thus, general, world-knowledge expectations about the category interface with the adjective used to guide comparison class inferences, as predicted by the model.
 
 %\ndg{should point to (very nice) fig 2 somewhere?}
@@ -942,6 +955,7 @@ The strong quantitative fit of this model suggests that comparison class inferen
 Though our fully parameterized model does the best job at accounting for the variability in comparison class inferences, the data set exhibits even more variability than our model can account for. Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals).
 The model struggles to match participants' inferences for \emph{spices}, which do not show the predicted effect of expectations and also show a fairly strong basic-level bias for the more superordinate category of \emph{spices}.
 A similar pattern can be observed for the \emph{doorways} item and the \emph{condo} and \emph{mansion wall} items, where human inferences much more strongly support the more superordinate categories than the model's inferences.
+\mht{our assumption of gaussian priors might be incorrect}
 In our maximal model, we inferred two separate basic-level bias parameters, one for superordinate~vs.~basic-level comparisons and one for basic~vs.~subordinate-level comparisons.
 These item mismatches suggest \mht{revisit after re-running model comparisons?}
 see an overall weak preference for basic-level categories over subordinate level categories and so the model does not show a strong preference for \emph{spices}.
