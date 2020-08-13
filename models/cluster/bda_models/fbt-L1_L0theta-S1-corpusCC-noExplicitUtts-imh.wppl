@@ -151,8 +151,8 @@ var model = function(){
 
 			// display(superordinate_categories)
 
-			data_within_stim_id_cc.length == 0 ? display("====EMPTY stim_id ADJ====" + stim_id + "_") : null
-			data_within_stim_id_adj.length == 0 ? display("====EMPTY stim_id CC====" + stim_id + "_") : null
+			data_within_stim_id_cc.length == 0 ? display("====EMPTY stim_id CC====" + stim_id + "_") : null
+			data_within_stim_id_adj.length == 0 ? display("====EMPTY stim_id ADJ====" + stim_id + "_") : null
 
     // foreach(superordinate_categories, function(superordinate){
 			// display(superordinate)
