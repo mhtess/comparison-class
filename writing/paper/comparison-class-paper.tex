@@ -107,7 +107,7 @@
 
 \newcommand{\brmresults}[2]{\(\beta = \rlgetnum{#1}{key}{#2}{mean}{2}\) [\rlgetnum{#1}{key}{#2}{l95}{2}, \rlgetnum{#1}{key}{#2}{u95}{2}]}
 
-\newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2} (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2})}
+\newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2}  (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2}) }
 
 \authornote{Correspondence concerning this article should be addressed to Michael
 Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
@@ -756,7 +756,7 @@ Bayesian data analysis.
 Since we infer the world knowledge priors $P(x)$, our method appears tantamount to a \emph{descriptive Bayesian approach} \cite{tauber2017}, in which we are simply interested in understanding what prior knowledge would give rise to the inference patterns we observe in the data.
 This method is not useful for our purposes since we are interested in characterizing the extent of the variability in comparison class inferences that are explained by actual knowledge about the categories and properties, not whether the variability can be be explained by some knowledge in principle. (That is, we would like to \emph{predict} not merely \emph{accomodate} item-level variation.)
 Measuring prior knowledge in this setting is challenging, however,  since direct empirical measurements require explicit estimation of relevant quantities or probabilities \cite<e.g., plausible temperatures of days in winter, summer, etc...;>{Franke2016} and many of our domains can be reasoned about intuitively (e.g., the loudness of a diesel engine~vs.~an electric car) without a clear representation of the underlying scale (e.g., how many decibels is the typical sound of a diesel engine?).
-For this reason, we take a different approach: We utilize the productivity of the fragment of natural language that our computational model understands to predict data from a related language experiment (\emph{Adjective Endorsements}: truth judgments for statements with explicit comparison classes involving the same scalar adjectives applied to the same categories; $n=375$, see SI for details) and synthesize the two data sets using a single Bayesian data analytic model, wherein the parameters that govern background knowledge in the pragmatics models are constrained by both data sets.
+For this reason, we take a different approach: We utilize the productivity of the fragment of natural language that our computational model understands to predict data from a related language experiment (\emph{Adjective Endorsements}: truth judgments for statements with explicit comparison classes involving the same scalar adjectives applied to the same categories; $n=375$, see SI for details and see Figure \ref{fig:residuals} for results for eight items) and synthesize the two data sets using a single Bayesian data analytic model, wherein the parameters that govern background knowledge in the pragmatics models are constrained by both data sets.
 \ndg{i can imagine reviewers complaining that this is circular, since the truth judgements depend on the same prior knowledge and in a similar way -- so at most our model is simply jointly accommodating the data.... what do you think?}
 \mht{we are trying to make the case that comparison class inferences depend upon world knowledge. we expect other judgments to depend on world knowledge as well. is there a truly-circular model that we could show is not as good? perhaps we could show in the SI that the raw correlation between the two judgments is not as predictive as our modeling approach (though that comparison would have 0 parameters, whereas our model has many). we could also try to articulate a true-circular model, which hopefully wouldn't be as good?}
 
@@ -786,7 +786,7 @@ Convergence was checked through visual inspection of the different chains to ens
 \begin{figure}[t!]
 \centering
 \includegraphics[width=\textwidth]{figs/model_scatters_modelVariants.pdf}
-\caption{Model fits for Expt.~2 (Comparison Class Inference) and Expt.~3 (Adjective Endorsement) for four models that differ in their parameterization of the comparison class prior. Flat prior model assumes all comparison classes are equally likely a priori. Basic-level bias model assumes that there is a preference for a basic-level comparison class. Frequency effect assumes the prior probability of a comparison class tracks the frequency of the NP in a corpus. Basis-level and frequency effect assumes that the prior probability of a comparison class is a function of a basic-level bias and frequency. Dots represents means of the human judgments (proportion Specific-NP for Expt.~2; proportion endorsement for Expt.~3) and the maximum a-posteriori estimate of the model's predictions. Lines represents bootstrapped 95\% confidence intervals for the data and 95\% Bayesian credible intervals for the models.}
+\caption{Model fits for main experiment (Comparison Class Inference) and norming experiment (Adjective Endorsement; see SI) for four models that differ in their parameterization of the comparison class prior used inside the RSA model. Flat prior model assumes all comparison classes are equally likely a priori. Basic-level bias model assumes that there is a preference for a basic-level comparison class. Frequency effect assumes the prior probability of a comparison class tracks the frequency of the NP in a corpus. Basic-level and frequency effect assumes that the prior probability of a comparison class is a function of a basic-level bias and frequency. Dots represents means of the human judgments (proportion Specific-NP for Comparison Class Inference experiment; proportion endorsement for norming study) and the maximum a-posteriori estimate of the model's predictions. Lines represents bootstrapped 95\% confidence intervals for the data and 95\% Bayesian credible intervals for the models.}
 \label{fig:scatters}
 \end{figure}
 %We explore each of these components of the model to elucidate the cognitive representations that underly comparison class inferences.
@@ -831,8 +831,9 @@ Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- 
 \begin{figure}[t!]
     \centering
     \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference and Adjective Endorsement data sets. See SI for full data-analytic model.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} \\
-    \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4). ]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}}
-    \caption{Quantitative modeling results.}
+    \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4) for comparison class inference data. Top two rows show data and model predictions for the main Comparison Class Inference experiment; bottom two rows correspond to the Adjective Endorsements (norming study; see SI). The log ratio frequency of subordinate NP to superordinate NP is shown in brackets next to the x-axis labels; a more negative number corresponds to a stronger prior belief in the superordinate category as the comparison class.]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}}
+    \caption{Quantitative modeling results for eight sets of items.}
+    \label{fig:by_item_results}
 \end{figure}
 
 
@@ -848,8 +849,8 @@ Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- 
 %Our full model does a quite good job at accounting for the gradability of these inferences ($r = 0.88; r^2 = 0.77$)
 
 To gain further insight into the comparison class inference results, we examine the maximal model's posterior distribution over parameters.
-The speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}$, $\alpha_2 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}$.
-We also find a positive effect of frequency of the noun phrase -- $\beta_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}$.
+The speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}, $\alpha_2 =  $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}.
+We also find a positive effect of frequency of the noun phrase -- $\beta_1 = $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}.
 Our maximal model infers two parameters for the basic-level bias, one which operates if the particular item is a subordinate-level category (and thus, the more superordinate category would be the basic-level) and one that operates if the item is a basic-level category (and thus, the more superordinate category is the superordinate-level).
 We can then use those parameters to compute imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming a constant effect of usage frequency).
 These parameters show that basic and subordinate comparison classes are highly accessible and superordinate comparison classes less so (Figure \ref{fig:parameters}).
@@ -873,13 +874,14 @@ These parameters show that basic and subordinate comparison classes are highly a
     every head row/.style={before row = \toprule, after row = \midrule},
     every last row/.style={after row = \bottomrule},
     columns/model_variant/.style={string type, column name={Model}, column type = l},
-    columns/subordinateCC_r2/.style={string type, column name={$r^2$ Expt.~2}, column type = l,  sci sep align, precision=3},
-   columns/subordinateCC_mse/.style={fixed, column name={$MSE$ Expt.~2}, column type = l, dec sep align, precision=4},
-    columns/adjEndorse_r2/.style={string type, column name={$r^2$ Expt.~3}, column type = l, sci sep align, precision=3},
-     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ Expt.~3}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
+    columns/subordinateCC_r2/.style={string type, column name={$r^2$ CC}, column type = l,  sci sep align, precision=3},
+   columns/subordinateCC_mse/.style={fixed, column name={$MSE$ CC}, column type = l, dec sep align, precision=4},
+    columns/adjEndorse_r2/.style={string type, column name={$r^2$ norming}, column type = l, sci sep align, precision=3},
+     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ norming}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
     \label{tab:r2bf}
   \end{table}
 \end{center}
+
 
 
 \begin{figure}[t]
@@ -889,8 +891,26 @@ These parameters show that basic and subordinate comparison classes are highly a
 \end{figure}
 
 
+Our fully parameterized model triangulates its inferences about the comparison class via background knowledge about the property and the comparison class prior, given by a basic-level bias and the corpus frequency of the subordinate NP. Figure \ref{fig:by_item_results} shows these sources of information for eight sets of subordinate NPs. 
+One can see that middle-of-the-scale control items were sometimes inferred to be closer to high-end of the scale (e.g., the \emph{parrot} is considered relatively light in color relative to other birds) and sometimes closer to the low-end of the scale (e.g., the \emph{laptop} is considered relatively light in weight relative to other electronic devices; Figure~\ref{fig:residuals}, Adjective Endorsement data). These judgments result in different imputed  world knowledge priors (Figure~\ref{fig:worldPriors}) which leads to different comparison class inferences (Figure~\ref{fig:residuals}, Comparison Class Inferences). For example, the \emph{parrot} patterns more like the \emph{seagull} than it does the \emph{crow} in its comparison class inferences: when described as \emph{dark}, it is slightly more likely to be considered \emph{dark for a bird} than when it is described as \emph{light} in color. 
+The data set on comparison class inferences, however, exhibits  even more variability than our model, with its particular sources of information, can account for. 
+For example, the model struggles to match participants' inferences for the comparison class for \emph{shopping malls}, which has an NP-frequency similar to the other subordinate categories in its set (\emph{ice rinks}, \emph{saunas}) and has a world knowledge prior distribution that falls right in the middle of the scale (Fig.~\ref{fig:worldPriors}); thus, the model predicts no difference in comparison class inferences from adjectives \emph{hot}~vs.~\emph{cold}, while participants are more likely to treat a cold shopping mall similar to a cold ice rink -- \emph{cold for a place} -- arguably, more consistent with world knowledge in an American context (i.e., malls in America tend to be heavily air-conditioned). This discrepancy might result from the comparison class inference task leading to slightly richer interpretations than the norming study, perhaps as a result of participants having to do freely produce a response (as opposed to giving a binary decision, as in the Adjective Endorsement norming study; see SI for details). 
 
 
+%Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals).
+
+%Though our fully parameterized model does the best job at accounting for the variability in comparison class inferences, the data set exhibits even more variability than our model can account for. Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals).
+%For example, the model struggles to match participants' inferences for the comparison class for \emph{shopping malls}, which has an NP-frequency similar to the other subordinate categories in its set (ice rinks, saunas) and has a world knowledge prior distribution that falls right in the middle of the scale (Fig.~\ref{fig:worldPriors}); thus, the model predicts no difference in comparison class inferences from adjectives \emph{warm}~vs.~\emph{cold}, while participants are more likely to think a 
+
+%do not show the predicted effect of expectations and also show a fairly strong basic-level bias for the more superordinate category of \emph{spices}.
+%A similar pattern can be observed for the \emph{doorways} item and the \emph{condo} and \emph{mansion wall} items, where human inferences much more strongly support the more superordinate categories than the model's inferences.
+%\mht{our assumption of gaussian priors might be incorrect}
+%In our maximal model, we inferred two separate basic-level bias parameters, one for superordinate~vs.~basic-level comparisons and one for basic~vs.~subordinate-level comparisons.
+%These item mismatches suggest \mht{revisit after re-running model comparisons?}
+%see an overall weak preference for basic-level categories over subordinate level categories and so the model does not show a strong preference for \emph{spices}.
+%These cases are all artifact categories, suggesting that the effect of the basic-level on comparison class inferences may be different for artifacts as for animals, perhaps owing to differences in conceptual representations of these higher-order categories \cite{gelman1988development, kalish1998natural, rhodes2009developmental}.
+%%Spices: garlic is more like salt, but people have a strong preference for "spices" here... because sub and basic level categories are assumed to have equal probability, we fail here.
+%\ndg{but presumably there were other artifact categories in the data set that worked better?}
 
 
 
@@ -952,16 +972,7 @@ The fact that participants naturally produce different responses to the comparis
 The model also made quantitative predictions about the item-level variation of this inference given knowledge about properties and categories.
 The strong quantitative fit of this model suggests that comparison class inference can be viewed as cooperative pragmatic inference.
 
-Though our fully parameterized model does the best job at accounting for the variability in comparison class inferences, the data set exhibits even more variability than our model can account for. Figure \ref{fig:residuals} shows the four item sets with largest mean model residuals (as well as the four item sets with smallest mean model residuals).
-The model struggles to match participants' inferences for \emph{spices}, which do not show the predicted effect of expectations and also show a fairly strong basic-level bias for the more superordinate category of \emph{spices}.
-A similar pattern can be observed for the \emph{doorways} item and the \emph{condo} and \emph{mansion wall} items, where human inferences much more strongly support the more superordinate categories than the model's inferences.
-\mht{our assumption of gaussian priors might be incorrect}
-In our maximal model, we inferred two separate basic-level bias parameters, one for superordinate~vs.~basic-level comparisons and one for basic~vs.~subordinate-level comparisons.
-These item mismatches suggest \mht{revisit after re-running model comparisons?}
-see an overall weak preference for basic-level categories over subordinate level categories and so the model does not show a strong preference for \emph{spices}.
-These cases are all artifact categories, suggesting that the effect of the basic-level on comparison class inferences may be different for artifacts as for animals, perhaps owing to differences in conceptual representations of these higher-order categories \cite{gelman1988development, kalish1998natural, rhodes2009developmental}.
-%Spices: garlic is more like salt, but people have a strong preference for "spices" here... because sub and basic level categories are assumed to have equal probability, we fail here.
-\ndg{but presumably there were other artifact categories in the data set that worked better?}
+
 
 Previous work investigating the role of the comparison class in adjective interpretation has provided strong linguistic cues to convey the speaker's intended comparison class.
 \citeA{Barner2008} were able to convey to 4-year-olds that the comparison class for a ``tall pimwit'' is \emph{other pimwits} and does not include other non-pimwit objects.
