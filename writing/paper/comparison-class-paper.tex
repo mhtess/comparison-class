@@ -708,17 +708,17 @@ Our primary hypothesis was that usage of a subordinate~vs.~superordinate compari
 %Our comparison class inference model makes qualitative predictions about the likely comparison class assumed by a speaker when they hear a scalar adjective (e.g., \emph{he's tall}; Figure \ref{fig:modelCartoon}E).
 
 As predicted by the comparison class inference model, we observe a pair of two-way interactions (Figure \ref{fig:ccInferenceMain}):
-When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the negative-form adjective (e.g., short) led to more subordinate comparison classes than the positive-form adjective (e.g., tall) in comparison to the control, middle-of-the-scale items (e.g., soccer player): posterior mean beta-weight and 95\% Bayesian credible interval: \brmresults{expt_brm_contrasts_10k.csv}{adjpol_nphigh}.
+When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the positive-form adjective (e.g., tall) led to more subordinate comparison classes than the negative-form adjective (e.g., short) in comparison to the control, middle-of-the-scale items (e.g., soccer player): posterior mean beta-weight and 95\% Bayesian credible interval: \brmresults{expt_brm_contrasts_10k.csv}{adjpol_nphigh}.
 This interaction was the result of the high-end-of-the-scale subordinate categories showing more subordinate comparison class inferences for the negative adjective (e.g., short) than for the positive adjective (e.g., tall): \brmresults{expt_brm_contrasts_10k.csv}{highneg_highpos}.
 The same preference was not observed for the middle-of-the-scale, control items (e.g., \emph{soccer players}; \brmresults{expt_brm_contrasts_10k.csv}{adjpol}). 
 A comparable interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): Hearing the positive-form adjective led to credibly more subordinate inferences than hearing a negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt_brm_contrasts_10k.csv}{adjpol_nplow}.
 Again, this was driven by the behavior of the low-end-of-the-scale subordinate categories, which showed a stronger preference for the superordinate comparison classes for negative than for positive adjectives (\brmresults{expt_brm_contrasts_10k.csv}{lowneg_lowpos}).
 
 Our results are highly symmetric across the low-end~vs.~high-end of the scale subordinate categories.
-%We observe an overall preference for subordinate comparison classes for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}; \brmresults{expt_brm_contrasts_10k.csv}{intercept}) and no  
+We observe an overall preference for subordinate comparison classes for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}; \brmresults{expt_brm_contrasts_10k.csv}{intercept}) and no overall differences in this preference for items at the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_contrasts_10k.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_contrasts_10k.csv}{nplow}). 
 %We observe no credible difference in the overall preference for subordinate~vs.~superordinate comparison class inferences when the subordinate category was either near the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_contrasts_10k.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_contrasts_10k.csv}{nplow}).
-The inferences that result from adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_contrasts_10k.csv}{lowpos_highneg}), nor were the inferences about categories from adjectives that were consistent with general expectations (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_contrasts_10k.csv}{lowneg_highpos}).
-Thus, general, world-knowledge expectations about the category interface with the adjective used to guide comparison class inferences, as predicted by the model.
+The inferences that result from adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_contrasts_10k.csv}{lowpos_highneg}), nor were the inferences  from adjectives that were consistent with general expectations about a category (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_contrasts_10k.csv}{lowneg_highpos}).
+
 
 %\ndg{should point to (very nice) fig 2 somewhere?}
 
@@ -731,8 +731,8 @@ Thus, general, world-knowledge expectations about the category interface with th
 \end{figure}
 
 
-
-The overall preference for a subordinate level comparison class and the magnitude of the effect of the adjective varies considerably by item (Figure \ref{fig:ccInferenceItems}).
+Taken together, these results point to general, world-knowledge expectations about the category interfacing with the adjective in order to guide comparison class inferences, as predicted by the model.
+The overall preference for a subordinate level comparison class and the magnitude of the effect of the adjective varies considerably by item, however (Figure \ref{fig:ccInferenceItems}).
 We turn to the quantitative aspect of our model to triangulate the sources of this variability.
 
 \subsection{Quantitative modeling of item-variability}

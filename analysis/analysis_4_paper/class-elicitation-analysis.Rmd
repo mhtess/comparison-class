@@ -11,6 +11,8 @@ library(tidyboot)
 library(ggplot2)
 library(brms)
 library(knitr)
+library(ggthemes)
+theme_set(theme_few())
 ```
 
 ``` {r}
@@ -24,9 +26,18 @@ library(knitr)
 
 # automatically classified data, for viz
 # df.auto <- read_csv("../../data/class-elicitation-prereg-final/auto-classified-data-full-w-freqs-final.csv")
+
 df.auto <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
 
-with(df.auto, table(specific, matchingSuper)) %>% 
+# df.auto %>% 
+#   mutate(specific = as.numeric(specific)) %>%
+#   write_csv(., 
+#           path =  "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
+
+matching.responses <- with(df.auto, table(specific, matchingSuper))
+
+prop.table(matching.responses)
+%>% 
   kable()
 
 ```
@@ -43,7 +54,7 @@ n.automatic.responses <- d.tidy.auto.match %>%
 n.automatic.responses
 n.automatic.responses / length(df.auto$response)
 
-write_csv(d.tidy.auto.match, "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_mexact-match_frequencies.csv")
+# write_csv(d.tidy.auto.match, "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_mexact-match_frequencies.csv")
 ```
 
 
@@ -77,8 +88,10 @@ d.tidy.phrase.specificMarking.bs.item %>%
     levels = c("low", "medium", "high")
   )) -> d.tidy.phrase.specificMarking.bs.item
 
-# save(d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData")
-#load(file = "../writing/paper/cached_results/class-elicitation-bs-byItem.RData") # d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file =
+save(d.tidy.phrase.specificMarking.bs, 
+     d.tidy.phrase.specificMarking.bs.item, 
+     file = "../../writing/paper/cached_results/class-elicitation-bs-byItem-fullSet.RData")
+#load(file = "../../writing/paper/cached_results/class-elicitation-bs-byItem-fullSet.RData") # d.tidy.phrase.specificMarking.bs, d.tidy.phrase.specificMarking.bs.item, file =
 
 set.seed(2020)
 
@@ -146,7 +159,6 @@ d.tidy.phrase.specificMarking.bs.item %>%
 
 # save(d.tidy.phrase.specificMarking.bs.item, file = "d_comparisonClass_specific_bs_item.RData")
 ```
-
 
 ```{r}
 # look at data matched automatically by-item
@@ -278,7 +290,149 @@ ggsave(
 
 # Regression modeling
 
-### Simulate data to get contrast coding right
+## BRM model
+
+### run model
+
+```{r}
+#d.tidy.clean.responses.fac <- df.auto %>%
+d.tidy.clean.responses.fac <- d.tidy.auto.match %>%
+  mutate(
+    adj_polarity = factor(adj_polarity,
+      levels = c("negative", "positive")
+    ),
+    np_expectations = factor(np_expectations,
+      levels = c("medium", "low", "high")
+    )
+  )
+
+d.tidy.clean.responses.fac$stim_id <- as.factor(d.tidy.clean.responses.fac$stim_id)
+d.tidy.clean.responses.fac$workerid <- as.factor(d.tidy.clean.responses.fac$workerid)
+
+contrasts(d.tidy.clean.responses.fac$adj_polarity) <- c(-1 / 2, 1 / 2)
+
+rs.glm.brm <- brm(
+  formula = specific ~ np_expectations * adj_polarity +
+    (1 + np_expectations * adj_polarity | workerid) +
+    (1 + np_expectations * adj_polarity | stim_id),
+  family = bernoulli(), chains = 4, cores = 4, 
+  iter = 10000,
+  data = d.tidy.clean.responses.fac,
+  file = "rs_brm_glm_exact-match_4chain_10k"
+)
+
+contrasts(d.tidy.clean.responses.fac$adj_polarity)
+contrasts(d.tidy.clean.responses.fac$np_expectations)
+
+rs.glm.brm.summary <- summary(rs.glm.brm)
+
+rs.glm.brm.summary
+
+# saveRDS(rs.glm.brm, file = '../../writing/paper/cached_results/rs_brm_glm_4chain_10k.rds')
+```
+
+### compute marginal posteriors
+
+```{r}
+rs.glm.brm.betas.samples <- brms::posterior_samples(rs.glm.brm, add_chain = T) %>% 
+  select(starts_with("b_")) %>%
+  rename(
+    intercept = b_Intercept,
+    nplow = b_np_expectationslow,
+    nphigh = b_np_expectationshigh,
+    adjpol = b_adj_polarity1,
+    adjpol_nplow = `b_np_expectationslow:adj_polarity1`,
+    adjpol_nphigh = `b_np_expectationshigh:adj_polarity1`
+  ) %>%
+  mutate(
+    highneg_highpos = -adjpol - adjpol_nphigh,
+    lowneg_lowpos = -adjpol - adjpol_nplow,
+    lowneg_highneg = nplow - nphigh - 
+      0.5 * adjpol_nplow + 0.5 * adjpol_nphigh,
+    lowpos_highpos = nplow - nphigh + 
+      0.5 * adjpol_nplow - 0.5 * adjpol_nphigh,
+    lowneg_highpos = -adjpol + nplow - nphigh - 
+      0.5 * adjpol_nplow - 0.5 * adjpol_nphigh,
+    lowpos_highneg = adjpol + nplow - nphigh + 
+      0.5 * adjpol_nplow + 0.5 * adjpol_nphigh
+  ) 
+
+# write_csv(rs.glm.brm.betas.samples,
+#           path = "../../writing/paper/cached_results/rs_brm_glm_exactmatch_4chain_10k_samples.csv")
+
+
+
+rs.glm.brm.betas.samples %>%
+  gather(key, val) %>% 
+  group_by(key) %>%
+  summarize(
+    'l95' = quantile(val, probs = c(0.025, 0.975))[[1]],
+    'mean'  = mean(val),
+    'u95' = quantile(val, probs = c(0.025, 0.975))[[2]],
+    prob_gt_0 = mean(val > 0)*100,
+    prob_lt_0 = mean(val < 0)*100
+  ) -> rs.glm.brm.full.contrasts
+
+# write_csv(rs.glm.brm.full.contrasts,
+#           path = "../../writing/paper/csv_data_4_tex/expt_brm_exactmatch_contrasts_10k.csv")
+```
+
+
+# Universally consistent responses
+
+```{r check ceiling/floor responses}
+# check the matched items where the mean of responses is 1 or 0
+# df.auto %>%
+d.tidy.auto.match %>%
+  group_by(stim_id, np_expectations, adj_polarity) %>%
+  mutate(meanResp = mean(specific)) %>%
+  filter((meanResp == 1) | (meanResp == 0)) %>%
+  distinct(
+    stim_id, np_expectations,
+    keyword, adj_polarity, adj,
+    response_lemma, # showing response_lemma will show the individual (lemmatized) responses that were all categorized as either sub or super
+    meanResp
+  ) -> d.match.ceiling
+  
+d.match.ceiling %>%
+  distinct(stim_id, np_expectations, adj_polarity, meanResp) %>%
+  group_by(meanResp) %>%
+  count()
+
+d.match.ceiling %>%
+  ungroup() %>%
+  distinct(
+    stim_id, np_expectations,  
+    keyword, adj,
+    meanResp
+  ) %>%
+  #sample_n(20) %>%
+  kable()
+  #View()
+
+d.match.ceiling %>%
+  ungroup() %>%
+  filter(meanResp == 1) %>%
+  distinct(
+    stim_id, np_expectations,  
+    keyword, adj_polarity,
+    meanResp
+  ) %>%
+  group_by(np_expectations, adj_polarity) %>%
+  count() %>%
+  ungroup() %>%
+  mutate(np_expectations = factor(np_expectations, levels = c("low", "medium", "high"))) %>%
+  rename(adjpol = adj_polarity) %>%
+  spread(np_expectations, n) %>% 
+  mutate(medium = ifelse(is.na(medium), 0, medium)) %>%
+  #kable()
+  write_csv(., "../../writing/paper/csv_data_4_tex/itemCounts_ceil_floor_fulldata.csv")
+```
+
+
+
+
+## (depracated?) Simulate data to get contrast coding right
 
 ```{r}
 simulated.data <- bind_rows(
@@ -397,61 +551,3 @@ print(
 )
 ```
 
-
-#### Full model
-
-
-```{r}
-d.tidy.clean.responses.fac <- data %>%
-  mutate(
-    adj_polarity = factor(adj_polarity,
-      levels = c("negative", "positive")
-    ),
-    np_expectations = factor(np_expectations,
-      levels = c("medium", "low", "high")
-    )
-  )
-
-d.tidy.clean.responses.fac$stim_id <- as.factor(d.tidy.clean.responses.fac$stim_id)
-d.tidy.clean.responses.fac$workerid <- as.factor(d.tidy.clean.responses.fac$workerid)
-
-contrasts(d.tidy.clean.responses.fac$adj_polarity) <- c(-1 / 2, 1 / 2)
-
-rs.glm.brm <- brm(
-  formula = specific ~ np_expectations * adj_polarity +
-    (1 + np_expectations * adj_polarity | workerid) +
-    (1 + np_expectations * adj_polarity | stim_id),
-  family = bernoulli(), chains = 3, cores = 3, iter = 1000,
-  data = d.tidy.clean.responses.fac
-)
-
-
-rs.glm.brm.summary <- summary(rs.glm.brm)
-
-rs.glm.brm.summary
-```
-
-```{r}
-write_csv(data.frame(rs.glm.brm.summary[["fixed"]]) %>%
-  mutate(Rowname = row.names(.)),
-path = "../writing/paper/csv_data_4_tex/expt3_brm_pilot.csv"
-)
-```
-
-
-#### Simple effects
-
-
-```{r}
-rs.glm <- glmer(
-  formula = specific ~ np_positiveness * adj_positiveness +
-    (1 | workerid) +
-    (1 | superordinate),
-  family = "binomial",
-  data = d.tidy.phrase.w.original.fac
-)
-
-contrasts(d.tidy.phrase.w.original.fac$np_positiveness)
-
-summary(rs.glm)
-```
