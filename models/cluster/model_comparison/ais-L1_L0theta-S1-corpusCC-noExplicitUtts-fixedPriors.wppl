@@ -1,4 +1,4 @@
-// time webppl ais-L1_L0theta-S1-corpusCC-noExplicitUtts.wppl --require utils --require webppl-json fixed fixed single-intercept_slope 1
+// time webppl model_comparison/ais-L1_L0theta-S1-corpusCC-noExplicitUtts-fixedPriors.wppl --require ./node_modules/utils --require webppl-json --random-seed 202008131647 by_item fixed intercept_slope 1
 
 // global or by_item
 var comparison_class_prior_intercept = process.argv[process.argv.length - 4]
@@ -63,8 +63,8 @@ var thresholdPrior = cache(function(form) {
   });
 });
 
-
-var dataPath = "../../data/";
+var dataPath = "data/";
+// var dataPath = "../../data/";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv";
 // var cc_inference_DataFile = "class-elicitation-prereg-final/class-elicitation_auto-classified_mexact-match_frequencies.csv";
 var cc_inference_DataFile = "class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv";
@@ -223,10 +223,10 @@ var model = function() {
       // var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
       var supercatWeight = 1 - subcatWeight
 
-      var comparisonClass_prior = Categorical({
-        vs: ["superordinate", "subordinate"],
-        ps: [supercatWeight, subcatWeight]
-      })
+			var comparisonClass_prior = Categorical({
+				vs: ["superordinate", "subordinate"],
+				ps: [avoidEndPoints(supercatWeight), avoidEndPoints(subcatWeight)]
+			})
 
       // displayObj(subordinate_parameters)
       // displayObj(superordinate_parameters)
@@ -263,8 +263,7 @@ var model = function() {
             var m = meaning(utterance, state, threshold);
             condition(m);
             return state;
-          }
-        })
+          }, method: "enumerate"})
       }, 10000);
 
       /////////////////////////////////////////////////
@@ -276,8 +275,7 @@ var model = function() {
             var L0 = literalListener(utterance, comparisonClass)
             factor(alphas.cc_inference * L0.score(state))
             return utterance
-          }
-        })
+				}, method: "enumerate"})
       }, 10000)
 
       var pragmaticListener = function(form) {
@@ -289,8 +287,7 @@ var model = function() {
             var S1 = speaker1(state, comparisonClass, form);
             observe(S1, utterance);
             return comparisonClass == "subordinate" ? 1 : 0
-          }
-        })
+				}, method: "enumerate"})
       }
       /////////////////////////////////////////////////
 
@@ -323,16 +320,21 @@ var model = function() {
 
 }
 
+// 24 hr - 100000
+// 2 days - 200000
+
+// var steps = 100000 // 1 days
+var steps = 200000 // 2 days
 
 // var steps = 100000
-var steps = 100
+// var steps = 1000
 var samples = 1
 var mll = AIS(model, {
   steps: steps,
   samples: samples
 })
 
-var resultsOutFile = 'results/marginal-likelihood/ais-L1-fixedDegreeParams'+degree_prior_param_file+'-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_' +
+var resultsOutFile = 'results/ais-L1-fixedDegreeParams'+degree_prior_param_file+'-fullClassifiedOneSuperNoRefFail-sansSilence-corpusFreqCCLogistic_byNP_' +
   by_item_cc_parameters + '-steps-' + steps + '_iter' + chain + '.csv'
 // // postOut
 
