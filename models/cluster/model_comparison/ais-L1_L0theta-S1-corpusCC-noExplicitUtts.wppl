@@ -202,10 +202,10 @@ var model = function() {
       // var subcatWeight = uniformDrift({a:0, b:1, width: 0.1})
       var supercatWeight = 1 - subcatWeight
 
-      var comparisonClass_prior = Categorical({
-        vs: ["superordinate", "subordinate"],
-        ps: [supercatWeight, subcatWeight]
-      })
+			var comparisonClass_prior = Categorical({
+				vs: ["superordinate", "subordinate"],
+				ps: [avoidEndPoints(supercatWeight), avoidEndPoints(subcatWeight)]
+			})
 
       // displayObj(subordinate_parameters)
       // displayObj(superordinate_parameters)
@@ -242,7 +242,7 @@ var model = function() {
             var m = meaning(utterance, state, threshold);
             condition(m);
             return state;
-          }
+          }, method: "enumerate"
         })
       }, 10000);
 
@@ -255,7 +255,7 @@ var model = function() {
             var L0 = literalListener(utterance, comparisonClass)
             factor(alphas.cc_inference * L0.score(state))
             return utterance
-          }
+          }, method: "enumerate"
         })
       }, 10000)
 
@@ -268,7 +268,7 @@ var model = function() {
             var S1 = speaker1(state, comparisonClass, form);
             observe(S1, utterance);
             return comparisonClass == "subordinate" ? 1 : 0
-          }
+          }, method: "enumerate"
         })
       }
       /////////////////////////////////////////////////
@@ -285,7 +285,7 @@ var model = function() {
           factor(-1 * alphas.adj_endorse * _kl)
 
           return utterance == (form + "Adjective") ? 1 : 0
-        }})
+        }, method: "enumerate"})
       }, 10000)
 
 
