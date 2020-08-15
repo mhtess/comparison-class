@@ -58,7 +58,7 @@ var thresholdPrior = cache(function(form){
 });
 
 var dataPath = "data/";
-// var dataPath = "../../data/";
+var dataPath = "../../data/";
 // var dataPath = "/home/mtessler/projects/comparison-class/data/"
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub2.csv";
 // var cc_inference_DataFile = "pilot-classElicitation-free-4/class-elicitation-free-4-cleaned-data-w-sub-pl.csv";
@@ -204,7 +204,7 @@ var model = function(){
 
         var comparisonClass_prior = Categorical({
 					vs: ["superordinate", "subordinate"],
-					ps: [supercatWeight, subcatWeight]
+					ps: [avoidEndPoints(supercatWeight), avoidEndPoints(subcatWeight)]
 				})
 
 				// displayObj(subordinate_parameters)
@@ -235,7 +235,7 @@ var model = function(){
           var m = meaning(utterance, state, threshold);
           condition(m);
           return state;
-        }})
+        }, method: "enumerate"})
       }, 10000);
 
 			/////////////////////////////////////////////////
@@ -246,7 +246,7 @@ var model = function(){
           var L0 = literalListener(utterance, comparisonClass)
           factor( alphas.cc_inference * L0.score(state) )
           return utterance
-        }})
+        }, method: "enumerate"})
       }, 10000)
 
       var pragmaticListener = function(form) {
@@ -257,7 +257,7 @@ var model = function(){
           var S1 = speaker1(state, comparisonClass, form);
           observe(S1, utterance);
           return comparisonClass == "subordinate" ? 1 : 0
-        }})
+        }, method: "enumerate"})
       }
 			/////////////////////////////////////////////////
 
@@ -343,7 +343,7 @@ var model = function(){
   return query
 }
 
-// var totalIterations = 100, lag =  1;
+// var totalIterations = 50, lag =  1;
 // var totalIterations = 250000, lag =  25;
 // var totalIterations = 150000, lag =  50;
 var totalIterations = 500000, lag =  250;
