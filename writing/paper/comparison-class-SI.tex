@@ -290,6 +290,58 @@ Intriguingly, the numeric counts of items that received 100\% subordinate-NP res
 %\end{center}
 
 
+\subsection{Adjective Endorsement Task (Task 3)}
+%\subsection{Stimuli Generation Task (Task 1)}
+
+This experiment served to generate further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
+Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/vdkbp}.
+
+\subsubsection{Participants}
+
+We recruited 300 participants from Amazon's Mechanical Turk, restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
+This number was arrived at with the goal of estimating endorsement probabilities for each item with a 95\% confidence interval width of 0.2 for each item.
+Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed a sequential sampling procedure in order to over-sample items that exhibit non-categorical judgments (i.e., high between-participant variability).
+We first collected 35 responses for each item, computed 95\% CIs for each item, and stopped collecting data for items whose 95\% CIs were smaller than 0.2.
+After the first 35 responses, we collected more responses for each item until the 95\% for that item was smaller than 0.2 or we reached our predetermined sample size.
+The experiment took about 10 minutes and participants were compensated \$1.50 for their work.
+
+\subsubsection{Procedure}
+
+On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., \emph{You step outside during the winter.}).
+This was followed by a question asking if the participant would endorse the positive- and/or negative-form adjective explicitly relative to the superordinate category (e.g., \emph{Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?}).
+Participants could respond to each question with either a \emph{yes} or \emph{no} judgment (2 judgments per trial).
+Each participant completed 48 items.
+
+\subsubsection{Materials}
+
+The experimental materials were the same as used in Task 2 (Comparison Class Inference).
+%In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered.
+%In total, we had 126 sets of stimuli (3 subordinates with 1 superordinate), thus this experiment had 378 unique trials (one per subordinate category).
+Each trial contained 2 judgments (positive and negative adjectives) for a total of 756 total unique judgments.
+
+\subsubsection{Results}
+
+The primary goal of this experiment is to validate the stimuli generated in Experiment 1 and to use to data to constrain the parameters governing world knowledge in the joint Bayesian data-analytic model. We build a Bayesian logistic mixed-effects model to predict participants' responses as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
+The model is judgment $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
+}
+
+As expected by the generating procedure for these stimuli, the only regression coefficients that were credibly different from zero were the interaction terms.
+When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between endorsements of the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt2_brm_pilot.csv}{adj_positiveness1}.
+Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
+When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
+The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
+This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{figs/bars_adj_finalExpt_pilot_byItem.pdf}
+%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+\caption{Task 3 (Adjective Endorsement) results for a subset of the items.}\label{fig:adjEndorseItems}
+\end{figure}
+
+
+
 
 
 \section{Alternative Models}

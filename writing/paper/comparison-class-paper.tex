@@ -1,6 +1,5 @@
 \documentclass[doc]{apa6}
-
-\usepackage[english]{babel}
+\usepackage[american]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -24,6 +23,7 @@
 %\DeclareLanguageMapping{american}{american-apa}
 
   \title{Warm (for Winter): Inferring comparison classes for scalar adjectives}
+  \shorttitle{Inferring comparison classes}
     \author{Michael Henry Tessler\textsuperscript{1,2} and Noah D. Goodman\textsuperscript{2}}
     \date{}
 
@@ -116,7 +116,7 @@ E-mail: tessler@mit.edu}
 \abstract{
 The meaning of an utterance can change depending on the context. Yet,
 what counts as context is often only implicit in everyday
-conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}: other days of the year, other weeks, other seasons, etc...
+conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}: other days of the year, other weeks, other seasons, etc.
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener decides upon a comparison class.
 We extend a Bayesian model of pragmatic reasoning to be able to reason flexibly about the comparison class intended by the speaker and test the qualitative predictions of this model using a large-scale free-production experiment.
 We then quantitatively synthesize the model with the data using Bayesian data analysis, which further reveals  that usage frequency and a preference for basic-level categories are two main contributors to comparison class inference.
@@ -876,6 +876,7 @@ These parameters show that basic and subordinate comparison classes are highly a
 \begin{center}
   \begin{table}[h]
     \centering
+%    \begin{tabular}
     \pgfplotstabletypeset[sci zerofill,
     col sep = comma,
     every head row/.style={before row = \toprule, after row = \midrule},
@@ -886,6 +887,7 @@ These parameters show that basic and subordinate comparison classes are highly a
     columns/adjEndorse_r2/.style={string type, column name={$r^2$ norming}, column type = l, sci sep align, precision=3},
      columns/adjEndorse_mse/.style={fixed, column name={$MSE$ norming}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
     \label{tab:r2bf}
+%    \end{tabular}
   \end{table}
 \end{center}
 
@@ -1171,120 +1173,72 @@ FA8750-14-2-0009 to NDG.
 %\setlength{\bibindent}{-\bibleftmargin}
 
 \bibliography{comparison-class}
-
-\newpage
-
-\section{Supplementary Methods}
-
-\subsection{Task 1: Stimuli Generation}
-
-\subsubsection{Participants}
-
-We recruited 50 participants from Amazon's Mechanical
-Turk, restricted to those with U.S. IP addresses with at least a
-95\% work approval rating. The experiment took about 5 minutes and
-participants were compensated \$0.60 for their work.
-
-\subsubsection{Materials}
-
-We used 15 pairs of positive- and negative-form gradable adjectives that describe physical dimensions (Table \ref{tab:1}).
-Some of the adjective pairs described the same dimension and/or had an adjective in common with another pair (e.g., \emph{fast}--\emph{slow} and \emph{quick}--\emph{slow}); these were included because we believed they would bring to mind different kinds of categories.
-
-\subsubsection{Procedure}
-
-On each trial, participants were given a phrasal template, for which they were asked to fill-in the missing elements.
-The template was composed of three sentences, each missing a subject; the content of the sentence described the subject as one generally having the adjective applied to them (Figure \ref{fig:exptOverview}, Step 1).
-These sentences were followed with another that said that the three kinds of subjects from the previous sentences were all instances of a more general category: ``all kinds of \_\_\_''.
-This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category.
-
-The template for ``big'' and ``small'' looked like:
-\begin{description}[noitemsep]
-%\tightlist
-\item \_\_\_\_\_ are generally big.
-\item  \_\_\_\_\_ are generally small.
-\item \_\_\_\_\_ are sometimes big and sometimes small.
-\item These three are all kinds of \_\_\_\_\_.
-\end{description}
 %
-Participants filled out one template for each of the 15 pairs of adjectives.
-
-
-\subsubsection{Results}
-From the full set of responses (750, in total), we select sets of items to be used in the subsequent experiments.
-We selected item sets on the basis of hierarchal consistency of the categories (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and based on how well the items would make sense in the kinds of minimal contexts we use in Expt.~2.
-Two examples from each adjective pair are shown in Table \ref{tab:1}.
-We code each of the subordinate categories as to whether they were expected to fall low, high, or in the middle of the degree scale (i.e., those generated in response to the \emph{generally positive adjective}, \emph{generally negative adjective}, or \emph{sometimes positive and sometimes negative}).
-
-
-\subsection{Task 3: Adjective endorsement details}
-
-This experiment served to generate further data that could be used to constrain the model parameters shown in Figure \ref{fig:bayesnet}.
-Sample size, sampling procedure, exclusion criteria, and data analysis were preregistered: \url{osf.io/vdkbp}.
-
-\subsubsection{Participants}
-
-We recruited 300 participants from Amazon's Mechanical Turk, restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
-This number was arrived at with the goal of estimating endorsement probabilities for each item with a 95\% confidence interval width of 0.2 for each item.
-Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed a sequential sampling procedure in order to over-sample items that exhibit non-categorical judgments (i.e., high between-participant variability).
-We first collected 35 responses for each item, computed 95\% CIs for each item, and stopped collecting data for items whose 95\% CIs were smaller than 0.2.
-After the first 35 responses, we collected more responses for each item until the 95\% for that item was smaller than 0.2 or we reached our predetermined sample size.
-The experiment took about 10 minutes and participants were compensated \$1.50 for their work.
-
-\subsubsection{Procedure}
-
-On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., \emph{You step outside during the winter.}).
-This was followed by a question asking if the participant would endorse the positive- and/or negative-form adjective explicitly relative to the superordinate category (e.g., \emph{Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?}).
-Participants could respond to each question with either a \emph{yes} or \emph{no} judgment (2 judgments per trial).
-Each participant completed 48 items.
-
-\subsubsection{Materials}
-
-The experimental materials were a modified subset of those generated in Experiment 1.
-In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered.
-In total, we had 126 sets of stimuli (3 subordinates with 1 superordinate), thus this experiment had 378 unique trials (one per subordinate category).
-Each trial contained 2 judgments (positive and negative adjectives) for a total of 756 total unique judgments.
-
-\subsubsection{Results}
-
-The primary goal of this experiment is to validate the stimuli generated in Experiment 1 and to use to data to constrain the parameters governing world knowledge in the joint Bayesian data-analytic model (see Data-analytic Strategy section). We build a logistic mixed-effects model to predict participants' responses as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
-The model is judgment $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
-}
-
-As expected by the generating procedure for these stimuli, the only regression coefficients that were credibly different from zero were the interaction terms.
-When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between endorsements of the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt2_brm_pilot.csv}{adj_positiveness1}.
-Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
-When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
-The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
-This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
-
-\begin{figure}[t!]
-\centering
-\includegraphics[width=\textwidth]{figs/bars_adj_finalExpt_pilot_byItem.pdf}
-%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Experiment 3 (Adjective Endorsement) results for a subset of the items.}\label{fig:adjEndorseItems}
-\end{figure}
-
-\subsection{Bayesian data analysis model supplementary details}
-
-Previous modeling papers in the RSA tradition empirically elicit world knowledge $P(x)$ through prior elicitation tasks.
-Such tasks typically involve estimating numerical quantities or making probability judgments, for which the participant must have relevant knowledge concerning the units of measure (e.g., prices in dollars) and/or for which complicated linking functions are designed to relate latent probabilities to the estimation data \cite{Franke2016}.
-In order to estimate world knowledge $P(x)$ for our large, heterogeneous set of items, we take a different approach.
-
-\subsubsection{World knowledge priors}
-
-In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
-Comparing interpretations of the same adjective across different comparison classes is an inherently relative judgment; thus, only the relative values for the degrees affect model predictions.
-Therefore, we fix each general (basic/superordinate) class in each domain to be a standard normal distribution---$P(x \mid c = c_{general}) = \mathcal{N}(0, 1)$---and assume the specific (subordinate/basic) priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
-These parameters vary by the category $k = c_{sub}$ as well as the degree scale (e.g., height vs. weight).
-We infer the plausible values of the parameters governing the subordinate priors from the data.
-
-%This model with uncertainty around the parameters of the world knowledge priors is overparameretized, however, with respect to the comparison class inference data. The data from the comparison class experiment (Task 2) is insufficient to reliably estimate the model parameters governing the world knowledge priors.
-To constrain the world knowledge parameters, we use the same RSA architecture to predict additional data about a related Adjective Endorsement task (Expt.~3).
-In the Adjective Endorsement task ($n=375$), participants are asked to judge whether a gradable adjective (e.g., \emph{warm} or \emph{cold}) would be true of a hypothetical member of a specific category relative to the basic- or superordinate level category (e.g., \emph{You step outside during the winter. Do you think it would be warm relative to other days of the year? ...cold relative to other days of the year?}).
-That is, we have participants judge the truth or falsity of adjectives when the comparison class is explicit (see Supplementary Information for full experimental details).
-
-To model the adjective endorsement data, we modify our comparison class inference RSA model by removing comparison class uncertainty from the model (since the task provides the comparison class explicitly) and, following \citeA{Tessler2019psychrev}, model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, where $L_0(x \mid u)$ is given by Eq. \ref{eq:L0}.
-The speaker's decision rule marginalizes over their beliefs about the property value of the referent in the category (e.g., the speaker doesn't know the exact height of the referent, but knows that the referent is a basketball player and averages over plausible heights of basketball players: $x\sim P_{k}$).
+%\newpage
+%
+%\section{Supplementary Methods}
+%
+%\subsection{Task 1: Stimuli Generation}
+%
+%\subsubsection{Participants}
+%
+%We recruited 50 participants from Amazon's Mechanical
+%Turk, restricted to those with U.S. IP addresses with at least a
+%95\% work approval rating. The experiment took about 5 minutes and
+%participants were compensated \$0.60 for their work.
+%
+%\subsubsection{Materials}
+%
+%We used 15 pairs of positive- and negative-form gradable adjectives that describe physical dimensions (Table \ref{tab:1}).
+%Some of the adjective pairs described the same dimension and/or had an adjective in common with another pair (e.g., \emph{fast}--\emph{slow} and \emph{quick}--\emph{slow}); these were included because we believed they would bring to mind different kinds of categories.
+%
+%\subsubsection{Procedure}
+%
+%On each trial, participants were given a phrasal template, for which they were asked to fill-in the missing elements.
+%The template was composed of three sentences, each missing a subject; the content of the sentence described the subject as one generally having the adjective applied to them (Figure \ref{fig:exptOverview}, Step 1).
+%These sentences were followed with another that said that the three kinds of subjects from the previous sentences were all instances of a more general category: ``all kinds of \_\_\_''.
+%This last sentence was introduced to constrain the kinds of responses to the first three sentences such that the subjects would be all members of the same basic- or superordinate level category.
+%
+%The template for ``big'' and ``small'' looked like:
+%\begin{description}[noitemsep]
+%%\tightlist
+%\item \_\_\_\_\_ are generally big.
+%\item  \_\_\_\_\_ are generally small.
+%\item \_\_\_\_\_ are sometimes big and sometimes small.
+%\item These three are all kinds of \_\_\_\_\_.
+%\end{description}
+%%
+%Participants filled out one template for each of the 15 pairs of adjectives.
+%
+%
+%\subsubsection{Results}
+%From the full set of responses (750, in total), we select sets of items to be used in the subsequent experiments.
+%We selected item sets on the basis of hierarchal consistency of the categories (i.e., that the three generated categories corresponded to the same level of abstraction e.g., they were all subordinate categories of the same basic-level category) and based on how well the items would make sense in the kinds of minimal contexts we use in Expt.~2.
+%Two examples from each adjective pair are shown in Table \ref{tab:1}.
+%We code each of the subordinate categories as to whether they were expected to fall low, high, or in the middle of the degree scale (i.e., those generated in response to the \emph{generally positive adjective}, \emph{generally negative adjective}, or \emph{sometimes positive and sometimes negative}).
+%
+%
+%\subsection{Bayesian data analysis model supplementary details}
+%
+%Previous modeling papers in the RSA tradition empirically elicit world knowledge $P(x)$ through prior elicitation tasks.
+%Such tasks typically involve estimating numerical quantities or making probability judgments, for which the participant must have relevant knowledge concerning the units of measure (e.g., prices in dollars) and/or for which complicated linking functions are designed to relate latent probabilities to the estimation data \cite{Franke2016}.
+%In order to estimate world knowledge $P(x)$ for our large, heterogeneous set of items, we take a different approach.
+%
+%\subsubsection{World knowledge priors}
+%
+%In our model, world knowledge is represented by probability distributions over degrees (e.g., heights).
+%Comparing interpretations of the same adjective across different comparison classes is an inherently relative judgment; thus, only the relative values for the degrees affect model predictions.
+%Therefore, we fix each general (basic/superordinate) class in each domain to be a standard normal distribution---$P(x \mid c = c_{general}) = \mathcal{N}(0, 1)$---and assume the specific (subordinate/basic) priors to also be Gaussian distributions---\(P(x \mid c = c_{sub}) = \mathcal{N}(\mu_{sub}, \sigma_{sub})\); the subordinate priors thus have standardized units.
+%These parameters vary by the category $k = c_{sub}$ as well as the degree scale (e.g., height vs. weight).
+%We infer the plausible values of the parameters governing the subordinate priors from the data.
+%
+%%This model with uncertainty around the parameters of the world knowledge priors is overparameretized, however, with respect to the comparison class inference data. The data from the comparison class experiment (Task 2) is insufficient to reliably estimate the model parameters governing the world knowledge priors.
+%To constrain the world knowledge parameters, we use the same RSA architecture to predict additional data about a related Adjective Endorsement task (Expt.~3).
+%In the Adjective Endorsement task ($n=375$), participants are asked to judge whether a gradable adjective (e.g., \emph{warm} or \emph{cold}) would be true of a hypothetical member of a specific category relative to the basic- or superordinate level category (e.g., \emph{You step outside during the winter. Do you think it would be warm relative to other days of the year? ...cold relative to other days of the year?}).
+%That is, we have participants judge the truth or falsity of adjectives when the comparison class is explicit (see Supplementary Information for full experimental details).
+%
+%To model the adjective endorsement data, we modify our comparison class inference RSA model by removing comparison class uncertainty from the model (since the task provides the comparison class explicitly) and, following \citeA{Tessler2019psychrev}, model sentence endorsement as a speaker deciding whether or not to produce the adjectival utterance to the listener: $S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_{k}}} \ln{L_0(x \mid u)})$, where $L_0(x \mid u)$ is given by Eq. \ref{eq:L0}.
+%The speaker's decision rule marginalizes over their beliefs about the property value of the referent in the category (e.g., the speaker doesn't know the exact height of the referent, but knows that the referent is a basketball player and averages over plausible heights of basketball players: $x\sim P_{k}$).
 
 
 %\newpage
