@@ -1,4 +1,4 @@
-\documentclass[doc]{apa6}
+\documentclass[man, floatsintext]{apa6}
 \usepackage[american]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -119,7 +119,7 @@ what counts as context is often only implicit in everyday
 conversation. The utterance ``it's warm outside'' signals that the temperature outside is relatively high, but the temperature could be high relative to a number of different \emph{comparison classes}: other days of the year, other weeks, other seasons, etc.
 Theories of context-sensitive language use agree that the comparison class is a crucial feature of meaning understanding, but little is known about how a listener decides upon a comparison class.
 We extend a Bayesian model of pragmatic reasoning to be able to reason flexibly about the comparison class intended by the speaker and test the qualitative predictions of this model using a large-scale free-production experiment.
-We then quantitatively synthesize the model with the data using Bayesian data analysis, which further reveals  that usage frequency and a preference for basic-level categories are two main contributors to comparison class inference.
+We then quantitatively synthesize the model and data using Bayesian data analysis, which further reveals  that usage frequency and a preference for basic-level categories are two main contributors to comparison class inference.
 %We introduce a hybrid experimental-Bayesian data analytic approach to examine the quantitative predictions of the model, finding%We present free-production and forced-choice experiments showing reliable patterns of comparison class inference.
 %The patterns of inference we observe are consistent with a model of Bayesian reasoning about the likely comparison class, which we incorporate into a probabilistic model of adjective interpretation, furthering the breadth of computational models of language understanding.
 The methods and results we present open the door to studying richer aspects of context-sensitive language understanding.
@@ -294,20 +294,14 @@ L_1(x, c \mid u, f, g) &\propto S_1(u \mid x, c) \cdot P(x \mid f, g) \cdot P(c 
 }
 
 Following work in the Rational Speech Act modeling framework \cite{Frank2012, Goodman2016, scontras2017probabilistic}, the speaker $S_1$ in this model is a soft-max rational agent (with degree of rationality $\alpha$) who produces utterances in order to convey information about the degree $x$ to a listener $L_0$ who knows the comparison class, while also taking into account the cost of the utterance $u$.\footnote{For simplicity, for all of our qualitative and quantitative modeling, we assume no difference in production cost for different utterances. Hence, our model reduces to simply: $S_1(u \mid x, c) \propto L_{0}(x \mid u, c)^{ \alpha}$}
-
-
+%
 \begin{align}
 S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S1}
 \end{align}
 %exp{(\alpha_1 \cdot \ln {L_{0}(x \mid u, \theta)} )}
-
-
 %\ndg{the next two paragraphs are a bit too abstract. perhaps move the content down to where the corresponding model terms are introduced.}
-
-
 %For both of these random variables, the listener can employ knowledge to constrain the inference problem.
 %Specifically,
-
 %\begin{figure}[ht]
 %  \begin{center}
 %    \begin{tabular}{cc}
@@ -333,13 +327,8 @@ S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cos
 %  \caption{Generative model of utterances in the mind of a listener. An utterance $u$ is a function of a comparison class $c$ and degree $x$, via the $S_2$ model (Equation \ref{eq:S2}). A listener's best guess about the degree is a function of both the shared beliefs about the referent $f$ and  the listener's private beliefs $g$. The comparison class $c$ is a function of only the shared beliefs between speaker and listener $f$.}
 %  \label{fig:bayesnet}
 %\end{figure}
-
 %Formally, this inference can be captured in a Bayesian formulation:
 %
-
-
-
-
 %
 For simplicity, we assume the speaker has three utterances she can say: \{\emph{tall}, \emph{short}, silence\}, where silence is a semantically vacuous utterance (i.e., a null action).\footnote{We use the male pronoun to refer to the listener and the female pronoun to refer to the speaker, for clarity of exposition.}\footnote{The inferences we model are invariant to reasonable choices of alternative utterances. Most notably, including alternatives that allow the speaker to explicitly communicate the comparison class (e.g., \emph{tall for a basketball player}) do not change the qualitative results we describe.
 }
@@ -371,7 +360,7 @@ Finally, we assume the communicative goal of using an adjective like \emph{tall}
 %We adopt the model of \citeA{Lassiter2013, Lassiter2017}   A full presentation of this  part of the model is given in Appendix A.
 
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
 \caption{\small \label{fig:modelCartoon}Model overview. A listener hears a basketball player described as ``tall'' by a speaker. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is a function of the comparison class (facets). C: Listener $L_1$ imagines what a speaker $S_1$ would say given different heights of the referent (x-axis) and assuming different comparison classes (facets); the opacity of the colors is in proportion to the listener's prior beliefs of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Speaker utterance production probabilities for different comparison classes, marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} if the comparison class is \emph{people}. E: Pragmatic listener inferences about the comparison class is computed via Bayes Rule with the utterance likelihood model given by this speaker. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}. Prior distribution of heights for people is a unit normal distribution $\mathcal{N}(0, 1)$ and the heights of basketball players is a right-shifted normal with smaller variance $\mathcal{N}(0, 0.5)$.
@@ -589,9 +578,9 @@ The categories within each item set are paired with either a positive-form or ne
 Thus, this experiment had 270 unique categories (90 sets $\times$ 3 levels of general expectations) described with 2 adjectives each (e.g., tall and short), for a total of 540 unique items.
 
 
-\begin{table*}[ht]
+\begin{table}[!ht]
 \centering
-\begingroup\fontsize{10pt}{11pt}\selectfont
+\begingroup\fontsize{10pt}{10pt}\selectfont
 \begin{tabularx}{\textwidth}{lll}
   \hline
 Adjectives (scale) & Example subordinate classes (superordinate class) \\
@@ -632,7 +621,7 @@ Adjectives (scale) & Example subordinate classes (superordinate class) \\
 Categories were curated from a set of empirically elicited noun phrases from a stimulus generation task (see SI).}
 \label{tab:1}
 \endgroup
-\end{table*}
+\end{table}
 
 
 
@@ -662,7 +651,7 @@ We used the word ``other'' to invoke the presupposition that the referent is a m
 %At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 %This memory check trial was also used as a basis for exclusion.
 
-\begin{figure}[t!]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf}
 %{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
@@ -874,10 +863,9 @@ These parameters show that basic and subordinate comparison classes are highly a
 
 
 \begin{center}
-  \begin{table}[h]
-    \centering
-%    \begin{tabular}
-    \pgfplotstabletypeset[sci zerofill,
+\begin{table}[h]
+\centering
+\pgfplotstabletypeset[sci zerofill,
     col sep = comma,
     every head row/.style={before row = \toprule, after row = \midrule},
     every last row/.style={after row = \bottomrule},
@@ -885,10 +873,8 @@ These parameters show that basic and subordinate comparison classes are highly a
     columns/subordinateCC_r2/.style={string type, column name={$r^2$ CC}, column type = l,  sci sep align, precision=3},
    columns/subordinateCC_mse/.style={fixed, column name={$MSE$ CC}, column type = l, dec sep align, precision=4},
     columns/adjEndorse_r2/.style={string type, column name={$r^2$ norming}, column type = l, sci sep align, precision=3},
-     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ norming}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}
-    \label{tab:r2bf}
-%    \end{tabular}
-  \end{table}
+     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ norming}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}\label{tab:r2bf}
+\end{table}
 \end{center}
 
 
@@ -1064,7 +1050,7 @@ In addition to the novel empirical data and the computational model of compariso
 On the experimental side, we articulated an explicit generative model of our items, which we deployed on human participants to construct a large and diverse set of linguistic stimuli (n = 540 unique stimuli).
 While this procedure was not entirely ``end-to-end'' (i.e., we authors still needed to curate, edit, and add context to the items), the method presents a significant advance beyond the traditional method of constructing a small set of stimuli, often inadvertently optimized to test a theory \cite{Clark1973}.
 On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \cite{tauber2017} with the productivity of probabilistic models of language understanding \cite{Goodman2016, scontras2017probabilistic} to jointly model two complementary language tasks and infer the relevant prior knowledge shared between the tasks.
-The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would be otherwise inaccessible through traditional prior elicitation techniques because human participants lack requisite knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?) \ndg{didn't we do this in previous work?}\mht{we did this in the cogsci paper, but i'm not of cases beyond that?}; in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimate numerical quantities for which complicated linking functions must be designed \cite<cf.,>{Franke2016}.
+The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would be otherwise inaccessible through traditional prior elicitation techniques because human participants lack requisite knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?) \ndg{didn't we do this in previous work?}\mht{we did this in the cogsci paper, and i suppose we did a version of this with generics and targeting parameters of the structured prior..., but the second point of explicitly modeling the language i think is novel}; in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimate numerical quantities for which complicated linking functions must be designed \cite<cf.,>{Franke2016}.
 This fully Bayesian language approach also provides further constraints on the language understanding models, which must predict quantitative data from two similar but distinct language experiments.
 The productivity of natural language can thus be harnessed to productively design experiments that further constrain and test computational models of language and cognition.
 
@@ -1160,9 +1146,7 @@ The meaning and the context from a single vague utterance.
 \section{Acknowledgements}
 
 This work was supported in part by NSF Graduate Research Fellowship
-DGE-114747 to MHT and a
-Sloan Research Fellowship, ONR grant N00014-13-1-0788, and DARPA grant
-FA8750-14-2-0009 to NDG.
+DGE-114747 and NSF SBE Postdoctoral Research Fellowship Grant No. 1911790 to  MHT and a Sloan Research Fellowship, ONR grant N00014-13-1-0788, and DARPA grant FA8750-14-2-0009 to NDG.
 
 \newpage
 
