@@ -795,8 +795,7 @@ All model variants are able to accommodate the norming, Adjective Endorsement da
 %The BDA models adjust the parameters of the world knowledge priors used in RSA in such a way as to make the adjectives felicitous for the categories in question; in this way, the adjective endorsement task (SI) serves as a norming data set.
 This result is a good sanity check; it shows that parameters for world knowledge learned by the model are those that maximize the fit to the adjective endorsement data, suggesting that those data are strongly shaping the world knowledge priors.
  %constraining the parameters of the world knowledge priors 
- Thus, our adjective endorsement task works as a kind of vague, prior elicitation, where we can learn about the world knowledge priors by asking simple natural language queries to participants. 
-  \ndg{explain that a little more...?} \mht{better?}
+ Thus, our adjective endorsement task works as a kind of vague, prior elicitation, where we can learn about the world-knowledge priors by asking simple natural language queries to participants. 
 Correspondingly, the imputed world knowledge priors reflect intuitively reasonable general expectations about the categories (Figure \ref{fig:worldPriors}).
 
 The predictions of the different model variants come apart for the Comparison Class Inference data (Figure \ref{fig:scatters}; top row).
@@ -961,13 +960,12 @@ The variability for writing tools is also quite idiosyncratic: \emph{pens} are l
 Interpreting language requires understanding the context in which the words are uttered.
 Yet, speakers almost never articulate context explicitly but leave it to the listener to pragmatically reconstruct.
 Inferring comparison classes for relative adjectives (e.g., \emph{tall}) is a case study in this larger phenomenon of the pragmatic reconstruction of context.
-\ndg{awk:} \mht{better?}
 In this paper, we propose that listeners flexibly adjust the comparison class using pragmatic reasoning and world knowledge. 
-We implement this proposal in a novel extension to a state-of-the-art model of language understanding, the predictions of which we empirically confirm using an open-ended response measure on a diverse range of linguistic stimuli.
+We implement this proposal by extending a state-of-the-art language understanding model. Its prediction are empirically confirmed using an open-ended response measure on a diverse range of linguistic stimuli.
 
 We propose a minimal extension to an adjective interpretation Rational Speech Act model to allow it to flexibly reason about the implicit comparison class (e.g., \emph{tall for a person}~vs.~\emph{tall for a basketball player}).
 The model generated the qualitative prediction that listeners should prefer more specific (e.g., subordinate-level) comparison classes when the adjective conflicts with their general expectations about a member of a category (e.g., a basketball player who is short), which we confirmed by asking participants to freely explicate the intended comparison class.
-The fact that participants naturally produce different responses to the comparison class elicitation task suggests that these inferences can be flexibly adjusted in a spontaneous manner, without an experimenter directly querying about potential alternative comparison classes \cite<cf.>{tessler2017warm}. \ndg{why?}\mht{better?}
+The fact that participants naturally produce different comparison classes suggests that these inferences vary spontaneously depending on context, without an experimenter directly raising alternative comparison classes. 
 %and we showed how this inference requires pragmatic reasoning; a literal interpretation model in fact draws the wrong inference.
 The model also made quantitative predictions about the item-level variation of this inference given knowledge about properties and categories.
 The strong quantitative fit of this model suggests that comparison class inference can be viewed as cooperative pragmatic inference.
@@ -1031,7 +1029,7 @@ Determining this hypothesis space of comparison classes is an important future d
 For example, how do we know to even consider the comparison classes of basketball players vs. people, and not all objects in general?
 \emph{Objects} may be a comparison class that listeners would consider given the right context and our assumption of constructing comparison classes out of a taxonomic hierarchy is consistent with \emph{objects} being a candidate comparison class.
 However, just because a comparison class is in the hypothesis space does not mean that is a likely comparison class: Indeed, we observe in our quantitative modeling results that a uniform prior distribution over comparison classes is unlikely, and in fact, superordinate categories have the lowest probability of providing the comparison class.
-The fact that superordinate categories are dispreferred may be a product of the fact that superordinate categories tend to have higher variability across members than basic-level or subordinate level categories.
+The fact that superordinate categories are dis-preferred may be a product of the fact that superordinate categories tend to have higher variability across members than basic-level or subordinate level categories.
 Our modeling work also shows that usage frequency of the noun phrase contributes to the comparison class prior.
 Corpus frequency is a composite measurement of factors relevant for speech production.
 Its utility in this model suggests that utterances without an explicit comparison class (e.g., ``It's warm outside'') may in fact be elliptical sentences, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension \cite{bergen2015strategic}.
