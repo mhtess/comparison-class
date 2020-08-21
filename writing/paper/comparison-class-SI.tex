@@ -298,9 +298,9 @@ Sample size, sampling procedure, exclusion criteria, and data analysis were prer
 
 \subsubsection{Participants}
 
-We recruited 300 participants from Amazon's Mechanical Turk, restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
+We recruited 400 participants from Amazon's Mechanical Turk, restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
 This number was arrived at with the goal of estimating endorsement probabilities for each item with a 95\% confidence interval width of 0.2 for each item.
-Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed a sequential sampling procedure in order to over-sample items that exhibit non-categorical judgments (i.e., high between-participant variability).
+Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed an analogous sequential sampling procedure to that employed in Task 2 (Comparison Class Inference, see above) in order to over-sample items that exhibit high between-participant variability.
 We first collected 35 responses for each item, computed 95\% CIs for each item, and stopped collecting data for items whose 95\% CIs were smaller than 0.2.
 After the first 35 responses, we collected more responses for each item until the 95\% for that item was smaller than 0.2 or we reached our predetermined sample size.
 The experiment took about 10 minutes and participants were compensated \$1.50 for their work.
@@ -309,8 +309,14 @@ The experiment took about 10 minutes and participants were compensated \$1.50 fo
 
 On each trial, participants were given a sentence introducing a member of a subordinate category (e.g., \emph{You step outside during the winter.}).
 This was followed by a question asking if the participant would endorse the positive- and/or negative-form adjective explicitly relative to the superordinate category (e.g., \emph{Do you think it would be warm relative to other days of the year? Do you think it would be cold relative to other days of the year?}).
+Both questions appeared on the screen on the same trial.
 Participants could respond to each question with either a \emph{yes} or \emph{no} judgment (2 judgments per trial).
 Each participant completed 48 items.
+
+As with the comparison class inference experiment, after the main trials, participants completed a memory check trial asking which adjective--NP combinations appeared on the main trials. 
+Participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
+Participants were excluded if they answered fewer than 7 out of 10 memory check questions correctly.
+A total of 103 participants failed this check, leaving 297 participants for the main analysis. 
 
 \subsubsection{Materials}
 
@@ -331,6 +337,15 @@ Also, there were no credible differences in average endorsements for the adjecti
 When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
 The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
 This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
+
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/bars_adj_finalExpt_prereg_bars_syncDodge.pdf}
+\caption{Adjective Endorsement (Task 3) experimental results. Proportion of sentence endorsements as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity. The biggest outlier for the low general expectations was the loudness of the \emph{owl}, which was judged to be more loud than quiet; the biggest outlier for the high general expectations was the fabric of \emph{wool}, which was judged to be more light than heavy. }\label{fig:adjEndorseMain}
+\end{figure}
+
 
 
 \begin{figure}[t!]
