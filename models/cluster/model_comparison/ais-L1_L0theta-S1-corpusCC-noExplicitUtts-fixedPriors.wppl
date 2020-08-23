@@ -105,12 +105,12 @@ var model = function() {
 
   var interceptEffect = comparison_class_prior_intercept == "flat" ? 0 : gaussianDrift({
     mu: 0,
-    sigma: 2,
+    sigma: 1,
     width: 0.5
   })
   var frequencyEffect = comparison_class_prior_slope == "flat" ? 0 : uniformDrift({
-    a: -3,
-    b: 3,
+    a: -1,
+    b: 1,
     width: 0.5
   })
 
@@ -122,12 +122,12 @@ var model = function() {
     class_type_2: {
       intercept: comparison_class_prior_intercept == "by_item" ? gaussianDrift({
         mu: 0,
-        sigma: 2,
+        sigma: 1,
         width: 0.5
       }) : -interceptEffect,
       frequency: comparison_class_prior_slope == "by_item" ? uniformDrift({
-        a: -3,
-        b: 3,
+        a: -1,
+        b: 1,
         width: 0.5
       }) : frequencyEffect
     }
