@@ -425,7 +425,7 @@ d.tidy.resp.valid.lemmatized.keyword <- d.tidy.resp.valid.lemmatized %>%
     keyword = gsub("patio door", "patio", keyword),
     keyword = gsub("front gate", "front", keyword),
     keyword = gsub("chocolate cake", "chocolate", keyword),
-    keyword = gsub("podcast episode", "podcast", keyword)#,
+    keyword = gsub("podcast episode", "podcast", keyword)
   )
 ```
 
@@ -633,10 +633,8 @@ We extract frequecies of the plural NPs and the adjusted superordinates from the
 The corresponding subordinate and superordinate frequencies are added to each data point. 
 
 ```{r}
-df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
 # d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
-d.tidy.auto.freq <- d.tidy.auto %>%
+d.tidy.auto.4freq <- d.tidy.auto %>%
   rowwise() %>%
   mutate(
     np_pl = insert_plural_np(tolower(np), superordinate),
@@ -645,7 +643,14 @@ d.tidy.auto.freq <- d.tidy.auto %>%
     superordinate.freq = ifelse(stim_id == 5, "writing tools", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avoid polysemy
-  )  %>%
+  ) 
+
+#d.tidy.auto.4freq %>% 
+  write_csv("../../data/class-elicitation-prereg-final/full-classified-tidy-data4freqs.csv")
+  
+df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
+d.tidy.auto.freq <- d.tidy.auto.4freq %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
   mutate(
