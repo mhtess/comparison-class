@@ -36,6 +36,20 @@ df.trials <- read_csv("../../data/class-elicitation-prereg-final/class-elicitati
 df.subject <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
 df.attention <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
 ```
+```{r helpers}
+# check matching between strings
+ containsString_responses <- function(strng, substrng, clean_str, us_substr) {
+   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+     ifelse(length(strsplit(us_substr, clean_str)[[1]]) > 1, 1, 0)
+   ))
+ }
+
+ containsString <- function(strng, substrng) {
+   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+     ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
+   ))
+ }
+```
 
 ## Participant Exclusion 
 
