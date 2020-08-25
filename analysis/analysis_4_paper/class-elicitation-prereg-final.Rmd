@@ -8,11 +8,11 @@ The comparison class elicitation experiment is a free prduction experiment where
 
 # Analysis Outline
 
-First, the raw responses are processed automatically by matching responses to keywords providing the essence of the respective comparison class: mostly, we match against the NPs of the sentence (referent NPs) and the anticipated superordinate of the item. In order to improve the automatic classification we lemmatize and correct for misspellings of the raw responses. 
+First, the raw responses are processed automatically by matching responses to keywords providing the essence of the respective comparison class: mostly, we match against the NPs of the sentence (referent NPs) and the anticipated superordinate of the item. In order to improve the automatic classification we lemmatize and correct for misspellings of the raw responses.
 
-Second, the responses which were not processed automatically are processed manually. From these responses, we looked for responses thatwere produced by at least three participants and noted these as consistent comparison classes that were different from the referent NP and the anticiapted superordinate. 
+Second, the responses which were not processed automatically are processed manually. From these responses, we looked for responses thatwere produced by at least three participants and noted these as consistent comparison classes that were different from the referent NP and the anticiapted superordinate.
 
-The analysis proceedes from simplest processing steps to more sophisticated processing steps, leading to the output of dataframes containing data passing these different processing steps. 
+The analysis proceedes from simplest processing steps to more sophisticated processing steps, leading to the output of dataframes containing data passing these different processing steps.
 
 At the end, data visualisations and regression models can be found.
 
@@ -47,10 +47,24 @@ df.trials <- read_csv("../../data/class-elicitation-prereg-final/class-elicitati
 df.subject <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-subject_information.csv")
 df.attention <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-prereg-final-catch_trials.csv")
 ```
+```{r helpers}
+# check matching between strings
+ containsString_responses <- function(strng, substrng, clean_str, us_substr) {
+   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+     ifelse(length(strsplit(us_substr, clean_str)[[1]]) > 1, 1, 0)
+   ))
+ }
 
-## Participant Exclusion 
+ containsString <- function(strng, substrng) {
+   return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+     ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
+   ))
+ }
+```
 
-Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials). 
+## Participant Exclusion
+
+Before the main trials, participants completed warm-up trials testing task comprehension (an easy paraphrase task of the kind appearing in the main trials).
 
 ```{r comprehension check}
 df.botcaptcha <- df.attention %>%
@@ -72,13 +86,13 @@ df.comprehension <- df.attention %>%
       containsString(tolower(response), "towe")
   ))
 
-df.comprehension %>% 
+df.comprehension %>%
   group_by(pass_comp) %>%
   count() %>%
   kable()
 
 # What did people write-in that was incorrect?
-df.comprehension %>% 
+df.comprehension %>%
   filter(!pass_comp) %>%
   select(response) %>%
   kable()
@@ -203,10 +217,10 @@ n.total.responses - n.valid.responses
 
 ### Reference failure
 
-Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John sees an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to, some subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for specific words from the contexts. 
+Some responses fail to establish correct reference, e.g. participants referred to the wrong entity mentioned in the context sentence: given the sentence "John sees an adult lift a box" and the comment "John says: 'They're strong'", when asked who the adult is strong relative to, some subjects responded "relative to other boxes". Since these 'failed-reference' responses often mention distractor nouns in the context sentence, we extract these responses by looking for specific words from the contexts.
 
 ``` {r}
-# remove responses failig to establish correct reference 
+# remove responses failig to establish correct reference
 d.tidy.resp.valid.FailedRef <- d.tidy.resp.valid %>%
   mutate(response = tolower(response)) %>%
   rowwise() %>%
@@ -261,7 +275,7 @@ d.tidy.resp.valid.FailedRef <- d.tidy.resp.valid %>%
          failed_ref = ifelse(grepl("weightlifters", response), FALSE,
                              failed_ref),
   ) %>% filter((responseLength < 3) & # longer responses contain the target N
-               (failed_ref == TRUE) & 
+               (failed_ref == TRUE) &
                (response != "pieces of furniture")
                )
 ```
@@ -271,7 +285,7 @@ d.tidy.resp.valid.FailedRef <- d.tidy.resp.valid %>%
 d.tidy.resp.valid.noFailedRef <- anti_join(
   d.tidy.resp.valid,
   d.tidy.resp.valid.FailedRef,
-  by = c("stim_id", "response")    ) 
+  by = c("stim_id", "response")    )
 
 
 n.ref.fail <- d.tidy.resp.valid.FailedRef %>%
@@ -292,7 +306,7 @@ n.after.ref.fail <- d.tidy.resp.valid.noFailedRef %>%
 
 ### Misspelling Correction
 
-In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all. 
+In order to improve matching of the provided repsonses to the subordinate NPs or the anticipated superordinate labels, we correct misspellings occurring in the provided responses. The misspellings were extracted manually. The misspellings and corrections are read from the dataframe and converted to a named list which is used with str_replace_all.
 
 ```{r list of commong mispellings}
 misspellings_df <- read_delim("text_processing/misspellings_dict.csv",
@@ -302,7 +316,7 @@ misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df
 ```
 
 
-### Lemmatization 
+### Lemmatization
 
 To further improve the response classification, we lemmatize the plural responses (specifically, the irregular nouns and misspellings) to match the NPs and superordinates (e.g. 'libraries' is converted to 'library').
 
@@ -394,7 +408,7 @@ testing out item-specific replacements
 
 ## Extract keywords for Subordinate NP match
 
-To programatically check whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *subordinate* (i.e., including the mentioned NP). 
+To programatically check whether or not responses contain the supplied NP (i.e. are subordinate) or the anticipated superordinate of the item (i.e. are superordinate), we distill multi-word NPs (e.g., "six-pack of beer") to single words (e.g., "beer") that we think convey the essence of the subordinate category given the context. And so, if we see a response containing the word "beer", then it will be marked as *subordinate* (i.e., including the mentioned NP).
 
 ```{r keyword match}
 d.tidy.resp.valid.lemmatized.keyword <- d.tidy.resp.valid.lemmatized %>%
@@ -454,9 +468,9 @@ d.tidy.resp.valid.lemmatized.keyword <- d.tidy.resp.valid.lemmatized %>%
 
 ## Automatic Classification
 
-The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword (for subordinate) or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly. 
+The preprocessed responses are automatically classified into subordinate and superordinate by matching them against the preprocessed subordinate keywords and superordinates. We check if the response includes either the keyword (for subordinate) or the superordinate and if either includes the response. Furthermore, since we check either way and some NPs are composites including the superordinate, we manually check if the response is just the superordinate ('berries') and classify it as the superordinate accordingly.
 
-We modified one item (77: "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the NP matching (as well as for frequency extraction and adjective endorsement task). 
+We modified one item (77: "desserts") for which the superordinate deviated (participants tended to paraphrase the more general class as "food"). We use the empirical modal superordinate ("food") for the NP matching (as well as for frequency extraction and adjective endorsement task).
 
 If the response was classified as subordinate (i.e. _specific_), it is turned into be the corresponding NP (represented by the variable `mode_np`), otherwise it is turned into the corresponding superordinate.
 
@@ -476,10 +490,10 @@ d.tidy.resp.valid.lemmatized.keyword %>%
   # if the response is specific (subordinate), the modal NP is inserted, otherwise the modal superordinate is inserted
   mutate(mode_np = ifelse(specific == 1, np, superordinate)) -> d.tidy.auto
 
-with(d.tidy.auto, table(specific, matchingSuper)) %>% 
+with(d.tidy.auto, table(specific, matchingSuper)) %>%
   kable()
 
-# d.tidy.auto %>% 
+# d.tidy.auto %>%
 #   select(response, response_lemma_us, keyword,  specific, superordinate, super_in_resp, response_lemma, super_us, resp_in_super, matchingSuper) %>%
 #   View()
 
@@ -510,7 +524,7 @@ d.tidy.auto %>%
     response_lemma, # showing response_lemma will show the individual (lemmatized) responses that were all categorized as either sub or super
     meanResp
   ) -> d.match.ceiling
-  
+
 d.match.ceiling %>%
   distinct(stim_id, np_expectations, adj_polarity, meanResp) %>%
   group_by(meanResp) %>%
@@ -540,7 +554,7 @@ d.match.ceiling %>%
   ungroup() %>%
   mutate(np_expectations = factor(np_expectations, levels = c("low", "medium", "high"))) %>%
   rename(adjpol = adj_polarity) %>%
-  spread(np_expectations, n) %>% 
+  spread(np_expectations, n) %>%
   kable()
   # write_csv(., "../../writing/paper/csv_data_4_tex/itemCounts_ceil_floor.csv")
 ```
@@ -648,14 +662,12 @@ insert_plural_np <- function(np, superordinate) {
 ```
 
 
-We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy. 
-The corresponding subordinate and superordinate frequencies are added to each data point. 
+We extract frequecies of the plural NPs and the adjusted superordinates from the Google Web 1T 5-gram corpus (except for some items). We exchange some superordinates for their synonyms in order avoid polysemy.
+The corresponding subordinate and superordinate frequencies are added to each data point.
 
 ```{r}
-df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
-
 # d.tidy.auto.classified.w.pl.np <- d.tidy.auto.match.adjust_super %>%
-d.tidy.auto.freq <- d.tidy.auto %>%
+d.tidy.auto.4freq <- d.tidy.auto %>%
   rowwise() %>%
   mutate(
     np_pl = insert_plural_np(tolower(np), superordinate),
@@ -664,19 +676,26 @@ d.tidy.auto.freq <- d.tidy.auto %>%
     superordinate.freq = ifelse(stim_id == 5, "writing tools", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "venue", "venues", superordinate.freq),
     superordinate.freq = ifelse(superordinate == "dens", "animal dens", superordinate.freq) # avoid polysemy
-  )  %>%
+  )
+
+#d.tidy.auto.4freq %>%
+  write_csv("../../data/class-elicitation-prereg-final/full-classified-tidy-data4freqs.csv")
+
+df.frequencies <- read_csv("../../data/class-elicitation-prereg-final/class-elicitation-final-plural_frequencies.csv")
+
+d.tidy.auto.freq <- d.tidy.auto.4freq %>%
   left_join(., df.frequencies, by = c("np_pl" = "NPs")) %>% # add subordinate frequencies
   left_join(., df.frequencies, by = c("superordinate.freq" = "NPs")) %>% # add superordinate frequencies
   mutate(
     degree = ifelse(degree == "length_duration", "length", degree)
   ) %>%
-  rename(subordinate_freq = Frequencies.x, 
+  rename(subordinate_freq = Frequencies.x,
          superordinate_freq = Frequencies.y,
-    superordinate_pl = superordinate.freq, 
-    subordinate_sg = np, 
+    superordinate_pl = superordinate.freq,
+    subordinate_sg = np,
     subordinate_pl = np_pl) %>%
-  select(-X1.x, -X1.y) %>% 
-  mutate(specific = as.numeric(specific)) 
+  select(-X1.x, -X1.y) %>%
+  mutate(specific = as.numeric(specific))
 
 
 d.tidy.auto.freq.clean <- d.tidy.auto.freq %>%
@@ -701,7 +720,7 @@ d.tidy.auto.freq.clean <- d.tidy.auto.freq %>%
 ## Output CSVs
 
 ```{r}
-write_csv(d.tidy.auto.freq, 
+write_csv(d.tidy.auto.freq,
           path =  "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies2.csv")
 ```
 
@@ -712,9 +731,9 @@ Compare two files
 ```{r}
 # df.1 <- read_csv( "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies2.csv")
 # df.0 <- read_csv( "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
-# 
+#
 # anti_join(df.0, df.1) %>% View()
-# 
+#
 # View(df.1 %>% filter(subordinate_sg == "basketball player"))
 ```
 
@@ -739,25 +758,25 @@ length(d.tidy.auto.non_match$response)
 #   View()
 ```
 
-The goal is to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). The responses are lower-cased. 
+The goal is to extract the responses which were produced by at least 3 participants for the respective stimulus (NP-adj pair). The responses are lower-cased.
 
 
-The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 869 non-matched responses (20.6%) were produced less than 3 times and are dropped. 
+The lemmatized and corrected reponses are counted by-stimulus; we keep those which were produced by at least 3 participants. 869 non-matched responses (20.6%) were produced less than 3 times and are dropped.
 
 ``` {r nonMatchedResps-grab3}
 # d.tidy.auto.non_match.lemma.counts <- d.tidy.auto.non_match %>% count(stim_id, response_hand_lemma)
 
 # MH, I found it illuminating to look at: d.tidy.auto.non_match %>% count(response_hand_lemma) %>% View()
-# you can see if there are more misspellings or lemmatizations required easily by sorting by response_hand_lemma 
+# you can see if there are more misspellings or lemmatizations required easily by sorting by response_hand_lemma
 
 # d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match.lemma.counts %>%
 #   right_join(., d.tidy.auto.non_match, by = c("stim_id", "response_hand_lemma")) %>%
 #   filter(n >= 3)
 # MH: this code replaces the need for the other two lines above this
 
-d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match %>% 
-  group_by(stim_id, response_hand_lemma) %>% 
-  mutate(n = n()) %>% 
+d.tidy.auto.non_match.grab3 <- d.tidy.auto.non_match %>%
+  group_by(stim_id, response_hand_lemma) %>%
+  mutate(n = n()) %>%
   filter(n >= 3)
 
 nrow(d.tidy.auto.non_match) - nrow(d.tidy.auto.non_match.grab3)
@@ -770,11 +789,11 @@ The data is manually classified into the following types of comparison classes:
 - superordinate ('super')
 - super-superordinate ('supersuper'): comparison classes that are more general than the anticipated superordinate categories (e.g. 'things' relative to the anticipated 'musical instruments')
 - different hierarchy ('diff'): the comparison class is outside of the anticipated hierarchy (e.g. more specific than the anticipated superordinate: "cats" instead of animals for stim 8)
-- "NA" for invalid responses 
+- "NA" for invalid responses
 
 The by-response hand-classifications are put into the column 'hand_cc'.
 
-Most classifications are read from a dataframe and are classifications from a produced response (a string) to a categorization. Some of these judgments are adjective-NP (item) specific, and these are performed after reading the dataframe with `case_when`. 
+Most classifications are read from a dataframe and are classifications from a produced response (a string) to a categorization. Some of these judgments are adjective-NP (item) specific, and these are performed after reading the dataframe with `case_when`.
 
 ``` {r manualCC}
 # look at distinct responses
@@ -842,11 +861,11 @@ d.auto.non_match.hand_cc.valid <- d.auto.non_match.hand_cc %>% filter(!(hand_cc 
 
 ## Modal Superordinate Responses
 
-The responses that were not processed automatically are inspected in detail to find responses systematically deviating from the anticipated ones. 
+The responses that were not processed automatically are inspected in detail to find responses systematically deviating from the anticipated ones.
 
 ### Superordinates for the Adjective Endorsement Task
 
-Here, superordinate responses were extracted which deviated from the anticipated superordinates in all conditions (i.e. NPs and adejctives: 3x2). The superordinates for the item 5 and 77 were adjusted to the modal response extracted here in all data sets and were used in the adjective endorsement experiment. 
+Here, superordinate responses were extracted which deviated from the anticipated superordinates in all conditions (i.e. NPs and adejctives: 3x2). The superordinates for the item 5 and 77 were adjusted to the modal response extracted here in all data sets and were used in the adjective endorsement experiment.
 
 The data points form the full data set are grouped by stim id, NP expectation, adjective polarity and specificity and the number of occurances of each response is calculated. Then, the modal response is extracted. The responses are then coerced to the respective modal response (i.e. the modal response of the respective NP and adjective condition). Then those superordinates where the modal response deviates for all 6 items of a set (set is 6 variations of an item: 3 np_expectations x 2 adj_polarities) and the deviating modal response is the same for all the 6 are extracted.
 
@@ -994,7 +1013,7 @@ Here, a dataframe containing the full processed data where the superordinates ar
 ``` {r}
 # create full df with produced grab-3 superordinates
 
-d.tidy.auto.classified.w.frequency %>% 
+d.tidy.auto.classified.w.frequency %>%
  filter((specific == 1) | (matchingSuper == 1)) %>%
   select(workerid, stim_id, degree,
     superordinate_pl = superordinate.freq,
