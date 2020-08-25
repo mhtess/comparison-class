@@ -27,6 +27,17 @@ library(ggthemes)
 library(brms)
 library(stringr)
 theme_set(theme_few())
+
+containsString_responses <- function(strng, substrng, clean_str, us_substr) {
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+    ifelse(length(strsplit(us_substr, clean_str)[[1]]) > 1, 1, 0)
+  ))
+}
+containsString <- function(strng, substrng) {
+  return(ifelse(length(strsplit(strng, substrng)[[1]]) > 1, 1,
+    ifelse(length(strsplit(substrng, strng)[[1]]) > 1, 1, 0)
+  ))
+}
 ```
 
 ## Load data
@@ -285,7 +296,7 @@ In order to improve matching of the provided repsonses to the subordinate NPs or
 
 ```{r list of commong mispellings}
 misspellings_df <- read_delim("text_processing/misspellings_dict.csv",
-                            delim = ";") 
+                            delim = ";")
 
 misspellings_set <- pull(misspellings_df, V2) %>% set_names(pull(misspellings_df, V1))
 ```
@@ -324,15 +335,33 @@ d.tidy.resp.valid.noFailedRef %>%
   ungroup() %>%
   mutate(
     response_spelling = str_replace_all(tolower(response), misspellings_set),
-    response_synonym = str_replace_all(response_spelling, synonym_set),
-    # ITEM-SPECIFIC SYNONYMS
-    response_synonym = case_when(
-        (stim_id == 25 && response_synonym == "episode") ~ "sitcom",
-        (stim_id == 28 && response_synonym == "episode") ~ "podcast episode",
-        (stim_id == 29 && response_synonym == "rock") ~ "rock concert",
-        (stim_id == 81 && response_synonym == "cans") ~ "trash can",
-        TRUE ~ response_synonym
-      ),
+    response_synonym = str_replace_all(response_spelling, synonym_set)
+  ) %>%
+  rowwise() %>%
+  mutate( # ITEM-SPECIFIC SYNONYMS
+    response_synonym = ifelse(
+      (stim_id == 19 && response_synonym %in% c("player", "players", "ball players") && np == "basketball player"), "basketball players",
+      ifelse(
+        (stim_id == 19 && response_synonym %in% c("player", "players") && np == "jockey"), "jockeys",
+        ifelse(
+          (stim_id == 19 && response_synonym %in% c("player", "players") && np == "golfer"), "golfers",
+          ifelse(
+            (stim_id == 25 && response_synonym %in% c("episode", "episodes")),
+            "sitcom",
+            ifelse(stim_id == 28 && response_synonym %in% c("episode", "episodes"), "podcast episode",
+              ifelse(stim_id == 29 && response_synonym == "rock", "rock concert",
+                ifelse(stim_id == 81 && response_synonym == "cans", "trash can",
+                  response_synonym
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  ) %>%
+  ungroup() %>%
+  mutate(
     response_lemma = tolower(str_replace_all(response_synonym, lemmatization_set))
   ) %>%
   mutate(
@@ -341,6 +370,9 @@ d.tidy.resp.valid.noFailedRef %>%
     corrected_lemma = response_synonym != response_lemma
   ) -> d.tidy.resp.valid.lemmatized
 
+# d.tidy.resp.valid.noFailedRef.temp %>%
+#   filter(response_synonym %in%c("episode", "episodes", "rock", "cans")) %>%
+#  View()
 
 sum(d.tidy.resp.valid.lemmatized$corrected_spelling)
 sum(d.tidy.resp.valid.lemmatized$corrected_spelling) / n.valid.responses
@@ -411,7 +443,8 @@ d.tidy.resp.valid.lemmatized.keyword <- d.tidy.resp.valid.lemmatized %>%
     keyword = gsub("patio door", "patio", keyword),
     keyword = gsub("front gate", "front", keyword),
     keyword = gsub("chocolate cake", "chocolate", keyword),
-    keyword = gsub("podcast episode", "podcast", keyword)#,
+    keyword = gsub("podcast episode", "podcast", keyword),
+    keyword = gsub("basketball player", "basketball", keyword)
   )
 ```
 
@@ -642,7 +675,8 @@ d.tidy.auto.freq <- d.tidy.auto %>%
     superordinate_pl = superordinate.freq, 
     subordinate_sg = np, 
     subordinate_pl = np_pl) %>%
-  select(-X1.x, -X1.y) 
+  select(-X1.x, -X1.y) %>% 
+  mutate(specific = as.numeric(specific)) 
 
 
 d.tidy.auto.freq.clean <- d.tidy.auto.freq %>%
@@ -668,7 +702,20 @@ d.tidy.auto.freq.clean <- d.tidy.auto.freq %>%
 
 ```{r}
 write_csv(d.tidy.auto.freq, 
-          path =  "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
+          path =  "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies2.csv")
+```
+
+
+Compare two files
+
+
+```{r}
+# df.1 <- read_csv( "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies2.csv")
+# df.0 <- read_csv( "../../data/class-elicitation-prereg-final/class-elicitation_auto-classified_frequencies.csv")
+# 
+# anti_join(df.0, df.1) %>% View()
+# 
+# View(df.1 %>% filter(subordinate_sg == "basketball player"))
 ```
 
 
