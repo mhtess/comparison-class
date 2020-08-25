@@ -110,7 +110,7 @@
 \renewcommand{\thetable}{S\arabic{table}}   
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-Here we present additional information about methods, results, and cognitive models. Readers who are interested in the model code and analysis code are encouraged to consult the associated online repository: \url{https://github.com/mhtess/comparison-class}.
+Here we present additional information about methods, results, and cognitive models. Readers who are interested in the model code and analysis code are encouraged to consult the associated online repository: \url{https://github.com/mhtess/comparison-class-paper}.
 
 
 %The following sections present details on the analyses used to evaluate whether the different experimental manipulations produced different responses. 
@@ -690,6 +690,8 @@ Figure \ref{fig:bayesnet} shows the plate diagram corresponding the BDA model fo
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 7 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in. 
 %For the full (slope and intercept) model, we ran additional 5 MCMC chains to be more confident in our conclusions about the parameters. 
 Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently. 
+
+We estimated the marginal likelihood of the data under each model by using an Annealed Importance Sampling algorithm implemented in WebPPL \cite{neal2001annealed}. We collected 4 samples from the AIS algorithm, which was run 250,000 steps per sample. 
 
 %where a basic-level bias plays the role of an intercept term $\beta_0$: $P(c) = \text{logistic}(\beta_0)
 

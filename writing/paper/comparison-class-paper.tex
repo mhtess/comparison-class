@@ -32,7 +32,7 @@
 \vspace{0.5cm}
 
 \textsuperscript{1}Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology \\\textsuperscript{2}Department of Psychology, Stanford University}
-\keywords{comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: X}
+\keywords{comparison class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: 6224}
 \makeatletter
 \newcommand\LastLTentrywidth{1em}
 \newlength\longtablewidth
@@ -109,8 +109,7 @@
 
 \newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2}  (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2}) }
 
-\authornote{Correspondence concerning this article should be addressed to Michael
-Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
+\authornote{Draft version 8/25/2020. This paper has not been peer reviewed. Please do not copy or cite without author's permission. Correspondence concerning this article should be addressed to Michael Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
 E-mail: tessler@mit.edu}
 
 \abstract{
@@ -363,7 +362,7 @@ Finally, we assume the communicative goal of using an adjective like \emph{tall}
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\textwidth]{figs/model_cartoon.pdf}
-\caption{\small \label{fig:modelCartoon}Model overview. A listener hears a basketball player described as ``tall'' by a speaker. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is a function of the comparison class (facets). C: Listener $L_1$ imagines what a speaker $S_1$ would say given different heights of the referent (x-axis) and assuming different comparison classes (facets); the opacity of the colors is in proportion to the listener's prior beliefs of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Speaker utterance production probabilities for different comparison classes, marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} if the comparison class is \emph{people}. E: Pragmatic listener inferences about the comparison class is computed via Bayes Rule with the utterance likelihood model given by this speaker. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}. Prior distribution of heights for people is a unit normal distribution $\mathcal{N}(0, 1)$ and the heights of basketball players is a right-shifted normal with smaller variance $\mathcal{N}(0, 0.5)$.
+\caption{\small \label{fig:modelCartoon}Model overview. A listener hears a basketball player described as ``tall'' by a speaker. A: A hypothesis space of comparison classes is constructed over a taxonomic hierarchy. B: A comparison class is realized as a probability distribution over the relevant degree (e.g., height; shown in black). The interpretation of a gradable adjective (e.g., \emph{tall}; shown in red)---given by $L_{0}(x \mid u, c)$---is a function of the comparison class (facets). C: Listener $L_1$ imagines what a speaker $S_1$ would say given different heights of the referent (x-axis) and assuming different comparison classes (facets); the opacity of the colors is in proportion to the listener's prior beliefs of that particular height (e.g., the listener knows the referent is a basketball player, and so expects heights towards the upper range of the scale). D: Speaker utterance production probabilities for different comparison classes, marginalizing over the plausible heights of the referent. A speaker is more likely to say \emph{tall} if the comparison class is \emph{people}. E: Pragmatic listener inferences about the comparison class is computed via Bayes Rule with the utterance likelihood model given by this speaker. Listener is more likely to infer \emph{basketball players} as the comparison class when the referent is described as \emph{short} than when they are described as \emph{tall}. Prior distribution of heights for people is a unit normal distribution $\mathcal{N}(0, 1)$ and the heights of basketball players is a right-shifted normal with smaller variance $\mathcal{N}(0.5, 0.5)$.
 % speaker production probability distributions are shown with the.
 }
 \end{figure}
@@ -422,6 +421,8 @@ In the experiment, participants rephrase a speaker's statement, which involves a
 To norm world knowledge needed in our quantitative modeling, we also measure truth judgments for statements involving scalar adjectives and an explicit comparison class (see SI).
 %We model both data sets using the same RSA architecture.
 Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered for the Comparison Class Inference task: \url{osf.io/xuc96}.
+All data reported, analysis scripts, code for cognitive models and web experiments can be found at \url{github.com/mhtess/comparison-class-paper}.
+
 
 %The quantitative predictions of the model are tested using a joint Bayesian data analytic strategy, where we explicitly model the data from both the Comparison Class Inference and Adjective Endorsement tasks.
 %This joint Bayesian data-analytic strategy allows us to infer from simple linguistic judgments the world knowledge that guides the inference about the comparison class in the computational model.
@@ -651,12 +652,7 @@ We used the word ``other'' to invoke the presupposition that the referent is a m
 %At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 %This memory check trial was also used as a basis for exclusion.
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=0.7\textwidth]{figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf}
-%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Comparison Class Inference experimental results. Proportion of paraphrases that contained the Subordinate NPs (e.g., \emph{basketball player}) with which the referent was introduced, as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity.}\label{fig:ccInferenceMain}
-\end{figure}
+
 
 \subsection{Results}
 
@@ -672,13 +668,18 @@ We preprocessed the remaining 26,320 responses by correcting for misspellings  (
 
 Pilot testing suggested that participants primarily provide comparison class paraphrases that are identical to the subordinate noun phrase by which the referent is introduced (\emph{subordinate-NP}, e.g., a basketball player) or a more superordinate category (\emph{superordinate-NP}).
 We automatically categorize responses as \emph{subordinate} if the preprocessed response contains the subordinate-NP as a substring; all other responses are coded as \emph{superordinate}.\footnote{This analysis assumes that in order to convey a category at least as specific as the subordinate-NP, one must include the subordinate-NP in the response. For example, \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player}. Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses contained any.}
-For a finer-grained analysis, we further categorize the \emph{superordinate} responses as to whether or not they contain the pre-conceived superordinate-NP.\footnote{Out of our 90 pre-conceived superordinate-NPs, one (``deserts'') turned out to be an incorrect guess as to what would be the most salient superordinate category for the subordinate categories (``smoothies'', ``muffins'', ``chocolate fondue'') in the context. We replaced this pre-designated superordinate-NP with the empirically most popular superordinate-NP (``foods'') for purposes of analysis.}
+For a finer-grained analysis, we further categorize the \emph{superordinate} responses as to whether or not they contain the pre-conceived superordinate-NP.\footnote{Out of our 90 pre-conceived superordinate-NPs, one (``desserts'') turned out to be an incorrect guess as to what would be the most salient superordinate category for the subordinate categories (``smoothies'', ``muffins'', ``chocolate fondue'') in the context. We replaced this pre-designated superordinate-NP with the empirically most popular superordinate-NP (``foods'') for purposes of analysis.}
 15637 (59.4\%) of the responses were categorized as \emph{subordinate}; of the remaining 10683 (41.6\%) responses, 6676 (25.3\% of the total) explicitly mention the pre-conceived superordinate-NP.
 In the subsequent analyses, we treat the responses that do mention neither the subordinate or superordinate-NP as \emph{superordinate}, as these responses in general either referenced superordinate categories along other hierarchies (e.g., a sauna is cold \emph{relative to other days} [as opposed to other saunas or locations]) or categories that were superordinate relative to our pre-designated superordinate categories (e.g., a wrestler is strong \emph{relative to other people} [as opposed to other wrestlers or athletes]).
 %; we present analyses that exclude these responses in the SI. 
 %That is, 22313 (84.7\%) of valid responses could be automatically categorized as either the subordinate-NP or a superordinate-NP that was consistent across items in the item set.
 
-
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/bars_cc_finalExpt_prereg_bars_syncDodge.pdf}
+%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+\caption{Comparison Class Inference experimental results. Proportion of paraphrases that contained the Subordinate NPs (e.g., \emph{basketball player}) with which the referent was introduced, as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity.}\label{fig:ccInferenceMain}
+\end{figure}
 
 
 %\red{For example, in response to  \{basketball players, golfers, jockeys\} are \{tall, short\}, \textbf{X\%} of participants produced either one of the three specific NPs or the more general \emph{people}}. \mht{[how common is athlete here?]}
@@ -748,9 +749,11 @@ Contra a fully descriptive approach, we are not interested in whether the variab
 %This method is not useful for our purposes since we are interested in characterizing the extent of the variability in comparison class inferences that are explained by actual knowledge about the categories and properties, not whether the variability can be be explained by some knowledge in principle. 
 Measuring prior knowledge in this setting is challenging, however,  since direct empirical measurements require explicit estimation of relevant quantities or probabilities \cite<e.g., plausible temperatures of days in winter, plausible heights of basketball players, etc.;>{Franke2016} and many of our domains can be reasoned about intuitively (e.g., the loudness of a diesel engine~vs.~an electric car) without a clear representation of the underlying scale (e.g., how many decibels is the typical sound of a diesel engine?).
 For this reason, we take a different approach: We utilize the productivity of the fragment of natural language that our computational model understands in order to predict data from a related language experiment ($n=375$, \emph{Adjective Endorsements}: truth judgments for sentences with explicit comparison classes involving the same scalar adjectives applied to the same categories, e.g., ``Imagine a day in winter. Do you think it is cold relative to other days of the year?''; see SI for details and see Figure \ref{fig:residuals} for results for eight items) and synthesize the two data sets using a single Bayesian data analytic model, wherein the parameters that govern background knowledge in the pragmatics models are constrained by both data sets.
-\ndg{i can imagine reviewers complaining that this is circular, since the truth judgements depend on the same prior knowledge and in a similar way -- so at most our model is simply jointly accommodating the data.... what do you think?}
-\mht{ya, in true fact, we are doing something in between pure prediction and pure accommodation... we're doing constrained accommodation, constrained by being able to accommodate other judgments as well... should we try to add this nuance in there?}
-\ndg{i think a little bit. maybe add something like: "Because the adjective endorsement task provides an explicit comparison task, accommodating this data allows us to calibrate the world-knowledge without the effect of comparison class inference."}
+Because the adjective endorsement task provides an explicit comparison class, accommodating this data allows us to calibrate the world-knowledge without the effect of comparison class inference.
+
+%\ndg{i can imagine reviewers complaining that this is circular, since the truth judgements depend on the same prior knowledge and in a similar way -- so at most our model is simply jointly accommodating the data.... what do you think?}
+%\mht{ya, in true fact, we are doing something in between pure prediction and pure accommodation... we're doing constrained accommodation, constrained by being able to accommodate other judgments as well... should we try to add this nuance in there?}
+%\ndg{i think a little bit. maybe add something like: ""}
 
 %\mht{we are trying to make the case that comparison class inferences depend upon world knowledge. we expect other judgments to depend on world knowledge as well. is there a truly-circular model that we could show is not as good? perhaps we could show in the SI that the raw correlation between the two judgments is not as predictive as our modeling approach (though that comparison would have 0 parameters, whereas our model has many). we could also try to articulate a true-circular model, which hopefully wouldn't be as good?}
 %\mht{i see now that you may have been drawing attention back to the argument we make in the start of the paragraph about prediction vs accommodation... if so, then maybe we just need to be more nuanced in our discussion of prediction vs. accommodation... }
@@ -772,7 +775,7 @@ For this reason, we take a different approach: We utilize the productivity of th
 
 
 We infer the parameters of all models using a Bayesian data analytic model that shares the world knowledge parameters between these two tasks (comparison class inference and adjective endorsements) and infers the comparison class prior parameters (which depend on the model variant) and the speaker optimality free parameters of the RSA models (SI Figure S3).
-We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 3 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in.
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 7 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in.
 Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently.
 
 %The comparison class inference model has one speaker optimality: $\alpha^\text{1}_{1}$.
@@ -805,8 +808,9 @@ The baseline Flat Prior model predicts variability in comparison class inference
 The Frequency effect model assumes NPs with higher usage frequency will more likely be used as comparison classes and is able to explain roughly 22\% of the variance.
 The Basic-level bias model explains roughly 71\% of the variance by assuming that basic-level comparison classes may be more likely \emph{a priori}.
 Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- a combination of the two alternative models -- gives rise to the best model predictions in terms of variance explained (77\%) and mean squared error (Table \ref{tab:r2bf}), suggesting that the structure of the comparison class reflects both a basic-level bias and an effect of the frequency of the NP, in addition to other possible factors.
-
-\ndg{need some words about model comparison, given unequal number of params?}
+We confirm that the maximally parameterized model is the best explanation of the data by comparing the marginal likelihood of the data under each model to compute a Bayes Factor (BF) as a measure of formal comparison. 
+BFs quantify how well the model predicts the data, averaging over the prior distribution over parameters; by taking the average over the model's prior distribution over parameters, the measure explicitly takes into account model complexity because higher complexity models have wider prior distributions over the parameter \cite{lee2014bayesian}.
+The observed data is several orders of magnitude more likely under the full model than the closest competitor model, the simpler Basic-level bias only model (Table \ref{tab:r2bf}).
 
 %Our BDA model returns posterior distributions over the parameters of the RSA models, governing world knowledge, the comparison class prior, and the speaker optimality parameters.
 %We first determine which parameterization of the comparison class prior (flat, basic-level bias, frequency, basic-level bias and frequency) is the best for our comparison class inference RSA model to predict the comparison class inference data.
@@ -846,12 +850,11 @@ Finally, the maximally parameterized \emph{Basic-level and Frequency effect} -- 
 %Our full model does a quite good job at accounting for the gradability of these inferences ($r = 0.88; r^2 = 0.77$)
 
 To gain further insight into the comparison class inference results, we examine the maximal model's posterior distribution over parameters.
-The speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}, $\alpha_2 =  $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}.
-We also find a positive effect of frequency of the noun phrase -- $\beta_1 = $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}.
-Our maximal model infers two parameters for the basic-level bias, one which operates if the particular item is a subordinate-level category (and thus, the more superordinate category would be the basic-level) and one that operates if the item is a basic-level category (and thus, the more superordinate category is the superordinate-level).
-We can then use those parameters to compute imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming a constant effect of usage frequency).
+The speaker optimality parameters for each task were inferred to be values for which listeners assuming a rational speaker and consistent with the prior literature on RSA models --- means and 95\% Bayesian credible intervals: $\alpha_1 =  $ \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_subordinateCC_NA}, $\alpha_2 =  \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_speakerOptimality_adjEndorse_NA}$.
+We also find a positive effect of frequency of the noun phrase -- $\beta_1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_frequency_basic_super}$.
+Our maximal model infers two parameters for the basic-level bias, one which operates if the particular item is a subordinate-level category (and thus, the more superordinate category would be the basic-level; $\beta_0^0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_sub_basic}$) and one that operates if the item is a basic-level category (and thus, the more superordinate category is the superordinate-level; $\beta_0^1 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_basic_super}$).
+We can use these parameters to compute imputed prior probabilities of subordinate, basic, and superordinate comparison classes (assuming a constant effect of usage frequency).
 These parameters show that basic and subordinate comparison classes are highly accessible and superordinate comparison classes less so (Figure \ref{fig:parameters}).
-
 
 %The full model infers on a by-item basis whether the basic-level category is the supplied NP or whether the basic-level category is an unmentioned, more superordinate category, because we expect the basic-level bias to operate differently for these different regimes of items.
 %As expected, the comparison class prior NPs that were categorized as basic-level categories strongly favored those mentioned categories -- $\beta^1_0 = \hdiresults{model_params_cis.csv}{byItem-intercept_single-slope_beta_intercept_basic_super}$.
@@ -871,14 +874,14 @@ These parameters show that basic and subordinate comparison classes are highly a
     every head row/.style={before row = \toprule, after row = \midrule},
     every last row/.style={after row = \bottomrule},
     columns/model_variant/.style={string type, column name={Model}, column type = l},
-    columns/subordinateCC_r2/.style={string type, column name={$r^2$ CC}, column type = l,  sci sep align, precision=3},
-   columns/subordinateCC_mse/.style={fixed, column name={$MSE$ CC}, column type = l, dec sep align, precision=4},
-    columns/adjEndorse_r2/.style={string type, column name={$r^2$ norming}, column type = l, sci sep align, precision=3},
-     columns/adjEndorse_mse/.style={fixed, column name={$MSE$ norming}, column type = l, dec sep align, precision=4}]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE).}\label{tab:r2bf}
+    columns/subordinateCC_r2/.style={string type, column name={$r^2_{CC}$}, column type = l,  sci sep align, precision=3},
+   columns/subordinateCC_mse/.style={fixed, column name={$MSE_{CC}$}, column type = l, dec sep align, precision=4},
+    columns/adjEndorse_r2/.style={string type, column name={$r^2_{norming}$}, column type = l, sci sep align, precision=3},
+     columns/adjEndorse_mse/.style={fixed, column name={$MSE_{norming}$}, column type = l, dec sep align, precision=4},
+     columns/log_bf/.style={fixed, column name={log BF}, column type = l, dec sep align, precision=0}
+     ]{csv_data_4_tex/mse_r2_table.csv}\caption{Model evaluation results. Full basic-level and frequency model exhibits the best fit to both data sets in terms of variance explained $(r^2)$ and mean squared error (MSE). (log) Bayes Factor are shown with respect to the full model (i.e., negative numbers indicate positive evidence for the full basic-level and frequency model).}\label{tab:r2bf}
 \end{table}
 \end{center}
-
-
 
 \begin{figure}[t]
 \centering
@@ -1053,7 +1056,7 @@ On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \ci
 The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would be otherwise inaccessible through traditional prior elicitation techniques because human participants lack requisite knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?);
 %\ndg{didn't we do this in previous work?}\mht{we did this in the cogsci paper, and i suppose we did a version of this with generics and targeting parameters of the structured prior..., but the second point of explicitly modeling the language i think is novel}; 
 in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimate numerical quantities for which complicated linking functions must be designed \cite<cf.,>{Franke2016}.
-This fully Bayesian language approach also provides further constraints on the language understanding models, which must predict quantitative data from two similar but distinct language experiments \ndg{only one of which requires comparison class inference}.
+This fully Bayesian language approach also provides further constraints on the language understanding models, which must predict quantitative data from two related language experiments, only one of which requires comparison class inference.
 The productivity of natural language can thus be harnessed to productively design experiments that further constrain and test computational models of language and cognition.
 
 
@@ -1147,6 +1150,7 @@ The meaning and the context from a single vague utterance.
 
 \section{Acknowledgements}
 
+The authors would like to acknowledge Polina Tsvilodub for her contributions to the preprocessing of the free production data and for  implementing the adjective endorsement task.
 This work was supported in part by NSF Graduate Research Fellowship
 DGE-114747 and NSF SBE Postdoctoral Research Fellowship Grant No. 1911790 to  MHT and a Sloan Research Fellowship, ONR grant N00014-13-1-0788, and DARPA grant FA8750-14-2-0009 to NDG.
 
