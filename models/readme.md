@@ -1,8 +1,8 @@
 # Comparison class models
 
 ## One-off models
-- `ccrsa.wppl`: Comparison class inference model (listener model), for use with `class-elicitation` experiment
-- `adjective-s2-stateUncertainty.wppl`: Vague speaker model (speaker model), for use with `vague-prior-elicitation` experimnent
+- `ccrsa.wppl`: Comparison class inference model (listener model), for use with comparison class inference experiment
+- `adj-endorsement.wppl`: Adjective endorsement speaker model, for use with adjective endorsement
 
 ## Full Bayesian Treatment (BDA with RSA)
 - `fbt-for-subCatPriors.wppl`: Maximally, includes both of the above one-off models.
@@ -11,7 +11,7 @@ Incorporates the data in order to infer these parameters and generate posterior 
 
 ### Adjective RSA package
 
-This holds much of the shared code for use with `ccrsa` and `adjective-s2-stateUncertainty`.
+This holds much of the shared code for use with `ccrsa` and `adj-endorsement`.
 
 Contents:
   - `utils.wppl`: helper functions (e.g., `KL`, `round`)

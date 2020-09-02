@@ -3,22 +3,24 @@ var classPrior = Infer({
   model: function(){return uniformDraw(["sub", "super"])}
 });
 
-var alphas = {s1: 3, s2: 1};
+var alphas = {s1: 3};
 
-var literalListener = cache(function(utterance, threshold, comparisonClass) {
+var literalListener = cache(function(utterance, comparisonClass) {
+  var form = utterance.split('Adjective')[0]
+
   Infer({model: function(){
     var state = sample(statePrior[comparisonClass]);
+    var threshold = form == "silence" ? "NA" : sample(thresholdPrior(form));
     var m = meaning(utterance, state, threshold);
     condition(m);
     return state;
   }})
 })
 
-
-var speaker1 = cache(function(state, threshold, comparisonClass, form) {
+var speaker1 = cache(function(state, comparisonClass, form) {
   Infer({model: function(){
-    var utterance = sample(utterancePrior(form))
-    var L0 = literalListener(utterance, threshold, comparisonClass)
+    var utterance = sample(utterancePrior)
+    var L0 = literalListener(utterance, comparisonClass)
     factor( alphas.s1 * L0.score(state) )
     return utterance
   }})
@@ -29,8 +31,7 @@ var pragmaticListener = function(form) {
     var utterance = form + "Adjective";
     var comparisonClass = sample(classPrior);
     var state = sample(statePrior["sub"]);
-    var threshold = sample(thresholdPrior(form));
-    var S1 = speaker1(state, threshold, comparisonClass, form);
+    var S1 = speaker1(state, comparisonClass, form);
     observe(S1, utterance);
     return comparisonClass
   }})

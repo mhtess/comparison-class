@@ -1,0 +1,30 @@
+// webppl adj-endorsement.wppl --require adjectiveRSA
+
+var alphas = {s1: 1, s2: 1};
+
+var literalListener = cache(function(utterance, comparisonClass) {
+  var form = utterance.split('Adjective')[0]
+  // display(form)
+  Infer({model: function(){
+    var state = sample(statePrior[comparisonClass]);
+    var threshold = form == "silence" ? "NA" : sample(thresholdPrior(form));
+    var m = meaning(utterance, state, threshold);
+    condition(m);
+    return state;
+  }, method: "enumerate"})
+}, 10000);
+
+var speaker = cache(function(form) {
+  Infer({model: function(){
+    var utterance = uniformDraw([form + "Adjective", "silence"])
+    var speakerBeliefs = statePrior["sub"];
+    var L0 = literalListener(utterance, "super")
+
+    var _kl = KL(speakerBeliefs, L0, speakerBeliefs.support());
+    factor(-1 * alphas.s1 * _kl)
+
+    return utterance == (form + "Adjective") ? 1 : 0
+  }})
+}, 10000)
+
+speaker("positive")
