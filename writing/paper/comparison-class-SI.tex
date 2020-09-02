@@ -110,7 +110,7 @@
 \renewcommand{\thetable}{S\arabic{table}}   
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-Here we present additional information about methods, results, and cognitive models. Readers who are interested in the model code and analysis code are encouraged to consult the associated online repository: \url{https://github.com/mhtess/comparison-class}.
+Here we present additional information about methods, results, and cognitive models. Readers who are interested in the model code and analysis code are encouraged to consult the associated online repository: \url{https://github.com/mhtess/comparison-class-paper}.
 
 
 %The following sections present details on the analyses used to evaluate whether the different experimental manipulations produced different responses. 
@@ -327,24 +327,40 @@ Each trial contained 2 judgments (positive and negative adjectives) for a total 
 
 \subsubsection{Results}
 
-The primary goal of this experiment is to validate the stimuli generated in Experiment 1 and to use to data to constrain the parameters governing world knowledge in the joint Bayesian data-analytic model. We build a Bayesian logistic mixed-effects model to predict participants' responses as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
+The primary goal of this experiment is to validate the stimuli generated in Task 1 and to use to data to constrain the parameters governing world knowledge in the joint Bayesian data-analytic model. We build a Bayesian logistic mixed-effects model to predict participants' responses as a function of the general expectations about the subordinate category (low, medium, high; dummy coded with the medium category as the reference level), the adjective (positive vs. negative; difference coded), and their interaction; in addition, we include the maximal mixed effects structure by-item set and by-participant that mirrors this fixed effects structure.\footnote{
 The model is judgment $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\_expectations * adjective\_polarity | participant) + (1 + gen\_expectations * adjective\_polarity | item\_set).
 }
 
-As expected by the generating procedure for these stimuli, the only regression coefficients that were credibly different from zero were the interaction terms.
-When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between endorsements of the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt2_brm_pilot.csv}{adj_positiveness1}.
-Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
-When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
-The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
-This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
-
-
+%
+%As expected by the generating procedure for these stimuli, the only regression coefficients that were credibly different from zero were the interaction terms (Figure \ref{fig:adjEndorseMain}).
+%When the subordinate category was expected to be near the middle of the scale (e.g., a soccer player), there was not a credible difference between endorsements of the positive form adjective (e.g., tall) and the negative form adjective (e.g., short): beta-weight and 95\% Bayesian credible interval: \brmresults{expt2_brm_pilot.csv}{adj_positiveness1}.
+%Also, there were no credible differences in average endorsements for the adjectives when the subordinate category was either near the high-end of the scale (e.g., basketball players; \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive}) or the low-end of the scale (e.g., gymnasts; \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative}).
+%When the subordinate category was expected to be near the high-end of the scale (e.g., the height of a basketball player), endorsements of the positive form adjective (e.g., tall) were credibly higher than endorsements of the negative form adjective (e.g., short) in comparison to middle-of-the-scale subordinate categories (e.g., soccer player):  \brmresults{expt2_brm_pilot.csv}{np_positivenesspositive:adj_positiveness1}.
+%The opposite interaction term was also credibly different from zero: When the subordinate category was expected to be near the low-end of the scale (e.g., the height of a gymnast player), endorsements of the positive form adjective were credibly lower than endorsements of the negative form adjective in comparison to middle-of-the-scale subordinate categories:  \brmresults{expt2_brm_pilot.csv}{np_positivenessnegative:adj_positiveness1}.
+%This analysis confirms that our experimental items bring to mind the kinds of general expectations that we hypothesize are relevant for our primary comparison class inference hypothesis.
 
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/bars_adj_finalExpt_prereg_bars_syncDodge.pdf}
 \caption{Adjective Endorsement (Task 3) experimental results. Proportion of sentence endorsements as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity. The biggest outlier for the low general expectations was the loudness of the \emph{owl}, which was judged to be more loud than quiet; the biggest outlier for the high general expectations was the fabric of \emph{wool}, which was judged to be more light than heavy. }\label{fig:adjEndorseMain}
 \end{figure}
+
+The pattern of endorsements was highly consistent with the a priori general expectations by which the stimuli were generated (Figure \ref{fig:adjEndorseMain}).
+When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the positive-form adjective (e.g., tall) was endorsed much more strongly than the negative adjective (e.g., short) in comparison to the control, middle-of-the-scale items (e.g., soccer player): posterior mean beta-weight and 95\% Bayesian credible interval: \brmresults{expt_brm_adj_contrasts_10k.csv}{adjpol_nphigh}.
+This interaction was the result of the high-end-of-the-scale subordinate categories showing more endorsements for the positive (e.g., tall) than for the negative (e.g., short) adjective: \brmresults{expt_brm_adj_contrasts_10k.csv}{highneg_highpos}.
+The same endorsement profile was not observed for the middle-of-the-scale, control items (e.g., \emph{soccer players}, for which the positive and negative adjective were endorsed equally as often \brmresults{expt_brm_adj_contrasts_10k.csv}{adjpol}). 
+A comparable interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): The positive-form adjective was endorsed credibly less than the negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt_brm_adj_contrasts_10k.csv}{adjpol_nplow}.
+Again, this was driven by the behavior of the low-end-of-the-scale subordinate categories, which showed strong endorsements for the negative than for the positive adjectives (\brmresults{expt_brm_adj_contrasts_10k.csv}{lowneg_lowpos}).
+
+The results from the endorsement task are remarkably symmetric across the low-end~vs.~high-end of the scale subordinate categories.
+We observe for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}), a slight preference to reject both adjectives over accepting both (i.e., \emph{neither tall nor short} was a stronger pattern than \emph{both tall and short}; \brmresults{expt_brm_adj_contrasts_10k.csv}{intercept}). The mean endorsements, averaging over positive and negative adjectives, for items at the high-end of the scale (e.g., \emph{basketball players}) was not different from chance  (\brmresults{expt_brm_adj_contrasts_10k.csv}{nphigh}) nor were the average endorsements of adjectives for categories at the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_adj_contrasts_10k.csv}{nplow}). 
+%We observe no credible difference in the overall preference for subordinate~vs.~superordinate comparison class inferences when the subordinate category was either near the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_contrasts_10k.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_contrasts_10k.csv}{nplow}).
+Furthermore, the endorsements of adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_adj_contrasts_10k.csv}{lowpos_highneg}), nor were the inferences  from adjectives that were consistent with general expectations about a category (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_adj_contrasts_10k.csv}{lowneg_highpos}).
+
+
+
+
+
 
 
 
@@ -577,7 +593,7 @@ Since this alternative pragmatic model derives the same qualitative inference fo
 
     \end{tabular}
   \end{center}
-  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Experiments 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and $\beta_1$, an effect of frequency of the noun phrase $\hat{f}_k$. Our category stimuli may be either subordinate level categories of basic-level categories determined by parameter $z_{d,k}$, which gates between using two different basic-level bias comparison class parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
+  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Tasks 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and an effect of frequency of the noun phrase $\hat{f}_k$ given by $\beta_1$. The referent category of each stimulus may be either a subordinate level category or a basic-level category, determined by parameter $z_{d,k}$, which gates between using two different basic-level bias comparison class parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
 
@@ -671,9 +687,11 @@ The binary level-of-abstractness parameter which governs the direction and magni
 
 We ran four different BDA models, corresponding to the different ways of parameterizing the comparison class prior: (1) flat prior model (assumes the comparison class prior is always 50/50 between subordinate and superordinate class); (2) intercept only model (assumes a basic-level bias), (3) slope only model (assumes an effect of corpus frequency, but no basic-level bias), (4) slope and intercept.
 Figure \ref{fig:bayesnet} shows the plate diagram corresponding the BDA model for the full, slope and intercept model. 
-We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 3 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in. 
-For the full (slope and intercept) model, we ran additional 5 MCMC chains to be more confident in our conclusions about the parameters. 
+We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 7 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in. 
+%For the full (slope and intercept) model, we ran additional 5 MCMC chains to be more confident in our conclusions about the parameters. 
 Convergence was checked through visual inspection of the different chains to ensure similar conclusions would be drawn from each chain independently. 
+
+We estimated the marginal likelihood of the data under each model by using an Annealed Importance Sampling algorithm implemented in WebPPL \cite{neal2001annealed}. We collected 4 samples from the AIS algorithm, which was run 250,000 steps per sample. 
 
 %where a basic-level bias plays the role of an intercept term $\beta_0$: $P(c) = \text{logistic}(\beta_0)
 
