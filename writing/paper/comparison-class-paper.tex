@@ -22,7 +22,7 @@
 %\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
 %\DeclareLanguageMapping{american}{american-apa}
 
-  \title{Warm (for Winter): Inferring comparison classes for gradable adjectives}
+  \title{Warm (for Winter): Inferring reference classes in communication}
   \shorttitle{Inferring comparison classes}
     \author{Michael Henry Tessler\textsuperscript{1,2} and Noah D. Goodman\textsuperscript{2}}
     \date{}
@@ -140,24 +140,96 @@ The methods and results we present open the door to studying richer aspects of c
 %A 6'1'' man is not short; that is, unless the man is a basketball player; they could be short for a basketball player.
 
 
-A 75\degree F (24\degree C) day is warm. A 50\degree F (10\degree C) day is not. That is, unless it's Winter; 50\degree F could be warm for Winter. \emph{Warm} is a relative adjective, and its felicity depends upon what a speaker uses as a basis of comparison---the \emph{comparison class} (e.g., warm relative to days in Winter~vs.~days in other seasons). The comparison class is canonically a category used for interpreting relative comparisons (\emph{warm relative to what?}) and can be deployed to make sense of a wide swath of linguistic expressions, including relative adjectives \cite<\emph{warm} or \emph{tall};>{cresswell1976semantics, klein1980semantics, kennedy2005scale}, vague quantifiers \cite<e.g., \emph{many}, \emph{a lot};>{Scholler2017}, and category generalizations such as generic or habitual statements \cite<e.g., \emph{Robins lay eggs}, \emph{John smokes};>{Tessler2019psychrev}.
+A 75\degree F (24\degree C) day is warm. A 50\degree F (10\degree C) day is not. That is, unless it is Winter; 50\degree F could be warm for Winter. 
+Whether or not something is \emph{warm} depends upon what \emph{reference class} you might be using (e.g., warm for Winter~vs.~warm for any season).  
+The problem of determining an appropriate reference class touches on issues as wide as providing a price value to a house (CITE) to informing sentences for defendants convicted in the legal system (CITE).
+The problem stems from how one would, in principle, calculate a frequency of a singular future event (i.e., to assign a probability to that event; CITE RACHEMBACH), but it extends to the assignment of values such in the legal cases.
+The issue is that any particular event or thing belongs to multiple categories, giving rise to multiple possible reference classes. 
 
-Comparison classes are a case study in the kinds of representations that sit at the interface of psychological and linguistic theory.
-In formal linguistic semantics, the comparison class is a free (underspecified) variable that often gets ``filled in by context'' \cite{bale2008universal, Bale2011, Solt2009}.
-Comparison classes need to be inferred because any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes:
-A day in January is also a day of the year; if a listener hears ``It's warm'', it could be \emph{warm in comparison to the last week}, \emph{warm for the season}, or \emph{warm relative to other seasons}; it could also be \emph{warm for Boston}, \emph{warm for the northeast USA}, \emph{warm for a place with currently six inches of snow on the ground}, among an infinity of possibilities.
-Psychological and/or communicative (pragmatic) mechanisms presumably are responsible for that filling in process, but how those mechanisms should function to determine a comparison class remains obscure. 
+In natural language, the reference class problems takes shape when trying to assign a context-sensitive interpretation to statement with a relative meaning (e.g., \emph{warm}... relative to what?). 
+This general problem of reference classes (in linguistics, called \emph{comparison classes}) touches on a wide swath of linguistic expressions, including relative adjectives \cite<\emph{warm} or \emph{tall};>{cresswell1976semantics, klein1980semantics, kennedy2005scale}, vague quantifiers \cite<e.g., \emph{many}, \emph{a lot};>{Scholler2017}, and, in a nonbovious way, category generalizations such as generic or habitual statements \cite<e.g., \emph{Robins lay eggs}, \emph{John smokes};>{Tessler2019psychrev}.
+Formally, the reference class is a free (underspecified) variable that linguistic theories posit gets ``filled in by context'' \cite{kennedy2005scale, bale2008universal, Bale2011, Solt2009} \red{CHECK HOW THESE AUTHORS TALK ABOUT THAT}.
+Psychological and/or communicative (pragmatic) mechanisms presumably are responsible for that filling in process, but how those mechanisms operate to determine a reference class remains obscure. 
+References classes thus also serve as a case study into the representations that sit at the interface of psychological and linguistic theory.
+
+Empirically, the question of how human listeners decide upon the reference class has also received little systematic attention.
+Empirical work with adults and children has primarily interrogated how judgments and interpretations for relative adjectives (e.g., \emph{dark}, \emph{tall}) depend upon the statistical details of a pre-determined comparison class  \cite{Barner2008, Qing2014, Schmidt2009, Solt2012}.
+Indirect evidence that the comparison class is flexibly inferred comes from studies with young children, which find that a directly-modified noun phrase can be used to constrain what objects go into the comparison class: What counts as a \emph{tall pimwit} (a novel category) depends on the distribution of heights of \emph{pimwits} and not the heights of other categories like \emph{daxes} \cite<i.e., \emph{daxes} are not in the reference class;>{Barner2008}.
+Additionally, strong linguistic and perceptual cues can provide a signal to children as young as two-and-a-half that the comparison class can change \cite<e.g., an objectively small mitten can be \emph{big} relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
+A systematic investigation into how listeners flexibly adjust the reference class is outstanding. 
+
+
+In what follows, we examine the problem of inferring references in communication using gradable adjectives like \emph{dark} or \emph{tall} as our case study. 
+We describe how comparison classes can be incorporated into computational models of pragmatic communication, using a Theory of Mind based reasoning mechanism.
+The model predicts an intuitive interaction between a listener's world knowledge (e.g., winter days are generally cold) and the valence/polarity of the adjective heard (e.g., \emph{warm}~vs.~\emph{cold}), which a control model without a Theory of Mind based reasoning mechanism does not predict.
+The model also makes fine-grained qualitative predictions that can depend upon probabilistic knowledge about the property in the category (e.g., the temperature of Winter days) and prior beliefs about the reference class, a construct that has not been investigated to our knowledge.
+We formalize further predictions about the structure of the reference class prior and show that it credibly contains elements that encode a basic level bias \cite{Rosch1975} and a notion of usage frequency.
+For these investigations, we present empirical data from a large-scale, pre-registered, free-production experiment in which participants freely generate reference classes for interpreting relative adjectives in context.
+
+%A model that infers the comparison class through a Theory of Mind based reasoning mechanism makes unique predictions, which are empirically confirmed, to 
+
+
+%We show that a control model that infers comparison classes without Theory of Mind does not make the correct predictions. 
+
+
+
+
+
+
+%Through informal model comparison, we show how inferring comparison class requires a Theory of Mind based reasoning mechanism.
+
+
+%We show how one of these ways -- 
+
+% a pair of computational model that integrate reference classes into communication in different ways. 
+
+%integrates psychological, linguistic, and pragmatic representations in a coherent way and makes quantitative predictions about comparison class inferences. 
+
+
+
+
+
+%AWe formalize additional predictions about the nature of the reference class prior and show that it credibly contains elements that encode a basic level bias \cite{Rosch1975} and a notion of usage frequency.
+%We test these hypotheses in a large-scale, pre-registered, free-production experiment in which participants are freely generate comparison classes when interpreting relative adjectives in context.
+
+
+
+
+%the reference class -- (as 
+%In formal linguistic semantics,Comparison classes need to be inferred because any particular referent of discourse can be conceptualized or categorized in multiple ways, giving rise to multiple possible comparison classes:
+%A day in January is also a day of the year; if a listener hears ``It's warm'', it could be \emph{warm in comparison to the last week}, \emph{warm for the season}, or \emph{warm relative to other seasons}; it could also be \emph{warm for Boston}, \emph{warm for the northeast USA}, \emph{warm for a place with currently six inches of snow on the ground}, among an infinity of possibilities.
+
+
+%Any individual thing or event may be incorporated into many different references classes (e.g., a day in Winter is also a day of the year as well as a day of a specific individual week, and so on), which can result in many different expected values or probabilities being assigned to that thing or event  
+%
+%Frequencies require a well-defined 
+%
+%If we are asked to find the probability holding for an individual future event, we must first incorporate the case in a suitable reference class. An individual thing or event may be incorporated in many reference classes, from which differ- ent probabilities will result. 
+%
+%This ambiguity has been called the problem of the reference class. 
+%
+%to compute frequency for a well-defined category (e.g., to assign a frequentist interpretation of probability to an event. 
+%
+%The problem stems from trying to prove a value, probability, or interpretation to a specific instance
+%The problem is rife in natural language where context-sensitive meanings depend upon what a speaker is assuming to be the reference class.
+%
+%
+%The problem is rife 
+%
+%; all based not
+%
+%a speaker uses as a basis of comparison---the \emph{reference class} (e.g., warm relative to days in Winter~vs.~days in other seasons). 
+%Assign a valuation, interpretation, or probability to a specific example 
+%Determining the reference class that is implied in ordinary language is a problem whose implications range from interpretating relative adjectives (\emph{warm} relative to what?) to assigning valuations to houses by appealing to other ``similar'' houses (e.g., similar houses) 
+%
+%
+%\emph{Warm} is a relative adjective, and its felicity depends upon what a speaker uses as a basis of comparison---the \emph{comparison class} The comparison class is canonically a category used for interpreting relative comparisons (\emph{warm relative to what?}) and can be deployed to make sense of a wide swath of linguistic expressions, including relative adjectives \cite<\emph{warm} or \emph{tall};>{cresswell1976semantics, klein1980semantics, kennedy2005scale}, vague quantifiers \cite<e.g., \emph{many}, \emph{a lot};>{Scholler2017}, and category generalizations such as generic or habitual statements \cite<e.g., \emph{Robins lay eggs}, \emph{John smokes};>{Tessler2019psychrev}.
+%
+
 
 %The fact that comparison classes often go unsaid gives rise to an inferential problem for listeners.
 %Furthermore, the connection between inferring the comparison class and theories of adjective meaning remains obscure because models of reasoning developed in psychology rarely talk to models of semantic meaning developed in linguistics.
 %Theoretical work in semantics has instead focused on how information from an already determined comparison class is integrated with a compositional semantics and which representations might be preferred \cite{Bale2011, Solt2009}.
-
-
-On the empirical side, the question of how human listeners decide upon the comparison class has also received little systematic attention.
-Empirical work with adults and children has primarily interrogated how judgments and interpretations for relative adjectives like \emph{dark} or \emph{tall} depend upon the statistical details of a pre-determined comparison class  \cite{Barner2008, Qing2014, Schmidt2009, Solt2012}.
-Indirect evidence that the comparison class can be flexibly adjusted comes from studies with young children, which find that a directly-modified noun phrase can be used to constrain what objects go into the comparison class: What counts as a \emph{tall pimwit} (a novel category) depends on the distribution of heights of \emph{pimwits} and not the heights of other categories like \emph{daxes} \cite{Barner2008}.
-Additionally, strong linguistic and perceptual cues can provide a signal to children as young as 2-and-a-half that the comparison class can change \cite<e.g., an objectively small mitten can be \emph{big} relative to the tiny mittens on the table;>{Ebeling1988, Ebeling1994}.
-A systematic investigation into how human listeners flexibly adjust the comparison class is outstanding. 
 
 % mechanisms that allow contextual and linguistic factors to interface.
 
@@ -170,12 +242,6 @@ A systematic investigation into how human listeners flexibly adjust the comparis
 
 
 %Rational Speech Act models are a framework for formalizing precise hypotheses about linguistic and psychological representations and describe their integration. 
-
-In this paper, we articulate a general, computational model for inferring comparison classes that integrates psychological, linguistic, and pragmatic representations in a coherent way and makes quantitative predictions about comparison class inferences. 
-The model predicts an intuitive interaction between a listener's world knowledge about the referent (e.g., winter days are generally cold; summer days are generally warm) and the valence/polarity of the adjective heard (e.g., \emph{It is warm}~vs.~\emph{It is cold}).
-The model also makes fine-grained qualitative predictions that can depend upon two representations posited by the model: probabilistic knowledge about the property in the category (e.g., the distribution over temperature for days in Winter in a particular location) and prior beliefs about the comparison class, a representation that has never been investigated.
-We formalize additional predictions about the nature of the comparison class prior and show that it credibly contains elements that encode a basic level bias \cite{Rosch1975} and a smaller effect of frequency.
-We test these hypotheses in a large-scale, pre-registered, free-production experiment in which participants are freely generate comparison classes when interpreting adjective phrases in context.
 
 
 
