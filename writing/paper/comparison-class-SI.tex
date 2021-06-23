@@ -205,7 +205,7 @@ Our text preprocessing procedure was divided into two stages: Exclusions and Cor
 \paragraph{Exclusions}
 
 We excluded responses that did not make sense given the context.
-These included but were not limited to responses that were the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 440 in total (1.6\%). 
+These included but were not limited to responses that were simply the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 440 in total (1.6\%). 
 
 We additionally removed from the data set responses that seemed to be the result of a failure of the participant to grasp the intended referent of the utterance. For example, in the context sentence: ``Alexander is in the forest and hears a woodpecker. Alexander says, \emph{It is loud}'', the intended referent of the pronoun \emph{it} is the woodpecker; however, some participants responded \emph{it is loud relative to other forests}, which suggests they understood the referent to which \emph{it} refers to be the forest. This kind of ``reference failure'' responses numbered 249 in total (or, 0.9\% of the remaining responses). 
 
@@ -227,6 +227,18 @@ Thus, we automatically categorized preprocessed responses as either subordinate 
 
 
 \subsubsection{Supplementary data analysis}
+
+\paragraph{Distribution of response types across experimental factors}
+
+In the main text, we reported that roughly 60\% of responses explicitly mentioned the subordinate category, 25\% of responses explicitly mentioned the modal superordinate category, and 15\% of responses referred to some other, relatively superordinate category. We examine this 3-way classification of responses by the experimental factors that are the focus of this paper: general expectations about the category and the adjective polarity. 
+Figure \ref{fig:3wayBars} shows the distribution of response types by general expectations and adjective polarity. Overall, we find a pattern of responses that is consistent with the idea that when the adjective is consonant with the general expectations about the category, a listener will look for a more superordinate comparison class. 
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figs/3way_bars_cc_finalExpt.pdf}
+\caption{Proportion of responses under a three-way classification: mention subordinate, mention the modal superordinate response, or mention another, relatively superordinate category. For negative polarity adjectives, the proportion of both the ``superordinate'' and ``other'' responses increases as general expectations lower (and thus become more consistent with the adjective polarity; e.g., a short gymnast). For positive polarity adjectives, we see the reverse trend. Error-bars denote bootstrapped 95\% CIs.}\label{fig:3wayBars}
+\end{figure}
+
 
 
 \paragraph{Regression on subset of responses that explicitly mention subordinate or superordinate-NP}
@@ -378,8 +390,6 @@ Furthermore, the endorsements of adjectives that are in conflict with a listener
 \section{Alternative Models}
 
 
-
-
 The inference about the comparison class outlined in the main text involves a listener reasoning about a speaker reasoning about a listener. The full Rational Speech Act model is given by these equations (reproduced from the main text): 
 %
 \begin{align}
@@ -392,8 +402,6 @@ L_{0}(x, \theta \mid u, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mi
 
 
 \subsection{Literal alternative model}
-
-
 
 One might question whether the inference about the comparison class is necessarily a pragmatic inference which requires recursive reasoning. 
 We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1a} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
@@ -702,6 +710,15 @@ We estimated the marginal likelihood of the data under each model by using an An
 
 % + \beta_1 \cdot \log (\frac{\hat{f}_{specific}}{\hat{f}_{general}}) )$, where $\hat{f}_k$  represents the frequency of the comparison class  $k$ NP estimated from the Google WebGram corpus, $\beta_1$ is the sensitivity of the comparison class prior to relative frequency, and $\beta_0$ is a basic-level bias.
 
+\subsection{Supplementary model results}
+
+\begin{figure}[t!]
+    \centering
+      \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4) for comparison class inference data. Top two rows show data and model predictions for the main Comparison Class Inference experiment; bottom two rows correspond to the Adjective Endorsements (norming study). The log ratio frequency of subordinate NP to superordinate NP is shown in brackets next to the x-axis labels; a more negative number corresponds to a stronger prior belief in the superordinate category as the comparison class.]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}} \\
+    \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference and Adjective Endorsement data sets.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} 
+    \caption{Quantitative modeling results for eight sets of items.}
+    \label{fig:by_item_results}
+\end{figure}
 
 
 %}
