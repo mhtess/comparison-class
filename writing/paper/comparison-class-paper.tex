@@ -1143,22 +1143,63 @@ Understanding the meanings of words often, if not always, requires appreciating 
 Yet, context is almost never articulated explicitly, but left to the listener to pragmatically reconstruct.
 Inferring comparison classes for relative statements (e.g., scalar adjectives like \emph{tall}) is a case study in this larger phenomenon of the pragmatic reconstruction of context and is the communicative variant of the well-known \emph{reference class problem} in philosophy.
 In this paper, we propose that listeners flexibly adjust the comparison class using pragmatic reasoning and world knowledge. 
-We implement this proposal by extending a state-of-the-art language understanding model. Its prediction are empirically confirmed using an open-ended response measure on a diverse range of linguistic stimuli.
+We implement this proposal by extending a state-of-the-art language understanding model. Its prediction are empirically confirmed in an open-ended response measure using a diverse range of linguistic stimuli.
+The strong fit of this model suggests that comparison class inference can be viewed as cooperative pragmatic inference.
 
-We propose a minimal extension to an adjective interpretation Rational Speech Act model to allow it to flexibly reason about the implicit comparison class (e.g., \emph{tall for a person}~vs.~\emph{tall for a basketball player}).
+We proposed a minimal extension to an adjective interpretation Rational Speech Act model to allow it to flexibly reason about the implicit comparison class (e.g., \emph{tall for a person}~vs.~\emph{tall for a basketball player}).
 The model generated the qualitative prediction that listeners should prefer more specific (e.g., subordinate-level) comparison classes when the adjective conflicts with their general expectations about a member of a category (e.g., a basketball player who is short), which we confirmed by asking participants to freely explicate the intended comparison class.
 The fact that participants freely produced these comparison classes suggests that these inferences vary spontaneously in context, without an experimenter directly raising alternative comparison classes.  
 The model also made quantitative predictions about the item-level variation of this inference given knowledge about properties and categories.
-The strong quantitative fit of this model suggests that comparison class inference can be viewed as cooperative pragmatic inference.
+
+We have addressed a particular aspect of comparison class inference: deciding among two conceptually-based comparison classes, that we pre-specified as subordinate~vs.~superordinate category labels.
+The restriction of our model to considering only two comparison classes was a convenient simplification, but the fact that the majority of responses naturally produced were either subordinate~vs.~superordinate category labels suggests that this was also a reasonable simplification. 
+At the same time, the variability in responses was substantially greater than our idealized model could account for: Participants freely produced comparison classes that were either more abstract or less abstract than our superordinate comparison classes as well as comparison classes that fell along different conceptual hierarchies. 
+Still, other kinds of comparison classes are possible (e.g., perceptually-based comparisons and functional comparisons as in ``big for the doll'') and are understood by even very young children \cite{Ebeling1994}.
+The inferential machinery we present in our model of comparison class inference is general and should apply equally well to these other kinds of comparison classes, once a hypothesis space of comparison class is determined.
+
+%The fact that superordinate categories are dis-preferred may be a product of the fact that superordinate categories tend to have higher variability across members than basic-level or subordinate level categories.
+%Our modeling work also shows that usage frequency of the noun phrase contributes to the comparison class prior.
+%Corpus frequency is a composite measurement of factors relevant for speech production.
+%Its utility in this model suggests that utterances without an explicit comparison class (e.g., ``It's warm outside'') may in fact be elliptical sentences, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension \cite{bergen2015strategic}.
+
+Our modeling work pointed to a basic-level bias and corpus frequency as two factors that inform the hypothesis space of comparison class, but developing a more general theory of the comparison class prior will be an important step for this approach.
+Many of the ``miscellaneous'' comparison classes that were elicited in our task appealed to other aspects of the context that were made available by the language in the task.
+For example, the sentence \emph{Robert is at a decoration shop and looks at a statue made of bronze} brings into the context different concepts that could be parametrically combined to construct comparison classes -- bronze, statues, decorations, shop -- and several participants appealed to these concepts in their responses (e.g., expensive relative to \emph{items at the shop}).
+These observations dovetail with prior work that investigated adjective interpretation with comparison classes in young children and which highlight the importance of linguistic cues for comparison classes.
+For example, for a 4-year-old, the comparison class for a ``tall pimwit'' is \emph{other pimwits} and does not include other non-pimwit objects \cite{Barner2008}.
+Even younger children can flexibly shift between qualitatively different kinds of comparison classes, given strong linguistic cues to distinguish the intended comparison class (e.g., ``Is this a \emph{big mitten}?'' vs. ``Is this mitten \emph{big for the doll}?''; \citeNP{Ebeling1994}).
+%This prior work highlights the importance of linguistic cues for comparison class inference, while our work -- in which the speaker does not use a category label (e.g., ``basketball player'', ``winter'') in their adjectival utterance (e.g., ``He's tall''; ``It's warm'') -- demonstrates that such cues are not necessary for (adult) listeners to flexible adjust the comparison class. 
+One key future direction then is determining the cues that are available in the naturalistic environment and how adult and child listeners use those cues to infer comparison classes.
+
+
+
+%For example, how do we know to even consider the comparison classes of basketball players vs. people, and not all objects in general?
+%\emph{Objects} may be a comparison class that listeners would consider given the right context and our assumption of constructing comparison classes out of a taxonomic hierarchy is consistent with \emph{objects} being a candidate comparison class.
+%However, just because a comparison class is in the hypothesis space does not mean that is a likely comparison class: Indeed, we observe in our quantitative modeling results that a uniform prior distribution over comparison classes is unlikely, and in fact, superordinate categories have the lowest probability of providing the comparison class.
+
+
+In addition to the novel empirical data and the computational model of comparison class inference, this paper also presents experimental and data-analytic methodological innovations.
+On the experimental side, we articulated an explicit generative model for our experimental stimuli, which we deployed on human participants to construct a large and diverse set of linguistic items (n = 540 unique stimuli).
+While this procedure was not entirely ``end-to-end'' (i.e., we authors still needed to curate, edit, and add context to the items), the method presents a significant advance beyond the traditional method of constructing a small set of stimuli, often inadvertently optimized to test a theory \cite{Clark1973}.
+On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \cite{tauber2017} with the productivity of probabilistic models of language understanding \cite{Goodman2016, scontras2017probabilistic} to jointly model two complementary language tasks and infer the relevant prior knowledge shared between the tasks.
+The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would otherwise be inaccessible through traditional prior elicitation techniques because human participants lack requisite knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?);
+%\ndg{didn't we do this in previous work?}\mht{we did this in the cogsci paper, and i suppose we did a version of this with generics and targeting parameters of the structured prior..., but the second point of explicitly modeling the language i think is novel}; 
+in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimate numerical quantities for which complicated linking functions must be designed \cite<cf.,>{Franke2016}.
+This fully Bayesian language approach also provides further constraints on the language understanding models, which must predict quantitative data from two related language experiments.
+This approach highlights how the productivity of natural language can be harnessed to productively design experiments to further constrain and test computational models of language and cognition.
+
+In our stimuli, a speaker utters an adjectival sentence without a strong cue to the comparison class: \emph{He [a basketball player] is tall}.
+A rational speaker might not bother articulating or providing a strong cue to a comparison class if the listener can reasonably be assumed to be able infer the comparison class.
+By doing so, the speaker would be operating according to a principle of communicating more information with less effort. 
+This is not how the speaker in our model operates; instead, in our model, the speaker is simply presupposing that the listener has the same comparison class as they do, and the listener is tasked with inferring what the comparison class is. 
+In the SI, we formalize the higher-order speaker, who reasons about whether or not the listener will correctly infer the comparison class, and show that the comparison class inferences that result in such a model are qualitatively similar to those of the model we present above. 
 
 
 
 
-Previous work investigating the role of the comparison class in adjective interpretation has provided strong linguistic cues to convey the speaker's intended comparison class.
-\citeA{Barner2008} were able to convey to 4-year-olds that the comparison class for a ``tall pimwit'' is \emph{other pimwits} and does not include other non-pimwit objects.
-\citeA{Ebeling1994} showed how even younger children can flexibly shift between qualitatively different kinds of comparison classes, given strong linguistic cues to distinguish the intended comparison class (e.g., ``Is this a \emph{big mitten}?'' vs. ``Is this mitten \emph{big for a doll}?'').
-In our experiments, the speaker does not use a category label (e.g., ``basketball player'', ``winter'') in their utterance (e.g., ``He's tall''; ``It's warm''); without these strong linguistic cues, adults flexibly adjust the comparison class by using their world knowledge.
-The fact that young children, who do not have the same kind of world knowledge as adults, can flexibly adjust the comparison class raises the question of what kinds of cues are available to them (and to adults) in the naturalistic environment for comparison class inference.
+%Previous work investigating the role of the comparison class in adjective interpretation has deployed strong linguistic cues to convey the speaker's intended comparison class.
+
+%The fact that young children, who do not have the same kind of world knowledge as adults, can flexibly adjust the comparison class raises the question of what kinds of cues are available to them (and to adults) in the naturalistic environment for comparison class inference.
 
 %\mht{minimal cues... also, NP $\neq$ cc}
 %A relevant detail of our experiment contexts is that the speaker's sentence did not include a noun phrase to describe the referent (i.e, the speaker said ``He is tall'' as opposed to ``That basketball player is tall'').
@@ -1171,13 +1212,11 @@ The fact that young children, who do not have the same kind of world knowledge a
 
 The phenomenon of comparison class inference is a case study in \emph{context inference}, or reasoning about the set of beliefs that are in common ground between speaker and listener.
 %Our model is similar in structure to
-The model is thus similar in structure to models of presupposition accommodation \cite<e.g.,>{Qing2016projective}, which linguistic theories classically pose as involving a listener adding or revising information to the common ground in order to make sense of an utterance. 
+The model is thus similar in structure to models of presupposition accommodation \cite<e.g.,>{Qing2016projective, Degen2015}, which linguistic theories classically pose as involving a listener adding or revising information to the common ground in order to make sense of an utterance. 
 For example, if John says to Mary ``My car is in the shop'', it is not necessary \emph{a priori} that Mary know that John has a car; if Mary did not know (or she temporarily forgot) that John owns a car, Mary can \emph{accommodate} John's utterance by adding to the common ground the presupposition that \emph{John has a car}.
-In our case, the speaker utters an adjectival sentence without a strong cue to the comparison class: \emph{He [a basketball player] is tall}.
-By doing so, the speaker may be operating according to a principle of communicating more information with less effort. 
-If the listener can reasonably be assumed to be able infer the comparison class, then the speaker can get away without articulating it explicitly.
-In the SI, we formalize this higher-order speaker (i.e., the speaker who reasons about whether or not the listener will correctly infer the comparison class) and show how the listener who reasons about this kind of speaker reconstructs the intended comparison class in a qualitatively similar way to model we present above. 
 The continuity in the computational formalisms that underly this sort of common ground revision suggest a very basic cognitive mechanism behind the pragmatic reconstruction of context \cite<e.g.,>{levinson2000presumptive}. 
+
+
 % \ndg{... finish that sentence? also worth throwing a cite (and maybe a very short discussion) to the qing, goodman, lassiter (2016). i think this is the only previous rsa model of presupposition accommodation?}
 
 %The situation we model is one of asymmetric knowledge: The listener is uncertain about the comparison class, but assumes that the speaker does not represent their uncertainty.
@@ -1205,20 +1244,8 @@ Such simple semantic representations, coupled with a powerful inferential cognit
 %In a similar way, inferring that the speaker meant the basketball player is short \emph{for a basketball player} might be tantamount to inferring that the speaker is conceiving of the referent as a basketball player.
 %This potential symmetry between comparison classes and representations of referents could have implications for theories of alternative utterances: For example, the speaker said ``cat'' and not ``drawing of a cat'' because they believed the listener would not be confused, given the context, that the referent is not an actual cat.
 
-We have addressed a particular aspect of comparison class inference: deciding among two possible conceptually-based comparison classes, that we pre-specified as subordinate~vs.~superordinate category labels.
-The restriction of our model to considering only two comparison classes was a convenient simplification, but the fact that the majority of responses naturally produced were either subordinate~vs.~superordinate category labels suggests that this was a reasonable simplification. 
-At the same time, the variability in responses was substantially greater than our idealized model could account for: Participants freely produced comparison classes that were either more abstract or less abstract than our superordinate comparison classes as well as comparison classes that fell along different conceptual hierarchies. 
-Still, other kinds of comparison classes are possible (e.g., perceptually-based comparisons and functional comparisons as in ``big for the doll'') and are understood by even very young children \cite{Ebeling1994}.
-The inferential machinery we present in our model of comparison class inference is general and should apply equally well to these other kinds of comparison classes, once a hypothesis space of comparison class is determined.
 
-Determining a hypothesis space of comparison classes is an important future direction for this approach.
-For example, how do we know to even consider the comparison classes of basketball players vs. people, and not all objects in general?
-\emph{Objects} may be a comparison class that listeners would consider given the right context and our assumption of constructing comparison classes out of a taxonomic hierarchy is consistent with \emph{objects} being a candidate comparison class.
-However, just because a comparison class is in the hypothesis space does not mean that is a likely comparison class: Indeed, we observe in our quantitative modeling results that a uniform prior distribution over comparison classes is unlikely, and in fact, superordinate categories have the lowest probability of providing the comparison class.
-The fact that superordinate categories are dis-preferred may be a product of the fact that superordinate categories tend to have higher variability across members than basic-level or subordinate level categories.
-Our modeling work also shows that usage frequency of the noun phrase contributes to the comparison class prior.
-Corpus frequency is a composite measurement of factors relevant for speech production.
-Its utility in this model suggests that utterances without an explicit comparison class (e.g., ``It's warm outside'') may in fact be elliptical sentences, in a way analogous to sentence fragments studied in noisy-channel models of production and comprehension \cite{bergen2015strategic}.
+
 
 %Our solution at present is to say that \emph{objects} is a comparison class with low probability, but why should it have low prior probability?
 %From our modeling work, we found that the \emph{superordinate} level was the least likely to give rise to a comparison class, and that may result from superordinate categories having a
@@ -1229,17 +1256,6 @@ Its utility in this model suggests that utterances without an explicit compariso
 
 
 %\mht{relation to  the inference about the comparison class being ``the speaker is thinking of the referent as an X''... reduces to same thing?}
-
-In addition to the novel empirical data and the computational model of comparison class inference, this paper also presents experimental and data-analytic methodological innovations.
-On the experimental side, we articulated an explicit generative model of our items, which we deployed on human participants to construct a large and diverse set of linguistic stimuli (n = 540 unique stimuli).
-While this procedure was not entirely ``end-to-end'' (i.e., we authors still needed to curate, edit, and add context to the items), the method presents a significant advance beyond the traditional method of constructing a small set of stimuli, often inadvertently optimized to test a theory \cite{Clark1973}.
-On the data-analytic side, we coupled a \emph{descriptive Bayesian} approach \cite{tauber2017} with the productivity of probabilistic models of language understanding \cite{Goodman2016, scontras2017probabilistic} to jointly model two complementary language tasks and infer the relevant prior knowledge shared between the tasks.
-The major feature of this method is that it allows us to back-out quantitatively detailed domain knowledge that would be otherwise inaccessible through traditional prior elicitation techniques because human participants lack requisite knowledge of the quantitative scales (e.g., how many decibels is the sound of a rooster's crow?);
-%\ndg{didn't we do this in previous work?}\mht{we did this in the cogsci paper, and i suppose we did a version of this with generics and targeting parameters of the structured prior..., but the second point of explicitly modeling the language i think is novel}; 
-in addition, this method has the feature that  participants respond only to simple, natural language questions rather than estimate numerical quantities for which complicated linking functions must be designed \cite<cf.,>{Franke2016}.
-This fully Bayesian language approach also provides further constraints on the language understanding models, which must predict quantitative data from two related language experiments, only one of which requires comparison class inference.
-The productivity of natural language can thus be harnessed to productively design experiments that further constrain and test computational models of language and cognition.
-
 
 %It's been suggested that there exist qualitatively different kinds of
 %comparison classes, constructed by reference to either: the perceptual
