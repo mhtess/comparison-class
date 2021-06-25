@@ -34,7 +34,7 @@
 \vspace{0.5cm}
 
 \textsuperscript{1}Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology \\\textsuperscript{2}Department of Psychology, Stanford University}
-\keywords{comparison class; reference class; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: 6224}
+\keywords{comparison class; reference class; adjectives; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: 7264}
 \makeatletter
 \newcommand\LastLTentrywidth{1em}
 \newlength\longtablewidth
@@ -111,7 +111,7 @@
 
 \newcommand{\hdiresults}[2]{\rlgetnum{#1}{param_name}{#2}{MAP}{2}  (\rlgetnum{#1}{param_name}{#2}{cred_lower}{2}, \rlgetnum{#1}{param_name}{#2}{cred_upper}{2}) }
 
-\authornote{Draft version 9/15/2020. This paper has not been peer reviewed. %Please do not copy or cite without author's permission. 
+\authornote{Draft version 6/24/2021. This paper has not been peer reviewed. %Please do not copy or cite without author's permission. 
 Correspondence concerning this article should be addressed to Michael Henry Tessler, Department of Brain and Cognitive Sciences, Building 46, Room 3027, Massachusetts Institute of Technology, 77 Massachusetts Avenue, Cambridge, MA 02139.
 E-mail: tessler@mit.edu}
 
@@ -515,12 +515,12 @@ We can address this question by reformulating the comparison class inference spe
 L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)\cdot P(\theta) \cdot P(c \mid k)  \label{eq:L0alt}
 \end{align}
 %
-Similar to the pragmatic listener model (Eq.~\ref{eq:L1a}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes via $P(c \mid k)$ (e.g., with the knowledge that the referent is a basketball player, the listener considers comparison classes that are the same as or superordinate to the class of basketball players).
-Unlike the pragmatic listener model (Eq.~\ref{eq:L1a}), however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S_1(u \mid c)$---where $c$ and $k$ may or may not refer to the same class (e.g., the listener may know the referent is a basketball player -- $k = \emph{basketball players}$ -- but believes the speaker was assuming a \emph{person} comparison class -- $c = \emph{people}$).
+Similar to the pragmatic listener model (Eq.~\ref{eq:L1a}), this listener can use the category membership of the referent $k$ to constrain the hypothesis space of comparison classes via $P(c \mid k)$ (e.g., with the knowledge that the referent is a basketball player, the listener considers comparison classes that are the same as or superordinate to the class of basketball players).
+Unlike the pragmatic listener model (Eq.~\ref{eq:L1a}), however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has both their private representation of the referent---which informs the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts by assuming some comparison class is in common ground---$S_1(u \mid c)$---where $c$ and $k$ may or may not refer to the same class (e.g., the listener may know the referent is a basketball player -- $k = \emph{basketball players}$ -- but believes the speaker was assuming a \emph{person} comparison class -- $c = \emph{people}$).
 The literal listener version of the model has no way of separating these representations.
 In effect, the question that this listener can address is different from the comparison class inference problem. The question this alternative model is answering is: what is more likely---a basketball player whose height is very great or a person whose height is very great? 
 By doing so, this alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:altModels}). 
-Thus, a literal listener model is insufficient to resolve comparison classes in context and this inference seems to require a Theory of Mind based reasoning mechanism.
+Thus, a literal listener model is insufficient to reason about comparison classes and this inference seems to require a Theory of Mind based reasoning mechanism.
 
 \begin{figure}[t]
     \centering
@@ -913,7 +913,7 @@ We estimate the distributional knowledge about properties $P(x)$, the parameters
 %Thus, the model provides a strong baseline hypothesis for evaluating comparison class inferences by the influence of world knowledge $P(x)$.
 
 Since we infer the world knowledge priors $P(x)$, our analysis technique is similar to a \emph{descriptive Bayesian approach} \cite{tauber2017}, in which the modeler is simply interested in estimating what the prior knowledge in the model would have to be in order to account for the inference patterns in the data. 
-Here, however, we go beyond merely accommodating the item-level variation in the data and attempt to predict the variability in the data using independent measurements of participants'  knowledge of categories and properties.
+Here, however, we go beyond merely accommodating the item-level variation in the data and attempt to predict the variability in the data using independent measurements of participants'  prior knowledge of categories and properties.
 %A fully descriptive approach
 % we are not interested in whether the variability can be explained by some knowledge in principle, but whether the variability is explained by actual knowledge about the categories and properties.
 %(That is, we would like to \emph{predict} not merely \emph{accommodate} item-level variation.)
