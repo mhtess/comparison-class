@@ -205,13 +205,13 @@ Our text preprocessing procedure was divided into two stages: Exclusions and Cor
 \paragraph{Exclusions}
 
 We excluded responses that did not make sense given the context.
-These included but were not limited to responses that were simply the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 440 in total (1.6\%). 
+These included but were not limited to responses that were simply the adjectives (e.g., \emph{tall}), the names of the characters (e.g., \emph{Alex}), and copied portions of the text on the screen (e.g., the sentence prompt: \emph{the street is wide}). These invalid responses totaled 443 in total (1.6\%). 
 
-We additionally removed from the data set responses that seemed to be the result of a failure of the participant to grasp the intended referent of the utterance. For example, in the context sentence: ``Alexander is in the forest and hears a woodpecker. Alexander says, \emph{It is loud}'', the intended referent of the pronoun \emph{it} is the woodpecker; however, some participants responded \emph{it is loud relative to other forests}, which suggests they understood the referent to which \emph{it} refers to be the forest. This kind of ``reference failure'' responses numbered 249 in total (or, 0.9\% of the remaining responses). 
+We additionally removed from the data set responses that seemed to be the result of a failure of the participant to grasp the intended referent of the utterance. For example, in the context sentence: ``Alexander is in the forest and hears a woodpecker. Alexander says, \emph{It is loud}'', the intended referent of the pronoun \emph{it} is the woodpecker; however, some participants responded \emph{it is loud relative to other forests}, which suggests they understood the referent to which \emph{it} refers to be the forest. This kind of ``reference failure'' responses numbered 267 in total (or, 1.0\% of the remaining responses). 
 
 \paragraph{Corrections}
 
-In order to improve alignment across responses, we corrected for misspellings (633; 2.38\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 3154, 11.9\%), and replaced some responses with obvious synonyms given the context (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}/\emph{individuals}--\emph{people}; 787, 2.96\%). 
+In order to improve alignment across responses, we corrected for misspellings  (\rlgetnum{correction_counts.csv}{key}{corrected_spelling}{total}{1}; \rlgetnum{correction_counts.csv}{key}{corrected_spelling}{prop}{1}\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; \rlgetnum{correction_counts.csv}{key}{corrected_lemma}{total}{1}; \rlgetnum{correction_counts.csv}{key}{corrected_lemma}{prop}{1}\%), and replaced some responses with obvious synonyms given the context (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}/\emph{individuals}--\emph{people}; \rlgetnum{correction_counts.csv}{key}{corrected_synonym}{total}{1}; \rlgetnum{correction_counts.csv}{key}{corrected_synonym}{prop}{1}\%). 
 
 
 \subsubsection{Response analysis}
@@ -255,6 +255,16 @@ Again, this was driven by the behavior of the low-end-of-the-scale subordinate c
 The inferences measured from this reduced data set are similarly highly symmetric across the low-end~vs.~high-end of the scale subordinate categories.
 We observe an overall preference for subordinate comparison classes for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{intercept}) and no overall differences in this preference for items at the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{nplow}). 
 The inferences that result from adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{lowpos_highneg}), nor were the inferences  from adjectives that were consistent with general expectations about a category (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{lowneg_highpos}).
+
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figs/bars_cc_finalExpt_prereg_bars_exactMatch_syncDodge.pdf}
+%{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
+\caption{Comparison Class Inference experimental results removing responses that mention neither subordinate nor superordinate categories. Proportion of paraphrases that contained the Subordinate NPs (e.g., \emph{basketball player}) with which the referent was introduced, as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity.}\label{fig:ccInferenceMain2}
+\end{figure}
+
 
 \paragraph{Universally consistent responses}
 
