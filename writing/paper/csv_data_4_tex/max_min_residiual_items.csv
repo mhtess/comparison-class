@@ -1,9 +1,9 @@
 stim_id,degree,superordinate,item_sort
-stim_90,width,doorways,mb
 stim_71,strength,walls,mb
+stim_76,temperature_h,places,mb
+stim_89,width,roads,mb
 stim_44,price,spices,mb
-stim_14,hardness,furniture,mb
 stim_88,width,waterways,ma
-stim_32,loudness_n,venues,ma
-stim_46,price,clothes,ma
+stim_80,weight,electronic devices,ma
+stim_75,temperature_h,locations,ma
 stim_1,darkness,birds,ma
