@@ -1,0 +1,4 @@
+specific,matchingSuper,n,type,total_n,prop
+0,FALSE,3951,notSubordinate_notSuperordinate,26317,15.013109396967739
+0,TRUE,6645,notSubordinate_Superordinate,26317,25.24983850742866
+1,FALSE,15721,Subordinate_notSuperordinate,26317,59.7370520956036
