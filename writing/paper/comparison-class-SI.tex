@@ -164,13 +164,7 @@ Sample size, exclusion criteria, regression analysis, and cognitive model analys
 
 We recruited 837 participants from Amazon's Mechanical Turk. 
 Participants were restricted to those with U.S. IP addresses with at least a 95\% work approval rating. 
-In addition, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants. 
-The test involved reading a sentence in which a named speaker (e.g., Joseph) says to a named listener (e.g., Elizabeth) ``It's a beautiful day, isn't it?''. 
-Participants were asked to type in a text box to whom the speaker (in this case: Joseph) is talking (i.e., Elizabeth).
-Speaker and listener names were randomized in a way that could not be read off the source .html file.
-Participants were given three attempts to correctly identify the listener. 
-If they did not succeed within 3 attempts, they would be unable to proceed with the experiment.
-Since participants who fail this check are required to exit the experiment before completing the task, we do not have an estimate for how many participants fail this check. 
+In addition, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants, described above.
 
 In addition to the above restrictions, we excluded participants based on both a task comprehension question appearing before the main trials and a memory check trial appearing after the main trials. 
 In the task comprehension / warm-up trial, participants were told they they would be asked to rephrase something a person said:  the person said a word that is relative and their task was to figure out what the word was relative to. They were given the example of \emph{John says: ``The Empire State Building is tall''} and asked to fill-in a sentence with the same kind of response they would do on the main trials (i.e., \emph{The Empire State Building is tall relative to other \_\_\_}). Participants were told to fill in the blank with a group or category that makes the most sense and to use their common sense.
@@ -231,7 +225,7 @@ Thus, we automatically categorized preprocessed responses as either subordinate 
 \paragraph{Distribution of response types across experimental factors}
 
 In the main text, we reported that roughly 60\% of responses explicitly mentioned the subordinate category, 25\% of responses explicitly mentioned the modal superordinate category, and 15\% of responses referred to some other, relatively superordinate category. We examine this 3-way classification of responses by the experimental factors that are the focus of this paper: general expectations about the category and the adjective polarity. 
-Figure \ref{fig:3wayBars} shows the distribution of response types by general expectations and adjective polarity. Overall, we find a pattern of responses that is consistent with the idea that when the adjective is consonant with the general expectations about the category, a listener will look for a more superordinate comparison class. 
+Figure \ref{fig:3wayBars} shows the distribution of response types by general expectations and adjective polarity. Overall, we find a pattern of responses that is consistent with the idea that when the adjective is consistent with the general expectations about the category, a listener will look for a more superordinate comparison class. 
 
 \begin{figure}[!t]
 \centering
@@ -248,7 +242,7 @@ In the main text, we analyze the full data set of preprocessed responses. Here, 
 
 The results on the subset of responses that explicitly mention either the subordinate or superordinate-NP are entirely consistent with the results derived from the full data set.
 When the subordinate category was expected to be near the high-end of the scale (e.g., basketball player), the positive-form adjective (e.g., tall) led to fewer subordinate comparison classes than the negative-form adjective (e.g., short) in comparison to the control, middle-of-the-scale items (e.g., soccer player): posterior mean beta-weight and 95\% Bayesian credible interval: \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{adjpol_nphigh}.
-Again, this interaction was the result of the high-end-of-the-scale subordinate categories showing more subordinate comparison class inferences for the negative adjective (e.g., short) than for the positive adjective (e.g., tall): \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{highneg_highpos}. a preference which was not observed for the middle-of-the-scale, control items (e.g., \emph{soccer players}; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{adjpol}). 
+Again, this interaction was the result of the high-end-of-the-scale subordinate categories showing more subordinate comparison class inferences for the negative adjective (e.g., short) than for the positive adjective (e.g., tall): \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{highneg_highpos}, a preference which was not observed for the middle-of-the-scale, control items (e.g., \emph{soccer players}; \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{adjpol}). 
 As before, a comparable interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): Hearing the positive-form adjective led to credibly more subordinate inferences than hearing a negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{adjpol_nplow}.
 Again, this was driven by the behavior of the low-end-of-the-scale subordinate categories, which showed a stronger preference for the superordinate comparison classes for negative than for positive adjectives (\brmresults{expt_brm_exact-match_contrasts_10k_2.csv}{lowneg_lowpos}).
 
@@ -262,7 +256,7 @@ The inferences that result from adjectives that are in conflict with a listener'
 \centering
 \includegraphics[width=0.7\textwidth]{figs/bars_cc_finalExpt_prereg_bars_exactMatch_syncDodge.pdf}
 %{\centering \includegraphics{figs/bars_adj_finalExpt_pilot_byItem} }
-\caption{Comparison Class Inference experimental results removing responses that mention neither subordinate nor superordinate categories. Proportion of paraphrases that contained the Subordinate NPs (e.g., \emph{basketball player}) with which the referent was introduced, as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity.}\label{fig:ccInferenceMain2}
+\caption{Comparison Class Inference experimental results removing responses that mention neither subordinate nor superordinate categories. Proportion of paraphrases that contained the Subordinate NPs (e.g., \emph{basketball player}) with which the referent was introduced, as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bars are bootstrapped 95\% confidence intervals. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity.}\label{fig:ccInferenceMain2}
 \end{figure}
 
 
@@ -272,7 +266,7 @@ The inferences that result from adjectives that are in conflict with a listener'
 Of these universal consistent responses (i.e., responses that were at floor or at ceiling), all but one were cases where 100\% of participants gave a subordinate-NP response (i.e., a response that was the same as the NP with which the referent was introduced). 
 For example, 100\% of valid responses for a ``loud church'' all concerned the subordinate category \emph{church}. 
 The lone NP-adj pair that led to all superordinate responses (for either data set) was the ``cheap plastic bracelet'', which all participants said was cheap relative to other \emph{bracelets}. 
-Intriguingly, the numeric counts of items that received 100\% subordinate-NP responses mirrors the overall pattern of responses collapsed across items shown in the main text: adjectives that conflict with the general expectations about the category (e.g., a short basketball player) are more likely to receive subordinate-NP comparison class responses (Table \ref{tab:counts} for counts of universally consistent responses from the full data set; Table \ref{tab:counts2} for universally consistent responses from the restricted data set). 
+Intriguingly, the numeric counts of items that received 100\% subordinate-NP responses mirrors the overall pattern of responses collapsed across items shown in the main text: adjectives that conflict with the general expectations about the category (e.g., a short basketball player) are more likely to receive subordinate-NP comparison class responses (Table \ref{tab:counts} for counts of universally consistent responses from the full data set; Table \ref{tab:counts2} for universally consistent responses from the restricted data set).
 
 %\begin{center}
   \begin{table}[h]
@@ -286,7 +280,7 @@ Intriguingly, the numeric counts of items that received 100\% subordinate-NP res
     columns/adjpol/.style={string type, column name={Adjective Polarity}, column type = l},
     columns/low/.style={string type, column name={low}, column type = l,  sci sep align, precision=3},
    columns/medium/.style={fixed, column name={medium}, column type = l, dec sep align, precision=4},
-    columns/high/.style={string type, column name={high}, column type = l, sci sep align, precision=3}]{csv_data_4_tex/itemCounts_ceil_floor_fulldata.csv}\caption{Full data set. Counts of items that had 100\% subordinate-NP comparison class responses, as a function of the adjective polarity (positive~vs.~negative) and general expectations about the category (low, medium, high).}
+    columns/high/.style={string type, column name={high}, column type = l, sci sep align, precision=3}]{csv_data_4_tex/itemCounts_ceil_floor_fulldata.csv}\caption{Counts of items that had 100\% subordinate-NP comparison class responses, as a function of the adjective polarity (positive~vs.~negative) and general expectations about the category (low, medium, high) computed over the full data set.}
     \label{tab:counts}
 }
 \hfill
@@ -305,7 +299,7 @@ Intriguingly, the numeric counts of items that received 100\% subordinate-NP res
     columns/adjpol/.style={string type, column name={Adjective Polarity}, column type = l},
     columns/low/.style={string type, column name={low}, column type = l,  sci sep align, precision=3},
    columns/medium/.style={fixed, column name={medium}, column type = l, dec sep align, precision=4},
-    columns/high/.style={string type, column name={high}, column type = l, sci sep align, precision=3}]{csv_data_4_tex/itemCounts_ceil_floor_exactmatch.csv}\caption{Restricted data set. Counts of items that had 100\% subordinate-NP comparison class responses, as a function of the adjective polarity (positive~vs.~negative) and general expectations about the category (low, medium, high).}
+    columns/high/.style={string type, column name={high}, column type = l, sci sep align, precision=3}]{csv_data_4_tex/itemCounts_ceil_floor_exactmatch.csv}\caption{Counts of items that had 100\% subordinate-NP comparison class responses, as a function of the adjective polarity (positive~vs.~negative) and general expectations about the category (low, medium, high) computed over the restricted data set.}
     \label{tab:counts2}
     }
   \end{table}
@@ -324,7 +318,7 @@ We recruited 400 participants from Amazon's Mechanical Turk, restricted to those
 This number was arrived at with the goal of estimating endorsement probabilities for each item with a 95\% confidence interval width of 0.2 for each item.
 Because our measure is a two-alternative forced-choice and because we expect some items to receive fairly categorical judgments (i.e., low between-participant variability), we employed an analogous sequential sampling procedure to that employed in Task 2 (Comparison Class Inference, see above) in order to over-sample items that exhibit high between-participant variability.
 We first collected 35 responses for each item, computed 95\% CIs for each item, and stopped collecting data for items whose 95\% CIs were smaller than 0.2.
-After the first 35 responses, we collected more responses for each item until the 95\% for that item was smaller than 0.2 or we reached our predetermined sample size.
+After the first 35 responses, we collected more responses for each item until the 95\% CI for that item was smaller than 0.2 or we reached our predetermined sample size.
 The experiment took about 10 minutes and participants were compensated \$1.50 for their work.
 
 \subsubsection{Procedure}
@@ -345,7 +339,7 @@ A total of 103 participants failed this check, leaving 297 participants for the 
 The experimental materials were the same as used in Task 2 (Comparison Class Inference).
 %In addition to the sets of noun phrases forming the subordinate categories, a context sentence was crafted to provide an appropriate but minimal context in which the adjective could be uttered.
 %In total, we had 126 sets of stimuli (3 subordinates with 1 superordinate), thus this experiment had 378 unique trials (one per subordinate category).
-Each trial contained 2 judgments (positive and negative adjectives) for a total of 756 total unique judgments.
+Each trial contained 2 judgments (positive and negative adjectives).
 
 \subsubsection{Results}
 
@@ -364,7 +358,7 @@ The model is judgment $\sim$ gen\_expectations * adjective\_polarity + (1 + gen\
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.7\textwidth]{figs/bars_adj_finalExpt_prereg_bars_syncDodge.pdf}
-\caption{Adjective Endorsement (Task 3) experimental results. Proportion of sentence endorsements as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity. The biggest outlier for the low general expectations was the loudness of the \emph{owl}, which was judged to be more loud than quiet; the biggest outlier for the high general expectations was the fabric of \emph{wool}, which was judged to be more light than heavy. }\label{fig:adjEndorseMain}
+\caption{Adjective Endorsement (Task 3) experimental results. Proportion of sentence endorsements as a function of the general expectations listeners have about the category (x-axis) and the polarity of the adjective used to describe the category (colors; e.g., \emph{tall} = positive, \emph{short} = negative). Bars represent overall means and error bar is a bootstrapped 95\% confidence interval. Each dot represents the mean of a single item and lines connect Subordinate NPs described with different adjectives (e.g., \emph{tall} and \emph{short} basketball player). Dots are jittered horizontally to improve visual clarity. The biggest outlier for the low general expectations was the loudness of the \emph{owl}, which was judged to be more loud than quiet; the biggest outlier for the high general expectations was the fabric of \emph{wool}, which was judged to be more light than heavy. }\label{fig:adjEndorseMain}
 \end{figure}
 
 The pattern of endorsements was highly consistent with the a priori general expectations by which the stimuli were generated (Figure \ref{fig:adjEndorseMain}).
@@ -374,8 +368,8 @@ The same endorsement profile was not observed for the middle-of-the-scale, contr
 A comparable interaction was observed for categories that were expected to be near the low-end of the scale (e.g., jockey): The positive-form adjective was endorsed credibly less than the negative-form adjective, in comparison to the middle-of-the-scale subordinate categories:  \brmresults{expt_brm_adj_contrasts_10k.csv}{adjpol_nplow}.
 Again, this was driven by the behavior of the low-end-of-the-scale subordinate categories, which showed strong endorsements for the negative than for the positive adjectives (\brmresults{expt_brm_adj_contrasts_10k.csv}{lowneg_lowpos}).
 
-The results from the endorsement task are remarkably symmetric across the low-end~vs.~high-end of the scale subordinate categories.
-We observe for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}), a slight preference to reject both adjectives over accepting both (i.e., \emph{neither tall nor short} was a stronger pattern than \emph{both tall and short}; \brmresults{expt_brm_adj_contrasts_10k.csv}{intercept}). The mean endorsements, averaging over positive and negative adjectives, for items at the high-end of the scale (e.g., \emph{basketball players}) was not different from chance  (\brmresults{expt_brm_adj_contrasts_10k.csv}{nphigh}) nor were the average endorsements of adjectives for categories at the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_adj_contrasts_10k.csv}{nplow}). 
+The results from the endorsement task were remarkably symmetric across the low-end~vs.~high-end of the scale subordinate categories.
+We observe for the control (middle-of-the-scale) subordinate categories (e.g., \emph{soccer players}), a slight preference to reject both adjectives over accepting both (i.e., \emph{neither tall nor short} was a more common pattern than \emph{both tall and short}; \brmresults{expt_brm_adj_contrasts_10k.csv}{intercept}). The mean endorsements, averaging over positive and negative adjectives, for items at the high-end of the scale (e.g., \emph{basketball players}) was not different from chance  (\brmresults{expt_brm_adj_contrasts_10k.csv}{nphigh}) nor were the average endorsements of adjectives for categories at the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_adj_contrasts_10k.csv}{nplow}). 
 %We observe no credible difference in the overall preference for subordinate~vs.~superordinate comparison class inferences when the subordinate category was either near the high-end of the scale (e.g., \emph{basketball players}; \brmresults{expt_brm_contrasts_10k.csv}{nphigh}) or the low-end of the scale (e.g., \emph{gymnasts}; \brmresults{expt_brm_contrasts_10k.csv}{nplow}).
 Furthermore, the endorsements of adjectives that are in conflict with a listener's general expectations of the categories (e.g., tall gymnasts~vs.~short basketball players) were not different between the low-end and high-end items (\brmresults{expt_brm_adj_contrasts_10k.csv}{lowpos_highneg}), nor were the inferences  from adjectives that were consistent with general expectations about a category (e.g., short gymnasts~vs.~tall basketball players; \brmresults{expt_brm_adj_contrasts_10k.csv}{lowneg_highpos}).
 
@@ -403,8 +397,8 @@ Furthermore, the endorsements of adjectives that are in conflict with a listener
 The inference about the comparison class outlined in the main text involves a listener reasoning about a speaker reasoning about a listener. The full Rational Speech Act model is given by these equations (reproduced from the main text): 
 %
 \begin{align}
-L_1(x, c \mid u, k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k)  \label{eq:L1a} \\ 
-S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cost}(u) ))}\label{eq:S1} \\
+L_1(x, c \mid u; k) &\propto S_1(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k)  \label{eq:L1a} \\ 
+S_1(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{0}(x \mid u, c) - \text{cost}(u) ))} \label{eq:S1b} \\
 L_{0}(x \mid u, c) &= \int_{\theta} L_{0}(x, \theta \mid u, c) \diff\theta \label{eq:L0_marg} \\ 
 L_{0}(x, \theta \mid u, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mid c)} \cdot P(\theta) \label{eq:L0}
 \end{align}
@@ -414,7 +408,7 @@ L_{0}(x, \theta \mid u, c) &\propto {\delta_{[\![u]\!](x, \theta)} \cdot P(x \mi
 \subsection{Literal alternative model}
 
 One might question whether the inference about the comparison class is necessarily a pragmatic inference which requires recursive reasoning. 
-We can answer this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1a} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
+We can investigate this question by reformulating the comparison class inference  spelled out in Equation \ref{eq:L1a} in terms of a literal listener model (\emph{a la} Equation \ref{eq:L0}). 
 This literal comparison class inference model is given by:
 %
   \begin{align}
@@ -422,7 +416,7 @@ L_{0}(x, \theta, c \mid u, k) &\propto \delta_{[\![u]\!](x, \theta)} \cdot P(x \
 \end{align}
 %
 Similar to the pragmatic listener model (Eq.~\ref{eq:L1a}), this listener can use their knowledge of the referent $k$ to constrain the hypothesis space of comparison classes (e.g., with the knowledge that the referent is a basketball player, consider comparison classes that the same as or superordinate to the class of basketball players).
-Unlike the pragmatic listener model (Eq.~\ref{eq:L1a}), however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S_1(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener may know the referent is a basketball player -- $k = \emph{basketball players}$ -- but believes the speaker was assuming a \emph{person} comparison class -- $c = \emph{people}$).
+Unlike the pragmatic listener model (Eq.~\ref{eq:L1a}), however, the literal listener version of the model does not hold different representations of the referent in mind: The pragmatic listener has their private representation of the referent---given by the prior distribution of the degree $P(x \mid k)$---and imagines a speaker who acts assuming some comparison class---$S_1(u \mid c)$---where $c$ and $k$ may or may not index the same class (e.g., the listener may know the referent is a basketball player -- $k = \emph{basketball players}$ -- but believe the speaker was assuming a \emph{person} comparison class -- $c = \emph{people}$).
 The literal listener version of the model has no way of separating these representations.
 In effect, this listener is answering a slightly different question from the comparison class inference problem. The question this alternative model is answering is: what is more likely---a basketball player whose height is greater than some threshold or a person whose height is greater than some threshold? 
 This alternative model predicts the exact opposite pattern of results from the pragmatic listener model (Figure \ref{fig:altModels}A). 
@@ -432,15 +426,15 @@ This alternative model predicts the exact opposite pattern of results from the p
     \centering
     \subfigure{\label{fig:alternativeModelPredictions}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L0.pdf}}
     \subfigure{\label{fig:alternativeModelPredictions2}\includegraphics[width=0.48\textwidth]{figs/cc_inference_L2.pdf}}
-    \caption{Alternative model predictions. A: A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall? B: A more sophisticated pragmatic listener model that reasons about which comparison class a speaker believes that the listener would infer.}
+    \caption{Alternative model predictions. A: A literal model that does not represent a speaker's representation of the context as separate from their own. This listener effectively answers the question of what is more likely: a basketball player who is tall or a person who is tall? This model predicts the exact opposite pattern of data from the pragmatic model reported in the main text. B: A more sophisticated pragmatic listener model than that reported in the main text. This model reasons about which comparison class a speaker believes that the listener would infer. This model produces the same pattern of results as the simpler pragmatic model reported in the main text.}
     \label{fig:altModels}
 \end{figure}
 
 
 \subsection{Alternative pragmatic model}
 
-The pragmatic comparison class inference listener model (Eq. \ref{eq:L1a}) reasons about which comparison class a speaker is more likely to be assuming.
-That is, the speaker (Eq. \ref{eq:S1}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
+The pragmatic comparison class inference listener model (Eq.~\ref{eq:L1a}) reasons about which comparison class a speaker is more likely to be assuming.
+That is, the speaker (Eq.~\ref{eq:S1b}) is presumed to be assuming that a particular comparison class is already in the common ground, analogous to a presupposition (e.g., saying ``My car is in the shop'' presupposes that the speaker owns a car). 
 Speakers may be aware, however, that the comparison class is not in the common ground; still, they may still avoid articulating a comparison class  (e.g., uttering ``He's short for a basketball player'') if the listener can reasonably be assumed to infer the comparison class. 
 
 This kind of inference is more sophisticated: It involves a listener reasoning about the comparison class that a speaker believed the listener would infer.
@@ -452,8 +446,8 @@ L_2(x, c \mid u, k) &\propto S_2(u \mid x, c) \cdot P(x \mid k) \cdot P(c \mid k
 S_2(u \mid x, c) &\propto \exp{(\alpha \cdot (\ln L_{1}(x, c \mid u) - \text{cost}(u) ))}\label{eq:S2} 
 \end{align}
 %
-where $L_1$ is the pragmatic inference model defined above and in the main text (Eq.~\ref{eq:L1A}).
-The primary difference between this model and the model given by Eqs.~\ref{eq:L1a} and \ref{eq:S1} is in the speaker $S_2$ (Eq.~\ref{eq:S2}) (vs. the $S_1$ shown in Eq.~\ref{eq:S1}).
+where $L_1$ is the pragmatic inference model defined above and in the main text (Eq.~\ref{eq:L1a}).
+The primary difference between this model and the model given by Eqs.~\ref{eq:L1a} and \ref{eq:S1b} is in the speaker $S_2$ (Eq.~\ref{eq:S2}) (vs.~the $S_1$ shown in Eq.~\ref{eq:S1b}).
 $S_2$ chooses their utterance by taking into account the fact that the listener $L_1$ (Eq.~\ref{eq:L1a}) is uncertain about the comparison class. 
 As shown in Figure \ref{fig:altModels}B, this more sophisticated pragmatic inference model arrives at the same conclusions about the likely comparison class given different general expectations about the category and the adjective heard.
 Further, the inferences of this model, like those of the simpler pragmatics model, are resilient to reasonable choices of alternative utterances; most notably, if the set of alternative utterances provides a way to explicitly articulate the comparison class (e.g., the speaker could have said \emph{They're tall for a basketball player}), the same inferences result from hearing the utterance without a comparison class.
@@ -611,7 +605,7 @@ Since this alternative pragmatic model derives the same qualitative inference fo
 
     \end{tabular}
   \end{center}
-  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (an adjective endorsement model $S_1$ and the comparison class inference model $L_1$) directly predict the data from Tasks 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and an effect of frequency of the noun phrase $\hat{f}_k$ given by $\beta_1$. The referent category of each stimulus may be either a subordinate level category or a basic-level category, determined by parameter $z_{d,k}$, which gates between using two different basic-level bias comparison class parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
+  \caption{\small Joint Bayesian data analytic strategy of the maximal model. Two related RSA models (the comparison class inference model $L_1$ and the adjective endorsement model $S_1$) directly predict the data from Tasks 2 \& 3 ($d^{cci}$ and $d^{adj}$), respectively. Each of these models relies upon world knowledge, which varies by the degree $d$ (e.g., height) and category $k$ (e.g., basketball players)---$P(x^{d,k})$, assumed to be Normal distributions with unknown mean $\mu^d_k$ and variance $\sigma^d_k$). The prior probability of a comparison class $c_{d,k}$ is used only in the $L_1$ model, and is assumed to be a  logistic linear function encoding a basic level bias $\beta_0$ and an effect of frequency of the noun phrase $\hat{f}_k$ given by $\beta_1$. The referent category of each stimulus may be either a subordinate level category or a basic-level category, determined by parameter $z_{d,k}$, which gates between using two different basic-level bias comparison class parameters. Finally, each RSA model has its own speaker optimality parameter $\alpha$.}
   \label{fig:bayesnet}
 \end{figure}
 
@@ -630,10 +624,10 @@ Since this alternative pragmatic model derives the same qualitative inference fo
 
 \section{Bayesian Data Analysis}
 
-We generate quantitative predictions for the Comparison Class Inference by constructing a joint Bayesian data-analytic model that synthesizes the data from the Comparison Class Inference experiment and the Adjective Endorsement task (Task 3) using Rational Speech Act models to predict the data from each experiment. 
-The RSA model for the comparison class inference data is described in the main text of the experiment and is given by Eq.~\ref{eq:L1a} (reproduced in the supplement). 
+We generate quantitative predictions for the Comparison Class Inference by constructing a joint Bayesian data-analytic model that synthesizes the data from the Comparison Class Inference experiment (Task 2) and the Adjective Endorsement experiment (Task 3) using Rational Speech Act models to predict the data from each experiment. 
+The RSA model for the comparison class inference data is described in the main text of the experiment and is given by Eq.~\ref{eq:L1a}. 
 
-We model the adjective endorsement data using the pragmatic speaker component $S_1$ (Eq.~\label{eq:S1}) of the comparison class inference model, with three slight modifications: (1) the comparison class $c$ is assumed to be the superordinate comparison class, since the endorsement task concerns sentences drawing explicit comparisons to a superordinate class, (2) the speaker has two alternative utterances: produce the adjective in question (e.g., tall or short) or stay silent  (following \citeNP{degen2014lost, Tessler2019psychrev}), and (3) the speaker's utility is computed via an expectation about the degree value $x$ for the referent given by its category membership $k$: $x\sim P_k$ (e.g., the speaker does not have a particular height in mind to convey but averages over their expectations about the height of the referent).
+We model the adjective endorsement data using the pragmatic speaker component $S_1$ (Eq.~\ref{eq:S1b}) of the comparison class inference model, with three slight modifications: (1) the comparison class $c$ is assumed to be the superordinate comparison class, since the endorsement task concerns sentences drawing explicit comparisons to a superordinate class, (2) the speaker has two alternative utterances: produce the adjective in question (e.g., tall or short) or stay silent  (following \citeNP{degen2014lost, Tessler2019psychrev}), and (3) the speaker's utility is computed via an expectation about the degree value $x$ for the referent given by its category membership $k$: $x\sim P_k$ (e.g., the speaker does not have a particular height in mind to convey but averages over their expectations about the height of the referent).
 The adjective endorsement RSA model we use is given by: 
 
 \begin{equation}
@@ -642,7 +636,7 @@ S_{1}(u \mid k) \propto \exp{(\alpha_2 \cdot {\mathbb E}_{x\sim P_k}} \ln{L_0(x 
 
 \noindent where $L_0(x \mid u)$ is Equation \ref{eq:L0} printed above.
 
-Each RSA model a global speaker optimality parameter $\alpha_{i}$ which determines the degree to which speakers are assumed to be informative.
+Each RSA model has a global speaker optimality parameter $\alpha_{i}$ which determines the degree to which speakers are assumed to be informative.
 This parameter is not of direct theoretical interest and we use priors consistent with the previous literature on RSA models: $\alpha_i \sim \text{Uniform}(0, 20)$.
 
 \subsection{Degree priors (World knowledge)}
@@ -659,7 +653,7 @@ We put priors over these mean and variance parameters of each subordinate catego
 \subsection{Comparison class priors and description of alternative models}
 
 The comparison class prior $P(c)$ reflects listeners' expectations of what comparison classes are likely to be used in conversation. 
-Baseline expectations about conceptual comparison class could be a function of the level of abstraction of the categories in question as well as the usage frequency of the noun phrases used to describe those categories. 
+Baseline expectations about conceptual comparison classes could be a function of the level of abstraction of the categories in question as well as the usage frequency of the noun phrases used to describe those categories. 
 For example, basic-level categories may be more probable conceptual comparison classes because of their utility in everyday reasoning \cite{rosch1975family}; additionally, we might expect the relative probability of basic-level~vs.~subordinate level categories to differ from basic~vs.~superordinate categories.
 To investigate these possibilities, we construct and compare models which differ in how the comparison class prior is parameterized.
 
@@ -667,12 +661,12 @@ To investigate these possibilities, we construct and compare models which differ
 
 \subsubsection{Flat prior model (baseline)}
 
-Our baseline model makes inferences based only on distributional knowledge about scalar properties of categories $P(x)$ (described above).
+Our baseline model makes inferences based only on distributional knowledge about scalar properties of categories $P(x \mid k)$ (described above).
 For this model, the comparison class prior is uninformed and does not provide an \emph{a priori} preference for the relatively subordinate or relatively superordinate comparison class; thus, all of the by-item variability in comparison class inferences in this model must be explained as a function of the distributional knowledge about properties.
 
 \subsubsection{Basic-level bias}
 
-The \emph{basic-level bias} model assumes some \emph{a priori} preference the Subordinate or Superordinate comparison classes.
+The \emph{basic-level bias} model assumes some \emph{a priori} preference for the Subordinate or Superordinate comparison classes.
 We parameterize the comparison class prior via a logistic model, where a basic-level bias plays the role of an intercept term $\beta_0$: $P(c) = \text{logistic}(\beta_0)$.
 Our crowd-sourced stimuli generation procedure (Task 1) presents interesting inferential challenges for this analysis. 
 \emph{A priori}, we do not know if the NPs we use to introduce the referents (Referent NPs; those generated by participants in Task 1) are basic-level categories or subordinate level categories, and hence, whether the more general comparison class would correspond to a superordinate-level category or a basic-level category.
@@ -689,7 +683,7 @@ We assume a usage-based frequency effect to operate independent of the level-of-
 
 %We do not infer a separate 
 
-\subsubsection{Basic-level bias and frequency effect (full model)}
+\subsubsection{Full model: Basic-level bias and frequency effect}
 
 To test whether both a basic-level bias and frequency effect jointly contribute to the comparison class prior, our full model assumes both contribute via a logistic-linear model: $P(c) = \text{logistic}(\beta_0 + \beta_1\cdot \log (\frac{\hat{f}_{sub}}{\hat{f}_{super}}))$.
 
@@ -700,6 +694,14 @@ The binary level-of-abstractness parameter which governs the direction and magni
 
 
 %The comparison class prior $P(c \mid k)$ is parameterized by logistic function, which can encode a basic-level bias and an effect of corpus frequency, depending on the model, with the following parameters on the regression coefficients:  $\beta_0 \sim \text{Gaussian}(0, 2)$, $\beta_1 \sim \text{Uniform}(-3, 3)$. 
+
+\begin{figure}[t!]
+    \centering
+      \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4) for comparison class inference data. Top two rows show data and model predictions for the main Comparison Class Inference experiment; bottom two rows correspond to the Adjective Endorsements (norming study). The log ratio frequency of subordinate NP to superordinate NP is shown in brackets next to the x-axis labels; a more negative number corresponds to a stronger prior belief in the superordinate category as the comparison class.]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}} \\
+    \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference and Adjective Endorsement data sets.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} 
+    \caption{Quantitative modeling results for eight sets of items which show the lowest and highest residuals for the comparison class inference data.}
+    \label{fig:by_item_results}
+\end{figure}
 
 \subsection{Model implementation}
 
@@ -720,16 +722,14 @@ We estimated the marginal likelihood of the data under each model by using an An
 
 % + \beta_1 \cdot \log (\frac{\hat{f}_{specific}}{\hat{f}_{general}}) )$, where $\hat{f}_k$  represents the frequency of the comparison class  $k$ NP estimated from the Google WebGram corpus, $\beta_1$ is the sensitivity of the comparison class prior to relative frequency, and $\beta_0$ is a basic-level bias.
 
+
+
+
+
+
 \subsection{Supplementary model results}
 
-\begin{figure}[t!]
-    \centering
-      \subfigure[Human data and model predictions for items with small residuals (left 4) and largest residuals (right 4) for comparison class inference data. Top two rows show data and model predictions for the main Comparison Class Inference experiment; bottom two rows correspond to the Adjective Endorsements (norming study). The log ratio frequency of subordinate NP to superordinate NP is shown in brackets next to the x-axis labels; a more negative number corresponds to a stronger prior belief in the superordinate category as the comparison class.]{\label{fig:residuals}\includegraphics[width=\textwidth]{figs/bars_ccinfOnly_finalExpt_byNP_topResdiuals_intercept_slope_300k.pdf}} \\
-    \subfigure[Imputed prior distributions over degrees for 8 of the 90 item sets. These distributions were generated from the Maximum A-Posteriori parameter values inferred by conditioning on the Comparison Class Inference and Adjective Endorsement data sets.]{\label{fig:worldPriors}\includegraphics[width=\textwidth]{figs/reconstructed_world_priors.pdf}} 
-    \caption{Quantitative modeling results for eight sets of items.}
-    \label{fig:by_item_results}
-\end{figure}
-
+Figure \ref{fig:by_item_results} shows model predictions and inferred parameters for four sets of items which for which the full model does well at predicting the comparison class inference data and four sets of items where the full model does not do well at predicting the comparison class inferences. Predictions in the Comparison Class Inference task (Fig.~\ref{fig:residuals}, top rows) can be triangulated by examining the predictions in the Adjective Endorsement task  (Fig.~\ref{fig:residuals}, bottom rows) and the inferred world knowledge parameters (Fig.~\ref{fig:worldPriors}).
 
 %}
 
@@ -969,9 +969,6 @@ We estimated the marginal likelihood of the data under each model by using an An
 %to productively design experiments that further constrain and test
 %computational models of language and cognition.
 %
-
-\newpage
-
 
 \bibliographystyle{apacite}
 
