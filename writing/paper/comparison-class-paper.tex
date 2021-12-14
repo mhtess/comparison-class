@@ -740,7 +740,7 @@ All data reported, analysis scripts, code for cognitive models and web experimen
 \subsubsection{Participants}
 
 We recruited 837 participants from Amazon's Mechanical Turk.
-This number was arrived at with the goal of estimating the probability of a subordinate~vs.~superordinate comparison class (in a 2AFC setting) with confidence intervals no larger than 0.20 for each unique item in the data set, which conservatively produced an estimate of roughly 50 responses per item.
+This number was arrived at with the goal of estimating the probability of a subordinate vs. superordinate comparison class (in a 2AFC setting) with confidence intervals no larger than 0.20 for each unique item in the data set, which conservatively produced an estimate of roughly 50 responses per item.
 
 Participants were restricted to those with U.S. IP addresses with at least a 95\% work approval rating.
 In addition, participants were required to pass a simple language comprehension test that we designed in order to weed out bots and other bad-faith participants (see SI).
@@ -831,11 +831,7 @@ The participant was asked what they thought the speaker meant (e.g., \emph{What 
 They're tall relative to other \_\_\_\_\_\_.
 \end{quote}
 We used the word ``other'' to invoke the presupposition that the referent is a member of the comparison class. Pilot testing suggesting that omitting this word invoked many direct comparisons to singular entities (e.g., \emph{They're tall relative to their short friend}), which were wildly heterogeneous in nature.
-
-After the main comparison class inference trials, participants completed a memory check trial asking which adjective--NP combinations appeared on the main trials. 
-At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
-
-After the main comparison class inference trials, participants completed a memory check trial where they had to select (from a checklist of 10 options) all of the adjective--noun phrase pairs (``tall -- basketball player'') that they had seen on the main trials (see SI for full details). 
+After the main comparison class inference trials, participants completed a memory check trial where they had to select (from a checklist of 10 options) all of the adjective--noun phrase pairs (e.g., \emph{tall -- basketball player}, \emph{green -- tennis ball}) that they had seen on the main trials (see SI for full details). 
 %This memory check trial was also used as a basis for exclusion.
 
 
@@ -852,8 +848,8 @@ We preprocessed the remaining \rlgetnum{mention_category_counts.csv}{type}{notSu
 
 %In order to improve alignment across responses, we corrected for misspellings (569; 2.14\%), lemmatized to align plural and singular responses (e.g., \emph{baby} and \emph{babies}; 867, 3.28\%), and replaced some responses with obvious synonyms (e.g., \emph{child}--\emph{kid}; \emph{booze}--\emph{alcoholic drink}; \emph{humans}--\emph{people}; 323, 1.22\%).
 
-Pilot testing suggested that participants primarily provided comparison class paraphrases that were identical to the subordinate noun phrase by which the referent is introduced (``subordinate-NP'', e.g., basketball players) or a more superordinate category (``superordinate-NP'', e.g., people).
-We took advantage of the fact that conveying a category at least as specific as the subordinate-NP generally requires including the subordinate-NP in the response (e.g., \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player})\footnote{Negation markers (e.g., ``all kinds of people except basketball players'') are one case where this assumption would be invalid, but no responses used negation markers in this way.} to automatically categorize responses as ``subordinate'' if the preprocessed response contained the subordinate-NP as a substring (\rlgetnum{mention_category_counts.csv}{type}{Subordinate_notSuperordinate}{n}{1}, or \rlgetnum{mention_category_counts.csv}{type}{Subordinate_notSuperordinate}{prop}{1}\% of all responses); all other responses were coded as ``superordinate'' (10596, or 40.3\%).
+Pilot testing suggested that participants primarily provided comparison class paraphrases that were identical to the subordinate noun phrase (NP) by which the referent is introduced (\emph{subordinate-NP}, e.g., basketball players) or a more superordinate category (\emph{superordinate-NP}, e.g., people).
+We took advantage of the fact that conveying a category at least as specific as the subordinate-NP generally requires including the subordinate-NP in the response (e.g., \emph{male basketball players} is more specific than \emph{basketball players} and includes the substring \emph{basketball player})\footnote{Negation markers (e.g., ``all kinds of people \emph{except} basketball players'') are one case where this assumption would be invalid, but no responses used negation markers in this way.} to automatically categorize responses as \emph{subordinate} if the preprocessed response contained the subordinate-NP as a substring (\rlgetnum{mention_category_counts.csv}{type}{Subordinate_notSuperordinate}{n}{1}, or \rlgetnum{mention_category_counts.csv}{type}{Subordinate_notSuperordinate}{prop}{1}\% of all responses); all other responses were coded as \emph{superordinate} (10596, or 40.3\%).
 %A corollary of this assumption is items that do not mention the subordinate-NP are superordinate categories. 
 Thus, ``superordinate'' here refers to categories potentially at different levels of abstraction (e.g., a wrestler may be strong relative to other \emph{wrestlers}, \emph{athletes}, or \emph{people}; in this case, both \emph{athletes} and \emph{people} would  be categorized as superordinate) as well as categories along different conceptual hierarchies (e.g., the price of a particular \emph{top-shelf liquor} could be expensive relative to other \emph{alcoholic drinks} or relative to the same kind of top-shelf liquor at \emph{other stores}; a \emph{pet parrot} could be loud relative to \emph{other pets} or relative to other \emph{birds}; etc.).
 
@@ -862,8 +858,8 @@ Of the 10596 responses categorized as ``superordinate'', \rlgetnum{mention_categ
 Of the 15\% of responses that mentioned neither subordinate nor superordinate responses, 77\% (3034 responses) were responses that were produced by at least three participants, suggesting that these were robust alternatives to the other more salient options (i.e., subordinate or modal superordinate). 
 % and we manually coded these robust alternative responses in more detail.
 These ``other'' responses fell into five natural categories, in roughly equal proportions: categories at an intermediate level of abstraction between subordinate and superordinate (e.g., \emph{melons} is intermediate between \emph{watermelons} and \emph{fruit}; \emph{drinks} is intermediate between \emph{smoothies} and \emph{food};  28\%), categories that were superordinate to the modal superordinate response (e.g., \emph{desserts} is superordinate to \emph{cakes} which is superordinate to \emph{cheesecakes}; \emph{instruments} is superordinate to \emph{guitars} which is superordinate to \emph{ukeleles}; 28\%), categories that were superordinate along different conceptual hierarchies than the modal superordinate category (e.g., chicken at a butcher shop that was expensive relative to other \emph{butcher shops} as opposed to relative to other \emph{meats};  the nighttime that was dark relative to other \emph{places} as opposed to relative to other \emph{times of day}; 14\%),  rough synonyms of the modal superordinate category (e.g., \emph{bouquets} instead of \emph{flower bouquets}; \emph{methods of cooking} instead of \emph{cookware}; 21\% of ``other'' responses), and responses that referred directly to the scale or dimension described by the adjective, which could be construed as the most superordinate category (e.g., \emph{expensive} relative to other \emph{prices}; 9\%).
-In the subsequent analyses, we treat the ``other'' responses that mention neither the subordinate or superordinate-NP as ``superordinate''.
-The qualitative results do not change, however, when we exclude these ``other'' responses altogether (see SI for a parallel set of regression results excluding the ``other'' responses). 
+In the subsequent analyses, we treat the \emph{other} responses that mention neither the subordinate or superordinate-NP as \emph{superordinate}.
+The qualitative results do not change, however, when we exclude these \emph{other} responses altogether (see SI for a parallel set of regression results excluding the \emph{other} responses). 
 
 
 %Of these 3034 ``other'' responses that were mentioned by at least 3 participants, 67\% of them (2076) were clearly superordinate categories either at a level of abstraction in between the subordinate and the modal superordinate (e.g., \emph{fabric} for the \emph{light silk}, instead of \emph{materials}) or at a level superordinate to the modal superordinate (e.g., \emph{animals} for the \emph{loud owl}, instead of \emph{birds}).
@@ -1225,17 +1221,20 @@ This approach highlights how the productivity of natural language can be harness
 
 In our stimuli, a speaker utters an adjectival sentence without a strong cue to the comparison class: \emph{He [a basketball player] is tall}.
 Why might speakers not bother articulating the comparison class? 
-If a listener (like the model we present in this paper) is trying to infer the comparison class, then a speaker (who is reasoning about this listener) could save the effort of producing the comparison class when they believe the listener will correctly infer it.\footnote{The speaker here would be operating roughly according to a principle of trying to communicate more information with less effort.}
+If a listener is trying to infer the comparison class (like the model we present in this paper), then a speaker (who is reasoning about this listener) could save the effort of producing the comparison class when they believe the listener will correctly infer it.\footnote{The speaker here would be operating roughly according to a principle of trying to communicate more information with less effort.}
 In the SI, we formalize this kind of higher-order speaker, who reasons about whether or not the listener will correctly infer the comparison class; furthermore, we show that a listener who reasons about this speaker (i.e., a higher-order listener) draws qualitatively similar comparison class inferences to the simpler listener model we present above. 
 Future work can be done to interrogate the predictions of the higher-order speaker to better understand when human speakers decide when to make the comparison class explicit.
 
 
-Comparison classes are useful because they allow us to generalize the lexical semantics of many different kinds of adjectives and other linguistic messages that convey relative meanings.
-For example, the semantic meaning of \emph{tall} and \emph{warm} have equivalent functional forms, which vary only in the dimension the adjective picks up: $\denote{tall} = \text{height}(x) > \theta$ and $\denote{warm} = \text{temperature}(x) > \theta$.
+Comparison classes are useful for learning linguistic meanings because they allow us to generalize the lexical semantics of many different kinds of adjectives and other linguistic messages that convey relative meanings.
+For example, the semantic meaning of \emph{tall} and \emph{warm} have equivalent semantic functional forms, which vary only in the dimension the adjective picks up: $\denote{tall} = \text{height}(x) > \theta$ and $\denote{warm} = \text{temperature}(x) > \theta$.
 Even generic language (e.g., \emph{Birds have hollow bones}) can be understood by a threshold semantics: $\denote{ \emph{Birds fly south in the winter}} = P(x \text{ flies south in the winter} \mid x \text{ is a bird}) > \theta$ \cite{Tessler2019psychrev}. 
 Human cognition can use the minimal semantic template -- $\denote{words} = \text{dimension}(x) > \theta$ -- and infer the intended comparison class (which determines $\theta$) to create an infinity of possible meanings, and natural language seems to embrace these kinds of ambiguities \cite{piantadosi2012communicative}.
+It remains an open question, however, whether learning this common structural form of meaning requires a model with built-in structure.
+For example, large-scale deep learning (especially transformer-based) sequence models that are trained from huge amounts of text (i.e., Large Language Models, such as BERT or GPT-3; \citeNP{devlin2018bert}, \citeNP{brown2020language}) exhibit surprisingly sophisticated syntactic knowledge, even on syntactic constructions that are rare in natural text \cite{linzen2016assessing, futrell2018rnns, wilcox2021syntax}.
+An important future direction for this line of work is to test whether such models learn a shared semantic representation for scalar adjectives (or, relative statements more broadly) and whether the Large Language Models appreciate the context-sensitivity that comes with different comparison classes.
 %[ndg: cite piantadosi, tily, gibson here for the functional reasons that language embraces such ambiguity?
-Such simple semantic representations, coupled with a powerful inferential cognitive mechanism, could help explain why young children acquire such context-sensitive language (e.g., the word \emph{big}) so early \cite{Sera1987,Ebeling1988,Mintz2002,Sandhofer2007}: General purpose inferential mechanisms can be used to determine the comparison class, thus filling in a large part of the meaning in context.
+% aSuch simple semantic representations, coupled with a powerful inferential cognitive mechanism, could help explain why young children acquire such context-sensitive language (e.g., the word \emph{big}) so early \cite{Sera1987,Ebeling1988,Mintz2002,Sandhofer2007}: General purpose inferential mechanisms can be used to determine the comparison class, thus filling in a large part of the meaning in context.
 
 
 %Previous work investigating the role of the comparison class in adjective interpretation has deployed strong linguistic cues to convey the speaker's intended comparison class.
@@ -1387,11 +1386,9 @@ listener is to make sense of the conversation. This work suggests that listeners
 Meaning and context from simple, vague utterances.
 
 
-%\section{Acknowledgements}
+\section{Acknowledgements}
 
-%The authors would like to acknowledge Polina Tsvilodub for her contributions to the preprocessing of the free production data and for  implementing the adjective endorsement task.
-% This work was supported in part by NSF Graduate Research Fellowship
-% DGE-114747 and NSF SBE Postdoctoral Research Fellowship Grant No. 1911790 to  MHT and a Sloan Research Fellowship, ONR grant N00014-13-1-0788, and DARPA grant FA8750-14-2-0009 to NDG.
+We thank Polina Tsvilodub for her contributions to the preprocessing of the free production data and for implementing the adjective endorsement task. We also thank Michael Lopez-Brau for work on a preliminary version of this project. This work was supported in part by NSF Graduate Research Fellowship DGE-114747 and NSF SBE Postdoctoral Research Fellowship Grant No. 1911790 to  MHT and a Sloan Research Fellowship, ONR grant N00014-13-1-0788, and DARPA grant FA8750-14-2-0009 to NDG.
 
 \newpage
 

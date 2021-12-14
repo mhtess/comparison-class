@@ -16,15 +16,19 @@
 
   \title{Supplemental Information\\ 
   Warm (for Winter): Inferring comparison classes in communication}
-    \author{Michael Henry Tessler\textsuperscript{1,2} and Noah D. Goodman\textsuperscript{2}}    \date{}
+    \author{Michael Henry Tessler\textsuperscript{1,2} and Noah D. Goodman\textsuperscript{2, 3}} 
+%         \author{Anonymous} 
+
+       \date{}
   
 \shorttitle{ SI: Inferring comparison classes}
+% \affiliation{Anonymized}
 \affiliation{
 \vspace{0.5cm}
+\textsuperscript{1}Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology \\\textsuperscript{2}Department of Psychology, Stanford University
+\\\textsuperscript{3}Department of Computer Science, Stanford University}
 
-\textsuperscript{1}Department of Brain and Cognitive Sciences, Massachusetts Institute of Technology \\\textsuperscript{2}Department of Psychology, Stanford University}
-
-\keywords{comparison class; reference class; adjectives; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: X}
+\keywords{comparison class; reference class; adjectives; pragmatics; Rational Speech Act; Bayesian cognitive model; Bayesian data analysis\newline\indent Word count: 5308}
 \makeatletter
 \newcommand\LastLTentrywidth{1em}
 \newlength\longtablewidth
@@ -157,7 +161,7 @@ From this set of 750 responses, we curated a collection of 90 ``item sets'', eac
 
 In this experiment, we measure comparison class inferences by having participants rephrase a speaker's statement which involves a scalar adjective in a way that makes the comparison class explicit.
 We measure comparison class inferences using a free-production measure to provide further ecological validity to our measurements of comparison classes: We wish to see if listeners spontaneously adjust their comparison class depending on world knowledge and pragmatic reasoning.
-A smaller-scale, forced-choice version of this task was reported in \citeA{tessler2017warm}.  
+A smaller-scale, forced-choice version of this task was reported in Anonymous (2017). %\citeA{tessler2017warm}.  
 Sample size, exclusion criteria, regression analysis, and cognitive model analysis were preregistered: \url{osf.io/xuc96}.
 
 \subsubsection{Participant restrictions and exclusion criteria}
@@ -172,7 +176,7 @@ Responses to this warm-up trial were used as a basis for exclusion (any response
 Invalid responses to the warm-up trial were most often indicative of copying some part of the text on the screen and pasting it into the response box (e.g., responding with the name of the speaker, just putting the adjective ``tall'', or responding with a whole sentence without a comparison class ``that is tall'').
 55 participants were excluded for providing an invalid response to this task comprehension question. 
 
-After the main comparison class inference trials, participants completed a memory check trial asking which adjective--NP combinations appeared on the main trials. 
+After the main comparison class inference trials, participants completed a memory check trial asking which adjective--Noun Phrase (NP) combinations appeared on the main trials. 
 At the end of the task, participants were asked a memory check question where they had to select, from a list of 10 options, all of the items they could recall seeing. In the memory check, items were shown as adjective -- noun pairs (``tall -- basketball player'') and the 5 distractors were either color or multidimensional adjectives paired with a category that was not used in our test stimuli (e.g., ``green -- tennis ball''; ``beautiful -- painting'').
 Participants were excluded if they answered fewer than 7 out of 10 memory check questions correctly.
 A total of 59 participants failed this check, though 27 of these also failed the task comprehension check. 
@@ -705,7 +709,7 @@ The binary level-of-abstractness parameter which governs the direction and magni
 
 \subsection{Model implementation}
 
-We ran four different BDA models, corresponding to the different ways of parameterizing the comparison class prior: (1) flat prior model (assumes the comparison class prior is always 50/50 between subordinate and superordinate class); (2) intercept only model (assumes a basic-level bias), (3) slope only model (assumes an effect of corpus frequency, but no basic-level bias), (4) slope and intercept.
+We ran four different BDA models, corresponding to the different ways of parameterizing the comparison class prior: (1) Flat Prior model (assumes the comparison class prior is always 50/50 between subordinate and superordinate class); (2) Basic-level bias, or intercept only model (assumes a basic-level bias), (3) Frequency effect, or slope only model (assumes an effect of corpus frequency, but no basic-level bias), (4) Basic-level bias and Frequency effect (slope and intercept).
 Figure \ref{fig:bayesnet} shows the plate diagram corresponding the BDA model for the full, slope and intercept model. 
 We implemented the RSA and Bayesian data analysis models in the probabilistic programming language WebPPL \cite{dippl} and performed inference by running 7 MCMC chains with 500,000 iterations each, discarding the first 250,000 for burn-in. 
 %For the full (slope and intercept) model, we ran additional 5 MCMC chains to be more confident in our conclusions about the parameters. 
